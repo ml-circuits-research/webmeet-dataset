@@ -9,7 +9,7 @@
 //      constraint's words equal to its value); a constraint without words has a value the text says; no value that is
 //      a phrase the text does not say; no kind the text does not say; an existing target that no words identify has a
 //      lookup (w.request.lookup key=thing: the system finds it in the context); no filler hiding content words of a
-//      request.
+//      request; a request's evidence lies inside its own words (no key_words taken from another request).
 //   4. account for every word (warnings, the row is valid but incomplete): each content word of the text is evidence of a
 //      wire or filler. Grammar words (determiners, pronouns, prepositions, conjunctions, auxiliaries, adverbs of
 //      w.lang.en.closed, the grammar classes of w.lang.en.skip, w.lang.en.imperative.lead) need no wire; filler words (w.lang.en.skip
@@ -142,6 +142,13 @@ function grounding(text, wires, tab) {
     }
     if (w.type === 'w.request.constraint' || w.type === 'w.request.unread')
       for (const v of w.attrs.value ?? []) if (String(v).startsWith('"') && !/^(-?\d+(\.\d+)?|true|false)$/.test(tok(v)) && !text.includes(tok(v))) out.push([w.type, 'value', 'a phrase the text does not say (keep the words; the system normalises them)']);
+  }
+  // a request's evidence lies in its own words: the phrases of its wires are inside the request's `words`
+  for (const r of wires.filter((w) => w.type === 'w.request.request' && w.attrs.words)) {
+    const words = one(r, 'words');
+    for (const w of wires.filter((x) => x === r || String(x.attrs.request?.[0]) === '$' + r.id))
+      for (const k of ['predicate', 'asked_words', 'sort_words', 'name', 'name_words', 'description', 'count_words', 'code_words', 'family_words', 'key_words', 'measure_words'])
+        for (const v of w.attrs[k] ?? []) if (text.includes(tok(v)) && !words.includes(tok(v))) out.push([w.type, k, "outside its request's words (evidence of another request?)"]);
   }
   // filler inside a request's words may hold only filler and grammar words
   const spans = wires.filter((w) => w.type === 'w.request.request').map((r) => { const sp = one(r, 'words') ?? text, i = text.indexOf(sp); return i < 0 ? [0, text.length] : [i, i + sp.length]; });
