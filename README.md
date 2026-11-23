@@ -189,6 +189,8 @@ review has no warning of the kinds marked *, apart from what the schema cannot s
   pair" is a phrase); write the phrase it belongs to, or leave the word uncovered (a scene name with `note=page.scene` is the
   exception);
 - \* *unread noting a misspelling*: a typo is not a meaning, leave it uncovered;
+- \* *unread noting a particle, speed or modality* (`note=request.particle`, `request.speed`, `request.modality`,
+  `request.additionalVerb`): "wrap Main up", "quickly", "could" belong to the predicate or are filler;
 - \* *a chart measure or dimension that is a verb or grammar word*: what is counted or grouped by is a thing of the
   data ("let's get a bar chart of the documents": the documents, not "get");
 - \* *the same wire twice in one request*;
