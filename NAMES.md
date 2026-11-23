@@ -23,10 +23,10 @@ marked *pending* is being repaired; it takes its new name when its repair is com
 | diagram/data-drop.1.2.csv | diagram/charts-02.csv | 4796 | renamed |
 | diagram/data-drop.1.3.csv | diagram/nodes-01.csv | 4966 | renamed |
 | diagram/data-drop.1.4.csv | diagram/charts-03.csv | 4530 | renamed |
-| diagram/data-drop.2.1.csv | diagram/charts-04.csv | 4938 | pending |
-| diagram/data-drop.2.2.csv | diagram/nodes-02.csv | 3645 | pending |
-| diagram/data-drop.2.3.csv | diagram/charts-05.csv | 4867 | pending |
-| diagram/data-drop.2.4.csv | diagram/nodes-03.csv | 1419 | pending |
+| diagram/data-drop.2.1.csv | diagram/charts-04.csv | 4938 | renamed |
+| diagram/data-drop.2.2.csv | diagram/nodes-02.csv | 3645 | renamed |
+| diagram/data-drop.2.3.csv | diagram/charts-05.csv | 4867 | renamed |
+| diagram/data-drop.2.4.csv | diagram/nodes-03.csv | 1419 | renamed |
 | diagram/data-drop.3.1.csv | diagram/nodes-04.csv | 4082 | renamed |
 | diagram/data-drop.3.2.csv | diagram/nodes-05.csv | 2919 | renamed |
 | diagram/data-drop.3.3.csv | diagram/diagrams-01.csv | 4573 | renamed |
