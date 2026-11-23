@@ -233,6 +233,8 @@ function warningsOf(text, wires) {
     const t = one(u, 'text') ?? '';
     if (/^[\w'-]+$/.test(t) && (isGrammar(t) || verbActs(t))) out.add('unread holding a single grammar word or verb (a particle belongs to the predicate, a verb is the predicate or filler)');
   }
+  for (const r of wires.filter((w) => w.type === 'w.request.request' && w.attrs.asked_words))
+    for (const v of r.attrs.asked_words) if (tok(v) === (one(r, 'words') ?? text).replace(/[?.!]+$/, '') || tok(v).split(/\s+/).length > 4) out.add('asked_words hold the whole request, not the words naming the key asked about');
   const loose = [...text.matchAll(TOKEN)].filter((m) => !covered[m.index] && !isGrammar(m[0])).map((m) => m[0]);
   if (loose.length) out.add('words no wire formalizes'), (out.loose = [...new Set(loose)].join(' '));
   for (const r of wires.filter((w) => w.type === 'w.request.request')) {
