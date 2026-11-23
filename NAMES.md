@@ -19,10 +19,10 @@ marked *pending* is being repaired; it takes its new name when its repair is com
 | calendar/ui-natural.csv | calendar/meetings-09.csv | 59 | renamed |
 | calendar/ui-systematic.csv | calendar/meetings-10.csv | 149 | renamed |
 | calendar/ui-tiers.csv | calendar/meetings-11.csv | 6 | renamed |
-| diagram/data-drop.1.1.csv | diagram/charts-01.csv | 4111 | pending |
-| diagram/data-drop.1.2.csv | diagram/charts-02.csv | 4796 | pending |
-| diagram/data-drop.1.3.csv | diagram/nodes-01.csv | 4966 | pending |
-| diagram/data-drop.1.4.csv | diagram/charts-03.csv | 4530 | pending |
+| diagram/data-drop.1.1.csv | diagram/charts-01.csv | 4111 | renamed |
+| diagram/data-drop.1.2.csv | diagram/charts-02.csv | 4796 | renamed |
+| diagram/data-drop.1.3.csv | diagram/nodes-01.csv | 4966 | renamed |
+| diagram/data-drop.1.4.csv | diagram/charts-03.csv | 4530 | renamed |
 | diagram/data-drop.2.1.csv | diagram/charts-04.csv | 4938 | pending |
 | diagram/data-drop.2.2.csv | diagram/nodes-02.csv | 3645 | pending |
 | diagram/data-drop.2.3.csv | diagram/charts-05.csv | 4867 | pending |
