@@ -265,7 +265,7 @@ function warningsOf(text, wires) {
     if (acts && acts.size === 1 && acts.has('remove') && !['remove', 'undo'].includes(one(r, 'act'))) out.add('act contradicts the predicate (a removal verb, by k.actions verbs)');
     const words = one(r, 'words') ?? text;
     const mine = wires.filter((w) => String(w.attrs.request?.[0]) === '$' + r.id);
-    for (const name of properNames(words)) if (!mine.some((w) => Object.values(w.attrs).flat().some((v) => tok(v).includes(name)))) out.add('proper name of the text missing from the circuit');
+    for (const name of properNames(words)) if (name.toLowerCase() !== String(one(r, 'predicate') ?? '').toLowerCase() && !mine.some((w) => Object.values(w.attrs).flat().some((v) => tok(v).includes(name)))) out.add('proper name of the text missing from the circuit');
     const unread = mine.filter((w) => w.type === 'w.request.unread');
     if (unread.some((u) => one(u, 'text') === words) || (unread.length && !mine.some((w) => w.type === 'w.request.constraint'))) out.add('meaning left unread (no key yet)');
   }
