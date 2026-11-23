@@ -52,7 +52,7 @@ for (const path of git('ls-tree', '-r', '--name-only', REV).split('\n').filter((
 for (const tab of readdirSync(ROOT).filter((d) => !d.startsWith('.') && d !== 'tools' && existsSync(join(ROOT, d)))) {
   let files;
   try { files = readdirSync(join(ROOT, tab)).filter((f) => f.endsWith('.csv')); } catch { continue; }
-  for (const f of files) read(readFileSync(join(ROOT, tab, f), 'utf8'), after, sourceOf(`${tab}/${f}`));
+  for (const f of files) { let t; try { t = readFileSync(join(ROOT, tab, f), 'utf8'); } catch { continue; } read(t, after, sourceOf(`${tab}/${f}`)); } // a file removed while listing is skipped
 }
 
 let lost = 0, textChanged = 0;
