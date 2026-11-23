@@ -227,6 +227,12 @@ function warningsOf(text, wires) {
     if (w.type === 'w.request.target' && says(one(w, 'sort'), text)) mark(one(w, 'sort'));
     if (w.type === 'w.request.constraint' && !w.attrs.words) for (const v of w.attrs.value ?? []) mark(tok(v));
   }
+  // an unread wire holds a meaning in its words: a single grammar word ("out", "up") or a single verb of k.actions
+  // ("look", "stay") is not one; a particle belongs to the predicate ("come out"), a verb is the predicate or filler
+  for (const u of wires.filter((w) => w.type === 'w.request.unread')) {
+    const t = one(u, 'text') ?? '';
+    if (/^[\w'-]+$/.test(t) && (isGrammar(t) || verbActs(t))) out.add('unread holding a single grammar word or verb (a particle belongs to the predicate, a verb is the predicate or filler)');
+  }
   const loose = [...text.matchAll(TOKEN)].filter((m) => !covered[m.index] && !isGrammar(m[0])).map((m) => m[0]);
   if (loose.length) out.add('words no wire formalizes'), (out.loose = [...new Set(loose)].join(' '));
   for (const r of wires.filter((w) => w.type === 'w.request.request')) {
