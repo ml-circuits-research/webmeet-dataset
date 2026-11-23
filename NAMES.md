@@ -83,10 +83,10 @@ marked *pending* is being repaired; it takes its new name when its repair is com
 | drawing/data-drop.4.1.csv | drawing/scenes-10.csv | 3671 | renamed |
 | drawing/data-drop.4.2.csv | drawing/scenes-11.csv | 4722 | renamed |
 | drawing/data-drop.4.3.csv | drawing/scenes-12.csv | 758 | renamed |
-| drawing/data-drop.5.1.csv | drawing/placement-02.csv | 5000 | pending |
-| drawing/data-drop.5.2.csv | drawing/placement-03.csv | 218 | pending |
-| drawing/data-drop.5.3.csv | drawing/scenes-13.csv | 4957 | pending |
-| drawing/data-drop.5.4.csv | drawing/scenes-14.csv | 1099 | pending |
+| drawing/data-drop.5.1.csv | drawing/placement-02.csv | 5000 | renamed |
+| drawing/data-drop.5.2.csv | drawing/placement-03.csv | 218 | renamed |
+| drawing/data-drop.5.3.csv | drawing/scenes-13.csv | 4957 | renamed |
+| drawing/data-drop.5.4.csv | drawing/scenes-14.csv | 1099 | renamed |
 | drawing/data-drop.6.csv | drawing/scenes-15.csv | 1301 | renamed |
 | drawing/demo-tool-profile.1.csv | drawing/scenes-16.csv | 3872 | pending |
 | drawing/demo-tool-profile.2.csv | drawing/scenes-17.csv | 4864 | pending |
