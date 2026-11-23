@@ -1,19 +1,21 @@
-// Checks the dataset: every row of every <tab>/*.csv has the columns text,sop, and its circuit (the `sop` cell)
-//   1. conforms to the schemas of sop-knowledge-worlds (w.request, with the acts of k.actions): every wire's type is
+// Checks the dataset. Every row of every <tab>/*.csv has the columns text,sop; its circuit (the `sop` cell) must
+//   1. conform to the schemas of sop-knowledge-worlds (w.request, with the acts of k.actions): every wire's type is
 //      declared, every key is a slot of its type, enums, numbers, references and required keys hold;
-//   2. quotes the message exactly: every phrase slot (words, sort_words, name, description, count_words, code_words,
-//      measure_words, and the text of an unread wire) is a substring of the row's text;
-//   3. says nothing the row does not give (errors): no goes_to (the tab is the folder, not something the text says);
-//      no context wire (a page object: whatever the text says of it is on the target or constraint, the rest is a page
-//      state the text does not give) and no thing link;
-//      no key repeating another (request words equal to the whole text, sort_words equal to sort, a constraint's words
-//      equal to its value); the predicate is words of the text.
-//   4. warnings (the row is valid but should be rewritten): an existing target nothing in the row identifies (no name,
-//      description, kind words, code or previous message), a target kind the text never says, and a
-//      meaning left unread (an unread wire with the request's whole words, or a request with only unread wires), and a
-//      value that is a phrase the text does not say (neither the text's words nor a closed-bank atom), and a proper name
-//      of the text (a capitalised word not starting a sentence) that no wire of its request keeps.
-//      `--warnings FILE` writes those rows to a CSV (text, sop, warning) for the generating session.
+//   2. quote the message exactly: every evidence key (a request's words and predicate; a target's sort_words, name,
+//      description, count_words, code_words, ids, family_words; a constraint's words, key_words, measure_words; the text
+//      of an unread or filler wire) is words of the row's text;
+//   3. say nothing the row does not give (errors): no goes_to (the tab is the folder); no context wire or thing link (a
+//      page object); no key repeating another (request words equal to the whole text, sort_words equal to sort, a
+//      constraint's words equal to its value); a constraint without words has a value the text says; no value that is
+//      a phrase the text does not say; no kind the text does not say; an existing target that no words identify has a
+//      lookup (w.request.lookup key=thing: the system finds it in the context); no filler hiding content words of a
+//      request.
+//   4. account for every word (warnings, the row is valid but incomplete): each content word of the text is evidence of a
+//      wire or filler. Grammar words (determiners, pronouns, prepositions, conjunctions, auxiliaries, adverbs of
+//      w.lang.en.closed, the grammar classes of w.lang.en.skip, w.lang.en.imperative.lead) need no wire; filler words (w.lang.en.skip
+//      politeness, filler, desire; interjections) are kept in w.request.filler wires. Also warned: a proper name of a
+//      request (a capitalised word not starting a sentence) that no wire keeps, and a meaning left in unread.
+//      `--warnings FILE` writes the warned rows to a CSV (text, sop, warning, words) for the generating session.
 // Run before adding new rows:
 //   node tools/check.mjs [--file drawing/new-batch.csv] [--knowledge ../sop-knowledge-worlds] [--limit N] [--top K] [--json OUT]
 // Prints the number of rows that pass and the problems grouped by kind with an example; exit code 1 on any problem.
@@ -28,7 +30,7 @@ if (!existsSync(join(KNOWLEDGE, 'tools', 'sopworld', 'sopworld.mjs'))) throw new
 const DATASET = resolve(args.dataset ?? join(HERE, '..'));
 const ONLY = args.file ? resolve(args.file) : null;
 const TAB_WORLD = { drawing: 'w.drawing', diagram: 'w.diagram', document: 'w.document', calendar: 'w.calendar', avatar: 'w.face' };
-const PHRASES = { 'w.request.request': ['words', 'predicate'], 'w.request.target': ['sort_words', 'name', 'description', 'count_words', 'code_words', 'ids'], 'w.request.constraint': ['words', 'measure_words'], 'w.request.unread': ['text'] };
+const PHRASES = { 'w.request.request': ['words', 'predicate'], 'w.request.target': ['sort_words', 'name', 'description', 'count_words', 'code_words', 'ids', 'family_words'], 'w.request.constraint': ['words', 'key_words', 'measure_words'], 'w.request.unread': ['text'], 'w.request.filler': ['text'] };
 const tok = (v) => (String(v).startsWith('"') ? JSON.parse(v) : String(v));
 const LIMIT = Number(args.limit ?? Infinity);
 const EXAMPLES = Number(args.examples ?? 3);
@@ -81,47 +83,101 @@ for (const id of REFERENCED) {
 // What the row itself says: errors for wires and keys that nothing in the row grounds, or that repeat another key.
 const one = (w, k) => (w.attrs[k] ? tok(w.attrs[k][0]) : undefined);
 const esc = (x) => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-const says = (phrase, text) => !!phrase && String(phrase).length > 1 && new RegExp(`(?<![\\w])${esc(String(phrase))}(?:e?s)?(?![\\w])`, 'i').test(text);
+const says = (phrase, text) => !!phrase && String(phrase).length > 0 && new RegExp(`(?<![\\w])${esc(String(phrase))}(?:e?s)?(?![\\w])`, 'i').test(text);
+// Grammar and filler words of w.lang.en (sop-knowledge-worlds): the words that need no wire, and the words a filler
+// wire keeps. Every other word of a message is content.
+const LEX = (() => {
+  const grammar = new Set(), filler = new Set(), endings = new Set(), contractions = [];
+  const dir = join(KNOWLEDGE, 'docs', 'worlds', 'w.lang.en', 'shards');
+  for (const f of readdirSync(dir).filter((x) => x.endsWith('.sop'))) for (const w of parse(readFileSync(join(dir, f), 'utf8'))) {
+    const cls = w.attrs.class ? tok(w.attrs.class[0]) : '';
+    const texts = (w.attrs.text ?? []).map((t) => tok(t).toLowerCase());
+    if (w.type === 'w.lang.en.closed' && ['determiner', 'pronoun', 'preposition', 'conjunction', 'auxiliary', 'particle', 'adverb'].includes(cls)) texts.forEach((t) => grammar.add(t));
+    if (w.type === 'w.lang.en.closed' && cls === 'interjection') texts.forEach((t) => filler.add(t));
+    if (w.type === 'w.lang.en.skip') texts.forEach((t) => (['politeness', 'filler', 'desire'].includes(cls) ? filler : grammar).add(t));
+    if (w.type === 'w.lang.en.imperative.lead') texts.forEach((t) => grammar.add(t)); // words dropped before the verb
+    if (w.type === 'w.lang.en.contraction') contractions.push([texts[0], tok(w.attrs.expands[0]).toLowerCase()]);
+    if (w.type === 'w.lang.en.contraction.ending') endings.add(tok(w.attrs.ending[0]).toLowerCase());
+  }
+  for (const [t, e] of contractions) if (e.split(/\s+/).every((x) => grammar.has(x))) grammar.add(t);
+  return { grammar, filler, endings };
+})();
+const isGrammar = (w) => {
+  const x = w.toLowerCase().replace(/\u2019/g, "'");
+  const i = x.indexOf("'");
+  return LEX.grammar.has(x) || (i > 0 && LEX.grammar.has(x.slice(0, i)) && LEX.endings.has(x.slice(i)));
+};
+
+// Errors: wires and keys that nothing in the row grounds, or that repeat another key.
 function grounding(text, wires) {
   const out = [];
-    for (const w of wires) {
+  for (const w of wires) {
     if (w.type === 'w.request.context') out.push([w.type, '', 'page object: not said by the text (write what the text says on the target)']);
     if (w.attrs.thing) out.push([w.type, 'thing', 'link to a page object: not said by the text']);
     if (w.type === 'w.request.request') {
       if (w.attrs.goes_to) out.push([w.type, 'goes_to', 'not said in the text (the tab is the folder)']);
       if (one(w, 'words') === text) out.push([w.type, 'words', 'repeats the whole text (leave it out)']);
     }
-    if (w.type === 'w.request.target' && w.attrs.sort_words && one(w, 'sort_words') === one(w, 'sort')) out.push([w.type, 'sort_words', 'repeats sort (leave it out)']);
-    if (w.type === 'w.request.constraint' && w.attrs.words && (w.attrs.value ?? []).length === 1 && String(one(w, 'value')) === one(w, 'words')) out.push([w.type, 'words', 'repeats value (leave it out)']);
-    if (w.type === 'w.request.constraint' && !w.attrs.words && !(w.attrs.value ?? []).every((v) => text.includes(tok(v)))) out.push([w.type, 'value', 'neither words nor a value the text says']);
+    if (w.type === 'w.request.target') {
+      if (w.attrs.sort_words && one(w, 'sort_words') === one(w, 'sort')) out.push([w.type, 'sort_words', 'repeats sort (leave it out)']);
+      if (w.attrs.sort && !w.attrs.sort_words && !says(one(w, 'sort'), text)) out.push([w.type, 'sort', 'a kind the text does not say']);
+      const identified = ['name', 'description', 'sort_words', 'code_words', 'count_words', 'ids'].some((k) => w.attrs[k]) || says(one(w, 'sort'), text);
+      const looked = wires.some((l) => l.type === 'w.request.lookup' && String(l.attrs.target?.[0]) === '$' + w.id && one(l, 'key') === 'thing');
+      if (one(w, 'mode') !== 'new' && one(w, 'fill') !== 'all' && !identified && !looked) out.push([w.type, '', 'existing target no words identify and no lookup (add w.request.lookup key=thing)']);
+    }
+    if (w.type === 'w.request.constraint') {
+      if (w.attrs.words && (w.attrs.value ?? []).length === 1 && String(one(w, 'value')) === one(w, 'words')) out.push([w.type, 'words', 'repeats value (leave it out)']);
+      if (!w.attrs.words && !(w.attrs.value ?? []).every((v) => text.includes(tok(v)))) out.push([w.type, 'value', 'neither words nor a value the text says']);
+    }
+    if (w.type === 'w.request.constraint' || w.type === 'w.request.unread')
+      for (const v of w.attrs.value ?? []) if (String(v).startsWith('"') && !/^(-?\d+(\.\d+)?|true|false)$/.test(tok(v)) && !text.includes(tok(v))) out.push([w.type, 'value', 'a phrase the text does not say (keep the words; the system normalises them)']);
+  }
+  // filler inside a request's words may hold only filler and grammar words
+  const spans = wires.filter((w) => w.type === 'w.request.request').map((r) => { const sp = one(r, 'words') ?? text, i = text.indexOf(sp); return i < 0 ? [0, text.length] : [i, i + sp.length]; });
+  for (const f of wires.filter((w) => w.type === 'w.request.filler')) {
+    const ft = one(f, 'text');
+    const outside = [...text.matchAll(new RegExp(`(?<![\\w])${esc(ft)}(?![\\w])`, 'g'))].some((m) => !spans.some(([a, b]) => a <= m.index && m.index < b));
+    let rest = ft.toLowerCase();
+    for (const ph of [...LEX.filler].filter((x) => x.includes(' '))) rest = rest.replaceAll(ph, ' ');  // "thank you"
+    if (!outside && (rest.match(TOKEN) ?? []).some((x) => !isGrammar(x) && !LEX.filler.has(x))) out.push([f.type, 'text', 'filler hides content words of a request']);
   }
   return out;
 }
+const TOKEN = /[A-Za-z0-9]+(?:['\u2019][A-Za-z]+)?/g;
+const EVIDENCE = ['words', 'predicate', 'sort_words', 'name', 'description', 'count_words', 'code_words', 'ids', 'family_words', 'key_words', 'measure_words', 'text'];
+// Warnings: words of the text no wire accounts for, lost proper names, meanings left in unread.
 function warningsOf(text, wires) {
   const out = new Set();
-  const previous = wires.some((w) => w.type === 'w.request.previous');
+  const covered = new Array(text.length).fill(false);
+  const mark = (ph) => {
+    if (!ph || String(ph).length < 1) return;
+    const re = new RegExp(`(?<![\\w])${esc(String(ph))}(?![\\w])`, 'gi');
+    for (const m of text.matchAll(re)) for (let i = m.index; i < m.index + m[0].length; i++) covered[i] = true;
+  };
+  for (const w of wires) {
+    if (w.type === 'w.request.request' || w.type === 'w.request.previous' || w.type === 'w.request.clock') { mark(one(w, 'predicate')); continue; }
+    for (const k of EVIDENCE) for (const v of w.attrs[k] ?? []) mark(tok(v));
+    if (w.type === 'w.request.target' && says(one(w, 'sort'), text)) mark(one(w, 'sort'));
+    if (w.type === 'w.request.constraint' && !w.attrs.words) for (const v of w.attrs.value ?? []) mark(tok(v));
+  }
+  const loose = [...text.matchAll(TOKEN)].filter((m) => !covered[m.index] && !isGrammar(m[0])).map((m) => m[0]);
+  if (loose.length) out.add('words no wire formalizes'), (out.loose = [...new Set(loose)].join(' '));
   for (const r of wires.filter((w) => w.type === 'w.request.request')) {
     const words = one(r, 'words') ?? text;
-    const mine = wires.filter((w) => tok(w.attrs.request?.[0] ?? '') === '$' + r.id || String(w.attrs.request?.[0]) === '$' + r.id);
-    const t = mine.find((w) => w.type === 'w.request.target');
-    if (t && one(t, 'mode') !== 'new' && !['name', 'description', 'sort_words', 'code_words', 'count_words'].some((k) => t.attrs[k]) && !says(one(t, 'sort'), words) && !previous && one(t, 'fill') !== 'all')
-      out.add('existing target nothing in the row identifies');
-    if (t && one(t, 'sort') && !t.attrs.sort_words && !says(one(t, 'sort'), text)) out.add('target kind the text never says');
-    for (const w of mine.filter((x) => x.type === 'w.request.constraint' || x.type === 'w.request.unread'))
-      for (const v of w.attrs.value ?? []) if (String(v).startsWith('"') && !/^-?\d+(\.\d+)?$/.test(tok(v)) && !text.includes(tok(v))) out.add('value the text does not say (an invented phrase)');
-    const unread = mine.filter((w) => w.type === 'w.request.unread');
+    const mine = wires.filter((w) => String(w.attrs.request?.[0]) === '$' + r.id);
     for (const name of properNames(words)) if (!mine.some((w) => Object.values(w.attrs).flat().some((v) => tok(v).includes(name)))) out.add('proper name of the text missing from the circuit');
-    if (unread.some((u) => one(u, 'text') === words) || (unread.length && !mine.some((w) => w.type === 'w.request.constraint'))) out.add('meaning left unread');
+    const unread = mine.filter((w) => w.type === 'w.request.unread');
+    if (unread.some((u) => one(u, 'text') === words) || (unread.length && !mine.some((w) => w.type === 'w.request.constraint'))) out.add('meaning left unread (no key yet)');
   }
   return out;
 }
-// Capitalised words that are not the first word of a sentence (and not "I"): names the circuit must keep.
+// Capitalised words that are not the first word of a sentence (and not "I" or an abbreviation): names to keep.
 function properNames(text) {
   const out = [];
   for (const m of text.matchAll(/[A-Z][\w'-]*/g)) {
     const before = text.slice(0, m.index).trimEnd();
-    if (!before || /[.!?:;"“(\-—]$/.test(before) || /^I('|$)/.test(m[0]) || !/^\w/.test(text.slice(m.index - 1, m.index) || ' ') === false) continue;
-    if (/^[A-Z]{2,}s?$/.test(m[0])) continue; // an abbreviation (IDs, UTC), not a name
+    if (!before || /[.!?:;"\u201c(\-\u2014]$/.test(before) || /^I('|$)/.test(m[0]) || /\w/.test(text[m.index - 1] ?? ' ')) continue;
+    if (/^[A-Z]{2,}s?$/.test(m[0])) continue;
     out.push(m[0]);
   }
   return out;
@@ -161,7 +217,8 @@ outer: for (const tab of Object.keys(TAB_WORLD)) {
           for (const key of PHRASES[w.type] ?? []) for (const v of w.attrs[key] ?? []) if (!text.includes(tok(v))) problems.push([w.type, key, 'phrase not found in the text']);
         }
         problems.push(...grounding(text, wires));
-        for (const why of warningsOf(text, wires)) { warned.add(why); warnRows.push([text, sop, why]); }
+        const ws = warningsOf(text, wires);
+        for (const why of ws) { warned.add(why); warnRows.push([text, sop, why, why.startsWith('words no wire') ? ws.loose : '']); }
         if (!text.trim()) problems.push(['(row)', 'text', 'empty text']);
         const res = base.fork().tell(sop);
         for (const v of res.violations ?? []) {
@@ -197,6 +254,6 @@ if (wc.size) {
 }
 if (args.warnings) {
   const q = (x) => '"' + String(x).replaceAll('"', '""') + '"';
-  writeFileSync(args.warnings, 'text,sop,warning\n' + warnRows.map((r) => r.map(q).join(',')).join('\n') + '\n');
+  writeFileSync(args.warnings, 'text,sop,warning,words\n' + warnRows.map((r) => r.map(q).join(',')).join('\n') + '\n');
 }
 process.exitCode = bad ? 1 : 0;

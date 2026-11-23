@@ -33,6 +33,30 @@ The wires follow the `w.request` schema of
 [sop-knowledge-worlds](https://github.com/ml-circuits-research/sop-knowledge-worlds) (`docs/worlds/w.request/schema.sop`,
 documented in its `WORLD.md`). Every row must conform to that schema; `tools/check.mjs` enforces it.
 
+The circuit is the formalisation of the text and of nothing else. Three rules make that checkable:
+
+1. **Evidence.** Every wire keeps the words of the message it was read from. A wire with no words of the text is an
+   invention.
+2. **Every word is accounted for.** Each content word of the message is the evidence of some wire, or it is filler.
+   Grammar words (articles, pronouns, prepositions, auxiliaries …) need nothing: the structure expresses them.
+3. **What is needed but not said is asked for, not invented.** When a request needs something the text does not say
+   (which thing "it" is), the circuit says so with a `w.request.lookup` wire. The system then looks it up in the
+   context: the page, the previous turns, the preferences.
+
+```text
+text: please switch to the robot preset
+
+@f1 w.request.filler text=please
+@r1 w.request.request act=change mood=do predicate=switch
+@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=face.preset value=robot operator=eq phase=result key_words=preset
+```
+
+Here "please" is filler, "switch" is the predicate, "robot" is the value (a value equal to its words needs no
+`words`), and "preset" names the key. "the" is a grammar word, written as `determiner=definite`. Which face is meant
+is not said, so a lookup asks for it.
+
 ```text
 text: move the house to 260,180, then make the house blue
 
@@ -45,18 +69,25 @@ text: move the house to 260,180, then make the house blue
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.colour value=blue operator=eq phase=result
 ```
 
-| wire | one per | main keys |
+### The wires
+
+| wire | one per | keys (evidence keys in **bold**) |
 | --- | --- | --- |
+| `w.request.request` | request in the message (a message can hold several) | `act` (a `k.actions` act), `mood` (do, ask, check, propose), **`words`** (the part of the text this request covers, when it is not the whole message), **`predicate`** (the verb as said), `question` and `asked` for questions, `mode` (the finer act, see below) |
+| `w.request.target` | request: what it acts on | `family` (drawn, node, chart, meeting, part, face, text, …), `mode` (new, existing, bound), `determiner`, `fill` (written, context, description, all, journal_step), `sort` (its kind; evidence when the text says it) and **`sort_words`** (the words that said it, when they differ from `sort`), **`name`**, **`description`**, `count` and **`count_words`**, `quantifier`, `ordinal`, **`code_words`**, **`ids`**, **`family_words`** ("the chart" when no kind is said) |
+| `w.request.constraint` | condition of a request | `attribute` (the reader key: drawn.colour, chart.labels, meeting.time, …), `value` (repeated for several values), **`words`** (the words of the value, when they differ from it), **`key_words`** (the words naming the key: "the colour", "facing"), `operator` (eq, degree, delta, relation, …), `phase` (selector: picks the target; result: the outcome wanted), `on` (attribute, place, count, size), `want=no` for a negation, `character=preference`, `step`, `unit`, `measure` and **`measure_words`**, `scope`, `open_value` |
+| `w.request.unread` | meaning with no reader key yet | **`text`** (the words), `note` (the meaning's name), `value` (only a value the text says or a closed-list value) |
+| `w.request.lookup` | thing a request needs that the text does not say | `request`, `target` or `constraint` (the wire it completes), `key` (thing, family, sort, value, name), `from` (page, previous, preference, any) |
+| `w.request.filler` | run of filler words | **`text`**: politeness ("please", "thank you"), hedges ("um", "just", "actually"), wishes ("I want"), greetings, and remarks around the requests ("that would help", "because the report uses it") |
 | `w.request.previous` | message, when there was a previous message | `text` |
 | `w.request.clock` | message, when the time matters (calendar) | `now`, `timezone` |
-| `w.request.request` | request in the message (a message can hold several) | `act` (a `k.actions` act), `mood` (do, ask, check, propose), `words` (the part of the text this request covers, when it is not the whole message), `predicate` (the verb as said), `question` and `asked` for questions, `mode` (the finer act, see below) |
-| `w.request.target` | request: what it acts on | `family` (drawn, node, chart, meeting, part, face, text, …), `mode` (new, existing, bound), `determiner`, `fill` (how an existing target is given: written, context, description, all, journal_step), `sort` (its kind) and `sort_words` (the words that said it, when they differ from `sort`), `name`, `description`, `count`, `count_words`, `quantifier`, `ordinal`, `code_words`, `ids` |
-| `w.request.constraint` | condition of a request | `attribute` (the reader key: drawn.colour, chart.labels, meeting.time, …), `value` (repeated for several values), `words` (the words of the text that say it, when they differ from the value), `operator` (eq, degree, delta, relation, …), `phase` (selector: picks the target; result: the outcome wanted), `on` (kind of condition: attribute, place, count, size), `want=no` for a negation, `character=preference`, `step`, `unit`, `measure`, `measure_words`, `scope`, `open_value` |
-| `w.request.unread` | meaning with no reader key yet | `text` (the words), `note` (the meaning's name), `value` |
 
-A key is written only when it says something new. Left out, it means: the request covers the whole message (`words`), the
-target's kind words are the kind itself (`sort_words`), the constraint's words are its value (`words`), the constraint
-is wanted (`want=yes`) and required (`character=requirement`).
+A key is written only when it says something new. When it is left out, the defaults are:
+
+- the request covers the whole message (`words`);
+- the target's kind words are the kind itself (`sort_words`);
+- the constraint's words are its value (`words`);
+- the constraint is wanted (`want=yes`) and required (`character=requirement`).
 
 **Acts.** `act` must name an act of `k.actions`. When the app has a finer act, `act` is the general act and `mode`
 holds the finer one:
@@ -70,28 +101,30 @@ holds the finer one:
 | reverse, set | `act=change mode=reverse`, `act=change mode=set` |
 | repeat | `act=copy mode=repeat` |
 
-**Rules for every row.** A row says only what its text (and, when given, its previous message) says. Each example
-stands alone: there is no hidden page, tab or memory behind it. `tools/check.mjs` refuses:
+**Lookups, and why not `?x`.** SOP Lang has variables (`?x`), but only in queries and in the patterns of a rule. A fact
+cannot hold one: sopworld refuses `@t target thing=?x`. A circuit is a set of facts, so it says what is missing with a
+lookup fact. The host then turns the lookup into a query on its context. For `key=thing` it runs
+`ask('@x <thing type of the area>')` over the page, trying the selection or the last thing made first. One match
+completes the target; several or none make the host ask the person. Use a lookup only for something the request
+needs. Never fill it with a guess.
 
-- a phrase key (`words`, `predicate`, `sort_words`, `name`, `description`, `count_words`, `code_words`,
-  `measure_words`, the `text` of an unread wire) that is not copied exactly from the message, typos included;
-- a target `ids` value the text does not say (a page id), a context wire (an object of the page) or a `thing` link. Whatever the text says about an object is written on the
-  target or constraint (its kind, name, code words); anything more (another name, an id, a size) is a page state the
-  text does not give;
-- a constraint without `words` whose value is not in the text (the value must then be words of the text);
-- `goes_to`: the tab is given by the file's folder, not by anything the text says;
-- a key that repeats another (`words` equal to the whole message, `sort_words` equal to `sort`, a constraint's `words`
-  equal to its `value`).
+## Writing new data
 
-It also warns, without refusing, about rows to rewrite:
+Each example stands alone: there is no hidden page, tab or memory behind it. Write only what the text, and the previous
+message when it is given, says:
 
-- an existing target nothing in the row identifies ("make it shorter" with no previous message and no named object).
-  Write such requests with the text that makes the referent clear: a previous message, or the object named;
-- a target kind the text never says;
-- a meaning left unread (an unread wire holding the request's whole words, or a request with only unread wires);
-- a value that is a phrase the text does not say ("x inverted" for "invert the x axis"): a value is either words of the
-  text or a value of a closed list (blue, near, left_of, much_more);
-- a proper name of the text (a capitalised word not starting a sentence) that no wire of its request keeps.
+- **Copy every evidence key exactly from the message**, typos included.
+- **Leave out what the text does not say**: no page objects (context wires, `thing` links, ids of the page), no
+  `goes_to` (the folder gives the tab), no kind or value the text does not say. A value is either words of the text or
+  a value of a closed list (blue, near, left_of, much_more). Never write a summary phrase like "x inverted".
+- **Write a lookup** for what a request needs and the text does not give. For "make it shorter" with no previous
+  message, write `lookup key=thing from=page`; with a previous message that names the thing, use `from=previous`.
+  Better still, add examples where the text itself makes the referent clear.
+- **Put greetings, politeness, hedges and remarks around the request in filler wires.** Words that carry meaning must
+  be the evidence of a request, target, constraint or unread wire. Never hide them as filler.
+- **Keep every proper name** ("Start", "Room 4", "Sales by month") in the wire it belongs to.
+- **Write a meaning that has no key yet as `w.request.unread`**, with its words and a `note` naming the meaning, so
+  the schema can gain the key.
 
 ## Checking new data
 
@@ -100,12 +133,32 @@ It also warns, without refusing, about rows to rewrite:
 ```sh
 node tools/check.mjs                              # every file (about a minute)
 node tools/check.mjs --file diagram/new.csv       # one file
-node tools/check.mjs --warnings rewrite.csv       # also list the rows to rewrite (text, sop, warning)
+node tools/check.mjs --warnings rewrite.csv       # also list the rows to complete (text, sop, warning, words)
 ```
 
-It prints how many rows pass, each kind of problem with a count and an example row, and the counts of warnings. The exit code is 1 when any
-row fails. Fix the rows, or, when the data carries a real meaning the schema lacks, extend the schema in
-sop-knowledge-worlds. Never bend the meaning to fit.
+**Errors** (the row is refused):
+- schema violations: unknown type or key, a value outside an enum, an act that is not in `k.actions`;
+- an evidence key that is not words of the text;
+- a context wire or a `thing` link;
+- `goes_to`;
+- a key repeating another;
+- a value that is a phrase the text does not say;
+- a kind the text does not say;
+- an existing target that no words identify and that has no lookup;
+- filler that hides content words of a request.
+
+**Warnings** (the row is valid but incomplete; `--warnings` lists them with the words concerned):
+- content words of the text that no wire accounts for;
+- a proper name of a request that no wire keeps;
+- a meaning left in unread.
+
+Grammar and filler words come from `w.lang.en` in sop-knowledge-worlds:
+- **grammar**: `w.lang.en.closed` determiners, pronouns, prepositions, conjunctions, auxiliaries, particles and
+  adverbs; the grammar classes of `w.lang.en.skip`; `w.lang.en.imperative.lead`; contractions that expand to these;
+- **filler**: the politeness, filler and desire classes of `w.lang.en.skip`, and interjections.
+
+The checker uses no word list of its own. Fix rows that fail. When the data carries a real meaning the schema lacks,
+extend the schema in sop-knowledge-worlds. Never bend the meaning to fit.
 
 ## How PSys2 uses it
 
@@ -153,11 +206,20 @@ What each source is:
 
 Document, Calendar and Avatar are thin (under 12,000 messages each). They are the next areas to fill.
 
-Known data issues (2026-11-23): all rows pass the checker; 62,443 rows carry a warning: 42,922 with an existing target
-nothing in the row identifies, 34,371 with a meaning left unread, 9,691 with an invented value phrase, 5,156 with a
-proper name the circuit loses, 1,173 with a kind the text never says (a row can have several). They are the first
-candidates for rewriting. When the data moved here, the page contexts of the old rows (lists of objects with names and
-ids the text does not say, up to 95 per row) and target ids the text does not say were dropped.
+Known data issues (2026-11-23): all rows pass the checker. When the data moved here:
+- page contexts that the text does not give were dropped, as were page ids, kinds and value phrases the text does not
+  say;
+- lookups were written for 49,851 rows whose target the text does not identify;
+- filler was marked in 84,000 rows, from w.lang.en, together with remarks outside every request;
+- key_words and family_words were added where the text names the key or the family.
+
+124,304 rows still carry a warning:
+- 122,570 have content words no wire accounts for (the older labels did not record the words behind every wire);
+- 34,371 have a meaning left in unread;
+- 5,219 lose a proper name.
+
+`node tools/check.mjs --warnings rewrite.csv` lists them with the words concerned. They are the rows to complete or
+rewrite first.
 
 ## Licence
 
