@@ -235,6 +235,12 @@ function warningsOf(text, wires) {
   }
   for (const r of wires.filter((w) => w.type === 'w.request.request' && w.attrs.asked_words))
     for (const v of r.attrs.asked_words) if (tok(v) === (one(r, 'words') ?? text).replace(/[?.!]+$/, '') || tok(v).split(/\s+/).length > 4) out.add('asked_words hold the whole request, not the words naming the key asked about');
+  // a constraint or unread wire written twice in one request says the same thing twice
+  { const seen = new Set();
+    for (const w of wires.filter((x) => x.type === 'w.request.constraint' || x.type === 'w.request.unread')) {
+      const k = w.type + ' ' + JSON.stringify(Object.entries(w.attrs).sort());
+      if (seen.has(k)) out.add('the same wire twice in one request'); seen.add(k);
+    } }
   const loose = [...text.matchAll(TOKEN)].filter((m) => !covered[m.index] && !isGrammar(m[0])).map((m) => m[0]);
   if (loose.length) out.add('words no wire formalizes'), (out.loose = [...new Set(loose)].join(' '));
   for (const r of wires.filter((w) => w.type === 'w.request.request')) {
