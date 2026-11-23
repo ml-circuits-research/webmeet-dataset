@@ -230,6 +230,12 @@ function warningsOf(text, wires) {
   const loose = [...text.matchAll(TOKEN)].filter((m) => !covered[m.index] && !isGrammar(m[0])).map((m) => m[0]);
   if (loose.length) out.add('words no wire formalizes'), (out.loose = [...new Set(loose)].join(' '));
   for (const r of wires.filter((w) => w.type === 'w.request.request')) {
+    // "keep two of the trees" is a removal of all the others: its selector carries the exclusion (want=no); a removal
+    // under a keeping verb whose selectors exclude nothing would remove the very things to keep
+    if (one(r, 'act') === 'remove' && /^(keep|keeps|kept|leave|leaves|left|stay|stays|spare|let|remain|remains)$/i.test(one(r, 'predicate') ?? '')) {
+      const sel = wires.filter((w) => w.type === 'w.request.constraint' && String(w.attrs.request?.[0]) === '$' + r.id && one(w, 'phase') === 'selector');
+      if (sel.length && !sel.some((w) => one(w, 'want') === 'no')) out.add('a removal under a keeping verb whose selector excludes nothing (keep X = remove the others: want=no)');
+    }
     const acts = r.attrs.predicate ? verbActs(one(r, 'predicate'), one(r, 'words') ?? text) : null;
     // A verb has several acts by context (put, give, make, drop); a verb whose only act in k.actions is removal
     // ("delete the sync") written with another act is a contradiction.
