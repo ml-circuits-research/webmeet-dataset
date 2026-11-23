@@ -36,24 +36,22 @@ documented in its `WORLD.md`). Every row must conform to that schema; `tools/che
 ```text
 text: move the house to 260,180, then make the house blue
 
-@o1 w.request.context sort=house name=House
 @r1 w.request.request act=place mood=do words="move the house to 260,180" predicate=move
-@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=house thing=$o1
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=house
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.x value="260" operator=eq phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.y value="180" operator=eq phase=result
 @r2 w.request.request act=change mood=do words="make the house blue" predicate=make
-@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=description sort=house thing=$o1
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=description sort=house
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.colour value=blue operator=eq phase=result
 ```
 
 | wire | one per | main keys |
 | --- | --- | --- |
-| `w.request.context` | object on the page that the message names | `sort` (its kind), `name`, `code` (its id, e.g. n3), `size`, `y`, `text`; a target or constraint links to it with `thing=$o1` |
 | `w.request.previous` | message, when there was a previous message | `text` |
 | `w.request.clock` | message, when the time matters (calendar) | `now`, `timezone` |
 | `w.request.request` | request in the message (a message can hold several) | `act` (a `k.actions` act), `mood` (do, ask, check, propose), `words` (the part of the text this request covers, when it is not the whole message), `predicate` (the verb as said), `question` and `asked` for questions, `mode` (the finer act, see below) |
-| `w.request.target` | request: what it acts on | `family` (drawn, node, chart, meeting, part, face, text, …), `mode` (new, existing, bound), `determiner`, `fill` (how an existing target is given: written, context, description, all, journal_step), `sort` (its kind) and `sort_words` (the words that said it, when they differ from `sort`), `name`, `description`, `count`, `count_words`, `quantifier`, `ordinal`, `code_words`, `ids`, `thing` (the object of the page it is) |
-| `w.request.constraint` | condition of a request | `attribute` (the reader key: drawn.colour, chart.labels, meeting.time, …), `value` (repeated for several values), `words` (the words of the text that say it, when they differ from the value), `thing` (an object of the page it names, e.g. a relation's anchor), `operator` (eq, degree, delta, relation, …), `phase` (selector: picks the target; result: the outcome wanted), `on` (kind of condition: attribute, place, count, size), `want=no` for a negation, `character=preference`, `step`, `unit`, `measure`, `measure_words`, `scope`, `open_value` |
+| `w.request.target` | request: what it acts on | `family` (drawn, node, chart, meeting, part, face, text, …), `mode` (new, existing, bound), `determiner`, `fill` (how an existing target is given: written, context, description, all, journal_step), `sort` (its kind) and `sort_words` (the words that said it, when they differ from `sort`), `name`, `description`, `count`, `count_words`, `quantifier`, `ordinal`, `code_words`, `ids` |
+| `w.request.constraint` | condition of a request | `attribute` (the reader key: drawn.colour, chart.labels, meeting.time, …), `value` (repeated for several values), `words` (the words of the text that say it, when they differ from the value), `operator` (eq, degree, delta, relation, …), `phase` (selector: picks the target; result: the outcome wanted), `on` (kind of condition: attribute, place, count, size), `want=no` for a negation, `character=preference`, `step`, `unit`, `measure`, `measure_words`, `scope`, `open_value` |
 | `w.request.unread` | meaning with no reader key yet | `text` (the words), `note` (the meaning's name), `value` |
 
 A key is written only when it says something new. Left out, it means: the request covers the whole message (`words`), the
@@ -77,8 +75,10 @@ stands alone: there is no hidden page, tab or memory behind it. `tools/check.mjs
 
 - a phrase key (`words`, `predicate`, `sort_words`, `name`, `description`, `count_words`, `code_words`,
   `measure_words`, the `text` of an unread wire) that is not copied exactly from the message, typos included;
-- a context wire for an object the text does not name (by its name, code or kind), or that no wire links to with
-  `thing`. A list of everything on the page is not context: an object is there only because the message speaks of it;
+- a context wire (an object of the page) or a `thing` link. Whatever the text says about an object is written on the
+  target or constraint (its kind, name, code words); anything more (another name, an id, a size) is a page state the
+  text does not give;
+- a constraint without `words` whose value is not in the text (the value must then be words of the text);
 - `goes_to`: the tab is given by the file's folder, not by anything the text says;
 - a key that repeats another (`words` equal to the whole message, `sort_words` equal to `sort`, a constraint's `words`
   equal to its `value`).
@@ -150,10 +150,10 @@ What each source is:
 
 Document, Calendar and Avatar are thin (under 12,000 messages each). They are the next areas to fill.
 
-Known data issues (2026-11-23): all rows pass the checker; 54,653 rows carry a warning: 42,920 with an existing target
-nothing in the row identifies, 34,371 with a meaning left unread, 355 with a kind the text never says (a row can have
-several). They are the first candidates for rewriting. When the data moved here, page contexts that listed objects the
-message does not name (up to 95 per row) were dropped.
+Known data issues (2026-11-23): all rows pass the checker; 54,948 rows carry a warning: 42,922 with an existing target
+nothing in the row identifies, 34,371 with a meaning left unread, 1,173 with a kind the text never says (a row can have
+several). They are the first candidates for rewriting. When the data moved here, the page contexts of the old rows (lists
+of objects with names and ids the text does not say, up to 95 per row) were dropped.
 
 ## Licence
 

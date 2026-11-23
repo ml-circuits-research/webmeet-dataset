@@ -4,11 +4,12 @@
 //   2. quotes the message exactly: every phrase slot (words, sort_words, name, description, count_words, code_words,
 //      measure_words, and the text of an unread wire) is a substring of the row's text;
 //   3. says nothing the row does not give (errors): no goes_to (the tab is the folder, not something the text says);
-//      a context wire only for an object the text names (its name, code or kind) and that a wire links to (thing=$oN);
+//      no context wire (a page object: whatever the text says of it is on the target or constraint, the rest is a page
+//      state the text does not give) and no thing link;
 //      no key repeating another (request words equal to the whole text, sort_words equal to sort, a constraint's words
 //      equal to its value); the predicate is words of the text.
 //   4. warnings (the row is valid but should be rewritten): an existing target nothing in the row identifies (no name,
-//      description, kind words, code, linked object or previous message), a target kind the text never says, and a
+//      description, kind words, code or previous message), a target kind the text never says, and a
 //      meaning left unread (an unread wire with the request's whole words, or a request with only unread wires).
 //      `--warnings FILE` writes those rows to a CSV (text, sop, warning) for the generating session.
 // Run before adding new rows:
@@ -81,18 +82,16 @@ const esc = (x) => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const says = (phrase, text) => !!phrase && String(phrase).length > 1 && new RegExp(`(?<![\\w])${esc(String(phrase))}(?:e?s)?(?![\\w])`, 'i').test(text);
 function grounding(text, wires) {
   const out = [];
-  const used = new Set(wires.flatMap((w) => (w.attrs.thing ?? []).map((v) => String(v).replace(/^\$/, ''))));
-  for (const w of wires) {
-    if (w.type === 'w.request.context') {
-      if (!used.has(w.id)) out.push([w.type, '', 'object no wire links to (thing=$' + 'oN)']);
-      if (![one(w, 'name'), one(w, 'code'), one(w, 'sort')].some((x) => says(x, text))) out.push([w.type, '', 'object the text does not name']);
-    }
+    for (const w of wires) {
+    if (w.type === 'w.request.context') out.push([w.type, '', 'page object: not said by the text (write what the text says on the target)']);
+    if (w.attrs.thing) out.push([w.type, 'thing', 'link to a page object: not said by the text']);
     if (w.type === 'w.request.request') {
       if (w.attrs.goes_to) out.push([w.type, 'goes_to', 'not said in the text (the tab is the folder)']);
       if (one(w, 'words') === text) out.push([w.type, 'words', 'repeats the whole text (leave it out)']);
     }
     if (w.type === 'w.request.target' && w.attrs.sort_words && one(w, 'sort_words') === one(w, 'sort')) out.push([w.type, 'sort_words', 'repeats sort (leave it out)']);
     if (w.type === 'w.request.constraint' && w.attrs.words && (w.attrs.value ?? []).length === 1 && String(one(w, 'value')) === one(w, 'words')) out.push([w.type, 'words', 'repeats value (leave it out)']);
+    if (w.type === 'w.request.constraint' && !w.attrs.words && !(w.attrs.value ?? []).every((v) => text.includes(tok(v)))) out.push([w.type, 'value', 'neither words nor a value the text says']);
   }
   return out;
 }
@@ -103,9 +102,9 @@ function warningsOf(text, wires) {
     const words = one(r, 'words') ?? text;
     const mine = wires.filter((w) => tok(w.attrs.request?.[0] ?? '') === '$' + r.id || String(w.attrs.request?.[0]) === '$' + r.id);
     const t = mine.find((w) => w.type === 'w.request.target');
-    if (t && one(t, 'mode') !== 'new' && !['name', 'description', 'sort_words', 'code_words', 'thing', 'count_words'].some((k) => t.attrs[k]) && !says(one(t, 'sort'), words) && !previous && one(t, 'fill') !== 'all')
+    if (t && one(t, 'mode') !== 'new' && !['name', 'description', 'sort_words', 'code_words', 'count_words'].some((k) => t.attrs[k]) && !says(one(t, 'sort'), words) && !previous && one(t, 'fill') !== 'all')
       out.add('existing target nothing in the row identifies');
-    if (t && one(t, 'sort') && !t.attrs.sort_words && !t.attrs.thing && !says(one(t, 'sort'), text)) out.add('target kind the text never says');
+    if (t && one(t, 'sort') && !t.attrs.sort_words && !says(one(t, 'sort'), text)) out.add('target kind the text never says');
     const unread = mine.filter((w) => w.type === 'w.request.unread');
     if (unread.some((u) => one(u, 'text') === words) || (unread.length && !mine.some((w) => w.type === 'w.request.constraint'))) out.add('meaning left unread');
   }

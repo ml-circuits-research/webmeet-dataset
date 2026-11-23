@@ -1,44 +1,32 @@
 text,sop
-"We're presenting the survey tomorrow and the slide needs a heading, so could you turn Survey results into a doughnut chart called ""How customers rated us""?","@o1 w.request.context sort=chart name=""Sales by region""
-@o2 w.request.context sort=chart name=""Monthly visitors""
-@o3 w.request.context sort=group name=""Survey results""
-@r1 w.request.request act=make mood=do predicate=turn
+"We're presenting the survey tomorrow and the slide needs a heading, so could you turn Survey results into a doughnut chart called ""How customers rated us""?","@r1 w.request.request act=make mood=do predicate=turn
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite sort=chart
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.source words=""Survey results"" operator=eq phase=result thing=$o3
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.type value=doughnut words=""doughnut chart"" operator=eq phase=result thing=$o1 thing=$o2
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.source words=""Survey results"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.type value=doughnut words=""doughnut chart"" operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.title value=""How customers rated us"" operator=eq phase=result"
-"Maybe a bar chart would read better than the raw numbers - build one from Quarterly revenue and name it Quarterly sales, if that's not too much trouble","@o1 w.request.context sort=chart name=""Sales by region""
-@o2 w.request.context sort=chart name=""Monthly visitors""
-@o3 w.request.context sort=group name=""Quarterly revenue""
-@r1 w.request.request act=make mood=do predicate=build
+"Maybe a bar chart would read better than the raw numbers - build one from Quarterly revenue and name it Quarterly sales, if that's not too much trouble","@r1 w.request.request act=make mood=do predicate=build
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite sort=chart
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result thing=$o1 thing=$o2
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.source words=""Quarterly revenue"" operator=eq phase=result thing=$o3
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.source words=""Quarterly revenue"" operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.title value=""Quarterly sales"" operator=eq phase=result"
-"If the Survey results group still has its numbers, chart them as a radar titled Service scores.","@o1 w.request.context sort=group name=""Quarterly revenue""
-@o2 w.request.context sort=group name=""Survey results""
-@r1 w.request.request act=make mood=do predicate=chart
+"If the Survey results group still has its numbers, chart them as a radar titled Service scores.","@r1 w.request.request act=make mood=do predicate=chart
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.source words=""the Survey results group"" operator=eq phase=result thing=$o1 thing=$o2
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.source words=""the Survey results group"" operator=eq phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.type value=radar operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.title value=""Service scores"" operator=eq phase=result"
-make the Survey results group somewhat smaller,"@o1 w.request.context sort=group name=""Survey results""
-@r1 w.request.request act=change mood=do predicate=make
-@r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=written name=""Survey results"" thing=$o1
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.id value=""Survey results"" operator=eq phase=selector thing=$o1
+make the Survey results group somewhat smaller,"@r1 w.request.request act=change mood=do predicate=make
+@r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=written name=""Survey results""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.id value=""Survey results"" operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=size attribute=group.scale words=smaller operator=delta phase=result step=less"
-reduce the size of Approval steps slightly,"@o1 w.request.context sort=group name=""Approval steps""
-@r1 w.request.request act=change mood=do predicate=reduce
-@r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=written name=""Approval steps"" thing=$o1
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.id value=""Approval steps"" operator=eq phase=selector thing=$o1
+reduce the size of Approval steps slightly,"@r1 w.request.request act=change mood=do predicate=reduce
+@r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=written name=""Approval steps""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.id value=""Approval steps"" operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=size attribute=group.scale words=slightly operator=delta phase=result"
-Leadership looks tiny compared to the other groups - could you scale it up somewhat?,"@o1 w.request.context sort=group name=Leadership
-@r1 w.request.request act=change mood=do predicate=scale
-@r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=written name=Leadership thing=$o1
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.id value=Leadership operator=eq phase=selector thing=$o1
+Leadership looks tiny compared to the other groups - could you scale it up somewhat?,"@r1 w.request.request act=change mood=do predicate=scale
+@r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=written name=Leadership
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.id value=Leadership operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=size attribute=group.scale words=""up somewhat"" operator=delta phase=result"
-Survey results: a little smaller,"@o1 w.request.context sort=group name=""Survey results""
-@r1 w.request.request act=change mood=do
-@r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=written name=""Survey results"" thing=$o1
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.id value=""Survey results"" operator=eq phase=selector thing=$o1
+Survey results: a little smaller,"@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=written name=""Survey results""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.id value=""Survey results"" operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=size attribute=group.scale words=smaller operator=delta phase=result step=less"
