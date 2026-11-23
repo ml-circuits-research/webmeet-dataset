@@ -33,8 +33,8 @@ marked *pending* is being repaired; it takes its new name when its repair is com
 | diagram/data-drop.3.4.csv | diagram/charts-06.csv | 4998 | renamed |
 | diagram/data-drop.3.5.csv | diagram/diagrams-02.csv | 351 | renamed |
 | diagram/data-drop.4.csv | diagram/diagrams-03.csv | 4107 | renamed |
-| diagram/demo-tool-profile.1.csv | diagram/nodes-06.csv | 4813 | pending |
-| diagram/demo-tool-profile.2.csv | diagram/diagrams-04.csv | 4165 | pending |
+| diagram/demo-tool-profile.1.csv | diagram/nodes-06.csv | 4813 | renamed |
+| diagram/demo-tool-profile.2.csv | diagram/diagrams-04.csv | 4165 | renamed |
 | diagram/human-adapted-diagram.csv | diagram/diagrams-05.csv | 538 | renamed |
 | diagram/main-synthetic.csv | diagram/nodes-07.csv | 2350 | renamed |
 | diagram/ui-comparatives.csv | diagram/nodes-08.csv | 215 | renamed |
