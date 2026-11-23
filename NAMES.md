@@ -27,11 +27,11 @@ marked *pending* is being repaired; it takes its new name when its repair is com
 | diagram/data-drop.2.2.csv | diagram/nodes-02.csv | 3645 | pending |
 | diagram/data-drop.2.3.csv | diagram/charts-05.csv | 4867 | pending |
 | diagram/data-drop.2.4.csv | diagram/nodes-03.csv | 1419 | pending |
-| diagram/data-drop.3.1.csv | diagram/nodes-04.csv | 4082 | pending |
-| diagram/data-drop.3.2.csv | diagram/nodes-05.csv | 2919 | pending |
-| diagram/data-drop.3.3.csv | diagram/diagrams-01.csv | 4573 | pending |
-| diagram/data-drop.3.4.csv | diagram/charts-06.csv | 4998 | pending |
-| diagram/data-drop.3.5.csv | diagram/diagrams-02.csv | 351 | pending |
+| diagram/data-drop.3.1.csv | diagram/nodes-04.csv | 4082 | renamed |
+| diagram/data-drop.3.2.csv | diagram/nodes-05.csv | 2919 | renamed |
+| diagram/data-drop.3.3.csv | diagram/diagrams-01.csv | 4573 | renamed |
+| diagram/data-drop.3.4.csv | diagram/charts-06.csv | 4998 | renamed |
+| diagram/data-drop.3.5.csv | diagram/diagrams-02.csv | 351 | renamed |
 | diagram/data-drop.4.csv | diagram/diagrams-03.csv | 4107 | renamed |
 | diagram/demo-tool-profile.1.csv | diagram/nodes-06.csv | 4813 | pending |
 | diagram/demo-tool-profile.2.csv | diagram/diagrams-04.csv | 4165 | pending |
