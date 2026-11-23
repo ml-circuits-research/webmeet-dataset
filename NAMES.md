@@ -8,8 +8,8 @@ marked *pending* is being repaired; it takes its new name when its repair is com
 
 | former name | new name | rows | state |
 | --- | --- | ---: | --- |
-| calendar/demo-tool-profile.1.csv | calendar/meetings-01.csv | 4875 | pending |
-| calendar/demo-tool-profile.2.csv | calendar/meetings-02.csv | 1229 | pending |
+| calendar/demo-tool-profile.1.csv | calendar/meetings-01.csv | 4875 | renamed |
+| calendar/demo-tool-profile.2.csv | calendar/meetings-02.csv | 1229 | renamed |
 | calendar/main-synthetic.csv | calendar/meetings-03.csv | 647 | renamed |
 | calendar/multiwoz-v1.csv | calendar/meetings-04.csv | 48 | renamed |
 | calendar/smcalflow-v1.csv | calendar/meetings-05.csv | 32 | renamed |
@@ -48,8 +48,8 @@ marked *pending* is being repaired; it takes its new name when its repair is com
 | diagram/ui-quantities.csv | diagram/diagrams-06.csv | 25 | renamed |
 | diagram/ui-systematic.csv | diagram/diagrams-07.csv | 1688 | renamed |
 | diagram/ui-tiers.csv | diagram/diagrams-08.csv | 7 | renamed |
-| document/demo-tool-profile.1.csv | document/text-01.csv | 4833 | pending |
-| document/demo-tool-profile.2.csv | document/text-02.csv | 3048 | pending |
+| document/demo-tool-profile.1.csv | document/text-01.csv | 4833 | renamed |
+| document/demo-tool-profile.2.csv | document/text-02.csv | 3048 | renamed |
 | document/main-synthetic.csv | document/text-03.csv | 1819 | renamed |
 | document/pptc-v1.csv | document/text-04.csv | 18 | renamed |
 | document/texse-v1.csv | document/text-05.csv | 17 | renamed |
@@ -88,9 +88,9 @@ marked *pending* is being repaired; it takes its new name when its repair is com
 | drawing/data-drop.5.3.csv | drawing/scenes-13.csv | 4957 | renamed |
 | drawing/data-drop.5.4.csv | drawing/scenes-14.csv | 1099 | renamed |
 | drawing/data-drop.6.csv | drawing/scenes-15.csv | 1301 | renamed |
-| drawing/demo-tool-profile.1.csv | drawing/scenes-16.csv | 3872 | pending |
-| drawing/demo-tool-profile.2.csv | drawing/scenes-17.csv | 4864 | pending |
-| drawing/demo-tool-profile.3.csv | drawing/placement-04.csv | 956 | pending |
+| drawing/demo-tool-profile.1.csv | drawing/scenes-16.csv | 3872 | renamed |
+| drawing/demo-tool-profile.2.csv | drawing/scenes-17.csv | 4864 | renamed |
+| drawing/demo-tool-profile.3.csv | drawing/placement-04.csv | 956 | renamed |
 | drawing/human-adapted-drawing.csv | drawing/placement-05.csv | 558 | renamed |
 | drawing/main-synthetic.1.csv | drawing/objects-02.csv | 2581 | renamed |
 | drawing/main-synthetic.2.csv | drawing/objects-03.csv | 5000 | renamed |
@@ -103,8 +103,8 @@ marked *pending* is being repaired; it takes its new name when its repair is com
 | drawing/ui-human.csv | drawing/scenes-21.csv | 968 | renamed |
 | drawing/ui-natural.csv | drawing/scenes-22.csv | 472 | renamed |
 | drawing/ui-quantities.csv | drawing/scenes-23.csv | 149 | renamed |
-| drawing/ui-relations.1.csv | drawing/placement-06.csv | 5000 | pending |
-| drawing/ui-relations.2.csv | drawing/placement-07.csv | 108 | pending |
-| drawing/ui-relations.3.csv | drawing/placement-08.csv | 266 | pending |
+| drawing/ui-relations.1.csv | drawing/placement-06.csv | 5000 | renamed |
+| drawing/ui-relations.2.csv | drawing/placement-07.csv | 108 | renamed |
+| drawing/ui-relations.3.csv | drawing/placement-08.csv | 266 | renamed |
 | drawing/ui-systematic.csv | drawing/scenes-24.csv | 1055 | renamed |
 | drawing/ui-tiers.csv | drawing/style-01.csv | 4 | renamed |
