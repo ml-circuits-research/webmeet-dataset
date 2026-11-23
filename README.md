@@ -73,8 +73,8 @@ text: move the house to 260,180, then make the house blue
 
 | wire | one per | keys (evidence keys in **bold**) |
 | --- | --- | --- |
-| `w.request.request` | request in the message (a message can hold several) | `act` (a `k.actions` act), `mood` (do, ask, check, propose), **`words`** (the part of the text this request covers, when it is not the whole message), **`predicate`** (the verb as said), `question` and `asked` for questions, `mode` (the finer act, see below) |
-| `w.request.target` | request: what it acts on | `family` (drawn, node, chart, meeting, part, face, text, …), `mode` (new, existing, bound), `determiner`, `fill` (written, context, description, all, journal_step), `sort` (its kind; evidence when the text says it) and **`sort_words`** (the words that said it, when they differ from `sort`), **`name`**, **`description`**, `count` and **`count_words`**, `quantifier`, `ordinal`, **`code_words`**, **`ids`**, **`family_words`** ("the chart" when no kind is said) |
+| `w.request.request` | request in the message (a message can hold several) | `act` (a `k.actions` act), `mood` (do, ask, check, propose), **`words`** (the part of the text this request covers, when it is not the whole message), **`predicate`** (the verb as said), `question` and `asked` for questions with **`asked_words`** ("what colour"), `mode` (the finer act, see below) |
+| `w.request.target` | request: what it acts on | `family` (drawn, node, chart, meeting, part, face, text, …), `mode` (new, existing, bound), `determiner`, `fill` (written, context, description, all, journal_step), `sort` (its kind; evidence when the text says it) and **`sort_words`** (the words that said it, when they differ from `sort`), **`name`** and **`name_words`** ("called", "labelled"), **`description`**, `count` and **`count_words`**, `quantifier`, `ordinal`, **`code_words`**, **`ids`**, **`family_words`** ("the chart" when no kind is said) |
 | `w.request.constraint` | condition of a request | `attribute` (the reader key: drawn.colour, chart.labels, meeting.time, …), `value` (repeated for several values), **`words`** (the words of the value, when they differ from it), **`key_words`** (the words naming the key: "the colour", "facing"), `operator` (eq, degree, delta, relation, …), `phase` (selector: picks the target; result: the outcome wanted), `on` (attribute, place, count, size), `want=no` for a negation, `character=preference`, `step`, `unit`, `measure` and **`measure_words`**, `scope`, `open_value` |
 | `w.request.unread` | meaning with no reader key yet | **`text`** (the words), `note` (the meaning's name), `value` (only a value the text says or a closed-list value) |
 | `w.request.lookup` | thing a request needs that the text does not say | `request`, `target` or `constraint` (the wire it completes), `key` (thing, family, sort, value, name), `from` (page, previous, preference, any) |
@@ -211,12 +211,13 @@ Known data issues (2026-11-23): all rows pass the checker. When the data moved h
   say;
 - lookups were written for 49,851 rows whose target the text does not identify;
 - filler was marked in 84,000 rows, from w.lang.en, together with remarks outside every request;
-- key_words and family_words were added where the text names the key or the family.
+- key_words, family_words, name_words and asked_words were added where the text names the key, the family, the
+  name or what is asked (with the words the knowledge worlds give for each key).
 
-124,304 rows still carry a warning:
-- 122,570 have content words no wire accounts for (the older labels did not record the words behind every wire);
+115,320 rows still carry a warning:
+- 112,117 have content words no wire accounts for (the older labels did not record the words behind every wire);
 - 34,371 have a meaning left in unread;
-- 5,219 lose a proper name.
+- 5,204 lose a proper name.
 
 `node tools/check.mjs --warnings rewrite.csv` lists them with the words concerned. They are the rows to complete or
 rewrite first.

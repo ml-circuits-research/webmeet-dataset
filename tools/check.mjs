@@ -30,7 +30,7 @@ if (!existsSync(join(KNOWLEDGE, 'tools', 'sopworld', 'sopworld.mjs'))) throw new
 const DATASET = resolve(args.dataset ?? join(HERE, '..'));
 const ONLY = args.file ? resolve(args.file) : null;
 const TAB_WORLD = { drawing: 'w.drawing', diagram: 'w.diagram', document: 'w.document', calendar: 'w.calendar', avatar: 'w.face' };
-const PHRASES = { 'w.request.request': ['words', 'predicate'], 'w.request.target': ['sort_words', 'name', 'description', 'count_words', 'code_words', 'ids', 'family_words'], 'w.request.constraint': ['words', 'key_words', 'measure_words'], 'w.request.unread': ['text'], 'w.request.filler': ['text'] };
+const PHRASES = { 'w.request.request': ['words', 'predicate', 'asked_words'], 'w.request.target': ['sort_words', 'name', 'name_words', 'description', 'count_words', 'code_words', 'ids', 'family_words'], 'w.request.constraint': ['words', 'key_words', 'measure_words'], 'w.request.unread': ['text'], 'w.request.filler': ['text'] };
 const tok = (v) => (String(v).startsWith('"') ? JSON.parse(v) : String(v));
 const LIMIT = Number(args.limit ?? Infinity);
 const EXAMPLES = Number(args.examples ?? 3);
@@ -144,7 +144,7 @@ function grounding(text, wires) {
   return out;
 }
 const TOKEN = /[A-Za-z0-9]+(?:['\u2019][A-Za-z]+)?/g;
-const EVIDENCE = ['words', 'predicate', 'sort_words', 'name', 'description', 'count_words', 'code_words', 'ids', 'family_words', 'key_words', 'measure_words', 'text'];
+const EVIDENCE = ['words', 'predicate', 'asked_words', 'sort_words', 'name', 'name_words', 'description', 'count_words', 'code_words', 'ids', 'family_words', 'key_words', 'measure_words', 'text'];
 // Warnings: words of the text no wire accounts for, lost proper names, meanings left in unread.
 function warningsOf(text, wires) {
   const out = new Set();
@@ -155,7 +155,7 @@ function warningsOf(text, wires) {
     for (const m of text.matchAll(re)) for (let i = m.index; i < m.index + m[0].length; i++) covered[i] = true;
   };
   for (const w of wires) {
-    if (w.type === 'w.request.request' || w.type === 'w.request.previous' || w.type === 'w.request.clock') { mark(one(w, 'predicate')); continue; }
+    if (w.type === 'w.request.request' || w.type === 'w.request.previous' || w.type === 'w.request.clock') { mark(one(w, 'predicate')); for (const v of w.attrs.asked_words ?? []) mark(tok(v)); continue; }
     for (const k of EVIDENCE) for (const v of w.attrs[k] ?? []) mark(tok(v));
     if (w.type === 'w.request.target' && says(one(w, 'sort'), text)) mark(one(w, 'sort'));
     if (w.type === 'w.request.constraint' && !w.attrs.words) for (const v of w.attrs.value ?? []) mark(tok(v));

@@ -30,14 +30,14 @@ pick the entire face,"@r1 w.request.request act=pick mood=do predicate=pick
 @r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=written name=face
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=face.id value=face operator=eq phase=selector"
 show the avatar part IDs for 4 seconds,"@r1 w.request.request act=change mood=do predicate=show
-@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=context
+@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=context family_words=avatar
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=face.duration value=""4"" words=""4 seconds"" operator=eq phase=result unit=second measure=4 measure_words=""4"""
 keep avatar part IDs visible,"@r1 w.request.request act=change mood=do predicate=keep
-@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=context
+@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=context family_words=avatar
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 hide avatar part IDs,"@r1 w.request.request act=change mood=do predicate=hide
-@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=context
+@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=context family_words=avatar
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 select the eyes,"@r1 w.request.request act=pick mood=do predicate=select
 @r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=eyes"
@@ -100,26 +100,22 @@ remove the whole avatar appearance,"@r1 w.request.request act=remove mood=do pre
 @r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 show me the avatar parts,"@r1 w.request.request act=ask mood=ask predicate=show question=describe
-@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=context
+@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=context family_words=avatar
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 what does the avatar currently have?,"@r1 w.request.request act=ask mood=ask predicate=what question=describe
-@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=context
+@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=context family_words=avatar
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 undo the last avatar change,"@prev w.request.previous text=""Update \""Avatar\"" using composition base \""woman\"".""
 @r1 w.request.request act=undo mood=do predicate=undo
-@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=journal_step
+@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=journal_step family_words=avatar
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous"
 put the avatar back,"@prev w.request.previous text=""Update \""Avatar\"" using composition base \""woman\"".""
 @r1 w.request.request act=undo mood=do predicate=put
-@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=journal_step
+@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=journal_step family_words=avatar
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous"
 redo that avatar edit,"@prev w.request.previous text=""Undo the last action.""
 @r1 w.request.request act=redo mood=do predicate=redo
-@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=journal_step
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous"
-restore the avatar change I undid,"@prev w.request.previous text=""Undo the last action.""
-@r1 w.request.request act=redo mood=do predicate=restore
-@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=journal_step
+@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=journal_step family_words=avatar
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous"
 change the avatar to a baby,"@r1 w.request.request act=change mood=do predicate=change
 @r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=description sort=avatar
@@ -800,15 +796,15 @@ set the mouth size to default,"@r1 w.request.request act=change mood=do predicat
 "make the avatar look happy, then move the mouth up","@f1 w.request.filler text=then
 @r1 w.request.request act=change mood=do words=""make the avatar look happy"" predicate=make
 @r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=description sort=avatar
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=face.expression value=happy operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=face.expression value=happy operator=eq phase=result key_words=look
 @r2 w.request.request act=place mood=do words=""move the mouth up"" predicate=move
 @r2.t w.request.target request=$r2 family=part mode=existing determiner=definite fill=description sort=mouth
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=part.place value=up operator=eq phase=result"
 make the avatar look a bit happier,"@clock w.request.clock now=2026-11-17T12:00:00Z timezone=UTC
 @r1 w.request.request act=change mood=do predicate=make
-@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=context
+@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=context family_words=avatar
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=face.expression value=happy words=happier operator=delta phase=result step=more"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=face.expression value=happy words=happier operator=delta phase=result step=more key_words=look"
 give the avatar curly brown hair,"@clock w.request.clock now=2026-11-17T12:00:00Z timezone=UTC
 @r1 w.request.request act=change mood=do predicate=give
 @r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=context
@@ -837,11 +833,11 @@ the avatar with the robot appearance,"@r1 w.request.request act=change mood=do
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=face.preset value=robot operator=eq phase=result"
 give the avatar a happy look,"@r1 w.request.request act=change mood=do predicate=give
 @r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=description sort=avatar
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=face.expression value=happy operator=eq phase=result"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=face.expression value=happy operator=eq phase=result key_words=look"
 change the face so it looks happy,"@f1 w.request.filler text=so
 @r1 w.request.request act=change mood=do predicate=change
 @r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=description sort=face
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=face.expression value=happy operator=eq phase=result"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=face.expression value=happy operator=eq phase=result key_words=looks"
 a happy avatar,"@r1 w.request.request act=change mood=do
 @r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=written name=avatar
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=face.expression value=happy operator=eq phase=result
@@ -862,15 +858,15 @@ the whole avatar for editing,"@r1 w.request.request act=pick mood=do
 @r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=written name=avatar
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=face.id value=avatar operator=eq phase=selector open_value=true"
 display the avatar part IDs for 4 seconds,"@r1 w.request.request act=change mood=do predicate=display
-@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=context
+@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=context family_words=avatar
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=face.duration value=""4"" words=""4 seconds"" operator=eq phase=result unit=second measure=4 measure_words=""4"""
 let me see avatar object IDs for 4 seconds,"@r1 w.request.request act=change mood=do predicate=let
-@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=context
+@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=context family_words=avatar
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=face.duration value=""4"" words=""4 seconds"" operator=eq phase=result unit=second measure=4 measure_words=""4"""
 avatar part IDs visible for 4 seconds,"@r1 w.request.request act=change mood=do
-@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=context
+@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=context family_words=avatar
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=face.duration value=""4"" words=""4 seconds"" operator=eq phase=result unit=second measure=4 measure_words=""4"""
 choose the eyes for editing,"@r1 w.request.request act=pick mood=do predicate=choose
@@ -910,9 +906,6 @@ a cap as the avatar hat,"@r1 w.request.request act=make mood=do
 @r1.t w.request.target request=$r1 family=part mode=new determiner=indefinite
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=hat operator=eq phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.variant value=cap operator=eq phase=result"
-replace the mouth with a smile variant,"@r1 w.request.request act=change mood=do predicate=replace
-@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=mouth
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.variant value=smile operator=eq phase=result key_words=variant"
 use a smile for the mouth shape,"@r1 w.request.request act=change mood=do predicate=use
 @r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=mouth
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.variant value=smile operator=eq phase=result"
@@ -956,34 +949,34 @@ an empty avatar,"@r1 w.request.request act=remove mood=do
 @r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 describe the current avatar parts,"@r1 w.request.request act=ask mood=ask predicate=describe question=describe
-@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=context
+@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=context family_words=avatar
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 tell me which parts this avatar has,"@r1 w.request.request act=ask mood=ask predicate=tell question=describe
-@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=context
+@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=context family_words=avatar
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 reverse the most recent avatar edit,"@prev w.request.previous text=""Update \""Avatar\"" using composition base \""woman\"".""
 @r1 w.request.request act=undo mood=do predicate=reverse
-@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=journal_step
+@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=journal_step family_words=avatar
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous"
 go back one avatar action,"@prev w.request.previous text=""Update \""Avatar\"" using composition base \""woman\"".""
 @r1 w.request.request act=undo mood=do predicate=go
-@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=journal_step
+@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=journal_step family_words=avatar
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous"
 one avatar edit back,"@prev w.request.previous text=""Update \""Avatar\"" using composition base \""woman\"".""
 @r1 w.request.request act=undo mood=do
-@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=journal_step
+@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=journal_step family_words=avatar
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous"
 repeat the avatar action that was undone,"@prev w.request.previous text=""Undo the last action.""
 @r1 w.request.request act=redo mood=do predicate=repeat
-@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=journal_step
+@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=journal_step family_words=avatar
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous"
 go forward one avatar edit,"@prev w.request.previous text=""Undo the last action.""
 @r1 w.request.request act=redo mood=do predicate=edit
-@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=journal_step
+@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=journal_step family_words=avatar
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous"
 the undone avatar edit again,"@prev w.request.previous text=""Undo the last action.""
 @r1 w.request.request act=redo mood=do
-@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=journal_step
+@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=journal_step family_words=avatar
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous"
 "change the avatar, to the man appearance","@r1 w.request.request act=change mood=do predicate=change
 @r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=description sort=avatar
@@ -991,13 +984,6 @@ the undone avatar edit again,"@prev w.request.previous text=""Undo the last acti
 "change the avatar, with human character kind","@r1 w.request.request act=change mood=do predicate=change
 @r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=description sort=avatar
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=face.characterKind value=human operator=eq phase=result key_words=character key_words=kind"
-"change the avatar, to the man appearance, with human character kind","@r1 w.request.request act=change mood=do predicate=change
-@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=description sort=avatar
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=face.base value=man words=""the man"" operator=eq phase=result
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=face.characterKind value=human operator=eq phase=result key_words=character key_words=kind"
-"update the mouth, to the smile variant","@r1 w.request.request act=change mood=do predicate=update
-@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=mouth
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.variant value=smile operator=eq phase=result key_words=variant"
 "update the mouth, big","@r1 w.request.request act=change mood=do predicate=update
 @r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=mouth
 @r1.c1 w.request.constraint request=$r1 on=size attribute=part.size value=big operator=degree phase=result"
@@ -1008,7 +994,7 @@ the undone avatar edit again,"@prev w.request.previous text=""Undo the last acti
 "update the front hair, back hair and eyebrows, coloured blue","@r1 w.request.request act=change mood=do predicate=update
 @r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=""the front hair, back hair and eyebrows""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.ids value=""the front hair, back hair and eyebrows"" operator=eq phase=selector
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.colour value=blue operator=eq phase=result"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.colour value=blue operator=eq phase=result key_words=coloured"
 "update the front hair, back hair and eyebrows, big","@r1 w.request.request act=change mood=do predicate=update
 @r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=""the front hair, back hair and eyebrows""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.ids value=""the front hair, back hair and eyebrows"" operator=eq phase=selector
@@ -1016,16 +1002,16 @@ the undone avatar edit again,"@prev w.request.previous text=""Undo the last acti
 "update the front hair, back hair and eyebrows, coloured blue, big","@r1 w.request.request act=change mood=do predicate=update
 @r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=""the front hair, back hair and eyebrows""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.ids value=""the front hair, back hair and eyebrows"" operator=eq phase=selector
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.colour value=blue operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.colour value=blue operator=eq phase=result key_words=coloured
 @r1.c3 w.request.constraint request=$r1 on=size attribute=part.size value=big operator=degree phase=result"
 temporarily display the avatar part IDs,"@r1 w.request.request act=change mood=do predicate=temporarily
-@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=context
+@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=context family_words=avatar
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 select the whole avatar,"@r1 w.request.request act=pick mood=do predicate=select
 @r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=written name=avatar
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=face.id value=avatar operator=eq phase=selector open_value=true"
 pick the eye shapes,"@r1 w.request.request act=pick mood=do predicate=pick
-@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=context
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=context family_words=shapes
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 add a cap as the hat,"@r1 w.request.request act=make mood=do predicate=add
 @r1.t w.request.target request=$r1 family=part mode=new determiner=indefinite
@@ -1081,7 +1067,7 @@ eyes and mouth removed,"@r1 w.request.request act=remove mood=do
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.ids value=eyes operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.ids value=mouth operator=eq phase=selector"
 "temporarily display the avatar part IDs, for 4 seconds","@r1 w.request.request act=change mood=do predicate=temporarily
-@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=context
+@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=context family_words=avatar
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=face.duration value=""4"" words=""4 seconds"" operator=eq phase=result unit=second measure=4 measure_words=""4"""
 move the mouth up,"@r1 w.request.request act=place mood=do predicate=move
@@ -1112,6 +1098,16 @@ avatar name: Alex,"@r1 w.request.request act=change mood=do
 @r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=written name=avatar
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=face.name value=Alex operator=eq phase=result key_words=name
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=face.id value=avatar operator=eq phase=selector open_value=true"
+mouth variant: smile,"@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=mouth
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.ids value=mouth operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.variant value=smile operator=eq phase=result key_words=variant"
+replace the mouth with a smile variant,"@r1 w.request.request act=change mood=do predicate=replace
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=mouth
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.variant value=smile operator=eq phase=result key_words=variant"
+"update the mouth, to the smile variant","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=mouth
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.variant value=smile operator=eq phase=result key_words=variant"
 call this avatar Alex,"@r1 w.request.request act=change mood=do predicate=call
 @r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=description sort=avatar
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=face.name value=Alex operator=eq phase=result"
@@ -1151,19 +1147,23 @@ give the avatar raised eyebrows,"@r1 w.request.request act=make mood=do predicat
 put a flower wreath on the avatar,"@r1 w.request.request act=make mood=do predicate=put
 @r1.t w.request.target request=$r1 family=part mode=new determiner=indefinite
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.variant value=""flower wreath"" operator=eq phase=result"
-mouth variant: smile,"@r1 w.request.request act=change mood=do
-@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=mouth
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.ids value=mouth operator=eq phase=selector
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.variant value=smile operator=eq phase=result key_words=variant"
-the avatar parts?,"@r1 w.request.request act=ask mood=ask question=describe
-@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=context
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 change the avatar to a woman with curly hair,"@r1 w.request.request act=change mood=do predicate=change
 @r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=description sort=avatar
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=face.base value=""woman with curly hair"" operator=eq phase=result"
+restore the avatar change I undid,"@prev w.request.previous text=""Undo the last action.""
+@r1 w.request.request act=redo mood=do predicate=restore
+@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=journal_step family_words=avatar
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous"
+"change the avatar, to the man appearance, with human character kind","@r1 w.request.request act=change mood=do predicate=change
+@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=description sort=avatar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=face.base value=man words=""the man"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=face.characterKind value=human operator=eq phase=result key_words=character key_words=kind"
+the avatar parts?,"@r1 w.request.request act=ask mood=ask question=describe
+@r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=context family_words=avatar
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 make the avatar look happy,"@r1 w.request.request act=change mood=do predicate=make
 @r1.t w.request.target request=$r1 family=face mode=existing determiner=definite fill=description sort=avatar
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=face.expression value=happy operator=eq phase=result"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=face.expression value=happy operator=eq phase=result key_words=look"
 dress the avatar in a space suit,"@r1 w.request.request act=make mood=do predicate=dress
 @r1.t w.request.target request=$r1 family=part mode=new determiner=indefinite
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.variant value=""space suit"" operator=eq phase=result"
