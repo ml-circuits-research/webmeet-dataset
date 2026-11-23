@@ -12,6 +12,7 @@ Each row is one message with the wires the reader should produce for it.
 <tab>/<source>.N.csv        a large source split into parts of at most ~10 MB (one source)
 keys.csv                    the reader's keys per tab: tab, family, key, head, values (a closed list, "; "-separated)
 tools/check.mjs             the checker: run it on every new file before adding it
+tools/rows-diff.mjs         rows on disk against the last commit, per source: lost, added, changed (no example may be lost)
 ```
 
 Every file has the same two columns:
@@ -150,6 +151,7 @@ node tools/check.mjs                              # every file (about a minute)
 node tools/check.mjs --file diagram/new.csv       # one file (repairing old rows)
 node tools/check.mjs --file diagram/new.csv --new # a file of new data: also the diversity gate
 node tools/check.mjs --warnings rewrite.csv       # also list the rows to complete (text, sop, warning, words)
+node tools/rows-diff.mjs                          # before a commit: no row lost, no text changed (exit 1 otherwise)
 ```
 
 **Errors** (the row is refused):
