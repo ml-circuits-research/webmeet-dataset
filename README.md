@@ -155,7 +155,7 @@ message when it is given, says:
 node tools/check.mjs                              # every file (about a minute)
 node tools/check.mjs --file diagram/new.csv       # one file (repairing old rows)
 node tools/check.mjs --file diagram/new.csv --new # a file of new data: also the diversity gate
-node tools/check.mjs --warnings rewrite.csv       # also list the rows to complete (text, sop, warning, words)
+node tools/check.mjs --warnings /tmp/rewrite.csv       # also list the rows to complete (text, sop, warning, words)
 node tools/rows-diff.mjs                          # before a commit: no row lost, no text changed (exit 1 otherwise)
 node tools/review.mjs --file drawing/scenes-08.csv            # review a repair against its committed version
 node tools/review.mjs --file diagram/a.1.csv,diagram/a.2.csv --head diagram/a.csv   # the parts of a split file
@@ -306,7 +306,7 @@ Warnings after the repairs of 2026-11-23 (counted on the committed files):
 - 29,849 meanings left in unread (10,000 others became constraints when their keys were added);
 - 3,803 proper names missing from the circuit.
 
-`node tools/check.mjs --warnings rewrite.csv` lists them with the words concerned. They are the rows to complete or
+`node tools/check.mjs --warnings /tmp/rewrite.csv` lists them with the words concerned. They are the rows to complete or
 rewrite first.
 
 ## Licence

@@ -25,7 +25,7 @@
 //   node tools/check.mjs [--file drawing/new-batch.csv [--new]] [--knowledge ../sop-knowledge-worlds] [--limit N] [--top K] [--json OUT]
 // Prints the number of rows that pass and the problems grouped by kind with an example; exit code 1 on any problem.
 import { readFileSync, readdirSync, existsSync, writeFileSync } from 'node:fs';
-import { join, resolve, dirname } from 'node:path';
+import { join, resolve, dirname, relative } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -369,7 +369,9 @@ if (wc.size) {
   console.log(`\nwarnings (rows to rewrite; valid but not grounded): ${new Set(warnRows.map((x) => x[0] + '\0' + x[1])).size} rows`);
   for (const [why, n] of [...wc].sort((a, b) => b[1] - a[1])) console.log(`${n}\t${why}`);
 }
-if (args.warnings === true) console.error('--warnings needs a file name: --warnings rewrite.csv');
+if (args.warnings === true) console.error('--warnings needs a file name: --warnings /tmp/rewrite.csv');
+// the warnings list never goes into the dataset: a path inside this repository would overwrite or add a data file
+if (typeof args.warnings === 'string' && !relative(join(HERE, '..'), resolve(args.warnings)).startsWith('..')) { console.error(`--warnings must be outside the dataset (for example /tmp/warn.csv), not ${args.warnings}`); process.exit(2); }
 if (typeof args.warnings === 'string') {
   const q = (x) => '"' + String(x).replaceAll('"', '""') + '"';
   writeFileSync(args.warnings, 'text,sop,warning,words\n' + warnRows.map((r) => r.map(q).join(',')).join('\n') + '\n');
