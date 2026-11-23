@@ -236,7 +236,7 @@ function warningsOf(text, wires) {
     const ws = t.match(/[\w'-]+/g) ?? [];
     if (/^[\w'-]+$/.test(t) && (isGrammar(t) || verbActs(t))) out.add('unread holding a single grammar word or verb (a particle belongs to the predicate, a verb is the predicate or filler)');
     else if (ws.length > 1 && ws.every((x) => isGrammar(x))) out.add('unread holding only grammar words');
-    else if (ws.filter((x) => !isGrammar(x)).length === 1 && one(u, 'note') !== 'page.scene') out.add('unread holding a single word (write the phrase it belongs to, or leave it uncovered)'); // "the scene" is one word with an article
+    else if (ws.filter((x) => !/^(the|a|an|this|that|these|those|its|his|her|their|my|our|your)$/i.test(x)).length === 1 && one(u, 'note') !== 'page.scene') out.add('unread holding a single word (write the phrase it belongs to, or leave it uncovered)'); // "the scene": one word with an article ("first pair" is a phrase)
     if (/misspel|typo/i.test(one(u, 'note') ?? '')) out.add('unread noting a misspelling (a typo is not a meaning: leave it uncovered)');
   }
   // what a chart measures or groups by is a thing of the data, never a verb or a grammar word ("get", "sit", "go")
