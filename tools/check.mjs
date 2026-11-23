@@ -118,6 +118,8 @@ const isGrammar = (w) => {
 function grounding(text, wires, tab) {
   const out = [];
   for (const w of wires) {
+    // SOP Lang writes a one-word value bare: quotes are for phrases (value=dusk, value="at dusk")
+    for (const [k, vs] of Object.entries(w.attrs)) for (const v of vs) if (/^"[A-Za-z_][A-Za-z0-9_.-]*"$/.test(String(v)) && !/^"(true|false)"$/.test(String(v))) out.push([w.type, k, 'a single word in quotes (SOP Lang writes it bare)']);
     if (w.type === 'w.request.context') out.push([w.type, '', 'page object: not said by the text (write what the text says on the target)']);
     if (w.attrs.thing) out.push([w.type, 'thing', 'link to a page object: not said by the text']);
     if (w.type === 'w.request.request') {

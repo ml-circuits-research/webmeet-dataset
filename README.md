@@ -138,6 +138,8 @@ message when it is given, says:
 - **Use the keys of `keys.csv`** for the file's tab, and only the values of a key's closed list (or mark
   `open_value=true` for words outside it, as written).
 - **Vary the sentences**: start each row from a real line of a source corpus; no frame with values swapped in.
+- **Write a one-word value bare, as SOP Lang does** (`value=dusk`, `text=harbour`); quotes are for phrases
+  (`words="at dusk"`). The checker rejects a single word in quotes.
 - **Keep every proper name** ("Start", "Room 4", "Sales by month") in the wire it belongs to.
 - **Write a meaning that has no key yet as `w.request.unread`**, with its words and a `note` naming the meaning, so
   the schema can gain the key. Keys gained this way (2026-11-23): `page.scene` ("a harbour"), `page.time` ("at dusk"),
