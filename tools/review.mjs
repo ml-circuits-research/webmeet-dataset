@@ -13,6 +13,7 @@
 //   - new unread whose meaning has a key now (page.time, page.weather, page.scene, page.style, drawn.arrangement,
 //     drawn.action, chart.colourBy, chart.aggregate);
 //   - new drawn.action values that do not start with a verb of doing ("made of gold" is a material);
+//   - new drawn.keep inside a request whose verb is not a keeping verb (a keep is its own request);
 //   - new drawn.arrangement for a place or an alignment ("in the second column", "level with the woman");
 //   - rows with more than 10 new lines (a script running away);
 //   - the same wire twice in a request.
@@ -105,6 +106,7 @@ for (const r of after) {
       if (/^chart\.(measure|dimension)$/.test(a) && words(v).length && words(v).every((w) => GRAMMAR.has(w.toLowerCase()) || VERBISH.has(w.toLowerCase()))) note('new chart measure/dimension that is a verb or grammar word', r.text, l);
       if (a === 'drawn.action' && !DOING.test(v)) note('new drawn.action that is not something a figure does', r.text, l);
       if (a === 'drawn.arrangement' && (/^((in line|level|even|lined up|line) with|(first|second|third|fourth|fifth|last|top|bottom|middle) (row|column))/i.test(tok(attr(l, 'words') ?? '')) || /\b(line|lined) up with\b|\bin line with\b|\blevel with\b/i.test(r.text))) note('new drawn.arrangement for a place or an alignment with one thing (an arrangement is how several stand: "in a row")', r.text, l);
+      if (a === 'drawn.keep') { const req = (attr(l, 'request') ?? '').slice(1); const pred = tok((nowLines.find((x) => x.startsWith(`@${req} w.request.request `)) ?? '').match(/ predicate=("[^"]*"|\S+)/)?.[1] ?? ''); if (!/^(keep|keeps|keeping|kept|leave|leaves|leaving|left|stay|stays|staying|remain|remains|hold|changes|change|moves|move)\b/i.test(pred)) note('new drawn.keep inside a request of another verb (a keep is its own request with its own target)', r.text, l); }
       if (/^chart\.[xy]Label$/.test(a) && /^[XYxy]$/.test(v)) note('new axis label that is only the axis letter ("in the X" names the axis)', r.text, l);
     }
   }
