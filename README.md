@@ -147,14 +147,15 @@ message when it is given, says:
 
 ```sh
 node tools/check.mjs                              # every file (about a minute)
-node tools/check.mjs --file diagram/new.csv       # one file
+node tools/check.mjs --file diagram/new.csv       # one file (repairing old rows)
+node tools/check.mjs --file diagram/new.csv --new # a file of new data: also the diversity gate
 node tools/check.mjs --warnings rewrite.csv       # also list the rows to complete (text, sop, warning, words)
 ```
 
 **Errors** (the row is refused):
 - a constraint `attribute` or a target `family` that is not a key or family of the file's tab in `keys.csv`;
 - a value of a closed list (`keys.csv` values) that is not on the list, unless the constraint says `open_value=true`;
-- for a file named with `--file` (new data): fewer than 80% distinct sentence shapes once values, names and numbers are
+- with `--new` (a file of new data): fewer than 80% distinct sentence shapes once values, names and numbers are
   removed (a file of one frame with values swapped in is refused);
 - schema violations: unknown type or key, a value outside an enum, an act that is not in `k.actions`;
 - an evidence key that is not words of the text;

@@ -19,10 +19,10 @@
 //   5. use the reader's keys (keys.csv): a constraint's attribute and a target's family are keys of the file's tab, and a
 //      value of a closed list is on it unless the constraint says open_value=true (errors); an act does not contradict
 //      its predicate (removal against creation or change, by the verbs of k.actions; warning).
-//   6. vary its sentences: a file named with --file (new data) has at least 80% distinct sentence shapes once values,
+//   6. vary its sentences: with --new (a file of new data) it has at least 80% distinct sentence shapes once values,
 //      names and numbers are removed (--min-shapes); for the whole dataset the files below are listed.
 // Run before adding new rows:
-//   node tools/check.mjs [--file drawing/new-batch.csv] [--knowledge ../sop-knowledge-worlds] [--limit N] [--top K] [--json OUT]
+//   node tools/check.mjs [--file drawing/new-batch.csv [--new]] [--knowledge ../sop-knowledge-worlds] [--limit N] [--top K] [--json OUT]
 // Prints the number of rows that pass and the problems grouped by kind with an example; exit code 1 on any problem.
 import { readFileSync, readdirSync, existsSync, writeFileSync } from 'node:fs';
 import { join, resolve, dirname } from 'node:path';
@@ -299,12 +299,12 @@ outer: for (const tab of Object.keys(TAB_WORLD)) {
       }
     }
     // Diversity: a file of new data repeats no sentence shape (values, names and numbers removed). Checked as an error
-    // for a file named with --file (the delivery gate) and reported for every file otherwise.
+    // with --new (the delivery gate for new data) and reported for every file otherwise.
     if (shapes.length >= 30) {
       const ratio = new Set(shapes).size / shapes.length;
       if (ratio < MIN_SHAPES) {
         lowShapes.push([`${tab}/${file}`, ratio, shapes.length]);
-        if (ONLY) { add(`(file) | | repeated sentence shapes: ${Math.round(ratio * 100)}% distinct, at least ${MIN_SHAPES * 100}% needed`, { where: `${tab}/${file}`, text: '', sop: '' }); bad++; }
+        if (ONLY && 'new' in args) { add(`(file) | | repeated sentence shapes: ${Math.round(ratio * 100)}% distinct, at least ${MIN_SHAPES * 100}% needed`, { where: `${tab}/${file}`, text: '', sop: '' }); bad++; }
       }
     }
   }
