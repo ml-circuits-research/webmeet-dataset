@@ -92,10 +92,10 @@ marked *pending* is being repaired; it takes its new name when its repair is com
 | drawing/demo-tool-profile.2.csv | drawing/scenes-17.csv | 4864 | pending |
 | drawing/demo-tool-profile.3.csv | drawing/placement-04.csv | 956 | pending |
 | drawing/human-adapted-drawing.csv | drawing/placement-05.csv | 558 | renamed |
-| drawing/main-synthetic.1.csv | drawing/objects-02.csv | 2581 | pending |
-| drawing/main-synthetic.2.csv | drawing/objects-03.csv | 5000 | pending |
-| drawing/main-synthetic.3.csv | drawing/objects-04.csv | 3191 | pending |
-| drawing/main-synthetic.4.csv | drawing/objects-05.csv | 468 | pending |
+| drawing/main-synthetic.1.csv | drawing/objects-02.csv | 2581 | renamed |
+| drawing/main-synthetic.2.csv | drawing/objects-03.csv | 5000 | renamed |
+| drawing/main-synthetic.3.csv | drawing/objects-04.csv | 3191 | renamed |
+| drawing/main-synthetic.4.csv | drawing/objects-05.csv | 468 | renamed |
 | drawing/ui-comparatives.csv | drawing/objects-06.csv | 422 | renamed |
 | drawing/ui-composition.csv | drawing/scenes-18.csv | 446 | renamed |
 | drawing/ui-coverage.csv | drawing/scenes-19.csv | 651 | renamed |
