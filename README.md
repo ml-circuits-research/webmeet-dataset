@@ -111,6 +111,17 @@ needs. Never fill it with a guess.
 
 ## Writing new data
 
+**The circuit formalises what is said, not what makes sense.** "make the eyes straight" is formalised as a change of the
+eyes with the value "straight", even though eyes cannot be straight. Judging sense is the job of the SOP interpretation,
+which has the schemas and the knowledge; a formaliser (a reader model) has neither. Such requests are useful examples.
+The checker asks only for a coherent formalisation:
+- every wire has its words;
+- the keys belong to the tab;
+- a value is on its key's list or marked `open_value=true`;
+- the act does not contradict its verb.
+
+It never asks for knowledge of the world.
+
 Each example stands alone: there is no hidden page, tab or memory behind it. Write only what the text, and the previous
 message when it is given, says:
 
