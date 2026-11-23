@@ -185,8 +185,9 @@ review has no warning of the kinds marked *, apart from what the schema cannot s
 - \* *unread holding a single grammar word or verb*: a particle belongs to the predicate ("come out"), a verb is the
   predicate or filler;
 - \* *unread holding only grammar words* ("down by", "up the");
-- \* *unread holding a single word*: write the phrase it belongs to, or leave the word uncovered (a scene name with
-  `note=page.scene` is the exception);
+- \* *unread holding a single word*: one content word, with or without an article ("caption", "a caption", "the
+  scene"); write the phrase it belongs to, or leave the word uncovered (a scene name with `note=page.scene` is the
+  exception);
 - \* *unread noting a misspelling*: a typo is not a meaning, leave it uncovered;
 - \* *a chart measure or dimension that is a verb or grammar word*: what is counted or grouped by is a thing of the
   data ("let's get a bar chart of the documents": the documents, not "get");
