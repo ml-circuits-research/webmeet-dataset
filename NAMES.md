@@ -64,8 +64,8 @@ marked *pending* is being repaired; it takes its new name when its repair is com
 | drawing/avatar-demo-tool-profile.csv | drawing/people-01.csv | 642 | renamed |
 | drawing/avatar-emuedit-v1.csv | drawing/people-02.csv | 30 | renamed |
 | drawing/avatar-magicbrush-v1.csv | drawing/people-03.csv | 45 | renamed |
-| drawing/avatar-main-synthetic.1.csv | drawing/people-04.csv | 1273 | pending |
-| drawing/avatar-main-synthetic.2.csv | drawing/people-05.csv | 3925 | pending |
+| drawing/avatar-main-synthetic.1.csv | drawing/people-04.csv | 1273 | renamed |
+| drawing/avatar-main-synthetic.2.csv | drawing/people-05.csv | 3925 | renamed |
 | drawing/avatar-ui-comparatives.csv | drawing/people-06.csv | 109 | renamed |
 | drawing/avatar-ui-coverage.csv | drawing/scenes-02.csv | 415 | renamed |
 | drawing/avatar-ui-features.csv | drawing/people-07.csv | 249 | renamed |
