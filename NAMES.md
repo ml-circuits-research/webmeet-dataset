@@ -41,8 +41,8 @@ marked *pending* is being repaired; it takes its new name when its repair is com
 | diagram/ui-composition.csv | diagram/nodes-09.csv | 422 | renamed |
 | diagram/ui-coverage.csv | diagram/nodes-10.csv | 824 | pending |
 | diagram/ui-diagram-v2-voice.csv | diagram/nodes-11.csv | 92 | renamed |
-| diagram/ui-diagram.1.csv | diagram/nodes-12.csv | 4962 | pending |
-| diagram/ui-diagram.2.csv | diagram/charts-07.csv | 1706 | pending |
+| diagram/ui-diagram.1.csv | diagram/nodes-12.csv | 4962 | renamed |
+| diagram/ui-diagram.2.csv | diagram/charts-07.csv | 1706 | renamed |
 | diagram/ui-human.csv | diagram/nodes-13.csv | 1091 | renamed |
 | diagram/ui-natural.csv | diagram/nodes-14.csv | 401 | renamed |
 | diagram/ui-quantities.csv | diagram/diagrams-06.csv | 25 | renamed |
