@@ -229,10 +229,19 @@ function warningsOf(text, wires) {
   }
   // an unread wire holds a meaning in its words: a single grammar word ("out", "up") or a single verb of k.actions
   // ("look", "stay") is not one; a particle belongs to the predicate ("come out"), a verb is the predicate or filler
+  // Words of only grammar ("down by", "up the") hold no meaning either; a single content word is a meaning cut out of its
+  // phrase (a scene name, note=page.scene, is the exception); a misspelling is not a meaning.
   for (const u of wires.filter((w) => w.type === 'w.request.unread')) {
     const t = one(u, 'text') ?? '';
+    const ws = t.match(/[\w'-]+/g) ?? [];
     if (/^[\w'-]+$/.test(t) && (isGrammar(t) || verbActs(t))) out.add('unread holding a single grammar word or verb (a particle belongs to the predicate, a verb is the predicate or filler)');
+    else if (ws.length > 1 && ws.every((x) => isGrammar(x))) out.add('unread holding only grammar words');
+    else if (ws.length === 1 && one(u, 'note') !== 'page.scene') out.add('unread holding a single word (write the phrase it belongs to, or leave it uncovered)');
+    if (/misspel|typo/i.test(one(u, 'note') ?? '')) out.add('unread noting a misspelling (a typo is not a meaning: leave it uncovered)');
   }
+  // what a chart measures or groups by is a thing of the data, never a verb or a grammar word ("get", "sit", "go")
+  for (const c of wires.filter((w) => w.type === 'w.request.constraint' && /^chart\.(measure|dimension)$/.test(one(w, 'attribute') ?? '')))
+    for (const v of c.attrs.value ?? []) { const ws = tok(v).match(/[\w'-]+/g) ?? []; if (ws.length && ws.every((x) => isGrammar(x) || verbActs(x))) out.add('a chart measure or dimension that is a verb or grammar word'); }
   for (const r of wires.filter((w) => w.type === 'w.request.request' && w.attrs.asked_words))
     for (const v of r.attrs.asked_words) if (tok(v) === (one(r, 'words') ?? text).replace(/[?.!]+$/, '') || tok(v).split(/\s+/).length > 4) out.add('asked_words hold the whole request, not the words naming the key asked about');
   // a constraint or unread wire written twice in one request says the same thing twice

@@ -159,27 +159,46 @@ node tools/check.mjs --warnings rewrite.csv       # also list the rows to comple
 node tools/rows-diff.mjs                          # before a commit: no row lost, no text changed (exit 1 otherwise)
 ```
 
-**Errors** (the row is refused):
-- a constraint `attribute` or a target `family` that is not a key or family of the file's tab in `keys.csv`;
-- a value of a closed list (`keys.csv` values) that is not on the list, unless the constraint says `open_value=true`;
-- with `--new` (a file of new data): fewer than 80% distinct sentence shapes once values, names and numbers are
-  removed (a file of one frame with values swapped in is refused);
-- schema violations: unknown type or key, a value outside an enum, an act that is not in `k.actions`;
-- an evidence key that is not words of the text;
-- a context wire or a `thing` link;
-- `goes_to`;
-- a key repeating another;
-- a value that is a phrase the text does not say;
-- a kind the text does not say;
-- an existing target that no words identify and that has no lookup;
-- filler that hides content words of a request.
+**Errors** (the row is refused). Each line is the message the checker prints, with its rule:
+- *schema violations*: a type or key `w.request` does not declare, a value outside an enum, an act not in `k.actions`;
+- *not a key / family of the tab (keys.csv)*: a constraint `attribute` or a target `family` the file's tab does not have;
+- *no reader key*: a constraint without `attribute` (a meaning without a key is an unread wire with a note);
+- *not a value of the key, and not marked open_value*: a value outside the key's closed list;
+- *phrase not found in the text*: an evidence key (`words`, `predicate`, `sort_words`, `name`, `text` …) that is not
+  words of the text;
+- *a phrase the text does not say*: a quoted value the text does not contain (keep the words; the system normalises);
+- *neither words nor a value the text says*: a constraint with no `words` whose value the text does not say;
+- *outside its request's words*: evidence or a value that belongs to another request of the same text;
+- *repeats value / repeats sort / repeats the whole text*: `words` equal to the value, `sort_words` equal to `sort`,
+  request `words` equal to the whole text (leave them out);
+- *page object / link to a page object / goes_to*: a context wire, a `thing` link or `goes_to` (not said by the text);
+- *a kind the text does not say*: a target `sort` the text does not say;
+- *existing target no words identify and no lookup*: add `w.request.lookup key=thing`;
+- *filler hides content words of a request*: filler inside a request's words may hold only filler and grammar words;
+- with `--new` (a file of new data): fewer than 80% distinct sentence shapes once values, names and numbers are removed.
 
-**Warnings** (the row is valid but incomplete; `--warnings` lists them with the words concerned):
-- content words of the text that no wire accounts for;
-- a proper name of a request that no wire keeps;
-- a meaning left in unread;
-- an act that contradicts its predicate: a verb whose only act in `k.actions` is removal ("delete", "remove", "wipe")
-  written with another act.
+**Warnings** (the row is valid but incomplete; `--warnings` lists them with the words concerned). A file delivered for
+review has no warning of the kinds marked *, apart from what the schema cannot say yet:
+- *words no wire formalizes*: content words no wire accounts for;
+- *meaning left unread (no key yet)*: a request whose meaning is only in unread wires;
+- *proper name of the text missing from the circuit*;
+- \* *unread holding a single grammar word or verb*: a particle belongs to the predicate ("come out"), a verb is the
+  predicate or filler;
+- \* *unread holding only grammar words* ("down by", "up the");
+- \* *unread holding a single word*: write the phrase it belongs to, or leave the word uncovered (a scene name with
+  `note=page.scene` is the exception);
+- \* *unread noting a misspelling*: a typo is not a meaning, leave it uncovered;
+- \* *a chart measure or dimension that is a verb or grammar word*: what is counted or grouped by is a thing of the
+  data ("let's get a bar chart of the documents": the documents, not "get");
+- \* *the same wire twice in one request*;
+- \* *act contradicts the predicate*: a verb whose only act in `k.actions` is removal ("delete") written with another act;
+- \* *a removal under a keeping verb whose selector excludes nothing*: "keep two of the trees" removes the others, its
+  selector carries `want=no`;
+- \* *asked_words hold the whole request*: they name only the key asked about.
+
+What the checker cannot see, a review reads: whether a note names what its words mean ("to the drawing" is not a
+scene), whether `words` hold only the words that say the value (not "I'd like the colour"), and whether a repair kept
+the meaning of the row (never rewrite "keep X" as removing X). Read 20 changed rows of every file before delivering it.
 
 For the whole dataset the checker also lists the files below 80% distinct sentence shapes (old generated data to
 regenerate).
