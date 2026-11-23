@@ -241,7 +241,7 @@ function warningsOf(text, wires) {
   }
   // what a chart measures or groups by is a thing of the data, never a verb or a grammar word ("get", "sit", "go")
   for (const c of wires.filter((w) => w.type === 'w.request.constraint' && /^chart\.(measure|dimension)$/.test(one(w, 'attribute') ?? '')))
-    for (const v of c.attrs.value ?? []) { const ws = tok(v).match(/[\w'-]+/g) ?? []; if (ws.length && ws.every((x) => isGrammar(x) || verbActs(x))) out.add('a chart measure or dimension that is a verb or grammar word'); }
+    for (const v of c.attrs.value ?? []) { const ws = tok(v).match(/[\w'-]+/g) ?? []; if (ws.length && ws.every((x) => isGrammar(x) || (verbActs(x) && new RegExp(`(^|\\b(let's|lets|to|you|i|we|please|can|could|will|would|and)\\s+)${esc(x)}\\b`, 'i').test(text)))) out.add('a chart measure or dimension that is a verb or grammar word'); } // a verb only where the text uses it as one ('let's get'); 'by store' names data
   for (const r of wires.filter((w) => w.type === 'w.request.request' && w.attrs.asked_words))
     for (const v of r.attrs.asked_words) if (tok(v) === (one(r, 'words') ?? text).replace(/[?.!]+$/, '') || tok(v).split(/\s+/).length > 4) out.add('asked_words hold the whole request, not the words naming the key asked about');
   // a constraint or unread wire written twice in one request says the same thing twice
