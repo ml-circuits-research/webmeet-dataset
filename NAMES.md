@@ -36,7 +36,7 @@ marked *pending* is being repaired; it takes its new name when its repair is com
 | diagram/demo-tool-profile.1.csv | diagram/nodes-06.csv | 4813 | pending |
 | diagram/demo-tool-profile.2.csv | diagram/diagrams-04.csv | 4165 | pending |
 | diagram/human-adapted-diagram.csv | diagram/diagrams-05.csv | 538 | renamed |
-| diagram/main-synthetic.csv | diagram/nodes-07.csv | 2350 | pending |
+| diagram/main-synthetic.csv | diagram/nodes-07.csv | 2350 | renamed |
 | diagram/ui-comparatives.csv | diagram/nodes-08.csv | 215 | renamed |
 | diagram/ui-composition.csv | diagram/nodes-09.csv | 422 | renamed |
 | diagram/ui-coverage.csv | diagram/nodes-10.csv | 824 | pending |

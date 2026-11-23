@@ -125,6 +125,7 @@ function grounding(text, wires, tab) {
       if (one(w, 'words') === text) out.push([w.type, 'words', 'repeats the whole text (leave it out)']);
     }
     if (w.type === 'w.request.target' && w.attrs.family && !FAMILIES.has(`${tab} ${one(w, 'family')}`)) out.push([w.type, 'family', `not a family of the ${tab} tab (keys.csv)`]);
+    if (w.type === 'w.request.constraint' && !w.attrs.attribute) out.push([w.type, 'attribute', "no reader key (a meaning without a key is an unread wire with a note)"]);
     if (w.type === 'w.request.constraint' && w.attrs.attribute) {
       const key = KEYS.get(`${tab} ${one(w, 'attribute')}`);
       if (!key) out.push([w.type, 'attribute', `not a key of the ${tab} tab (keys.csv)`]);
