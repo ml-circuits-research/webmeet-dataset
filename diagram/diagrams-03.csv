@@ -1451,7 +1451,7 @@ draw a column chart of the average claim cost as a function of the region as wel
 @r1 w.request.request act=make mood=do words=""build a bar chart of the frequency of orders versus weekday"" predicate=build
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
-@r1.u1 w.request.unread request=$r1 text=""frequency of orders"" note=chart.aggregation value=count"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count words=frequency operator=eq phase=result"
 "hey — chart the category sales, with the category in furniture or technology — go on","@f1 w.request.filler text=hey
 @f2 w.request.filler text=go
 @r1 w.request.request act=make mood=do words=""chart the category sales, with the category in furniture or technology"" predicate=chart
@@ -5145,17 +5145,17 @@ Let's also sort the chart largest to smallest.,"@f1 w.request.filler text=also
 "I only need the top five on it, since the labels need to survive the printout","@r1 w.request.request act=change mood=do predicate=need
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""top five"" note=chart.limit value=five"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""top five"" operator=eq phase=result"
 I'd like the chart widened to the top eight instead of stopping at the top three.,"@r1 w.request.request act=change mood=do predicate=like
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context family_words=chart
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""top eight"" note=chart.limit value=eight"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.top value=8 words=""top eight"" operator=eq phase=result"
 Could you also change this chart from the top ten to the top twenty?,"@f1 w.request.filler text=also
 @prev w.request.previous text=""Show me the Monthly sales chart.""
 @r1 w.request.request act=change mood=do predicate=change
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=demonstrative fill=context family_words=chart
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous
-@r1.u1 w.request.unread request=$r1 text=""top twenty"" note=chart.limit value=twenty"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.top value=20 words=""top twenty"" operator=eq phase=result"
 "For the print version, it needs ten bins, because the numbers in the sheet are still moving","@r1 w.request.request act=change mood=do predicate=needs
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
@@ -13942,7 +13942,7 @@ The next thing is to show only the bottom four on it.,"@prev w.request.previous 
 @r1 w.request.request act=change mood=do words=""I'd like you to extend Monthly sales to the top eight"" predicate=extend
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Monthly sales""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.id value=""Monthly sales"" operator=eq phase=selector
-@r1.u1 w.request.unread request=$r1 text=""top eight"" note=chart.limit value=eight
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.top value=8 words=""top eight"" operator=eq phase=result
 @r2 w.request.request act=change mood=do words=""and hide the grid"" predicate=hide
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
@@ -13951,7 +13951,7 @@ The next thing is to show only the bottom four on it.,"@prev w.request.previous 
 @r1 w.request.request act=change mood=do words=""Maybe change Revenue by region from the top five to the top ten"" predicate=change
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Revenue by region""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.id value=""Revenue by region"" operator=eq phase=selector
-@r1.u1 w.request.unread request=$r1 text=""top ten"" note=chart.limit value=ten
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.top value=10 words=""top ten"" operator=eq phase=result
 @r2 w.request.request act=change mood=do words=""and put the legend on the right"" predicate=put
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
@@ -13962,7 +13962,7 @@ I'd also like you to show the top eight on the Monthly sales chart now.,"@f1 w.r
 @r1 w.request.request act=change mood=do predicate=show
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written sort=chart name=""Monthly sales"" family_words=chart
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.id value=""Monthly sales"" operator=eq phase=selector
-@r1.u1 w.request.unread request=$r1 text=""top eight"" note=chart.limit value=eight"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.top value=8 words=""top eight"" operator=eq phase=result"
 Could you bin wait time in 50 steps on the chart?,"@f1 w.request.filler text=wait
 @r1 w.request.request act=change mood=do predicate=bin
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context family_words=chart
@@ -20099,7 +20099,7 @@ mirror the same surface fill treatment on the sales heatmap,"@prev w.request.pre
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=strongest operator=eq phase=result
-@r1.u1 w.request.unread request=$r1 text="" ten customers"" note=chart.limit"
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.top value=10 words=ten operator=eq phase=result"
 "I need to see weekly totals across the orders as a line chart, with the y axis starting at zero, with the values shown at the points and add gridlines behind the bars","@f1 w.request.filler text=need
 @r1 w.request.request act=make mood=do words=""I need to see weekly totals across the orders as a line chart, with the y axis starting at zero, with the values shown at the points"" predicate=see
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
@@ -21938,7 +21938,7 @@ Maybe also sort it alphabetically.,"@f1 w.request.filler text=""Maybe also""
 @r1 w.request.request act=change mood=do words=""I'd like you to limit Revenue by region to the top 10"" predicate=limit
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Revenue by region""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.id value=""Revenue by region"" operator=eq phase=selector
-@r1.u1 w.request.unread request=$r1 text=""top 10"" note=chart.limit value=""10""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.top value=10 words=""top 10"" operator=eq phase=result
 @r2 w.request.request act=change mood=do words=""and hide the grid"" predicate=hide
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
@@ -22789,7 +22789,7 @@ Maybe also show only the months where the discount was applied on this chart.,"@
 "Can we cut the sales chart to the top six, because the deck template has no room for a table","@f1 w.request.filler text=no
 @r1 w.request.request act=change mood=do predicate=cut
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=description sort=chart description=""the sales chart"" family_words=chart
-@r1.u1 w.request.unread request=$r1 text=""top six"" note=chart.limit value=six"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.top value=6 words=""top six"" operator=eq phase=result"
 "I'd like you to make the y axis on Monthly sales upside down, and hide the grid.","@f1 w.request.filler text=like
 @r1 w.request.request act=change mood=do words=""I'd like you to make the y axis on Monthly sales upside down"" predicate=make
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Monthly sales""
@@ -23179,7 +23179,7 @@ I want the average support cost per quarter as a bar chart,"@r1 w.request.reques
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""sorted from high to low"" operator=eq phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with a zero-based y axis"" operator=eq phase=result
-@r1.u1 w.request.unread request=$r1 text=""frequency of support"" note=chart.aggregation value=count"
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count words=frequency operator=eq phase=result"
 "let's do a bar chart of the count of orders by category, in descending order","@r1 w.request.request act=make mood=do
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
@@ -23806,7 +23806,7 @@ The next thing is to sort the bar chart in ascending order.,"@r1 w.request.reque
 What if the Monthly sales chart went out to the top twenty?,"@r1 w.request.request act=change mood=do predicate=What
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written sort=chart name=""Monthly sales"" family_words=chart
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.id value=""Monthly sales"" operator=eq phase=selector
-@r1.u1 w.request.unread request=$r1 text=""top twenty"" note=chart.limit value=twenty"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.top value=20 words=""top twenty"" operator=eq phase=result"
 What if the gridlines on the Monthly sales chart were off?,"@r1 w.request.request act=change mood=do predicate=What
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written sort=chart name=""Monthly sales"" family_words=chart
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.id value=""Monthly sales"" operator=eq phase=selector
