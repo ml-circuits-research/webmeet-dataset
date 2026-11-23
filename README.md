@@ -157,7 +157,20 @@ node tools/check.mjs --file diagram/new.csv       # one file (repairing old rows
 node tools/check.mjs --file diagram/new.csv --new # a file of new data: also the diversity gate
 node tools/check.mjs --warnings rewrite.csv       # also list the rows to complete (text, sop, warning, words)
 node tools/rows-diff.mjs                          # before a commit: no row lost, no text changed (exit 1 otherwise)
+node tools/review.mjs --file drawing/scenes-08.csv            # review a repair against its committed version
+node tools/review.mjs --file diagram/a.1.csv,diagram/a.2.csv --head diagram/a.csv   # the parts of a split file
 ```
+
+`tools/review.mjs` is the review a repair gets before it is committed; run it before every READY. It only reads.
+- **BLOCKING** (exit code 1): a row lost or added, a text changed, a committed constraint that disappeared, checker
+  errors.
+- **REVIEW**: new wires the rules below forbid (grammar-only or one-word unread, notes that are not meanings, unread
+  whose meaning has a key now, a verb as chart measure, `drawn.action` that is not something a figure does, an axis
+  letter as axis label, duplicates, runaway rows), with examples.
+- **SAMPLE**: changed rows as `-` (committed) and `+` (now) lines, to read against their text.
+
+A file is ready when BLOCKING is 0, REVIEW is 0 (or each remaining line is explained in the READY), and the sample
+reads right.
 
 **Errors** (the row is refused). Each line is the message the checker prints, with its rule:
 - *schema violations*: a type or key `w.request` does not declare, a value outside an enum, an act not in `k.actions`;
