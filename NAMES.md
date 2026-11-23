@@ -72,10 +72,10 @@ marked *pending* is being repaired; it takes its new name when its repair is com
 | drawing/avatar-ui-human.csv | drawing/people-08.csv | 812 | renamed |
 | drawing/avatar-ui-natural.csv | drawing/people-09.csv | 342 | renamed |
 | drawing/avatar-ui-systematic.csv | drawing/people-10.csv | 326 | renamed |
-| drawing/data-drop.1.1.csv | drawing/scenes-03.csv | 4433 | pending |
-| drawing/data-drop.1.2.csv | drawing/placement-01.csv | 5000 | pending |
-| drawing/data-drop.1.3.csv | drawing/scenes-04.csv | 1388 | pending |
-| drawing/data-drop.1.4.csv | drawing/scenes-05.csv | 2788 | pending |
+| drawing/data-drop.1.1.csv | drawing/scenes-03.csv | 4433 | renamed |
+| drawing/data-drop.1.2.csv | drawing/placement-01.csv | 5000 | renamed |
+| drawing/data-drop.1.3.csv | drawing/scenes-04.csv | 1388 | renamed |
+| drawing/data-drop.1.4.csv | drawing/scenes-05.csv | 2788 | renamed |
 | drawing/data-drop.2.1.csv | drawing/scenes-06.csv | 3992 | pending |
 | drawing/data-drop.2.2.csv | drawing/scenes-07.csv | 4129 | pending |
 | drawing/data-drop.3.1.csv | drawing/scenes-08.csv | 4378 | pending |
