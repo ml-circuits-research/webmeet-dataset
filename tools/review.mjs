@@ -13,6 +13,7 @@
 //   - new unread whose meaning has a key now (page.time, page.weather, page.scene, page.style, drawn.arrangement,
 //     drawn.action, chart.colourBy, chart.aggregate);
 //   - new drawn.action values that do not start with a verb of doing ("made of gold" is a material);
+//   - new drawn.arrangement for a place or an alignment ("in the second column", "level with the woman");
 //   - rows with more than 10 new lines (a script running away);
 //   - the same wire twice in a request.
 //   Then a sample of changed rows, as - (committed) / + (now) lines, to read against the text.
@@ -103,6 +104,7 @@ for (const r of after) {
       const a = attr(l, 'attribute') ?? '', v = tok(attr(l, 'value') ?? '');
       if (/^chart\.(measure|dimension)$/.test(a) && words(v).length && words(v).every((w) => GRAMMAR.has(w.toLowerCase()) || VERBISH.has(w.toLowerCase()))) note('new chart measure/dimension that is a verb or grammar word', r.text, l);
       if (a === 'drawn.action' && !DOING.test(v)) note('new drawn.action that is not something a figure does', r.text, l);
+      if (a === 'drawn.arrangement' && /^((in line|level|even|lined up|line) with|(first|second|third|fourth|fifth|last|top|bottom|middle) (row|column))/i.test(tok(attr(l, 'words') ?? ''))) note('new drawn.arrangement for a place or an alignment with one thing (an arrangement is how several stand: "in a row")', r.text, l);
       if (/^chart\.[xy]Label$/.test(a) && /^[XYxy]$/.test(v)) note('new axis label that is only the axis letter ("in the X" names the axis)', r.text, l);
     }
   }
