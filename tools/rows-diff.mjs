@@ -1,7 +1,7 @@
-// Compares the rows on disk with the last commit (or another git revision), per tab and source, so that no example is
-// lost by a repair or a file split. A row is its (text, sop); a source is the file name without its part number
-// (data-drop.2.3.csv belongs to data-drop), so moving rows between parts of one source is not a change.
-//   node tools/rows-diff.mjs [--rev HEAD] [--examples 3]
+// Compares the rows on disk with the last commit (or another git revision), per tab, so that no example is lost by a
+// repair, a split or a rename. A row is its (text, sop); rows are pooled per tab, so moving rows between files of a tab
+// is not a change (--by source compares per file name without its part number instead).
+//   node tools/rows-diff.mjs [--rev HEAD] [--by source] [--examples 3]
 // Prints, per tab/source: rows before and after, rows lost, rows added, rows whose circuit changed (same text) and rows
 // whose text changed. Exit code 1 when a row was lost or a text changed.
 import { execFileSync } from 'node:child_process';
@@ -28,7 +28,8 @@ function* csvRows(text) {
   }
   if (field || row.length) { row.push(field); yield row; }
 }
-const sourceOf = (path) => { const [tab, file] = path.split('/'); return `${tab}/${file.split('.')[0]}`; };
+// rows are compared per tab: renaming, splitting or regrouping files inside a tab is no change (--by source: per file name)
+const sourceOf = (path) => { const [tab, file] = path.split('/'); return args.by === 'source' ? `${tab}/${file.split('.')[0]}` : tab; };
 function read(text, into, source) {
   const rows = csvRows(text);
   const header = rows.next().value ?? [];
@@ -51,12 +52,12 @@ for (const path of git('ls-tree', '-r', '--name-only', REV).split('\n').filter((
 for (const tab of readdirSync(ROOT).filter((d) => !d.startsWith('.') && d !== 'tools' && existsSync(join(ROOT, d)))) {
   let files;
   try { files = readdirSync(join(ROOT, tab)).filter((f) => f.endsWith('.csv')); } catch { continue; }
-  for (const f of files) read(readFileSync(join(ROOT, tab, f), 'utf8'), after, `${tab}/${f.split('.')[0]}`);
+  for (const f of files) read(readFileSync(join(ROOT, tab, f), 'utf8'), after, sourceOf(`${tab}/${f}`));
 }
 
 let lost = 0, textChanged = 0;
 const total = (m) => [...m.values()].reduce((a, b) => a + b, 0);
-console.log('source\tbefore\tafter\tlost\tadded\tcircuit changed\ttext changed');
+console.log('tab\tbefore\tafter\tlost\tadded\tcircuit changed\ttext changed');
 for (const source of [...new Set([...before.keys(), ...after.keys()])].sort()) {
   const b = before.get(source) ?? new Map(), a = after.get(source) ?? new Map();
   const goneKeys = [...b].flatMap(([k, n]) => Array(Math.max(0, n - (a.get(k) ?? 0))).fill(k));
