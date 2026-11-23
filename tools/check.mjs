@@ -10,7 +10,9 @@
 //      equal to its value); the predicate is words of the text.
 //   4. warnings (the row is valid but should be rewritten): an existing target nothing in the row identifies (no name,
 //      description, kind words, code or previous message), a target kind the text never says, and a
-//      meaning left unread (an unread wire with the request's whole words, or a request with only unread wires).
+//      meaning left unread (an unread wire with the request's whole words, or a request with only unread wires), and a
+//      value that is a phrase the text does not say (neither the text's words nor a closed-bank atom), and a proper name
+//      of the text (a capitalised word not starting a sentence) that no wire of its request keeps.
 //      `--warnings FILE` writes those rows to a CSV (text, sop, warning) for the generating session.
 // Run before adding new rows:
 //   node tools/check.mjs [--file drawing/new-batch.csv] [--knowledge ../sop-knowledge-worlds] [--limit N] [--top K] [--json OUT]
@@ -26,7 +28,7 @@ if (!existsSync(join(KNOWLEDGE, 'tools', 'sopworld', 'sopworld.mjs'))) throw new
 const DATASET = resolve(args.dataset ?? join(HERE, '..'));
 const ONLY = args.file ? resolve(args.file) : null;
 const TAB_WORLD = { drawing: 'w.drawing', diagram: 'w.diagram', document: 'w.document', calendar: 'w.calendar', avatar: 'w.face' };
-const PHRASES = { 'w.request.request': ['words', 'predicate'], 'w.request.target': ['sort_words', 'name', 'description', 'count_words', 'code_words'], 'w.request.constraint': ['words', 'measure_words'], 'w.request.unread': ['text'] };
+const PHRASES = { 'w.request.request': ['words', 'predicate'], 'w.request.target': ['sort_words', 'name', 'description', 'count_words', 'code_words', 'ids'], 'w.request.constraint': ['words', 'measure_words'], 'w.request.unread': ['text'] };
 const tok = (v) => (String(v).startsWith('"') ? JSON.parse(v) : String(v));
 const LIMIT = Number(args.limit ?? Infinity);
 const EXAMPLES = Number(args.examples ?? 3);
@@ -105,8 +107,22 @@ function warningsOf(text, wires) {
     if (t && one(t, 'mode') !== 'new' && !['name', 'description', 'sort_words', 'code_words', 'count_words'].some((k) => t.attrs[k]) && !says(one(t, 'sort'), words) && !previous && one(t, 'fill') !== 'all')
       out.add('existing target nothing in the row identifies');
     if (t && one(t, 'sort') && !t.attrs.sort_words && !says(one(t, 'sort'), text)) out.add('target kind the text never says');
+    for (const w of mine.filter((x) => x.type === 'w.request.constraint' || x.type === 'w.request.unread'))
+      for (const v of w.attrs.value ?? []) if (String(v).startsWith('"') && !/^-?\d+(\.\d+)?$/.test(tok(v)) && !text.includes(tok(v))) out.add('value the text does not say (an invented phrase)');
     const unread = mine.filter((w) => w.type === 'w.request.unread');
+    for (const name of properNames(words)) if (!mine.some((w) => Object.values(w.attrs).flat().some((v) => tok(v).includes(name)))) out.add('proper name of the text missing from the circuit');
     if (unread.some((u) => one(u, 'text') === words) || (unread.length && !mine.some((w) => w.type === 'w.request.constraint'))) out.add('meaning left unread');
+  }
+  return out;
+}
+// Capitalised words that are not the first word of a sentence (and not "I"): names the circuit must keep.
+function properNames(text) {
+  const out = [];
+  for (const m of text.matchAll(/[A-Z][\w'-]*/g)) {
+    const before = text.slice(0, m.index).trimEnd();
+    if (!before || /[.!?:;"“(\-—]$/.test(before) || /^I('|$)/.test(m[0]) || !/^\w/.test(text.slice(m.index - 1, m.index) || ' ') === false) continue;
+    if (/^[A-Z]{2,}s?$/.test(m[0])) continue; // an abbreviation (IDs, UTC), not a name
+    out.push(m[0]);
   }
   return out;
 }

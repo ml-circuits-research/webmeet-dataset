@@ -75,7 +75,7 @@ stands alone: there is no hidden page, tab or memory behind it. `tools/check.mjs
 
 - a phrase key (`words`, `predicate`, `sort_words`, `name`, `description`, `count_words`, `code_words`,
   `measure_words`, the `text` of an unread wire) that is not copied exactly from the message, typos included;
-- a context wire (an object of the page) or a `thing` link. Whatever the text says about an object is written on the
+- a target `ids` value the text does not say (a page id), a context wire (an object of the page) or a `thing` link. Whatever the text says about an object is written on the
   target or constraint (its kind, name, code words); anything more (another name, an id, a size) is a page state the
   text does not give;
 - a constraint without `words` whose value is not in the text (the value must then be words of the text);
@@ -88,7 +88,10 @@ It also warns, without refusing, about rows to rewrite:
 - an existing target nothing in the row identifies ("make it shorter" with no previous message and no named object).
   Write such requests with the text that makes the referent clear: a previous message, or the object named;
 - a target kind the text never says;
-- a meaning left unread (an unread wire holding the request's whole words, or a request with only unread wires).
+- a meaning left unread (an unread wire holding the request's whole words, or a request with only unread wires);
+- a value that is a phrase the text does not say ("x inverted" for "invert the x axis"): a value is either words of the
+  text or a value of a closed list (blue, near, left_of, much_more);
+- a proper name of the text (a capitalised word not starting a sentence) that no wire of its request keeps.
 
 ## Checking new data
 
@@ -150,10 +153,11 @@ What each source is:
 
 Document, Calendar and Avatar are thin (under 12,000 messages each). They are the next areas to fill.
 
-Known data issues (2026-11-23): all rows pass the checker; 54,948 rows carry a warning: 42,922 with an existing target
-nothing in the row identifies, 34,371 with a meaning left unread, 1,173 with a kind the text never says (a row can have
-several). They are the first candidates for rewriting. When the data moved here, the page contexts of the old rows (lists
-of objects with names and ids the text does not say, up to 95 per row) were dropped.
+Known data issues (2026-11-23): all rows pass the checker; 62,443 rows carry a warning: 42,922 with an existing target
+nothing in the row identifies, 34,371 with a meaning left unread, 9,691 with an invented value phrase, 5,156 with a
+proper name the circuit loses, 1,173 with a kind the text never says (a row can have several). They are the first
+candidates for rewriting. When the data moved here, the page contexts of the old rows (lists of objects with names and
+ids the text does not say, up to 95 per row) and target ids the text does not say were dropped.
 
 ## Licence
 
