@@ -10,6 +10,7 @@ Each row is one message with the wires the reader should produce for it.
 ```text
 <tab>/<source>.csv          tab: drawing, diagram, document, calendar, avatar
 <tab>/<source>.N.csv        a large source split into parts of at most ~10 MB (one source)
+keys.csv                    the reader's keys per tab: tab, family, key, head, values (a closed list, "; "-separated)
 tools/check.mjs             the checker: run it on every new file before adding it
 ```
 
@@ -122,6 +123,9 @@ message when it is given, says:
   Better still, add examples where the text itself makes the referent clear.
 - **Put greetings, politeness, hedges and remarks around the request in filler wires.** Words that carry meaning must
   be the evidence of a request, target, constraint or unread wire. Never hide them as filler.
+- **Use the keys of `keys.csv`** for the file's tab, and only the values of a key's closed list (or mark
+  `open_value=true` for words outside it, as written).
+- **Vary the sentences**: start each row from a real line of a source corpus; no frame with values swapped in.
 - **Keep every proper name** ("Start", "Room 4", "Sales by month") in the wire it belongs to.
 - **Write a meaning that has no key yet as `w.request.unread`**, with its words and a `note` naming the meaning, so
   the schema can gain the key.
@@ -137,6 +141,10 @@ node tools/check.mjs --warnings rewrite.csv       # also list the rows to comple
 ```
 
 **Errors** (the row is refused):
+- a constraint `attribute` or a target `family` that is not a key or family of the file's tab in `keys.csv`;
+- a value of a closed list (`keys.csv` values) that is not on the list, unless the constraint says `open_value=true`;
+- for a file named with `--file` (new data): fewer than 80% distinct sentence shapes once values, names and numbers are
+  removed (a file of one frame with values swapped in is refused);
 - schema violations: unknown type or key, a value outside an enum, an act that is not in `k.actions`;
 - an evidence key that is not words of the text;
 - a context wire or a `thing` link;
@@ -150,7 +158,12 @@ node tools/check.mjs --warnings rewrite.csv       # also list the rows to comple
 **Warnings** (the row is valid but incomplete; `--warnings` lists them with the words concerned):
 - content words of the text that no wire accounts for;
 - a proper name of a request that no wire keeps;
-- a meaning left in unread.
+- a meaning left in unread;
+- an act that contradicts its predicate: a verb whose only act in `k.actions` is removal ("delete", "remove", "wipe")
+  written with another act.
+
+For the whole dataset the checker also lists the files below 80% distinct sentence shapes (old generated data to
+regenerate).
 
 Grammar and filler words come from `w.lang.en` in sop-knowledge-worlds:
 - **grammar**: `w.lang.en.closed` determiners, pronouns, prepositions, conjunctions, auxiliaries, particles and

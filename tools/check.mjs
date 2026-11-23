@@ -16,6 +16,11 @@
 //      politeness, filler, desire; interjections) are kept in w.request.filler wires. Also warned: a proper name of a
 //      request (a capitalised word not starting a sentence) that no wire keeps, and a meaning left in unread.
 //      `--warnings FILE` writes the warned rows to a CSV (text, sop, warning, words) for the generating session.
+//   5. use the reader's keys (keys.csv): a constraint's attribute and a target's family are keys of the file's tab, and a
+//      value of a closed list is on it unless the constraint says open_value=true (errors); an act does not contradict
+//      its predicate (removal against creation or change, by the verbs of k.actions; warning).
+//   6. vary its sentences: a file named with --file (new data) has at least 80% distinct sentence shapes once values,
+//      names and numbers are removed (--min-shapes); for the whole dataset the files below are listed.
 // Run before adding new rows:
 //   node tools/check.mjs [--file drawing/new-batch.csv] [--knowledge ../sop-knowledge-worlds] [--limit N] [--top K] [--json OUT]
 // Prints the number of rows that pass and the problems grouped by kind with an example; exit code 1 on any problem.
@@ -109,7 +114,7 @@ const isGrammar = (w) => {
 };
 
 // Errors: wires and keys that nothing in the row grounds, or that repeat another key.
-function grounding(text, wires) {
+function grounding(text, wires, tab) {
   const out = [];
   for (const w of wires) {
     if (w.type === 'w.request.context') out.push([w.type, '', 'page object: not said by the text (write what the text says on the target)']);
@@ -117,6 +122,12 @@ function grounding(text, wires) {
     if (w.type === 'w.request.request') {
       if (w.attrs.goes_to) out.push([w.type, 'goes_to', 'not said in the text (the tab is the folder)']);
       if (one(w, 'words') === text) out.push([w.type, 'words', 'repeats the whole text (leave it out)']);
+    }
+    if (w.type === 'w.request.target' && w.attrs.family && !FAMILIES.has(`${tab} ${one(w, 'family')}`)) out.push([w.type, 'family', `not a family of the ${tab} tab (keys.csv)`]);
+    if (w.type === 'w.request.constraint' && w.attrs.attribute) {
+      const key = KEYS.get(`${tab} ${one(w, 'attribute')}`);
+      if (!key) out.push([w.type, 'attribute', `not a key of the ${tab} tab (keys.csv)`]);
+      else if (key.values && !w.attrs.open_value) for (const v of w.attrs.value ?? []) if (!key.values.has(tok(v).toLowerCase())) out.push([w.type, 'value', 'not a value of the key (keys.csv), and not marked open_value']);
     }
     if (w.type === 'w.request.target') {
       if (w.attrs.sort_words && one(w, 'sort_words') === one(w, 'sort')) out.push([w.type, 'sort_words', 'repeats sort (leave it out)']);
@@ -144,6 +155,50 @@ function grounding(text, wires) {
   return out;
 }
 const TOKEN = /[A-Za-z0-9]+(?:['\u2019][A-Za-z]+)?/g;
+
+// The reader's keys per tab (keys.csv): a constraint's attribute and a target's family must be keys of the file's tab,
+// and a value of a closed list must be on it (or the constraint says open_value=true).
+const KEYS = new Map(), FAMILIES = new Set();
+{
+  const rows = csvRows(readFileSync(join(DATASET, 'keys.csv'), 'utf8'));
+  const h = rows.next().value;
+  for (const r of rows) {
+    if (r.length < h.length) continue;
+    const o = Object.fromEntries(h.map((k, i) => [k, r[i]]));
+    KEYS.set(`${o.tab} ${o.key}`, { head: o.head, values: o.values ? new Set(o.values.split('; ').map((x) => x.toLowerCase())) : null });
+    FAMILIES.add(`${o.tab} ${o.family}`);
+  }
+}
+// The acts the verbs of k.actions mean (k.actions.verb text=delete act=remove): a predicate that is such a verb should
+// go with one of its acts.
+const VERB_ACTS = new Map();
+{
+  const dir = join(KNOWLEDGE, 'docs', 'worlds', 'k.actions', 'shards');
+  for (const f of readdirSync(dir).filter((x) => x.endsWith('.sop'))) for (const w of parse(readFileSync(join(dir, f), 'utf8'))) {
+    if (w.type !== 'k.actions.verb' || !w.attrs.act) continue;
+    const t = tok(w.attrs.text[0]).toLowerCase();
+    if (!VERB_ACTS.has(t)) VERB_ACTS.set(t, new Set());
+    for (const a of w.attrs.act) VERB_ACTS.get(t).add(tok(a));
+  }
+}
+const verbActs = (p, words = '') => {
+  const x = String(p).toLowerCase(), w = ` ${words.toLowerCase()} `;
+  for (const c of [x, x.replace(/s$/, ''), x.replace(/ed$/, ''), x.replace(/d$/, ''), x.replace(/ing$/, ''), x.replace(/ing$/, 'e'), x.replace(/ied$/, 'y'), x.replace(/ies$/, 'y')]) {
+    if (!VERB_ACTS.has(c)) continue;
+    const acts = new Set(VERB_ACTS.get(c));
+    // a phrasal verb of k.actions whose particle the request says ("take the glasses off": take off -> remove)
+    for (const [t, a] of VERB_ACTS) if (t.startsWith(c + ' ') && t.split(' ').slice(1).every((part) => w.includes(` ${part} `) || w.includes(` ${part},`))) a.forEach((y) => acts.add(y));
+    return acts;
+  }
+  return null;
+};
+// The shape of a sentence once its values, names and numbers are removed (for the diversity of a delivered file).
+const shapeOf = (text, wires) => {
+  let s = text.toLowerCase();
+  const vals = wires.flatMap((w) => ['value', 'name', 'description', 'words', 'sort_words', 'predicate'].flatMap((k) => (w.attrs[k] ?? []).map((v) => tok(v).toLowerCase())));
+  for (const v of [...new Set(vals)].sort((a, b) => b.length - a.length)) if (v.length > 1) s = s.split(v).join('X');
+  return s.replace(/\d+(:\d+)?/g, 'N');
+};
 const EVIDENCE = ['words', 'predicate', 'asked_words', 'sort_words', 'name', 'name_words', 'description', 'count_words', 'code_words', 'ids', 'family_words', 'key_words', 'measure_words', 'text'];
 // Warnings: words of the text no wire accounts for, lost proper names, meanings left in unread.
 function warningsOf(text, wires) {
@@ -163,6 +218,10 @@ function warningsOf(text, wires) {
   const loose = [...text.matchAll(TOKEN)].filter((m) => !covered[m.index] && !isGrammar(m[0])).map((m) => m[0]);
   if (loose.length) out.add('words no wire formalizes'), (out.loose = [...new Set(loose)].join(' '));
   for (const r of wires.filter((w) => w.type === 'w.request.request')) {
+    const acts = r.attrs.predicate ? verbActs(one(r, 'predicate'), one(r, 'words') ?? text) : null;
+    // A verb has several acts by context (put, give, make, drop); a verb whose only act in k.actions is removal
+    // ("delete the sync") written with another act is a contradiction.
+    if (acts && acts.size === 1 && acts.has('remove') && !['remove', 'undo'].includes(one(r, 'act'))) out.add('act contradicts the predicate (a removal verb, by k.actions verbs)');
     const words = one(r, 'words') ?? text;
     const mine = wires.filter((w) => String(w.attrs.request?.[0]) === '$' + r.id);
     for (const name of properNames(words)) if (!mine.some((w) => Object.values(w.attrs).flat().some((v) => tok(v).includes(name)))) out.add('proper name of the text missing from the circuit');
@@ -183,6 +242,7 @@ function properNames(text) {
   return out;
 }
 const warned = new Set(), warnRows = [];
+const MIN_SHAPES = Number(args['min-shapes'] ?? 0.8), lowShapes = [];
 
 const groups = new Map();
 let total = 0, bad = 0;
@@ -203,6 +263,7 @@ outer: for (const tab of Object.keys(TAB_WORLD)) {
     const header = rows.next().value;
     const ti = header.indexOf('text'), si = header.indexOf('sop');
     if (header.join(',') !== 'text,sop') { add(`(file) | | the header must be text,sop`, { where: `${tab}/${file}`, text: header.join(','), sop: '' }); bad++; continue; }
+    const shapes = [];
     for (const r of rows) {
       if (total >= LIMIT) break outer;
       total++;
@@ -216,7 +277,8 @@ outer: for (const tab of Object.keys(TAB_WORLD)) {
         for (const w of wires) {
           for (const key of PHRASES[w.type] ?? []) for (const v of w.attrs[key] ?? []) if (!text.includes(tok(v))) problems.push([w.type, key, 'phrase not found in the text']);
         }
-        problems.push(...grounding(text, wires));
+        problems.push(...grounding(text, wires, tab));
+        shapes.push(shapeOf(text, wires));
         const ws = warningsOf(text, wires);
         for (const why of ws) { warned.add(why); warnRows.push([text, sop, why, why.startsWith('words no wire') ? ws.loose : '']); }
         if (!text.trim()) problems.push(['(row)', 'text', 'empty text']);
@@ -236,7 +298,20 @@ outer: for (const tab of Object.keys(TAB_WORLD)) {
         add(k, { where, text, sop });
       }
     }
+    // Diversity: a file of new data repeats no sentence shape (values, names and numbers removed). Checked as an error
+    // for a file named with --file (the delivery gate) and reported for every file otherwise.
+    if (shapes.length >= 30) {
+      const ratio = new Set(shapes).size / shapes.length;
+      if (ratio < MIN_SHAPES) {
+        lowShapes.push([`${tab}/${file}`, ratio, shapes.length]);
+        if (ONLY) { add(`(file) | | repeated sentence shapes: ${Math.round(ratio * 100)}% distinct, at least ${MIN_SHAPES * 100}% needed`, { where: `${tab}/${file}`, text: '', sop: '' }); bad++; }
+      }
+    }
   }
+}
+if (!ONLY && lowShapes.length) {
+  console.log(`files below ${MIN_SHAPES * 100}% distinct sentence shapes (old data to regenerate): ${lowShapes.length}`);
+  for (const [f, r, n] of lowShapes.sort((x, y) => x[1] - y[1]).slice(0, 15)) console.log(`  ${Math.round(r * 100)}%\t${f} (${n} rows)`);
 }
 
 const sorted = [...groups.entries()].sort((a, b) => b[1].n - a[1].n);
