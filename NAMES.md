@@ -78,8 +78,8 @@ marked *pending* is being repaired; it takes its new name when its repair is com
 | drawing/data-drop.1.4.csv | drawing/scenes-05.csv | 2788 | renamed |
 | drawing/data-drop.2.1.csv | drawing/scenes-06.csv | 3992 | pending |
 | drawing/data-drop.2.2.csv | drawing/scenes-07.csv | 4129 | pending |
-| drawing/data-drop.3.1.csv | drawing/scenes-08.csv | 4378 | pending |
-| drawing/data-drop.3.2.csv | drawing/scenes-09.csv | 1373 | pending |
+| drawing/data-drop.3.1.csv | drawing/scenes-08.csv | 4378 | renamed |
+| drawing/data-drop.3.2.csv | drawing/scenes-09.csv | 1373 | renamed |
 | drawing/data-drop.4.1.csv | drawing/scenes-10.csv | 3671 | renamed |
 | drawing/data-drop.4.2.csv | drawing/scenes-11.csv | 4722 | renamed |
 | drawing/data-drop.4.3.csv | drawing/scenes-12.csv | 758 | renamed |
