@@ -104,7 +104,7 @@ for (const r of after) {
       const a = attr(l, 'attribute') ?? '', v = tok(attr(l, 'value') ?? '');
       if (/^chart\.(measure|dimension)$/.test(a) && words(v).length && words(v).every((w) => GRAMMAR.has(w.toLowerCase()) || VERBISH.has(w.toLowerCase()))) note('new chart measure/dimension that is a verb or grammar word', r.text, l);
       if (a === 'drawn.action' && !DOING.test(v)) note('new drawn.action that is not something a figure does', r.text, l);
-      if (a === 'drawn.arrangement' && /^((in line|level|even|lined up|line) with|(first|second|third|fourth|fifth|last|top|bottom|middle) (row|column))/i.test(tok(attr(l, 'words') ?? ''))) note('new drawn.arrangement for a place or an alignment with one thing (an arrangement is how several stand: "in a row")', r.text, l);
+      if (a === 'drawn.arrangement' && (/^((in line|level|even|lined up|line) with|(first|second|third|fourth|fifth|last|top|bottom|middle) (row|column))/i.test(tok(attr(l, 'words') ?? '')) || /\b(line|lined) up with\b|\bin line with\b|\blevel with\b/i.test(r.text))) note('new drawn.arrangement for a place or an alignment with one thing (an arrangement is how several stand: "in a row")', r.text, l);
       if (/^chart\.[xy]Label$/.test(a) && /^[XYxy]$/.test(v)) note('new axis label that is only the axis letter ("in the X" names the axis)', r.text, l);
     }
   }
