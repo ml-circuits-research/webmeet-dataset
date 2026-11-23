@@ -140,7 +140,10 @@ message when it is given, says:
 - **Vary the sentences**: start each row from a real line of a source corpus; no frame with values swapped in.
 - **Keep every proper name** ("Start", "Room 4", "Sales by month") in the wire it belongs to.
 - **Write a meaning that has no key yet as `w.request.unread`**, with its words and a `note` naming the meaning, so
-  the schema can gain the key.
+  the schema can gain the key. Keys gained this way (2026-11-23): `page.scene` ("a harbour"), `page.time` ("at dusk"),
+  `page.weather` ("in the fog"), `page.style` ("as a pencil sketch"), `drawn.arrangement` ("in a row"),
+  `drawn.action` ("chase the cat"), `chart.colourBy` ("coloured by region") and `median` for `chart.aggregate`; write
+  these as constraints now, with a closed-list value and the said words (`value=dusk words="at dusk"`).
 
 ## Checking new data
 
@@ -261,10 +264,10 @@ Known data issues (2026-11-23): all rows pass the checker. When the data moved h
 - key_words, family_words, name_words and asked_words were added where the text names the key, the family, the
   name or what is asked (with the words the knowledge worlds give for each key).
 
-115,320 rows still carry a warning:
-- 112,117 have content words no wire accounts for (the older labels did not record the words behind every wire);
-- 34,371 have a meaning left in unread;
-- 5,204 lose a proper name.
+Warnings after the repairs of 2026-11-23 (counted on the committed files):
+- 85,793 content words no wire accounts for (the older labels did not record the words behind every wire);
+- 29,849 meanings left in unread (10,000 others became constraints when their keys were added);
+- 3,803 proper names missing from the circuit.
 
 `node tools/check.mjs --warnings rewrite.csv` lists them with the words concerned. They are the rows to complete or
 rewrite first.

@@ -43,12 +43,12 @@ text,sop
 @r1 w.request.request act=change mood=do words=""show me a boathouse in the sea wind"" predicate=show
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the sea wind"" note=page.weather value=wind
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=wind words=""in the sea wind"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""boathouse"" note=drawn.detail
 @r2 w.request.request act=change mood=do words=""in the early morning""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""in the early morning"" note=page.time value=morning
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=early_morning words=""in the early morning"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""three small white gulls above the dock""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=quantified sort=gull sort_words=gulls
 @r3.c1 w.request.constraint request=$r3 on=count attribute=drawn.count words=three operator=eq phase=result
@@ -312,7 +312,7 @@ cap the garden pond in a thin skin of ice,"@r1 w.request.request act=change mood
 racee the umbrella against a stiff gale,"@r1 w.request.request act=change mood=do predicate=racee
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context sort=umbrella
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=against operator=relation phase=result open_value=true
-@r1.u1 w.request.unread request=$r1 text=""a stiff gale"" note=page.weather value=""stiff gale"""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=page.weather value=wind words=""a stiff gale"" operator=eq phase=result"
 recover the sofa with zebra print,"@r1 w.request.request act=change mood=do predicate=recover
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context sort=sofa
 @r1.u1 w.request.unread request=$r1 text=""zebra print"" note=drawn.pattern value=""zebra print"""
@@ -772,7 +772,7 @@ place one block on top of the yellow column to make five,"@r1 w.request.request 
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=yellow operator=eq phase=selector
 @r1.c3 w.request.constraint request=$r1 on=count attribute=drawn.count words=one operator=eq phase=result
 @r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the yellow column"" operator=relation phase=selector
-@r1.u1 w.request.unread request=$r1 text=""make five"" note=drawn.action"
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=drawn.action value=""make five"" operator=eq phase=result"
 put a new stack of two offset one space from the first stack,"@r1 w.request.request act=make mood=do predicate=put
 @r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=stack description=""a new stack of two""
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=from operator=relation phase=result open_value=true
@@ -904,7 +904,7 @@ what if you shift the woman in the orange coat back beside the woman in the gree
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.distanceGrade value=one operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=red operator=eq phase=selector
 @r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=orange operator=eq phase=selector
-@r1.u1 w.request.unread request=$r1 text=""place to the left"" note=drawn.action
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=drawn.action value=""place to the left"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""same way"" note=drawn.keep"
 "shift the woman in the green dress and purple hat left by one, in the same fashion","@r1 w.request.request act=change mood=do predicate=shift
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context sort=woman description=""the woman in the green dress and purple hat""
@@ -925,12 +925,12 @@ what if you shift the woman in the orange coat back beside the woman in the gree
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=purple words=""purple shirt"" operator=eq phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.direction value=right operator=eq phase=result
 @r1.u1 w.request.unread request=$r1 text=""same move"" note=drawn.keep
-@r1.u2 w.request.unread request=$r1 text=""place right"" note=drawn.action"
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.action value=""place right"" operator=eq phase=result"
 "move the person in a purple shirt one place right, same move","@r1 w.request.request act=change mood=do predicate=move
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context sort=person description=""the person in a purple shirt""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=purple words=""purple shirt"" operator=eq phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.direction value=right operator=eq phase=result
-@r1.u1 w.request.unread request=$r1 text=""place right"" note=drawn.action"
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.action value=""place right"" operator=eq phase=result"
 "place a tower of green blocks in the gap between the two red blocks, 3 blocks high","@r1 w.request.request act=make mood=do predicate=place
 @r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=blocks description=""a tower of green blocks""
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""in the gap between the two red blocks"" operator=relation phase=result
@@ -973,7 +973,7 @@ what if you move the Pepsi block two spaces above the SRI block,"@r1 w.request.r
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.direction value=right words=""right edge"" operator=eq phase=result
 @r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.relation value=to words=""to the right edge"" operator=relation phase=result open_value=true
 @r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the right edge"" operator=relation phase=selector
-@r1.u1 w.request.unread request=$r1 text=""leave the row as it is"" note=drawn.action"
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.action value=""leave the row as it is"" operator=eq phase=result"
 "two more blocks until the row reaches the tower, and after that, keep the rest of the row as it is","@r1 w.request.request act=make mood=do
 @r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=blocks description=""two more blocks""
 @r1.c1 w.request.constraint request=$r1 on=count attribute=drawn.count words=two operator=eq phase=result
@@ -1201,7 +1201,7 @@ the mat needs to be straw.,"@r1 w.request.request act=change mood=do words=""the
 @r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
 @r2.c1 w.request.constraint request=$r2 on=size attribute=drawn.size words=bigger operator=delta phase=result step=more
-@r2.u1 w.request.unread request=$r2 text=""make it a little"" note=drawn.action"
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=drawn.action value=""make it a little"" operator=eq phase=result"
 "put a small house on the hill, on the gentle slope where the sheep grzae.","@r1 w.request.request act=make mood=do predicate=put
 @r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=house
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=on operator=relation phase=result
@@ -1247,13 +1247,13 @@ the mat needs to be straw.,"@r1 w.request.request act=change mood=do words=""the
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=left_of words=""to the left of"" operator=relation phase=result
 @r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the road"" operator=relation phase=selector
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result
-@r1.u1 w.request.unread request=$r1 text=""side where the sun rises"" note=page.weather"
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=page.weather value=sun words=""side where the sun rises"" operator=eq phase=result"
 "to the left of the main road, there should be a round well, on the side whre the sun rises.","@r1 w.request.request act=make mood=do
 @r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=well
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=left_of words=""to the left of"" operator=relation phase=result
 @r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the main road"" operator=relation phase=selector
 @r1.u1 w.request.unread request=$r1 text=""round well"" note=drawn.detail
-@r1.u2 w.request.unread request=$r1 text=""side whre the sun rises"" note=page.weather"
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=page.weather value=sun words=""side whre the sun rises"" operator=eq phase=result"
 "would you add a little bench over on the far side of the road, and leave space for the milk stand opposite.","@r1 w.request.request act=make mood=do predicate=add
 @r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bench
 @r1.u1 w.request.unread request=$r1 text=""over on the far side of the road"" note=drawn.across_from value=""over on the far side of the road""
@@ -1589,7 +1589,7 @@ make the dog chase the cat,"@r1 w.request.request act=place mood=do predicate=ma
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=dog
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.relation value=near words=chase operator=eq phase=result
 @r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the cat"" operator=relation phase=selector
-@r1.u1 w.request.unread request=$r1 text=chase note=drawn.action value=chase"
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.action value=""chase"" operator=eq phase=result"
 Can you make sure to keep new shapes on the right?,"@r1 w.request.request act=change mood=do predicate=Can
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -1650,10 +1650,10 @@ a dress for the woman,"@r1 w.request.request act=make mood=do
 make the dog bite the cat's tail and make the girl chase the dog off,"@r1 w.request.request act=place mood=do words=""make the dog bite the cat's tail"" predicate=make
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=dog
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.owner value=""the cat's tail"" operator=eq phase=selector
-@r1.u1 w.request.unread request=$r1 text=bite note=drawn.action value=bite
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.action value=""bite"" operator=eq phase=result
 @r2 w.request.request act=place mood=do words=""make the girl chase the dog off"" predicate=make
 @r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=description sort=girl
-@r2.u1 w.request.unread request=$r2 text=chase note=drawn.action value=chase"
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.action value=""chase"" operator=eq phase=result"
 how about a girl crying facing right below the sun?,"@r1 w.request.request act=make mood=do predicate=how
 @r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=girl
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.facing value=right operator=eq phase=result key_words=facing
@@ -1753,7 +1753,7 @@ could you erase the long shadow of the dog,"@r1 w.request.request act=remove moo
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=on operator=relation phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=gray words=grey operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the still lake"" operator=relation phase=selector
-@r1.u1 w.request.unread request=$r1 text=""sun catching the top"" note=page.weather"
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=page.weather value=sun words=""sun catching the top"" operator=eq phase=result"
 "draw a white duck in the deep river, and do not let it come ashore, not on the bank.","@r1 w.request.request act=make mood=do predicate=draw
 @r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=duck
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=in operator=relation phase=result
@@ -1831,12 +1831,12 @@ remove the railing's shadow,"@r1 w.request.request act=remove mood=do predicate=
 @r1 w.request.request act=change mood=do
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context family_words=page
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous
-@r1.u1 w.request.unread request=$r1 text=""a rough pencil sketch"" note=page.style value=""pencil sketch"""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.style value=""rough pencil sketch"" words=""a rough pencil sketch"" operator=eq phase=result"
 make everything look like a comic book,"@f1 w.request.filler text=like
 @r1 w.request.request act=change mood=do predicate=make
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""look like a comic book"" note=page.style value=""comic book"""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.style value=""look like a comic book"" operator=eq phase=result"
 no — the dog a size bigger,"@prev w.request.previous text=""a small dog sits under the bench""
 @r1 w.request.request act=change mood=do predicate=no
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=dog description=""the dog""
@@ -1945,12 +1945,12 @@ i want the woman in the green scarf facing right — with everything else left w
 @r2 w.request.request act=change mood=do words=""bathe the whole page in harsh midday light, every corner of it"" predicate=bathe
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context family_words=page
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""harsh midday light"" note=page.time value=""harsh midday""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=noon words=""harsh midday light"" operator=eq phase=result
 @r2.u3 w.request.unread request=$r2 text=""corner"" note=drawn.detail"
 "draw a bakery at daybreak in the first frost: four cups, a barista, a customer, and a cat","@r1 w.request.request act=change mood=do words=""draw a bakery at daybreak in the first frost"" predicate=draw
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the first frost"" note=page.weather value=frost
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=frost words=""in the first frost"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""bakery at daybreak"" note=drawn.detail
 @r2 w.request.request act=make mood=do words=""four cups""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=quantified sort=cup sort_words=cups
@@ -1977,13 +1977,13 @@ i want the woman in the green scarf facing right — with everything else left w
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=bear description=""the bear in the woods""
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=in words=""in the woods"" operator=relation phase=result
 @r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the woods"" operator=relation phase=selector
-@r1.u1 w.request.unread request=$r1 text=""sniffing the fish"" note=drawn.action value=sniff"
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.action value=""sniffing the fish"" operator=eq phase=result"
 "can you draw an aquarium in the afternoon: three small silver fish above the coral, a medium red crab at the bottom, two pink shells just next to the sand, and a small child with a happy face in front of the coral","@f1 w.request.filler text=just
 @r1 w.request.request act=change mood=do words=""can you draw an aquarium in the afternoon"" predicate=can
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the afternoon"" note=page.time value=afternoon
-@r1.u2 w.request.unread request=$r1 text=""draw an aquarium"" note=drawn.action
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=afternoon words=""in the afternoon"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.action value=""draw an aquarium"" operator=eq phase=result
 @r2 w.request.request act=make mood=do words=""three small silver fish above the coral""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=quantified sort=fish
 @r2.c1 w.request.constraint request=$r2 on=count attribute=drawn.count words=three operator=eq phase=result
@@ -2011,12 +2011,12 @@ i want the woman in the green scarf facing right — with everything else left w
 "make a canyon camp scene in the sun at noon with four medium green cactuses next to the mesa, a medium guide standing next to the trail, a small brown hat on the guide, a small green lizard on the trail, and a medium red backpack next to the guide","@r1 w.request.request act=change mood=do words=""make a canyon camp scene in the sun"" predicate=make
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the sun"" note=page.weather value=sun
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=sun words=""in the sun"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""canyon camp scene"" note=page.composition
 @r2 w.request.request act=change mood=do words=""at noon""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""at noon"" note=page.time value=noon
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=noon words=""at noon"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""four medium green cactuses next to the mesa""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=quantified sort=cactus sort_words=cactuses
 @r3.c1 w.request.constraint request=$r3 on=count attribute=drawn.count words=four operator=eq phase=result
@@ -2089,7 +2089,7 @@ i wonder if you could rest a green block in the middle of the second row and in 
 @r2 w.request.request act=make mood=do words=""raise a green staucture, the same staucture""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=staucture description=""a green staucture""
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.colour value=green operator=eq phase=result
-@r2.u1 w.request.unread request=$r2 text=""raise a green staucture"" note=drawn.action"
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=drawn.action value=""raise a green staucture"" operator=eq phase=result"
 "i wonder if you could fit two orange blocks on both sides of the two red blocks, then fit another orange block on top of the second red block, then delete the first red block","@f1 w.request.filler text=wonder
 @f2 w.request.filler text=then
 @r1 w.request.request act=make mood=do words=""fit two orange blocks on both sides of the two red blocks"" predicate=fit
@@ -2149,7 +2149,7 @@ go for a soft evening light,"@r1 w.request.request act=change mood=do
 have the woman put her hands on her face,"@r1 w.request.request act=change mood=do predicate=have
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=woman
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.pose words=""hands on her face"" operator=eq phase=result open_value=true
-@r1.u1 w.request.unread request=$r1 text=""put her hands on her face"" note=drawn.action"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.action value=""put her hands on her face"" operator=eq phase=result"
 "hey, let the woman smile","@f1 w.request.filler text=hey
 @r1 w.request.request act=change mood=do words=""let the woman smile"" predicate=let
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=woman
@@ -2168,7 +2168,7 @@ let the cat become angry with the dog,"@r1 w.request.request act=change mood=do 
 @r1 w.request.request act=place mood=do words=""can you make the dog bite the cat's tail?"" predicate=can
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=dog
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.owner value=""the cat's tail"" operator=eq phase=selector
-@r1.u1 w.request.unread request=$r1 text=""make the dog bite"" note=drawn.action value=bite"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.action value=""make the dog bite"" operator=eq phase=result"
 dog curled up asleep,"@r1 w.request.request act=make mood=do
 @r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=dog
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.pose words=""curled up asleep"" operator=eq phase=result open_value=true"
@@ -2311,7 +2311,7 @@ in the picture there is a ebnch with a leg cut off by the edge on the right midd
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context count_words=it
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=left words=""the left"" operator=region phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.facing value=right operator=eq phase=result key_words=facing
-@r1.u1 w.request.unread request=$r1 text=""make it on the left"" note=drawn.action"
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.action value=""make it on the left"" operator=eq phase=result"
 i want it just a cat,"@f1 w.request.filler text=just
 @prev w.request.previous text=""draw a pet for the boy to play with""
 @r1 w.request.request act=change mood=do predicate=want
@@ -2523,7 +2523,7 @@ make it so the green-hat man is back to where he was before,"@f1 w.request.fille
 @r1 w.request.request act=change mood=do words=""can you make the dog a size bigger?"" predicate=can
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=dog description=""the dog""
 @r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size words=bigger operator=delta phase=result step=more key_words=size
-@r1.u1 w.request.unread request=$r1 text=""make the dog a size bigger?"" note=drawn.action
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.action value=""make the dog a size bigger?"" operator=eq phase=result
 @r2 w.request.request act=make mood=do words=""a little cat by the tree""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=cat
 @r2.c1 w.request.constraint request=$r2 on=place attribute=drawn.relation value=by operator=relation phase=result open_value=true
@@ -2735,7 +2735,7 @@ underneath the bench there are two small cats facing right — keeping the rest 
 @r1 w.request.request act=change mood=do words=""can you make the birds all face the sun"" predicate=can
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=quantified fill=all sort=bird sort_words=birds
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.facing value=""the sun"" words=""face the sun"" operator=eq phase=result open_value=true
-@r1.u1 w.request.unread request=$r1 text=""sun"" note=page.weather
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=page.weather value=sun operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""make the birds all face the sun"" note=drawn.action"
 "the people should all face the bench, so the whole scene still reads","@f1 w.request.filler text=""so the whole scene still reads""
 @r1 w.request.request act=change mood=do words=""the people should all face the bench"" predicate=should
@@ -2762,13 +2762,13 @@ hey — there is a big cloud half behind the tree,"@f1 w.request.filler text=hey
 @r1 w.request.request act=place mood=do words=""please leave the sky clear, from now on"" predicate=please
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=sky description=""the sky""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=preference.scope value=""from now on"" operator=eq phase=result
-@r1.u1 w.request.unread request=$r1 text=""leave the sky clear"" note=drawn.action"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.action value=""leave the sky clear"" operator=eq phase=result"
 "keep the top left of the sky clear from now on, right there in the scene","@f1 w.request.filler text=""right there in the scene""
 @r1 w.request.request act=place mood=do words=""keep the top left of the sky clear from now on"" predicate=keep
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=sky description=""the sky""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=top_left words=""the top left"" want=no operator=region phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=preference.scope value=""from now on"" operator=eq phase=result
-@r1.u1 w.request.unread request=$r1 text=""clear from now on"" note=drawn.action"
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.action value=""clear from now on"" operator=eq phase=result"
 "from now on, leave the sun on the right, so the whole scene still reads","@f1 w.request.filler text=""so the whole scene still reads""
 @r1 w.request.request act=place mood=do words=""from now on, leave the sun on the right"" predicate=leave
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=sun description=""the sun""
@@ -2802,7 +2802,7 @@ hey — there is a big cloud half behind the tree,"@f1 w.request.filler text=hey
 @r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.relation value=by words=""by the house"" operator=relation phase=result open_value=true
 @r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the house"" operator=relation phase=selector
 @r1.u1 w.request.unread request=$r1 text=""with the tallest on the left"" note=drawn.size_order value=""with the tallest on the left""
-@r1.u2 w.request.unread request=$r1 text=""place three kids by the house"" note=drawn.action"
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.action value=""place three kids by the house"" operator=eq phase=result"
 "draw three boats on the lake, from largest to smallest, in the picture","@f1 w.request.filler text=picture
 @r1 w.request.request act=make mood=do words=""draw three boats on the lake, from largest to smallest"" predicate=draw
 @r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=boat sort_words=boats
@@ -3100,7 +3100,7 @@ just a finger-width apart for the trees as a set,"@f1 w.request.filler text=just
 @r2.t w.request.target request=$r2 family=group mode=existing determiner=definite fill=context count_words=them
 @r2.u1 w.request.unread request=$r2 text=""trade back"" note=drawn.swap
 @r2.u2 w.request.unread request=$r2 text=""once more"" note=drawn.detail
-@r2.u3 w.request.unread request=$r2 text=""leave them be"" note=drawn.action"
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.action value=""leave them be"" operator=eq phase=result"
 "a small dog down at the bottom, then arrange every one of the clouds into a full grid, and do not leave a stray one out — keep it that way for the rest of the scene","@f1 w.request.filler text=then
 @f2 w.request.filler text=""keep it that way for the rest of the scene""
 @r1 w.request.request act=make mood=do words=""a small dog down at the bottom""
@@ -3625,7 +3625,7 @@ ban the dogs today — and that is the whole scene — the way the drawing looks
 @r3.c3 w.request.constraint request=$r3 on=attribute attribute=drawn.colour value=brown operator=eq phase=result
 @r3.c4 w.request.constraint request=$r3 on=place attribute=drawn.relation value=""in front of"" words=""in front of the bandstand"" operator=relation phase=result open_value=true
 @r3.c5 w.request.constraint request=$r3 on=place attribute=drawn.anchor value=""the bandstand"" operator=relation phase=selector
-@r3.u1 w.request.unread request=$r3 text=""in a row"" note=drawn.arrangement value=row
+@r3.c6 w.request.constraint request=$r3 on=attribute attribute=drawn.arrangement value=row words=""in a row"" operator=eq phase=result
 @r4 w.request.request act=make mood=do words=""a small boy standing next to the bandstand""
 @r4.t w.request.target request=$r4 family=drawn mode=new determiner=indefinite sort=boy
 @r4.c1 w.request.constraint request=$r4 on=size attribute=drawn.size value=small operator=degree phase=result
@@ -3645,7 +3645,7 @@ ban the dogs today — and that is the whole scene — the way the drawing looks
 @r2.c3 w.request.constraint request=$r2 on=attribute attribute=drawn.colour value=brown operator=eq phase=result
 @r2.c4 w.request.constraint request=$r2 on=place attribute=drawn.relation value=""in front of"" words=""in front of the bandstand"" operator=relation phase=result open_value=true
 @r2.c5 w.request.constraint request=$r2 on=place attribute=drawn.anchor value=""the bandstand"" operator=relation phase=selector
-@r2.u1 w.request.unread request=$r2 text=""in a row"" note=drawn.arrangement value=row
+@r2.c6 w.request.constraint request=$r2 on=attribute attribute=drawn.arrangement value=row words=""in a row"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""two medium musicians facing right standing right on the bandstand""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=quantified sort=musician sort_words=musicians
 @r3.c1 w.request.constraint request=$r3 on=count attribute=drawn.count words=two operator=eq phase=result
@@ -3849,7 +3849,7 @@ the bottom edge: keep it clear,"@r1 w.request.request act=place mode=arrange moo
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.u1 w.request.unread request=$r1 text=""the bottom edge"" note=drawn.negative_space value=""bottom edge""
-@r1.u2 w.request.unread request=$r1 text=""keep it clear"" note=drawn.action"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.action value=""keep it clear"" operator=eq phase=result"
 "spare the area around the sun, keeping everything else where it is","@f1 w.request.filler text=""keeping everything else""
 @r1 w.request.request act=place mode=arrange mood=do words=""spare the area around the sun"" predicate=spare
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
@@ -3882,11 +3882,11 @@ just swap the gate's surface for glass,"@f1 w.request.filler text=just
 change the whole picture to a glossy art deco print,"@r1 w.request.request act=change mood=do predicate=change
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context family_words=""whole picture""
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""a glossy art deco print"" note=page.style value=""art deco"""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.style value=""glossy art deco print"" words=""a glossy art deco print"" operator=eq phase=result"
 rework the whole scene into a bold art deco poster,"@r1 w.request.request act=change mood=do predicate=rework
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""a bold art deco poster"" note=page.style value=""art deco""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.style value=""bold art deco poster"" words=""a bold art deco poster"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""whole scene"" note=page.composition"
 "a small brown dog lying down at the bottom edge, then show me the picture as a bold art deco poster, top to bottom — nothing on the page stays as it was","@f1 w.request.filler text=then
 @f2 w.request.filler text=""page stays""
@@ -3899,13 +3899,13 @@ rework the whole scene into a bold art deco poster,"@r1 w.request.request act=ch
 @r2 w.request.request act=change mood=do words=""show me the picture as a bold art deco poster, top to bottom"" predicate=show
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context family_words=picture
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""a bold art deco poster"" note=page.style value=""art deco""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.style value=""bold art deco poster"" words=""a bold art deco poster"" operator=eq phase=result
 @r2.u2 w.request.unread request=$r2 text=""top to bottom"" note=drawn.detail"
 amke everything look like a gothic painting,"@f1 w.request.filler text=like
 @r1 w.request.request act=change mood=do predicate=amke
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""look like a gothic painting"" note=page.style value=gothic"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.style value=""look like a gothic painting"" operator=eq phase=result"
 I want the whole setting to become a quiet park with benches,"@r1 w.request.request act=change mood=do predicate=want
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -3930,7 +3930,7 @@ a wet and windy evening everywhere,"@prev w.request.previous text=""this grey sk
 have the page come out as snow falling at dusk,"@r1 w.request.request act=change mood=do predicate=have
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context family_words=page
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""come out as snow falling at dusk"" note=page.weather"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=snow words=""come out as snow falling at dusk"" operator=eq phase=result"
 a misty morning everywhere,"@prev w.request.previous text=""this grey sky will not do""
 @r1 w.request.request act=change mood=do
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
@@ -3940,7 +3940,7 @@ a misty morning everywhere,"@prev w.request.previous text=""this grey sky will n
 st the whole scene in morning light,"@r1 w.request.request act=change mood=do predicate=st
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""morning light"" note=page.time value=morning
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=morning words=""morning light"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""whole scene"" note=page.composition"
 I want just the shirt on the boy deep green,"@f1 w.request.filler text=just
 @r1 w.request.request act=change mood=do predicate=want
@@ -4164,7 +4164,7 @@ hey — as a rule make sure the kite stays in the sky,"@f1 w.request.filler text
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=grey operator=eq phase=result
 @r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.relation value=along words=""along the path"" operator=relation phase=result
 @r1.c5 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the path"" operator=relation phase=selector
-@r1.u1 w.request.unread request=$r1 text=""in a row"" note=drawn.arrangement value=row
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=drawn.arrangement value=row words=""in a row"" operator=eq phase=result
 @r2 w.request.request act=make mood=do words=""a medium keeper facing left with a proud face in the left part""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=keeper
 @r2.c1 w.request.constraint request=$r2 on=size attribute=drawn.size value=medium operator=degree phase=result
@@ -4311,7 +4311,7 @@ hey — as a rule make sure the kite stays in the sky,"@f1 w.request.filler text
 @r3.c3 w.request.constraint request=$r3 on=attribute attribute=drawn.colour value=white operator=eq phase=result
 @r3.c4 w.request.constraint request=$r3 on=place attribute=drawn.relation value=""next to"" words=""next to the stove"" operator=relation phase=result open_value=true
 @r3.c5 w.request.constraint request=$r3 on=place attribute=drawn.anchor value=""the stove"" operator=relation phase=selector
-@r3.u1 w.request.unread request=$r3 text=""in a row"" note=drawn.arrangement value=row
+@r3.c6 w.request.constraint request=$r3 on=attribute attribute=drawn.arrangement value=row words=""in a row"" operator=eq phase=result
 @r4 w.request.request act=make mood=do words=""a medium chef facing left standing next to the stove""
 @r4.t w.request.target request=$r4 family=drawn mode=new determiner=indefinite sort=chef
 @r4.c1 w.request.constraint request=$r4 on=size attribute=drawn.size value=medium operator=degree phase=result
@@ -4511,7 +4511,7 @@ hey — as a rule make sure the kite stays in the sky,"@f1 w.request.filler text
 @r2.c3 w.request.constraint request=$r2 on=attribute attribute=drawn.colour value=blue operator=eq phase=result
 @r2.c4 w.request.constraint request=$r2 on=place attribute=drawn.relation value=""next to"" words=""right next to the umbrella"" operator=relation phase=result open_value=true
 @r2.c5 w.request.constraint request=$r2 on=place attribute=drawn.anchor value=""the umbrella"" operator=relation phase=selector
-@r2.u1 w.request.unread request=$r2 text=""in a row"" note=drawn.arrangement value=row
+@r2.c6 w.request.constraint request=$r2 on=attribute attribute=drawn.arrangement value=row words=""in a row"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""a small woman facing left with a happy face just next to the umbrella""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=woman
 @r3.c1 w.request.constraint request=$r3 on=size attribute=drawn.size value=small operator=degree phase=result
@@ -4837,12 +4837,12 @@ do we have ducks facing the lake?,"@r1 w.request.request act=ask mood=ask predic
 @r1 w.request.request act=change mood=do words=""draw a castle courtyard in the storm"" predicate=draw
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the storm"" note=page.weather value=storm
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=storm words=""in the storm"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""castle courtyard"" note=drawn.detail
 @r2 w.request.request act=change mood=do words=""at dusk""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""at dusk"" note=page.time value=dusk
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=dusk words=""at dusk"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""a large grey towerr in the bottom left corner""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=tower sort_words=towerr
 @r3.c1 w.request.constraint request=$r3 on=size attribute=drawn.size value=large operator=degree phase=result
@@ -4871,12 +4871,12 @@ do we have ducks facing the lake?,"@r1 w.request.request act=ask mood=ask predic
 @r1 w.request.request act=change mood=do words=""make a farm in the low mist"" predicate=make
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the low mist"" note=page.weather value=mist
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=mist words=""in the low mist"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""farm"" note=page.composition
 @r2 w.request.request act=change mood=do words=""in the early morning""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""in the early morning"" note=page.time value=morning
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=early_morning words=""in the early morning"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""three medium white sheep behind the fence""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=quantified sort=sheep
 @r3.c1 w.request.constraint request=$r3 on=count attribute=drawn.count words=three operator=eq phase=result
@@ -4891,7 +4891,7 @@ do we have ducks facing the lake?,"@r1 w.request.request act=ask mood=ask predic
 @r4.c3 w.request.constraint request=$r4 on=attribute attribute=drawn.colour value=white operator=eq phase=result
 @r4.c4 w.request.constraint request=$r4 on=place attribute=drawn.relation value=""in front of"" words=""in front of the barn"" operator=relation phase=result open_value=true
 @r4.c5 w.request.constraint request=$r4 on=place attribute=drawn.anchor value=""the barn"" operator=relation phase=selector
-@r4.u1 w.request.unread request=$r4 text=""in a row"" note=drawn.arrangement value=row
+@r4.c6 w.request.constraint request=$r4 on=attribute attribute=drawn.arrangement value=row words=""in a row"" operator=eq phase=result
 @r5 w.request.request act=make mood=do words=""a medium farmer standing just next to the barn""
 @r5.t w.request.target request=$r5 family=drawn mode=new determiner=indefinite sort=farmer
 @r5.c1 w.request.constraint request=$r5 on=size attribute=drawn.size value=medium operator=degree phase=result
@@ -4908,7 +4908,7 @@ do we have ducks facing the lake?,"@r1 w.request.request act=ask mood=ask predic
 @r1 w.request.request act=change mood=do words=""can you draw a farm in the early morning"" predicate=can
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the early morning"" note=page.time value=morning
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=early_morning words=""in the early morning"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""draw a farm"" note=page.composition
 @r2 w.request.request act=make mood=do words=""four large yellow haystacks in a row next to the barn""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=quantified sort=haystack sort_words=haystacks
@@ -4917,7 +4917,7 @@ do we have ducks facing the lake?,"@r1 w.request.request act=ask mood=ask predic
 @r2.c3 w.request.constraint request=$r2 on=attribute attribute=drawn.colour value=yellow operator=eq phase=result
 @r2.c4 w.request.constraint request=$r2 on=place attribute=drawn.relation value=""next to"" words=""next to the barn"" operator=relation phase=result open_value=true
 @r2.c5 w.request.constraint request=$r2 on=place attribute=drawn.anchor value=""the barn"" operator=relation phase=selector
-@r2.u1 w.request.unread request=$r2 text=""in a row"" note=drawn.arrangement value=row
+@r2.c6 w.request.constraint request=$r2 on=attribute attribute=drawn.arrangement value=row words=""in a row"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""three medium brown sacks on the right-hand side""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=quantified sort=sack sort_words=sacks
 @r3.c1 w.request.constraint request=$r3 on=count attribute=drawn.count words=three operator=eq phase=result
@@ -4940,12 +4940,12 @@ do we have ducks facing the lake?,"@r1 w.request.request act=ask mood=ask predic
 "draw a seaside boardwalk in the sea wind in the afternoon: two small white gulls on the pier, a medium brown owl right on the bench, a small girl sitting right on the bench, and a small boy standing next to the girl","@r1 w.request.request act=change mood=do words=""draw a seaside boardwalk in the sea wind"" predicate=draw
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the sea wind"" note=page.weather value=wind
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=wind words=""in the sea wind"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""seaside boardwalk"" note=page.composition
 @r2 w.request.request act=change mood=do words=""in the afternoon""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""in the afternoon"" note=page.time value=afternoon
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=afternoon words=""in the afternoon"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""two small white gulls on the pier""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=quantified sort=gull sort_words=gulls
 @r3.c1 w.request.constraint request=$r3 on=count attribute=drawn.count words=two operator=eq phase=result
@@ -4975,12 +4975,12 @@ do we have ducks facing the lake?,"@r1 w.request.request act=ask mood=ask predic
 @r1 w.request.request act=change mood=do words=""show me a seaside boardwalk in the rain"" predicate=show
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the rain"" note=page.weather value=rain
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=rain words=""in the rain"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""seaside boardwalk"" note=page.composition
 @r2 w.request.request act=change mood=do words=""at dusk""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""at dusk"" note=page.time value=dusk
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=dusk words=""at dusk"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""a medium brown owl on the bench""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=owl
 @r3.c1 w.request.constraint request=$r3 on=size attribute=drawn.size value=medium operator=degree phase=result
@@ -5008,7 +5008,7 @@ do we have ducks facing the lake?,"@r1 w.request.request act=ask mood=ask predic
 "draw a jungle clearing at noon: an owl, a snake, an explorer, and two frogs","@r1 w.request.request act=change mood=do words=""draw a jungle clearing at noon"" predicate=draw
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""at noon"" note=page.time value=noon
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=noon words=""at noon"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""jungle clearing"" note=page.composition
 @r2 w.request.request act=make mood=do words=""an owl""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=owl
@@ -5022,12 +5022,12 @@ do we have ducks facing the lake?,"@r1 w.request.request act=ask mood=ask predic
 "draw a jungle clearing in the warm rain in the afternoon: a girl, a dog, three ducks, and a cat","@r1 w.request.request act=change mood=do words=""draw a jungle clearing in the warm rain"" predicate=draw
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the warm rain"" note=page.weather value=rain
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=rain words=""in the warm rain"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""jungle clearing"" note=page.composition
 @r2 w.request.request act=change mood=do words=""in the afternoon""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""in the afternoon"" note=page.time value=afternoon
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=afternoon words=""in the afternoon"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""a girl""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=girl
 @r4 w.request.request act=make mood=do words=""a dog""
@@ -5040,7 +5040,7 @@ do we have ducks facing the lake?,"@r1 w.request.request act=ask mood=ask predic
 "show me a desert oasis at noon: two camels, a boy, a girl, and a goat","@r1 w.request.request act=change mood=do words=""show me a desert oasis at noon"" predicate=show
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""at noon"" note=page.time value=noon
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=noon words=""at noon"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""desert oasis"" note=page.composition
 @r2 w.request.request act=make mood=do words=""two camels""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=quantified sort=camel sort_words=camels
@@ -5055,7 +5055,7 @@ do we have ducks facing the lake?,"@r1 w.request.request act=ask mood=ask predic
 @r1 w.request.request act=change mood=do words=""next, give me a desert oasis at night"" predicate=give
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous
-@r1.u1 w.request.unread request=$r1 text=""at night"" note=page.time value=night
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=night words=""at night"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""desert oasis"" note=page.composition
 @r2 w.request.request act=make mood=do words=""a medium orange fire right in front of the tent""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=fire
@@ -5086,12 +5086,12 @@ do we have ducks facing the lake?,"@r1 w.request.request act=ask mood=ask predic
 "make a desert oasis in the heat haze at noon: a medium traveler standing next to the cactus, a medium white goat on the far right, a medium brown tent right behind the cactus, and two small green lizards on the cactus","@r1 w.request.request act=change mood=do words=""make a desert oasis in the heat haze"" predicate=make
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the heat haze"" note=page.weather value=haze
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=haze words=""in the heat haze"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""desert oasis"" note=page.composition
 @r2 w.request.request act=change mood=do words=""at noon""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""at noon"" note=page.time value=noon
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=noon words=""at noon"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""a medium traveler standing next to the cactus""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=traveler
 @r3.c1 w.request.constraint request=$r3 on=size attribute=drawn.size value=medium operator=degree phase=result
@@ -5120,7 +5120,7 @@ do we have ducks facing the lake?,"@r1 w.request.request act=ask mood=ask predic
 @r1 w.request.request act=change mood=do words=""draw a desert oasis at dusk"" predicate=draw
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""at dusk"" note=page.time value=dusk
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=dusk words=""at dusk"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""desert oasis"" note=page.composition
 @r2 w.request.request act=make mood=do words=""three large brown jarss in the bottom left corner""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=quantified sort=jar sort_words=jarss
@@ -5149,12 +5149,12 @@ do we have ducks facing the lake?,"@r1 w.request.request act=ask mood=ask predic
 @r1 w.request.request act=change mood=do words=""darw a mountain cabin in the falling snow"" predicate=darw
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the falling snow"" note=page.weather value=snow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=snow words=""in the falling snow"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""mountain cabin"" note=page.composition
 @r2 w.request.request act=change mood=do words=""at night""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""at night"" note=page.time value=night
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=night words=""at night"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""three large brown logs next to the cabin""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=quantified sort=log sort_words=logs
 @r3.c1 w.request.constraint request=$r3 on=count attribute=drawn.count words=three operator=eq phase=result
@@ -5185,12 +5185,12 @@ do we have ducks facing the lake?,"@r1 w.request.request act=ask mood=ask predic
 @r1 w.request.request act=change mood=do words=""can you draw a mountain cabin in the falling snow"" predicate=can
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the falling snow"" note=page.weather value=snow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=snow words=""in the falling snow"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""draw a mountain cabin"" note=page.composition
 @r2 w.request.request act=change mood=do words=""at dusk""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""at dusk"" note=page.time value=dusk
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=dusk words=""at dusk"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""three medium brown logs under the window""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=quantified sort=log sort_words=logs
 @r3.c1 w.request.constraint request=$r3 on=count attribute=drawn.count words=three operator=eq phase=result
@@ -5219,12 +5219,12 @@ do we have ducks facing the lake?,"@r1 w.request.request act=ask mood=ask predic
 @r1 w.request.request act=change mood=do words=""on the village square, in the rain""
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the rain"" note=page.weather value=rain
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=rain words=""in the rain"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""village square"" note=page.composition
 @r2 w.request.request act=change mood=do words=""in the early morning""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""in the early morning"" note=page.time value=morning
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=early_morning words=""in the early morning"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""a small boy standing with a surprised face just next to the bench""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=boy
 @r3.c1 w.request.constraint request=$r3 on=size attribute=drawn.size value=small operator=degree phase=result
@@ -5262,7 +5262,7 @@ do we have ducks facing the lake?,"@r1 w.request.request act=ask mood=ask predic
 @r1 w.request.request act=change mood=do words=""next, build a village square in the evening"" predicate=build
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous
-@r1.u1 w.request.unread request=$r1 text=""in the evening"" note=page.time value=evening
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=evening words=""in the evening"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""village square"" note=page.composition
 @r2 w.request.request act=make mood=do words=""two medium brown benches right in front of the bandstand""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=quantified sort=bench sort_words=benches
@@ -5295,7 +5295,7 @@ do we have ducks facing the lake?,"@r1 w.request.request act=ask mood=ask predic
 @r1 w.request.request act=change mood=do words=""next, put a village square together in the evening"" predicate=put
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous
-@r1.u1 w.request.unread request=$r1 text=""in the evening"" note=page.time value=evening
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=evening words=""in the evening"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""village square together"" note=page.composition
 @r2 w.request.request act=make mood=do words=""a medium red kite just above the bandstand""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=kite
@@ -5332,7 +5332,7 @@ do we have ducks facing the lake?,"@r1 w.request.request act=ask mood=ask predic
 "a village square in the early morning with a boy, a girl, a cat, and three breads","@r1 w.request.request act=change mood=do words=""a village square in the early morning""
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the early morning"" note=page.time value=morning
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=early_morning words=""in the early morning"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""village square"" note=page.composition
 @r2 w.request.request act=make mood=do words=""a boy""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=boy
@@ -5347,7 +5347,7 @@ do we have ducks facing the lake?,"@r1 w.request.request act=ask mood=ask predic
 @r1 w.request.request act=change mood=do words=""draw a village square at noon"" predicate=draw
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""at noon"" note=page.time value=noon
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=noon words=""at noon"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""village square"" note=page.composition
 @r2 w.request.request act=make mood=do words=""three medium brown benches in a row in front of the fountain""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=quantified sort=bench sort_words=benches
@@ -5356,7 +5356,7 @@ do we have ducks facing the lake?,"@r1 w.request.request act=ask mood=ask predic
 @r2.c3 w.request.constraint request=$r2 on=attribute attribute=drawn.colour value=brown operator=eq phase=result
 @r2.c4 w.request.constraint request=$r2 on=place attribute=drawn.relation value=""in front of"" words=""in front of the fountain"" operator=relation phase=result open_value=true
 @r2.c5 w.request.constraint request=$r2 on=place attribute=drawn.anchor value=""the fountain"" operator=relation phase=selector
-@r2.u1 w.request.unread request=$r2 text=""in a row"" note=drawn.arrangement value=row
+@r2.c6 w.request.constraint request=$r2 on=attribute attribute=drawn.arrangement value=row words=""in a row"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""two small kids sitting facing left right on the bench""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=quantified sort=kid sort_words=kids
 @r3.c1 w.request.constraint request=$r3 on=count attribute=drawn.count words=two operator=eq phase=result
@@ -5381,7 +5381,7 @@ do we have ducks facing the lake?,"@r1 w.request.request act=ask mood=ask predic
 @r1 w.request.request act=change mood=do words=""next, draw a riverside picnic spot at sunset"" predicate=draw
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous
-@r1.u1 w.request.unread request=$r1 text=""at sunset"" note=page.time value=sunset
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=sunset words=""at sunset"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""riverside picnic spot"" note=page.composition
 @r2 w.request.request act=make mood=do words=""two swans""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=quantified sort=swan sort_words=swans
@@ -5398,7 +5398,7 @@ do we have ducks facing the lake?,"@r1 w.request.request act=ask mood=ask predic
 @r1 w.request.request act=change mood=do words=""now draw a riverside picnic spot at sunset"" predicate=draw
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous
-@r1.u1 w.request.unread request=$r1 text=""at sunset"" note=page.time value=sunset
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=sunset words=""at sunset"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""riverside picnic spot"" note=page.composition
 @r2 w.request.request act=make mood=do words=""a medium brown piee on the blanket""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=pie sort_words=piee
@@ -5429,12 +5429,12 @@ do we have ducks facing the lake?,"@r1 w.request.request act=ask mood=ask predic
 @r1 w.request.request act=change mood=do words=""put a riverside picnic spot together in the low mist"" predicate=put
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the low mist"" note=page.weather value=mist
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=mist words=""in the low mist"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""riverside picnic spot together"" note=page.composition
 @r2 w.request.request act=change mood=do words=""at dawn""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""at dawn"" note=page.time value=dawn
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=dawn words=""at dawn"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""a large brown table right next to the river""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=table
 @r3.c1 w.request.constraint request=$r3 on=size attribute=drawn.size value=large operator=degree phase=result
@@ -5465,12 +5465,12 @@ do we have ducks facing the lake?,"@r1 w.request.request act=ask mood=ask predic
 @r1 w.request.request act=change mood=do words=""show me a riverside picnic spot in the low mist"" predicate=show
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the low mist"" note=page.weather value=mist
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=mist words=""in the low mist"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""riverside picnic spot"" note=page.composition
 @r2 w.request.request act=change mood=do words=""at dawn""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""at dawn"" note=page.time value=dawn
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=dawn words=""at dawn"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""a large brown table next to the river""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=table
 @r3.c1 w.request.constraint request=$r3 on=size attribute=drawn.size value=large operator=degree phase=result
@@ -5499,7 +5499,7 @@ do we have ducks facing the lake?,"@r1 w.request.request act=ask mood=ask predic
 "i want a riverside picnic spot at noon: a grill, a girl, two burgers, and a bear","@r1 w.request.request act=change mood=do words=""i want a riverside picnic spot at noon"" predicate=want
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""at noon"" note=page.time value=noon
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=noon words=""at noon"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""riverside picnic spot"" note=page.composition
 @r2 w.request.request act=make mood=do words=""a grill""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=grill
@@ -5515,12 +5515,12 @@ do we have ducks facing the lake?,"@r1 w.request.request act=ask mood=ask predic
 @r1 w.request.request act=change mood=do words=""now darw a riverside picnic spot in the river breeze"" predicate=darw
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous
-@r1.u1 w.request.unread request=$r1 text=""in the river breeze"" note=page.weather value=breeze
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=breeze words=""in the river breeze"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""riverside picnic spot"" note=page.composition
 @r2 w.request.request act=change mood=do words=""in the golden light""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=previous
-@r2.u1 w.request.unread request=$r2 text=""in the golden light"" note=page.time value=golden
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=golden_hour words=""in the golden light"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""two medium brown baskets on the blanket""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=quantified sort=basket sort_words=baskets
 @r3.c1 w.request.constraint request=$r3 on=count attribute=drawn.count words=two operator=eq phase=result
@@ -5553,7 +5553,7 @@ do we have ducks facing the lake?,"@r1 w.request.request act=ask mood=ask predic
 @r1 w.request.request act=change mood=do words=""let the scene become next morning"" predicate=let
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous
-@r1.u1 w.request.unread request=$r1 text=""next morning"" note=page.time
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=morning words=""next morning"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""scene become"" note=page.composition"
 "a small grey cat sitting in the bottom left corner, then transform the whole page over to nightfall, every corner of it — the objects all stay exactly where they are","@f1 w.request.filler text=then
 @f2 w.request.filler text=""objects all stay exactly""
@@ -5567,7 +5567,7 @@ do we have ducks facing the lake?,"@r1 w.request.request act=ask mood=ask predic
 @r2 w.request.request act=change mood=do words=""transform the whole page over to nightfall, every corner of it"" predicate=transform
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context family_words=page
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=previous
-@r2.u1 w.request.unread request=$r2 text=nightfall note=page.time value=nightfall
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=dusk words=nightfall operator=eq phase=result
 @r2.u3 w.request.unread request=$r2 text=""corner"" note=drawn.detail"
 hey — make the scene an icy winter palette,"@f1 w.request.filler text=hey
 @r1 w.request.request act=change mood=do words=""make the scene an icy winter palette"" predicate=make
@@ -5639,12 +5639,12 @@ hey — render the house by the fence as a pale watercolour,"@f1 w.request.fille
 @r1 w.request.request act=change mood=do words=""also put a carnival together in the rain"" predicate=put
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous
-@r1.u1 w.request.unread request=$r1 text=""in the rain"" note=page.weather value=rain
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=rain words=""in the rain"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""carnival together"" note=drawn.detail
 @r2 w.request.request act=change mood=do words=""at dusk""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=previous
-@r2.u1 w.request.unread request=$r2 text=""at dusk"" note=page.time value=dusk
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=dusk words=""at dusk"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""a large red ferris wheel over on the left side""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=""ferris wheel""
 @r3.c1 w.request.constraint request=$r3 on=size attribute=drawn.size value=large operator=degree phase=result
@@ -5673,7 +5673,7 @@ hey — render the house by the fence as a pale watercolour,"@f1 w.request.fille
 @r1 w.request.request act=change mood=do words=""draw a carnival at dusk"" predicate=draw
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""at dusk"" note=page.time value=dusk
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=dusk words=""at dusk"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""carnival"" note=drawn.detail
 @r2 w.request.request act=make mood=do words=""four small gold masks on the stall""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=quantified sort=mask sort_words=masks
@@ -5704,7 +5704,7 @@ hey — render the house by the fence as a pale watercolour,"@f1 w.request.fille
 "put an orchard together in the sun: a large brown ladder right next to the tree, a small boy standing facing right right on the ladder, two small brown baskets under the ladder, a medium white goose right next to the ladder, and nine red apples deep in the basket","@r1 w.request.request act=change mood=do words=""put an orchard together in the sun"" predicate=put
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the sun"" note=page.weather value=sun
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=sun words=""in the sun"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""orchard together"" note=drawn.detail
 @r2 w.request.request act=make mood=do words=""a large brown ladder right next to the tree""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=ladder
@@ -5742,18 +5742,18 @@ hey — render the house by the fence as a pale watercolour,"@f1 w.request.fille
 "set up an autumn orchard scene in the autumn wind in the afternoon: nine red apples in a row at the bottom, two medium brown baskets next to the apple, two medium white sheep behind the basket, a small girl standing with a happy face next to the sheep, a small black crow near the apple, and a small red scarf on the girl","@r1 w.request.request act=change mood=do words=""set up an autumn orchard scene in the autumn wind"" predicate=set
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the autumn wind"" note=page.weather value=""autumn wind""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=wind words=""in the autumn wind"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""up an autumn orchard scene"" note=page.composition
 @r2 w.request.request act=change mood=do words=""in the afternoon""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""in the afternoon"" note=page.time value=afternoon
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=afternoon words=""in the afternoon"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""nine red apples in a row at the bottom""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=quantified sort=apple sort_words=apples
 @r3.c1 w.request.constraint request=$r3 on=count attribute=drawn.count words=nine operator=eq phase=result
 @r3.c2 w.request.constraint request=$r3 on=attribute attribute=drawn.colour value=red operator=eq phase=result
 @r3.c3 w.request.constraint request=$r3 on=attribute attribute=drawn.at value=bottom words=""the bottom"" operator=region phase=result
-@r3.u1 w.request.unread request=$r3 text=""in a row"" note=drawn.arrangement value=row
+@r3.c4 w.request.constraint request=$r3 on=attribute attribute=drawn.arrangement value=row words=""in a row"" operator=eq phase=result
 @r4 w.request.request act=make mood=do words=""two medium brown baskets next to the apple""
 @r4.t w.request.target request=$r4 family=drawn mode=new determiner=quantified sort=basket sort_words=baskets
 @r4.c1 w.request.constraint request=$r4 on=count attribute=drawn.count words=two operator=eq phase=result
@@ -5790,7 +5790,7 @@ hey — render the house by the fence as a pale watercolour,"@f1 w.request.fille
 @r1 w.request.request act=change mood=do words=""can you draw a harbour in the sea wind"" predicate=can
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the sea wind"" note=page.weather value=wind
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=wind words=""in the sea wind"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""draw a harbour"" note=page.composition
 @r2 w.request.request act=make mood=do words=""a large blue boat next to the dock""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=boat
@@ -5822,7 +5822,7 @@ hey — render the house by the fence as a pale watercolour,"@f1 w.request.fille
 @r1 w.request.request act=change mood=do words=""put a harbour together in the fog"" predicate=put
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the fog"" note=page.weather value=fog
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=fog words=""in the fog"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""harbour together"" note=page.composition
 @r2 w.request.request act=make mood=do words=""a small boy with a happy face right next to the lighthouse""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=boy
@@ -5852,7 +5852,7 @@ hey — render the house by the fence as a pale watercolour,"@f1 w.request.fille
 "draw a harbour at noon: six small silver fish in a row on the stall, a medium white ice block right on the stall, a medium vendor standing facing right right behind the stall, a small grey cat next to the stall, and a medium brown crate right on the dock","@r1 w.request.request act=change mood=do words=""draw a harbour at noon"" predicate=draw
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""at noon"" note=page.time value=noon
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=noon words=""at noon"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""harbour"" note=page.composition
 @r2 w.request.request act=make mood=do words=""six small silver fish in a row on the stall""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=quantified sort=fish
@@ -5861,7 +5861,7 @@ hey — render the house by the fence as a pale watercolour,"@f1 w.request.fille
 @r2.c3 w.request.constraint request=$r2 on=attribute attribute=drawn.colour value=silver operator=eq phase=result
 @r2.c4 w.request.constraint request=$r2 on=place attribute=drawn.relation value=on words=""on the stall"" operator=relation phase=result
 @r2.c5 w.request.constraint request=$r2 on=place attribute=drawn.anchor value=""the stall"" operator=relation phase=selector
-@r2.u1 w.request.unread request=$r2 text=""in a row"" note=drawn.arrangement value=row
+@r2.c6 w.request.constraint request=$r2 on=attribute attribute=drawn.arrangement value=row words=""in a row"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""a medium white ice block right on the stall""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=""ice block""
 @r3.c1 w.request.constraint request=$r3 on=size attribute=drawn.size value=medium operator=degree phase=result
@@ -5892,7 +5892,7 @@ hey — render the house by the fence as a pale watercolour,"@f1 w.request.fille
 @r1 w.request.request act=change mood=do words=""now make a harbour at sunset in the evening breeze"" predicate=make
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous
-@r1.u1 w.request.unread request=$r1 text=""in the evening breeze"" note=page.weather value=breeze
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=breeze words=""in the evening breeze"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""harbour at sunset"" note=page.composition
 @r2 w.request.request act=make mood=do words=""a large white sailboat right in the middle""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=sailboat
@@ -5924,7 +5924,7 @@ hey — render the house by the fence as a pale watercolour,"@f1 w.request.fille
 "set up a harbour at sunset scene in the low mist: three medium black lamps in a row along the pier, a small woman standing on the pier, a small brown dog next to the woman, a medium brown bench on the pier, a small white gull above the pier, and two small pink balloons next to the woman","@r1 w.request.request act=change mood=do words=""set up a harbour at sunset scene in the low mist"" predicate=set
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the low mist"" note=page.weather value=mist
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=mist words=""in the low mist"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""up a harbour at sunset scene"" note=page.composition
 @r2 w.request.request act=make mood=do words=""three medium black lamps in a row along the pier""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=quantified sort=lamp sort_words=lamps
@@ -5933,7 +5933,7 @@ hey — render the house by the fence as a pale watercolour,"@f1 w.request.fille
 @r2.c3 w.request.constraint request=$r2 on=attribute attribute=drawn.colour value=black operator=eq phase=result
 @r2.c4 w.request.constraint request=$r2 on=place attribute=drawn.relation value=along words=""along the pier"" operator=relation phase=result
 @r2.c5 w.request.constraint request=$r2 on=place attribute=drawn.anchor value=""the pier"" operator=relation phase=selector
-@r2.u1 w.request.unread request=$r2 text=""in a row"" note=drawn.arrangement value=row
+@r2.c6 w.request.constraint request=$r2 on=attribute attribute=drawn.arrangement value=row words=""in a row"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""a small woman standing on the pier""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=woman
 @r3.c1 w.request.constraint request=$r3 on=size attribute=drawn.size value=small operator=degree phase=result
@@ -5968,7 +5968,7 @@ hey — render the house by the fence as a pale watercolour,"@f1 w.request.fille
 "make a harbour at sunset scene in the low mist with three medium black lamps in a row along the pier, a small woman standing on the pier, a small brown dog next to it, a small white gull above the pier, a medium brown bench on the pier, and two small pink balloons next to the woman","@r1 w.request.request act=change mood=do words=""make a harbour at sunset scene in the low mist"" predicate=make
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the low mist"" note=page.weather value=mist
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=mist words=""in the low mist"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""harbour at sunset scene"" note=page.composition
 @r2 w.request.request act=make mood=do words=""three medium black lamps in a row along the pier""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=quantified sort=lamp sort_words=lamps
@@ -5977,7 +5977,7 @@ hey — render the house by the fence as a pale watercolour,"@f1 w.request.fille
 @r2.c3 w.request.constraint request=$r2 on=attribute attribute=drawn.colour value=black operator=eq phase=result
 @r2.c4 w.request.constraint request=$r2 on=place attribute=drawn.relation value=along words=""along the pier"" operator=relation phase=result
 @r2.c5 w.request.constraint request=$r2 on=place attribute=drawn.anchor value=""the pier"" operator=relation phase=selector
-@r2.u1 w.request.unread request=$r2 text=""in a row"" note=drawn.arrangement value=row
+@r2.c6 w.request.constraint request=$r2 on=attribute attribute=drawn.arrangement value=row words=""in a row"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""a small woman standing on the pier""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=woman
 @r3.c1 w.request.constraint request=$r3 on=size attribute=drawn.size value=small operator=degree phase=result
@@ -6012,7 +6012,7 @@ hey — render the house by the fence as a pale watercolour,"@f1 w.request.fille
 "set up a harbour at sunset scene in the fog: two small white tables in a row next to the cafe, a medium waiter standing facing left behind the table, four small white cups on the table, a small white gull near the table, a small grey cat under the table, and a large red umbrella next to the cafe","@r1 w.request.request act=change mood=do words=""set up a harbour at sunset scene in the fog"" predicate=set
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the fog"" note=page.weather value=fog
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=fog words=""in the fog"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""up a harbour at sunset scene"" note=page.composition
 @r2 w.request.request act=make mood=do words=""two small white tables in a row next to the cafe""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=quantified sort=table sort_words=tables
@@ -6021,7 +6021,7 @@ hey — render the house by the fence as a pale watercolour,"@f1 w.request.fille
 @r2.c3 w.request.constraint request=$r2 on=attribute attribute=drawn.colour value=white operator=eq phase=result
 @r2.c4 w.request.constraint request=$r2 on=place attribute=drawn.relation value=""next to"" words=""next to the cafe"" operator=relation phase=result open_value=true
 @r2.c5 w.request.constraint request=$r2 on=place attribute=drawn.anchor value=""the cafe"" operator=relation phase=selector
-@r2.u1 w.request.unread request=$r2 text=""in a row"" note=drawn.arrangement value=row
+@r2.c6 w.request.constraint request=$r2 on=attribute attribute=drawn.arrangement value=row words=""in a row"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""a medium waiter standing facing left behind the table""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=waiter
 @r3.c1 w.request.constraint request=$r3 on=size attribute=drawn.size value=medium operator=degree phase=result
@@ -6057,7 +6057,7 @@ hey — render the house by the fence as a pale watercolour,"@f1 w.request.fille
 "build a greenhouse scene in the afternoon: four medium green cactuses in a row on the shelf, three small orange pots in a row under the shelf, a medium gardener standing facing right next to the shelf, two small green gloves next to the pot, a small brown stool next to the shelf, and a small grey cat on the shelf","@r1 w.request.request act=change mood=do words=""build a greenhouse scene in the afternoon"" predicate=build
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the afternoon"" note=page.time value=afternoon
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=afternoon words=""in the afternoon"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""greenhouse scene"" note=page.composition
 @r2 w.request.request act=make mood=do words=""four medium green cactuses in a row on the shelf""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=quantified sort=cactus sort_words=cactuses
@@ -6066,7 +6066,7 @@ hey — render the house by the fence as a pale watercolour,"@f1 w.request.fille
 @r2.c3 w.request.constraint request=$r2 on=attribute attribute=drawn.colour value=green operator=eq phase=result
 @r2.c4 w.request.constraint request=$r2 on=place attribute=drawn.relation value=on words=""on the shelf"" operator=relation phase=result
 @r2.c5 w.request.constraint request=$r2 on=place attribute=drawn.anchor value=""the shelf"" operator=relation phase=selector
-@r2.u1 w.request.unread request=$r2 text=""in a row"" note=drawn.arrangement value=row
+@r2.c6 w.request.constraint request=$r2 on=attribute attribute=drawn.arrangement value=row words=""in a row"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""three small orange pots in a row under the shelf""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=quantified sort=pot sort_words=pots
 @r3.c1 w.request.constraint request=$r3 on=count attribute=drawn.count words=three operator=eq phase=result
@@ -6074,7 +6074,7 @@ hey — render the house by the fence as a pale watercolour,"@f1 w.request.fille
 @r3.c3 w.request.constraint request=$r3 on=attribute attribute=drawn.colour value=orange operator=eq phase=result
 @r3.c4 w.request.constraint request=$r3 on=place attribute=drawn.relation value=under words=""under the shelf"" operator=relation phase=result
 @r3.c5 w.request.constraint request=$r3 on=place attribute=drawn.anchor value=""the shelf"" operator=relation phase=selector
-@r3.u1 w.request.unread request=$r3 text=""in a row"" note=drawn.arrangement value=row
+@r3.c6 w.request.constraint request=$r3 on=attribute attribute=drawn.arrangement value=row words=""in a row"" operator=eq phase=result
 @r4 w.request.request act=make mood=do words=""a medium gardener standing facing right next to the shelf""
 @r4.t w.request.target request=$r4 family=drawn mode=new determiner=indefinite sort=gardener
 @r4.c1 w.request.constraint request=$r4 on=size attribute=drawn.size value=medium operator=degree phase=result
@@ -6104,7 +6104,7 @@ hey — render the house by the fence as a pale watercolour,"@f1 w.request.fille
 "set up a bakery scene in the afternoon: a medium white stand next to the counter, a large pink cake on the stand, four small pink cupcakes on the stand, a small child with a surprised face facing left next to the stand, three small blue candles on the cake, and a small brown dog next to the child","@r1 w.request.request act=change mood=do words=""set up a bakery scene in the afternoon"" predicate=set
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the afternoon"" note=page.time value=afternoon
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=afternoon words=""in the afternoon"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""up a bakery scene"" note=page.composition
 @r2 w.request.request act=make mood=do words=""a medium white stand next to the counter""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=stand
@@ -6148,7 +6148,7 @@ hey — render the house by the fence as a pale watercolour,"@f1 w.request.fille
 "show me a bakery at dawn: a dough ball, a rolling pin, two sacks, a mouse, and a baker","@r1 w.request.request act=change mood=do words=""show me a bakery at dawn"" predicate=show
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""at dawn"" note=page.time value=dawn
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=dawn words=""at dawn"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""bakery"" note=drawn.detail
 @r2 w.request.request act=make mood=do words=""a dough ball""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=""dough ball""
@@ -6165,7 +6165,7 @@ hey — render the house by the fence as a pale watercolour,"@f1 w.request.fille
 @r1 w.request.request act=change mood=do words=""darw a bakery in the early morning"" predicate=darw
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the early morning"" note=page.time value=morning
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=early_morning words=""in the early morning"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""bakery"" note=drawn.detail
 @r2 w.request.request act=make mood=do words=""a medium silver tray on the counter""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=tray
@@ -6197,7 +6197,7 @@ hey — render the house by the fence as a pale watercolour,"@f1 w.request.fille
 @r1 w.request.request act=change mood=do words=""draw a bakery at noon"" predicate=draw
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""at noon"" note=page.time value=noon
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=noon words=""at noon"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""bakery"" note=drawn.detail
 @r2 w.request.request act=make mood=do words=""a large brown peell next to the oven""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=peel sort_words=peell
@@ -6231,7 +6231,7 @@ hey — render the house by the fence as a pale watercolour,"@f1 w.request.fille
 @r1 w.request.request act=change mood=do words=""also start with a bakery at daybreak in the low mist"" predicate=start
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous
-@r1.u1 w.request.unread request=$r1 text=""in the low mist"" note=page.weather value=mist
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=mist words=""in the low mist"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""bakery at daybreak"" note=drawn.detail
 @r2 w.request.request act=make mood=do words=""a large silver tray right on the counter""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=tray
@@ -6271,7 +6271,7 @@ hey — render the house by the fence as a pale watercolour,"@f1 w.request.fille
 @r1 w.request.request act=change mood=do words=""hey - also put a bakery at daybreak together in the low mist"" predicate=put
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous
-@r1.u1 w.request.unread request=$r1 text=""in the low mist"" note=page.weather value=mist
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=mist words=""in the low mist"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""bakery at daybreak together"" note=drawn.detail
 @r2 w.request.request act=make mood=do words=""a large silver tray right on the counter""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=tray
@@ -6308,7 +6308,7 @@ hey — render the house by the fence as a pale watercolour,"@f1 w.request.fille
 "build a bakery at daybreak in the early morning: a small red sign right near the window, a small girl with a happy face next to the window, right on the window, five small gold pastries in a row, and right on the window, a small brown sparrow","@r1 w.request.request act=change mood=do words=""build a bakery at daybreak in the early morning"" predicate=build
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the early morning"" note=page.time value=morning
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=early_morning words=""in the early morning"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""bakery at daybreak"" note=drawn.detail
 @r2 w.request.request act=make mood=do words=""a small red sign right near the window""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=sign
@@ -6329,7 +6329,7 @@ hey — render the house by the fence as a pale watercolour,"@f1 w.request.fille
 @r4.c3 w.request.constraint request=$r4 on=attribute attribute=drawn.colour value=gold operator=eq phase=result
 @r4.c4 w.request.constraint request=$r4 on=place attribute=drawn.relation value=on words=""right on the window"" operator=relation phase=result
 @r4.c5 w.request.constraint request=$r4 on=place attribute=drawn.anchor value=""the window"" operator=relation phase=selector
-@r4.u1 w.request.unread request=$r4 text=""in a row"" note=drawn.arrangement value=row
+@r4.c6 w.request.constraint request=$r4 on=attribute attribute=drawn.arrangement value=row words=""in a row"" operator=eq phase=result
 @r5 w.request.request act=make mood=do words=""right on the window, a small brown sparrow""
 @r5.t w.request.target request=$r5 family=drawn mode=new determiner=indefinite sort=sparrow
 @r5.c1 w.request.constraint request=$r5 on=size attribute=drawn.size value=small operator=degree phase=result
@@ -6340,7 +6340,7 @@ hey — render the house by the fence as a pale watercolour,"@f1 w.request.fille
 @r1 w.request.request act=change mood=do words=""give me a library in the early morning"" predicate=give
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the early morning"" note=page.time value=morning
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=early_morning words=""in the early morning"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""library"" note=page.composition
 @r2 w.request.request act=make mood=do words=""a large brown ladder just next to the shelf""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=ladder
@@ -6368,12 +6368,12 @@ hey — render the house by the fence as a pale watercolour,"@f1 w.request.fille
 @r5.c3 w.request.constraint request=$r5 on=attribute attribute=drawn.colour value=green operator=eq phase=result
 @r5.c4 w.request.constraint request=$r5 on=place attribute=drawn.relation value=on words=""right on the shelf"" operator=relation phase=result
 @r5.c5 w.request.constraint request=$r5 on=place attribute=drawn.anchor value=""the shelf"" operator=relation phase=selector
-@r5.u1 w.request.unread request=$r5 text=""in a row"" note=drawn.arrangement value=row"
+@r5.c6 w.request.constraint request=$r5 on=attribute attribute=drawn.arrangement value=row words=""in a row"" operator=eq phase=result"
 "i want a library in the afternoon: a medium storyteller sitting right on the rug, on the rug, four small red cushions in a row, three small children sitting all around the storyteller, and just next to the storyteller, a small white rabbit","@f1 w.request.filler text=just
 @r1 w.request.request act=change mood=do words=""i want a library in the afternoon"" predicate=want
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the afternoon"" note=page.time value=afternoon
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=afternoon words=""in the afternoon"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""library"" note=page.composition
 @r2 w.request.request act=make mood=do words=""a medium storyteller sitting right on the rug""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=storyteller
@@ -6388,7 +6388,7 @@ hey — render the house by the fence as a pale watercolour,"@f1 w.request.fille
 @r3.c3 w.request.constraint request=$r3 on=attribute attribute=drawn.colour value=red operator=eq phase=result
 @r3.c4 w.request.constraint request=$r3 on=place attribute=drawn.relation value=on words=""on the rug"" operator=relation phase=result
 @r3.c5 w.request.constraint request=$r3 on=place attribute=drawn.anchor value=""the rug"" operator=relation phase=selector
-@r3.u1 w.request.unread request=$r3 text=""in a row"" note=drawn.arrangement value=row
+@r3.c6 w.request.constraint request=$r3 on=attribute attribute=drawn.arrangement value=row words=""in a row"" operator=eq phase=result
 @r4 w.request.request act=make mood=do words=""three small children sitting all around the storyteller""
 @r4.t w.request.target request=$r4 family=drawn mode=new determiner=quantified sort=child sort_words=children
 @r4.c1 w.request.constraint request=$r4 on=count attribute=drawn.count words=three operator=eq phase=result
@@ -6420,7 +6420,7 @@ hey — render the house by the fence as a pale watercolour,"@f1 w.request.fille
 @r2 w.request.request act=change mood=do words=""recast the whole page in light pencil sketch"" predicate=recast
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context family_words=page
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""light pencil sketch"" note=page.style value=""pencil sketch"""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.style value=""light pencil sketch"" operator=eq phase=result"
 "I want the girl standing still, and style the whole page as pop art, thanks","@f1 w.request.filler text=thanks
 @prev w.request.previous text=""the body language needs work""
 @r1 w.request.request act=change mood=do words=""I want the girl standing still"" predicate=want
@@ -6429,7 +6429,7 @@ hey — render the house by the fence as a pale watercolour,"@f1 w.request.fille
 @r2 w.request.request act=change mood=do words=""style the whole page as pop art"" predicate=style
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context family_words=page
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=previous
-@r2.u1 w.request.unread request=$r2 text=""pop art"" note=page.style value=""pop art"""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.style value=""pop art"" operator=eq phase=result"
 "a little blue bird perched up in the top right, then keep the little house mirrored in the still lake, right across the surface, nothing moves but the light","@f1 w.request.filler text=then
 @f2 w.request.filler text=""moves but the light""
 @r1 w.request.request act=make mood=do words=""a little blue bird perched up in the top right""
@@ -6532,28 +6532,28 @@ just make the armchair brown leather,"@f1 w.request.filler text=just
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=bear description=""the bear in the woods""
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=in words=""in the woods"" operator=relation phase=result
 @r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the woods"" operator=relation phase=selector
-@r1.u1 w.request.unread request=$r1 text=""sniff the fish"" note=drawn.action value=sniff
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.action value=""sniff the fish"" operator=eq phase=result
 @r2 w.request.request act=make mood=do words=""let the bird watch the bear"" predicate=let
 @r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=description sort=bird description=""the bird""
-@r2.u1 w.request.unread request=$r2 text=""watch the bear"" note=drawn.action value=watch"
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.action value=""watch the bear"" operator=eq phase=result"
 "have the dog by the tree play with the ball, as drawn so far","@f1 w.request.filler text=""drawn so far""
 @r1 w.request.request act=make mood=do words=""have the dog by the tree play with the ball"" predicate=have
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=dog description=""the dog by the tree""
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=by words=""by the tree"" operator=relation phase=result open_value=true
 @r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the tree"" operator=relation phase=selector
-@r1.u1 w.request.unread request=$r1 text=""play with the ball"" note=drawn.action value=""play with"""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.action value=""play with the ball"" operator=eq phase=result"
 "i want the rabbit on the lawn to nuzzle the cat, just like that","@f1 w.request.filler text=""just like""
 @r1 w.request.request act=make mood=do words=""i want the rabbit on the lawn to nuzzle the cat"" predicate=want
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=rabbit description=""the rabbit on the lawn""
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=on words=""on the lawn"" operator=relation phase=result
 @r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the lawn"" operator=relation phase=selector
-@r1.u1 w.request.unread request=$r1 text=""nuzzle the cat"" note=drawn.action value=nuzzle"
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.action value=""nuzzle the cat"" operator=eq phase=result"
 make the duck on the pond swim beside the boat — right there in the picture — that is how the picture goes,"@f1 w.request.filler text=""right there in the picture — that is how the picture goes""
 @r1 w.request.request act=make mood=do words=""make the duck on the pond swim beside the boat"" predicate=make
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=duck description=""the duck on the pond""
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=on words=""on the pond"" operator=relation phase=result
 @r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the pond"" operator=relation phase=selector
-@r1.u1 w.request.unread request=$r1 text=""swim beside the boat"" note=drawn.action value=""swim beside"""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.action value=""swim beside the boat"" operator=eq phase=result"
 put a bird above the pond — exactly where the picture needs it — so the scene reads the way it should,"@f1 w.request.filler text=""exactly where the picture needs it — so the scene reads the way""
 @r1 w.request.request act=make mood=do words=""put a bird above the pond"" predicate=put
 @r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bird
@@ -6585,7 +6585,7 @@ place a bear behind the tent — over on our little canvas — and that is the w
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=on words=""on the lawn"" operator=relation phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=preference.scope value=""every picture"" operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the lawn"" operator=relation phase=selector
-@r1.u1 w.request.unread request=$r1 text=""keep the kids on the lawn"" note=drawn.action
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.action value=""keep the kids on the lawn"" operator=eq phase=result
 @r2 w.request.request act=make mood=do words=""each time it should keep the sun at the top right"" predicate=should
 @r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=description sort=sun description=""the sun""
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.at value=top words=""at the top right"" operator=region phase=result
@@ -6610,7 +6610,7 @@ place a bear behind the tent — over on our little canvas — and that is the w
 @r1 w.request.request act=change mood=do words=""next, give me an aquarium in the evening"" predicate=give
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous
-@r1.u1 w.request.unread request=$r1 text=""in the evening"" note=page.time value=evening
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=evening words=""in the evening"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""aquarium"" note=drawn.detail
 @r2 w.request.request act=make mood=do words=""a large grey seal just above the tunnel""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=seal
@@ -6643,7 +6643,7 @@ place a bear behind the tent — over on our little canvas — and that is the w
 @r1 w.request.request act=change mood=do words=""now draw an aquarium in the evening"" predicate=draw
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous
-@r1.u1 w.request.unread request=$r1 text=""in the evening"" note=page.time value=evening
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=evening words=""in the evening"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""aquarium"" note=drawn.detail
 @r2 w.request.request act=make mood=do words=""a large grey seall above the tunnel""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=seal sort_words=seall
@@ -6675,7 +6675,7 @@ place a bear behind the tent — over on our little canvas — and that is the w
 @r1 w.request.request act=change mood=do words=""show me an aquarium in the afternoon"" predicate=show
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the afternoon"" note=page.time value=afternoon
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=afternoon words=""in the afternoon"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""aquarium"" note=drawn.detail
 @r2 w.request.request act=make mood=do words=""a small child with a happy face in front of the coral""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=child
@@ -6705,8 +6705,8 @@ place a bear behind the tent — over on our little canvas — and that is the w
 "could you put an aquarium together in the early morning: a large green turtle in the middle, five yellow fish right behind the turtle, a small girl with a sad face facing right next to the tank, and two orange starfishes right on the sand","@r1 w.request.request act=change mood=do words=""could you put an aquarium together in the early morning"" predicate=could
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the early morning"" note=page.time value=morning
-@r1.u2 w.request.unread request=$r1 text=""put an aquarium together"" note=drawn.action
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=early_morning words=""in the early morning"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.action value=""put an aquarium together"" operator=eq phase=result
 @r2 w.request.request act=make mood=do words=""a large green turtle in the middle""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=turtle
 @r2.c1 w.request.constraint request=$r2 on=size attribute=drawn.size value=large operator=degree phase=result
@@ -6734,7 +6734,7 @@ place a bear behind the tent — over on our little canvas — and that is the w
 "an aquarium in the early morning with a turtle, two starfishes, five fish, and a girl","@r1 w.request.request act=change mood=do words=""an aquarium in the early morning""
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the early morning"" note=page.time value=morning
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=early_morning words=""in the early morning"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""aquarium"" note=drawn.detail
 @r2 w.request.request act=make mood=do words=""a turtle""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=turtle
@@ -6751,7 +6751,7 @@ place a bear behind the tent — over on our little canvas — and that is the w
 @r1 w.request.request act=change mood=do words=""start with an airport lounge in the afternoon"" predicate=start
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the afternoon"" note=page.time value=afternoon
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=afternoon words=""in the afternoon"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""airport lounge"" note=page.composition
 @r2 w.request.request act=make mood=do words=""a medium white plane just behind the window""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=plane
@@ -6784,7 +6784,7 @@ place a bear behind the tent — over on our little canvas — and that is the w
 @r1 w.request.request act=change mood=do words=""start with an airport lounge at noon"" predicate=start
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""at noon"" note=page.time value=noon
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=noon words=""at noon"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""airport lounge"" note=page.composition
 @r2 w.request.request act=make mood=do words=""a large grey cart right next to the carousel""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=cart
@@ -6818,12 +6818,12 @@ place a bear behind the tent — over on our little canvas — and that is the w
 @r1 w.request.request act=change mood=do words=""now i want a rooftop terrace in the evening breeze"" predicate=want
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous
-@r1.u1 w.request.unread request=$r1 text=""in the evening breeze"" note=page.weather value=breeze
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=breeze words=""in the evening breeze"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""rooftop terrace"" note=page.composition
 @r2 w.request.request act=change mood=do words=""at sunset""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=previous
-@r2.u1 w.request.unread request=$r2 text=""at sunset"" note=page.time value=sunset
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=sunset words=""at sunset"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""a woman""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=woman
 @r4 w.request.request act=make mood=do words=""a cat""
@@ -6837,12 +6837,12 @@ place a bear behind the tent — over on our little canvas — and that is the w
 "set up a rooftop terrace scene in the sun in the afternoon: a medium gardener kneeling next to the door, three medium terracotta planters between the door and the parapet, a small orange cat next to the planter, a small green watering can next to the gardener, and four pink flowers in the planter","@r1 w.request.request act=change mood=do words=""set up a rooftop terrace scene in the sun"" predicate=set
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the sun"" note=page.weather value=sun
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=sun words=""in the sun"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""up a rooftop terrace scene"" note=page.composition
 @r2 w.request.request act=change mood=do words=""in the afternoon""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""in the afternoon"" note=page.time value=afternoon
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=afternoon words=""in the afternoon"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""a medium gardener kneeling next to the door""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=gardener
 @r3.c1 w.request.constraint request=$r3 on=size attribute=drawn.size value=medium operator=degree phase=result
@@ -6878,12 +6878,12 @@ place a bear behind the tent — over on our little canvas — and that is the w
 "i want a rooftop terrace in the sun in the early morning: a table, a man, a cat, and three cups","@r1 w.request.request act=change mood=do words=""i want a rooftop terrace in the sun"" predicate=want
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the sun"" note=page.weather value=sun
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=sun words=""in the sun"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""rooftop terrace"" note=page.composition
 @r2 w.request.request act=change mood=do words=""in the early morning""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""in the early morning"" note=page.time value=morning
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=early_morning words=""in the early morning"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""a table""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=table
 @r4 w.request.request act=make mood=do words=""a man""
@@ -6899,12 +6899,12 @@ place a bear behind the tent — over on our little canvas — and that is the w
 @r1 w.request.request act=change mood=do words=""now make a treehouse in the sun"" predicate=make
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous
-@r1.u1 w.request.unread request=$r1 text=""in the sun"" note=page.weather value=sun
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=sun words=""in the sun"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""treehouse"" note=page.composition
 @r2 w.request.request act=change mood=do words=""in the early morning""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=previous
-@r2.u1 w.request.unread request=$r2 text=""in the early morning"" note=page.time value=morning
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=early_morning words=""in the early morning"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""a large brown ladder next to the trunk""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=ladder
 @r3.c1 w.request.constraint request=$r3 on=size attribute=drawn.size value=large operator=degree phase=result
@@ -6937,12 +6937,12 @@ place a bear behind the tent — over on our little canvas — and that is the w
 @r1 w.request.request act=change mood=do words=""also a treehouse in the sun""
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous
-@r1.u1 w.request.unread request=$r1 text=""in the sun"" note=page.weather value=sun
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=sun words=""in the sun"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""treehouse"" note=page.composition
 @r2 w.request.request act=change mood=do words=""in the early morning""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=previous
-@r2.u1 w.request.unread request=$r2 text=""in the early morning"" note=page.time value=morning
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=early_morning words=""in the early morning"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""a large brown ladder right next to the trunk""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=ladder
 @r3.c1 w.request.constraint request=$r3 on=size attribute=drawn.size value=large operator=degree phase=result
@@ -6979,12 +6979,12 @@ place a bear behind the tent — over on our little canvas — and that is the w
 @r1 w.request.request act=change mood=do words=""can you draw a treehouse in the sea wind"" predicate=can
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the sea wind"" note=page.weather value=wind
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=wind words=""in the sea wind"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""draw a treehouse"" note=page.composition
 @r2 w.request.request act=change mood=do words=""in the afternoon""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""in the afternoon"" note=page.time value=afternoon
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=afternoon words=""in the afternoon"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""a small girl with a happy face on the platform""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=girl
 @r3.c1 w.request.constraint request=$r3 on=size attribute=drawn.size value=small operator=degree phase=result
@@ -7015,12 +7015,12 @@ place a bear behind the tent — over on our little canvas — and that is the w
 @r1 w.request.request act=change mood=do words=""also set up a summer fair scene in the sun"" predicate=set
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous
-@r1.u1 w.request.unread request=$r1 text=""in the sun"" note=page.weather value=sun
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=sun words=""in the sun"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""up a summer fair scene"" note=page.composition
 @r2 w.request.request act=change mood=do words=""in the afternoon""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=previous
-@r2.u1 w.request.unread request=$r2 text=""in the afternoon"" note=page.time value=afternoon
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=afternoon words=""in the afternoon"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""a small girl with a happy face next to the booth""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=girl
 @r3.c1 w.request.constraint request=$r3 on=size attribute=drawn.size value=small operator=degree phase=result
@@ -7062,12 +7062,12 @@ place a bear behind the tent — over on our little canvas — and that is the w
 @r1 w.request.request act=change mood=do words=""now darw a summer fair in the sun"" predicate=darw
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous
-@r1.u1 w.request.unread request=$r1 text=""in the sun"" note=page.weather value=sun
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=sun words=""in the sun"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""summer fair"" note=page.composition
 @r2 w.request.request act=change mood=do words=""in the afternoon""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=previous
-@r2.u1 w.request.unread request=$r2 text=""in the afternoon"" note=page.time value=afternoon
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=afternoon words=""in the afternoon"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""a small girl with a happy face next to the booth""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=girl
 @r3.c1 w.request.constraint request=$r3 on=size attribute=drawn.size value=small operator=degree phase=result
@@ -7098,12 +7098,12 @@ place a bear behind the tent — over on our little canvas — and that is the w
 @r1 w.request.request act=change mood=do words=""start with a summer fair in the sun"" predicate=start
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the sun"" note=page.weather value=sun
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=sun words=""in the sun"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""summer fair"" note=page.composition
 @r2 w.request.request act=change mood=do words=""at noon""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""at noon"" note=page.time value=noon
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=noon words=""at noon"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""a small boy with a happy face facing right right next to the fence""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=boy
 @r3.c1 w.request.constraint request=$r3 on=size attribute=drawn.size value=small operator=degree phase=result
@@ -7132,12 +7132,12 @@ place a bear behind the tent — over on our little canvas — and that is the w
 "put a summer fair together in the sun in the early morning: a large brown pony right next to the ring, a small girl sitting with a happy face facing left right on the pony, a small blue bucket next to the gate, and two medium red flags right along the ring","@r1 w.request.request act=change mood=do words=""put a summer fair together in the sun"" predicate=put
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the sun"" note=page.weather value=sun
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=sun words=""in the sun"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""summer fair together"" note=page.composition
 @r2 w.request.request act=change mood=do words=""in the early morning""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""in the early morning"" note=page.time value=morning
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=early_morning words=""in the early morning"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""a large brown pony right next to the ring""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=pony
 @r3.c1 w.request.constraint request=$r3 on=size attribute=drawn.size value=large operator=degree phase=result
@@ -7169,12 +7169,12 @@ place a bear behind the tent — over on our little canvas — and that is the w
 @r1 w.request.request act=change mood=do words=""hey - put a summer fair together in the sun"" predicate=put
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the sun"" note=page.weather value=sun
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=sun words=""in the sun"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""summer fair together"" note=page.composition
 @r2 w.request.request act=change mood=do words=""in the early morning""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""in the early morning"" note=page.time value=morning
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=early_morning words=""in the early morning"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""a large brown pony right next to the ring""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=pony
 @r3.c1 w.request.constraint request=$r3 on=size attribute=drawn.size value=large operator=degree phase=result
@@ -7206,12 +7206,12 @@ place a bear behind the tent — over on our little canvas — and that is the w
 @r1 w.request.request act=change mood=do words=""show me a boathouse in the low mist"" predicate=show
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the low mist"" note=page.weather value=mist
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=mist words=""in the low mist"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""boathouse"" note=drawn.detail
 @r2 w.request.request act=change mood=do words=""in the early morning""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""in the early morning"" note=page.time value=morning
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=early_morning words=""in the early morning"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""a medium dockworker standing facing left on the dock""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=dockworker
 @r3.c1 w.request.constraint request=$r3 on=size attribute=drawn.size value=medium operator=degree phase=result
@@ -7243,12 +7243,12 @@ place a bear behind the tent — over on our little canvas — and that is the w
 @r1 w.request.request act=change mood=do words=""can you draw a boathouse in the sea wind"" predicate=can
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the sea wind"" note=page.weather value=wind
-@r1.u2 w.request.unread request=$r1 text=""draw a boathouse"" note=drawn.action
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=wind words=""in the sea wind"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.action value=""draw a boathouse"" operator=eq phase=result
 @r2 w.request.request act=change mood=do words=""at dusk""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""at dusk"" note=page.time value=dusk
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=dusk words=""at dusk"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""a small woman standing with a happy face on the jetty""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=woman
 @r3.c1 w.request.constraint request=$r3 on=size attribute=drawn.size value=small operator=degree phase=result
@@ -7278,12 +7278,12 @@ place a bear behind the tent — over on our little canvas — and that is the w
 "draw a canyon camp in the sun at noon: four medium green cactusess next to the mesa, a medium guide standing right next to the trail, and a small green lizard right on the trail","@r1 w.request.request act=change mood=do words=""draw a canyon camp in the sun"" predicate=draw
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the sun"" note=page.weather value=sun
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=sun words=""in the sun"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""canyon camp"" note=page.composition
 @r2 w.request.request act=change mood=do words=""at noon""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""at noon"" note=page.time value=noon
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=noon words=""at noon"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""four medium green cactusess next to the mesa""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=quantified sort=cactus sort_words=cactusess
 @r3.c1 w.request.constraint request=$r3 on=count attribute=drawn.count words=four operator=eq phase=result
@@ -7306,12 +7306,12 @@ place a bear behind the tent — over on our little canvas — and that is the w
 "a canyon camp in the heat haze in the afternoon with a fox, an explorer, a backpack, and two bottles","@r1 w.request.request act=change mood=do words=""a canyon camp in the heat haze""
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the heat haze"" note=page.weather value=haze
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=haze words=""in the heat haze"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""canyon camp"" note=page.composition
 @r2 w.request.request act=change mood=do words=""in the afternoon""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""in the afternoon"" note=page.time value=afternoon
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=afternoon words=""in the afternoon"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""a fox""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=fox
 @r4 w.request.request act=make mood=do words=""an explorer""
@@ -7327,12 +7327,12 @@ place a bear behind the tent — over on our little canvas — and that is the w
 @r1 w.request.request act=change mood=do words=""also could you put an island shore together in the sun"" predicate=could
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous
-@r1.u1 w.request.unread request=$r1 text=""in the sun"" note=page.weather value=sun
-@r1.u2 w.request.unread request=$r1 text=""put an island shore together"" note=drawn.action
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=sun words=""in the sun"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.action value=""put an island shore together"" operator=eq phase=result
 @r2 w.request.request act=change mood=do words=""in the early morning""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=previous
-@r2.u1 w.request.unread request=$r2 text=""in the early morning"" note=page.time value=morning
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=early_morning words=""in the early morning"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""a medium red parrot right on the palm""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=parrot
 @r3.c1 w.request.constraint request=$r3 on=size attribute=drawn.size value=medium operator=degree phase=result
@@ -7361,12 +7361,12 @@ place a bear behind the tent — over on our little canvas — and that is the w
 "show me an island shore in the sun at noon: two crabs, a boy, two starfishes, and a shell","@r1 w.request.request act=change mood=do words=""show me an island shore in the sun"" predicate=show
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the sun"" note=page.weather value=sun
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=sun words=""in the sun"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""island shore"" note=drawn.detail
 @r2 w.request.request act=change mood=do words=""at noon""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""at noon"" note=page.time value=noon
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=noon words=""at noon"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""two crabs""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=quantified sort=crab sort_words=crabs
 @r3.c1 w.request.constraint request=$r3 on=count attribute=drawn.count words=two operator=eq phase=result
@@ -7380,12 +7380,12 @@ place a bear behind the tent — over on our little canvas — and that is the w
 "set up an island shore scene in the sea wind in the afternoon: a medium boy sitting with a happy face next to the cave, three medium brown driftwoods next to the cave, a medium orange fire next to the driftwood, two small white gulls at the top, a small red cap on the boy, and a small black pot on the fire","@r1 w.request.request act=change mood=do words=""set up an island shore scene in the sea wind"" predicate=set
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the sea wind"" note=page.weather value=wind
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=wind words=""in the sea wind"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""up an island shore scene"" note=page.composition
 @r2 w.request.request act=change mood=do words=""in the afternoon""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""in the afternoon"" note=page.time value=afternoon
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=afternoon words=""in the afternoon"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""a medium boy sitting with a happy face next to the cave""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=boy
 @r3.c1 w.request.constraint request=$r3 on=size attribute=drawn.size value=medium operator=degree phase=result
@@ -7426,12 +7426,12 @@ place a bear behind the tent — over on our little canvas — and that is the w
 "build an island shore scene in the evening breeze at sunset: a medium woman standing with a happy face facing left on the jetty, a medium grey seal next to the jetty, a large white sailboat next to the jetty, a small straw hat on the woman, a medium yellow rope on the jetty, and two small red flags on the sailboat","@r1 w.request.request act=change mood=do words=""build an island shore scene in the evening breeze"" predicate=build
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the evening breeze"" note=page.weather value=breeze
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=breeze words=""in the evening breeze"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""island shore scene"" note=page.composition
 @r2 w.request.request act=change mood=do words=""at sunset""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""at sunset"" note=page.time value=sunset
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=sunset words=""at sunset"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""a medium woman standing with a happy face facing left on the jetty""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=woman
 @r3.c1 w.request.constraint request=$r3 on=size attribute=drawn.size value=medium operator=degree phase=result
@@ -7584,7 +7584,7 @@ hey — leave only the bench and the wooden gate in the picture,"@f1 w.request.f
 "make it a spell of bright sun, and give the woman a pair of sunglasses","@r1 w.request.request act=change mood=do words=""make it a spell of bright sun"" predicate=make
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""a spell of bright sun"" note=page.weather value=""spell of bright sun""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=sun words=""a spell of bright sun"" operator=eq phase=result
 @r2 w.request.request act=make mood=do words=""give the woman a pair of sunglasses"" predicate=give
 @r2.t w.request.target request=$r2 family=part mode=new determiner=indefinite sort=sunglasses
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=part.owner value=woman words=""the woman"" operator=eq phase=selector
@@ -7599,7 +7599,7 @@ hey — leave only the bench and the wooden gate in the picture,"@f1 w.request.f
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=over operator=relation phase=result open_value=true
-@r1.u1 w.request.unread request=$r1 text=""a steady snowfall"" note=page.weather value=""steady snowfall""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=page.weather value=snow words=""a steady snowfall"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""whole scene"" note=page.composition
 @r1.u3 w.request.unread request=$r1 text=""front to back"" note=drawn.detail
 @r2 w.request.request act=make mood=do words=""pass a large umbrella to the person as if it were always there"" predicate=pass
@@ -7829,12 +7829,12 @@ hey — rebuild the city backdrop in a fine ink-line city,"@f1 w.request.filler 
 @r1 w.request.request act=change mood=do words=""rebuild the city backdrop in a fine ink-line city"" predicate=rebuild
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""a fine ink-line city"" note=page.style value=""fine ink-line city""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.style value=""fine ink-line city"" words=""a fine ink-line city"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""city backdrop"" note=page.composition"
 reatyle the city as an art-deco city,"@r1 w.request.request act=change mood=do predicate=reatyle
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""an art-deco city"" note=page.style value=""art-deco city""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.style value=""art-deco city"" words=""an art-deco city"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""city"" note=page.composition"
 trn the busy street into a city of toy blocks,"@r1 w.request.request act=change mood=do predicate=trn
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
@@ -7958,7 +7958,7 @@ shape the whole picture into a poster layout centred on the subject with a wide 
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=over operator=relation phase=result open_value=true
 @r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the road"" operator=relation phase=selector
 @r1.u1 w.request.unread request=$r1 text=""dust"" note=drawn.detail
-@r1.u2 w.request.unread request=$r1 text=""storm"" note=page.weather
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=page.weather value=storm operator=eq phase=result
 @r2 w.request.request act=remove mood=do words=""lose the buildings on the horizon, then leave a tumbleweed in the middle of the road"" predicate=lose
 @r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=context sort=building
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.kind value=building operator=eq phase=selector
@@ -8230,7 +8230,7 @@ please scoot the four-block stack diagonally northeast of the middle block,"@f1 
 @r2 w.request.request act=make mood=do words=""put a purple structure in place, the same structure""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=structure description=""a purple structure""
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.colour value=purple operator=eq phase=result
-@r2.u1 w.request.unread request=$r2 text=""put a purple structure in place"" note=drawn.action"
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=drawn.action value=""put a purple structure in place"" operator=eq phase=result"
 "can you sweep the two most left green blocks, then put a tower of five red blocks on the left side of the green tower","@f1 w.request.filler text=then
 @r1 w.request.request act=remove mood=do words=""can you sweep the two most left green blocks"" predicate=sweep
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context sort=blocks description=""the two most left green blocks""
@@ -8266,7 +8266,7 @@ please scoot the four-block stack diagonally northeast of the middle block,"@f1 
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=structure description=""a red structure""
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.colour value=red operator=eq phase=result
 @r2.c2 w.request.constraint request=$r2 on=attribute attribute=drawn.size value=""the same size"" operator=eq phase=result
-@r2.u1 w.request.unread request=$r2 text=""raise a red structure"" note=drawn.action
+@r2.c4 w.request.constraint request=$r2 on=attribute attribute=drawn.action value=""raise a red structure"" operator=eq phase=result
 @r2.c3 w.request.constraint request=$r2 on=attribute attribute=drawn.kind value=shape operator=eq phase=result
 @r2.u2 w.request.unread request=$r2 text=""in its place"" note=drawn.detail"
 "maybe you could ease blbck 9 two spaces left, then wrong way, so blbck 9 two spaces right","@f1 w.request.filler text=maybe
@@ -9186,7 +9186,7 @@ now have the little girl on the bench stand with arms out.,"@f1 w.request.filler
 @r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
 @r2.c1 w.request.constraint request=$r2 on=size attribute=drawn.size words=smaller operator=delta phase=result step=less
-@r2.u1 w.request.unread request=$r2 text=""make it a little"" note=drawn.action"
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=drawn.action value=""make it a little"" operator=eq phase=result"
 "we could use a little well right inside the low fence, so it can be sen from the kitchen window.","@f1 w.request.filler text=so
 @r1 w.request.request act=make mood=do
 @r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=well
@@ -9211,7 +9211,7 @@ now have the little girl on the bench stand with arms out.,"@f1 w.request.filler
 @r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
 @r2.c1 w.request.constraint request=$r2 on=size attribute=drawn.size words=smaller operator=delta phase=result step=less
-@r2.u1 w.request.unread request=$r2 text=""make it a little"" note=drawn.action"
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=drawn.action value=""make it a little"" operator=eq phase=result"
 "another young dog please outside the same fence, where the grass is long and the fence is low.","@f1 w.request.filler text=please
 @prev w.request.previous text=""would you add a little well just outside the low fence, so it stays out of the garden.""
 @r1 w.request.request act=make mood=do
@@ -9354,7 +9354,7 @@ now have the little girl on the bench stand with arms out.,"@f1 w.request.filler
 have the two people shake hands please,"@f1 w.request.filler text=please
 @r1 w.request.request act=place mood=do words=""have the two people shake hands"" predicate=have
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=person sort_words=people count_words=""the two people"" quantifier=two
-@r1.u1 w.request.unread request=$r1 text=""shake hands"" note=drawn.action value=""shake hands"""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.action value=""shake hands"" operator=eq phase=result"
 one more thing: let's have three little houses in a row along the shore,"@f1 w.request.filler text=""more thing""
 @r1 w.request.request act=make mood=do words=""let's have three little houses in a row along the shore""
 @r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=house sort_words=houses
@@ -9490,7 +9490,7 @@ swap them abck when you get a chance,"@f1 w.request.filler text=""get a chance""
 @r4.c3 w.request.constraint request=$r4 on=attribute attribute=drawn.colour value=red operator=eq phase=result
 @r4.c4 w.request.constraint request=$r4 on=place attribute=drawn.relation value=along words=""along the street"" operator=relation phase=result
 @r4.c5 w.request.constraint request=$r4 on=place attribute=drawn.anchor value=""the street"" operator=relation phase=selector
-@r4.u1 w.request.unread request=$r4 text=""in a row"" note=drawn.arrangement value=row"
+@r4.c6 w.request.constraint request=$r4 on=attribute attribute=drawn.arrangement value=row words=""in a row"" operator=eq phase=result"
 "a tiny bird up near the top, then let the short boy by the tent face left — so the scene reads the way it should","@f1 w.request.filler text=then
 @f2 w.request.filler text=""so the scene reads the way""
 @r1 w.request.request act=make mood=do words=""a tiny bird up near the top""
@@ -9563,7 +9563,7 @@ give me a short green bench by the path — just like that in the scene — keep
 @r1 w.request.request act=change mood=do words=""now build a harbour at sunset scene in the evening breeze"" predicate=build
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous
-@r1.u1 w.request.unread request=$r1 text=""in the evening breeze"" note=page.weather value=breeze
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=breeze words=""in the evening breeze"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""harbour at sunset scene"" note=page.composition
 @r2 w.request.request act=make mood=do words=""a large white sailboat in the middle""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=sailboat
@@ -9730,7 +9730,7 @@ put another cloud at the top — with everything else left where it is — over 
 "draw a farm in the early morning: four haystacks, two roosters, three sacks, and a farmer","@r1 w.request.request act=change mood=do words=""draw a farm in the early morning"" predicate=draw
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the early morning"" note=page.time value=morning
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=early_morning words=""in the early morning"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""farm"" note=page.composition
 @r2 w.request.request act=make mood=do words=""four haystacks""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=quantified sort=haystack sort_words=haystacks
@@ -9747,11 +9747,11 @@ put another cloud at the top — with everything else left where it is — over 
 @r1 w.request.request act=change mood=do words=""by the river, in the low mist""
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the low mist"" note=page.weather value=mist
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=mist words=""in the low mist"" operator=eq phase=result
 @r2 w.request.request act=change mood=do words=""at dawn""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""at dawn"" note=page.time value=dawn
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=dawn words=""at dawn"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""two medium white swans right on the river""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=quantified sort=swan sort_words=swans
 @r3.c1 w.request.constraint request=$r3 on=count attribute=drawn.count words=two operator=eq phase=result
@@ -9852,7 +9852,7 @@ put another cloud at the top — with everything else left where it is — over 
 @r1 w.request.request act=change mood=do words=""can you make the cat frown?"" predicate=can
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=cat
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.expression value=frown operator=eq phase=result open_value=true
-@r1.u1 w.request.unread request=$r1 text=""make the cat frown?"" note=drawn.action"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.action value=""make the cat frown?"" operator=eq phase=result"
 the second house should end up the exact twin of the first — colour included,"@r1 w.request.request act=change mood=do
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=house sort_words=""second house""
 @r1.u1 w.request.unread request=$r1 text=""the exact twin of the first"" note=drawn.match
@@ -9980,7 +9980,7 @@ rule: the kids facing the middle,"@r1 w.request.request act=change mood=do
 @r1 w.request.request act=change mood=do words=""hey - put a jungle clearing together at noon"" predicate=put
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""at noon"" note=page.time value=noon
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=noon words=""at noon"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""jungle clearing together"" note=page.composition
 @r2 w.request.request act=make mood=do words=""a medium brown owl right on the tree""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=owl
@@ -10011,7 +10011,7 @@ rule: the kids facing the middle,"@r1 w.request.request act=change mood=do
 "draw a market street in the early morning: a large brown stalll next to the awning, four small red apples right on the stall, a medium vendor standing right behind the stall, and a small boy with a sad face next to the stall","@r1 w.request.request act=change mood=do words=""draw a market street in the early morning"" predicate=draw
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the early morning"" note=page.time value=morning
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=early_morning words=""in the early morning"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""market street"" note=page.composition
 @r2 w.request.request act=make mood=do words=""a large brown stalll next to the awning""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=stall sort_words=stalll
@@ -10042,7 +10042,7 @@ rule: the kids facing the middle,"@r1 w.request.request act=change mood=do
 @r1 w.request.request act=change mood=do words=""could you put a market street together at noon"" predicate=could
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""at noon"" note=page.time value=noon
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=noon words=""at noon"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""put a market street together"" note=page.composition
 @r2 w.request.request act=make mood=do words=""three small brown breads right on the stall""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=quantified sort=bread sort_words=breads
@@ -10074,7 +10074,7 @@ rule: the kids facing the middle,"@r1 w.request.request act=change mood=do
 @r1 w.request.request act=change mood=do words=""also show me a train station at night"" predicate=show
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous
-@r1.u1 w.request.unread request=$r1 text=""at night"" note=page.time value=night
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=night words=""at night"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""train station"" note=page.composition
 @r2 w.request.request act=make mood=do words=""a locomotive""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=locomotive
@@ -10096,7 +10096,7 @@ shift the palette over to a spring palette,"@r1 w.request.request act=change moo
 @r2 w.request.request act=change mood=do words=""paint the whole page in light pencil sketch"" predicate=paint
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context family_words=page
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""light pencil sketch"" note=page.style value=""pencil sketch"""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.style value=""light pencil sketch"" operator=eq phase=result"
 "a car behind the house, right there, keeping everything else where it is","@f1 w.request.filler text=""keeping everything else""
 @r1 w.request.request act=make mood=do words=""a car behind the house, right there""
 @r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=car
@@ -10106,12 +10106,12 @@ shift the palette over to a spring palette,"@r1 w.request.request act=change moo
 @r1 w.request.request act=change mood=do words=""a summer fair in the heat haze""
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the heat haze"" note=page.weather value=haze
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=haze words=""in the heat haze"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""summer fair"" note=page.composition
 @r2 w.request.request act=change mood=do words=""at noon""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""at noon"" note=page.time value=noon
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=noon words=""at noon"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""a large red wheel right on the booth""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=wheel
 @r3.c1 w.request.constraint request=$r3 on=size attribute=drawn.size value=large operator=degree phase=result
@@ -10253,7 +10253,7 @@ how about removing the man's glasses?,"@r1 w.request.request act=remove mood=do 
 @r1.u1 w.request.unread request=$r1 text=""man's"" note=drawn.detail"
 can you take the woman's hat off?,"@r1 w.request.request act=remove mood=do predicate=can
 @r1.t w.request.target request=$r1 family=part mode=existing determiner=possessive fill=description sort=hat
-@r1.u1 w.request.unread request=$r1 text=""take the woman's"" note=drawn.action"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.action value=""take the woman's"" operator=eq phase=result"
 take off the woman's hta,"@r1 w.request.request act=remove mood=do predicate=take
 @r1.t w.request.target request=$r1 family=part mode=existing determiner=possessive fill=description sort=hat sort_words=hta
 @r1.u1 w.request.unread request=$r1 text=""woman's"" note=drawn.detail"
@@ -10457,7 +10457,7 @@ undo that and trade them back,"@prev w.request.previous text=""the two men have 
 @r1.u1 w.request.unread request=$r1 text=""trade them back"" note=drawn.swap"
 arrange all the trees in a neat row,"@r1 w.request.request act=place mode=arrange mood=do predicate=arrange
 @r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=all sort=tree sort_words=trees count_words=""all the trees""
-@r1.u1 w.request.unread request=$r1 text=""a neat row"" note=drawn.lineup value=""a neat row"""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.arrangement value=row words=""a neat row"" operator=eq phase=result"
 give me a cloud above each tree,"@r1 w.request.request act=make mood=do predicate=give
 @r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cloud
 @r1.c1 w.request.constraint request=$r1 on=count attribute=drawn.count words=each operator=eq phase=result
@@ -10644,7 +10644,7 @@ put a cloud bigger than the boat,"@r1 w.request.request act=make mood=do predica
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=boat description=""the boat""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=right words=""the right side"" operator=region phase=result
 @r1.u1 w.request.unread request=$r1 text=""put the boat to the right side"" note=drawn.action
-@r1.u2 w.request.unread request=$r1 text=""covers the sun"" note=page.weather"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=page.weather value=sun words=""covers the sun"" operator=eq phase=result"
 "my mistake, the sun goes to the top right, since the sky stays empty on the left","@prev w.request.previous text=""the sun is in the middle of the sky""
 @r1 w.request.request act=change mood=do predicate=mistake
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=sun description=""the sun""
@@ -11226,7 +11226,7 @@ the bird on the fence — red,"@prev w.request.previous text=""we put a blue bir
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=white operator=eq phase=result
 @r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.relation value=""in front of"" words=""in front of the window"" operator=relation phase=result open_value=true
 @r1.c5 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the window"" operator=relation phase=selector
-@r1.u1 w.request.unread request=$r1 text=""in a row"" note=drawn.arrangement value=row
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=drawn.arrangement value=row words=""in a row"" operator=eq phase=result
 @r2 w.request.request act=make mood=do words=""a medium astronaut standing right next to the chair""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=astronaut
 @r2.c1 w.request.constraint request=$r2 on=size attribute=drawn.size value=medium operator=degree phase=result
@@ -11418,8 +11418,8 @@ let 2 of all six birds stand,"@r1 w.request.request act=remove mood=do predicate
 "could you put a greenhouse together in the early morning: four small brown trays in a row right on the table, a small brown snail right on the tray, eight small green seedlings in the tray, and a small boy standing with a sad face facing left right next to the table","@r1 w.request.request act=change mood=do words=""could you put a greenhouse together in the early morning"" predicate=could
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the early morning"" note=page.time value=morning
-@r1.u2 w.request.unread request=$r1 text=""put a greenhouse together"" note=drawn.action
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=early_morning words=""in the early morning"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.action value=""put a greenhouse together"" operator=eq phase=result
 @r2 w.request.request act=make mood=do words=""four small brown trays in a row right on the table""
 @r2.t w.request.target request=$r2 family=drawn mode=new determiner=quantified sort=tray sort_words=trays
 @r2.c1 w.request.constraint request=$r2 on=count attribute=drawn.count words=four operator=eq phase=result
@@ -11427,7 +11427,7 @@ let 2 of all six birds stand,"@r1 w.request.request act=remove mood=do predicate
 @r2.c3 w.request.constraint request=$r2 on=attribute attribute=drawn.colour value=brown operator=eq phase=result
 @r2.c4 w.request.constraint request=$r2 on=place attribute=drawn.relation value=on words=""right on the table"" operator=relation phase=result
 @r2.c5 w.request.constraint request=$r2 on=place attribute=drawn.anchor value=""the table"" operator=relation phase=selector
-@r2.u1 w.request.unread request=$r2 text=""in a row"" note=drawn.arrangement value=row
+@r2.c6 w.request.constraint request=$r2 on=attribute attribute=drawn.arrangement value=row words=""in a row"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""a small brown snail right on the tray""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=snail
 @r3.c1 w.request.constraint request=$r3 on=size attribute=drawn.size value=small operator=degree phase=result
@@ -11592,12 +11592,12 @@ can you find the rabbit in the woods?,"@r1 w.request.request act=ask mood=ask pr
 "i want a rooftop terrace in the sun in the afternoon: three medium terracotta planters smack between the door and the parapet, next to the planter, a small orange cat, and a medium gardener kneeling right next to the door","@r1 w.request.request act=change mood=do words=""i want a rooftop terrace in the sun"" predicate=want
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""in the sun"" note=page.weather value=sun
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.weather value=sun words=""in the sun"" operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""rooftop terrace"" note=page.composition
 @r2 w.request.request act=change mood=do words=""in the afternoon""
 @r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""in the afternoon"" note=page.time value=afternoon
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=afternoon words=""in the afternoon"" operator=eq phase=result
 @r3 w.request.request act=make mood=do words=""three medium terracotta planters smack between the door and the parapet""
 @r3.t w.request.target request=$r3 family=drawn mode=new determiner=quantified sort=planter sort_words=planters
 @r3.c1 w.request.constraint request=$r3 on=count attribute=drawn.count words=three operator=eq phase=result
@@ -12230,7 +12230,7 @@ bring the woman in the red dress and red hat one place to the right,"@r1 w.reque
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.direction value=right operator=eq phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.distanceGrade value=one operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=red operator=eq phase=selector
-@r1.u1 w.request.unread request=$r1 text=""place to the right"" note=drawn.action"
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.action value=""place to the right"" operator=eq phase=result"
 move the person in blue and an orange hat from the edge next to the person in the same clothes,"@r1 w.request.request act=change mood=do predicate=move
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context sort=person description=""the person in blue and an orange hat""
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=""next to"" words=""next to the person in the same clothes"" operator=relation phase=result open_value=true
@@ -12287,4 +12287,4 @@ strip the scene back to the two wooden chairs,"@r1 w.request.request act=remove 
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.distanceGrade value=""just a touch"" operator=degree phase=result
 @r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the path"" operator=relation phase=selector
 @r1.c5 w.request.constraint request=$r1 on=size attribute=drawn.size value=long operator=degree phase=result
-@r1.u1 w.request.unread request=$r1 text=""leave the path clear"" note=drawn.action"
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=drawn.action value=""leave the path clear"" operator=eq phase=result"
