@@ -150,6 +150,9 @@ function grounding(text, wires, tab) {
     for (const w of wires.filter((x) => x === r || String(x.attrs.request?.[0]) === '$' + r.id))
       for (const k of ['predicate', 'asked_words', 'sort_words', 'name', 'name_words', 'description', 'count_words', 'code_words', 'family_words', 'key_words', 'measure_words'])
         for (const v of w.attrs[k] ?? []) if (text.includes(tok(v)) && !words.includes(tok(v))) out.push([w.type, k, "outside its request's words (evidence of another request?)"]);
+    // a constraint written without words takes its value as its words: that value must be in the request's words too
+    for (const c of wires.filter((x) => x.type === 'w.request.constraint' && String(x.attrs.request?.[0]) === '$' + r.id && !x.attrs.words))
+      for (const v of c.attrs.value ?? []) if (text.includes(tok(v)) && !words.includes(tok(v))) out.push([c.type, 'value', "a value outside its request's words (widen the request's words, or write the words it was read from)"]);
   }
   // filler inside a request's words may hold only filler and grammar words
   const spans = wires.filter((w) => w.type === 'w.request.request').map((r) => { const sp = one(r, 'words') ?? text, i = text.indexOf(sp); return i < 0 ? [0, text.length] : [i, i + sp.length]; });
