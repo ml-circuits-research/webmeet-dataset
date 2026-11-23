@@ -1,14 +1,14 @@
 # webmeet-dataset
 
 Training data for the PSys2 reader. The reader takes a message someone types in one tab of the app (Drawing, Diagram,
-Document, Calendar, Avatar). From that message it produces SOP Lang wires that say what was asked.
+Document, Calendar). From that message it produces SOP Lang wires that say what was asked.
 
 Each row is one message with the wires the reader should produce for it.
 
 ## Layout
 
 ```text
-<tab>/<source>.csv          tab: drawing, diagram, document, calendar, avatar
+<tab>/<source>.csv          tab: drawing, diagram, document, calendar
 <tab>/<source>.N.csv        a large source split into parts of at most ~10 MB (one source)
 keys.csv                    the reader's keys per tab: tab, family, key, head, values (a closed list, "; "-separated)
 tools/check.mjs             the checker: run it on every new file before adding it
@@ -196,27 +196,43 @@ each row an id, assigns it at random to train/dev/test (94/4/2), and adds the co
 188,786 messages, moved here from `psys2/official-dataset` (built from the corpora under `psys2/training/sop-bert/data/`
 and `psys2/main-synthetic-dataset/`; their history stays in the psys2 repository).
 
-| source | drawing | diagram | document | calendar | avatar | total |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| data-drop | 49,207 | 54,302 |  |  | 991 | 104,500 |
-| demo-tool-profile | 9,692 | 8,978 | 7,881 | 6,104 | 642 | 33,297 |
-| main-synthetic | 11,240 | 2,350 | 1,819 | 647 | 5,198 | 21,254 |
-| ui-diagram |  | 6,668 |  |  |  | 6,668 |
-| ui-relations | 5,374 |  |  |  |  | 5,374 |
-| ui-human | 968 | 1,091 | 1,094 | 319 | 812 | 4,284 |
-| ui-systematic | 1,055 | 1,688 | 318 | 149 | 326 | 3,536 |
-| ui-coverage | 651 | 824 | 648 | 642 | 415 | 3,180 |
-| ui-drawing-style | 1,931 |  |  |  |  | 1,931 |
-| ui-natural | 472 | 401 | 200 | 59 | 342 | 1,474 |
-| ui-composition | 446 | 422 |  |  |  | 868 |
-| ui-comparatives | 422 | 215 |  | 40 | 109 | 786 |
-| human-adapted-drawing | 558 |  |  |  |  | 558 |
-| human-adapted-diagram |  | 538 |  |  |  | 538 |
-| ui-features |  |  |  |  | 249 | 249 |
-| ui-quantities | 149 | 25 |  |  |  | 174 |
-| ui-diagram-v2-voice |  | 92 |  |  |  | 92 |
-| ui-tiers | 4 | 7 | 6 | 6 |  | 23 |
-| **total** | **82,169** | **77,601** | **11,966** | **7,966** | **9,084** | **188,786** |
+| source | drawing | diagram | document | calendar | total |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| data-drop | 49,207 | 54,302 |  |  | 103,509 |
+| demo-tool-profile | 9,692 | 8,978 | 7,881 | 6,104 | 32,655 |
+| main-synthetic | 11,240 | 2,350 | 1,819 | 647 | 16,056 |
+| ui-diagram |  | 6,668 |  |  | 6,668 |
+| ui-relations | 5,374 |  |  |  | 5,374 |
+| avatar-main-synthetic | 5,198 |  |  |  | 5,198 |
+| ui-human | 968 | 1,091 | 1,094 | 319 | 3,472 |
+| ui-systematic | 1,055 | 1,688 | 318 | 149 | 3,210 |
+| ui-coverage | 651 | 824 | 648 | 642 | 2,765 |
+| ui-drawing-style | 1,931 |  |  |  | 1,931 |
+| ui-natural | 472 | 401 | 200 | 59 | 1,132 |
+| avatar-data-drop | 991 |  |  |  | 991 |
+| ui-composition | 446 | 422 |  |  | 868 |
+| avatar-ui-human | 812 |  |  |  | 812 |
+| ui-comparatives | 422 | 215 |  | 40 | 677 |
+| avatar-demo-tool-profile | 642 |  |  |  | 642 |
+| human-adapted-drawing | 558 |  |  |  | 558 |
+| human-adapted-diagram |  | 538 |  |  | 538 |
+| avatar-ui-coverage | 415 |  |  |  | 415 |
+| avatar-ui-natural | 342 |  |  |  | 342 |
+| avatar-ui-systematic | 326 |  |  |  | 326 |
+| avatar-ui-features | 249 |  |  |  | 249 |
+| ui-quantities | 149 | 25 |  |  | 174 |
+| avatar-ui-comparatives | 109 |  |  |  | 109 |
+| ui-diagram-v2-voice |  | 92 |  |  | 92 |
+| multiwoz-v1 |  |  |  | 48 | 48 |
+| avatar-magicbrush-v1 | 45 |  |  |  | 45 |
+| smcalflow-v1 |  |  |  | 32 | 32 |
+| avatar-emuedit-v1 | 30 |  |  |  | 30 |
+| wildchat-v1 |  |  | 27 |  | 27 |
+| ui-tiers | 4 | 7 | 6 | 6 | 23 |
+| avatar-codraw-v1 | 18 |  |  |  | 18 |
+| pptc-v1 |  |  | 18 |  | 18 |
+| texse-v1 |  |  | 17 |  | 17 |
+| **total** | **91,346** | **77,601** | **12,028** | **8,046** | **189,021** |
 
 What each source is:
 
@@ -230,7 +246,10 @@ What each source is:
 - **human-adapted-***: real human utterances adapted to the Drawing and Diagram tabs.
 
 Priorities (owner, 2026-11-23): Drawing and Diagram. Drawing people (hair, faces, clothes, poses) is part of drawing and
-uses the drawing tab's wires; there is no special Avatar data to grow. Document and Calendar are not a priority.
+uses the drawing tab's wires; there is no special Avatar data. The former avatar rows (9,177) are in `drawing/avatar-*.csv`,
+written with the drawing keys: parts as `part.*` (the drawing part gained variant, size, length, value, place, property,
+scale, ids), the face and figure as the drawn person `drawn.*` (expression, preset, base, characterKind, sex, age …), the
+avatar's display as `page.mode` and `page.duration`. Document and Calendar are not a priority.
 
 Known data issues (2026-11-23): all rows pass the checker. When the data moved here:
 - page contexts that the text does not give were dropped, as were page ids, kinds and value phrases the text does not
