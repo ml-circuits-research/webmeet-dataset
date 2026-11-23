@@ -229,7 +229,8 @@ What each source is:
   quantities, avatar features, coverage of every operation).
 - **human-adapted-***: real human utterances adapted to the Drawing and Diagram tabs.
 
-Document, Calendar and Avatar are thin (under 12,000 messages each). They are the next areas to fill.
+Priorities (owner, 2026-11-23): Drawing and Diagram. Drawing people (hair, faces, clothes, poses) is part of drawing and
+uses the drawing tab's wires; there is no special Avatar data to grow. Document and Calendar are not a priority.
 
 Known data issues (2026-11-23): all rows pass the checker. When the data moved here:
 - page contexts that the text does not give were dropped, as were page ids, kinds and value phrases the text does not
