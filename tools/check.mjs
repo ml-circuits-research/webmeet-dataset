@@ -29,7 +29,8 @@ import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-const args = Object.fromEntries(process.argv.slice(2).reduce((a, x, i, all) => (x.startsWith('--') ? [...a, [x.slice(2), all[i + 1]]] : a), []));
+// --name value, or --name alone (true) when the next argument is another --flag or missing
+const args = Object.fromEntries(process.argv.slice(2).reduce((a, x, i, all) => (x.startsWith('--') ? [...a, [x.slice(2), all[i + 1] === undefined || all[i + 1].startsWith('--') ? true : all[i + 1]]] : a), []));
 const KNOWLEDGE = resolve(args.knowledge ?? process.env.SOP_KNOWLEDGE ?? join(HERE, '..', '..', 'sop-knowledge-worlds'));
 if (!existsSync(join(KNOWLEDGE, 'tools', 'sopworld', 'sopworld.mjs'))) throw new Error(`sop-knowledge-worlds not found at ${KNOWLEDGE} (clone it next to this repository or pass --knowledge DIR)`);
 const DATASET = resolve(args.dataset ?? join(HERE, '..'));
@@ -334,7 +335,8 @@ if (wc.size) {
   console.log(`\nwarnings (rows to rewrite; valid but not grounded): ${new Set(warnRows.map((x) => x[0] + '\0' + x[1])).size} rows`);
   for (const [why, n] of [...wc].sort((a, b) => b[1] - a[1])) console.log(`${n}\t${why}`);
 }
-if (args.warnings) {
+if (args.warnings === true) console.error('--warnings needs a file name: --warnings rewrite.csv');
+if (typeof args.warnings === 'string') {
   const q = (x) => '"' + String(x).replaceAll('"', '""') + '"';
   writeFileSync(args.warnings, 'text,sop,warning,words\n' + warnRows.map((r) => r.map(q).join(',')).join('\n') + '\n');
 }
