@@ -1,0 +1,51 @@
+text,sop
+book the Board room for my meeting with Mihai on Tuesday at 1pm - he's bringing the prototype and needs a big table,"@o1 w.request.context sort=person name=Mihai
+@o2 w.request.context sort=room name=""Cedar room""
+@o3 w.request.context sort=room name=""Board room""
+@o4 w.request.context sort=room name=""Focus pod""
+@r1 w.request.request act=make mood=do predicate=book
+@r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.room value=""the Board room"" operator=eq phase=result thing=$o2 thing=$o3 thing=$o4
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Mihai operator=eq phase=result thing=$o1
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Tuesday operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""1pm"" operator=eq phase=result"
+"If the Cedar room is free on Friday afternoon, put the budget review with Ana and Lee there at 3","@o1 w.request.context sort=person name=Ana
+@o2 w.request.context sort=person name=Lee
+@o3 w.request.context sort=room name=""Cedar room""
+@o4 w.request.context sort=room name=""Board room""
+@o5 w.request.context sort=room name=""Focus pod""
+@r1 w.request.request act=make mood=do predicate=put
+@r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=""budget review""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.room value=""the Cedar room"" operator=eq phase=result thing=$o3 thing=$o4 thing=$o5
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Friday operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Ana operator=eq phase=result thing=$o1
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Lee operator=eq phase=result thing=$o2
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""3"" operator=eq phase=result"
+"not sure which room is best, maybe the Focus pod? It's just the two of us, so set up a call with Priya there tomorrow at 10","@o1 w.request.context sort=person name=Priya
+@o2 w.request.context sort=room name=""Focus pod""
+@r1 w.request.request act=make mood=do predicate=""set up""
+@r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=call
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.room value=""the Focus pod"" operator=eq phase=result thing=$o2
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Priya operator=eq phase=result thing=$o1
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=tomorrow operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""10"" operator=eq phase=result"
+"please add the kids' dentist appointment to the Family calendar on Wednesday at 4:30 - it's personal, not for the office","@o1 w.request.context sort=calendar name=Family
+@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=""dentist appointment""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.calendar value=Family operator=eq phase=result thing=$o1
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Wednesday operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""4:30"" operator=eq phase=result"
+"I keep missing my training sessions, so could you schedule one with coach Dan on the Gym calendar for Thursday at 7am?","@o1 w.request.context sort=calendar name=Gym
+@r1 w.request.request act=make mood=do predicate=schedule
+@r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=""coach Dan"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.calendar value=Gym operator=eq phase=result thing=$o1
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Thursday operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""7am"" operator=eq phase=result"
+"Lee asked to sync on the roadmap - would Monday at 2 suit? If so, put a meeting with him on my Work calendar.","@o1 w.request.context sort=calendar name=Work
+@r1 w.request.request act=make mood=do predicate=put
+@r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Monday operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""2"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Lee words=him operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.calendar value=Work operator=eq phase=result thing=$o1"
