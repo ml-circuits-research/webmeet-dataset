@@ -1,4 +1,4 @@
-# WebMeet formalisation grades · v1.1
+# WebMeet formalisation grades · v1.2
 
 Grade each request once against its message and available context. For a formaliser that returns proposals, consider the whole set in any order. Assign L3 if any reasonable proposal matches the reference exactly, otherwise L4 if any proposal is reasonable. If all fall short, grade the closest usable proposal. L0 means the entire set contains no usable interpretation. Judge each proposal as emitted; never assemble a successful answer from fragments of separate proposals. **L3 + L4** is the percentage of reasonable readings. L3 and L4 distinguish two ways to succeed and carry equal weight.
 
@@ -12,6 +12,16 @@ Grade each request once against its message and available context. For a formali
 | **L2 – Incomplete** | There is useful, correct meaning, but an essential part is missing. | “Create A and connect it to B” creates A and omits the connection. |
 | **L3 – Identical to dataset** | The reading is reasonable and its SOP text matches the reference after line-ending normalization and trimming outer whitespace. | The same wires, identifiers and values are emitted. |
 | **L4 – Reasonable alternative** | The main intent and essential details are preserved using a different representation or a defensible interpretation. | The same request uses different local wire identifiers, with all references preserved. |
+
+## Subgrades for incomplete formaliser proposals
+
+Split L2 by the first applicable omission below. Apply this only after establishing that no proposal merits L3 or L4. Use one subgrade per request. Their sum is the historical L2 total.
+
+| Grade | Essential part missing | Example |
+| --- | --- | --- |
+| L2a | A requested action, question or step | Creates A and omits the next request to move it. |
+| L2b | An object, endpoint or reference needed for the recognized action | Reverses a connection but drops its explicitly given ID. |
+| L2c | A value, property, placement, scope or condition on the recognized action and object | Places the house but drops both coordinates. |
 
 ## Decisions that keep reports comparable
 
