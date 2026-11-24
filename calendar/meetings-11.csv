@@ -11,7 +11,8 @@ book the Board room for my meeting with Mihai on Tuesday at 1pm - he's bringing 
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Friday operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Ana operator=eq phase=result
 @r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Lee operator=eq phase=result
-@r1.c5 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""3"" operator=eq phase=result"
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""3"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=afternoon operator=region phase=result"
 "not sure which room is best, maybe the Focus pod? It's just the two of us, so set up a call with Priya there tomorrow at 10","@f1 w.request.filler text=maybe
 @f2 w.request.filler text=just
 @f3 w.request.filler text=so
@@ -26,10 +27,12 @@ book the Board room for my meeting with Mihai on Tuesday at 1pm - he's bringing 
 @r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=""dentist appointment""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.calendar value=Family operator=eq phase=result key_words=calendar
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Wednesday operator=eq phase=result
-@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""4:30"" operator=eq phase=result"
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""4:30"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=""personal, not for the office"" words=""it's personal, not for the office"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=kids words=""the kids'"" operator=eq phase=result"
 "I keep missing my training sessions, so could you schedule one with coach Dan on the Gym calendar for Thursday at 7am?","@f1 w.request.filler text=so
 @r1 w.request.request act=make mood=do predicate=schedule
-@r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite
+@r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=""training session"" sort_words=""training sessions""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=""coach Dan"" operator=eq phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.calendar value=Gym operator=eq phase=result key_words=calendar
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Thursday operator=eq phase=result
@@ -40,4 +43,9 @@ book the Board room for my meeting with Mihai on Tuesday at 1pm - he's bringing 
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Monday operator=eq phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""2"" operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Lee words=him operator=eq phase=result
-@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.calendar value=Work operator=eq phase=result key_words=calendar"
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.calendar value=Work operator=eq phase=result key_words=calendar
+@r2 w.request.request act=make mood=do words=""Lee asked to sync on the roadmap"" predicate=asked
+@r2.t w.request.target request=$r2 family=meeting mode=new determiner=indefinite description=""to sync on the roadmap""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=meeting.people value=Lee operator=eq phase=result
+@r3 w.request.request act=ask mood=ask words=""would Monday at 2 suit"" predicate=suit
+@r3.c1 w.request.constraint request=$r3 on=attribute attribute=meeting.day value=Monday operator=eq phase=selector"

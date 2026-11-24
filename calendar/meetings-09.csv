@@ -10,7 +10,7 @@ pick event review,"@r1 w.request.request act=pick mood=do predicate=pick
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=review operator=eq phase=selector"
 "add Planning on 2026-11-18 at 10:00 UTC for 30 minutes, notes Draft budget, ID planning","@r1 w.request.request act=make mood=do predicate=add
 @r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=planning operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=planning operator=eq phase=result key_words=ID
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=Planning operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=""2026-11-18"" operator=eq phase=result
 @r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result
@@ -19,21 +19,31 @@ pick event review,"@r1 w.request.request act=pick mood=do predicate=pick
 @r1.c7 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=""Draft budget"" operator=eq phase=result key_words=notes"
 "schedule Planning from 10:00 to 10:30 UTC on 2026-11-18; ID planning, notes Draft budget","@r1 w.request.request act=make mood=do predicate=schedule
 @r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=planning operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=planning operator=eq phase=result key_words=ID
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=Planning operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=""2026-11-18"" operator=eq phase=result
 @r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result
 @r1.c5 w.request.constraint request=$r1 on=attribute attribute=meeting.timezone value=UTC operator=eq phase=result
-@r1.c6 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=""Draft budget"" operator=eq phase=result key_words=notes"
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=""Draft budget"" operator=eq phase=result key_words=notes
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=meeting.end value=""10:30"" operator=eq phase=result"
 "rename Review to Team review, move it to 2026-11-18 at 10:00 UTC for one hour, and set notes to Bring draft","@r1 w.request.request act=change mood=do predicate=rename
-@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=review
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Review
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=review operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=""Team review"" operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=""2026-11-18"" operator=eq phase=result
 @r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result
 @r1.c5 w.request.constraint request=$r1 on=attribute attribute=meeting.timezone value=UTC operator=eq phase=result
 @r1.c6 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""1"" words=""one hour"" operator=eq phase=result unit=hour measure=1 measure_words=""one hour""
-@r1.c7 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=""Bring draft"" operator=eq phase=result key_words=notes"
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=""Bring draft"" operator=eq phase=result key_words=notes
+@r2 w.request.request act=place mood=do words=""move it to 2026-11-18 at 10:00 UTC for one hour"" predicate=move
+@r2.t w.request.target request=$r2 family=meeting mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=meeting.day value=""2026-11-18"" operator=eq phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result
+@r2.c3 w.request.constraint request=$r2 on=attribute attribute=meeting.timezone value=UTC operator=eq phase=result
+@r2.c4 w.request.constraint request=$r2 on=attribute attribute=meeting.length value=1 operator=eq phase=result words=""one hour"" unit=hour measure=1 measure_words=""one hour""
+@r3 w.request.request act=change mood=do words=""set notes to Bring draft"" predicate=set
+@r3.c1 w.request.constraint request=$r3 on=attribute attribute=meeting.notes value=""Bring draft"" operator=eq phase=result"
 "edit event review: Team review, 10:00–11:00 UTC on 2026-11-18, notes Bring draft","@r1 w.request.request act=change mood=do predicate=edit
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""event review""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=review words=""event review"" operator=eq phase=selector
@@ -58,7 +68,8 @@ delete the Review event,"@r1 w.request.request act=remove mood=do predicate=dele
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.ids value=Review operator=eq phase=selector"
 remove Review from the calendar,"@r1 w.request.request act=remove mood=do predicate=remove
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Review
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.ids value=Review operator=eq phase=selector"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.ids value=Review operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=meeting.calendar key_words=calendar operator=eq phase=result"
 delete Review,"@r1 w.request.request act=remove mood=do predicate=delete
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Review
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Review operator=eq phase=selector"
@@ -69,10 +80,10 @@ what's on my calendar?,"@r1 w.request.request act=ask mood=ask predicate=""what'
 @r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context family_words=calendar
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 show my events,"@r1 w.request.request act=ask mood=ask predicate=show question=describe
-@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context family_words=events
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 list the current bookings,"@r1 w.request.request act=ask mood=ask predicate=list question=describe
-@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context family_words=""current bookings""
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 "move Review to 2026-11-18 at 10:00 UTC, then change the event title to Weekly review","@f1 w.request.filler text=then
 @r1 w.request.request act=place mood=do words=""move Review to 2026-11-18 at 10:00 UTC"" predicate=move
@@ -97,7 +108,11 @@ move Review a bit later and keep the same duration,"@clock w.request.clock now=2
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=Review operator=eq phase=selector
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=later words=""a bit later"" operator=delta phase=result step=more"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=later words=""a bit later"" operator=delta phase=result step=more
+@r2 w.request.request act=change mood=do words=""keep the same duration"" predicate=keep
+@r2.t w.request.target request=$r2 family=meeting mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=meeting.length words=""the same duration"" operator=eq phase=result"
 make the event twice as long,"@clock w.request.clock now=2026-11-17T12:00:00Z timezone=UTC
 @r1 w.request.request act=change mood=do predicate=make
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context family_words=event
@@ -114,7 +129,7 @@ Review for editing,"@r1 w.request.request act=pick mood=do
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Review operator=eq phase=selector"
 "put Planning on 2026-11-18 at 10:00 UTC for 30 minutes, notes Draft budget, event ID planning","@r1 w.request.request act=make mood=do predicate=put
 @r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite family_words=event
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=planning operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=planning operator=eq phase=result key_words=ID
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=Planning operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=""2026-11-18"" operator=eq phase=result
 @r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result
@@ -123,7 +138,7 @@ Review for editing,"@r1 w.request.request act=pick mood=do
 @r1.c7 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=""Draft budget"" operator=eq phase=result key_words=notes"
 "Planning: 2026-11-18 10:00 UTC, 30 minutes, ID planning, notes Draft budget","@r1 w.request.request act=make mood=do
 @r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=planning operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=planning operator=eq phase=result key_words=ID
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=Planning operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=""2026-11-18"" operator=eq phase=result
 @r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result
@@ -131,16 +146,19 @@ Review for editing,"@r1 w.request.request act=pick mood=do
 @r1.c6 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""30"" words=""30 minutes"" operator=eq phase=result unit=minute measure=30 measure_words=""30""
 @r1.c7 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=""Draft budget"" operator=eq phase=result key_words=notes"
 retitle Review Team review and reschedule it to 2026-11-18 at 10:00 UTC for one hour with notes Bring draft,"@r1 w.request.request act=change mood=do predicate=reschedule
-@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=review
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Review
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=review operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=""Team review"" operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=""2026-11-18"" operator=eq phase=result
 @r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result
 @r1.c5 w.request.constraint request=$r1 on=attribute attribute=meeting.timezone value=UTC operator=eq phase=result
 @r1.c6 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""1"" words=""one hour"" operator=eq phase=result unit=hour measure=1 measure_words=""one hour""
-@r1.c7 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=""Bring draft"" operator=eq phase=result key_words=notes"
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=""Bring draft"" operator=eq phase=result key_words=notes
+@r2 w.request.request act=change mood=do words=""retitle Review Team review"" predicate=retitle
+@r2.t w.request.target request=$r2 family=meeting mode=existing determiner=definite fill=written name=Review
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=meeting.title value=""Team review"" operator=eq phase=result"
 "Review: title Team review, 2026-11-18 10:00 UTC, one hour, notes Bring draft","@r1 w.request.request act=change mood=do
-@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=review
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Review
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=review operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=""Team review"" operator=eq phase=result key_words=title
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=""2026-11-18"" operator=eq phase=result
@@ -168,31 +186,33 @@ Review on 2026-11-18 at 10:00 UTC,"@r1 w.request.request act=place mood=do
 @r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.timezone value=UTC operator=eq phase=result"
 erase the Review event from the calendar,"@r1 w.request.request act=remove mood=do predicate=erase
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Review family_words=event
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.ids value=Review operator=eq phase=selector"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.ids value=Review operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=meeting.calendar key_words=calendar operator=eq phase=result"
 take Review out of this calendar,"@r1 w.request.request act=remove mood=do predicate=take
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Review
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.ids value=Review operator=eq phase=selector"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.ids value=Review operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=meeting.calendar key_words=calendar operator=eq phase=result"
 cancel the event titled Review,"@r1 w.request.request act=remove mood=do predicate=cancel
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Review family_words=event name_words=titled
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Review operator=eq phase=selector"
 erase Review,"@r1 w.request.request act=remove mood=do predicate=erase
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Review
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Review operator=eq phase=selector"
-the Review event cancelled,"@r1 w.request.request act=remove mood=do
+the Review event cancelled,"@r1 w.request.request act=remove mood=do predicate=cancelled
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Review family_words=event
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Review operator=eq phase=selector"
 tell me which events are scheduled,"@r1 w.request.request act=ask mood=ask predicate=tell question=describe
-@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context family_words=events
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 describe my calendar entries,"@r1 w.request.request act=ask mood=ask predicate=describe question=describe
-@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context family_words=calendar
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context family_words=calendar family_words=entries
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 my calendar events?,"@r1 w.request.request act=ask mood=ask question=describe
-@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context family_words=calendar
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context family_words=calendar family_words=events
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 "add Planning on 2026-11-18 at 10:00 UTC for 30 minutes, ID planning","@r1 w.request.request act=make mood=do predicate=add
 @r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=planning operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=planning operator=eq phase=result key_words=ID
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=Planning operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=""2026-11-18"" operator=eq phase=result
 @r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result
@@ -200,7 +220,7 @@ my calendar events?,"@r1 w.request.request act=ask mood=ask question=describe
 @r1.c6 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""30"" words=""30 minutes"" operator=eq phase=result unit=minute measure=30 measure_words=""30"""
 "add Planning on 2026-11-18 at 10:00 UTC for 30 minutes, ID planning, with notes Draft budget","@r1 w.request.request act=make mood=do predicate=add
 @r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=planning operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=planning operator=eq phase=result key_words=ID
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=Planning operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=""2026-11-18"" operator=eq phase=result
 @r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result
@@ -208,7 +228,7 @@ my calendar events?,"@r1 w.request.request act=ask mood=ask question=describe
 @r1.c6 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""30"" words=""30 minutes"" operator=eq phase=result unit=minute measure=30 measure_words=""30""
 @r1.c7 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=""Draft budget"" operator=eq phase=result key_words=notes"
 "update the Review event, with title Team review","@r1 w.request.request act=change mood=do predicate=update
-@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=review family_words=event
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Review family_words=event
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=review operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=""Team review"" operator=eq phase=result key_words=title"
 "update the Review event, on 2026-11-18 at 10:00 UTC","@r1 w.request.request act=change mood=do predicate=update
@@ -218,7 +238,7 @@ my calendar events?,"@r1 w.request.request act=ask mood=ask question=describe
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result
 @r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.timezone value=UTC operator=eq phase=result"
 "update the Review event, with title Team review, on 2026-11-18 at 10:00 UTC","@r1 w.request.request act=change mood=do predicate=update
-@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=review family_words=event
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Review family_words=event
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=review operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=""Team review"" operator=eq phase=result key_words=title
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=""2026-11-18"" operator=eq phase=result
@@ -229,12 +249,12 @@ my calendar events?,"@r1 w.request.request act=ask mood=ask question=describe
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Review operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""1"" words=""one hour"" operator=eq phase=result unit=hour measure=1 measure_words=""one hour"""
 "update the Review event, with title Team review, for one hour","@r1 w.request.request act=change mood=do predicate=update
-@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=review family_words=event
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Review family_words=event
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=review operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=""Team review"" operator=eq phase=result key_words=title
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""1"" words=""one hour"" operator=eq phase=result unit=hour measure=1 measure_words=""one hour"""
 "update the Review event, with title Team review, on 2026-11-18 at 10:00 UTC, for one hour","@r1 w.request.request act=change mood=do predicate=update
-@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=review family_words=event
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Review family_words=event
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=review operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=""Team review"" operator=eq phase=result key_words=title
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=""2026-11-18"" operator=eq phase=result
@@ -246,7 +266,7 @@ my calendar events?,"@r1 w.request.request act=ask mood=ask question=describe
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Review operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=""Bring draft"" operator=eq phase=result key_words=notes"
 "update the Review event, with title Team review, with notes Bring draft","@r1 w.request.request act=change mood=do predicate=update
-@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=review family_words=event
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Review family_words=event
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=review operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=""Team review"" operator=eq phase=result key_words=title
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=""Bring draft"" operator=eq phase=result key_words=notes"
@@ -263,13 +283,13 @@ my calendar events?,"@r1 w.request.request act=ask mood=ask question=describe
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""1"" words=""one hour"" operator=eq phase=result unit=hour measure=1 measure_words=""one hour""
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=""Bring draft"" operator=eq phase=result key_words=notes"
 "update the Review event, with title Team review, for one hour, with notes Bring draft","@r1 w.request.request act=change mood=do predicate=update
-@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=review family_words=event
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Review family_words=event
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=review operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=""Team review"" operator=eq phase=result key_words=title
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""1"" words=""one hour"" operator=eq phase=result unit=hour measure=1 measure_words=""one hour""
 @r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=""Bring draft"" operator=eq phase=result key_words=notes"
 "update the Review event, with title Team review, on 2026-11-18 at 10:00 UTC, for one hour, with notes Bring draft","@r1 w.request.request act=change mood=do predicate=update
-@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=review family_words=event
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Review family_words=event
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=review operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=""Team review"" operator=eq phase=result key_words=title
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=""2026-11-18"" operator=eq phase=result
@@ -285,7 +305,7 @@ reschedule review for 10:00 UTC on 2026-11-18,"@r1 w.request.request act=place m
 @r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.timezone value=UTC operator=eq phase=result"
 book Planning on 2026-11-18 at 10:00 UTC for 30 minutes with ID planning and notes Draft budget,"@r1 w.request.request act=make mood=do predicate=book
 @r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=planning operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=planning operator=eq phase=result key_words=ID
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=Planning operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=""2026-11-18"" operator=eq phase=result
 @r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result
@@ -293,16 +313,16 @@ book Planning on 2026-11-18 at 10:00 UTC for 30 minutes with ID planning and not
 @r1.c6 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""30"" words=""30 minutes"" operator=eq phase=result unit=minute measure=30 measure_words=""30""
 @r1.c7 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=""Draft budget"" operator=eq phase=result key_words=notes"
 "set Review to title Team review, date 2026-11-18, time 10:00 UTC, duration one hour and notes Bring draft","@r1 w.request.request act=change mood=do predicate=set
-@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=review
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Review
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=review operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=""Team review"" operator=eq phase=result key_words=title
-@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=""2026-11-18"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=""2026-11-18"" operator=eq phase=result key_words=date
 @r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result key_words=time
 @r1.c5 w.request.constraint request=$r1 on=attribute attribute=meeting.timezone value=UTC operator=eq phase=result
-@r1.c6 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""1"" words=""one hour"" operator=eq phase=result unit=hour measure=1 measure_words=""one hour""
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""1"" words=""one hour"" operator=eq phase=result unit=hour measure=1 measure_words=""one hour"" key_words=duration
 @r1.c7 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=""Bring draft"" operator=eq phase=result key_words=notes"
 "update the Review event, with title Team review, on 2026-11-18 at 10:00 UTC, with notes Bring draft","@r1 w.request.request act=change mood=do predicate=update
-@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=review family_words=event
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Review family_words=event
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=review operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=""Team review"" operator=eq phase=result key_words=title
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=""2026-11-18"" operator=eq phase=result
@@ -317,9 +337,10 @@ book Planning on 2026-11-18 at 10:00 UTC for 30 minutes with ID planning and not
 @r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.timezone value=UTC operator=eq phase=result
 @r1.c5 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""1"" words=""one hour"" operator=eq phase=result unit=hour measure=1 measure_words=""one hour""
 @r1.c6 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=""Bring draft"" operator=eq phase=result key_words=notes"
-Review removed from the calendar,"@r1 w.request.request act=remove mood=do
+Review removed from the calendar,"@r1 w.request.request act=remove mood=do predicate=removed
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Review
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.ids value=Review operator=eq phase=selector"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.ids value=Review operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=meeting.calendar key_words=calendar operator=eq phase=result"
 "update the Review event, on 2026-11-18 at 10:00 UTC, for one hour","@r1 w.request.request act=change mood=do predicate=update
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Review family_words=event
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Review operator=eq phase=selector
