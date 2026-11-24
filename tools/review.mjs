@@ -70,7 +70,8 @@ const VERBISH = new Set('get go sit sits put make show set let see want need hav
 const DOING = /^(chase|chases|chasing|chased|play|plays|playing|swim|swims|swimming|follow|follows|following|ride|rides|riding|nuzzle|nuzzles|nuzzling|sniff|sniffs|sniffing|feed|feeds|feeding|carry|carries|carrying|collide|colliding|crash|crashing|run|runs|running|bite|bites|biting|bark|barks|barking|shake|wave|waves|waving|throw|throws|pull|pulls|kick|kicks|push|pushes|pick|watch|watches|watching|stare|hand|hold|holds|holding|herd|pet|call|look|bump|dance|dances|jump|jumps|sing|sings|read|reads|eat|eats|drink|drinks|fly|flies|climb|climbs|cry|cries|laugh|laughs|sleep|sleeps|hug|hugs|stop|put her hands|put its legs)\b/i;
 // what is not something a figure does: a material, a part, a placement or edit request, a relation, a clock ('made of gold', 'pair of eyes', 'put the cat on the bench', 'touches the lake', 'show three o'clock')
 const NOT_DOING = /^(made|make|pair|put|place|set|park|leave|keep|draw|raise|clear|take|show|group|touch|touches|cover|covers|hide|hides|overlap|overlaps|block|blocks|fits|stays|turned|come out|matching|to\b|move|stand over|half|full|in |on |at |with )/i;
-const KEYED = /^(page\.(time|weather|scene|style)|drawn\.(arrangement|lineup|action)|chart\.(aggregation|colourby))$/;
+const KEYED = /^(page\.(time|weather|scene|style|composition|scope)|drawn\.(arrangement|lineup|action|stack|journal\.restore|keep|reflow|occlusion|offset)|chart\.(aggregation|colourby|limit|filter|comparison|compare|resample|datefilter)|diagram\.(topic|step\.(repeat|exact|index|count))|node\.(ordinal\.swap|selection|journal\.restore|gap))$/;
+const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const words = (s) => s.match(/[\w'-]+/g) ?? [];
 const tok = (v) => (v.startsWith('"') ? v.slice(1, -1) : v);
 const attr = (l, k) => { const m = l.match(new RegExp(` ${k}=("[^"]*"|\\S+)`)); return m ? m[1] : null; };
@@ -101,6 +102,8 @@ for (const r of after) {
       if (ws.length && ws.every((w) => GRAMMAR.has(w.toLowerCase()))) note('new unread of only grammar words', r.text, l);
       else if (ws.filter((w) => !ARTICLE.test(w)).length === 1 && n !== 'page.scene') note('new unread of one word (with or without an article)', r.text, l);
       if (/^request\.(particle|speed|modality|additionalVerb)$/.test(n) || /misspel|typo/i.test(n)) note('new unread noting a particle, speed, modality or misspelling', r.text, l);
+      if (/^(diagram\.subject|drawn\.detail|request\.detail|chart\.other|request\.scope)$/.test(n)) note('new unread with a catch-all note (it covers words, it names no meaning)', r.text, l);
+      if (new RegExp(`${esc(t)}\\.\\d`).test(r.text) && /\d$/.test(t)) note('new unread cut inside a number ("0" of "0.5cm")', r.text, l);
       if (KEYED.test(n)) note('new unread whose meaning has a key now (write a constraint)', r.text, l);
     }
     if (l.includes(' w.request.constraint ')) {
