@@ -75,8 +75,7 @@ make a calendar for Doctor visits and give it a red colour,"@r1 w.request.reques
 @r1.t w.request.target request=$r1 family=calendar mode=new determiner=indefinite sort=calendar
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=""Doctor visits"" operator=eq phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=red operator=eq phase=result key_words=colour words=""give it a red colour"""
-"since Family is already blue, can you create a Kids calendar in yellow so I can tell them apart?","@f1 w.request.filler text=so
-@r1 w.request.request act=make mood=do predicate=create words=""can you create a Kids calendar in yellow""
+"since Family is already blue, can you create a Kids calendar in yellow so I can tell them apart?","@r1 w.request.request act=make mood=do predicate=create words=""can you create a Kids calendar in yellow""
 @r1.t w.request.target request=$r1 family=calendar mode=new determiner=indefinite sort=calendar
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=Kids operator=eq phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=yellow operator=eq phase=result
@@ -84,8 +83,8 @@ make a calendar for Doctor visits and give it a red colour,"@r1 w.request.reques
 @f3 w.request.filler text=""since Family is already blue"""
 "would it be possible to get a calendar for the house move? Call it Moving and colour it brown, please","@f1 w.request.filler text=please
 @r1 w.request.request act=make mood=do predicate=get
-@r1.t w.request.target request=$r1 family=calendar mode=new determiner=indefinite sort=calendar
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=Moving operator=eq phase=result
+@r1.t w.request.target request=$r1 family=calendar mode=new determiner=indefinite sort=calendar description=""a calendar for the house move""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=Moving operator=eq phase=result words=""Call it Moving""
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=brown operator=eq phase=result key_words=colour"
 "I keep missing bin days, so let's have a Chores calendar, bright magenta so it stands out","@f1 w.request.filler text=so
 @f2 w.request.filler text=so
@@ -167,10 +166,11 @@ switch the Work calendar's name to Acme,"@r1 w.request.request act=change mood=d
 @r2.t w.request.target request=$r2 family=calendar mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=calendar.colour value=green operator=eq phase=result words=""make it green"""
-the kids keep asking which calendar is theirs - could you rename Kids stuff to School and clubs?,"@r1 w.request.request act=change mood=do predicate=rename
-@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=""Kids stuff"" family_words=calendar
+the kids keep asking which calendar is theirs - could you rename Kids stuff to School and clubs?,"@r1 w.request.request act=change mood=do predicate=rename words=""could you rename Kids stuff to School and clubs?""
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=""Kids stuff""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=""Kids stuff"" operator=eq phase=selector
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=""School and clubs"" operator=eq phase=result"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=""School and clubs"" operator=eq phase=result
+@f1 w.request.filler text=""the kids keep asking which calendar is theirs"""
 "hmm, the name Work is confusing now that I freelance too; change it to Agency work, thanks","@f1 w.request.filler text=hmm
 @f2 w.request.filler text=now
 @f3 w.request.filler text=too
@@ -183,7 +183,7 @@ the kids keep asking which calendar is theirs - could you rename Kids stuff to S
 @r1 w.request.request act=change mood=do predicate=give words=""please give the Family calendar a friendlier name, Our home""
 @r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Family family_words=calendar
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Family operator=eq phase=selector
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=""Our home"" operator=eq phase=result key_words=name words=""give the Family calendar a friendlier name""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=""Our home"" operator=eq phase=result key_words=name words=""give the Family calendar a friendlier name, Our home""
 @f2 w.request.filler text=""before I share it with Ana"""
 rename this calendar to Personal,"@r1 w.request.request act=change mood=do predicate=rename
 @r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context family_words=calendar
@@ -243,11 +243,12 @@ the Family calendar should be yellow,"@r1 w.request.request act=change mood=do p
 @r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Gym family_words=calendar
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Gym operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=""bright orange"" operator=eq phase=result"
-"if it's not too much trouble, I'd prefer Work in grey; it's less distracting","@f1 w.request.filler text=too
-@r1 w.request.request act=change mood=do predicate=prefer
+"if it's not too much trouble, I'd prefer Work in grey; it's less distracting","@r1 w.request.request act=change mood=do predicate=prefer words=""I'd prefer Work in grey""
 @r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Work
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Work operator=eq phase=selector
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=grey operator=eq phase=result"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=grey operator=eq phase=result character=preference
+@f2 w.request.filler text=""if it's not too much trouble""
+@f3 w.request.filler text=""it's less distracting"""
 ok so paint the Gym calendar black and move yoga onto it,"@f1 w.request.filler text=""ok so""
 @r1 w.request.request act=change mood=do words=""paint the Gym calendar black"" predicate=paint
 @r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Gym family_words=calendar
@@ -320,10 +321,10 @@ the course finished in June. Could you remove the Evening classes calendar now?,
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=""Evening classes"" operator=eq phase=selector
 @f2 w.request.filler text=""the course finished in June."""
 "we merged everything into Family, so please delete the old Kids calendar","@f1 w.request.filler text=""so please""
-@r1 w.request.request act=remove mood=do predicate=delete words=""so please delete the old Kids calendar""
-@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Kids family_words=calendar
+@r1 w.request.request act=remove mood=do predicate=delete words=""please delete the old Kids calendar""
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Kids family_words=calendar description=""the old Kids calendar""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Kids operator=eq phase=selector
-@f2 w.request.filler text=""we merged everything into Family"""
+@f3 w.request.filler text=""we merged everything into Family, so"""
 rename Work to Office and then delete Gym altogether,"@f1 w.request.filler text=then
 @r1 w.request.request act=remove mood=do words=""delete Gym altogether"" predicate=delete
 @r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Gym
@@ -359,7 +360,7 @@ scrap Freelance,"@r1 w.request.request act=remove mood=do predicate=scrap
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Freelance operator=eq phase=selector"
 "get rid of it, the calendar I just picked","@f1 w.request.filler text=just
 @r1 w.request.request act=remove mood=do predicate=""get rid of""
-@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context family_words=calendar
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context family_words=calendar description=""the calendar I just picked""
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 add Tom to my contacts,"@r1 w.request.request act=make mood=do predicate=add
 @r1.t w.request.target request=$r1 family=person mode=new determiner=indefinite sort=person sort_words=contacts
@@ -373,7 +374,8 @@ create a person called Elena Popescu,"@r1 w.request.request act=make mood=do pre
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.name value=Jamal operator=eq phase=result"
 register Olga as a person in the calendar,"@r1 w.request.request act=make mood=do predicate=register
 @r1.t w.request.target request=$r1 family=person mode=new determiner=indefinite sort=person
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.name value=Olga operator=eq phase=result"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.name value=Olga operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=meeting.calendar operator=eq phase=result key_words=calendar"
 put Dr. Hughes on the list of people,"@r1 w.request.request act=make mood=do predicate=put
 @r1.t w.request.target request=$r1 family=person mode=new determiner=indefinite sort=person sort_words=people family_words=""list of people""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.name value=""Dr. Hughes"" operator=eq phase=result"
@@ -381,9 +383,8 @@ add someone new: Marta Silva,"@r1 w.request.request act=make mood=do predicate=a
 @r1.t w.request.target request=$r1 family=person mode=new determiner=indefinite sort=person sort_words=someone
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.name value=""Marta Silva"" operator=eq phase=result"
 we've got a new designer starting Monday - please add Noor so I can invite her to things,"@f1 w.request.filler text=please
-@f2 w.request.filler text=so
 @r1 w.request.request act=make mood=do predicate=add words=""we've got a new designer starting Monday - please add Noor""
-@r1.t w.request.target request=$r1 family=person mode=new determiner=indefinite sort=person sort_words=designer description=""a new designer starting Monday""
+@r1.t w.request.target request=$r1 family=person mode=new determiner=indefinite sort=person sort_words=designer description=""we've got a new designer starting Monday""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.name value=Noor operator=eq phase=result
 @f3 w.request.filler text=""so I can invite her to things"""
 add Ben as a person and then book him into the budget sync,"@f1 w.request.filler text=then
@@ -394,9 +395,10 @@ add Ben as a person and then book him into the budget sync,"@f1 w.request.filler
 @r2.t w.request.target request=$r2 family=meeting mode=existing determiner=definite fill=written name=""budget sync""
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=meeting.id value=""budget sync"" operator=eq phase=selector
 @r2.c2 w.request.constraint request=$r2 on=attribute attribute=meeting.people value=Ben words=him operator=eq phase=result"
-I keep typing Carla's name and it doesn't find her. Could you add Carla Mendes as a contact?,"@r1 w.request.request act=make mood=do predicate=add
-@r1.t w.request.target request=$r1 family=person mode=new determiner=indefinite sort=person sort_words=contact description=""Carla's name""
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.name value=""Carla Mendes"" operator=eq phase=result key_words=name"
+I keep typing Carla's name and it doesn't find her. Could you add Carla Mendes as a contact?,"@r1 w.request.request act=make mood=do predicate=add words=""Could you add Carla Mendes as a contact?""
+@r1.t w.request.target request=$r1 family=person mode=new determiner=indefinite sort=person sort_words=contact
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.name value=""Carla Mendes"" operator=eq phase=result
+@f1 w.request.filler text=""I keep typing Carla's name and it doesn't find her"""
 so my brother is visiting next month; can you add him as Radu so I can put him on family events?,"@f1 w.request.filler text=so
 @f2 w.request.filler text=so
 @r1 w.request.request act=make mood=do predicate=add words=""so my brother is visiting next month; can you add him as Radu""
@@ -442,7 +444,7 @@ change Priya to Priya Nair,"@r1 w.request.request act=change mood=do predicate=c
 @r1 w.request.request act=change mood=do predicate=update
 @r1.t w.request.target request=$r1 family=person mode=existing determiner=definite fill=written name=Mihai
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.id value=Mihai operator=eq phase=selector
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=person.name value=Mike operator=eq phase=result key_words=name"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=person.name value=Mike operator=eq phase=result key_words=name words=""goes by Mike now"""
 can you change the name of Ana to Ana Ionescu?,"@r1 w.request.request act=change mood=do predicate=change
 @r1.t w.request.target request=$r1 family=person mode=existing determiner=definite fill=written name=Ana
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.id value=Ana operator=eq phase=selector
@@ -461,7 +463,7 @@ edit the person Mihai so the name reads Mihai Popa,"@f1 w.request.filler text=so
 @r1 w.request.request act=change mood=do predicate=edit
 @r1.t w.request.target request=$r1 family=person mode=existing determiner=definite fill=written name=Mihai family_words=person
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.id value=Mihai operator=eq phase=selector
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=person.name value=""Mihai Popa"" operator=eq phase=result key_words=name"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=person.name value=""Mihai Popa"" operator=eq phase=result key_words=name words=""the name reads Mihai Popa"""
 please call Ana Annie in the people list,"@f1 w.request.filler text=please
 @r1 w.request.request act=change mood=do predicate=call
 @r1.t w.request.target request=$r1 family=person mode=existing determiner=definite fill=written name=Ana family_words=people family_words=""people list""
@@ -492,16 +494,17 @@ rename Mihai to Mihai B. and add him to the weekly review,"@r1 w.request.request
 @r2.t w.request.target request=$r2 family=meeting mode=existing determiner=definite fill=written name=""weekly review""
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=meeting.id value=""weekly review"" operator=eq phase=selector
 @r2.c2 w.request.constraint request=$r2 on=attribute attribute=meeting.people value=Mihai words=him operator=eq phase=result"
-when I search for Ana I get confused with the client; can we change our Ana to Ana (design)?,"@r1 w.request.request act=change mood=do predicate=change
+when I search for Ana I get confused with the client; can we change our Ana to Ana (design)?,"@r1 w.request.request act=change mood=do predicate=change words=""can we change our Ana to Ana (design)?""
 @r1.t w.request.target request=$r1 family=person mode=existing determiner=definite fill=written name=Ana
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.id value=Ana operator=eq phase=selector
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=person.name value=""Ana (design)"" operator=eq phase=result"
-"hey, Lee prefers his full name, so please make it Leeroy Jenkins","@f1 w.request.filler text=hey
-@f2 w.request.filler text=""so please""
-@r1 w.request.request act=change mood=do predicate=make
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=person.name value=""Ana (design)"" operator=eq phase=result
+@f1 w.request.filler text=""when I search for Ana I get confused with the client"""
+"hey, Lee prefers his full name, so please make it Leeroy Jenkins","@f2 w.request.filler text=""so please""
+@r1 w.request.request act=change mood=do predicate=make words=""please make it Leeroy Jenkins""
 @r1.t w.request.target request=$r1 family=person mode=existing determiner=definite fill=written name=Lee
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.id value=Lee operator=eq phase=selector
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=person.name value=""Leeroy Jenkins"" operator=eq phase=result key_words=name"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=person.name value=""Leeroy Jenkins"" operator=eq phase=result
+@f3 w.request.filler text=""hey, Lee prefers his full name, so"""
 Mihai -> Michael,"@r1 w.request.request act=change mood=do
 @r1.t w.request.target request=$r1 family=person mode=existing determiner=definite fill=written name=Mihai
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.id value=Mihai operator=eq phase=selector
@@ -510,7 +513,7 @@ rename this person to Pri,"@r1 w.request.request act=change mood=do predicate=re
 @r1.t w.request.target request=$r1 family=person mode=existing determiner=definite fill=context family_words=person
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.name value=Pri operator=eq phase=result"
-Ana becomes Anastasia,"@r1 w.request.request act=change mood=do
+Ana becomes Anastasia,"@r1 w.request.request act=change mood=do predicate=becomes
 @r1.t w.request.target request=$r1 family=person mode=existing determiner=definite fill=written name=Ana
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.id value=Ana operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=person.name value=Anastasia operator=eq phase=result"
@@ -558,7 +561,7 @@ I added Gary by mistake last week. Could you delete him?,"@r1 w.request.request 
 @r1.t w.request.target request=$r1 family=person mode=existing determiner=definite fill=written name=Gary
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.id value=Gary operator=eq phase=selector"
 rename Priya to Priya Nair and delete the duplicate Priya N.,"@r1 w.request.request act=remove mood=do words=""delete the duplicate Priya N."" predicate=delete
-@r1.t w.request.target request=$r1 family=person mode=existing determiner=definite fill=written name=""Priya N.""
+@r1.t w.request.target request=$r1 family=person mode=existing determiner=definite fill=written name=""Priya N."" description=""the duplicate Priya N.""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.id value=""Priya N."" operator=eq phase=selector
 @r2 w.request.request act=change mood=do words=""rename Priya to Priya Nair"" predicate=rename
 @r2.t w.request.target request=$r2 family=person mode=existing determiner=definite fill=written name=Priya
@@ -595,8 +598,7 @@ create a new meeting room named Studio B,"@r1 w.request.request act=make mood=do
 "can you set up a room, the Library?","@r1 w.request.request act=make mood=do predicate=""set up""
 @r1.t w.request.target request=$r1 family=room mode=new determiner=indefinite sort=room
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.name value=""the Library"" operator=eq phase=result"
-"facilities just opened a quiet space, so please add it as a room called Quiet corner","@f1 w.request.filler text=just
-@f2 w.request.filler text=""so please""
+"facilities just opened a quiet space, so please add it as a room called Quiet corner","@f2 w.request.filler text=""so please""
 @r1 w.request.request act=make mood=do predicate=add words=""so please add it as a room called Quiet corner""
 @r1.t w.request.target request=$r1 family=room mode=new determiner=indefinite sort=room
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.name value=""Quiet corner"" operator=eq phase=result key_words=called
@@ -656,7 +658,7 @@ create a room named Studio B in building B,"@r1 w.request.request act=make mood=
 "I'd like a new room, Lighthouse, located in the east wing","@r1 w.request.request act=make mood=do predicate=""I'd like""
 @r1.t w.request.target request=$r1 family=room mode=new determiner=indefinite sort=room
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.name value=Lighthouse operator=eq phase=result
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=room.location value=""in the east wing"" operator=eq phase=result"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=room.location value=""in the east wing"" operator=eq phase=result words=""located in the east wing"""
 can you add a meeting room called Kepler next to the kitchen?,"@r1 w.request.request act=make mood=do predicate=add
 @r1.t w.request.target request=$r1 family=room mode=new determiner=indefinite sort=room sort_words=""meeting room""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.name value=Kepler operator=eq phase=result key_words=called
@@ -690,7 +692,7 @@ add a room named Vault in the basement and give it 6 seats,"@r1 w.request.reques
 @r1.t w.request.target request=$r1 family=room mode=new determiner=indefinite sort=room
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.name value=Vault operator=eq phase=result key_words=named
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=room.location value=""in the basement"" operator=eq phase=result
-@r1.c3 w.request.constraint request=$r1 on=attribute attribute=room.seats value=""6"" words=""6 seats"" operator=eq phase=result key_words=seats"
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=room.seats value=""6"" operator=eq phase=result key_words=seats words=""give it 6 seats"""
 there's a new focus room on the mezzanine. Could you add it as Perch?,"@r1 w.request.request act=make mood=do predicate=add
 @r1.t w.request.target request=$r1 family=room mode=new determiner=indefinite sort=room sort_words=""focus room""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.location value=""on the mezzanine"" operator=eq phase=result
@@ -716,7 +718,7 @@ new room in the west wing,"@r1 w.request.request act=make mood=do
 "a room near the entrance, call it Porch","@r1 w.request.request act=make mood=do
 @r1.t w.request.target request=$r1 family=room mode=new determiner=indefinite sort=room
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.location value=""near the entrance"" operator=eq phase=result
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=room.name value=Porch operator=eq phase=result"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=room.name value=Porch operator=eq phase=result words=""call it Porch"""
 "Cabin room, in the annex","@r1 w.request.request act=make mood=do
 @r1.t w.request.target request=$r1 family=room mode=new determiner=indefinite sort=room
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.name value=""Cabin room"" operator=eq phase=result
@@ -735,7 +737,7 @@ rename the Cedar room to Redwood,"@r1 w.request.request act=change mood=do predi
 "call the board room the Boardroom, one word","@r1 w.request.request act=change mood=do predicate=call
 @r1.t w.request.target request=$r1 family=room mode=existing determiner=definite fill=written name=""board room""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.id value=""board room"" operator=eq phase=selector
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=room.name value=""the Boardroom"" operator=eq phase=result"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=room.name value=""the Boardroom"" operator=eq phase=result words=""call the board room the Boardroom, one word"""
 can you rename Board room to Conference room A?,"@r1 w.request.request act=change mood=do predicate=rename
 @r1.t w.request.target request=$r1 family=room mode=existing determiner=definite fill=written name=""Board room""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.id value=""Board room"" operator=eq phase=selector
@@ -758,11 +760,11 @@ relabel the cedar room as Room 301,"@r1 w.request.request act=change mood=do pre
 @r1.t w.request.target request=$r1 family=room mode=existing determiner=definite fill=written name=""cedar room""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.id value=""cedar room"" operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=room.name value=""Room 301"" operator=eq phase=result"
-"facilities renamed all the rooms after rivers, so the Board room is now Danube","@f1 w.request.filler text=so
-@r1 w.request.request act=change mood=do predicate=""is now""
-@r1.t w.request.target request=$r1 family=room mode=existing determiner=definite fill=written name=""Board room"" family_words=rooms
+"facilities renamed all the rooms after rivers, so the Board room is now Danube","@r1 w.request.request act=change mood=do predicate=""is now"" words=""the Board room is now Danube""
+@r1.t w.request.target request=$r1 family=room mode=existing determiner=definite fill=written name=""Board room""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.id value=""Board room"" operator=eq phase=selector
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=room.name value=Danube operator=eq phase=result"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=room.name value=Danube operator=eq phase=result
+@f2 w.request.filler text=""facilities renamed all the rooms after rivers, so"""
 people keep confusing it with the board room. Could you rename the Cedar room to Cedar studio?,"@r1 w.request.request act=change mood=do predicate=rename words=""Could you rename the Cedar room to Cedar studio?""
 @r1.t w.request.target request=$r1 family=room mode=existing determiner=definite fill=written name=""Cedar room""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.id value=""Cedar room"" operator=eq phase=selector
@@ -852,12 +854,12 @@ reduce the cedar room to 8 seats,"@r1 w.request.request act=change mood=do predi
 @r1 w.request.request act=change mood=do predicate=holds
 @r1.t w.request.target request=$r1 family=room mode=existing determiner=definite fill=written name=""Focus pod""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.id value=""Focus pod"" operator=eq phase=selector
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=room.seats value=""4"" words=""4 people"" operator=eq phase=result key_words=holds"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=room.seats value=""4"" operator=eq phase=result words=""it holds 4 people now"""
 "because of the new distancing rules, the Board room can only take 9 people - please update it","@f1 w.request.filler text=please
 @r1 w.request.request act=change mood=do predicate=update
 @r1.t w.request.target request=$r1 family=room mode=existing determiner=definite fill=written name=""Board room""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.id value=""Board room"" operator=eq phase=selector
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=room.seats value=""9"" words=""9 people"" operator=eq phase=result key_words=take"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=room.seats value=""9"" operator=eq phase=result words=""can only take 9 people"""
 the Cedar room got the big table back. Could you bump it up to 12 seats?,"@r1 w.request.request act=change mood=do predicate=bump
 @r1.t w.request.target request=$r1 family=room mode=existing determiner=definite fill=written name=""Cedar room""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.id value=""Cedar room"" operator=eq phase=selector
@@ -881,7 +883,7 @@ set the board room to 18 seats and book it for the weekly review,"@r1 w.request.
 @r1 w.request.request act=change mood=do predicate=""got space""
 @r1.t w.request.target request=$r1 family=room mode=existing determiner=definite fill=written name=""Oak room""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.id value=""Oak room"" operator=eq phase=selector
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=room.seats value=""30"" words=""for 30 people"" operator=eq phase=result key_words=space"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=room.seats value=""30"" operator=eq phase=result words=""it's got space for 30 people"""
 Board room: 22 seats,"@r1 w.request.request act=change mood=do
 @r1.t w.request.target request=$r1 family=room mode=existing determiner=definite fill=written name=""Board room""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.id value=""Board room"" operator=eq phase=selector
@@ -1044,7 +1046,7 @@ erase the Board room from the system,"@r1 w.request.request act=remove mood=do p
 @r1.t w.request.target request=$r1 family=room mode=existing determiner=definite fill=written name=Library family_words=room
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.id value=Library operator=eq phase=selector"
 the building closed the old Annex for good; would you mind removing it from the rooms?,"@r1 w.request.request act=remove mood=do predicate=removing
-@r1.t w.request.target request=$r1 family=room mode=existing determiner=definite fill=written name=Annex family_words=rooms
+@r1.t w.request.target request=$r1 family=room mode=existing determiner=definite fill=written name=Annex family_words=rooms description=""the old Annex""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.id value=Annex operator=eq phase=selector"
 ok so nobody ever books the Focus pod; let's just delete it,"@f1 w.request.filler text=""ok so""
 @f2 w.request.filler text=just
@@ -1162,14 +1164,16 @@ schedule a meeting with Priya on Friday at 2pm and move the budget sync to Monda
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Ana operator=eq phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Lee operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Mihai operator=eq phase=result
-@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Wednesday operator=eq phase=result"
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Wednesday operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=meeting.agenda value=""the offsite"" operator=eq phase=result words=""talk about the offsite"""
 would you mind booking an hour with Lee next Monday at 3? He asked to review the contract,"@r1 w.request.request act=make mood=do predicate=booking words=""booking an hour with Lee next Monday at 3? He asked to review the contract""
 @r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""1"" words=""an hour"" operator=eq phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Lee operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=""next Monday"" operator=eq phase=result
 @r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""3"" operator=eq phase=result
-@f1 w.request.filler text=""would you mind"""
+@f1 w.request.filler text=""would you mind""
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=meeting.agenda value=""the contract"" operator=eq phase=result words=""review the contract"""
 meet Priya on Friday,"@r1 w.request.request act=make mood=do predicate=meet
 @r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Priya operator=eq phase=result
@@ -1284,7 +1288,7 @@ I need somewhere quiet for my interview with Priya on Wednesday at 11 - the Focu
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Priya operator=eq phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Wednesday operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""11"" operator=eq phase=result
-@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.room value=""the Focus pod"" operator=eq phase=result"
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.room value=""the Focus pod"" operator=eq phase=result words=""the Focus pod would be perfect"""
 book the board room for the review,"@r1 w.request.request act=make mood=do predicate=book
 @r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=review
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.room value=""the board room"" operator=eq phase=result"
@@ -1312,7 +1316,8 @@ put a session with my trainer on the Gym calendar for Saturday at 8am,"@r1 w.req
 @r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=session
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.calendar value=Gym operator=eq phase=result key_words=calendar
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Saturday operator=eq phase=result
-@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""8am"" operator=eq phase=result"
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""8am"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=""my trainer"" operator=eq phase=result"
 Ana and I are planning the holiday party; can you create a Party planning meeting with her on the Work calendar for next Monday at 4?,"@r1 w.request.request act=make mood=do predicate=create words=""can you create a Party planning meeting with her on the Work calendar for next Monday at 4?""
 @r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=meeting
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=""Party planning"" operator=eq phase=result
@@ -1403,7 +1408,8 @@ ok so set up a call with Mihai on Thursday at 4 - and could you jot down in the 
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Lee operator=eq phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Friday operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""10"" operator=eq phase=result
-@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=""he wants the competitor analysis first"" operator=eq phase=result key_words=note words=""put that in, with the note that he wants the competitor analysis first"""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=""he wants the competitor analysis first"" operator=eq phase=result key_words=note words=""put that in, with the note that he wants the competitor analysis first""
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=meeting.agenda value=pricing operator=eq phase=result words=""talk pricing"""
 "book a Design sync with Ana tomorrow at 3 with notes Share Figma link, and cancel the yoga","@r1 w.request.request act=make mood=do words=""book a Design sync with Ana tomorrow at 3 with notes Share Figma link"" predicate=book
 @r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=""Design sync"" operator=eq phase=result
@@ -1483,12 +1489,13 @@ book the first open slot on Monday for a call with Priya,"@r1 w.request.request 
 @r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=meeting
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Lee operator=eq phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Ana operator=eq phase=result
-@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.free value=common_free words=""a time that works for both of them"" operator=eq phase=result"
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.free value=common_free operator=eq phase=result words=""pick a time that works for both of them"""
 "the server went down last night. Get me a meeting with Mihai at the soonest free moment, please","@f1 w.request.filler text=please
-@r1 w.request.request act=make mood=do predicate=Get
+@r1 w.request.request act=make mood=do predicate=Get words=""Get me a meeting with Mihai at the soonest free moment, please""
 @r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=meeting
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Mihai operator=eq phase=result
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.free value=nearest_free words=""the soonest free moment"" operator=eq phase=result"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.free value=nearest_free words=""the soonest free moment"" operator=eq phase=result
+@f2 w.request.filler text=""the server went down last night"""
 "if Friday is open at all, grab the first free half hour for a chat with Priya","@r1 w.request.request act=make mood=do predicate=grab
 @r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=chat
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Friday operator=eq phase=result
@@ -1505,18 +1512,18 @@ book the first open slot on Monday for a call with Priya,"@r1 w.request.request 
 @r2.t w.request.target request=$r2 family=meeting mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=meeting.room value=""the Board room"" operator=eq phase=result"
-"I know my week is packed, but could you slot in a call with Lee wherever there's the first gap on Wednesday?","@r1 w.request.request act=make mood=do predicate=""slot in"" words=""but could you slot in a call with Lee wherever there's the first gap on Wednesday?""
+"I know my week is packed, but could you slot in a call with Lee wherever there's the first gap on Wednesday?","@r1 w.request.request act=make mood=do predicate=""slot in"" words=""could you slot in a call with Lee wherever there's the first gap on Wednesday?""
 @r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=call
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Lee operator=eq phase=result
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.free value=first_free words=""the first gap"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.free value=first_free operator=eq phase=result words=""wherever there's the first gap""
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Wednesday operator=eq phase=result
-@f1 w.request.filler text=""I know my week is packed"""
-"hey, the client signed! Set up a celebration with Ana and Mihai as early as we can","@f1 w.request.filler text=hey
-@r1 w.request.request act=make mood=do predicate=""Set up""
+@f2 w.request.filler text=""I know my week is packed, but"""
+"hey, the client signed! Set up a celebration with Ana and Mihai as early as we can","@r1 w.request.request act=make mood=do predicate=""Set up"" words=""Set up a celebration with Ana and Mihai as early as we can""
 @r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=celebration
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Ana operator=eq phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Mihai operator=eq phase=result
-@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.free value=nearest_free words=""as early as we can"" operator=eq phase=result"
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.free value=nearest_free words=""as early as we can"" operator=eq phase=result
+@f2 w.request.filler text=""hey, the client signed!"""
 meeting with Ana whenever she's free,"@r1 w.request.request act=make mood=do
 @r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=meeting
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Ana operator=eq phase=result
@@ -1587,14 +1594,14 @@ put Physio on Friday at 4pm for 40 minutes,"@r1 w.request.request act=make mood=
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Friday operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""4pm"" operator=eq phase=result
 @r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""40"" words=""40 minutes"" operator=eq phase=result"
-"I want protected time to study, so please add an event Exam prep on Wednesday at 6pm lasting two hours","@f1 w.request.filler text=want
-@f2 w.request.filler text=""so please""
-@r1 w.request.request act=make mood=do predicate=add
+"I want protected time to study, so please add an event Exam prep on Wednesday at 6pm lasting two hours","@f2 w.request.filler text=""so please""
+@r1 w.request.request act=make mood=do predicate=add words=""please add an event Exam prep on Wednesday at 6pm lasting two hours""
 @r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=event
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=""Exam prep"" operator=eq phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Wednesday operator=eq phase=result
-@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""6pm"" operator=eq phase=result key_words=time
-@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""2"" operator=eq phase=result words=""lasting two hours"""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""6pm"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""2"" operator=eq phase=result words=""lasting two hours""
+@f3 w.request.filler text=""I want protected time to study, so"""
 the nail salon said it takes 50 minutes; could you add Nails for Saturday at 10?,"@r1 w.request.request act=make mood=do predicate=add
 @r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""50"" operator=eq phase=result words=""it takes 50 minutes""
@@ -1769,8 +1776,8 @@ swap Lee for Mihai in the weekly review,"@r1 w.request.request act=change mood=d
 @r1 w.request.request act=change mood=do predicate=add words=""so add her to the budget sync and drop him""
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""budget sync""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=""budget sync"" operator=eq phase=selector
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Priya words=her operator=eq phase=result
-@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Lee words=him want=no operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Priya operator=eq phase=result words=her
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Lee want=no operator=eq phase=result words=""drop him""
 @f2 w.request.filler text=""Priya is taking over the budget from Lee"""
 Mihai said he'd like to sit in on the design critique - could you invite him?,"@f1 w.request.filler text=like
 @r1 w.request.request act=change mood=do predicate=invite
@@ -1789,9 +1796,9 @@ add Ana to the weekly review and move it to the Board room,"@r1 w.request.reques
 @r1 w.request.request act=change mood=do predicate=take
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""budget sync""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=""budget sync"" operator=eq phase=selector
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Lee words=him want=no operator=eq phase=result"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Lee words=him want=no operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.day operator=eq phase=selector words=""next week"""
 our new designer Noor starts Monday. Please add her to the design critique so she can see how we work,"@f1 w.request.filler text=Please
-@f2 w.request.filler text=so
 @r1 w.request.request act=change mood=do predicate=add words=""Please add her to the design critique""
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""design critique""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=""design critique"" operator=eq phase=selector
@@ -1858,14 +1865,13 @@ the projector in the Board room is broken. Could you move the design critique to
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=""design critique"" operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.room value=""the Cedar room"" operator=eq phase=result
 @f1 w.request.filler text=""the projector in the Board room is broken."""
-"if the Cedar room is free then, I'd rather have the weekly review there than in the Board room","@f1 w.request.filler text=then
-@r1 w.request.request act=change mood=do predicate=have
+"if the Cedar room is free then, I'd rather have the weekly review there than in the Board room","@r1 w.request.request act=change mood=do predicate=""rather have""
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""weekly review""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=""weekly review"" operator=eq phase=selector
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.room value=""the Cedar room"" operator=eq phase=result
-@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.room value=""the Board room"" want=no operator=eq phase=result"
-"since it's just Lee and me, would you mind moving the budget sync to the Focus pod?","@f1 w.request.filler text=just
-@r1 w.request.request act=change mood=do predicate=moving words=""moving the budget sync to the Focus pod?""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.room value=""the Cedar room"" operator=eq phase=result words=there character=preference
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.room value=""the Board room"" want=no operator=eq phase=result words=""than in the Board room"" character=preference
+@r1.u1 w.request.unread request=$r1 text=""if the Cedar room is free then"" note=meeting.availability_guard"
+"since it's just Lee and me, would you mind moving the budget sync to the Focus pod?","@r1 w.request.request act=change mood=do predicate=moving words=""moving the budget sync to the Focus pod?""
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""budget sync""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=""budget sync"" operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.room value=""the Focus pod"" operator=eq phase=result
@@ -1895,7 +1901,7 @@ no room needed for the budget sync,"@f1 w.request.filler text=no
 @r1 w.request.request act=change mood=do
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""budget sync""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=""budget sync"" operator=eq phase=selector
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.room words=room want=no operator=eq phase=result"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.room want=no operator=eq phase=result words=""no room needed"""
 move yoga to the Gym calendar,"@r1 w.request.request act=change mood=do predicate=move
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=yoga
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=yoga operator=eq phase=selector
@@ -1921,9 +1927,8 @@ assign the dentist to the Family calendar,"@r1 w.request.request act=change mood
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=yoga
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=yoga operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.calendar value=Gym operator=eq phase=result
-@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.calendar value=Family want=no operator=eq phase=result"
-my partner can't see the dentist appointment. Could you move it to the Family calendar so she can?,"@f1 w.request.filler text=so
-@r1 w.request.request act=change mood=do predicate=move words=""my partner can't see the dentist appointment. Could you move it to the Family calendar""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.calendar value=Family want=no operator=eq phase=result words=""rather than Family"" character=preference"
+my partner can't see the dentist appointment. Could you move it to the Family calendar so she can?,"@r1 w.request.request act=change mood=do predicate=move words=""my partner can't see the dentist appointment. Could you move it to the Family calendar""
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""dentist appointment""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=""dentist appointment"" operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.calendar value=Family operator=eq phase=result key_words=calendar
@@ -2091,7 +2096,9 @@ start the weekly review half an hour earlier,"@r1 w.request.request act=place mo
 Priya has a clash with the design critique. Could we slide it 15 minutes later?,"@r1 w.request.request act=place mood=do predicate=slide
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""design critique""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=""design critique"" operator=eq phase=selector
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.shift value=""15"" words=""15 minutes later"" operator=delta phase=result"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.shift value=""15"" words=""15 minutes later"" operator=delta phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.relation value=same_time operator=relation phase=selector words=""Priya has a clash with the design critique""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.relation_anchor value=Priya operator=eq phase=selector"
 move the weekly review an hour earlier and put it in the Cedar room,"@r1 w.request.request act=place mood=do words=""move the weekly review an hour earlier"" predicate=move
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""weekly review""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=""weekly review"" operator=eq phase=selector
@@ -2100,24 +2107,24 @@ move the weekly review an hour earlier and put it in the Cedar room,"@r1 w.reque
 @r2.t w.request.target request=$r2 family=meeting mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=meeting.room value=""the Cedar room"" operator=eq phase=result"
-"if nothing else is booked right after it, would you push yoga back 30 minutes so I can get there from work?","@f1 w.request.filler text=so
-@r1 w.request.request act=place mood=do predicate=push words=""would you push yoga back 30 minutes""
+"if nothing else is booked right after it, would you push yoga back 30 minutes so I can get there from work?","@r1 w.request.request act=place mood=do predicate=push words=""would you push yoga back 30 minutes""
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=yoga
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=yoga operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.shift value=""30"" words=""back 30 minutes"" operator=delta phase=result
 @f2 w.request.filler text=""so I can get there from work?""
-@f3 w.request.filler text=""if nothing else is booked right after it"""
-"ok so the clinic called - they're running behind. Move my dentist appointment 40 minutes later, please","@f1 w.request.filler text=""ok so""
-@f2 w.request.filler text=please
-@r1 w.request.request act=place mood=do predicate=Move
-@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""dentist appointment"" name_words=called
+@r1.u1 w.request.unread request=$r1 text=""if nothing else is booked right after it"" note=meeting.availability_guard"
+"ok so the clinic called - they're running behind. Move my dentist appointment 40 minutes later, please","@f2 w.request.filler text=please
+@r1 w.request.request act=place mood=do predicate=Move words=""Move my dentist appointment 40 minutes later, please""
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""dentist appointment""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=""dentist appointment"" operator=eq phase=selector
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.shift value=""40"" words=""40 minutes later"" operator=delta phase=result"
-"hey, everyone's in early tomorrow; can the budget sync start an hour sooner?","@f1 w.request.filler text=hey
-@r1 w.request.request act=place mood=do predicate=start
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.shift value=""40"" words=""40 minutes later"" operator=delta phase=result
+@f3 w.request.filler text=""ok so the clinic called - they're running behind"""
+"hey, everyone's in early tomorrow; can the budget sync start an hour sooner?","@r1 w.request.request act=place mood=do predicate=start words=""tomorrow; can the budget sync start an hour sooner?""
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""budget sync""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=""budget sync"" operator=eq phase=selector
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.shift value=""-1"" words=""an hour sooner"" operator=delta phase=result"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.shift value=""-1"" words=""an hour sooner"" operator=delta phase=result
+@f2 w.request.filler text=""hey, everyone's in early""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=tomorrow operator=eq phase=selector"
 push it back an hour,"@r1 w.request.request act=place mood=do predicate=push
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -2199,7 +2206,8 @@ the project got shelved. Could you delete the weekly review and the design criti
 @r1 w.request.request act=remove mood=do predicate=drop
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""Lunch with Sam""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.ids value=""Lunch with Sam"" operator=eq phase=selector
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.ids value=""the yoga class"" operator=eq phase=selector"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.ids value=""the yoga class"" operator=eq phase=selector
+@r1.u1 w.request.unread request=$r1 text=""if Sam can't come anyway"" note=meeting.attendance_guard"
 "I'll be on holiday all week; would you mind removing the weekly review, the budget sync and yoga?","@r1 w.request.request act=remove mood=do predicate=removing words=""removing the weekly review, the budget sync and yoga?""
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""the weekly review""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.ids value=""the weekly review"" operator=eq phase=selector
@@ -2209,7 +2217,7 @@ the project got shelved. Could you delete the weekly review and the design criti
 "hmm, neither the dentist nor Lunch with Sam is happening, so delete those two","@f1 w.request.filler text=hmm
 @f2 w.request.filler text=so
 @r1 w.request.request act=remove mood=do predicate=delete
-@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""the dentist""
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""the dentist"" count=2 count_words=""those two""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.ids value=""the dentist"" operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.ids value=""Lunch with Sam"" operator=eq phase=selector"
 kill the budget sync and yoga,"@r1 w.request.request act=remove mood=do predicate=kill
@@ -2259,9 +2267,11 @@ can you remove Lunch with Sam from my calendar?,"@r1 w.request.request act=remov
 @r1 w.request.request act=remove mood=do predicate=cancel
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""weekly review""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=""weekly review"" operator=eq phase=selector
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.day words=""this week"" operator=eq phase=selector"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.day words=""this week"" operator=eq phase=selector
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.relation value=same_time operator=relation phase=selector words=""clashes with the offsite""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.relation_anchor value=""the offsite"" operator=eq phase=selector"
 I rebooked for next month. Could you delete the old dentist appointment?,"@r1 w.request.request act=remove mood=do predicate=delete words=""Could you delete the old dentist appointment?""
-@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""dentist appointment""
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""dentist appointment"" description=""the old dentist appointment""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=""dentist appointment"" operator=eq phase=selector
 @f1 w.request.filler text=""I rebooked for next month."""
 no yoga this week,"@f1 w.request.filler text=no
@@ -2276,20 +2286,20 @@ scrap the critique,"@r1 w.request.request act=remove mood=do predicate=scrap
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=dentist
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=dentist operator=eq phase=selector"
 remove the selected event,"@r1 w.request.request act=remove mood=do predicate=remove
-@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context family_words=event
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context family_words=event description=""the selected event""
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 can you cancel this one?,"@r1 w.request.request act=remove mood=do predicate=cancel
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 please delete the event I've selected,"@f1 w.request.filler text=please
 @r1 w.request.request act=remove mood=do predicate=delete
-@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context family_words=event
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context family_words=event description=""the event I've selected""
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 get rid of that meeting,"@r1 w.request.request act=remove mood=do predicate=""get rid of""
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context family_words=meeting
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 erase the current selection from the calendar,"@r1 w.request.request act=remove mood=do predicate=erase
-@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context description=""the current selection""
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=place attribute=meeting.calendar key_words=calendar operator=eq phase=result"
 "this one was a duplicate of the budget sync, so please delete it","@f1 w.request.filler text=""so please""
@@ -2299,23 +2309,23 @@ erase the current selection from the calendar,"@r1 w.request.request act=remove 
 @f2 w.request.filler text=""this one was a duplicate of the budget sync"""
 the client cancelled. Could you remove the meeting I just clicked on?,"@f1 w.request.filler text=just
 @r1 w.request.request act=remove mood=do predicate=remove words=""Could you remove the meeting I just clicked on?""
-@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context family_words=meeting
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context family_words=meeting description=""the meeting I just clicked on""
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @f2 w.request.filler text=""the client cancelled."""
 delete the selected meeting and then move the weekly review to its slot,"@f1 w.request.filler text=then
 @r1 w.request.request act=remove mood=do words=""delete the selected meeting"" predicate=delete
-@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context family_words=meeting
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context family_words=meeting description=""the selected meeting""
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r2 w.request.request act=place mood=do words=""move the weekly review to its slot"" predicate=move
 @r2.t w.request.target request=$r2 family=meeting mode=existing determiner=definite fill=written name=""weekly review""
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=meeting.id value=""weekly review"" operator=eq phase=selector
 @r2.c2 w.request.constraint request=$r2 on=attribute attribute=meeting.time words=""its slot"" operator=eq phase=result"
 "if nobody accepted it yet, would you mind cancelling the event that's selected?","@r1 w.request.request act=remove mood=do predicate=cancelling words=""cancelling the event that's selected?""
-@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context family_words=event
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context family_words=event description=""the event that's selected""
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@f1 w.request.filler text=""if nobody accepted it yet, would you mind"""
-"hmm, I added this by mistake; please just remove it","@f1 w.request.filler text=hmm
-@f2 w.request.filler text=""please just""
+@f1 w.request.filler text=""would you mind""
+@r1.u1 w.request.unread request=$r1 text=""if nobody accepted it yet"" note=meeting.acceptance_guard"
+"hmm, I added this by mistake; please just remove it","@f2 w.request.filler text=""please just""
 @r1 w.request.request act=remove mood=do predicate=remove words=""please just remove it""
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -2331,13 +2341,13 @@ bin this event,"@r1 w.request.request act=remove mood=do predicate=bin
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context family_words=event
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 remove the selected one,"@r1 w.request.request act=remove mood=do predicate=remove
-@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context description=""the selected one""
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 kill that appointment,"@r1 w.request.request act=remove mood=do predicate=kill
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context family_words=appointment
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 selected event - delete,"@r1 w.request.request act=remove mood=do predicate=delete
-@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context family_words=event
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context family_words=event description=""selected event""
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 drop it from the calendar,"@r1 w.request.request act=remove mood=do predicate=drop
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context
@@ -2347,23 +2357,23 @@ show me what my week looks like,"@f1 w.request.filler text=like
 @r1 w.request.request act=ask mood=ask predicate=show question=describe
 @r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.day words=""my week"" operator=eq phase=selector"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.day operator=eq phase=selector words=""my week"""
 what do I have on the Work calendar?,"@r1 w.request.request act=ask mood=ask predicate=""what do I have"" question=describe
 @r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Work family_words=calendar
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.calendar value=Work operator=eq phase=selector key_words=calendar"
-I've just got back from holiday - can you give me a rundown of everything coming up with Ana?,"@f1 w.request.filler text=just
-@r1 w.request.request act=ask mood=ask predicate=""give me a rundown"" question=describe words=""can you give me a rundown of everything coming up with Ana?""
+I've just got back from holiday - can you give me a rundown of everything coming up with Ana?,"@r1 w.request.request act=ask mood=ask predicate=""give me a rundown"" question=describe words=""can you give me a rundown of everything coming up with Ana?""
 @r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Ana
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Ana operator=eq phase=selector
 @f2 w.request.filler text=""I've just got back from holiday -"""
-"before I plan the weekend, what's on the Family calendar?","@r1 w.request.request act=ask mood=ask predicate=""what's on"" question=describe
+"before I plan the weekend, what's on the Family calendar?","@r1 w.request.request act=ask mood=ask predicate=""what's on"" question=describe words=""what's on the Family calendar?""
 @r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Family family_words=calendar
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.calendar value=Family operator=eq phase=selector key_words=calendar"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.calendar value=Family operator=eq phase=selector key_words=calendar
+@f1 w.request.filler text=""before I plan the weekend"""
 what's the schedule for today?,"@r1 w.request.request act=ask mood=ask predicate=""what's"" question=describe
 @r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=today operator=eq phase=selector"
-anything going on in the Board room?,"@r1 w.request.request act=ask mood=ask question=describe
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=today operator=eq phase=selector words=""the schedule for today"""
+anything going on in the Board room?,"@r1 w.request.request act=ask mood=ask question=describe predicate=""going on""
 @r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=""the Board room""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.room value=""the Board room"" operator=eq phase=selector"
 my agenda for Monday,"@r1 w.request.request act=ask mood=ask question=describe
@@ -2372,9 +2382,9 @@ my agenda for Monday,"@r1 w.request.request act=ask mood=ask question=describe
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Monday operator=eq phase=selector"
 when is the budget sync?,"@r1 w.request.request act=ask mood=ask predicate=when question=when
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""budget sync"""
-what time does the design critique start?,"@r1 w.request.request act=ask mood=ask predicate=""what time"" question=when
+what time does the design critique start?,"@r1 w.request.request act=ask mood=ask predicate=""what time"" question=when asked=meeting.start asked_words=start
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""design critique"""
-can you tell me when the weekly review is?,"@r1 w.request.request act=ask mood=ask predicate=when question=when
+can you tell me when the weekly review is?,"@r1 w.request.request act=ask mood=ask question=when predicate=tell asked=meeting.time asked_words=when
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""weekly review"""
 when's yoga this week?,"@r1 w.request.request act=ask mood=ask predicate=""when's"" question=when
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=yoga
@@ -2382,38 +2392,42 @@ when's yoga this week?,"@r1 w.request.request act=ask mood=ask predicate=""when'
 at what time is the budget sync tomorrow?,"@r1 w.request.request act=ask mood=ask predicate=""at what time"" question=when
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""budget sync""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=tomorrow operator=eq phase=selector"
-remind me when the dentist is,"@r1 w.request.request act=ask mood=ask predicate=when question=when
+remind me when the dentist is,"@r1 w.request.request act=ask mood=ask question=when predicate=remind asked=meeting.time asked_words=when
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=dentist"
-I need to leave early on Thursday - when does the design critique finish?,"@f1 w.request.filler text=need
-@r1 w.request.request act=ask mood=ask predicate=when question=when words=""when does the design critique finish?""
+I need to leave early on Thursday - when does the design critique finish?,"@r1 w.request.request act=ask mood=ask predicate=when question=when words=""when does the design critique finish?"" asked=meeting.end asked_words=finish
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""design critique""
 @f2 w.request.filler text=""I need to leave early on Thursday -"""
-Lee asked me and I couldn't remember: what time is the weekly review?,"@r1 w.request.request act=ask mood=ask predicate=""what time"" question=when
-@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""weekly review"""
+Lee asked me and I couldn't remember: what time is the weekly review?,"@r1 w.request.request act=ask mood=ask predicate=""what time"" question=when words=""what time is the weekly review?""
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""weekly review""
+@f1 w.request.filler text=""Lee asked me and I couldn't remember"""
 "when is the budget sync, and can you add Priya to it?","@r1 w.request.request act=ask mood=ask words=""when is the budget sync"" predicate=when question=when
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""budget sync""
 @r2 w.request.request act=change mood=do words=""can you add Priya to it"" predicate=add
 @r2.t w.request.target request=$r2 family=meeting mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=meeting.people value=Priya operator=eq phase=result"
-"if I book the dentist for the morning, would it clash with yoga? When is yoga anyway?","@f1 w.request.filler text=""book the dentist for the morning, would it clash""
-@r1 w.request.request act=ask mood=ask words=""When is yoga anyway?"" predicate=When question=when
-@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=yoga"
-quick question before I reply to Sam: which day did we put lunch with Sam on?,"@r1 w.request.request act=ask mood=ask predicate=""which day"" question=when
-@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""lunch with Sam"""
+"if I book the dentist for the morning, would it clash with yoga? When is yoga anyway?","@r1 w.request.request act=ask mood=ask predicate=When question=when words=""When is yoga""
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=yoga
+@f3 w.request.filler text=""anyway?""
+@r2 w.request.request act=ask mood=check words=""if I book the dentist for the morning, would it clash with yoga"" predicate=clash
+@r2.t w.request.target request=$r2 family=meeting mode=existing determiner=definite fill=written name=yoga
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=meeting.relation value=same_time operator=relation phase=selector words=""clash with yoga"""
+quick question before I reply to Sam: which day did we put lunch with Sam on?,"@r1 w.request.request act=ask mood=ask question=when words=""which day did we put lunch with Sam on?"" predicate=put asked=meeting.day asked_words=""which day""
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""lunch with Sam""
+@f1 w.request.filler text=""quick question before I reply to Sam"""
 "hey, I lost track of the dentist appointment - when exactly was it?","@f1 w.request.filler text=hey
-@r1 w.request.request act=ask mood=ask predicate=when question=when
+@r1 w.request.request act=ask mood=ask question=when predicate=""when exactly""
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""dentist appointment"""
 budget sync - what time?,"@r1 w.request.request act=ask mood=ask predicate=""what time"" question=when
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""budget sync"""
 when's the critique,"@r1 w.request.request act=ask mood=ask predicate=""when's"" question=when
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=critique"
-time of the review?,"@r1 w.request.request act=ask mood=ask question=when
+time of the review?,"@r1 w.request.request act=ask mood=ask question=when asked=meeting.time asked_words=time
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=review"
 when is it?,"@r1 w.request.request act=ask mood=ask predicate=when question=when
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
-dentist day?,"@r1 w.request.request act=ask mood=ask question=when
+dentist day?,"@r1 w.request.request act=ask mood=ask question=when asked=meeting.day asked_words=day
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=dentist"
 what time is lunch with Sam,"@r1 w.request.request act=ask mood=ask predicate=""what time"" question=when
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""lunch with Sam"""
@@ -2454,7 +2468,8 @@ I'm thinking of taking Friday off. Is anything with Lee or Mihai scheduled that 
 @r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Lee
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Lee operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Mihai operator=eq phase=selector
-@f1 w.request.filler text=""I'm thinking of taking Friday off."""
+@f1 w.request.filler text=""I'm thinking of taking Friday off.""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.day operator=eq phase=selector words=""that day"""
 "is the Focus pod free tomorrow morning? If so, put the budget sync there","@f1 w.request.filler text=so
 @r1 w.request.request act=ask mood=ask words=""is the Focus pod free tomorrow morning?"" predicate=is question=exists
 @r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=""the Focus pod""
@@ -2469,7 +2484,9 @@ I'm thinking of taking Friday off. Is anything with Lee or Mihai scheduled that 
 @r1 w.request.request act=ask mood=ask predicate=overlap question=exists words=""does the design critique overlap with anything Priya has on?""
 @r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Priya
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Priya operator=eq phase=selector
-@f2 w.request.filler text=hmm"
+@f2 w.request.filler text=hmm
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.relation value=same_time operator=relation phase=selector words=""overlap with anything Priya has on""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.relation_anchor value=Priya operator=eq phase=selector"
 free at 4?,"@r1 w.request.request act=ask mood=ask question=exists
 @r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -2478,9 +2495,10 @@ free at 4?,"@r1 w.request.request act=ask mood=ask question=exists
 Board room busy right now?,"@f1 w.request.filler text=now
 @r1 w.request.request act=ask mood=ask question=exists
 @r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=""Board room""
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.room value=""Board room"" operator=eq phase=selector"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.room value=""Board room"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.time operator=eq phase=selector words=""right now"""
 any gym sessions this week?,"@r1 w.request.request act=ask mood=ask question=exists
-@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=gym
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=gym family_words=sessions
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.calendar value=gym operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.day words=""this week"" operator=eq phase=selector"
 am I busy tomorrow morning,"@r1 w.request.request act=ask mood=ask predicate=""am I busy"" question=exists
@@ -2490,7 +2508,8 @@ am I busy tomorrow morning,"@r1 w.request.request act=ask mood=ask predicate=""a
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=morning operator=region phase=selector"
 Cedar room open after lunch?,"@r1 w.request.request act=ask mood=ask question=exists
 @r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=""Cedar room""
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.room value=""Cedar room"" operator=eq phase=selector"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.room value=""Cedar room"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.time operator=eq phase=selector words=""after lunch"""
 "hey, while you're at it, add a Football calendar - dark green if possible - and rename Gym to Fitness","@f1 w.request.filler text=""hey, while""
 @r1 w.request.request act=make mood=do words=""add a Football calendar - dark green if possible"" predicate=add
 @r1.t w.request.target request=$r1 family=calendar mode=new determiner=indefinite sort=calendar
@@ -2538,7 +2557,7 @@ add a room called Oak room,"@r1 w.request.request act=make mood=do predicate=add
 for the all-hands we need the Auditorium in the system; it holds about 150 people,"@r1 w.request.request act=make mood=do predicate=need
 @r1.t w.request.target request=$r1 family=room mode=new determiner=indefinite sort=room sort_words=Auditorium
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.name value=Auditorium operator=eq phase=result
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=room.seats value=""150"" words=""holds about 150 people"" operator=eq phase=result key_words=holds"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=room.seats value=""150"" operator=eq phase=result words=""it holds about 150 people"""
 that room is called Nest now,"@f1 w.request.filler text=now
 @r1 w.request.request act=change mood=do predicate=""is called""
 @r1.t w.request.target request=$r1 family=room mode=existing determiner=definite fill=context family_words=room
@@ -2553,7 +2572,7 @@ quick chat with Ana and Mihai on Monday,"@r1 w.request.request act=make mood=do
 schedule a sync with Priya and add a short agenda,"@r1 w.request.request act=make mood=do predicate=schedule
 @r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=sync
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Priya operator=eq phase=result
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.notes words=""a short agenda"" operator=eq phase=result"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.notes operator=eq phase=result words=""add a short agenda"""
 I need a meeting with Lee at the next available time,"@r1 w.request.request act=make mood=do predicate=""I need""
 @r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=meeting
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Lee operator=eq phase=result
@@ -2638,8 +2657,9 @@ book the Board room for a meeting with Ana on Friday at 10,"@r1 w.request.reques
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.calendar value=Family operator=eq phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Thursday operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""6"" operator=eq phase=result
-@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.calendar value=Work want=no operator=eq phase=result
-@f2 w.request.filler text=""this one's personal"""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.calendar value=Work want=no operator=eq phase=result words=""rather than Work"" character=preference
+@f2 w.request.filler text=""this one's personal""
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=""the estate agent"" operator=eq phase=result"
 "please schedule the Kickoff in a common free slot for Ana, Mihai and me","@f1 w.request.filler text=please
 @r1 w.request.request act=make mood=do predicate=schedule
 @r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite
@@ -2665,10 +2685,10 @@ bring Ana into it,"@r1 w.request.request act=change mood=do predicate=bring
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""design critique""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=""design critique"" operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.shift words=""a bit later"" operator=delta phase=result"
-ok so that's not happening anymore - hit delete on the one I've got open,"@f1 w.request.filler text=""ok so""
-@r1 w.request.request act=remove mood=do predicate=""hit delete""
-@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+ok so that's not happening anymore - hit delete on the one I've got open,"@r1 w.request.request act=remove mood=do predicate=""hit delete"" words=""hit delete on the one I've got open""
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context description=""the one I've got open""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@f2 w.request.filler text=""ok so that's not happening anymore"""
 anything with Ana today?,"@r1 w.request.request act=ask mood=ask question=exists
 @r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Ana
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Ana operator=eq phase=selector
@@ -2712,11 +2732,11 @@ transfer the design critique to the Work calendar,"@r1 w.request.request act=cha
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""design critique""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=""design critique"" operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.calendar value=Work operator=eq phase=result key_words=calendar"
-"before I say yes to the conference, could you see if there's anything on Family that week?","@f1 w.request.filler text=yes
-@r1 w.request.request act=ask mood=ask predicate=see question=exists words=""could you see if there's anything on Family that week?""
+"before I say yes to the conference, could you see if there's anything on Family that week?","@r1 w.request.request act=ask mood=ask predicate=see question=exists words=""could you see if there's anything on Family that week?""
 @r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Family
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.calendar value=Family operator=eq phase=selector
-@f2 w.request.filler text=""before I say yes to the conference"""
+@f2 w.request.filler text=""before I say yes to the conference""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.day operator=eq phase=selector words=""that week"""
 make this room bigger,"@r1 w.request.request act=change mood=do predicate=make
 @r1.t w.request.target request=$r1 family=room mode=existing determiner=definite fill=context family_words=room
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -2874,7 +2894,7 @@ I'd like Book club renamed to Reading group,"@f1 w.request.filler text=like
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=""Reading group"" operator=eq phase=result"
 I want the highlighted event removed,"@f1 w.request.filler text=want
 @r1 w.request.request act=remove mood=do predicate=removed
-@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context family_words=event
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context family_words=event description=""the highlighted event""
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 please file the weekly review under Work,"@f1 w.request.filler text=please
 @r1 w.request.request act=change mood=do predicate=file
