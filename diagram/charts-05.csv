@@ -40807,13 +40807,13 @@ List the average claims amount for each channel — then what is the channel cou
 "Name the top two products by revenue — also, what share do those two account for?","@r1 w.request.request act=ask mood=ask words=""Name the top two products by revenue"" predicate=Name question=list
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""top two products"" note=chart.top2 value=""top two""
-@r2 w.request.request act=ask mood=ask words=""also, what share do those two account for"" predicate=""also,"" question=what
+@r1.u1 w.request.constraint request=$r1 on=attribute attribute=chart.top value=2 words=""top two"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=product words=products operator=eq phase=result
+@r2 w.request.request act=ask mood=ask words=""also, what share do those two account for"" predicate=""account for"" question=percent
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
-@r2.u1 w.request.unread request=$r2 text=""what share do those two"" note=chart.share
-@r2.u2 w.request.unread request=$r2 text=""those two account"" note=chart.limit"
+@r2.l2 w.request.lookup request=$r2 key=answer from=request antecedent=$r1 words=""those two""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
 "List the two best products on revenue, so what fraction of total revenue do they hold?","@r1 w.request.request act=ask mood=ask words=""List the two best products on revenue"" predicate=List question=list
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -40847,13 +40847,13 @@ Tell me the two products at the top on revenue; now what combined share is that?
 "Name the top two products by revenue, and also, what share do those two account for?","@r1 w.request.request act=ask mood=ask words=""Name the top two products by revenue"" predicate=Name question=list
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""top two products"" note=chart.top2 value=""top two""
-@r2 w.request.request act=ask mood=ask words=""also, what share do those two account for"" predicate=""also,"" question=what
+@r1.u1 w.request.constraint request=$r1 on=attribute attribute=chart.top value=2 words=""top two"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=product words=products operator=eq phase=result
+@r2 w.request.request act=ask mood=ask words=""also, what share do those two account for"" predicate=""account for"" question=percent
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
-@r2.u1 w.request.unread request=$r2 text=""what share do those two"" note=chart.share
-@r2.u2 w.request.unread request=$r2 text=""those two account"" note=chart.limit"
+@r2.l2 w.request.lookup request=$r2 key=answer from=request antecedent=$r1 words=""those two""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
 "Give me the leading pair of products by revenue — finally, what proportion of revenue is the pair?","@r1 w.request.request act=ask mood=ask words=""Give me the leading pair of products by revenue"" predicate=Give question=list
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -40951,12 +40951,13 @@ Tell me the two products at the top on revenue; now what combined share is that?
 @r1 w.request.request act=ask mood=ask words=""Which two products have the highest revenue"" predicate=Which question=list
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""two products have the highest revenue"" note=chart.top2
-@r2 w.request.request act=ask mood=ask words=""also, what share do those two account for"" predicate=""also,"" question=what
+@r1.u1 w.request.constraint request=$r1 on=attribute attribute=chart.top value=2 words=""two products have the highest"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=product words=products operator=eq phase=result
+@r2 w.request.request act=ask mood=ask words=""also, what share do those two account for"" predicate=""account for"" question=percent
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""what share do those two"" note=chart.share
-@r2.u2 w.request.unread request=$r2 text=""those two account"" note=chart.limit"
+@r2.l2 w.request.lookup request=$r2 key=answer from=request antecedent=$r1 words=""those two""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
 "um, Name the top two products by revenue, so what fraction of total revenue do they hold, please?","@f1 w.request.filler text=um
 @f2 w.request.filler text=please
 @r1 w.request.request act=ask mood=ask words=""Name the top two products by revenue"" predicate=Name question=list
@@ -40972,13 +40973,13 @@ Tell me the two products at the top on revenue; now what combined share is that?
 "List the two best products on revanue, and also, what share do those two account for?","@r1 w.request.request act=ask mood=ask words=""List the two best products on revanue"" predicate=List question=list
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""two best products"" note=chart.top2
-@r2 w.request.request act=ask mood=ask words=""also, what share do those two account for"" predicate=""also,"" question=what
+@r1.u1 w.request.constraint request=$r1 on=attribute attribute=chart.top value=2 words=""two best products"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=product words=products operator=eq phase=result
+@r2 w.request.request act=ask mood=ask words=""also, what share do those two account for"" predicate=""account for"" question=percent
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue words=revanue operator=eq phase=result
-@r2.u1 w.request.unread request=$r2 text=""what share do those two"" note=chart.share
-@r2.u2 w.request.unread request=$r2 text=""those two account"" note=chart.limit"
+@r2.l2 w.request.lookup request=$r2 key=answer from=request antecedent=$r1 words=""those two""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue words=revanue operator=eq phase=result"
 "Which two products have the highest revenue, and then how much of the total do the pair meke up?","@r1 w.request.request act=ask mood=ask words=""Which two products have the highest revenue"" predicate=Which question=list
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
