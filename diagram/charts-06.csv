@@ -1142,7 +1142,7 @@ The next thing is to display the Revenue by region chart as shares rather than a
 @r1 w.request.request act=change mood=do predicate=display words=""display the Revenue by region chart as shares rather than absolute values""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written sort=chart name=""Revenue by region""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.id value=""Revenue by region"" operator=eq phase=selector
-@r1.u1 w.request.unread request=$r1 text=""as shares rather than absolute values"" note=chart.percenttotal value=shares"
+@r1.u1 w.request.constraint request=$r1 on=attribute attribute=chart.share value=value words=""as shares rather than absolute values"" operator=eq phase=result"
 "Make every bar on Monthly sales a percent of the total, since the export has to work on its own.","@f1 w.request.filler text=""since the export has to work on its own""
 @r1 w.request.request act=change mood=do predicate=Make words=""Make every bar on Monthly sales a percent of the total""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Monthly sales""
@@ -1152,11 +1152,10 @@ What if the Monthly sales chart showed shares instead of totals?,"@f1 w.request.
 @r1 w.request.request act=change mood=do predicate=showed words=""the Monthly sales chart showed shares instead of totals""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written sort=chart name=""Monthly sales""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.id value=""Monthly sales"" operator=eq phase=selector
-@r1.u1 w.request.unread request=$r1 text=""shares instead of totals"" note=chart.percenttotal value=shares"
-Is Orders by weekday showing shares yet?,"@r1 w.request.request act=change mood=do predicate=Is
+@r1.u1 w.request.constraint request=$r1 on=attribute attribute=chart.share value=value words=""shares instead of totals"" operator=eq phase=result"
+Is Orders by weekday showing shares yet?,"@r1 w.request.request act=ask mood=check predicate=Is question=exists asked=chart.share asked_words=""showing shares""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Orders by weekday""
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.id value=""Orders by weekday"" operator=eq phase=selector
-@r1.u1 w.request.unread request=$r1 text=""showing shares yet"" note=chart.percenttotal value=shares"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.id value=""Orders by weekday"" operator=eq phase=selector"
 Could you show the Orders by weekday chart as a percentage of the total?,"@r1 w.request.request act=change mood=do predicate=show
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written sort=chart name=""Orders by weekday""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.id value=""Orders by weekday"" operator=eq phase=selector
@@ -19164,7 +19163,8 @@ percent of total on the bar chart,"@r1 w.request.request act=change mood=do pred
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 I want the regional revenue chart as shares of the whole.,"@r1 w.request.request act=change mood=do predicate=want
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=description sort=chart description=""the regional revenue chart""
-@r1.u1 w.request.unread request=$r1 text=""shares of the whole"" note=chart.percenttotal value=""shares of the whole"""
+@r1.u1 w.request.constraint request=$r1 on=attribute attribute=chart.share value=value words=""shares of the whole"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.share.base value=""the whole"" words=""of the whole"" operator=eq phase=result"
 The next thing is to plot the chart as a percent of the grand total.,"@f1 w.request.filler text=""The next thing is to""
 @r1 w.request.request act=change mood=do predicate=plot words=""plot the chart as a percent of the grand total.""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context family_words=chart
@@ -19176,7 +19176,8 @@ The next thing is to plot the chart as a percent of the grand total.,"@f1 w.requ
 @r1 w.request.request act=change mood=do predicate=needs words=""it needs each category as a share of the whole""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""a share of the whole"" note=chart.percenttotal value=""a share of the whole""
+@r1.u1 w.request.constraint request=$r1 on=attribute attribute=chart.share value=value words=""a share of the whole"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.share.base value=""the whole"" words=""of the whole"" operator=eq phase=result
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result"
 Could you change this chart so the bars are percent of total?,"@f1 w.request.filler text=so
 @r1 w.request.request act=change mood=do predicate=change
@@ -19193,7 +19194,7 @@ I'd like the chart to show shares rather than the raw totals.,"@f1 w.request.fil
 @r1 w.request.request act=change mood=do predicate=show words=""the chart to show shares rather than the raw totals""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context family_words=chart
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""shares rather than the raw totals"" note=chart.percenttotal value=shares"
+@r1.u1 w.request.constraint request=$r1 on=attribute attribute=chart.share value=value words=""shares rather than the raw totals"" operator=eq phase=result"
 Let's give me the column chart with each category as a percentage of the total.,"@r1 w.request.request act=change mood=do predicate=give
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=description sort=""column chart"" description=""column chart""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result
