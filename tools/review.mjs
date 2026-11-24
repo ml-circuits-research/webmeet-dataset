@@ -68,6 +68,8 @@ const GRAMMAR = new Set('the a an of to in on up down out off over by for with a
 const ARTICLE = /^(the|a|an|this|that|these|those|its|his|her|their|my|our|your)$/i;
 const VERBISH = new Set('get go sit sits put make show set let see want need have has do does'.split(' '));
 const DOING = /^(chase|chases|chasing|chased|play|plays|playing|swim|swims|swimming|follow|follows|following|ride|rides|riding|nuzzle|nuzzles|nuzzling|sniff|sniffs|sniffing|feed|feeds|feeding|carry|carries|carrying|collide|colliding|crash|crashing|run|runs|running|bite|bites|biting|bark|barks|barking|shake|wave|waves|waving|throw|throws|pull|pulls|kick|kicks|push|pushes|pick|watch|watches|watching|stare|hand|hold|holds|holding|herd|pet|call|look|bump|dance|dances|jump|jumps|sing|sings|read|reads|eat|eats|drink|drinks|fly|flies|climb|climbs|cry|cries|laugh|laughs|sleep|sleeps|hug|hugs|stop|put her hands|put its legs)\b/i;
+// what is not something a figure does: a material, a part, a placement or edit request, a relation, a clock ('made of gold', 'pair of eyes', 'put the cat on the bench', 'touches the lake', 'show three o'clock')
+const NOT_DOING = /^(made|make|pair|put|place|set|park|leave|keep|draw|raise|clear|take|show|group|touch|touches|cover|covers|hide|hides|overlap|overlaps|block|blocks|fits|stays|turned|come out|matching|to\b|move|stand over|half|full|in |on |at |with )/i;
 const KEYED = /^(page\.(time|weather|scene|style)|drawn\.(arrangement|lineup|action)|chart\.(aggregation|colourby))$/;
 const words = (s) => s.match(/[\w'-]+/g) ?? [];
 const tok = (v) => (v.startsWith('"') ? v.slice(1, -1) : v);
@@ -104,7 +106,7 @@ for (const r of after) {
     if (l.includes(' w.request.constraint ')) {
       const a = attr(l, 'attribute') ?? '', v = tok(attr(l, 'value') ?? '');
       if (/^chart\.(measure|dimension)$/.test(a) && words(v).length && words(v).every((w) => GRAMMAR.has(w.toLowerCase()) || VERBISH.has(w.toLowerCase()))) note('new chart measure/dimension that is a verb or grammar word', r.text, l);
-      if (a === 'drawn.action' && !DOING.test(v)) note('new drawn.action that is not something a figure does', r.text, l);
+      if (a === 'drawn.action' && NOT_DOING.test(v)) note('new drawn.action that is not something a figure does', r.text, l);
       if (a === 'drawn.arrangement' && (/^((in line|level|even|lined up|line) with|(first|second|third|fourth|fifth|last|top|bottom|middle) (row|column))/i.test(tok(attr(l, 'words') ?? '')) || /\b(line|lined) up with\b|\bin line with\b|\blevel with\b/i.test(r.text))) note('new drawn.arrangement for a place or an alignment with one thing (an arrangement is how several stand: "in a row")', r.text, l);
       if (a === 'drawn.keep') { const req = (attr(l, 'request') ?? '').slice(1); const pred = tok((nowLines.find((x) => x.startsWith(`@${req} w.request.request `)) ?? '').match(/ predicate=("[^"]*"|\S+)/)?.[1] ?? ''); if (!/^(keep|keeps|keeping|kept|leave|leaves|leaving|left|stay|stays|staying|remain|remains|hold|changes|change|moves|move)\b/i.test(pred)) note('new drawn.keep inside a request of another verb (a keep is its own request with its own target)', r.text, l); }
       if (/^(chart\.only|drawn\.name|node\.label)$/.test(a) && !/ want=no/.test(l) && /^(excluding|except|without|leaving out|leave out|not |minus|exclude|ignoring|apart from|other than)/i.test(tok(attr(l, 'words') ?? ''))) note('new selector said with "excluding/except/without" but without want=no (the request keeps the opposite)', r.text, l);

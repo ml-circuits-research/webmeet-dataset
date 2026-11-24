@@ -175,6 +175,7 @@ reads right.
 **Errors** (the row is refused). Each line is the message the checker prints, with its rule:
 - *schema violations*: a type or key `w.request` does not declare, a value outside an enum, an act not in `k.actions`;
 - *not a key / family of the tab (keys.csv)*: a constraint `attribute` or a target `family` the file's tab does not have;
+- *no on=*: a constraint without `on` (required by `w.request`: attribute, place, size, count …);
 - *no reader key*: a constraint without `attribute` (a meaning without a key is an unread wire with a note);
 - *not a value of the key, and not marked open_value*: a value outside the key's closed list;
 - *phrase not found in the text*: an evidence key (`words`, `predicate`, `sort_words`, `name`, `text` …) that is not
