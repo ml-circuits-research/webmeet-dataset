@@ -92,6 +92,19 @@ for (const r of after) {
   const nowKeys = new Set(nowLines.filter((l) => l.includes(' w.request.constraint ')).map(ckey));
   for (const l of old.split('\n')) if (l.includes(' w.request.constraint ') && !nowKeys.has(ckey(l))) blocking.push(`committed constraint lost: ${r.text.slice(0, 80)}  ::  ${l.slice(0, 110)}`);
   const added = nowLines.filter((l) => !oldLines.has(l));
+  // Two measures may share a request, but each named value has its own evidence.
+  const measureEvidence = new Map();
+  for (const line of nowLines.filter(l => l.includes(' w.request.constraint ') && attr(l, 'attribute') === 'chart.measure')) {
+    const evidence = tok(attr(line, 'words') ?? '').toLowerCase();
+    const value = tok(attr(line, 'value') ?? '').toLowerCase();
+    if (!value || !evidence.includes(value)) continue;
+    const group = JSON.stringify([attr(line, 'request'), evidence]);
+    const previous = measureEvidence.get(group);
+    if (previous && previous.value !== value && (added.includes(line) || added.includes(previous.line))) {
+      note('distinct chart measures use the same evidence naming both values', r.text, line);
+    }
+    measureEvidence.set(group, { value, line });
+  }
   if (added.length > 10) note('rows with more than 10 new lines (a script running away?)', r.text, `${added.length} new lines`);
   const dup = new Set();
   for (const l of nowLines) if (/ w\.request\.(constraint|unread) /.test(l)) { const b = l.slice(l.indexOf(' ') + 1); if (dup.has(b)) note('the same wire twice in a request', r.text, l); dup.add(b); }
