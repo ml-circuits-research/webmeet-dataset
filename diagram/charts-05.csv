@@ -28125,13 +28125,16 @@ Make a bar chart of revenue by product. List the two best products on revenue; s
 @r2 w.request.request act=ask mood=ask words=""Give me the leading pair of products by revenue"" predicate=Give question=list
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""leading pair of products"" note=chart.top2
-@r3 w.request.request act=ask mood=ask words=""finally, what proportion of revenue is the pair"" predicate=""finally,"" question=what
+@r2.u1 w.request.constraint request=$r2 on=attribute attribute=chart.top value=2 words=""leading pair"" operator=eq phase=result
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.dimension value=product words=products operator=eq phase=result
+@r3 w.request.request act=ask mood=ask words=""finally, what proportion of revenue is the pair"" predicate=is question=percent
 @r3.t w.request.target request=$r3 family=chart mode=existing determiner=definite fill=context
 @r3.l1 w.request.lookup request=$r3 target=$r3.t key=thing from=page
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=product operator=eq phase=result
-@r3.u1 w.request.unread request=$r3 text=""proportion of revenue"" note=chart.percenttotal"
+@r3.l2 w.request.lookup request=$r3 key=answer from=request antecedent=$r2 words=""the pair""
+@r3.c1 w.request.constraint request=$r3 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r2.measure w.request.constraint request=$r2 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
 "How about a line chart of revenue by order date for January 2025 through June 2025, coloured by region","@r1 w.request.request act=make mood=do predicate=How
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
@@ -40773,12 +40776,14 @@ List the average claims amount for each channel — then what is the channel cou
 "Which two products have the highest revenue; next, what percentage of revenue comes from them?","@r1 w.request.request act=ask mood=ask words=""Which two products have the highest revenue"" predicate=Which question=list
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""two products have the highest revenue"" note=chart.top2
-@r2 w.request.request act=ask mood=ask words=""next, what percentage of revenue comes from them"" predicate=""comes from"" question=what
+@r1.u1 w.request.constraint request=$r1 on=attribute attribute=chart.top value=2 words=""two products have the highest"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=product words=products operator=eq phase=result
+@r2 w.request.request act=ask mood=ask words=""next, what percentage of revenue comes from them"" predicate=""comes from"" question=percent
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""percentage of revenue"" note=chart.percenttotal
-@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+@r2.l2 w.request.lookup request=$r2 key=answer from=request antecedent=$r1 words=them
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.measure w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
 "Name the top two products by revenue — also, what share do those two account for?","@r1 w.request.request act=ask mood=ask words=""Name the top two products by revenue"" predicate=Name question=list
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -40802,12 +40807,14 @@ List the average claims amount for each channel — then what is the channel cou
 "Give me the leading pair of products by revenue, and finally, what proportion of revenue is the pair?","@r1 w.request.request act=ask mood=ask words=""Give me the leading pair of products by revenue"" predicate=Give question=list
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""leading pair of products"" note=chart.top2
-@r2 w.request.request act=ask mood=ask words=""finally, what proportion of revenue is the pair"" predicate=""finally,"" question=what
+@r1.u1 w.request.constraint request=$r1 on=attribute attribute=chart.top value=2 words=""leading pair"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=product words=products operator=eq phase=result
+@r2 w.request.request act=ask mood=ask words=""finally, what proportion of revenue is the pair"" predicate=is question=percent
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
-@r2.u1 w.request.unread request=$r2 text=""proportion of revenue"" note=chart.percenttotal"
+@r2.l2 w.request.lookup request=$r2 key=answer from=request antecedent=$r1 words=""the pair""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
 Tell me the two products at the top on revenue; now what combined share is that?,"@r1 w.request.request act=ask mood=ask words=""Tell me the two products at the top on revenue"" predicate=Tell question=list
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -40830,12 +40837,14 @@ Tell me the two products at the top on revenue; now what combined share is that?
 "Give me the leading pair of products by revenue — finally, what proportion of revenue is the pair?","@r1 w.request.request act=ask mood=ask words=""Give me the leading pair of products by revenue"" predicate=Give question=list
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""leading pair of products"" note=chart.top2
-@r2 w.request.request act=ask mood=ask words=""finally, what proportion of revenue is the pair"" predicate=""finally,"" question=what
+@r1.u1 w.request.constraint request=$r1 on=attribute attribute=chart.top value=2 words=""leading pair"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=product words=products operator=eq phase=result
+@r2 w.request.request act=ask mood=ask words=""finally, what proportion of revenue is the pair"" predicate=is question=percent
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
-@r2.u1 w.request.unread request=$r2 text=""proportion of revenue"" note=chart.percenttotal"
+@r2.l2 w.request.lookup request=$r2 key=answer from=request antecedent=$r1 words=""the pair""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
 "What products take the first two places for revenue, and then how much of the total do the pair make up?","@r1 w.request.request act=ask mood=ask words=""What products take the first two places for revenue"" predicate=What question=list
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -40896,12 +40905,14 @@ Tell me the two products at the top on revenue; now what combined share is that?
 @r1 w.request.request act=ask mood=ask words=""Tell me the two products at the top on revenue"" predicate=Tell question=list
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous
-@r1.u1 w.request.unread request=$r1 text=""two products at the top"" note=chart.top2
-@r2 w.request.request act=ask mood=ask words=""next, what percentage of revenue comes from them"" predicate=""comes from"" question=what
+@r1.u1 w.request.constraint request=$r1 on=attribute attribute=chart.top value=2 words=""two products at the top"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=product words=products operator=eq phase=result
+@r2 w.request.request act=ask mood=ask words=""next, what percentage of revenue comes from them"" predicate=""comes from"" question=percent
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=previous
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
-@r2.u1 w.request.unread request=$r2 text=""percentage of revenue"" note=chart.percenttotal"
+@r2.l2 w.request.lookup request=$r2 key=answer from=request antecedent=$r1 words=them
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
 "while you're there: What products take the first two places for revenue — also, what share do those two account for?","@f1 w.request.filler text=while
 @prev w.request.previous text=""List the two best products on revenue; so what fraction of total revenue do they hold?""
 @r1 w.request.request act=ask mood=ask words=""What products take the first two places for revenue"" predicate=What question=list
