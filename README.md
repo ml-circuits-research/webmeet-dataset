@@ -78,7 +78,7 @@ text: move the house to 260,180, then make the house blue
 | `w.request.target` | request: what it acts on | `family` (drawn, node, chart, meeting, part, face, text, …), `mode` (new, existing, bound), `determiner`, `fill` (written, context, description, all, journal_step), `sort` (its kind; evidence when the text says it) and **`sort_words`** (the words that said it, when they differ from `sort`), **`name`** and **`name_words`** ("called", "labelled"), **`description`**, `count` and **`count_words`**, `quantifier`, `ordinal`, **`code_words`**, **`ids`**, **`family_words`** ("the chart" when no kind is said) |
 | `w.request.constraint` | condition of a request | `attribute` (the reader key: drawn.colour, chart.labels, meeting.time, …), `value` (repeated for several values), **`words`** (the words of the value, when they differ from it), **`key_words`** (the words naming the key: "the colour", "facing"), `operator` (eq, degree, delta, relation, …), `phase` (selector: picks the target; result: the outcome wanted), `on` (attribute, place, count, size), `want=no` for a negation, `character=preference`, `step`, `unit`, `measure` and **`measure_words`**, `scope`, `open_value` |
 | `w.request.unread` | meaning with no reader key yet | **`text`** (the words), `note` (the meaning's name), `value` (only a value the text says or a closed-list value) |
-| `w.request.lookup` | thing a request needs that the text does not say | `request`, `target` or `constraint` (the wire it completes), `key` (thing, family, sort, value, name), `from` (page, previous, preference, any) |
+| `w.request.lookup` | thing a request needs that the text does not say | `request`, `target` or `constraint` (the wire it completes), `key` (thing, family, sort, value, name, answer), `from` (page, previous, preference, any, request), `antecedent` (local ask), **`words`** (answer reference) |
 | `w.request.filler` | run of filler words | **`text`**: politeness ("please", "thank you"), hedges ("um", "just", "actually"), wishes ("I want"), greetings, and remarks around the requests ("that would help", "because the report uses it") |
 | `w.request.previous` | message, when there was a previous message | `text` |
 | `w.request.clock` | message, when the time matters (calendar) | `now`, `timezone` |
@@ -132,6 +132,10 @@ message when it is given, says:
 - **Write a lookup** for what a request needs and the text does not give. For "make it shorter" with no previous
   message, write `lookup key=thing from=page`; with a previous message that names the thing, use `from=previous`.
   Better still, add examples where the text itself makes the referent clear.
+- **Refer to an earlier answer** with `@r2.l2 w.request.lookup request=$r2 key=answer from=request antecedent=$r1 words=them`.
+  Name the earlier ask in the same message and quote the referring phrase. Keep any chart or other target lookup on
+  its own wire. If the answer comes from the previous message, write `key=answer from=previous` with evidence words,
+  keep the `w.request.previous` wire, and omit the local antecedent.
 - **Put greetings, politeness, hedges and remarks around the request in filler wires.** Words that carry meaning must
   be the evidence of a request, target, constraint or unread wire. Never hide them as filler.
 - **Use the reader keys of the file's tab**, declared as SOP facts in `sop-knowledge-worlds`

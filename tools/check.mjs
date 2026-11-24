@@ -36,7 +36,7 @@ if (!existsSync(join(KNOWLEDGE, 'tools', 'sopworld', 'sopworld.mjs'))) throw new
 const DATASET = resolve(args.dataset ?? join(HERE, '..'));
 const ONLY = args.file ? resolve(args.file) : null;
 const TAB_WORLD = { drawing: 'w.drawing', diagram: 'w.diagram', document: 'w.document', calendar: 'w.calendar', avatar: 'w.face' };
-const PHRASES = { 'w.request.request': ['words', 'predicate', 'asked_words'], 'w.request.target': ['sort_words', 'name', 'name_words', 'description', 'count_words', 'code_words', 'ids', 'family_words'], 'w.request.constraint': ['words', 'key_words', 'measure_words'], 'w.request.unread': ['text'], 'w.request.filler': ['text'] };
+const PHRASES = { 'w.request.request': ['words', 'predicate', 'asked_words'], 'w.request.target': ['sort_words', 'name', 'name_words', 'description', 'count_words', 'code_words', 'ids', 'family_words'], 'w.request.constraint': ['words', 'key_words', 'measure_words'], 'w.request.lookup': ['words'], 'w.request.unread': ['text'], 'w.request.filler': ['text'] };
 const tok = (v) => (String(v).startsWith('"') ? JSON.parse(v) : String(v));
 const LIMIT = Number(args.limit ?? Infinity);
 const EXAMPLES = Number(args.examples ?? 3);
@@ -138,6 +138,26 @@ function grounding(text, wires, tab) {
       const identified = ['name', 'description', 'sort_words', 'code_words', 'count_words', 'ids'].some((k) => w.attrs[k]) || says(one(w, 'sort'), text);
       const looked = wires.some((l) => l.type === 'w.request.lookup' && String(l.attrs.target?.[0]) === '$' + w.id && one(l, 'key') === 'thing');
       if (one(w, 'mode') !== 'new' && one(w, 'fill') !== 'all' && !identified && !looked) out.push([w.type, '', 'existing target no words identify and no lookup (add w.request.lookup key=thing)']);
+    }
+    if (w.type === 'w.request.lookup') {
+      const source = one(w, 'from');
+      if (one(w, 'key') === 'answer') {
+        const owner = wires.find((r) => r.type === 'w.request.request' && '$' + r.id === one(w, 'request'));
+        const words = one(w, 'words');
+        const ownerWords = owner && one(owner, 'words');
+        if (!words || !new RegExp(`(?<![\\w])${esc(words)}(?![\\w])`).test(ownerWords ?? text)) out.push([w.type, 'words', 'answer lookup needs evidence in its request']);
+        if (w.attrs.target || w.attrs.constraint) out.push([w.type, 'key', 'answer lookup supplies a separate request input']);
+        if (source === 'request') {
+          const prior = wires.find((r) => r.type === 'w.request.request' && '$' + r.id === one(w, 'antecedent'));
+          const priorWords = prior && one(prior, 'words');
+          if (!priorWords || !ownerWords || one(prior, 'act') !== 'ask' || text.indexOf(priorWords) + priorWords.length > text.indexOf(ownerWords))
+            out.push([w.type, 'antecedent', 'answer lookup must name an earlier ask in this message']);
+        } else if (source !== 'previous' || w.attrs.antecedent || !wires.some((r) => r.type === 'w.request.previous')) {
+          out.push([w.type, 'from', 'answer lookup needs an earlier ask or a previous message']);
+        }
+      } else if (source === 'request' || w.attrs.antecedent) {
+        out.push([w.type, 'antecedent', 'local request antecedent requires key=answer']);
+      }
     }
     if (w.type === 'w.request.constraint') {
       if (w.attrs.words && (w.attrs.value ?? []).length === 1 && String(one(w, 'value')) === one(w, 'words')) out.push([w.type, 'words', 'repeats value (leave it out)']);
