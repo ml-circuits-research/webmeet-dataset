@@ -1,13 +1,13 @@
 text,sop
 "My sister is house-sitting this week; make her a new document called Cat care that says ""Feed Milo twice a day and keep the balcony door shut.""","@f1 w.request.filler text=""sister is house-sitting this week""
 @r1 w.request.request act=make mood=do words=""make her a new document called Cat care that says \""Feed Milo twice a day and keep the balcony door shut.\"""" predicate=make
-@r1.t w.request.target request=$r1 family=text mode=new determiner=indefinite family_words=says
+@r1.t w.request.target request=$r1 family=text mode=new determiner=indefinite family_words=document
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=text.title value=""Cat care"" operator=eq phase=result key_words=called
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=text.content value=""Feed Milo twice a day and keep the balcony door shut."" operator=eq phase=result"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=text.content value=""Feed Milo twice a day and keep the balcony door shut."" operator=eq phase=result key_words=says"
 "If there isn't a document for it yet, create one named Door code containing ""Front door 4711, gate 0815.""","@r1 w.request.request act=make mood=do predicate=create
-@r1.t w.request.target request=$r1 family=text mode=new determiner=indefinite
+@r1.t w.request.target request=$r1 family=text mode=new determiner=indefinite family_words=document
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=text.title value=""Door code"" operator=eq phase=result key_words=named
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=text.content value=""Front door 4711, gate 0815."" operator=eq phase=result"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=text.content value=""Front door 4711, gate 0815."" operator=eq phase=result key_words=containing"
 "add a hyperlink from ""the full schedule"" in the Intro to https://example.com/schedule","@r1 w.request.request act=change mood=do predicate=add
 @r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=Intro
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=Intro operator=eq phase=selector
@@ -28,8 +28,9 @@ text,sop
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.mark value=link operator=eq phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.text value=pricing operator=eq phase=selector
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.attrs value=""example.com/prices"" operator=eq phase=result"
-"before I lose the thought - a fresh doc with just this line, please: ""Call the bank about the new card on Monday.""","@f1 w.request.filler text=just
+"before I lose the thought - a fresh doc with just this line, please: ""Call the bank about the new card on Monday.""","@f3 w.request.filler text=""before I lose the thought""
+@f1 w.request.filler text=just
 @f2 w.request.filler text=please
-@r1 w.request.request act=make mood=do
-@r1.t w.request.target request=$r1 family=text mode=new determiner=indefinite
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=text.content value=""Call the bank about the new card on Monday."" operator=eq phase=result"
+@r1 w.request.request act=make mood=do words=""a fresh doc with just this line, please: \""Call the bank about the new card on Monday.\""""
+@r1.t w.request.target request=$r1 family=text mode=new determiner=indefinite description=fresh family_words=doc
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=text.content value=""Call the bank about the new card on Monday."" operator=eq phase=result key_words=line"

@@ -225,6 +225,8 @@ function warningsOf(text, wires) {
     for (const k of EVIDENCE) for (const v of w.attrs[k] ?? []) mark(tok(v));
     if (w.type === 'w.request.target' && says(one(w, 'sort'), text)) mark(one(w, 'sort'));
     if (w.type === 'w.request.constraint' && !w.attrs.words) for (const v of w.attrs.value ?? []) mark(tok(v));
+    // a target's ordinal says its word ("the first paragraph": ordinal=first)
+    if (w.type === 'w.request.target' && w.attrs.ordinal) mark(one(w, 'ordinal'));
   }
   // an unread wire holds a meaning in its words: a single grammar word ("out", "up") or a single verb of k.actions
   // ("look", "stay") is not one; a particle belongs to the predicate ("come out"), a verb is the predicate or filler
