@@ -16,7 +16,7 @@
 //      politeness, filler, desire; interjections) are kept in w.request.filler wires. Also warned: a proper name of a
 //      request (a capitalised word not starting a sentence) that no wire keeps, and a meaning left in unread.
 //      `--warnings FILE` writes the warned rows to a CSV (text, sop, warning, words) for the generating session.
-//   5. use the reader's keys (keys.csv): a constraint's attribute and a target's family are keys of the file's tab, and a
+//   5. use the reader's keys (w.request keys): a constraint's attribute and a target's family are keys of the file's tab, and a
 //      value of a closed list is on it unless the constraint says open_value=true (errors); an act does not contradict
 //      its predicate (removal against creation or change, by the verbs of k.actions; warning).
 //   6. vary its sentences: with --new (a file of new data) it has at least 80% distinct sentence shapes once values,
@@ -124,13 +124,13 @@ function grounding(text, wires, tab) {
       if (w.attrs.goes_to) out.push([w.type, 'goes_to', 'not said in the text (the tab is the folder)']);
       if (one(w, 'words') === text) out.push([w.type, 'words', 'repeats the whole text (leave it out)']);
     }
-    if (w.type === 'w.request.target' && w.attrs.family && !FAMILIES.has(`${tab} ${one(w, 'family')}`)) out.push([w.type, 'family', `not a family of the ${tab} tab (keys.csv)`]);
+    if (w.type === 'w.request.target' && w.attrs.family && !FAMILIES.has(`${tab} ${one(w, 'family')}`)) out.push([w.type, 'family', `not a family of the ${tab} tab (w.request keys)`]);
     if (w.type === 'w.request.constraint' && !w.attrs.on) out.push([w.type, 'on', 'no on= (required by w.request: attribute, place, size, count ...)']);
     if (w.type === 'w.request.constraint' && !w.attrs.attribute) out.push([w.type, 'attribute', "no reader key (a meaning without a key is an unread wire with a note)"]);
     if (w.type === 'w.request.constraint' && w.attrs.attribute) {
       const key = KEYS.get(`${tab} ${one(w, 'attribute')}`);
-      if (!key) out.push([w.type, 'attribute', `not a key of the ${tab} tab (keys.csv)`]);
-      else if (key.values && !w.attrs.open_value) for (const v of w.attrs.value ?? []) if (!key.values.has(tok(v).toLowerCase())) out.push([w.type, 'value', 'not a value of the key (keys.csv), and not marked open_value']);
+      if (!key) out.push([w.type, 'attribute', `not a key of the ${tab} tab (w.request keys)`]);
+      else if (key.values && !w.attrs.open_value) for (const v of w.attrs.value ?? []) if (!key.values.has(tok(v).toLowerCase())) out.push([w.type, 'value', 'not a value of the key (w.request keys), and not marked open_value']);
     }
     if (w.type === 'w.request.target') {
       if (w.attrs.sort_words && one(w, 'sort_words') === one(w, 'sort')) out.push([w.type, 'sort_words', 'repeats sort (leave it out)']);
@@ -169,19 +169,17 @@ function grounding(text, wires, tab) {
 }
 const TOKEN = /[A-Za-z0-9]+(?:['\u2019][A-Za-z]+)?/g;
 
-// The reader's keys per tab (keys.csv): a constraint's attribute and a target's family must be keys of the file's tab,
-// and a value of a closed list must be on it (or the constraint says open_value=true).
+// The reader's keys per tab, as SOP facts of w.request (sop-knowledge-worlds docs/worlds/w.request/shards/keys.sop:
+// w.request.key tab=… family=… name=… head=… value=…): a constraint's attribute and a target's family must be keys of
+// the file's tab, and a value of a closed list must be on it (or the constraint says open_value=true).
 const KEYS = new Map(), FAMILIES = new Set();
-{
-  const rows = csvRows(readFileSync(join(DATASET, 'keys.csv'), 'utf8'));
-  const h = rows.next().value;
-  for (const r of rows) {
-    if (r.length < h.length) continue;
-    const o = Object.fromEntries(h.map((k, i) => [k, r[i]]));
-    KEYS.set(`${o.tab} ${o.key}`, { head: o.head, values: o.values ? new Set(o.values.split('; ').map((x) => x.toLowerCase())) : null });
-    FAMILIES.add(`${o.tab} ${o.family}`);
-  }
+for (const w of parse(readFileSync(join(KNOWLEDGE, 'docs', 'worlds', 'w.request', 'shards', 'keys.sop'), 'utf8'))) {
+  if (w.type !== 'w.request.key') continue;
+  const tab = one(w, 'tab'), values = (w.attrs.value ?? []).map((v) => tok(v).toLowerCase());
+  KEYS.set(`${tab} ${one(w, 'name')}`, { head: one(w, 'head'), values: values.length ? new Set(values) : null });
+  FAMILIES.add(`${tab} ${one(w, 'family')}`);
 }
+if (!KEYS.size) throw new Error('no reader keys in w.request/shards/keys.sop');
 // The acts the verbs of k.actions mean (k.actions.verb text=delete act=remove): a predicate that is such a verb should
 // go with one of its acts.
 const VERB_ACTS = new Map();

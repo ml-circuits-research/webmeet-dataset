@@ -10,7 +10,6 @@ Each row is one message with the wires the reader should produce for it.
 ```text
 <tab>/<source>.csv          tab: drawing, diagram, document, calendar
 <tab>/<source>.N.csv        a large source split into parts of at most ~10 MB (one source)
-keys.csv                    the reader's keys per tab: tab, family, key, head, values (a closed list, "; "-separated)
 tools/check.mjs             the checker: run it on every new file before adding it
 tools/rows-diff.mjs         rows on disk against the last commit, per source: lost, added, changed (no example may be lost)
 ```
@@ -135,7 +134,8 @@ message when it is given, says:
   Better still, add examples where the text itself makes the referent clear.
 - **Put greetings, politeness, hedges and remarks around the request in filler wires.** Words that carry meaning must
   be the evidence of a request, target, constraint or unread wire. Never hide them as filler.
-- **Use the keys of `keys.csv`** for the file's tab, and only the values of a key's closed list (or mark
+- **Use the reader keys of the file's tab**, declared as SOP facts in `sop-knowledge-worlds`
+  `docs/worlds/w.request/shards/keys.sop` (`w.request.key tab=… family=… name=… head=… value=…`), and only the values of a key's closed list (or mark
   `open_value=true` for words outside it, as written).
 - **Vary the sentences**: start each row from a real line of a source corpus; no frame with values swapped in.
 - **A one-word value may be written bare** (`value=dusk`, `text=harbour`), as SOP Lang allows; quotes are needed only
@@ -174,7 +174,7 @@ reads right.
 
 **Errors** (the row is refused). Each line is the message the checker prints, with its rule:
 - *schema violations*: a type or key `w.request` does not declare, a value outside an enum, an act not in `k.actions`;
-- *not a key / family of the tab (keys.csv)*: a constraint `attribute` or a target `family` the file's tab does not have;
+- *not a key / family of the tab (w.request keys)*: a constraint `attribute` or a target `family` the file's tab does not have;
 - *no on=*: a constraint without `on` (required by `w.request`: attribute, place, size, count …);
 - *no reader key*: a constraint without `attribute` (a meaning without a key is an unread wire with a note);
 - *not a value of the key, and not marked open_value*: a value outside the key's closed list;
