@@ -316,7 +316,8 @@ my mistake — the x axis should be not inverted,"@r1 w.request.request act=chan
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.invert value=none words=""not inverted"" operator=eq phase=result key_words=""x axis""
 @f1 w.request.filler text=""my mistake"""
-"oops, undo that and make the x axis not inverted","@r1 w.request.request act=change mood=do predicate=make words=""undo that and make the x axis not inverted""
+"oops, undo that and make the x axis not inverted","@u1 w.request.request act=undo mood=do predicate=undo words=""undo that""
+@r1 w.request.request act=change mood=do predicate=make words=""make the x axis not inverted""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.invert value=none words=""not inverted"" operator=eq phase=result key_words=""x axis""
@@ -959,7 +960,8 @@ my mistake — the chart should be back upright,"@r1 w.request.request act=chang
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.orientation value=upright words=""back upright"" operator=eq phase=result open_value=true
 @f1 w.request.filler text=""my mistake"""
-"oops, undo that and make the chart back upright","@r1 w.request.request act=change mood=do predicate=make words=""undo that and make the chart back upright""
+"oops, undo that and make the chart back upright","@u1 w.request.request act=undo mood=do predicate=undo words=""undo that""
+@r1 w.request.request act=change mood=do predicate=make words=""make the chart back upright""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context family_words=chart
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.orientation value=upright words=""back upright"" operator=eq phase=result open_value=true
@@ -2364,7 +2366,7 @@ make the error bar caps a size larger and then do the line thicker on the sales 
 the error bar caps on Sales by month should be a size larger; also do the line thicker on the sales chart. legend on the right,"@f1 w.request.filler text=also
 @r1 w.request.request act=change mood=do words=""the error bar caps on Sales by month should be a size larger""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Sales by month""
-@r1.u1 w.request.unread request=$r1 text=""a size larger"" note=chart.errorbar.cap.size
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.errorCap value=""a size larger"" operator=eq phase=result key_words=""error bar caps""
 @r2 w.request.request act=change mood=do words=""do the line thicker on the sales chart"" predicate=do
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=written family_words=chart name=""sales chart""
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.lineWidth value=thicker operator=eq phase=result key_words=line
@@ -5191,7 +5193,8 @@ tick numbers on the top and the right. title Revenue by month,"@r1 w.request.req
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.title value=""Revenue by month"" operator=eq phase=result key_words=title"
 the tick numbers on Revenue trend should be on the top and the right. legend on the right,"@r1 w.request.request act=change mood=do words=""the tick numbers on Revenue trend should be on the top and the right""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Revenue trend""
-@r1.u1 w.request.unread request=$r1 text=""on the top and the right"" note=chart.tick.position
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.xAxis value=top operator=eq phase=result key_words=""tick numbers""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.axisSide value=right operator=eq phase=result key_words=""tick numbers""
 @r2 w.request.request act=change mood=do words=""legend on the right""
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
@@ -5345,7 +5348,7 @@ numbers back on the right; also do the top numbers in tens on the sales chart. s
 the numbers on Sales by month should be back on the right; also do the top numbers in tens on the sales chart. legend on the right,"@f1 w.request.filler text=also
 @r1 w.request.request act=change mood=do words=""the numbers on Sales by month should be back on the right""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Sales by month""
-@r1.u1 w.request.unread request=$r1 text=""back on the right"" note=chart.tick.position value=right
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.axisSide value=right operator=eq phase=result words=""back on the right"" key_words=""numbers""
 @r2 w.request.request act=change mood=do words=""do the top numbers in tens on the sales chart"" predicate=do
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=written family_words=chart name=""sales chart""
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.tickFormat words=""in tens"" operator=eq phase=result open_value=true key_words=""top numbers""
@@ -5491,7 +5494,8 @@ y axis range 10^1 to 10^6. title Order value by quantity,"@r1 w.request.request 
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.title value=""Order value by quantity"" operator=eq phase=result key_words=title"
 the y axis range on Order value by quantity should be 10^1 to 10^6. font bigger,"@r1 w.request.request act=change mood=do words=""the y axis range on Order value by quantity should be 10^1 to 10^6""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Order value by quantity""
-@r1.u1 w.request.unread request=$r1 text=""10^1 to 10^6"" note=chart.yrange value=""10^1 to 10^6""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""10^1"" operator=eq phase=result key_words=""y axis range""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.max value=""10^6"" operator=eq phase=result key_words=""y axis range""
 @r2 w.request.request act=change mood=do words=""font bigger""
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
@@ -5617,7 +5621,8 @@ the missing piece: y axis range 10^1 to 10^6 on the order scatter. legend on the
 @r1.u1 w.request.unread request=$r1 text=""10^6 down to 10^1"" note=chart.xrange
 @r2 w.request.request act=change mood=do words=""do the y axis range 0 to 10 on the department chart"" predicate=do
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=written family_words=chart name=""department chart""
-@r2.u1 w.request.unread request=$r2 text=""y axis range 0 to 10"" note=chart.yrange value=""0 to 10""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.min value=0 operator=eq phase=result key_words=""y axis range""
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=chart.max value=10 operator=eq phase=result key_words=""y axis range""
 @r3 w.request.request act=change mood=do words=""title Revenue by department"" predicate=title
 @r3.t w.request.target request=$r3 family=chart mode=existing determiner=definite fill=context
 @r3.l1 w.request.lookup request=$r3 target=$r3.t key=thing from=page
@@ -6740,7 +6745,7 @@ matrix colours like a heat map. show grid lines,"@r1 w.request.request act=chang
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.grid value=show operator=eq phase=result key_words=grid key_words=""grid lines"""
 the matrix colours on Sales by weekday and hour should be like a heat map. legend on the right,"@r1 w.request.request act=change mood=do words=""the matrix colours on Sales by weekday and hour should be like a heat map""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Sales by weekday and hour""
-@r1.u1 w.request.unread request=$r1 text=""like a heat map"" note=chart.palette.mode value=heatmap
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.palette value=heatmap operator=eq phase=result words=""like a heat map"" key_words=""matrix colours""
 @r2 w.request.request act=change mood=do words=""legend on the right""
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
@@ -8881,6 +8886,7 @@ the missing piece: bar edges thicker on the department chart and then do the err
 @r3.c1 w.request.constraint request=$r3 on=attribute attribute=chart.fontSize words=""a bit bigger"" operator=delta phase=result step=more key_words=font"
 the tick numbers on Orders by weekday should be smaller and do the bar outlines black on the orders chart. legend on the right,"@r1 w.request.request act=change mood=do words=""the tick numbers on Orders by weekday should be smaller""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Orders by weekday""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.fontSize value=smaller operator=eq phase=result key_words=""tick numbers""
 @r2 w.request.request act=change mood=do words=""do the bar outlines black on the orders chart"" predicate=do
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=written family_words=chart name=""orders chart""
 @r2.u1 w.request.unread request=$r2 text=""bar outlines black"" note=chart.bar.edge.colour value=black
@@ -9702,7 +9708,7 @@ go for cap thickness as thick as it gets on the sales chart; also have the error
 @r1.u1 w.request.unread request=$r1 text=""as thick as it gets"" note=chart.errorbar.cap.width value=thick
 @r2 w.request.request act=change mood=do words=""do the error bar cap size smaller on the sales chart"" predicate=do
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=written family_words=chart name=""sales chart""
-@r2.u1 w.request.unread request=$r2 text=""error bar cap size smaller"" note=chart.errorbar.cap.size value=smaller
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.errorCap value=smaller operator=eq phase=result key_words=""error bar cap size""
 @r3 w.request.request act=change mood=do words=""show grid lines"" predicate=show
 @r3.t w.request.target request=$r3 family=chart mode=existing determiner=definite fill=context
 @r3.l1 w.request.lookup request=$r3 target=$r3.t key=thing from=page
@@ -9900,6 +9906,7 @@ go for cap thickness as thick as it gets on the sales chart; also have the error
 "the cap size on Revenue trend should be smaller; also do the grid lines dashed, magenta and horizontal on the revenue trend. markers bigger","@f1 w.request.filler text=also
 @r1 w.request.request act=change mood=do words=""the cap size on Revenue trend should be smaller""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Revenue trend""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.errorCap value=smaller operator=eq phase=result key_words=""cap size""
 @r2 w.request.request act=change mood=do words=""do the grid lines dashed, magenta and horizontal on the revenue trend"" predicate=do
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=written name=""revenue trend""
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.gridStyle words=""dashed, magenta and horizontal"" operator=eq phase=result open_value=true key_words=grid key_words=""grid lines""
@@ -10591,6 +10598,7 @@ cap size medium; also do the bar edges red on the sales chart. title Q2 sales,"@
 the cap size on Sales by month should be medium and then do the bar edges red on the sales chart. font bigger,"@f1 w.request.filler text=then
 @r1 w.request.request act=change mood=do words=""the cap size on Sales by month should be medium""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Sales by month""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.errorCap value=medium operator=eq phase=result key_words=""cap size""
 @r2 w.request.request act=change mood=do words=""do the bar edges red on the sales chart"" predicate=do
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=written family_words=chart name=""sales chart""
 @r2.u1 w.request.unread request=$r2 text=""bar edges red"" note=chart.bar.edge.colour value=red
@@ -12173,7 +12181,7 @@ could you set the tick numbers smaller on the top and left? and make the bars ho
 the tick numbers on Sales by month should be smaller on the top and left and then do the bars horizontal on the sales chart. show grid lines,"@f1 w.request.filler text=then
 @r1 w.request.request act=change mood=do words=""the tick numbers on Sales by month should be smaller on the top and left""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Sales by month""
-@r1.u1 w.request.unread request=$r1 text=""smaller on the top and left"" note=chart.tick.font
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.fontSize value=smaller operator=eq phase=result key_words=""tick numbers""
 @r2 w.request.request act=change mood=do words=""do the bars horizontal on the sales chart"" predicate=do
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=written family_words=chart name=""sales chart""
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.horizontal value=on words=horizontal operator=eq phase=result key_words=""bars""
@@ -12318,6 +12326,7 @@ title font large. show grid lines,"@r1 w.request.request act=change mood=do word
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.grid value=show operator=eq phase=result key_words=grid key_words=""grid lines"""
 the title font on Revenue trend should be large. legend on the right,"@r1 w.request.request act=change mood=do words=""the title font on Revenue trend should be large"" predicate=title
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Revenue trend""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.fontSize value=large operator=eq phase=result key_words=""title font""
 @r2 w.request.request act=change mood=do words=""legend on the right""
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
@@ -14487,6 +14496,7 @@ flow lines green. show grid lines,"@r1 w.request.request act=change mood=do word
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.grid value=show operator=eq phase=result key_words=grid key_words=""grid lines"""
 the flow lines on Traffic flow by avenue and hour should be green. y axis on the right,"@r1 w.request.request act=change mood=do words=""the flow lines on Traffic flow by avenue and hour should be green""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Traffic flow by avenue and hour""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.colour value=green operator=eq phase=result key_words=""flow lines""
 @r2 w.request.request act=change mood=do words=""y axis on the right""
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
@@ -14680,6 +14690,7 @@ flow lines orange. show grid lines,"@r1 w.request.request act=change mood=do wor
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.grid value=show operator=eq phase=result key_words=grid key_words=""grid lines"""
 the flow lines on Traffic flow by avenue and hour should be orange. y axis on the right,"@r1 w.request.request act=change mood=do words=""the flow lines on Traffic flow by avenue and hour should be orange""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Traffic flow by avenue and hour""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.colour value=orange operator=eq phase=result key_words=""flow lines""
 @r2 w.request.request act=change mood=do words=""y axis on the right""
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
@@ -14770,6 +14781,7 @@ bar faces blue. title Q2 sales,"@r1 w.request.request act=change mood=do words="
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.title value=""Q2 sales"" operator=eq phase=result key_words=title"
 the bar faces on Sales by month should be blue. font bigger,"@r1 w.request.request act=change mood=do words=""the bar faces on Sales by month should be blue""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Sales by month""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.colour value=blue operator=eq phase=result key_words=""bar faces""
 @r2 w.request.request act=change mood=do words=""font bigger""
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
@@ -16315,6 +16327,7 @@ marker faces purple. legend on the right,"@r1 w.request.request act=change mood=
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.legend value=right words=""on the right"" operator=eq phase=result key_words=legend"
 the marker faces on Order value by quantity should be purple. font bigger,"@r1 w.request.request act=change mood=do words=""the marker faces on Order value by quantity should be purple""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Order value by quantity""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.colour value=purple operator=eq phase=result key_words=""marker faces""
 @r2 w.request.request act=change mood=do words=""font bigger""
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
@@ -16536,7 +16549,7 @@ surface fill solid blue. show grid lines,"@r1 w.request.request act=change mood=
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.grid value=show operator=eq phase=result key_words=grid key_words=""grid lines"""
 the surface fill on Sensor surface by station and depth should be solid blue. legend on the right,"@r1 w.request.request act=change mood=do words=""the surface fill on Sensor surface by station and depth should be solid blue""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Sensor surface by station and depth""
-@r1.u1 w.request.unread request=$r1 text=""solid blue"" note=chart.surface.fill value=blue
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.colour value=""solid blue"" operator=eq phase=result key_words=""surface fill""
 @r2 w.request.request act=change mood=do words=""legend on the right""
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
@@ -16556,7 +16569,8 @@ my mistake — the chart type should be streamline plot,"@r1 w.request.request a
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=""streamline plot"" operator=eq phase=result open_value=true key_words=type
 @f1 w.request.filler text=""my mistake"""
-"oops, undo that and make the chart type streamline plot","@r1 w.request.request act=change mood=do predicate=make words=""undo that and make the chart type streamline plot""
+"oops, undo that and make the chart type streamline plot","@u1 w.request.request act=undo mood=do predicate=undo words=""undo that""
+@r1 w.request.request act=change mood=do predicate=make words=""make the chart type streamline plot""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context family_words=chart
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=""streamline plot"" operator=eq phase=result open_value=true key_words=type
@@ -20406,7 +20420,8 @@ my mistake — the line width should be bolder,"@r1 w.request.request act=change
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.lineWidth words=bolder operator=delta phase=result step=more key_words=width key_words=line
 @f1 w.request.filler text=""my mistake"""
-"oops, undo that and make the line width bolder","@r1 w.request.request act=change mood=do predicate=make words=""undo that and make the line width bolder""
+"oops, undo that and make the line width bolder","@u1 w.request.request act=undo mood=do predicate=undo words=""undo that""
+@r1 w.request.request act=change mood=do predicate=make words=""make the line width bolder""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.lineWidth words=bolder operator=delta phase=result step=more key_words=width key_words=line
@@ -20565,7 +20580,8 @@ my mistake — the line width should be one step the other way,"@r1 w.request.re
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.lineWidth value=""one step the other way"" operator=eq phase=result key_words=width key_words=line
 @f1 w.request.filler text=""my mistake"""
-"oops, undo that and make the line width one step the other way","@r1 w.request.request act=change mood=do predicate=make words=""undo that and make the line width one step the other way""
+"oops, undo that and make the line width one step the other way","@u1 w.request.request act=undo mood=do predicate=undo words=""undo that""
+@r1 w.request.request act=change mood=do predicate=make words=""make the line width one step the other way""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.lineWidth value=""one step the other way"" operator=eq phase=result key_words=width key_words=line
@@ -23995,6 +24011,7 @@ have the bar faces black; plus give it the title Orders per day,"@f1 w.request.f
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.title value=""Orders per day"" operator=eq phase=result key_words=title"
 the bar faces on Orders by weekday should be black. legend on the right,"@r1 w.request.request act=change mood=do words=""the bar faces on Orders by weekday should be black""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Orders by weekday""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.colour value=black operator=eq phase=result key_words=""bar faces""
 @r2 w.request.request act=change mood=do words=""legend on the right""
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
@@ -27094,7 +27111,7 @@ surface colour solid green. y axis on the right,"@r1 w.request.request act=chang
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.axisSide value=right words=""on the right"" operator=eq phase=result key_words=axis key_words=""y axis"""
 the surface colour on Sensor surface by station and depth should be solid green. show grid lines,"@r1 w.request.request act=change mood=do words=""the surface colour on Sensor surface by station and depth should be solid green""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Sensor surface by station and depth""
-@r1.u1 w.request.unread request=$r1 text=""solid green"" note=chart.surface.fill value=""solid green""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.colour value=""solid green"" operator=eq phase=result key_words=""surface colour""
 @r2 w.request.request act=change mood=do words=""show grid lines"" predicate=show
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
@@ -27268,6 +27285,7 @@ surface colour black plus do the font large on the surface chart. y axis on the 
 @r3.c1 w.request.constraint request=$r3 on=attribute attribute=chart.axisSide value=right words=""on the right"" operator=eq phase=result key_words=axis key_words=""y axis"""
 the surface colour on Sensor surface by station and depth should be black and do the font large on the surface chart. legend on the right,"@r1 w.request.request act=change mood=do words=""the surface colour on Sensor surface by station and depth should be black""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Sensor surface by station and depth""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.colour value=black operator=eq phase=result key_words=""surface colour""
 @r2 w.request.request act=change mood=do words=""do the font large on the surface chart"" predicate=do
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=written family_words=chart name=""surface chart""
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.fontSize value=large operator=eq phase=result key_words=font
@@ -28726,7 +28744,8 @@ let's have the tick numbers on the top and the right on the revenue trend,"@r1 w
 @r1.u1 w.request.unread request=$r1 text=""tick numbers on the top and the right"" note=chart.tick.position"
 the tick numbers on Revenue trend should be on the top and the right,"@r1 w.request.request act=change mood=do
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Revenue trend""
-@r1.u1 w.request.unread request=$r1 text=""on the top and the right"" note=chart.tick.position"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.xAxis value=top operator=eq phase=result key_words=""tick numbers""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.axisSide value=right operator=eq phase=result key_words=""tick numbers"""
 try the tick numbers on the top and the right,"@r1 w.request.request act=change mood=do predicate=try
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -28798,7 +28817,8 @@ let's have the y axis range 10^1 to 10^6 on the order scatter,"@r1 w.request.req
 @r1.u1 w.request.unread request=$r1 text=""y axis range 10^1 to 10^6"" note=chart.yrange value=""10^1 to 10^6"""
 the y axis range on Order value by quantity should be 10^1 to 10^6,"@r1 w.request.request act=change mood=do
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Order value by quantity""
-@r1.u1 w.request.unread request=$r1 text=""10^1 to 10^6"" note=chart.yrange value=""10^1 to 10^6"""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""10^1"" operator=eq phase=result key_words=""y axis range""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.max value=""10^6"" operator=eq phase=result key_words=""y axis range"""
 try the y axis range 10^1 to 10^6,"@r1 w.request.request act=change mood=do predicate=try
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -30192,7 +30212,7 @@ make the error bar cap thickness as thick as it gets and do the error bar cap si
 @r1.u1 w.request.unread request=$r1 text=""cap thickness as thick as it gets"" note=chart.errorbar.cap.width value=thick
 @r2 w.request.request act=change mood=do words=""do the error bar cap size smaller on the sales chart"" predicate=do
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=written family_words=chart name=""sales chart""
-@r2.u1 w.request.unread request=$r2 text=""error bar cap size smaller"" note=chart.errorbar.cap.size value=smaller"
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.errorCap value=smaller operator=eq phase=result key_words=""error bar cap size"""
 have the error bar cap thickness as thick as it gets and could you set the error bar cap size smaller?,"@r1 w.request.request act=change mood=do words=""have the error bar cap thickness as thick as it gets"" predicate=have
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -30252,7 +30272,7 @@ do the error bar cap thickness as thick as it gets on the sales chart and can yo
 @r1.u1 w.request.unread request=$r1 text=""cap thickness as thick as it gets"" note=chart.errorbar.cap.width value=thick
 @r2 w.request.request act=change mood=do words=""do the error bar cap size smaller on the sales chart"" predicate=do
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=written family_words=chart name=""sales chart""
-@r2.u1 w.request.unread request=$r2 text=""error bar cap size smaller"" note=chart.errorbar.cap.size value=smaller"
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.errorCap value=smaller operator=eq phase=result key_words=""error bar cap size"""
 "and also keep the cap thickness as thick as it gets — while you're at it, go for cap size smaller on the sales chart","@f1 w.request.filler text=also
 @f2 w.request.filler text=while
 @prev w.request.previous text=""do the error bar cap thickness as thick as it gets on the sales chart and can you make the error bar cap size smaller?""
@@ -30308,7 +30328,8 @@ could you set the error bar cap thickness asthick as it gets?; also make the err
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.u1 w.request.unread request=$r1 text=""arrow size one step smaller"" note=chart.flow.arrow.size
 @f1 w.request.filler text=""sorry"""
-"oops, undo that and make the arrow size one step smaller","@r1 w.request.request act=change mood=do predicate=make words=""undo that and make the arrow size one step smaller""
+"oops, undo that and make the arrow size one step smaller","@u1 w.request.request act=undo mood=do predicate=undo words=""undo that""
+@r1 w.request.request act=change mood=do predicate=make words=""make the arrow size one step smaller""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.u1 w.request.unread request=$r1 text=""arrow size one step smaller"" note=chart.flow.arrow.size
@@ -30526,7 +30547,8 @@ my mistake — the x axis range should be -3 to 3 from left to right,"@r1 w.requ
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.u1 w.request.unread request=$r1 text=""x axis range should be -3 to 3 from left to right"" note=chart.xrange
 @f1 w.request.filler text=""my mistake"""
-"oops, undo that and make the x axis range -3 to 3 from left to right","@r1 w.request.request act=change mood=do predicate=make words=""undo that and make the x axis range -3 to 3 from left to right""
+"oops, undo that and make the x axis range -3 to 3 from left to right","@u1 w.request.request act=undo mood=do predicate=undo words=""undo that""
+@r1 w.request.request act=change mood=do predicate=make words=""make the x axis range -3 to 3 from left to right""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.u1 w.request.unread request=$r1 text=""x axis range -3 to 3 from left to right"" note=chart.xrange
@@ -30580,7 +30602,8 @@ copy the same x range change across to the profit chart,"@prev w.request.previou
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.u1 w.request.unread request=$r1 text=""x axis range back at -3 to 3 from left to right"" note=chart.xrange"
-"oops, undo that and make the x axis range -3 tu 3 from left to right","@r1 w.request.request act=change mood=do predicate=make words=""undo that and make the x axis range -3 tu 3 from left to right""
+"oops, undo that and make the x axis range -3 tu 3 from left to right","@u1 w.request.request act=undo mood=do predicate=undo words=""undo that""
+@r1 w.request.request act=change mood=do predicate=make words=""make the x axis range -3 tu 3 from left to right""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.u1 w.request.unread request=$r1 text=""x axis range -3 tu 3 from left to right"" note=chart.xrange
@@ -30985,7 +31008,8 @@ let's have the title font large on the revenue trend,"@r1 w.request.request act=
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""revenue trend""
 @r1.u1 w.request.unread request=$r1 text=""font large"" note=chart.font.title value=large"
 the title font on Revenue trend should be large,"@r1 w.request.request act=change mood=do predicate=title
-@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Revenue trend"""
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Revenue trend""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.fontSize value=large operator=eq phase=result key_words=""title font"""
 try the title font large,"@r1 w.request.request act=change mood=do predicate=try
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -31795,7 +31819,8 @@ let's have the flow lines green on the traffic flow chart,"@r1 w.request.request
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written family_words=chart name=""traffic flow chart""
 @r1.u1 w.request.unread request=$r1 text=""flow lines green"" note=chart.line.colour value=green"
 the flow lines on Traffic flow by avenue and hour should be green,"@r1 w.request.request act=change mood=do
-@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Traffic flow by avenue and hour"""
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Traffic flow by avenue and hour""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.colour value=green operator=eq phase=result key_words=""flow lines"""
 try the flow lines green,"@r1 w.request.request act=change mood=do predicate=try
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -32024,7 +32049,8 @@ let's have the flow lines orange on the traffic flow chart,"@r1 w.request.reques
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written family_words=chart name=""traffic flow chart""
 @r1.u1 w.request.unread request=$r1 text=""flow lines orange"" note=chart.line.colour value=orange"
 the flow lines on Traffic flow by avenue and hour should be orange,"@r1 w.request.request act=change mood=do
-@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Traffic flow by avenue and hour"""
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Traffic flow by avenue and hour""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.colour value=orange operator=eq phase=result key_words=""flow lines"""
 try the flow lines orange,"@r1 w.request.request act=change mood=do predicate=try
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -32290,7 +32316,8 @@ I'd like the bin count six on the order histogram,"@r1 w.request.request act=cha
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""order histogram""
 @r1.u1 w.request.unread request=$r1 text=""bin count six"" note=chart.bin.count value=""6"""
 the bin count on Order values should be six,"@r1 w.request.request act=change mood=do
-@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Order values"""
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Order values""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.bins value=6 operator=eq phase=result words=six key_words=""bin count"""
 try the bin count six,"@r1 w.request.request act=change mood=do predicate=try
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -32551,7 +32578,8 @@ let's have the marker faces red on the order scatter,"@r1 w.request.request act=
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""order scatter""
 @r1.u1 w.request.unread request=$r1 text=""marker faces red"" note=chart.marker.face.colour value=red"
 the marker faces on Order value by quantity should be red,"@r1 w.request.request act=change mood=do
-@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Order value by quantity"""
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Order value by quantity""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.colour value=red operator=eq phase=result key_words=""marker faces"""
 try the marker faces red,"@r1 w.request.request act=change mood=do predicate=try
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -33050,7 +33078,7 @@ let's have the surface fill solid blue on the surface chart,"@r1 w.request.reque
 @r1.u1 w.request.unread request=$r1 text=""surface fill solid blue"" note=chart.surface.fill value=blue"
 the surface fill on Sensor surface by station and depth should be solid blue,"@r1 w.request.request act=change mood=do
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Sensor surface by station and depth""
-@r1.u1 w.request.unread request=$r1 text=""solid blue"" note=chart.surface.fill value=blue"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.colour value=""solid blue"" operator=eq phase=result key_words=""surface fill"""
 try the surface fill solid blue,"@r1 w.request.request act=change mood=do predicate=try
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -33482,7 +33510,8 @@ how about colour bar sohrt? plus let's have the colour bar medium in thickness o
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.u1 w.request.unread request=$r1 text=""colour bar thickness should be max, not min"" note=chart.cbar.width value=max
 @f1 w.request.filler text=""my mistake"""
-"oops, undo that and make the colour bar thickness max, not min","@r1 w.request.request act=change mood=do predicate=make words=""undo that and make the colour bar thickness max, not min""
+"oops, undo that and make the colour bar thickness max, not min","@u1 w.request.request act=undo mood=do predicate=undo words=""undo that""
+@r1 w.request.request act=change mood=do predicate=make words=""make the colour bar thickness max, not min""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.u1 w.request.unread request=$r1 text=""colour bar thickness max, not min"" note=chart.cbar.width value=max
@@ -34412,7 +34441,8 @@ bar faces black,"@r1 w.request.request act=change mood=do
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.u1 w.request.unread request=$r1 text=""bar faces black"" note=chart.bar.face value=black"
 the bar faces on Orders by weekday should be black,"@r1 w.request.request act=change mood=do
-@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Orders by weekday"""
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Orders by weekday""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.colour value=black operator=eq phase=result key_words=""bar faces"""
 try the bar faces black,"@r1 w.request.request act=change mood=do predicate=try
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -34942,7 +34972,7 @@ I'd like the surface colour solid green on the surface chart,"@r1 w.request.requ
 @r1.u1 w.request.unread request=$r1 text=""surface colour solid green"" note=chart.surface.fill value=""solid green"""
 the surface colour on Sensor surface by station and depth should be solid green,"@r1 w.request.request act=change mood=do
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Sensor surface by station and depth""
-@r1.u1 w.request.unread request=$r1 text=""solid green"" note=chart.surface.fill value=""solid green"""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.colour value=""solid green"" operator=eq phase=result key_words=""surface colour"""
 try the surface colour solid green,"@r1 w.request.request act=change mood=do predicate=try
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
