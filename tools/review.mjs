@@ -158,8 +158,12 @@ for (const r of after) {
 const summary = []; let errors = 0;
 for (const f of files) {
   let out = '';
-  try { out = execFileSync('node', [join(ROOT, 'tools/check.mjs'), '--file', f], { maxBuffer: 1 << 28 }).toString(); } catch (e) { out = e.stdout?.toString() ?? ''; }
+  try { out = execFileSync('node', [join(ROOT, 'tools/check.mjs'), '--file', f], { cwd: ROOT, maxBuffer: 1 << 28 }).toString(); } catch (e) { out = e.stdout?.toString() ?? ''; }
   const lines = out.split('\n').filter((l) => /^circuits|^\d+\t/.test(l));
+  const checkedRows = lines[0]?.match(/^circuits (\d+),/);
+  if (!checkedRows || Number(checkedRows[1]) !== after.filter(row => row.file === f).length) {
+    blocking.push(`checker did not verify every row in ${f}`);
+  }
   errors += Number((lines[0] ?? '').match(/not conforming (\d+)/)?.[1] ?? 0);
   summary.push(`${f}: ${lines.join(' | ')}`);
 }
