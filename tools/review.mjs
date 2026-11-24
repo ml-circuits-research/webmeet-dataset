@@ -131,6 +131,12 @@ for (const r of after) {
       for (const kw of (l.match(/ key_words=("[^"]*"|\S+)/g) ?? []).map((x) => tok(x.slice(11)))) if (/^(per|match|matches|distributed|showing|shows|show|split|splits|across|by|of|for|with|versus|vs|against|into|over|between|each|every|make|set|put|give|want|need|like|looks?|reads?)$/i.test(kw)) note('new key_words that name no key ("per", "showing", "match" only cover words)', r.text, l);
       if (/^step\./.test(a) && / phase=result/.test(l)) note('new step key as a result (a step key selects an earlier step: phase=selector; "bring back" is the act, not step.kind=add)', r.text, l);
       if (/ phase=selector/.test(l) && !/ want=no/.test(l) && v && new RegExp(`\\b(except|but not|other than|apart from|besides)\\b[^.,;]*\\b${esc(v)}`, 'i').test(r.text)) note('new selector inside an exception ("all houses except the one by the lake") without want=no: it selects what the text spares', r.text, l);
+      if (a === 'drawn.keep' && v === 'place') {
+        const evidence = tok(attr(l, 'words') ?? '');
+        if (/^(?:(?:the |their |its )?(?:same|even|equal|original) (?:gap|spacing|distance)|(?:\d+|one|two|three|four|five|six|seven|eight|nine|ten) (?:spots?|places?|units?|steps?) apart)$/i.test(evidence)) {
+          note('drawn.keep=place supported only by relative spacing', r.text, l);
+        }
+      }
       if (a === 'drawn.keep') { const req = (attr(l, 'request') ?? '').slice(1); const pred = tok((nowLines.find((x) => x.startsWith(`@${req} w.request.request `)) ?? '').match(/ predicate=("[^"]*"|\S+)/)?.[1] ?? ''); if (pred && !/^(keep|keeps|keeping|kept|leave|leaves|leaving|left|stay|stays|staying|remain|remains|hold|changes|change|moves|move)\b/i.test(pred)) note('new drawn.keep inside a request of another verb (a keep is its own request with its own target)', r.text, l); }
       if (/^(chart\.only|drawn\.name|node\.label)$/.test(a) && !/ want=no/.test(l) && /^(excluding|except|without|leaving out|leave out|not |minus|exclude|ignoring|apart from|other than)/i.test(tok(attr(l, 'words') ?? ''))) note('new selector said with "excluding/except/without" but without want=no (the request keeps the opposite)', r.text, l);
       if (/^chart\.[xy]Label$/.test(a) && /^[XYxy]$/.test(v)) note('new axis label that is only the axis letter ("in the X" names the axis)', r.text, l);
