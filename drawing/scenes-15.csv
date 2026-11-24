@@ -803,7 +803,8 @@ can you set three blue blacks between the two blocks and on top of the shell blo
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=""north of"" operator=relation phase=result open_value=true
 @r1.c2 w.request.constraint request=$r1 on=count attribute=drawn.count words=two operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the three-block stack"" operator=relation phase=selector
-@r1.u1 w.request.unread request=$r1 text=""space clear"" note=drawn.clear_of"
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.offset value=1 words=""one space"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=drawn.unit value=space operator=eq phase=result"
 "send block 2 until it is above the fifth block, one corner touching the yellow block","@r1 w.request.request act=change mood=do predicate=send
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context sort=block description=""block 2""
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=above words=""above the fifth block"" operator=relation phase=result
@@ -1159,13 +1160,15 @@ the mat needs to be straw.,"@r1 w.request.request act=change mood=do words=""the
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=on operator=relation phase=result
 @r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the wide river"" operator=relation phase=selector
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.material value=wooden operator=eq phase=result
-@r1.u1 w.request.unread request=$r1 text=""faoating clear of the bank and the reeds"" note=drawn.clear_of"
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.relation value=clear_of words=""clear of"" operator=relation phase=result
+@r1.c5 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the bank and the reeds"" relation=clear_of operator=relation phase=result"
 "on the pond, there should be an old boat, flating clear of the bank and the reeds.","@r1 w.request.request act=make mood=do
 @r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=boat
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=on operator=relation phase=result
 @r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the pond"" operator=relation phase=selector
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result
-@r1.u1 w.request.unread request=$r1 text=""flating clear of the bank and the reeds"" note=drawn.clear_of"
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.relation value=clear_of words=""clear of"" operator=relation phase=result
+@r1.c5 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the bank and the reeds"" relation=clear_of operator=relation phase=result"
 "now put a little swan there too in the same little pond, with the reeds between it and the shore, not on the bank.","@f1 w.request.filler text=now
 @f2 w.request.filler text=too
 @prev w.request.previous text=""put a small boat in the river, well out from the edge, not on the bank, and make it a little bigger.""
@@ -1218,14 +1221,16 @@ the mat needs to be straw.,"@r1 w.request.request act=change mood=do words=""the
 @r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=house
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=next_to words=""right beside"" operator=relation phase=result
 @r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the dirt road"" operator=relation phase=selector
-@r1.u1 w.request.unread request=$r1 text=""clear of the road"" note=drawn.clear_of value=""clear of the road""
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.relation value=clear_of words=""clear of"" operator=relation phase=result
+@r1.c5 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the road"" relation=clear_of operator=relation phase=result
 @r1.c3 w.request.constraint request=$r1 on=size attribute=drawn.size value=little operator=degree phase=result"
 "the best spot for a green tree is by the side of the main road, off the road on the field side of the hedge.","@r1 w.request.request act=make mood=do
 @r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=tree
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=next_to words=""by the side of"" operator=relation phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=green operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the main road"" operator=relation phase=selector
-@r1.u1 w.request.unread request=$r1 text=""off the road"" note=drawn.clear_of value=""off the road""
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.relation value=clear_of words=""off"" operator=relation phase=result
+@r1.c5 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the road"" relation=clear_of operator=relation phase=result
 @r1.u2 w.request.unread request=$r1 text=""best spot"" note=page.composition
 @r1.u3 w.request.unread request=$r1 text=""field side of the hedge"" note=drawn.detail"
 "add a white house left of the quiet road, and leave the verge and the white posts clear.","@r1 w.request.request act=make mood=do predicate=add
@@ -1510,19 +1515,22 @@ leave the old bench exactly as it is.,"@prev w.request.previous text=""put the b
 "let the small barn go clear of the road, and leave the gate clear.","@prev w.request.previous text=""put the barn next to the road""
 @r1 w.request.request act=change mood=do predicate=let
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=barn
-@r1.u1 w.request.unread request=$r1 text=""go clear of the road"" note=drawn.clear_of value=""clear of the road""
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.relation value=clear_of words=""clear of"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the road"" relation=clear_of operator=relation phase=result
 @r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result
 @r1.u2 w.request.unread request=$r1 text=""leave the gate clear"" note=drawn.keep"
 "move the small barn off the road, and leave the gate clear.","@prev w.request.previous text=""put the barn next to the road""
 @r1 w.request.request act=change mood=do predicate=move
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=barn
-@r1.u1 w.request.unread request=$r1 text=""off the road"" note=drawn.clear_of value=""off the road""
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.relation value=clear_of words=""off"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the road"" relation=clear_of operator=relation phase=result
 @r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result
 @r1.u2 w.request.unread request=$r1 text=""leave the gate clear"" note=drawn.keep"
 the wooden barn away from the road.,"@prev w.request.previous text=""put the barn next to the road""
 @r1 w.request.request act=change mood=do
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=barn
-@r1.u1 w.request.unread request=$r1 text=""away from the road"" note=drawn.clear_of value=""away from the road""
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.relation value=clear_of words=""away from"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the road"" relation=clear_of operator=relation phase=result
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.material value=wooden operator=eq phase=result"
 "could you add a little house on the big hill, and keep it there, away from the steep drop.","@r1 w.request.request act=make mood=do predicate=add
 @r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=house
@@ -1530,7 +1538,8 @@ the wooden barn away from the road.,"@prev w.request.previous text=""put the bar
 @r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the big hill"" operator=relation phase=selector
 @r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.keep value=place words=""keep it there"" operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=size attribute=drawn.size value=little operator=degree phase=result
-@r1.u2 w.request.unread request=$r1 text=""away from the steep drop"" note=drawn.clear_of"
+@r1.c5 w.request.constraint request=$r1 on=place attribute=drawn.relation value=clear_of words=""away from"" operator=relation phase=result
+@r1.c6 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the steep drop"" relation=clear_of operator=relation phase=result"
 "now a second white windmill on the same high hill, and leave it there for the whole scene.","@f1 w.request.filler text=now
 @prev w.request.previous text=""I want a small house on the hill, and keep it there, facing the valley.""
 @r1 w.request.request act=make mood=do
@@ -2118,7 +2127,8 @@ i wonder if you could rest a green block in the middle of the second row and in 
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.keep value=all words=""leave the rest of the line as it is"" operator=eq phase=result"
 "slide the old barn clear of the road, and leave the gate clear, and make it red.","@r1 w.request.request act=change mood=do words=""slide the old barn clear of the road, and leave the gate clear"" predicate=slide
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=barn
-@r1.u1 w.request.unread request=$r1 text=""clear of the road"" note=drawn.clear_of value=""clear of the road""
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.relation value=clear_of words=""clear of"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the road"" relation=clear_of operator=relation phase=result
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result
 @r1.u2 w.request.unread request=$r1 text=""leave the gate clear"" note=drawn.keep
 @r2 w.request.request act=change mood=do words=""make it red""
@@ -9226,7 +9236,8 @@ now have the little girl on the bench stand with arms out.,"@f1 w.request.filler
 @r1 w.request.request act=change mood=do words=""move the red barn off the road, so the carts can pass"" predicate=move
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=barn
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=red operator=eq phase=selector
-@r1.u1 w.request.unread request=$r1 text=""off the road"" note=drawn.clear_of value=""off the road""
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.relation value=clear_of words=""off"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the road"" relation=clear_of operator=relation phase=result
 @r1.u2 w.request.unread request=$r1 text=""carts can pass"" note=drawn.detail
 @r2 w.request.request act=change mood=do words=""turn it slightly to the left""
 @r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=context
@@ -9255,7 +9266,8 @@ now have the little girl on the bench stand with arms out.,"@f1 w.request.filler
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=next_to words=""by the side of"" operator=relation phase=result
 @r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the tree"" operator=relation phase=selector
 @r1.u1 w.request.unread request=$r1 text=""round rock by the side of the tree"" note=drawn.detail
-@r1.u2 w.request.unread request=$r1 text=""clear of the wall and the step"" note=drawn.clear_of"
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.relation value=clear_of words=""clear of"" operator=relation phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the wall and the step"" relation=clear_of operator=relation phase=result"
 "shift the little duck on the lake, where the surface is flat and the water is calm, and make it a little bigger.","@r1 w.request.request act=change mood=do words=""shift the little duck on the lake, where the surface is flat and the water is calm"" predicate=shift
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=duck
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=on operator=relation phase=result
@@ -9290,7 +9302,8 @@ now have the little girl on the bench stand with arms out.,"@f1 w.request.filler
 @r2 w.request.request act=place mood=do words=""keep it off the road"" predicate=keep
 @r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""off the road"" note=drawn.clear_of value=""off the road"""
+@r2.c1 w.request.constraint request=$r2 on=place attribute=drawn.relation value=clear_of words=""off"" operator=relation phase=result
+@r2.c2 w.request.constraint request=$r2 on=place attribute=drawn.anchor value=""the road"" relation=clear_of operator=relation phase=result"
 "could you put a small barn just beside the long road, and leave the milestone and the sign visible, and keep it off the track.","@r1 w.request.request act=make mood=do words=""could you put a small barn just beside the long road, and leave the milestone and the sign visible"" predicate=put
 @r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=barn
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=next_to words=""just beside"" operator=relation phase=result
@@ -9300,7 +9313,8 @@ now have the little girl on the bench stand with arms out.,"@f1 w.request.filler
 @r2 w.request.request act=place mood=do words=""keep it off the track"" predicate=keep
 @r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""off the track"" note=drawn.clear_of value=""off the track"""
+@r2.c1 w.request.constraint request=$r2 on=place attribute=drawn.relation value=clear_of words=""off"" operator=relation phase=result
+@r2.c2 w.request.constraint request=$r2 on=place attribute=drawn.anchor value=""the track"" relation=clear_of operator=relation phase=result"
 "I want a little bench right beside the road, where the ground is flat and the fence runs behind, and keep it off the road.","@r1 w.request.request act=make mood=do words=""I want a little bench right beside the road, where the ground is flat and the fence runs behind"" predicate=want
 @r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bench
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=next_to words=""right beside"" operator=relation phase=result
@@ -9310,7 +9324,8 @@ now have the little girl on the bench stand with arms out.,"@f1 w.request.filler
 @r2 w.request.request act=place mood=do words=""keep it off the road"" predicate=keep
 @r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""off the road"" note=drawn.clear_of value=""off the road"""
+@r2.c1 w.request.constraint request=$r2 on=place attribute=drawn.relation value=clear_of words=""off"" operator=relation phase=result
+@r2.c2 w.request.constraint request=$r2 on=place attribute=drawn.anchor value=""the road"" relation=clear_of operator=relation phase=result"
 "I want a little bench at the side of the narrow road, with the gate and the track just beyond, and keep it clear of the path.","@f1 w.request.filler text=just
 @r1 w.request.request act=make mood=do words=""I want a little bench at the side of the narrow road, with the gate and the track just beyond"" predicate=want
 @r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bench
@@ -9321,7 +9336,8 @@ now have the little girl on the bench stand with arms out.,"@f1 w.request.filler
 @r2 w.request.request act=place mood=do words=""keep it clear of the path"" predicate=keep
 @r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.u1 w.request.unread request=$r2 text=""clear of the path"" note=drawn.clear_of value=""clear of the path"""
+@r2.c1 w.request.constraint request=$r2 on=place attribute=drawn.relation value=clear_of words=""clear of"" operator=relation phase=result
+@r2.c2 w.request.constraint request=$r2 on=place attribute=drawn.anchor value=""the path"" relation=clear_of operator=relation phase=result"
 have the two people shake hands please,"@f1 w.request.filler text=please
 @r1 w.request.request act=place mood=do words=""have the two people shake hands"" predicate=have
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=person sort_words=people count_words=""the two people"" quantifier=two
@@ -11971,14 +11987,15 @@ there is a little plane with only the top showing above the swing set.,"@r1 w.re
 @r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=windmill
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=next_to words=""next to"" operator=relation phase=result
 @r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the dirt road"" operator=relation phase=selector
-@r1.u1 w.request.unread request=$r1 text=""clear of the road"" note=drawn.clear_of value=""clear of the road""
-@r1.u2 w.request.unread request=$r1 text=""room for a wooden"" note=page.composition
-@r1.u3 w.request.unread request=$r1 text=""turning place?"" note=drawn.detail"
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.relation value=clear_of words=""clear of"" operator=relation phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the road and the turning place"" relation=clear_of operator=relation phase=result
+@r1.u2 w.request.unread request=$r1 text=""room for a wooden"" note=page.composition"
 "can you place a little windmill beside the quiet road, off the road where the verge is flat and dry.","@r1 w.request.request act=make mood=do predicate=place
 @r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=windmill
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=next_to words=beside operator=relation phase=result
 @r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the quiet road"" operator=relation phase=selector
-@r1.u1 w.request.unread request=$r1 text=""off the road"" note=drawn.clear_of value=""off the road""
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.relation value=clear_of words=""off"" operator=relation phase=result
+@r1.c5 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the road"" relation=clear_of operator=relation phase=result
 @r1.c3 w.request.constraint request=$r1 on=size attribute=drawn.size value=little operator=degree phase=result
 @r1.u2 w.request.unread request=$r1 text=""verge is flat and dry"" note=drawn.detail"
 "would you add an old well alongside the road, from the gate down to the bend.","@r1 w.request.request act=make mood=do predicate=add
@@ -11998,7 +12015,8 @@ there is a little plane with only the top showing above the swing set.,"@r1 w.re
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=in_front_of words=""at the front of"" operator=relation phase=result
 @r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the big house"" operator=relation phase=selector
 @r1.u1 w.request.unread request=$r1 text=""round rock at the front of the big house"" note=drawn.detail
-@r1.u2 w.request.unread request=$r1 text=""clear space between it and the step"" note=drawn.clear_of"
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.relation value=clear_of words=""clear space"" operator=relation phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the step"" relation=clear_of operator=relation phase=result"
 "I want a wooden fence in front of the old house, with the low wall and the hedge behind it.","@r1 w.request.request act=make mood=do predicate=want
 @r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=fence
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=in_front_of words=""in front of"" operator=relation phase=result
@@ -12031,7 +12049,8 @@ there is a little plane with only the top showing above the swing set.,"@r1 w.re
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.distanceGrade value=""just a touch"" operator=degree phase=result
 @r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=white operator=eq phase=selector
 @r1.c5 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the path"" operator=relation phase=selector
-@r1.u1 w.request.unread request=$r1 text=""kaep it clear"" note=drawn.clear_of"
+@r1.c6 w.request.constraint request=$r1 on=place attribute=drawn.relation value=clear_of words=""clear of"" operator=relation phase=result
+@r1.c7 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the path"" relation=clear_of operator=relation phase=result"
 "shift the long table just a touch further from the well, with the shadow falling short of the wall.","@r1 w.request.request act=change mood=do predicate=shift
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=table
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.distanceGrade value=""just a touch"" operator=degree phase=result
@@ -12067,7 +12086,8 @@ the bench a bit further from the house.,"@r1 w.request.request act=change mood=d
 "bring the small barn off the path, and leave the gate clear.","@prev w.request.previous text=""put the barn next to the road""
 @r1 w.request.request act=change mood=do predicate=bring
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=barn
-@r1.u1 w.request.unread request=$r1 text=""off the path"" note=drawn.clear_of value=""off the path""
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.relation value=clear_of words=""off"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the path"" relation=clear_of operator=relation phase=result
 @r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result
 @r1.u2 w.request.unread request=$r1 text=""leave the gate clear"" note=drawn.keep"
 "on the big hill, there should be an old tree, and leave it there, clear of the sheep track.","@r1 w.request.request act=make mood=do
@@ -12076,7 +12096,8 @@ the bench a bit further from the house.,"@r1 w.request.request act=change mood=d
 @r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the big hill"" operator=relation phase=selector
 @r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.keep value=place words=""leave it there"" operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result
-@r1.u2 w.request.unread request=$r1 text=""clear of the sheep track"" note=drawn.clear_of"
+@r1.c5 w.request.constraint request=$r1 on=place attribute=drawn.relation value=clear_of words=""clear of"" operator=relation phase=result
+@r1.c6 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the sheep track"" relation=clear_of operator=relation phase=result"
 "on the green hill, there should be a little windmill, and keep it there, on the slope abve the path.","@r1 w.request.request act=make mood=do predicate=keep
 @r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=windmill
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=on operator=relation phase=result
