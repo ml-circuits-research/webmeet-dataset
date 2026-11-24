@@ -131,6 +131,14 @@ for (const r of after) {
       for (const kw of (l.match(/ key_words=("[^"]*"|\S+)/g) ?? []).map((x) => tok(x.slice(11)))) if (/^(per|match|matches|distributed|showing|shows|show|split|splits|across|by|of|for|with|versus|vs|against|into|over|between|each|every|make|set|put|give|want|need|like|looks?|reads?)$/i.test(kw)) note('new key_words that name no key ("per", "showing", "match" only cover words)', r.text, l);
       if (/^step\./.test(a) && / phase=result/.test(l)) note('new step key as a result (a step key selects an earlier step: phase=selector; "bring back" is the act, not step.kind=add)', r.text, l);
       if (/ phase=selector/.test(l) && !/ want=no/.test(l) && v && new RegExp(`\\b(except|but not|other than|apart from|besides)\\b[^.,;]*\\b${esc(v)}`, 'i').test(r.text)) note('new selector inside an exception ("all houses except the one by the lake") without want=no: it selects what the text spares', r.text, l);
+      if (a === 'chart.share.base' && /^(?:one hundred percent|100\s*%)$/i.test(v) &&
+          /\b(?:add(?:s|ing)?|sum(?:s|ming)?) (?:up )?to\b/i.test(r.text)) {
+        note('share denominator taken from the sum of the displayed percentages', r.text, l);
+      }
+      if (a === 'drawn.relation' && v === 'clear_of' &&
+          /\b(?:hid(?:e|es|ing|den)|cover(?:s|ing|ed)?)\b/i.test(tok(attr(l, 'words') ?? ''))) {
+        note('physical clearance inferred from hiding or covering evidence', r.text, l);
+      }
       if (a === 'drawn.keep' && v === 'place') {
         const evidence = tok(attr(l, 'words') ?? '');
         if (/^(?:(?:the |their |its )?(?:same|even|equal|original) (?:gap|spacing|distance)|(?:\d+|one|two|three|four|five|six|seven|eight|nine|ten) (?:spots?|places?|units?|steps?) apart)$/i.test(evidence)) {
