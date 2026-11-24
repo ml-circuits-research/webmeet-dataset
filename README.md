@@ -3,7 +3,7 @@
 Training data for the PSys2 reader. The reader takes a message someone types in one tab of the app (Drawing, Diagram,
 Document, Calendar). From that message it produces SOP Lang wires that say what was asked.
 
-Each row is one message with the wires the reader should produce for it.
+Each row is one message with the wires the reader should produce for it. Use the [shared grading legend](LEGEND.md) to report formaliser quality.
 
 ## Layout
 
