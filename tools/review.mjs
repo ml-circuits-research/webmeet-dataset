@@ -22,6 +22,7 @@ import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { approvedRetirements } from './review-migrations.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const args = Object.fromEntries(process.argv.slice(2).reduce((a, x, i, all) => (x.startsWith('--') ? [...a, [x.slice(2), all[i + 1] === undefined || all[i + 1].startsWith('--') ? true : all[i + 1]]] : a), []));
@@ -78,6 +79,14 @@ const attr = (l, k) => { const m = l.match(new RegExp(` ${k}=("[^"]*"|\\S+)`)); 
 const ckey = (l) => [attr(l, 'request'), attr(l, 'attribute'), attr(l, 'value')].join('|');
 
 const blocking = [], review = new Map(), changed = [];
+let retirements = new Map();
+if (args.migration) {
+  try {
+    retirements = approvedRetirements(JSON.parse(readFileSync(args.migration, 'utf8')), files, after);
+  } catch (error) {
+    blocking.push(`invalid migration: ${error.message}`);
+  }
+}
 const note = (kind, text, line) => { const g = review.get(kind) ?? []; g.push([text, line]); review.set(kind, g); };
 
 // rows
@@ -90,7 +99,7 @@ for (const r of after) {
   changed.push(r);
   const oldLines = new Set(old.split('\n')), nowLines = r.sop.split('\n');
   const nowKeys = new Set(nowLines.filter((l) => l.includes(' w.request.constraint ')).map(ckey));
-  for (const l of old.split('\n')) if (l.includes(' w.request.constraint ') && !nowKeys.has(ckey(l))) blocking.push(`committed constraint lost: ${r.text.slice(0, 80)}  ::  ${l.slice(0, 110)}`);
+  for (const l of old.split('\n')) if (l.includes(' w.request.constraint ') && !nowKeys.has(ckey(l)) && !retirements.get(r)?.has(l)) blocking.push(`committed constraint lost: ${r.text.slice(0, 80)}  ::  ${l.slice(0, 110)}`);
   const added = nowLines.filter((l) => !oldLines.has(l));
   // Two measures may share a request, but each named value has its own evidence.
   const measureEvidence = new Map();
@@ -171,6 +180,7 @@ if (errors) blocking.push(`${errors} checker errors (run node tools/check.mjs --
 
 console.log(`files: ${files.join(', ')}  (committed: ${heads.join(', ')})`);
 console.log(`rows: committed ${before.size}, now ${after.length}, changed ${changed.length}`);
+if (args.migration) console.log(`approved constraint retirements: ${[...retirements.values()].reduce((n, lines) => n + lines.size, 0)}`);
 console.log('checker:\n  ' + summary.join('\n  '));
 console.log(`\nBLOCKING: ${blocking.length}`);
 for (const b of blocking.slice(0, 15)) console.log('  ' + b);

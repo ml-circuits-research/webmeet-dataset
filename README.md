@@ -176,6 +176,13 @@ node tools/review.mjs --file diagram/a.1.csv,diagram/a.2.csv --head diagram/a.cs
 A file is ready when BLOCKING is 0, REVIEW is 0 (or each remaining line is explained in the READY), and the sample
 reads right.
 
+When a published constraint is wrong, the coordinator can approve an exact migration in
+`tools/migrations/*.json`. Each entry identifies the `file`, unchanged `text`, full old constraint
+lines in `remove`, and exact replacement wires in `require`. Review it with
+`node tools/review.mjs --file TAB/FILE.csv --migration tools/migrations/FILE.json`.
+Missing or ambiguous source rows, missing replacements, retained retired wires and other constraint
+losses still block publication. The normal command keeps refusing all constraint losses.
+
 **Errors** (the row is refused). Each line is the message the checker prints, with its rule:
 - *schema violations*: a type or key `w.request` does not declare, a value outside an enum, an act not in `k.actions`;
 - *not a key / family of the tab (w.request keys)*: a constraint `attribute` or a target `family` the file's tab does not have;

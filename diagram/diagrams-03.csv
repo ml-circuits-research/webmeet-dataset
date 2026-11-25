@@ -678,14 +678,15 @@ text,sop
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""Line chart"" operator=eq phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown at the points"" operator=eq phase=result key_words=values
-@r1.u1 w.request.unread request=$r1 text=""quarter the order fell in"" note=chart.dimension.derived
 @r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result
 @r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=quarter operator=eq phase=result key_words=""by quarter""
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.period value=quarter operator=eq phase=result
 @r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=sum operator=eq phase=result words=total
 @r2 w.request.request act=change mood=do words=""add gridlines behind the bars"" predicate=add
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.grid value=show words=gridlines operator=eq phase=result key_words=gridlines key_words=bars"
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.grid value=show words=gridlines operator=eq phase=result key_words=gridlines key_words=bars
+@r1.u1 w.request.unread request=$r1 text=""quarter the order fell in"" note=chart.period.source"
 "Flag the top three months","@r1 w.request.request act=change mood=do predicate=Flag
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -3345,6 +3346,7 @@ text,sop
 @r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=sum operator=eq phase=result words=total"
 "Chart the total marketing budget by segment, with category nested inside each segment","@r1 w.request.request act=make mood=do predicate=Chart
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=Chart
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category words=""with category nested inside each segment"" operator=eq phase=result
 @r1.u1 w.request.unread request=$r1 text=""with category nested inside each segment"" note=chart.dimension.nested
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""marketing budget"" operator=eq phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=segment operator=eq phase=result key_words=""by segment""
@@ -3821,28 +3823,27 @@ text,sop
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result key_words=values
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result key_words=gridlines
-@r1.u1 w.request.unread request=$r1 text=""price bucket of 500"" note=chart.dimension.derived
 @r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result
 @r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=price operator=eq phase=result key_words=""by price""
+@r1.u1 w.request.unread request=$r1 text=""price bucket of 500"" note=chart.bin.width value=""500""
 @r2 w.request.request act=change mood=do words=""give it the title 'Sales by price band'"" predicate=give
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
-@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.title value=""Sales by price band"" operator=eq phase=result key_words=title
-@r2.c2 w.request.constraint request=$r2 on=attribute attribute=chart.dimension value=""price band'"" operator=eq phase=result key_words=""by price band'"""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.title value=""Sales by price band"" operator=eq phase=result key_words=title"
 "um, Put together a bar chart of the sales by price bucket of 500 for each price band, please","@f1 w.request.filler text=um
 @f2 w.request.filler text=please
 @r1 w.request.request act=make mood=do words=""Put together a bar chart of the sales by price bucket of 500 for each price band"" predicate=Put
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
-@r1.u1 w.request.unread request=$r1 text=""price bucket of 500"" note=chart.dimension.derived
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""price bucket of 500"" note=chart.bin.width value=""500""
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=price operator=eq phase=result key_words=""by price"""
 "Render totla sales, broken out by calendar quarter of the order date as a line chart","@r1 w.request.request act=make mood=do predicate=Render
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
-@r1.u1 w.request.unread request=$r1 text=""calendar quarter of the order date"" note=chart.dimension.derived
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""totla sales"" operator=eq phase=result
-@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=calendar words=""broken out by calendar"" operator=eq phase=result key_words=""broken out by calendar"""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.period value=quarter words=""calendar quarter of the order date"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=""order date"" operator=eq phase=result"
 "Show the chart of sales over orders across the regions as a column chart and move the legend to the right","@r1 w.request.request act=make mood=do words=""Show the chart of sales over orders across the regions as a column chart"" predicate=Show
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=column words=""column chart"" operator=eq phase=result open_value=true
@@ -3911,8 +3912,9 @@ text,sop
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""sorted from high to low"" operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
-@r1.u1 w.request.unread request=$r1 text=""monthly revenue"" note=chart.dimension.derived
-@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result key_words=""by region"""
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result key_words=""by region""
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
 "start with the arcs labelled two, then add a transition called fire, and keep the whole diagram readable on one page","@f1 w.request.filler text=then
 @r1 w.request.request act=change mood=do predicate=start
 @r1.t w.request.target request=$r1 family=link mode=existing determiner=quantified fill=all
@@ -10914,6 +10916,7 @@ text,sop
 @r1 w.request.request act=make mood=do words=""Let's do a stacked bar chart of the total sales by category, with sub-category nested inside each category""
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=stacked words=""stacked bar chart"" operator=eq phase=result open_value=true
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=sub-category words=""with sub-category nested inside each category"" operator=eq phase=result
 @r1.u1 w.request.unread request=$r1 text=""with sub-category nested inside each category"" note=chart.dimension.nested
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result key_words=""by category""
@@ -10927,6 +10930,7 @@ text,sop
 @r1 w.request.request act=make mood=do words=""Display the total sales per category, split further by sub-category as a stacked bar chart"" predicate=Display
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=stacked words=""stacked bar chart"" operator=eq phase=result open_value=true
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=sub-category words=""split further by sub-category"" operator=eq phase=result
 @r1.u1 w.request.unread request=$r1 text=""split further by sub-category"" note=chart.dimension.nested
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result key_words=""per category""
@@ -10934,6 +10938,7 @@ text,sop
 "Chart the total slaes grouped by category and then by sub-category","@f1 w.request.filler text=then
 @r1 w.request.request act=make mood=do predicate=Chart
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=Chart
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=sub-category words=""and then by sub-category"" operator=eq phase=result
 @r1.u1 w.request.unread request=$r1 text="" grouped by category and then by sub-category"" note=chart.dimension.nested
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=slaes operator=eq phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result key_words=""grouped by category""
@@ -10941,6 +10946,7 @@ text,sop
 "Build me a bar chart of the total marketing budget per segment, split further by category","@r1 w.request.request act=make mood=do predicate=Build
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category words=""split further by category"" operator=eq phase=result
 @r1.u1 w.request.unread request=$r1 text=""split further by category"" note=chart.dimension.nested
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""marketing budget"" operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=segment operator=eq phase=result key_words=""per segment""
@@ -10948,6 +10954,7 @@ text,sop
 "Make a bar chart of the total headcount for each department, and within that each team","@r1 w.request.request act=make mood=do predicate=Make
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=team words=""and within that each team"" operator=eq phase=result
 @r1.u1 w.request.unread request=$r1 text=""and within that each team"" note=chart.dimension.nested
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=headcount operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department operator=eq phase=result key_words=""for each department""
@@ -10958,6 +10965,7 @@ text,sop
 @r1 w.request.request act=make mood=do words=""Make a bar chart of the total headcount grouped by department and then by team"" predicate=Make
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=team words=""then by team"" operator=eq phase=result
 @r1.u1 w.request.unread request=$r1 text="" grouped by department and then by team"" note=chart.dimension.nested
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=headcount operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department operator=eq phase=result key_words=""grouped by department""
@@ -10967,6 +10975,7 @@ text,sop
 @r1 w.request.request act=make mood=do words=""Build me a column chart of the total claims per region, split further by policy type"" predicate=Build
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=column words=""column chart"" operator=eq phase=result open_value=true
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=""policy type"" words=""split further by policy type"" operator=eq phase=result
 @r1.u1 w.request.unread request=$r1 text=""split further by policy type"" note=chart.dimension.nested
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=claims operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result key_words=""per region""
@@ -10975,6 +10984,7 @@ text,sop
 @r1 w.request.request act=make mood=do words=""How about a bar chart of the total orders by category, with month nested inside each category"" predicate=How
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=""with month nested inside each category"" operator=eq phase=result
 @r1.u1 w.request.unread request=$r1 text=""with month nested inside each category"" note=chart.dimension.nested
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result key_words=""by category""
@@ -10988,6 +10998,7 @@ text,sop
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result key_words=values
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result key_words=gridlines
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=""broken down by month inside each category"" operator=eq phase=result
 @r1.u1 w.request.unread request=$r1 text=""broken down by month inside each category"" note=chart.dimension.nested
 @r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result
 @r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result key_words=""by category""
@@ -10997,6 +11008,7 @@ text,sop
 @r1 w.request.request act=make mood=do words=""Try a bar chart of the total orders for each category, and within that each month"" predicate=Try
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=""and within that each month"" operator=eq phase=result
 @r1.u1 w.request.unread request=$r1 text=""and within that each month"" note=chart.dimension.nested
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result key_words=""for each category""
@@ -11006,6 +11018,7 @@ text,sop
 @r1 w.request.request act=make mood=do words=""Put together a bar chart of the total orders per category, split further by month"" predicate=Put
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=""split further by month"" operator=eq phase=result
 @r1.u1 w.request.unread request=$r1 text=""split further by month"" note=chart.dimension.nested
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result key_words=""per category""
@@ -11013,6 +11026,7 @@ text,sop
 "Try a bar chart of the total revenue by region, sub-grouped by channel","@r1 w.request.request act=make mood=do predicate=Try
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=channel words=""sub-grouped by channel"" operator=eq phase=result
 @r1.u1 w.request.unread request=$r1 text=""sub-grouped by channel"" note=chart.dimension.nested
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result key_words=""by region""
@@ -11033,7 +11047,9 @@ text,sop
 "Build me a bar chart of monthly totals of orders","@r1 w.request.request act=make mood=do predicate=Build
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=""monthly totals"" operator=eq phase=result"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count words=totals operator=eq phase=result"
 "Display a paired view of revenue for each region, this year side by side with last year as a bar chart","@r1 w.request.request act=make mood=do predicate=Display
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
@@ -11779,19 +11795,21 @@ text,sop
 "Display orders by weekday of the order date as a bar chart","@r1 w.request.request act=make mood=do predicate=Display
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
-@r1.u1 w.request.unread request=$r1 text=""weekday of the order date"" note=chart.dimension.derived
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result"
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=weekday operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""weekday of the order date"" note=chart.dimension.source"
 "Display average salary grouped by five-year tenure bracket as a column chart","@r1 w.request.request act=make mood=do predicate=Display
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=column words=""column chart"" operator=eq phase=result open_value=true
-@r1.u1 w.request.unread request=$r1 text=""five-year tenure bracket"" note=chart.dimension.derived
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=salary operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg operator=eq phase=result words=average
-@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=five-year words=""grouped by five-year"" operator=eq phase=result key_words=""grouped by five-year"""
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=tenure words=""tenure bracket"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""five-year tenure bracket"" note=chart.bin.width value=""5"""
 "Total sales by quarter of the order date","@r1 w.request.request act=make mood=do
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
-@r1.u1 w.request.unread request=$r1 text=""quarter of the order date"" note=chart.dimension.derived
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.period value=quarter operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=""order date"" operator=eq phase=result"
 "Let's do a bar chart of the revenue per head for each department","@r1 w.request.request act=make mood=do
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
@@ -11945,7 +11963,9 @@ text,sop
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""sorted from high to low"" operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
-@r1.u1 w.request.unread request=$r1 text=""monthly revenue by region"" note=chart.dimension.derived"
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region words=""by region"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
 "Revenue per employee by department, one bar per department","@r1 w.request.request act=make mood=do
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
 @r1.u1 w.request.unread request=$r1 text=""Revenue per employee"" note=chart.metric.ratio
@@ -17441,6 +17461,7 @@ text,sop
 @r1 w.request.request act=make mood=do predicate=see
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=channel words=""with channel nested inside each region"" operator=eq phase=result
 @r1.u1 w.request.unread request=$r1 text=""with channel nested inside each region"" note=chart.dimension.nested
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result key_words=""by region""
@@ -17474,7 +17495,8 @@ text,sop
 "Put together a bar chart of sales by price bucket of 500","@r1 w.request.request act=make mood=do predicate=Put
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
-@r1.u1 w.request.unread request=$r1 text=""price bucket of 500"" note=chart.dimension.derived
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=price words=""by price"" operator=eq phase=result
+@r1.c4 w.request.unread request=$r1 text=""price bucket of 500"" note=chart.bin.width value=""500""
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
 "We need a scatter plot of profit across and sales up","@r1 w.request.request act=make mood=do predicate=need
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=plot
@@ -17505,7 +17527,9 @@ text,sop
 @r1 w.request.request act=make mood=do words=""Bar chart of monthly revenue by region, only the top five, all on one common scale""
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""Bar chart"" operator=eq phase=result
-@r1.u1 w.request.unread request=$r1 text=""monthly revenue by region"" note=chart.dimension.derived
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region words=""by region"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
 @r2 w.request.request act=change mood=do words=""move the legend to the right"" predicate=move
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
@@ -17529,8 +17553,9 @@ text,sop
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""sorted from high to low"" operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result key_words=legend
-@r1.u1 w.request.unread request=$r1 text=""revenue by calendar quarter"" note=chart.dimension.derived
-@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result key_words=""per region"""
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.period value=quarter words=""calendar quarter"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result key_words=""per region""
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
 "let's put places drawn as circles and transitions as bars into a petri net","@r1 w.request.request act=make mood=do predicate=put
 @r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.kind value=""petri net"" operator=eq phase=result open_value=true"
@@ -18290,7 +18315,7 @@ text,sop
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department operator=eq phase=result key_words=""by department""
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.yLabel value=sales operator=eq phase=result
 @r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.stacked value=on words=stacked operator=eq phase=result
-@r1.u1 w.request.unread request=$r1 text=""product line"" note=chart.dimension.nested value=""product line"""
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=""product line"" words=""and product line"" operator=eq phase=result"
 "I'd rather see sales by region in a horizontal bar chart than in the spreadsheet, because the last version made the region look flat","@r1 w.request.request act=make mood=do predicate=see
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite sort=chart family_words=chart
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""horizontal bar chart"" operator=eq phase=result
@@ -21575,9 +21600,9 @@ text,sop
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result key_words=gridlines
-@r1.u1 w.request.unread request=$r1 text=""order-date month"" note=chart.dimension.derived
 @r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
-@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=order-date words=""broken out by order-date"" operator=eq phase=result key_words=""broken out by order-date""
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=order-date operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=""order-date month"" operator=eq phase=result
 @r2 w.request.request act=change mood=do words=""move the legend to the right"" predicate=move
 @r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
 @r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
@@ -21587,7 +21612,8 @@ text,sop
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=column words=""column chart"" operator=eq phase=result open_value=true key_words=bars
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""sorted from high to low"" operator=eq phase=result
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result key_words=values
-@r1.u1 w.request.unread request=$r1 text=""tenure band of five years"" note=chart.dimension.derived
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=tenure words=""tenure band"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""tenure band of five years"" note=chart.bin.width value=""5""
 @r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=salary operator=eq phase=result
 @r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg operator=eq phase=result words=average
 @r2 w.request.request act=change mood=do words=""make the bars blue"" predicate=make
