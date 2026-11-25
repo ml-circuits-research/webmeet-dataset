@@ -248,13 +248,15 @@ each row an id, assigns it at random to train/dev/test (94/4/2), and adds the co
 ## Where some examples come from
 
 Most rows are written here. `drawing/scenes-22.csv` also carries examples migrated from PSys2's
-paraphrase store: `psys2/training/paraphrases/out/art.draw.jsonl` at psys2 `dbcfba2db`, source groups
-`draw-a-red-house`, `color-the-house-blue` and `make-the-house-bigger`, first 32 examples. The wording
-and available single setup message are retained; records needing two setup commands remain deferred.
-The circuits were authored
-here in the current `w.request` form (the source's `core.request` labels are legacy and were not
-used). The legacy store stays in place: the path and revision above are the provenance, and the records
-not migrated yet remain available for the following batches.
+paraphrase store: `psys2/training/paraphrases/out/art.draw.jsonl` at psys2 `dbcfba2db`. The first batch
+is **32 examples from three source groups** — `draw-a-red-house` (11, no setup), `color-the-house-blue`
+(10) and `make-the-house-bigger` (11), the last two with the source's single setup message kept as
+`w.request.previous` and a previous-message lookup where it supplies the referent. Wording is
+unchanged; the circuits were authored here in the current `w.request` form (the source's
+`core.request` labels are legacy and were not used). The legacy store stays in place: the path and
+revision above are the provenance, and the records not migrated yet remain available for the next
+batches — the two-command groups `move-the-tree-to-the-left` and `delete-the-car`, and the
+context-bearing `make the house blue` record, whose identically worded committed row lacks its setup.
 
 ## Contents (2026-11-23)
 
