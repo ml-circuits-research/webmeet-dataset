@@ -3,7 +3,9 @@
 //   node tools/review.mjs --file diagram/charts-04.csv --head diagram/data-drop.2.csv   (a part of a split file)
 // It only reads (the committed version through `git show`); it changes nothing. Checks:
 //   BLOCKING (exit code 1):
-//   - a row lost, added or with its text changed (a split file: pass every part, or --head with the source);
+//   - a circuit lost, added or with its text changed, compared as the SET of (exact text, exact circuit) pairs, so
+//     packing repeated rows into the columns sop1, sop2, … preserves the set and loses nothing (a split file: pass
+//     every part, or --head with the source);
 //   - a committed constraint that disappeared (not rewritten with the same request, key and value);
 //   - checker errors (tools/check.mjs);
 //   REVIEW (listed with examples, to fix before READY):
@@ -23,6 +25,7 @@ import { readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { approvedRetirements } from './review-migrations.mjs';
+import { readRecords } from './rows.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const args = Object.fromEntries(process.argv.slice(2).reduce((a, x, i, all) => (x.startsWith('--') ? [...a, [x.slice(2), all[i + 1] === undefined || all[i + 1].startsWith('--') ? true : all[i + 1]]] : a), []));
@@ -44,25 +47,49 @@ function* csvRows(text) {
   }
   if (field || row.length) { row.push(field); yield row; }
 }
-const rows = (text) => { const it = csvRows(text); const h = it.next().value ?? []; const ti = h.indexOf('text'), si = h.indexOf('sop'); return [...it].filter((r) => r.length > 1).map((r) => ({ text: r[ti], sop: r[si] })); };
+// One record is one message (`text`); every populated SOP column (`sop`, `sop1`, `sop2`, …) is one independent
+// circuit — a reasonable alternative. Reviews compare the SET of (exact text, exact circuit) pairs, so packing
+// repeated rows into columns preserves the set and loses nothing.
+const rows = (text) => {
+  const file = readRecords(text);
+  if (!file.ok) throw new Error(file.why);
+  return file.records.flatMap((rec) => rec.circuits.map((c) => ({ text: rec.text, sop: c.sop, column: c.column, record: rec.record, line: rec.line })));
+};
 const git = (...a) => { try { return execFileSync('git', ['-C', ROOT, ...a], { maxBuffer: 1 << 30, stdio: ['ignore', 'pipe', 'ignore'] }).toString(); } catch { return null; } };
 
 const heads = args.head ? String(args.head).split(',').filter(Boolean) : files;
-// a text can occur several times (with different circuits): rows are paired by text, unchanged circuits first
-const committed = new Map();
+// A text can occur several times (with different circuits) and one record may hold alternatives in columns:
+// compare the SET of (text, circuit) pairs, which is what packing into columns must preserve.
+const committed = new Map(); // text -> [circuit, …] in committed order
 let committedRows = 0;
-for (const h of heads) { const t = git('show', `HEAD:${h}`); if (t === null) { console.error(`no committed version of ${h} (pass --head with the source file of a split)`); process.exit(2); } for (const r of rows(t)) { committedRows++; committed.set(r.text, [...(committed.get(r.text) ?? []), r.sop]); } }
-const after = files.flatMap((f) => rows(readFileSync(join(ROOT, f), 'utf8')).map((r) => ({ ...r, file: f })));
+const committedPair = new Set();
+for (const h of heads) {
+  const t = git('show', `HEAD:${h}`);
+  if (t === null) { console.error(`no committed version of ${h} (pass --head with the source file of a split)`); process.exit(2); }
+  for (const r of rows(t)) { committedRows++; committed.set(r.text, [...(committed.get(r.text) ?? []), r.sop]); committedPair.add(`${r.text}\u0000${r.sop}`); }
+}
+const afterAll = files.flatMap((f) => rows(readFileSync(join(ROOT, f), 'utf8')).map((r) => ({ ...r, file: f })));
+const after = afterAll; // one entry per circuit, with its column
+const afterPair = new Set(afterAll.map((r) => `${r.text}\u0000${r.sop}`));
 const lostRows = [];
 {
-  const byText = new Map(); for (const r of after) byText.set(r.text, [...(byText.get(r.text) ?? []), r]);
+  const byText = new Map(); for (const r of afterAll) byText.set(r.text, [...(byText.get(r.text) ?? []), r]);
+  for (const r of afterAll) r.old = committedPair.has(`${r.text}\u0000${r.sop}`) ? r.sop : undefined;
+  // a committed pair with no exact match now: the record changed (paired by text for the diff) or a row was lost
   for (const [t, olds] of committed) {
-    const nows = byText.get(t) ?? [], left = [...olds];
-    for (const r of nows) { const i = left.indexOf(r.sop); if (i >= 0) { r.old = left.splice(i, 1)[0]; } }
-    for (const r of nows) if (r.old === undefined && left.length) r.old = left.shift();
-    for (const _ of left) lostRows.push(t);
+    const nows = byText.get(t) ?? [];
+    const left = olds.filter((sop) => !nows.some((r) => r.sop === sop && r.old === undefined && r.claimed !== true));
+    for (const sop of left) {
+      const pair = `${t}\u0000${sop}`;
+      if (afterPair.has(pair)) continue;
+      const now = nows.find((r) => r.old === undefined && r.claimed !== true);
+      if (now) { now.claimed = true; now.old = sop; }
+      else lostRows.push(t);
+    }
   }
 }
+// packing: how many texts hold several circuits in columns now, and whether the pair set grew only by additions
+const packed = [...new Map(afterAll.map((r) => [r.text, 1])).keys()].filter((t) => (afterAll.filter((r) => r.text === t).length > 1)).length;
 const before = { size: committedRows };
 
 const GRAMMAR = new Set('the a an of to in on up down out off over by for with at as and or but so is are be been was were it its this that these those there here then than too very just only also again back away about into onto from'.split(' '));
@@ -87,10 +114,10 @@ if (args.migration) {
     blocking.push(`invalid migration: ${error.message}`);
   }
 }
-const note = (kind, text, line) => { const g = review.get(kind) ?? []; g.push([text, line]); review.set(kind, g); };
+const note = (kind, r, line) => { const g = review.get(kind) ?? []; g.push([`record ${r.record} (line ${r.line}) (${r.column}) ${r.text}`, line]); review.set(kind, g); };
 
 // rows
-for (const r of after) if (r.old === undefined) blocking.push(`row added or text changed: ${r.text.slice(0, 100)}`);
+for (const r of after) if (r.old === undefined) blocking.push(`record ${r.record} (line ${r.line}) (${r.column}) circuit added or text changed: ${r.text.slice(0, 100)}`);
 for (const t of lostRows) blocking.push(`row lost: ${t.slice(0, 100)}`);
 
 for (const r of after) {
@@ -110,55 +137,55 @@ for (const r of after) {
     const group = JSON.stringify([attr(line, 'request'), evidence]);
     const previous = measureEvidence.get(group);
     if (previous && previous.value !== value && (added.includes(line) || added.includes(previous.line))) {
-      note('distinct chart measures use the same evidence naming both values', r.text, line);
+      note('distinct chart measures use the same evidence naming both values', r, line);
     }
     measureEvidence.set(group, { value, line });
   }
-  if (added.length > 10) note('rows with more than 10 new lines (a script running away?)', r.text, `${added.length} new lines`);
+  if (added.length > 10) note('rows with more than 10 new lines (a script running away?)', r, `${added.length} new lines`);
   const dup = new Set();
-  for (const l of nowLines) if (/ w\.request\.(constraint|unread) /.test(l)) { const b = l.slice(l.indexOf(' ') + 1); if (dup.has(b)) note('the same wire twice in a request', r.text, l); dup.add(b); }
+  for (const l of nowLines) if (/ w\.request\.(constraint|unread) /.test(l)) { const b = l.slice(l.indexOf(' ') + 1); if (dup.has(b)) note('the same wire twice in a request', r, l); dup.add(b); }
   for (const l of added) {
-    if (!l.trim()) { note('blank line in a circuit', r.text, '(empty line)'); continue; }
+    if (!l.trim()) { note('blank line in a circuit', r, '(empty line)'); continue; }
     if (l.includes(' w.request.unread ')) {
       const t = tok(attr(l, 'text') ?? ''), n = tok(attr(l, 'note') ?? ''), ws = words(t);
-      if (ws.length && ws.every((w) => GRAMMAR.has(w.toLowerCase()))) note('new unread of only grammar words', r.text, l);
-      else if (ws.filter((w) => !ARTICLE.test(w)).length === 1 && n !== 'page.scene') note('new unread of one word (with or without an article)', r.text, l);
-      if (/^request\.(particle|speed|modality|additionalVerb)$/.test(n) || /misspel|typo/i.test(n)) note('new unread noting a particle, speed, modality or misspelling', r.text, l);
-      if (/^(diagram\.subject|drawn\.detail|request\.detail|chart\.other|request\.scope)$/.test(n)) note('new unread with a catch-all note (it covers words, it names no meaning)', r.text, l);
-      if (new RegExp(`${esc(t)}\\.\\d`).test(r.text) && /\d$/.test(t)) note('new unread cut inside a number ("0" of "0.5cm")', r.text, l);
-      if (KEYED.test(n)) note('new unread whose meaning has a key now (write a constraint)', r.text, l);
+      if (ws.length && ws.every((w) => GRAMMAR.has(w.toLowerCase()))) note('new unread of only grammar words', r, l);
+      else if (ws.filter((w) => !ARTICLE.test(w)).length === 1 && n !== 'page.scene') note('new unread of one word (with or without an article)', r, l);
+      if (/^request\.(particle|speed|modality|additionalVerb)$/.test(n) || /misspel|typo/i.test(n)) note('new unread noting a particle, speed, modality or misspelling', r, l);
+      if (/^(diagram\.subject|drawn\.detail|request\.detail|chart\.other|request\.scope)$/.test(n)) note('new unread with a catch-all note (it covers words, it names no meaning)', r, l);
+      if (new RegExp(`${esc(t)}\\.\\d`).test(r.text) && /\d$/.test(t)) note('new unread cut inside a number ("0" of "0.5cm")', r, l);
+      if (KEYED.test(n)) note('new unread whose meaning has a key now (write a constraint)', r, l);
     }
     if (l.includes(' w.request.constraint ')) {
       const a = attr(l, 'attribute') ?? '', v = tok(attr(l, 'value') ?? '');
-      if (/^chart\.(measure|dimension)$/.test(a) && words(v).length && words(v).every((w) => GRAMMAR.has(w.toLowerCase()) || VERBISH.has(w.toLowerCase()))) note('new chart measure/dimension that is a verb or grammar word', r.text, l);
-      if (a === 'drawn.action' && NOT_DOING.test(v)) note('new drawn.action that is not something a figure does', r.text, l);
-      if (a === 'drawn.arrangement' && (/^((in line|level|even|lined up|line) with|(first|second|third|fourth|fifth|last|top|bottom|middle) (row|column))/i.test(tok(attr(l, 'words') ?? '')) || /\b(line|lined) up with\b|\bin line with\b|\blevel with\b/i.test(r.text))) note('new drawn.arrangement for a place or an alignment with one thing (an arrangement is how several stand: "in a row")', r.text, l);
-      if (/^(drawn|node)\.restore$/.test(a)) { const req = (attr(l, 'request') ?? '').slice(1); if (nowLines.some((x) => x.startsWith(`@${req}.t`) && / mode=new /.test(x))) note('new restore on a thing the request makes (a new thing has no old place: "a green block where the red block was")', r.text, l); }
-      if (a === 'node.position' && /^(first|second|third|fourth|fifth|sixth|last|middle|leftmost|rightmost)$/i.test(v) && / phase=selector/.test(l)) note('new node.position for a position in a row (node.position is a relation: above, next_to; "the second box" is node.ordinal)', r.text, l);
+      if (/^chart\.(measure|dimension)$/.test(a) && words(v).length && words(v).every((w) => GRAMMAR.has(w.toLowerCase()) || VERBISH.has(w.toLowerCase()))) note('new chart measure/dimension that is a verb or grammar word', r, l);
+      if (a === 'drawn.action' && NOT_DOING.test(v)) note('new drawn.action that is not something a figure does', r, l);
+      if (a === 'drawn.arrangement' && (/^((in line|level|even|lined up|line) with|(first|second|third|fourth|fifth|last|top|bottom|middle) (row|column))/i.test(tok(attr(l, 'words') ?? '')) || /\b(line|lined) up with\b|\bin line with\b|\blevel with\b/i.test(r.text))) note('new drawn.arrangement for a place or an alignment with one thing (an arrangement is how several stand: "in a row")', r, l);
+      if (/^(drawn|node)\.restore$/.test(a)) { const req = (attr(l, 'request') ?? '').slice(1); if (nowLines.some((x) => x.startsWith(`@${req}.t`) && / mode=new /.test(x))) note('new restore on a thing the request makes (a new thing has no old place: "a green block where the red block was")', r, l); }
+      if (a === 'node.position' && /^(first|second|third|fourth|fifth|sixth|last|middle|leftmost|rightmost)$/i.test(v) && / phase=selector/.test(l)) note('new node.position for a position in a row (node.position is a relation: above, next_to; "the second box" is node.ordinal)', r, l);
       const pairCount = v === '2' && /^(?:chart\.(?:top|bottom)|drawn\.count)$/.test(a) &&
         /\bpair\b/i.test(tok(attr(l, 'words') ?? ''));
-      if (/^-?\d+(\.\d+)?$/.test(v) && !pairCount && !r.text.includes(v) && !/\b(zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|fifteen|twenty|thirty|forty|fifty|hundred|half|quarter|twice|double|triple|dozen|first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|twelfth|twentieth)/i.test(r.text)) note('new number the text does not say ("slightly transparent" is not 0.8: keep the words, or leave it unread)', r.text, l);
-      if (/^page\./.test(a)) { const req = (attr(l, 'request') ?? '').slice(1); if (nowLines.some((x) => x.startsWith(`@${req}.t`) && / family=drawn /.test(x)) && !nowLines.some((x) => x.startsWith(`@${req}.t`) && / family=(page|composition) /.test(x))) note('new page key on a request about a drawn thing ("a thick layer of snow on the roof" is on the roof, not the weather of the page)', r.text, l); }
-      for (const kw of (l.match(/ key_words=("[^"]*"|\S+)/g) ?? []).map((x) => tok(x.slice(11)))) if (/^(per|match|matches|distributed|showing|shows|show|split|splits|across|by|of|for|with|versus|vs|against|into|over|between|each|every|make|set|put|give|want|need|like|looks?|reads?)$/i.test(kw)) note('new key_words that name no key ("per", "showing", "match" only cover words)', r.text, l);
-      if (/^step\./.test(a) && / phase=result/.test(l)) note('new step key as a result (a step key selects an earlier step: phase=selector; "bring back" is the act, not step.kind=add)', r.text, l);
-      if (/ phase=selector/.test(l) && !/ want=no/.test(l) && v && new RegExp(`\\b(except|but not|other than|apart from|besides)\\b[^.,;]*\\b${esc(v)}`, 'i').test(r.text)) note('new selector inside an exception ("all houses except the one by the lake") without want=no: it selects what the text spares', r.text, l);
+      if (/^-?\d+(\.\d+)?$/.test(v) && !pairCount && !r.text.includes(v) && !/\b(zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|fifteen|twenty|thirty|forty|fifty|hundred|half|quarter|twice|double|triple|dozen|first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|twelfth|twentieth)/i.test(r.text)) note('new number the text does not say ("slightly transparent" is not 0.8: keep the words, or leave it unread)', r, l);
+      if (/^page\./.test(a)) { const req = (attr(l, 'request') ?? '').slice(1); if (nowLines.some((x) => x.startsWith(`@${req}.t`) && / family=drawn /.test(x)) && !nowLines.some((x) => x.startsWith(`@${req}.t`) && / family=(page|composition) /.test(x))) note('new page key on a request about a drawn thing ("a thick layer of snow on the roof" is on the roof, not the weather of the page)', r, l); }
+      for (const kw of (l.match(/ key_words=("[^"]*"|\S+)/g) ?? []).map((x) => tok(x.slice(11)))) if (/^(per|match|matches|distributed|showing|shows|show|split|splits|across|by|of|for|with|versus|vs|against|into|over|between|each|every|make|set|put|give|want|need|like|looks?|reads?)$/i.test(kw)) note('new key_words that name no key ("per", "showing", "match" only cover words)', r, l);
+      if (/^step\./.test(a) && / phase=result/.test(l)) note('new step key as a result (a step key selects an earlier step: phase=selector; "bring back" is the act, not step.kind=add)', r, l);
+      if (/ phase=selector/.test(l) && !/ want=no/.test(l) && v && new RegExp(`\\b(except|but not|other than|apart from|besides)\\b[^.,;]*\\b${esc(v)}`, 'i').test(r.text)) note('new selector inside an exception ("all houses except the one by the lake") without want=no: it selects what the text spares', r, l);
       if (a === 'chart.share.base' && /^(?:one hundred percent|100\s*%)$/i.test(v) &&
           /\b(?:add(?:s|ing)?|sum(?:s|ming)?) (?:up )?to\b/i.test(r.text)) {
-        note('share denominator taken from the sum of the displayed percentages', r.text, l);
+        note('share denominator taken from the sum of the displayed percentages', r, l);
       }
       if (a === 'drawn.relation' && v === 'clear_of' &&
           /\b(?:hid(?:e|es|ing|den)|cover(?:s|ing|ed)?)\b/i.test(tok(attr(l, 'words') ?? ''))) {
-        note('physical clearance inferred from hiding or covering evidence', r.text, l);
+        note('physical clearance inferred from hiding or covering evidence', r, l);
       }
       if (a === 'drawn.keep' && v === 'place') {
         const evidence = tok(attr(l, 'words') ?? '');
         if (/^(?:(?:the |their |its )?(?:same|even|equal|original) (?:gap|spacing|distance)|(?:\d+|one|two|three|four|five|six|seven|eight|nine|ten) (?:spots?|places?|units?|steps?) apart)$/i.test(evidence)) {
-          note('drawn.keep=place supported only by relative spacing', r.text, l);
+          note('drawn.keep=place supported only by relative spacing', r, l);
         }
       }
-      if (a === 'drawn.keep') { const req = (attr(l, 'request') ?? '').slice(1); const pred = tok((nowLines.find((x) => x.startsWith(`@${req} w.request.request `)) ?? '').match(/ predicate=("[^"]*"|\S+)/)?.[1] ?? ''); if (pred && !/^(keep|keeps|keeping|kept|leave|leaves|leaving|left|stay|stays|staying|remain|remains|hold|changes|change|moves|move)\b/i.test(pred)) note('new drawn.keep inside a request of another verb (a keep is its own request with its own target)', r.text, l); }
-      if (/^(chart\.only|drawn\.name|node\.label)$/.test(a) && !/ want=no/.test(l) && /^(excluding|except|without|leaving out|leave out|not |minus|exclude|ignoring|apart from|other than)/i.test(tok(attr(l, 'words') ?? ''))) note('new selector said with "excluding/except/without" but without want=no (the request keeps the opposite)', r.text, l);
-      if (/^chart\.[xy]Label$/.test(a) && /^[XYxy]$/.test(v)) note('new axis label that is only the axis letter ("in the X" names the axis)', r.text, l);
+      if (a === 'drawn.keep') { const req = (attr(l, 'request') ?? '').slice(1); const pred = tok((nowLines.find((x) => x.startsWith(`@${req} w.request.request `)) ?? '').match(/ predicate=("[^"]*"|\S+)/)?.[1] ?? ''); if (pred && !/^(keep|keeps|keeping|kept|leave|leaves|leaving|left|stay|stays|staying|remain|remains|hold|changes|change|moves|move)\b/i.test(pred)) note('new drawn.keep inside a request of another verb (a keep is its own request with its own target)', r, l); }
+      if (/^(chart\.only|drawn\.name|node\.label)$/.test(a) && !/ want=no/.test(l) && /^(excluding|except|without|leaving out|leave out|not |minus|exclude|ignoring|apart from|other than)/i.test(tok(attr(l, 'words') ?? ''))) note('new selector said with "excluding/except/without" but without want=no (the request keeps the opposite)', r, l);
+      if (/^chart\.[xy]Label$/.test(a) && /^[XYxy]$/.test(v)) note('new axis label that is only the axis letter ("in the X" names the axis)', r, l);
     }
   }
 }
@@ -179,7 +206,7 @@ for (const f of files) {
 if (errors) blocking.push(`${errors} checker errors (run node tools/check.mjs --file ...)`);
 
 console.log(`files: ${files.join(', ')}  (committed: ${heads.join(', ')})`);
-console.log(`rows: committed ${before.size}, now ${after.length}, changed ${changed.length}`);
+console.log(`circuits: committed ${before.size}, now ${after.length}, changed ${changed.length}; records with alternatives in columns: ${packed}`);
 if (args.migration) console.log(`approved constraint retirements: ${[...retirements.values()].reduce((n, lines) => n + lines.size, 0)}`);
 console.log('checker:\n  ' + summary.join('\n  '));
 console.log(`\nBLOCKING: ${blocking.length}`);
@@ -190,7 +217,7 @@ console.log(`\nSAMPLE of ${Math.min(SAMPLE, changed.length)} changed rows (read 
 const pick = [...changed]; for (let i = pick.length - 1; i > 0; i--) { const j = Math.floor(rand() * (i + 1)); [pick[i], pick[j]] = [pick[j], pick[i]]; }
 for (const r of pick.slice(0, SAMPLE)) {
   const o = new Set(r.old.split('\n')), n = new Set(r.sop.split('\n'));
-  console.log(`\n# ${r.text.slice(0, 150)}`);
+  console.log(`\n# record ${r.record} (line ${r.line}) (${r.column}) ${r.text.slice(0, 150)}`);
   for (const l of r.old.split('\n')) if (!n.has(l)) console.log('   - ' + l.slice(0, 150));
   for (const l of r.sop.split('\n')) if (!o.has(l)) console.log('   + ' + l.slice(0, 150));
 }

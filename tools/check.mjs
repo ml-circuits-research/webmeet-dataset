@@ -1,4 +1,7 @@
-// Checks the dataset. Every row of every <tab>/*.csv has the columns text,sop; its circuit (the `sop` cell) must
+// Checks the dataset. Every row of every <tab>/*.csv is one message (`text`) with one or more circuits in the
+// columns `sop`, `sop1`, `sop2`, … (each populated cell is ONE independent reading; an empty or whitespace-only cell
+// means no such alternative, and the header names are canonical: text,sop,sop1,sop2,… — `sop01` is refused). The
+// primary `sop` cell of a record is required: a record whose first reading is blank is refused. Each circuit must
 //   1. conform to the schemas of sop-knowledge-worlds (w.request, with the acts of k.actions): every wire's type is
 //      declared, every key is a slot of its type, enums, numbers, references and required keys hold;
 //   2. quote the message exactly: every evidence key (a request's words and predicate; a target's sort_words, name,
@@ -16,17 +19,23 @@
 //      politeness, filler, desire; interjections) are kept in w.request.filler wires. Also warned: a proper name of a
 //      request (a capitalised word not starting a sentence) that no wire keeps, and a meaning left in unread.
 //      `--warnings FILE` writes the warned rows to a CSV (text, sop, warning, words) for the generating session.
-//   5. use the reader's keys (w.request keys): a constraint's attribute and a target's family are keys of the file's tab, and a
+//   5. use the reader's keys (w.request keys): a constraint's attribute and a target's family are keys the knowledge
+//      declares anywhere (no folder/tab condition: a message is not judged by the folder it lies in, and a key name that
+//      two worlds declare with two meanings gets no value bank instead of borrowing one), and a
 //      value of a closed list is on it unless the constraint says open_value=true (errors); an act does not contradict
 //      its predicate (removal against creation or change, by the verbs of k.actions; warning).
 //   6. vary its sentences: with --new (a file of new data) it has at least 80% distinct sentence shapes once values,
 //      names and numbers are removed (--min-shapes); for the whole dataset the files below are listed.
 // Run before adding new rows:
 //   node tools/check.mjs [--file drawing/new-batch.csv [--new]] [--knowledge ../sop-knowledge-worlds] [--limit N] [--top K] [--json OUT]
+// --file may name a file outside the dataset folders (a batch to check before it is added). Every circuit diagnostic
+// names the numeric CSV record, the line it starts on and the SOP column it came from; one valid alternative never
+// hides an invalid one.
 // Prints the number of rows that pass and the problems grouped by kind with an example; exit code 1 on any problem.
 import { readFileSync, readdirSync, existsSync, writeFileSync } from 'node:fs';
 import { join, resolve, dirname, relative } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { readRecords } from './rows.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 // --name value, or --name alone (true) when the next argument is another --flag or missing
@@ -115,21 +124,35 @@ const isGrammar = (w) => {
 };
 
 // Errors: wires and keys that nothing in the row grounds, or that repeat another key.
-function grounding(text, wires, tab) {
+// The current-text rule: a circuit says what THIS text says plus declared knowledge. A previous message, a clock or a
+// referent taken from an earlier message is history, not evidence. It is an error when a delivery is checked (--new or
+// --current-text) and a reported count otherwise, so untouched old files are measured without being declared clean.
+const CURRENT_TEXT = 'current-text' in args || 'new' in args;
+const HISTORY = { previous: 0, clock: 0, from: 0 };
+const history = (what) => {
+  HISTORY[what]++;
+  return CURRENT_TEXT
+    ? [['w.request.' + (what === 'from' ? 'lookup' : what), what, 'history: the current text does not say it (no previous message, no clock, no earlier referent)']]
+    : [];
+};
+function grounding(text, wires) {
   const out = [];
   for (const w of wires) {
+    if (w.type === 'w.request.previous') { out.push(...history('previous')); continue; }
+    if (w.type === 'w.request.clock') { out.push(...history('clock')); continue; }
+    if (w.type === 'w.request.lookup' && one(w, 'from') === 'previous') out.push(...history('from'));
     if (w.type === 'w.request.context') out.push([w.type, '', 'page object: not said by the text (write what the text says on the target)']);
     if (w.attrs.thing) out.push([w.type, 'thing', 'link to a page object: not said by the text']);
     if (w.type === 'w.request.request') {
-      if (w.attrs.goes_to) out.push([w.type, 'goes_to', 'not said in the text (the tab is the folder)']);
+      if (w.attrs.goes_to) out.push([w.type, 'goes_to', 'not said in the text (no routing: a message stands on its own)']);
       if (one(w, 'words') === text) out.push([w.type, 'words', 'repeats the whole text (leave it out)']);
     }
-    if (w.type === 'w.request.target' && w.attrs.family && !FAMILIES.has(`${tab} ${one(w, 'family')}`)) out.push([w.type, 'family', `not a family of the ${tab} tab (w.request keys)`]);
+    if (w.type === 'w.request.target' && w.attrs.family && !FAMILIES.has(one(w, 'family'))) out.push([w.type, 'family', 'not a family any w.request key declares']);
     if (w.type === 'w.request.constraint' && !w.attrs.on) out.push([w.type, 'on', 'no on= (required by w.request: attribute, place, size, count ...)']);
     if (w.type === 'w.request.constraint' && !w.attrs.attribute) out.push([w.type, 'attribute', "no reader key (a meaning without a key is an unread wire with a note)"]);
     if (w.type === 'w.request.constraint' && w.attrs.attribute) {
-      const key = KEYS.get(`${tab} ${one(w, 'attribute')}`);
-      if (!key) out.push([w.type, 'attribute', `not a key of the ${tab} tab (w.request keys)`]);
+      const key = KEYS.get(one(w, 'attribute'));
+      if (!key) out.push([w.type, 'attribute', 'not a key any w.request key declares']);
       else if (key.values && !w.attrs.open_value) for (const v of w.attrs.value ?? []) if (!key.values.has(tok(v).toLowerCase())) out.push([w.type, 'value', 'not a value of the key (w.request keys), and not marked open_value']);
     }
     if (w.type === 'w.request.target') {
@@ -192,14 +215,37 @@ const TOKEN = /[A-Za-z0-9]+(?:['\u2019][A-Za-z]+)?/g;
 // The reader's keys per tab, as SOP facts of w.request (sop-knowledge-worlds docs/worlds/w.request/shards/keys.sop:
 // w.request.key tab=… family=… name=… head=… value=…): a constraint's attribute and a target's family must be keys of
 // the file's tab, and a value of a closed list must be on it (or the constraint says open_value=true).
-const KEYS = new Map(), FAMILIES = new Set();
+const KEYS = new Map(), FAMILIES = new Set(), KEY_WORLDS = new Map(), COLLISIONS = new Set();
 for (const w of parse(readFileSync(join(KNOWLEDGE, 'docs', 'worlds', 'w.request', 'shards', 'keys.sop'), 'utf8'))) {
   if (w.type !== 'w.request.key') continue;
-  const tab = one(w, 'tab'), values = (w.attrs.value ?? []).map((v) => tok(v).toLowerCase());
-  KEYS.set(`${tab} ${one(w, 'name')}`, { head: one(w, 'head'), values: values.length ? new Set(values) : null });
-  FAMILIES.add(`${tab} ${one(w, 'family')}`);
+  const name = one(w, 'name'), values = (w.attrs.value ?? []).map((v) => tok(v).toLowerCase()).sort();
+  const decl = { head: one(w, 'head'), values: values.length ? values : null };
+  const held = KEYS.get(name);
+  // A key is validated by what the knowledge declares, not by the folder a message sits in: no reader `tab` conditions
+  // a meaning. A name declared with two different heads or two different value lists is the same label on two
+  // concepts: a collision, never a merge. A colliding name is still a declared key (so a row is not refused for
+  // naming it), but NO value bank is applied, because borrowing one world's bank would judge a message by its folder.
+  if (held) held.decls.push(decl);
+  else KEYS.set(name, { decls: [decl] });
+  KEY_WORLDS.set(name, [...(KEY_WORLDS.get(name) ?? []), one(w, 'tab')]);
+  FAMILIES.add(one(w, 'family'));
 }
 if (!KEYS.size) throw new Error('no reader keys in w.request/shards/keys.sop');
+// The value bank of a key, when the knowledge declares it one way only; a colliding name gets no bank.
+for (const [name, held] of KEYS) {
+  const bank = (d) => (d.values === null ? null : d.values.join('\u0000'));
+  const same = held.decls.every((d) => bank(d) === bank(held.decls[0]) && d.head === held.decls[0].head);
+  // An owner that declares no closed list reads the value as written (a span): then no bank may refuse a word, because
+  // one of the meanings is open by declaration. Owners that all declare a list must agree, else the name means two
+  // things and the diagnostic names them instead of borrowing one list.
+  held.values = same ? (held.decls[0].values === null ? null : new Set(held.decls[0].values)) : null;
+  if (!same) {
+    const owners = KEY_WORLDS.get(name) ?? [];
+    held.owners = owners;
+    held.banks = held.decls.map((d) => (d.values === null ? 'span' : d.values.join(', ')));
+    COLLISIONS.add(name);
+  }
+}
 // The acts the verbs of k.actions mean (k.actions.verb text=delete act=remove): a predicate that is such a verb should
 // go with one of its acts.
 const VERB_ACTS = new Map();
@@ -316,22 +362,35 @@ const add = (key, example) => {
   groups.set(key, g);
 };
 
-outer: for (const tab of Object.keys(TAB_WORLD)) {
-  const dir = join(DATASET, tab);
-  let files;
-  try { files = readdirSync(dir).filter((f) => f.endsWith('.csv')).sort(); } catch { continue; }
-  for (const file of files) {
-    if (ONLY && resolve(join(dir, file)) !== ONLY) continue;
-    const rows = csvRows(readFileSync(join(dir, file), 'utf8'));
-    const header = rows.next().value;
-    const ti = header.indexOf('text'), si = header.indexOf('sop');
-    if (header.join(',') !== 'text,sop') { add(`(file) | | the header must be text,sop`, { where: `${tab}/${file}`, text: header.join(','), sop: '' }); bad++; continue; }
-    const shapes = [];
-    for (const r of rows) {
-      if (total >= LIMIT) break outer;
+// One file of the dataset (a tab folder is only where the file lies: no tab conditions a meaning).
+const checkFile = (where, content, { diversity = !ONLY || 'new' in args } = {}) => {
+  const file_ = readRecords(content);
+  if (!file_.ok) { add(`(file) | | ${file_.why}`, { where, text: '', sop: '' }); bad++; return; }
+  const shapes = [];
+  for (const record of file_.records) {
+    if (total >= LIMIT) return;
+    const text = record.text;
+    const at = { where, text, record: record.record, line: record.line };
+    // The first reading of a record is required: a blank (or whitespace-only) primary `sop` cell is refused, even
+    // when a later column has a circuit — the record would otherwise pass review without its first reading.
+    if (record.primaryBlank) {
+      total++; bad++;
+      add('(row) | sop | the required primary sop cell is blank (every record needs its first reading)',
+        { ...at, sop: record.sop, column: 'sop' });
+    }
+    for (let index = 0; index < record.extra.length; index++) {
+      // A populated cell beyond the declared columns is an undeclared alternative: refuse it by record and column, never
+      // drop it. Name it by its position so the fix is unambiguous.
+      total++; bad++;
+      add('(row) | sop* | a populated cell beyond the declared columns (an undeclared alternative would be dropped)',
+        { ...at, sop: record.extra[index], column: `column ${record.extraColumns[index]}` });
+      warnRows.push([text, record.extra[index], 'a populated cell beyond the declared columns', '']);
+    }
+    if (!text.trim()) { bad++; add('(row) | text | empty text', { ...at, sop: '' }); }
+    // Each populated SOP column is one independent circuit of the same message: a valid alternative never hides
+    // an invalid one, and an error names the record, its line and the column it came from.
+    for (const { sop, column } of record.circuits) {
       total++;
-      const text = r[ti], sop = r[si];
-      const where = `${tab}/${file}`;
       const problems = [];
       let wires;
       try { wires = parse(sop); } catch (e) { problems.push(['(parse)', '', e.message.replace(/".*"/, '"…"')]); }
@@ -340,48 +399,71 @@ outer: for (const tab of Object.keys(TAB_WORLD)) {
         for (const w of wires) {
           for (const key of PHRASES[w.type] ?? []) for (const v of w.attrs[key] ?? []) if (!text.includes(tok(v))) problems.push([w.type, key, 'phrase not found in the text']);
         }
-        problems.push(...grounding(text, wires, tab));
+        problems.push(...grounding(text, wires));
         shapes.push(shapeOf(text, wires));
         const ws = warningsOf(text, wires);
         for (const why of ws) { warned.add(why); warnRows.push([text, sop, why, why.startsWith('words no wire') ? ws.loose : '']); }
-        if (!text.trim()) problems.push(['(row)', 'text', 'empty text']);
         const res = base.fork().tell(sop);
         for (const v of res.violations ?? []) {
           const wire = wires.find((w) => w.id === v.id);
           const reason = String(v.why ?? v.kind ?? '').replace(/"[^"]*"/g, '"…"').replace(/\b\d+(\.\d+)?\b/g, 'N');
           problems.push([wire?.type ?? '?', v.key ?? '', reason]);
         }
-      }
+      } else if (!sop.trim()) problems.push(['(row)', column, 'an empty circuit']);
       if (problems.length) bad++;
       const seen = new Set();
       for (const [type, key, why] of problems) {
         const k = `${type} | ${key} | ${why}`;
         if (seen.has(k)) continue;
         seen.add(k);
-        add(k, { where, text, sop });
-      }
-    }
-    // Diversity: a file of new data repeats no sentence shape (values, names and numbers removed). Checked as an error
-    // with --new (the delivery gate for new data) and reported for every file otherwise.
-    if (shapes.length >= 30) {
-      const ratio = new Set(shapes).size / shapes.length;
-      if (ratio < MIN_SHAPES) {
-        lowShapes.push([`${tab}/${file}`, ratio, shapes.length]);
-        if (ONLY && 'new' in args) { add(`(file) | | repeated sentence shapes: ${Math.round(ratio * 100)}% distinct, at least ${MIN_SHAPES * 100}% needed`, { where: `${tab}/${file}`, text: '', sop: '' }); bad++; }
+        add(k, { ...at, sop, column });
       }
     }
   }
+  // Diversity: a file of new data repeats no sentence shape (values, names and numbers removed). Checked as an error
+  // with --new (the delivery gate for new data) and reported for every file otherwise.
+  if (shapes.length >= 30) {
+    const ratio = new Set(shapes).size / shapes.length;
+    if (ratio < MIN_SHAPES) {
+      lowShapes.push([where, ratio, shapes.length]);
+      if (diversity && 'new' in args) { add(`(file) | | repeated sentence shapes: ${Math.round(ratio * 100)}% distinct, at least ${MIN_SHAPES * 100}% needed`, { where, text: '', sop: '' }); bad++; }
+    }
+  }
+};
+
+let checkedOnly = false;
+for (const tab of Object.keys(TAB_WORLD)) {
+  const dir = join(DATASET, tab);
+  let files;
+  try { files = readdirSync(dir).filter((f) => f.endsWith('.csv')).sort(); } catch { continue; }
+  for (const file of files) {
+    if (ONLY && resolve(join(dir, file)) !== ONLY) continue;
+    if (ONLY) checkedOnly = true;
+    checkFile(`${tab}/${file}`, readFileSync(join(dir, file), 'utf8'));
+    if (total >= LIMIT) break;
+  }
 }
+// --file may name a file outside the dataset folders (a batch to check before it is added): check it instead of
+// silently reporting nothing.
+if (ONLY && !checkedOnly) checkFile(String(args.file), readFileSync(ONLY, 'utf8'));
+
 if (!ONLY && lowShapes.length) {
   console.log(`files below ${MIN_SHAPES * 100}% distinct sentence shapes (old data to regenerate): ${lowShapes.length}`);
   for (const [f, r, n] of lowShapes.sort((x, y) => x[1] - y[1]).slice(0, 15)) console.log(`  ${Math.round(r * 100)}%\t${f} (${n} rows)`);
 }
 
 const sorted = [...groups.entries()].sort((a, b) => b[1].n - a[1].n);
-console.log(`circuits ${total}, conforming ${total - bad}, not conforming ${bad}; ${groups.size} kinds of violation`);
+if (!CURRENT_TEXT && (HISTORY.previous || HISTORY.clock || HISTORY.from))
+  console.log(`\nhistory wires (refused by the current-text rule when delivering, --current-text): ${HISTORY.previous} previous, ${HISTORY.clock} clock, ${HISTORY.from} from=previous`);
+if (COLLISIONS.size) {
+  console.log('\nkey names the knowledge declares with two meanings (unresolved ownership: no value bank is borrowed)');
+  for (const name of [...COLLISIONS].sort())
+    console.log(`  ${name}: ${(KEYS.get(name).owners ?? []).join(', ')} — ${(KEYS.get(name).banks ?? []).join(' | ')}`);
+}
+console.log(`circuits ${total}, conforming ${Math.max(0, total - bad)}, not conforming ${bad}; ${groups.size} kinds of violation`);
 for (const [k, g] of sorted.slice(0, Number(args.top ?? 60))) {
   console.log(`\n${g.n}\t${k}`);
-  for (const e of g.examples.slice(0, 1)) console.log(`\t[${e.where}] ${e.text.slice(0, 120)}`);
+  for (const e of g.examples.slice(0, 1)) console.log(`\t[${e.where}] ${e.record ? `record ${e.record} (line ${e.line}) ` : ''}(${e.column ?? 'sop'}) ${e.text.slice(0, 120)}`);
 }
 if (args.json) writeFileSync(args.json, JSON.stringify({ total, bad, groups: sorted.map(([k, g]) => ({ violation: k, ...g })) }, null, 1));
 const wc = new Map();
