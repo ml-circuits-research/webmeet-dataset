@@ -245,25 +245,58 @@ extend the schema in sop-knowledge-worlds. Never bend the meaning to fit.
 each row an id, assigns it at random to train/dev/test (94/4/2), and adds the copies with an unrelated previous message.
 `sop_dataset.py check` confirms that the files hold every row of the former official dataset without loss.
 
+## One target per request — a codec limit, refused loudly
+
+`w.request` lets one request carry several `w.request.target` wires (`request=$r1` twice, `@r1.t1 door`,
+`@r1.t2 window`). The trainer row this codec builds holds a single `target` per request, so a second target
+wire would be projected away: its `sort`, `name` and the lookups that point at it were silently replaced by
+the later wire's. `sop_dataset.parse` now refuses such a circuit instead of losing data:
+
+```
+ValueError: target r1.t2 and target r1.t1 both belong to request $r1: this codec keeps one target per
+request, so r1.t2 would be dropped (unsupported singleton projection; write the separable effects as one
+request per target)
+```
+
+A wire declared twice with the same id (`@r1.t` on two lines) is one target written twice, not two objects,
+and is accepted. Single-target circuits behave exactly as before.
+
+The refusal describes the codec's capacity, not the natural-language request: "make the door and the window
+blue" is an ordinary request, and its lossless form is two requests, one per target, each with
+`words_origin=hull` (the implicit span of the full source text), which the codec round-trips with both
+targets and both results intact. This applies to separable effects; a collective effect over several things
+(align them, move them together) has no canonical retention yet.
+
+Measured on the current corpus (`189,119` rows of `webmeet-dataset/`), `1,125` rows carry distinct target
+wires on one request and now refuse — the largest groups are `diagram/nodes-05.csv` (365),
+`diagram/charts-06.csv` (169), `diagram/nodes-12.csv` (144), `drawing/scenes-05.csv` (121) and
+`diagram/nodes-04.csv` (81). `load` stops at the first such row and names its file and text, so a full
+load/export is not claimed to succeed while these rows lack a lossless interpretation. They include
+spurious extra targets and part-scope mistakes, so no automatic rewrite follows from the count.
+
 ## Where some examples come from
 
 Most rows are written here. `drawing/scenes-22.csv` carries the examples migrated from PSys2's
-paraphrase store: `psys2/training/paraphrases/out/art.draw.jsonl` at psys2 `dbcfba2db`. It now holds 54 examples
-from five source groups — `draw-a-red-house` (11, no setup),
-`color-the-house-blue` (10) and `make-the-house-bigger` (11) in the first batch, and
-`change-the-picture-to-night` (11, no setup) and `set-the-cat-size-to-huge` (11, setup
-`Draw a cat.`) in the second. Every single-setup group keeps the source's setup message as
-`w.request.previous` with a previous-message lookup where it supplies the referent. Wording is
-unchanged; the circuits were authored here in the current `w.request` form (the source's
-`core.request` labels are legacy and were not used). The legacy store stays in place: the path and
-revision above are the provenance, and the records not migrated yet remain available for the next
-batches — the two-command groups `move-the-tree-to-the-left` and `delete-the-car`, and the
-context-bearing `make the house blue` record, whose identically worded committed row lacks its setup.
+paraphrase store: `psys2/training/paraphrases/out/art.draw.jsonl` at psys2 `dbcfba2db`. It now holds 98 examples
+from nine source groups — `draw-a-red-house` (11, no setup), `color-the-house-blue` (10) and
+`make-the-house-bigger` (11) in the first batch; `change-the-picture-to-night` (11, no setup) and
+`set-the-cat-size-to-huge` (11, setup `Draw a cat.`) in the second; and
+`change-the-scene-to-sunset`, `draw-a-blue-car`, `put-grass-on-the-ground` and
+`paint-the-sky-dark-blue` (11 each, no setup) in the third. Every single-setup group keeps the
+source's setup message as `w.request.previous` with a previous-message lookup where it supplies
+the referent. Wording is unchanged; the circuits were authored here in the current `w.request`
+form (the source's `core.request` labels are legacy and were not used). The legacy store stays in
+place: the path and revision above are the provenance, and the records not migrated yet remain
+available for the next batches — the two-command groups `move-the-tree-to-the-left` and
+`delete-the-car`, the groups that need a key the schema does not have yet
+(`give-the-house-a-blue-door`, `make-the-door-of-the-house-green`, the palette questions
+`ask-which-things-can-be-drawn` and `ask-which-colors-are-available`), and the context-bearing
+`make the house blue` record, whose identically worded committed row lacks its setup.
 
-The second batch adds22 examples from the same source revision: `change-the-picture-to-night`
-(11 without setup) and `set-the-cat-size-to-huge` (11 with the exact `Draw a cat.` setup). Prior
-records and their circuits remain unchanged. This brings the two reviewed batches to54 examples;
-the source still retains the deferred context-bearing and multi-command records.
+The second and third batches add 66 examples from the same source revision: 22 in the second
+(`change-the-picture-to-night`, `set-the-cat-size-to-huge`) and 44 in the third (the four no-setup
+groups above). Prior records and their circuits remain unchanged; the source still retains the
+deferred context-bearing and multi-command records.
 
 ## Contents (2026-11-23)
 
