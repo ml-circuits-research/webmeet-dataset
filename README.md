@@ -245,6 +245,17 @@ extend the schema in sop-knowledge-worlds. Never bend the meaning to fit.
 each row an id, assigns it at random to train/dev/test (94/4/2), and adds the copies with an unrelated previous message.
 `sop_dataset.py check` confirms that the files hold every row of the former official dataset without loss.
 
+## Where some examples come from
+
+Most rows are written here. `drawing/scenes-22.csv` also carries examples migrated from PSys2's
+paraphrase store: `psys2/training/paraphrases/out/art.draw.jsonl` at psys2 `dbcfba2db`, source groups
+`draw-a-red-house`, `color-the-house-blue` and `make-the-house-bigger`, first 32 examples. The wording
+and available single setup message are retained; records needing two setup commands remain deferred.
+The circuits were authored
+here in the current `w.request` form (the source's `core.request` labels are legacy and were not
+used). The legacy store stays in place: the path and revision above are the provenance, and the records
+not migrated yet remain available for the following batches.
+
 ## Contents (2026-11-23)
 
 188,786 messages, moved here from `psys2/official-dataset` (built from the corpora under `psys2/training/sop-bert/data/`
