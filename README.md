@@ -287,8 +287,10 @@ source's setup message as `w.request.previous` with a previous-message lookup wh
 the referent. Wording is unchanged; the circuits were authored here in the current `w.request`
 form (the source's `core.request` labels are legacy and were not used). The legacy store stays in
 place: the path and revision above are the provenance, and the records not migrated yet remain
-available for the next batches — the two-command groups `move-the-tree-to-the-left` and
-`delete-the-car`, the groups that need a key the schema does not have yet
+available for the next batches — the two-command groups `move-the-tree-to-the-left`,
+`delete-the-car`, `change-the-sky-color-of-a-night-picture` (setup `Draw me a nice picture.`, `Make it
+night.`) and `go-back-to-the-day-picture-after-a-mood-change`, the groups that need a key the schema does
+not have yet
 (`give-the-house-a-blue-door`, `make-the-door-of-the-house-green`, the palette questions
 `ask-which-things-can-be-drawn` and `ask-which-colors-are-available`), and the context-bearing
 `make the house blue` record, whose identically worded committed row lacks its setup.
