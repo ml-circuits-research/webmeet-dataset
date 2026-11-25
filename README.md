@@ -247,16 +247,23 @@ each row an id, assigns it at random to train/dev/test (94/4/2), and adds the co
 
 ## Where some examples come from
 
-Most rows are written here. `drawing/scenes-22.csv` also carries examples migrated from PSys2's
-paraphrase store: `psys2/training/paraphrases/out/art.draw.jsonl` at psys2 `dbcfba2db`. The first batch
-is **32 examples from three source groups** — `draw-a-red-house` (11, no setup), `color-the-house-blue`
-(10) and `make-the-house-bigger` (11), the last two with the source's single setup message kept as
-`w.request.previous` and a previous-message lookup where it supplies the referent. Wording is
+Most rows are written here. `drawing/scenes-22.csv` carries the examples migrated from PSys2's
+paraphrase store: `psys2/training/paraphrases/out/art.draw.jsonl` at psys2 `dbcfba2db`. It now holds 54 examples
+from five source groups — `draw-a-red-house` (11, no setup),
+`color-the-house-blue` (10) and `make-the-house-bigger` (11) in the first batch, and
+`change-the-picture-to-night` (11, no setup) and `set-the-cat-size-to-huge` (11, setup
+`Draw a cat.`) in the second. Every single-setup group keeps the source's setup message as
+`w.request.previous` with a previous-message lookup where it supplies the referent. Wording is
 unchanged; the circuits were authored here in the current `w.request` form (the source's
 `core.request` labels are legacy and were not used). The legacy store stays in place: the path and
 revision above are the provenance, and the records not migrated yet remain available for the next
 batches — the two-command groups `move-the-tree-to-the-left` and `delete-the-car`, and the
 context-bearing `make the house blue` record, whose identically worded committed row lacks its setup.
+
+The second batch adds22 examples from the same source revision: `change-the-picture-to-night`
+(11 without setup) and `set-the-cat-size-to-huge` (11 with the exact `Draw a cat.` setup). Prior
+records and their circuits remain unchanged. This brings the two reviewed batches to54 examples;
+the source still retains the deferred context-bearing and multi-command records.
 
 ## Contents (2026-11-23)
 
