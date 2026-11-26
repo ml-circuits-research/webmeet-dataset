@@ -7,3 +7,5 @@ The original CSV columns hold the historical w.request annotations. Native refer
 Curated corrections use a new circuit identity. The review records the reason and the superseded review, and originEngines identifies the producers of the earlier circuit. Importing the historical inventory again preserves the correction.
 
 The files in `batches/*.jsonl` extend the original registry with independently reviewed native readings. Each exact source occurs in one registry file. A batch records its source revision and row ID, curator, and the hash of the supporting per-circuit judgments archived in soplang-nlu. A single source can have two distinct readings when its wording supports both. The full-source schema and grounding checks run before publication.
+
+The [batch formalization guide](BATCH-HOWTO.md) covers local strategy inference, resuming a 500-source group on another subscription, and publishing independently reviewed native annotations.
