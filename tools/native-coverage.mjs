@@ -43,7 +43,7 @@ for(const path of registry){
   }
 }
 const converted=new Map()
-const conversionPaths=paths.filter(path=>/^annotations\/nlu\/v1\/conversions\/vibe\/[^/]+\.jsonl\.gz$/u.test(path))
+const conversionPaths=paths.filter(path=>/^annotations\/nlu\/v1\/conversions\/(?:vibe|sol)\/[^/]+\.jsonl\.gz$/u.test(path))
 for(const path of conversionPaths){
   const bytes=execFileSync('git',['-C',root,'show',revision+':'+path],{maxBuffer:128*1024*1024})
   for(const line of gunzipSync(bytes).toString('utf8').split('\n').filter(Boolean)){
