@@ -178,22 +178,18 @@ show the document structure,"@r1 w.request.request act=ask mood=ask predicate=sh
 what chapters and blocks are in this document?,"@r1 w.request.request act=ask mood=ask predicate=what question=describe asked_words=""chapters and blocks""
 @r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=context family_words=document
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
-undo the last document edit,"@prev w.request.previous text=""Create a block with parent \""text1\"", with rows [[\""Item\"",\""Cost\""],[\""Paper\"",\""12\""]], with header true, named \""Budget\"".""
-@r1 w.request.request act=undo mood=do predicate=undo
+undo the last document edit,"@r1 w.request.request act=undo mood=do predicate=undo
 @r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=journal_step family_words=document ordinal=last description=""last document edit""
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous"
-put the document back,"@prev w.request.previous text=""Create a block with parent \""text1\"", with rows [[\""Item\"",\""Cost\""],[\""Paper\"",\""12\""]], with header true, named \""Budget\"".""
-@r1 w.request.request act=undo mood=do predicate=put
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
+put the document back,"@r1 w.request.request act=undo mood=do predicate=put
 @r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=journal_step family_words=document
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous"
-redo the document edit,"@prev w.request.previous text=""Undo the last action.""
-@r1 w.request.request act=redo mood=do predicate=redo
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
+redo the document edit,"@r1 w.request.request act=redo mood=do predicate=redo
 @r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=journal_step family_words=document description=edit
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous"
-restore the undone text change,"@prev w.request.previous text=""Undo the last action.""
-@r1 w.request.request act=redo mood=do predicate=restore
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
+restore the undone text change,"@r1 w.request.request act=redo mood=do predicate=restore
 @r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=journal_step family_words=text description=""undone text change""
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous"
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
 write a paragraph that says The delivery is late.,"@r1 w.request.request act=make mood=do predicate=write
 @r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=paragraph
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text value=""The delivery is late."" operator=eq phase=result key_words=says"
@@ -208,13 +204,11 @@ replace that paragraph with Thank you for your patience.,"@r1 w.request.request 
 @r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context family_words=paragraph
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text value=""Thank you for your patience."" operator=eq phase=result"
-put the subchapter before the chapter,"@clock w.request.clock now=2026-11-17T12:00:00Z timezone=UTC
-@r1 w.request.request act=place mood=do predicate=put
+put the subchapter before the chapter,"@r1 w.request.request act=place mood=do predicate=put
 @r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter sort=chapter
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=place attribute=section.order value=before operator=relation phase=result"
-promote the subchapter to a chapter,"@clock w.request.clock now=2026-11-17T12:00:00Z timezone=UTC
-@r1 w.request.request act=change mood=do predicate=promote
+promote the subchapter to a chapter,"@r1 w.request.request act=change mood=do predicate=promote
 @r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.role value=chapter words=""a chapter"" operator=eq phase=result"
@@ -496,18 +490,15 @@ list the sections and content blocks,"@r1 w.request.request act=ask mood=ask pre
 the document structure?,"@r1 w.request.request act=ask mood=ask question=describe asked_words=structure
 @r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=context family_words=document
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
-reverse the most recent document edit,"@prev w.request.previous text=""Create a block with parent \""text1\"", with rows [[\""Item\"",\""Cost\""],[\""Paper\"",\""12\""]], with header true, named \""Budget\"".""
-@r1 w.request.request act=undo mood=do predicate=reverse
+reverse the most recent document edit,"@r1 w.request.request act=undo mood=do predicate=reverse
 @r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=journal_step family_words=document description=""most recent document edit""
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous"
-repeat the document action that was undone,"@prev w.request.previous text=""Undo the last action.""
-@r1 w.request.request act=redo mood=do predicate=repeat
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
+repeat the document action that was undone,"@r1 w.request.request act=redo mood=do predicate=repeat
 @r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=journal_step family_words=document description=""document action that was undone""
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous"
-go forward one document edit,"@prev w.request.previous text=""Undo the last action.""
-@r1 w.request.request act=redo mood=do predicate=""go forward""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
+go forward one document edit,"@r1 w.request.request act=redo mood=do predicate=""go forward""
 @r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=journal_step family_words=document description=edit
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous"
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
 "update the Chapter heading, with text Overview","@r1 w.request.request act=change mood=do predicate=update
 @r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=written name=Chapter name_words=heading
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.id value=Chapter operator=eq phase=selector
@@ -817,10 +808,9 @@ reverse the heading order so Subchapter comes before Chapter,"@f1 w.request.fill
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.ids value=Chapter operator=eq phase=selector
 @r1.c3 w.request.constraint request=$r1 on=place attribute=section.order value=before operator=relation phase=result words=""Subchapter comes before Chapter"" key_words=order
 @r1.c4 w.request.constraint request=$r1 on=place attribute=section.order_anchor value=""Chapter"" operator=eq phase=result"
-go back one document action,"@prev w.request.previous text=""Create a block with parent \""text1\"", with rows [[\""Item\"",\""Cost\""],[\""Paper\"",\""12\""]], with header true, named \""Budget\"".""
-@r1 w.request.request act=undo mood=do predicate=""go back""
+go back one document action,"@r1 w.request.request act=undo mood=do predicate=""go back""
 @r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=journal_step family_words=document description=action
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous"
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
 "add a subchapter, at level 2, with object name Findings","@r1 w.request.request act=make mood=do predicate=add
 @r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=subchapter
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.level value=""2"" operator=eq phase=result key_words=level
@@ -833,8 +823,7 @@ select the first seven characters of b1,"@r1 w.request.request act=pick mood=do 
 @r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=written name=b1 ordinal=first
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.id value=b1 operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.to value=""7"" words=seven operator=eq phase=result key_words=characters"
-add a chapter about the results,"@clock w.request.clock now=2026-11-17T12:00:00Z timezone=UTC
-@r1 w.request.request act=make mood=do predicate=add
+add a chapter about the results,"@r1 w.request.request act=make mood=do predicate=add
 @r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite sort=chapter
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.content value=results operator=eq phase=result"
 open a fresh empty document called Report,"@r1 w.request.request act=make mood=do predicate=open
@@ -861,10 +850,9 @@ add a paragraph saying A new idea and name it Idea,"@r1 w.request.request act=ma
 empty the entire document,"@r1 w.request.request act=remove mood=do predicate=empty
 @r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=context family_words=document description=entire
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
-one document edit back,"@prev w.request.previous text=""Create a block with parent \""text1\"", with rows [[\""Item\"",\""Cost\""],[\""Paper\"",\""12\""]], with header true, named \""Budget\"".""
-@r1 w.request.request act=undo mood=do
+one document edit back,"@r1 w.request.request act=undo mood=do
 @r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=journal_step family_words=document description=""edit back""
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous"
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
 "add a table with rows Item,Cost and Paper,12, called Budget","@r1 w.request.request act=make mood=do predicate=add
 @r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite family_words=table
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Item operator=eq phase=result key_words=rows
@@ -905,10 +893,9 @@ align the first paragraph centrally,"@r1 w.request.request act=change mood=do pr
 begin a blank document with the title Report,"@r1 w.request.request act=make mood=do predicate=begin
 @r1.t w.request.target request=$r1 family=text mode=new determiner=indefinite family_words=document description=blank
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=text.title value=Report operator=eq phase=result key_words=title"
-the undone document edit again,"@prev w.request.previous text=""Undo the last action.""
-@r1 w.request.request act=redo mood=do
+the undone document edit again,"@r1 w.request.request act=redo mood=do
 @r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=journal_step family_words=document description=""undone document edit""
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous"
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
 start a new Report document,"@r1 w.request.request act=make mood=do predicate=start
 @r1.t w.request.target request=$r1 family=text mode=new determiner=indefinite family_words=document
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=text.title value=Report operator=eq phase=result"
