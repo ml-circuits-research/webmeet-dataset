@@ -94,3 +94,19 @@ eco python3 experiments/native-curation/progress.py "$WEBMEET_DIR" "$INVENTORY"
 The generation stage fills missing drafts with the selected library strategy. The curator can retain, revise or replace a draft, or abstain. The 500-source group is split into smaller model requests and checkpoints. Confirmation runs the schema and complete-source gate, then obtains independent source-based judgments for eligible circuits. A third model handles disagreements and a sample of agreements. An exact previously settled source/circuit pair can reuse its vote. Publication requires two supporting votes and excludes a circuit with a contradictory audit. Each published row contains its provenance. The review evidence and unresolved sources live under soplang-nlu/eval-results/2026-11-26-sol-native-curation. The dataset shard is under annotations/nlu/v1/batches.
 
 For a training experiment, choose the number of batches first and measure downstream performance on a held-out split after each tranche. Local generation for exploratory use ends after the local export. Publishing reviewed references uses the longer procedure. Keep experimental drafts and accepted references in separate files.
+
+## See which CSVs have native readings
+
+Run from webmeet-dataset with `SOP_NLU_DIR` and `SOP_KNOWLEDGE_DIR` set.
+
+```bash
+eco node tools/native-coverage.mjs HEAD > /tmp/webmeet-native-coverage.json
+```
+
+The report reads the chosen Git commit. Every CSV keeps its original application annotations. Native readings are stored separately and joined to the CSV rows by exact source text, preserving case and Unicode. A moved row keeps its native coverage. A changed text needs a new exact match. Local edits to CSVs and native registries are outside the committed report.
+
+- `legacy-only` means the file has no matching native rows. `partial` means some rows lack native readings or have readings that fail current checks. `native-complete` means every row has native readings and every stored alternative passes.
+- `nativeCurrent` counts rows whose stored alternatives all pass the current schema and full-source checks. `nativeNeedsRecheck` counts rows where at least one native alternative fails.
+- `withoutDirectAuditDigest` counts native rows with an alternative lacking a matching identity and direct audit digest. Some older corrections use a curation and supersession record instead. The report reruns static checks and records the exact library, knowledge and schema versions. Review judgments remain in each reading's provenance and its associated archive.
+
+The [first coverage snapshot](COVERAGE-2026-11-26.json) records all 100 CSV files.
