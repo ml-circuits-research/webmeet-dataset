@@ -2,6 +2,7 @@
 import {execFileSync} from 'node:child_process'
 import {createHash} from 'node:crypto'
 import {readFileSync} from 'node:fs'
+import {gunzipSync} from 'node:zlib'
 import {resolve,join} from 'node:path'
 import {fileURLToPath,pathToFileURL} from 'node:url'
 import {readRecords} from './rows.mjs'
@@ -41,9 +42,20 @@ for(const path of registry){
     native.set(text,{passing,total:readings.length,hasDirectAuditDigest:byIdentity===readings.length})
   }
 }
+const converted=new Map()
+const conversionPaths=paths.filter(path=>/^annotations\/nlu\/v1\/conversions\/vibe\/[^/]+\.jsonl\.gz$/u.test(path))
+for(const path of conversionPaths){
+  const bytes=execFileSync('git',['-C',root,'show',revision+':'+path],{maxBuffer:128*1024*1024})
+  for(const line of gunzipSync(bytes).toString('utf8').split('\n').filter(Boolean)){
+    const {text,readings,status}=JSON.parse(line)
+    if(converted.has(text)||!Array.isArray(readings)||!['static-pass','rework'].includes(status))
+      throw Error('Invalid or repeated conversion in '+path)
+    converted.set(text,readings.length>0&&readings.every(sop=>hasCompleteSource(validate(text,sop))))
+  }
+}
 const matched=new Set()
 const files=[]
-const rowCounts=()=>({rows:0,legacyOnly:0,nativeCurrent:0,nativeNeedsRecheck:0,withoutDirectAuditDigest:0})
+const rowCounts=()=>({rows:0,legacyOnly:0,nativeCurrent:0,nativeNeedsRecheck:0,withoutDirectAuditDigest:0,convertedStatic:0,conversionRework:0,pendingConversion:0})
 const totals=rowCounts()
 for(const path of paths.filter(path=>path.endsWith('.csv'))){
   const input=readRecords(git(root,'show',revision+':'+path))
@@ -52,7 +64,13 @@ for(const path of paths.filter(path=>path.endsWith('.csv'))){
   for(const {text} of input.records){
     counts.rows++
     const record=native.get(text)
-    if(!record){counts.legacyOnly++;continue}
+    if(!record){
+      counts.legacyOnly++
+      if(!converted.has(text))counts.pendingConversion++
+      else if(converted.get(text))counts.convertedStatic++
+      else counts.conversionRework++
+      continue
+    }
     matched.add(text)
     if(record.passing===record.total)counts.nativeCurrent++
     else counts.nativeNeedsRecheck++
@@ -68,4 +86,4 @@ console.log(JSON.stringify({revision,
   validatorSha256:hash(readFileSync(join(nluDir,'lib/check-analysis.mjs'))),
   nativeSchemaSha256:hash(readFileSync(join(nluDir,'schemas/nlu/schema.sop'))),
   totals,registry:{shards:registry.length,exactTexts:native.size,unmatchedExactTexts:native.size-matched.size,circuits,currentCircuits},
-  findingCounts,files},null,2))
+  conversionRegistry:{shards:conversionPaths.length,exactTexts:converted.size},findingCounts,files},null,2))

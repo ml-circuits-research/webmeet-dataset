@@ -123,3 +123,5 @@ eco python3 experiments/native-curation/vibe-queue.py "$INVENTORY" "$WEBMEET_DIR
 ```
 
 Add `--limit 1` to stop after one unfinished group. To resume, rerun using the same queue, model, schema and tool revision. Run one coordinator per queue. The plan skips exact texts with reviewed native references and the reserved evaluation cohort. It records the source and annotation revisions and assigns the remaining texts by source CSV. The output is committed under `annotations/nlu/v1/conversions/vibe/`. Each record includes the exact source, model, current schema and validator digests and a status of `static-pass` or `rework`. These files are separate from the independently reviewed reference registry. The benchmark continues to use its frozen references.
+
+Rerun the coverage command after conversion commits. The per-file fields `convertedStatic`, `conversionRework` and `pendingConversion` split rows that are outside the reviewed registry. This lets you track conversion progress even while the reviewed-reference status of a CSV stays the same.
