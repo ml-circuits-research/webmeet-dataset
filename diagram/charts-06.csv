@@ -1,4 +1,4 @@
-text,sop
+text,sop,sop1
 "the zero values in the sales chart disappear, make them visible","@r1 w.request.request act=change mood=do predicate=make
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""sales chart""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.title words=""sales chart"" operator=eq phase=selector
@@ -26863,7 +26863,10 @@ further apart,"@r1 w.request.request act=place mode=arrange mood=do predicate=ap
 more space,"@r1 w.request.request act=place mode=arrange mood=do predicate=more
 @r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""more space"" note=node.gap value=""more space"""
+@r1.u1 w.request.unread request=$r1 text=""more space"" note=node.gap value=""more space""","@r1 w.request.request act=place mode=arrange mood=do predicate=space
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.spacing value=generous words=space operator=eq phase=result open_value=true"
 spread them further from each other,"@r1 w.request.request act=place mode=arrange mood=do predicate=spread
 @r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
@@ -27246,7 +27249,12 @@ delete the last thrae boxes,"@r1 w.request.request act=remove mood=do predicate=
 the last two,"@r1 w.request.request act=remove mood=do predicate=last
 @r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
-@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=2 words=""last two"" operator=eq phase=result"
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=2 words=""last two"" operator=eq phase=result","@prev w.request.previous text=""the first three are already right""
+@r1 w.request.request act=change mood=do predicate=last
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.position value=last words=""last two"" operator=eq phase=selector open_value=true
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""last two"" operator=eq phase=selector"
 delete the last three boxes while keeping every other box in the row in the same place so the whole arrangement remains easy to follow,"@f1 w.request.filler text=so
 @f2 w.request.filler text=""so the whole arrangement remains easy to follow""
 @r1 w.request.request act=remove mood=do predicate=delete words=""delete the last three boxes while keeping every other box in the row in the same place""
@@ -27692,7 +27700,8 @@ delet all objects,"@r1 w.request.request act=remove mood=do predicate=delet
 @r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=all words=""all objects"" operator=eq phase=result"
 all of them,"@r1 w.request.request act=remove mood=do predicate=all
 @r1.t w.request.target request=$r1 family=node mode=existing determiner=quantified fill=all
-@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=all words=""all of them"" operator=eq phase=result"
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=all words=""all of them"" operator=eq phase=result","@r1 w.request.request act=undo mood=do
+@r1.t w.request.target request=$r1 family=node mode=new determiner=quantified"
 take out every figure except the middle two,"@r1 w.request.request act=remove mood=do predicate=""take out""
 @r1.t w.request.target request=$r1 family=node mode=existing determiner=quantified fill=all sort=figure
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.position value=middle words=""the middle two"" operator=eq phase=selector open_value=true
@@ -28289,7 +28298,10 @@ remove the figure we just mooved to the last position,"@r1 w.request.request act
 @r1.u1 w.request.unread request=$r1 text=""remove the figure we just mooved"" note=node.previous value=""we just mooved"""
 the previous one,"@r1 w.request.request act=remove mood=do
 @r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing","@prev w.request.previous text=""the diagram was changed a minute ago""
+@r1 w.request.request act=undo mood=do predicate=the
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous"
 get rid of the Grow box,"@r1 w.request.request act=remove mood=do predicate=get
 @r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Grow family_words=box"
 remove every second figure in the row,"@r1 w.request.request act=remove mood=do predicate=remove

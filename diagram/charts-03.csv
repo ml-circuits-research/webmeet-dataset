@@ -1,4 +1,4 @@
-text,sop
+text,sop,sop1,sop2
 open a new page and caption it Intake,"@r1 w.request.request act=make mood=do predicate=open words=""open a new page""
 @r1.t w.request.target request=$r1 family=page mode=new determiner=indefinite family_words=""new page""
 @r2 w.request.request act=make mood=do predicate=caption
@@ -20090,6 +20090,8 @@ undo the last edit,"@r1 w.request.request act=undo mood=do predicate=undo
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=last operator=eq phase=selector"
 go back two steps,"@r1 w.request.request act=undo mood=do predicate=""go back""
 @r1.t w.request.target request=$r1 family=step mode=existing fill=journal_step count=2 count_words=""back two steps""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page","@r1 w.request.request act=undo mood=do predicate=go
+@r1.t w.request.target request=$r1 family=step mode=existing count_words=two count=2 family_words=steps determiner=definite fill=journal_step
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 "undo the last three, please","@f1 w.request.filler text=please
 @r1 w.request.request act=undo mood=do predicate=undo
@@ -20924,7 +20926,12 @@ same again please,"@f1 w.request.filler text=please
 redo the previous step,"@r1 w.request.request act=redo mood=do predicate=redo
 @r1.t w.request.target request=$r1 family=step mode=existing fill=journal_step
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=last operator=eq phase=selector words=previous"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=last operator=eq phase=selector words=previous","@r1 w.request.request act=redo mood=do predicate=redo
+@r1.t w.request.target request=$r1 family=step mode=existing fill=journal_step sort=step
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=previous words=""the previous"" operator=eq phase=selector","@r1 w.request.request act=redo mood=do predicate=redo
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=step determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=previous words=""the previous step"" operator=eq phase=selector"
 repet step 2,"@r1 w.request.request act=redo mood=do predicate=repet
 @r1.t w.request.target request=$r1 family=step mode=existing fill=journal_step
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing

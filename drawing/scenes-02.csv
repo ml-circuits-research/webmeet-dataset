@@ -1,4 +1,4 @@
-text,sop
+text,sop,sop1
 rebuild the avatar from the old man base,"@r1 w.request.request act=change mood=do predicate=rebuild
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=avatar
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.base value=""old man"" operator=eq phase=result key_words=base"
@@ -528,7 +528,10 @@ turn off the object IDs,"@r1 w.request.request act=change mood=do predicate=""tu
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=off words=""turn off"" operator=eq phase=result
-@r1.u1 w.request.unread request=$r1 text=""object IDs"" note=""object ids"""
+@r1.u1 w.request.unread request=$r1 text=""object IDs"" note=""object ids""","@r1 w.request.request act=change mood=do predicate=""turn off""
+@r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=off operator=eq phase=result key_words=""object IDs"""
 set Object IDs to off,"@r1 w.request.request act=change mood=do predicate=set
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -588,10 +591,6 @@ no more labels,"@r1 w.request.request act=change mood=do
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context description=""labels""
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=off words=""no more"" operator=eq phase=result"
-IDs off,"@r1 w.request.request act=change mood=do
-@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context description=""IDs""
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=off operator=eq phase=result"
 hide the tags,"@r1 w.request.request act=change mood=do predicate=hide
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context description=""the tags""
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -1011,10 +1010,6 @@ blue eyes please,"@f1 w.request.filler text=please
 @r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=eyes
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.ids value=eyes operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.colour value=blue operator=eq phase=result"
-make it orange,"@r1 w.request.request act=change mood=do predicate=make
-@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=context
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.colour value=orange operator=eq phase=result"
 darker hair,"@r1 w.request.request act=change mood=do
 @r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=hair
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.ids value=hair operator=eq phase=selector
@@ -1075,9 +1070,6 @@ big lips,"@r1 w.request.request act=change mood=do
 @r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=lips
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.ids value=lips operator=eq phase=selector
 @r1.c2 w.request.constraint request=$r1 on=size attribute=part.size value=big operator=degree phase=result"
-make her hair curly,"@r1 w.request.request act=change mood=do predicate=make
-@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=hair
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.value value=curly operator=eq phase=result"
 give her mouth a smiling feel,"@r1 w.request.request act=change mood=do predicate=give
 @r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=mouth
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.value value=smiling operator=eq phase=result
@@ -1267,8 +1259,6 @@ nuke all the parts,"@r1 w.request.request act=remove mood=do predicate=nuke
 "empty the avatar out","@r1 w.request.request act=remove mood=do predicate=empty
 @r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=all
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.owner value=avatar words=""the avatar"" operator=eq phase=selector"
-describe the avatar,"@r1 w.request.request act=ask mood=ask predicate=describe question=describe
-@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=avatar"
 what does she look like right now?,"@f1 w.request.filler text=now
 @r1 w.request.request act=ask mood=ask predicate=""look like"" question=describe
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context
@@ -1357,13 +1347,6 @@ I didn't mean to delete the glasses; can you step back one change?,"@r1 w.reques
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=journal_step description=""one change""
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @f1 w.request.filler text=""I didn't mean to delete the glasses"""
-undo please,"@f1 w.request.filler text=please
-@r1 w.request.request act=undo mood=do predicate=undo
-@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=journal_step
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
-go back one,"@r1 w.request.request act=undo mood=do predicate=""go back""
-@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=journal_step
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 "nope, revert","@f1 w.request.filler text=nope
 @r1 w.request.request act=undo mood=do predicate=revert
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=journal_step
@@ -1386,10 +1369,6 @@ actually the sunglasses were fine - redo that change,"@f1 w.request.filler text=
 I undid too far; could you go forward one step on the face?,"@f1 w.request.filler text=""I undid too far""
 @r1 w.request.request act=redo mood=do predicate=""go forward"" words=""could you go forward one step on the face""
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=journal_step family_words=face description=""one step""
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
-redo please,"@f1 w.request.filler text=please
-@r1 w.request.request act=redo mood=do predicate=redo
-@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=journal_step
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 put it back again,"@r1 w.request.request act=redo mood=do predicate=""put it back""
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=journal_step
@@ -1495,9 +1474,6 @@ highlight the avatar as a whole,"@r1 w.request.request act=pick mood=do predicat
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=temporary operator=eq phase=result
 @r1.u1 w.request.unread request=$r1 text=""labels on the parts"" note=""part labels"""
-show IDs,"@r1 w.request.request act=change mood=do predicate=show
-@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context description=""IDs""
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 leave the part names on permanently,"@r1 w.request.request act=change mood=do predicate=leave
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -1692,9 +1668,6 @@ the labels vanish too fast; make them stay on permanently,"@f1 w.request.filler 
 change the length of the ponytail to long,"@r1 w.request.request act=change mood=do predicate=change
 @r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=ponytail
 @r1.c1 w.request.constraint request=$r1 on=size attribute=part.length value=long operator=degree phase=result key_words=length"
-redo it,"@r1 w.request.request act=redo mood=do predicate=redo
-@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=journal_step
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 "select the hoop earrings and turn them gold - well, yellow","@f1 w.request.filler text=well
 @r1 w.request.request act=pick mood=do words=""select the hoop earrings"" predicate=select
 @r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=""the hoop earrings""

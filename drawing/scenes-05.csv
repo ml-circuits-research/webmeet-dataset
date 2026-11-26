@@ -1,4 +1,4 @@
-text,sop
+text,sop,sop1
 make the roof thatched,"@r1 w.request.request act=change mood=do predicate=make
 @r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=roof
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.material value=thatch words=thatched operator=eq phase=result"
@@ -2799,7 +2799,10 @@ swap the daytime out for the dead of night,"@prev w.request.previous text=""turn
 make it night,"@r1 w.request.request act=change mood=do predicate=make
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=night operator=eq phase=result"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.time value=night operator=eq phase=result","@r1 w.request.request act=change mood=do predicate=make
+@r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.filter value=night operator=eq phase=result"
 "nighttime, that's all","@prev w.request.previous text=""turn the lamp on by the bench first""
 @r1 w.request.request act=change mood=do
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
@@ -11531,10 +11534,16 @@ always leave the sky clear — so the scene reads the way it should — right th
 "make sure the sky stays empty from now on, so the whole scene still reads","@f1 w.request.filler text=""so the whole scene still reads""
 @r1 w.request.request act=place mood=do words=""make sure the sky stays empty from now on"" predicate=""make sure""
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=sky description=""the sky""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=preference.scope value=""from now on"" operator=eq phase=result","@f1 w.request.filler text=""so the whole scene still reads""
+@r1 w.request.request act=place mood=do words=""make sure the sky stays empty from now on"" predicate=""make sure""
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=sky
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=preference.scope value=""from now on"" operator=eq phase=result"
 "never put anything in the sky, keeping everything else where it is","@f1 w.request.filler text=""keeping everything else""
 @r1 w.request.request act=place mood=do words=""never put anything in the sky"" predicate=put
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=sky description=""the sky""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=preference.scope value=never operator=eq phase=result","@f1 w.request.filler text=""keeping everything else""
+@r1 w.request.request act=place mood=do words=""never put anything in the sky"" predicate=put
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=sky
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=preference.scope value=never operator=eq phase=result"
 never let anything cover the sky — keeping the rest of the scene as it is — with everything else left where it is,"@f1 w.request.filler text=""keeping the rest of the scene as it is — with everything else left""
 @r1 w.request.request act=place mood=do words=""never let anything cover the sky"" predicate=cover
@@ -11556,6 +11565,9 @@ never let anything cover the sky — keeping the rest of the scene as it is — 
 "keep the sky clear from now on, just the way the drawing looks","@f1 w.request.filler text=""just the way the drawing looks""
 @r1 w.request.request act=place mood=do words=""keep the sky clear from now on"" predicate=keep
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=sky description=""the sky""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=preference.scope value=""from now on"" operator=eq phase=result","@f1 w.request.filler text=""just the way the drawing looks""
+@r1 w.request.request act=place mood=do words=""keep the sky clear from now on"" predicate=keep
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=sky
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=preference.scope value=""from now on"" operator=eq phase=result"
 "can you leave the sky empty, from now on, keeping everything else where it is","@f1 w.request.filler text=""keeping everything else""
 @r1 w.request.request act=place mood=do words=""can you leave the sky empty, from now on"" predicate=leave
@@ -11696,18 +11708,10 @@ always leave the sky clear — keeping the rest of the scene as it is — with e
 @r1 w.request.request act=place mood=do words=""always leave the sky clear"" predicate=leave
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=sky
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=preference.scope value=always operator=eq phase=result"
-"make sure the sky stays empty from now on, so the whole scene still reads","@f1 w.request.filler text=""so the whole scene still reads""
-@r1 w.request.request act=place mood=do words=""make sure the sky stays empty from now on"" predicate=""make sure""
-@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=sky
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=preference.scope value=""from now on"" operator=eq phase=result"
 "the sky should stay clear, always — over on our little canvas — and that is the whole scene — the way the drawing looks so far","@f1 w.request.filler text=""little canvas — and that is the whole scene — the way the drawing looks so far""
 @r1 w.request.request act=place mood=do words=""the sky should stay clear, always"" predicate=stay
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=sky
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=preference.scope value=always operator=eq phase=result"
-"never put anything in the sky, keeping everything else where it is","@f1 w.request.filler text=""keeping everything else""
-@r1 w.request.request act=place mood=do words=""never put anything in the sky"" predicate=put
-@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=sky
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=preference.scope value=never operator=eq phase=result"
 never let anything cover the sky — the way the drawing looks so far — exactly where the picture needs it,"@f1 w.request.filler text=""way the drawing looks so far — exactly where the picture needs""
 @r1 w.request.request act=place mood=do words=""never let anything cover the sky"" predicate=cover
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=sky
@@ -11721,10 +11725,6 @@ never let anything cover the sky — the way the drawing looks so far — exactl
 @r1 w.request.request act=place mood=do words=""the sky must stay clear, always"" predicate=must
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=sky
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=preference.scope value=always operator=eq phase=result"
-"keep the sky clear from now on, just the way the drawing looks","@f1 w.request.filler text=""just the way the drawing looks""
-@r1 w.request.request act=place mood=do words=""keep the sky clear from now on"" predicate=keep
-@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=sky
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=preference.scope value=""from now on"" operator=eq phase=result"
 "can you leave the sky empty from now on, keeping everything else where it is","@f1 w.request.filler text=""keeping everything else""
 @r1 w.request.request act=place mood=do words=""can you leave the sky empty from now on"" predicate=leave
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=sky

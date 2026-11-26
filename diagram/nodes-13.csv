@@ -1,4 +1,4 @@
-text,sop
+text,sop,sop1
 please add a rectangle labelled Review,"@f1 w.request.filler text=please
 @r1 w.request.request act=make mood=do predicate=add
 @r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=rectangle
@@ -2175,9 +2175,6 @@ I want the diagram cleared,"@f1 w.request.filler text=""I want""
 could you wipe the diagram?,"@r1 w.request.request act=remove mood=do predicate=wipe
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=context family_words=""the diagram""
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
-empty the diagram,"@r1 w.request.request act=remove mood=do predicate=empty
-@r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=context family_words=""the diagram""
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 "erase the whole diagram, please","@f1 w.request.filler text=please
 @r1 w.request.request act=remove mood=do predicate=erase
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=context family_words=""the whole diagram""
@@ -2479,7 +2476,9 @@ would you undo the last change I made to the diagram?,"@r1 w.request.request act
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
 undo the last change,"@r1 w.request.request act=undo mood=do predicate=undo
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step description=""the last change""
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing","@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=journal_step ordinal=last description=last
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 revert the diagram,"@r1 w.request.request act=undo mood=do predicate=revert
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step family_words=""the diagram""
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
@@ -2548,9 +2547,6 @@ would you redo the diagram change I just undid?,"@f1 w.request.filler text=just
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
 redo that change,"@r1 w.request.request act=redo mood=do predicate=redo
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step description=""that change""
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
-redo it,"@r1 w.request.request act=redo mood=do predicate=redo
-@r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
 redo the last undo,"@r1 w.request.request act=redo mood=do predicate=redo
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step description=""the last undo""
@@ -2715,9 +2711,6 @@ would you select group g1?,"@r1 w.request.request act=pick mood=do predicate=sel
 @r1 w.request.request act=pick mood=do predicate=select words=""select group g1""
 @r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=written name=g1 family_words=group
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.id value=g1 operator=eq phase=selector"
-select g1,"@r1 w.request.request act=pick mood=do predicate=select
-@r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=written name=g1
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.id value=g1 operator=eq phase=selector"
 pick g1,"@r1 w.request.request act=pick mood=do predicate=pick
 @r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=written name=g1
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.id value=g1 operator=eq phase=selector"
@@ -2729,9 +2722,6 @@ highlight g1,"@r1 w.request.request act=pick mood=do predicate=highlight
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.id value=g1 operator=eq phase=selector"
 choose the group g1,"@r1 w.request.request act=pick mood=do predicate=choose
 @r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=written name=g1 family_words=group
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.id value=g1 operator=eq phase=selector"
-grab g1,"@r1 w.request.request act=pick mood=do predicate=grab
-@r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=written name=g1
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.id value=g1 operator=eq phase=selector"
 click group g1,"@r1 w.request.request act=pick mood=do predicate=click
 @r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=written name=g1 family_words=group
@@ -5224,9 +5214,6 @@ please tell me what's in this diagram,"@f1 w.request.filler text=please
 @f1 w.request.filler text=""since it's gotten big""
 @r1 w.request.request act=ask mood=ask predicate=""what's"" question=describe words=""what's in this diagram""
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=context family_words=""this diagram""
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
-describe the diagram,"@r1 w.request.request act=ask mood=ask predicate=describe question=describe
-@r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=context family_words=""the diagram""
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 can you undo the last diagram change?,"@r1 w.request.request act=undo mood=do predicate=undo
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step description=""the last diagram change""

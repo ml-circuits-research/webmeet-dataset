@@ -1,4 +1,4 @@
-text,sop
+text,sop,sop1
 "add a collapsed subprocess with a plus marker first; then open the subprocess on a second page, without overlaps, with every element still visible","@f1 w.request.filler text=then
 @r1 w.request.request act=make mood=do predicate=add
 @r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=subprocess
@@ -11464,7 +11464,10 @@ return the row to its starting order,"@r1 w.request.request act=place mode=arran
 restore the starting arrangement,"@r1 w.request.request act=place mode=arrange mood=do predicate=restore
 @r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""the starting arrangement"" note=diagram.reset value=""the starting arrangement"""
+@r1.u1 w.request.unread request=$r1 text=""the starting arrangement"" note=diagram.reset value=""the starting arrangement""","@r1 w.request.request act=undo mood=do predicate=restore
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=start words=""the starting arrangement"" operator=eq phase=result"
 could you put them all back where they were,"@r1 w.request.request act=place mode=arrange mood=do words=""put them all back where they were"" predicate=put
 @r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page

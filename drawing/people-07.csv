@@ -1,4 +1,4 @@
-text,sop
+text,sop,sop1
 make her hair shorter,"@r1 w.request.request act=change mood=do predicate=make
 @r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=hair
 @r1.c1 w.request.constraint request=$r1 on=size attribute=part.length words=shorter operator=delta phase=result step=less"
@@ -527,7 +527,12 @@ switch her hair to curly,"@r1 w.request.request act=change mood=do predicate=swi
 give the avatar curly hair,"@r1 w.request.request act=change mood=do predicate=give
 @r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=hair
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.value value=curly operator=eq phase=result
-@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.owner value=avatar words=""the avatar"" operator=eq phase=selector"
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.owner value=avatar words=""the avatar"" operator=eq phase=selector","@r1 w.request.request act=change mood=do predicate=give
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.variant value=curly operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.owner value=avatar operator=eq phase=selector
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=part.ids value=hair operator=eq phase=selector"
 can her hair be curly,"@r1 w.request.request act=change mood=do predicate=be
 @r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=hair
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.value value=curly operator=eq phase=result"

@@ -1,4 +1,4 @@
-text,sop
+text,sop,sop1
 "Change the title of Project notes to ""Team Offsite 2027"".","@r1 w.request.request act=change mood=do predicate=Change
 @r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=context name=""Project notes""
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -1766,7 +1766,9 @@ Could you wipe everything in Project notes? We're rewriting it from the meeting 
 clear the doc,"@r1 w.request.request act=remove mood=do predicate=clear
 @r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=all description=""the doc"""
 wipe it all,"@r1 w.request.request act=remove mood=do predicate=wipe
-@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=all description=all"
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=all description=all","@r1 w.request.request act=remove mood=do predicate=wipe
+@r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 start over with a blank page,"@r1 w.request.request act=remove mood=do predicate=""start over""
 @r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=all description=""a blank page"""
 empty this document out,"@r1 w.request.request act=remove mood=do predicate=empty
@@ -1859,9 +1861,6 @@ hw many tables are there,"@r1 w.request.request act=ask mood=ask predicate=""hw 
 @r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=description sort=table sort_words=tables"
 total number of blocks?,"@r1 w.request.request act=ask mood=ask question=count
 @r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=all description=""total number"""
-undo the last change,"@r1 w.request.request act=undo mood=do predicate=undo
-@r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=journal_step ordinal=last description=last
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 "Undo that edit, please.","@f1 w.request.filler text=please
 @r1 w.request.request act=undo mood=do predicate=Undo
 @r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=journal_step
@@ -1881,9 +1880,6 @@ undo pls,"@f1 w.request.filler text=pls
 put it back how it was,"@r1 w.request.request act=undo mood=do predicate=""put it back""
 @r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=journal_step
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
-redo the last change,"@r1 w.request.request act=redo mood=do predicate=redo
-@r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=journal_step ordinal=last description=last
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 Redo what I just undid.,"@f1 w.request.filler text=just
 @r1 w.request.request act=redo mood=do predicate=Redo
 @r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=journal_step
@@ -1897,10 +1893,6 @@ reapply the edit you undid in the document,"@r1 w.request.request act=redo mood=
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 I undid the table by mistake - could you bring it back with redo?,"@f1 w.request.filler text=""undid the table by mistake""
 @r1 w.request.request act=redo mood=do words=""could you bring it back with redo?"" predicate=""bring it back""
-@r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=journal_step
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
-redo pls,"@f1 w.request.filler text=pls
-@r1 w.request.request act=redo mood=do predicate=redo
 @r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=journal_step
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 redo that in the document,"@r1 w.request.request act=redo mood=do predicate=redo

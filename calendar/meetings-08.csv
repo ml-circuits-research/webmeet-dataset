@@ -1,4 +1,4 @@
-text,sop
+text,sop,sop1
 please select the Review event,"@f1 w.request.filler text=please
 @r1 w.request.request act=pick mood=do predicate=select
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Review family_words=event
@@ -1277,9 +1277,6 @@ list my events,"@r1 w.request.request act=ask mood=ask predicate=list question=d
 what's scheduled?,"@r1 w.request.request act=ask mood=ask predicate=""what's"" question=describe
 @r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
-show calendar,"@r1 w.request.request act=ask mood=ask predicate=show question=describe
-@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context family_words=calendar
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 "my events, list them","@r1 w.request.request act=ask mood=ask predicate=list question=describe
 @r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context family_words=events
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
@@ -2059,7 +2056,9 @@ I need to know what's on my calendar,"@r1 w.request.request act=ask mood=ask pre
 @r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=""Bring draft"" operator=eq phase=result key_words=notes"
 select Review,"@r1 w.request.request act=pick mood=do predicate=select
 @r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Review
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Review operator=eq phase=selector"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Review operator=eq phase=selector","@r1 w.request.request act=pick mood=do predicate=select
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Review
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Review operator=eq phase=selector"
 "schedule Planning, 2026-11-18 10:00 UTC, 30 minutes, ID planning","@r1 w.request.request act=make mood=do predicate=schedule
 @r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=planning operator=eq phase=result key_words=ID

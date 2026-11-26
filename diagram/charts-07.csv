@@ -1,4 +1,4 @@
-text,sop
+text,sop,sop1
 can you make the rectangles colourful,"@r1 w.request.request act=change mood=do predicate=make
 @r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=all sort=rectangle sort_words=rectangles
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.theme value=vivid words=colourful operator=eq phase=result"
@@ -747,7 +747,10 @@ put numbers on the steps,"@r1 w.request.request act=change mood=do predicate=put
 number the steps,"@r1 w.request.request act=change mood=do predicate=number
 @r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.cs w.request.constraint request=$r1 on=attribute attribute=diagram.steps value=on words=number operator=eq phase=result key_words=steps"
+@r1.cs w.request.constraint request=$r1 on=attribute attribute=diagram.steps value=on words=number operator=eq phase=result key_words=steps","@r1 w.request.request act=change mood=do predicate=number
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.steps value=on words=steps operator=eq phase=result"
 number steps,"@r1 w.request.request act=change mood=do predicate=number
 @r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -1587,7 +1590,9 @@ would you split the biggest box into two steps,"@r1 w.request.request act=""take
 @r1.cc w.request.constraint request=$r1 on=count attribute=node.n words=two operator=eq phase=result"
 split it,"@r1 w.request.request act=""take apart"" mode=split mood=do predicate=split
 @r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page","@r1 w.request.request act=""take apart"" mode=split mood=do predicate=split
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
 "that step does two things, split it into two","@r1 w.request.request act=""take apart"" mode=split mood=do predicate=split words=""split it into two""
 @r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -1678,7 +1683,9 @@ I need you to turn the second arrow around,"@f1 w.request.filler text=need
 @f1 w.request.filler text=""it goes the wrong way"""
 reverse it,"@r1 w.request.request act=change mode=reverse mood=do predicate=reverse
 @r1.t w.request.target request=$r1 family=link mode=existing determiner=definite fill=context
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page","@r1 w.request.request act=change mood=do predicate=reverse
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
 please turn the arrow I just drew around,"@f1 w.request.filler text=please
 @f2 w.request.filler text=just
 @r1 w.request.request act=change mode=reverse mood=do predicate=turn
@@ -3468,7 +3475,8 @@ now show the chart as a pie chart,"@f1 w.request.filler text=now
 make it a donut,"@r1 w.request.request act=change mood=do predicate=make
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=doughnut words=donut operator=eq phase=result"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=doughnut words=donut operator=eq phase=result","@r1 w.request.request act=make mood=do predicate=make
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=donut"
 "shares read better as slices, so turn Fruit stock into a bars","@f1 w.request.filler text=so
 @r1 w.request.request act=change mood=do predicate=turn words=""so turn Fruit stock into a bars""
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Fruit stock""
@@ -4150,10 +4158,6 @@ can you show the values on the chart Sales by region,"@r1 w.request.request act=
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=values operator=eq phase=result"
 "hey, label each bar with its value","@f1 w.request.filler text=hey
 @r1 w.request.request act=change mood=do predicate=label words=""label each bar with its value""
-@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context family_words=bar
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=value operator=eq phase=result"
-label each bar with its value,"@r1 w.request.request act=change mood=do predicate=label
 @r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context family_words=bar
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=value operator=eq phase=result"

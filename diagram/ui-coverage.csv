@@ -1,6 +1,4 @@
-text,sop
-add a diamond,"@r1 w.request.request act=make mood=do predicate=add
-@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=diamond"
+text,sop,sop1
 put a hexagon on the diagram,"@r1 w.request.request act=make mood=do predicate=put
 @r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=hexagon
 @r1.t2 w.request.target request=$r1 family=page mode=existing determiner=definite fill=context family_words=""the diagram""
@@ -478,9 +476,6 @@ label it Retry,"@r1 w.request.request act=change mood=do predicate=label
 @r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Retry operator=eq phase=result"
-select Review,"@r1 w.request.request act=pick mood=do predicate=select
-@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Review
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Review operator=eq phase=selector"
 highlight the Start and Done shapes,"@r1 w.request.request act=pick mood=do predicate=highlight
 @r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Start family_words=shapes
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Start operator=eq phase=selector
@@ -595,9 +590,6 @@ select Approved? and whatever connects to it,"@r1 w.request.request act=pick moo
 @r1 w.request.request act=pick mood=do
 @r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=description sort=diamond
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.edges value=links operator=eq phase=result"
-delete Review,"@r1 w.request.request act=remove mood=do predicate=delete
-@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Review
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Review operator=eq phase=selector"
 remove the Note from the diagram,"@r1 w.request.request act=remove mood=do predicate=remove
 @r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Note
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Note operator=eq phase=selector
@@ -707,9 +699,6 @@ That one doesn't belong in the org chart. Remove it.,"@r1 w.request.request act=
 @r2 w.request.request act=place mode=arrange mood=do words=""tidy the rest into a row"" predicate=tidy
 @r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=all description=""the rest""
 @r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.layout value=row words=""into a row"" operator=eq phase=result"
-delete it,"@r1 w.request.request act=remove mood=do predicate=delete
-@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 bin this,"@r1 w.request.request act=remove mood=do predicate=bin
 @r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
@@ -718,6 +707,8 @@ remove that one,"@r1 w.request.request act=remove mood=do predicate=remove
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 delete selection,"@r1 w.request.request act=remove mood=do predicate=delete
 @r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context family_words=selection
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page","@r1 w.request.request act=remove mood=do predicate=delete
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context description=selection
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 these can go,"@r1 w.request.request act=remove mood=do predicate=go
 @r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
@@ -1698,7 +1689,10 @@ keep the node IDs visible,"@r1 w.request.request act=change mood=do predicate=ke
 show the IDs permanently,"@r1 w.request.request act=change mood=do predicate=show
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=always words=permanently operator=eq phase=result key_words=IDs"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=always words=permanently operator=eq phase=result key_words=IDs","@r1 w.request.request act=change mood=do predicate=show
+@r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context description=""the IDs""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=always words=permanently operator=eq phase=result"
 leave the shape IDs on all the time,"@r1 w.request.request act=change mood=do predicate=leave
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -1754,7 +1748,10 @@ For the review session please show the IDs and do not hide them automatically,"@
 IDs always on,"@r1 w.request.request act=change mood=do
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=always words=""always on"" operator=eq phase=result key_words=IDs"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=always words=""always on"" operator=eq phase=result key_words=IDs","@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context description=""IDs""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=always words=""always on"" operator=eq phase=result"
 keep IDs up,"@r1 w.request.request act=change mood=do predicate=keep
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -1762,11 +1759,15 @@ keep IDs up,"@r1 w.request.request act=change mood=do predicate=keep
 IDs stay on,"@r1 w.request.request act=change mood=do predicate=stay
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=always words=on operator=eq phase=result key_words=IDs"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=always words=on operator=eq phase=result key_words=IDs","@r1 w.request.request act=change mood=do predicate=stay
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 leave the IDs showing,"@r1 w.request.request act=change mood=do predicate=leave
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=always words=showing operator=eq phase=result key_words=IDs"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=always words=showing operator=eq phase=result key_words=IDs","@r1 w.request.request act=change mood=do predicate=leave
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 "show IDs, keep them","@r1 w.request.request act=change mood=do predicate=show
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -1795,7 +1796,10 @@ switch off the ID overlay,"@r1 w.request.request act=change mood=do predicate=sw
 make the IDs disappear,"@r1 w.request.request act=change mood=do predicate=make
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=off words=disappear operator=eq phase=result key_words=IDs"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=off words=disappear operator=eq phase=result key_words=IDs","@r1 w.request.request act=change mood=do predicate=make
+@r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context description=""the IDs""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=off words=disappear operator=eq phase=result"
 "I've noted the numbers I needed, so you can hide the IDs again","@f1 w.request.filler text=so
 @r1 w.request.request act=change mood=do predicate=hide words=""you can hide the IDs again""
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
@@ -1821,10 +1825,6 @@ make the IDs disappear,"@r1 w.request.request act=change mood=do predicate=make
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=off operator=eq phase=result
 @f9 w.request.filler text=""If the IDs are still showing""
 @f10 w.request.filler text=""the org chart is going on the wall"""
-IDs off,"@r1 w.request.request act=change mood=do
-@r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=off operator=eq phase=result key_words=IDs"
 no more IDs please,"@f1 w.request.filler text=please
 @r1 w.request.request act=change mood=do
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
@@ -1972,8 +1972,6 @@ is there a group around the approval steps and is it labelled?,"@f1 w.request.fi
 "Do the charts include a Survey results group, or was that removed?","@r1 w.request.request act=ask mood=ask predicate=include question=exists
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=written name=""Survey results"" family_words=charts sort=group
 @r1.u9 w.request.unread request=$r1 text=""or was that removed"" note=request.previous"
-any diamonds?,"@r1 w.request.request act=ask mood=ask question=exists
-@r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=description sort=diamond sort_words=diamonds"
 is Done there?,"@r1 w.request.request act=ask mood=ask predicate=is question=exists
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=written name=Done"
 got a Start box?,"@r1 w.request.request act=ask mood=ask predicate=got question=exists
@@ -2729,9 +2727,6 @@ dissolve the Leadership group,"@r1 w.request.request act=""take apart"" mode=ung
 @r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=description sort=group
 @f9 w.request.filler text=""The bars in Quarterly revenue should be separate shapes again""
 @f10 w.request.filler text=""don't delete anything"""
-ungroup it,"@r1 w.request.request act=""take apart"" mode=ungroup mood=do predicate=ungroup
-@r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=context
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 ungroup Survey results,"@r1 w.request.request act=""take apart"" mode=ungroup mood=do predicate=ungroup
 @r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=written name=""Survey results""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.id value=""Survey results"" operator=eq phase=selector"
@@ -3431,13 +3426,19 @@ permanent IDs please,"@f1 w.request.filler text=please
 @r1 w.request.request act=change mood=do
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=always words=permanent operator=eq phase=result key_words=IDs"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=always words=permanent operator=eq phase=result key_words=IDs","@f1 w.request.filler text=please
+@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context description=""IDs""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=always words=permanent operator=eq phase=result"
 can you get the IDs off the screen?,"@r1 w.request.request act=change mood=do predicate=get
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=off words=""off the screen"" operator=eq phase=result key_words=IDs"
 undo the move,"@r1 w.request.request act=undo mood=do predicate=undo
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step description=move
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page","@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=journal_step description=""the move""
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 "ok so the CEO box should say Managing director, that's her real title","@f1 w.request.filler text=""ok so""
 @r1 w.request.request act=change mood=do predicate=say

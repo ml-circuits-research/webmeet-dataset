@@ -1,4 +1,4 @@
-text,sop
+text,sop,sop1,sop2
 just add a diagram of three triangles,"@f1 w.request.filler text=just
 @r1 w.request.request act=make mood=do predicate=add
 @r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=triangle sort_words=triangles
@@ -271,9 +271,6 @@ make it nice,"@r1 w.request.request act=place mode=arrange mood=do predicate=mak
 @r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context family_words=diagram
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @f1 w.request.filler text=""it is hard to follow"""
-improve layout,"@r1 w.request.request act=place mode=arrange mood=do predicate=improve
-@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 make it look beter,"@r1 w.request.request act=place mode=arrange mood=do predicate=make
 @r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
@@ -4023,10 +4020,6 @@ please fill the selected one brown,"@f1 w.request.filler text=please
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.colour value=pink operator=eq phase=result
 @f1 w.request.filler text=""now that it is selected"""
-red,"@r1 w.request.request act=change mood=do
-@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.colour value=red operator=eq phase=result"
 go ahead and choose tiny in the size options,"@r1 w.request.request act=change mood=do predicate=choose words=""choose tiny in the size options""
 @r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -9911,7 +9904,9 @@ clear diagram,"@r1 w.request.request act=remove mood=do predicate=clear
 clear all,"@r1 w.request.request act=remove mood=do predicate=clear
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=all"
 empty the diagram,"@r1 w.request.request act=remove mood=do predicate=empty
-@r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=all family_words=diagram"
+@r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=all family_words=diagram","@r1 w.request.request act=remove mood=do predicate=empty
+@r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=context family_words=""the diagram""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 "the client changed everything, so delete the canvas","@r1 w.request.request act=remove mood=do predicate=delete words=""delete the canvas""
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=all family_words=canvas
 @f1 w.request.filler text=""the client changed everything, so"""
@@ -9934,7 +9929,9 @@ I need you to clear away all of it,"@f1 w.request.filler text=need
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=all family_words=canvas
 @f1 w.request.filler text=""the client changed everything, so I need you to"""
 clear,"@r1 w.request.request act=remove mood=do predicate=clear
-@r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=all"
+@r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=all","@r1 w.request.request act=remove mood=do predicate=clear
+@r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 let's get rid of everything,"@r1 w.request.request act=remove mood=do predicate=""get rid of""
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=all"
 "the client changed everything, so can you start over with the canvas","@r1 w.request.request act=remove mood=do predicate=""start over with"" words=""start over with the canvas""
@@ -10158,7 +10155,13 @@ please switch off the IDs,"@f1 w.request.filler text=please
 IDs off,"@r1 w.request.request act=change mood=do
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=off operator=eq phase=result key_words=IDs"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=off operator=eq phase=result key_words=IDs","@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context description=""IDs""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=off operator=eq phase=result","@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context description=""IDs""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=off operator=eq phase=result"
 I need you to show me the numbers on the shaes for a second,"@f1 w.request.filler text=need
 @r1 w.request.request act=change mood=do predicate=show
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
@@ -10267,9 +10270,6 @@ could you reverse,"@r1 w.request.request act=undo mood=do predicate=reverse
 @r1 w.request.request act=undo mood=do predicate=undo words=""ok undo that""
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
-oops,"@r1 w.request.request act=undo mood=do predicate=oops
-@r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 now take back what I just did,"@f1 w.request.filler text=now
 @f2 w.request.filler text=just
 @r1 w.request.request act=undo mood=do predicate=""take back""
@@ -10328,9 +10328,6 @@ now go back the last step,"@f1 w.request.filler text=now
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 reverse pls,"@f1 w.request.filler text=pls
 @r1 w.request.request act=undo mood=do predicate=reverse
-@r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
-undo,"@r1 w.request.request act=undo mood=do predicate=undo
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 "no wait, can you revert that","@f1 w.request.filler text=""no wait""
@@ -10496,6 +10493,10 @@ do again,"@r1 w.request.request act=redo mood=do predicate=""do again""
 @f1 w.request.filler text=""I undid too much"""
 redo it,"@r1 w.request.request act=redo mood=do predicate=redo
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page","@r1 w.request.request act=redo mood=do predicate=redo
+@r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing","@r1 w.request.request act=redo mood=do predicate=redo
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=journal_step
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 "actually it was fine, do again it","@r1 w.request.request act=redo mood=do predicate=""do again"" words=""do again it""
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step
@@ -10503,7 +10504,9 @@ redo it,"@r1 w.request.request act=redo mood=do predicate=redo
 @f1 w.request.filler text=""actually it was fine"""
 put it back,"@r1 w.request.request act=redo mood=do predicate=""put it back""
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page","@r1 w.request.request act=redo mood=do predicate=put
+@r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
 now bring back what I undid,"@f1 w.request.filler text=now
 @r1 w.request.request act=redo mood=do predicate=""bring back""
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step
@@ -10559,7 +10562,9 @@ repeat,"@r1 w.request.request act=redo mood=do predicate=repeat
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 redo that,"@r1 w.request.request act=redo mood=do predicate=redo
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page","@r1 w.request.request act=redo mood=do predicate=redo
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
 "I undid too much, hey, reapply that","@r1 w.request.request act=redo mood=do predicate=reapply words=""reapply that""
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -10567,9 +10572,14 @@ redo that,"@r1 w.request.request act=redo mood=do predicate=redo
 redo pls,"@f1 w.request.filler text=pls
 @r1 w.request.request act=redo mood=do predicate=redo
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page","@f1 w.request.filler text=pls
+@r1 w.request.request act=redo mood=do predicate=redo
+@r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=journal_step
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 redo what I undid,"@r1 w.request.request act=redo mood=do predicate=redo
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page","@r1 w.request.request act=redo mood=do predicate=redo
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=journal_step description=""what I undid""
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 "I undidt lomuch, would you put back thzt","@r1 w.request.request act=redo mood=do predicate=""put back"" words=""would you put back thzt""
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step
@@ -12476,6 +12486,8 @@ explain the diagram,"@r1 w.request.request act=ask mood=ask predicate=explain qu
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 overview,"@r1 w.request.request act=ask mood=ask question=describe
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page","@r1 w.request.request act=ask mood=ask predicate=overview question=describe asked=document.blocks
+@r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 tell me what the diagram shows,"@r1 w.request.request act=ask mood=ask predicate=""tell me"" question=describe
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=context family_words=diagram
@@ -12511,9 +12523,6 @@ what is on the canvas right now?,"@f1 w.request.filler text=now
 status of the diagram,"@r1 w.request.request act=ask mood=ask question=describe
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=context family_words=diagram
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
-describe the diagram,"@r1 w.request.request act=ask mood=ask predicate=describe question=describe
-@r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=context family_words=diagram
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 describe the canvas,"@r1 w.request.request act=ask mood=ask predicate=describe question=describe
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=context family_words=canvas
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
@@ -12522,7 +12531,11 @@ what's here,"@r1 w.request.request act=ask mood=ask predicate=""what's"" questio
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 describe it,"@r1 w.request.request act=ask mood=ask predicate=describe question=describe
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=context
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page","@r1 w.request.request act=ask mood=ask predicate=describe question=describe
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page","@r1 w.request.request act=ask mood=ask predicate=describe question=describe
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
 what is there?,"@r1 w.request.request act=ask mood=ask predicate=""is there"" question=describe
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
@@ -12868,7 +12881,8 @@ any decision boxes?,"@r1 w.request.request act=ask mood=check predicate=any ques
 is there a square?,"@r1 w.request.request act=ask mood=check predicate=""is there"" question=exists
 @r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=all sort=square"
 any diamonds?,"@r1 w.request.request act=ask mood=check predicate=any question=exists
-@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=all sort=diamond sort_words=diamonds"
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=all sort=diamond sort_words=diamonds","@r1 w.request.request act=ask mood=ask question=exists
+@r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=description sort=diamond sort_words=diamonds"
 is there a bubble in the diagram?,"@r1 w.request.request act=ask mood=check predicate=""is there"" question=exists
 @r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=all sort=circle sort_words=bubble
 @r1.t1 w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context family_words=diagram
@@ -15276,8 +15290,6 @@ ok mark the current won as the decision,"@f1 w.request.filler text=ok
 @r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=oval sort_words=stadium
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Approved operator=eq phase=result key_words=called
 @f1 w.request.filler text=""the data lives somewhere, hey"""
-insert a double rectangle,"@r1 w.request.request act=make mood=do predicate=insert
-@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=double_rectangle sort_words=""double rectangle"""
 "the data lives somewhere, I want to create a parallelogram called Send email","@r1 w.request.request act=make mood=do predicate=create words=""create a parallelogram called Send email""
 @r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=parallelogram
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""Send email"" operator=eq phase=result key_words=called
@@ -15988,7 +16000,10 @@ numbers off,"@r1 w.request.request act=change mood=do
 @r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=page.mode value=off key_words=numbers operator=eq phase=result
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.steps value=off operator=eq phase=result"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.steps value=off operator=eq phase=result","@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context description=""numbers""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=off operator=eq phase=result"
 now show step numbers,"@f1 w.request.filler text=now
 @r1 w.request.request act=change mood=do predicate=show
 @r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
@@ -18970,7 +18985,13 @@ I need you to reapply what I undid,"@f1 w.request.filler text=need
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
 redo the last change,"@r1 w.request.request act=redo mood=do predicate=redo
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step description=""last change""
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page","@r1 w.request.request act=redo mood=do predicate=redo
+@r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=journal_step ordinal=last description=last
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page","@prev w.request.previous text=""Undo the last action.""
+@r1 w.request.request act=redo mood=do predicate=redo
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous
+@r1.u1 w.request.unread request=$r1 text=""last change"" note=journal.step"
 let's put togeether Process with Finance together,"@r1 w.request.request act=group mood=do predicate=""put togeether""
 @r1.t w.request.target request=$r1 family=group mode=new determiner=indefinite
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.ids value=Process operator=eq phase=result
@@ -20825,7 +20846,12 @@ erase n4 and line e3,"@r1 w.request.request act=remove mood=do predicate=erase
 show IDs,"@r1 w.request.request act=change mood=do predicate=show
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=show open_value=true key_words=IDs operator=eq phase=result"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=show open_value=true key_words=IDs operator=eq phase=result","@r1 w.request.request act=change mood=do predicate=show
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context description=""IDs""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page","@r1 w.request.request act=change mood=do predicate=show
+@r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=visible operator=eq phase=result open_value=true words=IDs"
 show ids 20 seconds,"@r1 w.request.request act=change mood=do predicate=show
 @r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page

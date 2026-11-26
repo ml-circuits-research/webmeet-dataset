@@ -1,4 +1,4 @@
-text,sop,sop1
+text,sop,sop1,sop2
 set the title of the document to Quarterly plan,"@r1 w.request.request act=change mood=do predicate=set
 @r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=context family_words=document
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -52,18 +52,16 @@ select it to character 40 from character 40,"@r1 w.request.request act=pick mood
 change Introduction,"@r1 w.request.request act=change mood=do predicate=change
 @r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=written name=Introduction
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.id value=Introduction operator=eq phase=selector",
-change it,"@r1 w.request.request act=change mood=do predicate=change
-@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing","@r1 w.request.request act=change mood=do predicate=change
-@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
 set its text to Hello there,"@r1 w.request.request act=change mood=do predicate=set
 @r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.text value=""Hello there"" operator=eq phase=result key_words=text","@r1 w.request.request act=change mood=do predicate=set
 @r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text value=""Hello there"" operator=eq phase=result key_words=text"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text value=""Hello there"" operator=eq phase=result key_words=text","@r1 w.request.request act=change mood=do predicate=set
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.text value=""Hello there"" operator=eq phase=result key_words=text"
 set the name of Introduction to Main,"@r1 w.request.request act=change mood=do predicate=set
 @r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=written name=Introduction
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.id value=Introduction operator=eq phase=selector
@@ -74,7 +72,10 @@ set its name to Main,"@r1 w.request.request act=change mood=do predicate=set
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.name value=Main operator=eq phase=result key_words=name","@r1 w.request.request act=change mood=do predicate=set
 @r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.name value=Main operator=eq phase=result key_words=name"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.name value=Main operator=eq phase=result key_words=name","@r1 w.request.request act=change mood=do predicate=set
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.name value=Main operator=eq phase=result key_words=name"
 set its level to 1,"@r1 w.request.request act=change mood=do predicate=set
 @r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
@@ -728,8 +729,6 @@ rewrite the document with value formal and value very short,"@r1 w.request.reque
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=text.tone value=formal operator=eq phase=result key_words=value
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=text.length value=very_short words=""very short"" operator=eq phase=result key_words=value",
-add a paragraph,"@r1 w.request.request act=make mood=do predicate=add
-@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=paragraph",
 add a paragraph with text Hello there,"@r1 w.request.request act=make mood=do predicate=add
 @r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=paragraph
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text value=""Hello there"" operator=eq phase=result key_words=text",
@@ -742,8 +741,6 @@ add a paragraph with level 3,"@r1 w.request.request act=make mood=do predicate=a
 add a paragraph with name Main,"@r1 w.request.request act=make mood=do predicate=add
 @r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=paragraph
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.name value=Main operator=eq phase=result key_words=name",
-add a heading,"@r1 w.request.request act=make mood=do predicate=add
-@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=heading",
 add a quote,"@r1 w.request.request act=make mood=do predicate=add
 @r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=quote",
 add a paragraph with text Hello there and level 3,"@r1 w.request.request act=make mood=do predicate=add
@@ -937,18 +934,8 @@ delete Intro,"@r1 w.request.request act=remove mood=do predicate=delete
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.ids value=Intro operator=eq phase=selector",
 delete the quote,"@r1 w.request.request act=remove mood=do predicate=delete
 @r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=description sort=quote",
-delete it,"@r1 w.request.request act=remove mood=do predicate=delete
-@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing","@r1 w.request.request act=remove mood=do predicate=delete
-@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
 delete all the chapters,"@r1 w.request.request act=remove mood=do predicate=delete
 @r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=all sort=chapter sort_words=chapters description=""all the chapters""",
-move it,"@r1 w.request.request act=place mood=do predicate=move
-@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing","@r1 w.request.request act=place mood=do predicate=move
-@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
 move all the chapters,"@r1 w.request.request act=place mood=do predicate=move
 @r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=all sort=chapter sort_words=chapters description=""all the chapters""",
 delete the document,"@r1 w.request.request act=remove mood=do predicate=delete
@@ -1087,19 +1074,10 @@ add a block with text Hello there and level 3,"@r1 w.request.request act=make mo
 @r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=block
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text value=""Hello there"" operator=eq phase=result key_words=text
 @r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.level value=""3"" operator=eq phase=result key_words=level",
-delete the selection,"@r1 w.request.request act=remove mood=do predicate=delete
-@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context description=""the selection""
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing",
-move the selection,"@r1 w.request.request act=place mood=do predicate=move
-@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context description=""the selection""
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing",
 set the text of the selection to Hello there,"@r1 w.request.request act=change mood=do predicate=set
 @r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context description=""the selection""
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text value=""Hello there"" operator=eq phase=result key_words=text",
-change the selection,"@r1 w.request.request act=change mood=do predicate=change
-@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context description=""the selection""
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing",
 set the style of the selection to bullet,"@r1 w.request.request act=change mood=do predicate=set
 @r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context description=""the selection""
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing

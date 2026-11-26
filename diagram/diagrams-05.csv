@@ -1,4 +1,4 @@
-text,sop
+text,sop,sop1,sop2,sop3
 Add a shape of a circle on the page.,"@r1 w.request.request act=make mood=do words=""Add a shape of a circle on the page"" predicate=Add
 @r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=circle"
 Insert a red rectangle on the left page.,"@r1 w.request.request act=make mood=do words=""Insert a red rectangle on the left page"" predicate=Insert
@@ -525,7 +525,10 @@ make the arrow from Start to Review dotted,"@r1 w.request.request act=change moo
 make it orange,"@r1 w.request.request act=change mood=do predicate=make
 @r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.colour value=orange operator=eq phase=result"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.colour value=orange operator=eq phase=result","@r1 w.request.request act=change mood=do predicate=make
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.colour value=orange operator=eq phase=result"
 remove the one I just added,"@f1 w.request.filler text=just
 @r1 w.request.request act=remove mood=do predicate=remove
 @r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context ordinal=newest
@@ -1593,10 +1596,6 @@ colour the nodes by their role,"@r1 w.request.request act=change mood=do predica
 @r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.by value=role operator=eq phase=result"
-number the steps,"@r1 w.request.request act=change mood=do predicate=number
-@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.steps value=on words=steps operator=eq phase=result"
 make all arrows dotted,"@r1 w.request.request act=change mood=do predicate=make
 @r1.t w.request.target request=$r1 family=link mode=existing determiner=definite fill=all description=""all arrows""
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.style value=dotted operator=eq phase=result"
@@ -1634,6 +1633,12 @@ black and white please,"@f1 w.request.filler text=please
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.theme value=monochrome words=""black and white"" operator=eq phase=result"
 undo,"@r1 w.request.request act=undo mood=do predicate=undo
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing","@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page","@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page","@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=journal_step
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
 undo the last step,"@r1 w.request.request act=undo mood=do predicate=undo
 @r1.t w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step
@@ -1657,11 +1662,16 @@ undo the third step,"@r1 w.request.request act=undo mood=do predicate=undo
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=3 words=""the third step"" operator=eq phase=selector"
 undo that,"@r1 w.request.request act=undo mood=do predicate=undo
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page","@prev w.request.previous text=""Create an object of kind \""rectangle\"", named \""Box\"", with x 650, with y 180, with size 100.""
+@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=previous"
 undo last change,"@r1 w.request.request act=undo mood=do predicate=undo
 @r1.t w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=last words=""last change"" operator=eq phase=selector"
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=last words=""last change"" operator=eq phase=selector","@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=journal_step description=""last change""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
 redo first step,"@r1 w.request.request act=redo mood=do predicate=redo
 @r1.t w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
@@ -1691,7 +1701,10 @@ repeat the previous step,"@r1 w.request.request act=copy mode=repeat mood=do pre
 undo it please,"@f1 w.request.filler text=please
 @r1 w.request.request act=undo mood=do predicate=undo
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step
-@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page","@f1 w.request.filler text=please
+@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
 nope go back,"@f1 w.request.filler text=nope
 @r1 w.request.request act=undo mood=do words=""go back"" predicate=""go back""
 @r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step
@@ -2090,6 +2103,9 @@ Split each bar by Content Rating. Put a legend of the Content Rating on the righ
 red,"@r1 w.request.request act=change mood=do
 @r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.colour value=red operator=eq phase=result","@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.colour value=red operator=eq phase=result"
 same for all the circles,"@r1 w.request.request act=change mood=do
 @r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=all description=""all the circles"" quantifier=all"
@@ -2310,7 +2326,10 @@ set Apr to 12 and title it Q1 sales,"@r1 w.request.request act=change mood=do wo
 a bit more,"@r1 w.request.request act=change mood=do
 @r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
-@r1.c1 w.request.constraint request=$r1 on=size attribute=node.size words=""a bit more"" operator=delta phase=result step=less"
+@r1.c1 w.request.constraint request=$r1 on=size attribute=node.size words=""a bit more"" operator=delta phase=result step=less","@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.turn value=tilt words=""a bit more"" operator=eq phase=result"
 Fill the star with blue color,"@r1 w.request.request act=change mood=do predicate=Fill
 @r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=description sort=star
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.colour value=blue operator=eq phase=result key_words=color"

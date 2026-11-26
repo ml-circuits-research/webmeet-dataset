@@ -1,4 +1,4 @@
-text,sop
+text,sop,sop1
 move the middle object one spot to the left and leave a gap where it used to sit,"@r1 w.request.request act=place mood=do predicate=move
 @r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
@@ -20591,7 +20591,9 @@ make the last figure first and the first last,"@r1 w.request.request act=change 
 reverse the whole row,"@r1 w.request.request act=change mode=reverse mood=do predicate=reverse
 @r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
 @r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
-@r1.u1 w.request.unread request=$r1 text=""the whole row"" note=node.ordinal.swap value=""the whole row"""
+@r1.u1 w.request.unread request=$r1 text=""the whole row"" note=node.ordinal.swap value=""the whole row""","@r1 w.request.request act=change mode=reverse mood=do predicate=reverse
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=quantified fill=all quantifier=whole
+@r1.u1 w.request.unread request=$r1 text=""whole row"" note=node.selection value=""whole row"""
 "i want to read the row backwards, so put the last figure first and work back from there","@f1 w.request.filler text=want
 @f2 w.request.filler text=so
 @r1 w.request.request act=change mode=reverse mood=do predicate=put
@@ -30588,7 +30590,10 @@ one per plan,"@r1 w.request.request act=make mood=do predicate=one
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
 @r1.u1 w.request.unread request=$r1 text=""one per plan"" note=chart.encoding value=""one per plan"""
 both of them,"@r1 w.request.request act=make mood=do predicate=both
-@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite"
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite","@prev w.request.previous text=""the pair was deleted""
+@r1 w.request.request act=undo mood=do predicate=both
+@r1.t w.request.target request=$r1 family=node mode=new determiner=quantified
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=""2"" words=""both of them"" operator=eq phase=result"
 chart the average sales over the months,"@r1 w.request.request act=make mood=do predicate=chart
 @r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
 @r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=average operator=eq phase=result"
