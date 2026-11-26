@@ -130,4 +130,6 @@ Send one request at a time, with multiple independent rows in its JSON payload. 
 
 The corpus release decision uses the separate 90% plausibility target. Static coverage is checked on every row. Inspect a source-based sample for incorrect assignments even among static passes, and record defective rows for targeted correction. Establish feasible request width by checking the returned indices, timings and output quality.
 
+To roll out only on a file whose conversion pilot meets the plausibility target, create a new queue with `--source-file document/text-01.csv` (or another exact dataset-relative CSV path). Keep that same option when resuming the queue. Check the first production group with `--limit 1` before continuing across the file. Committed, statically checked pilot conversions are skipped by the new plan.
+
 To plan the same workflow with GPT-6.2 Sol, use `--backend sol`, a fresh queue directory and an explicit `--batch-rows` value. Sol also receives one request at a time. Each request requires a result for every input row. The queue writes Sol shards under `annotations/nlu/v1/conversions/sol/` and skips exact texts already found in either backend's committed shards. Choose one queue for a given corpus partition to avoid overlapping publication.
