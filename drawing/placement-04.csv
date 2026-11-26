@@ -1,4 +1,4 @@
-text,sop
+text,sop,sop1
 Let us put house to the left of tree. That would help.,"@f1 w.request.filler text=help
 @r1 w.request.request act=place mood=do words=""put house to the left of tree"" predicate=put
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=written name=house
@@ -294,6 +294,10 @@ Could you place bus to the left of traffic light. Thanks!,"@f1 w.request.filler 
 Could you move cafe to the left of newsagent. Thanks!,"@f1 w.request.filler text=Thanks
 @r1 w.request.request act=place mood=do words=""move cafe to the left of newsagent"" predicate=move
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=written name=cafe
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=left_of words=""to the left of"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=newsagent operator=relation phase=selector","@f1 w.request.filler text=Thanks
+@r1 w.request.request act=place mood=do predicate=move
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=cafe
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=left_of words=""to the left of"" operator=relation phase=result
 @r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=newsagent operator=relation phase=selector"
 Could you put bus to the left of bike lane. I appreciate it.,"@f1 w.request.filler text=appreciate
@@ -1869,7 +1873,11 @@ place Kettle to the left of Campfire.,"@r1 w.request.request act=place mood=do w
 put Kettle to the left of Campfire.,"@r1 w.request.request act=place mood=do words=""put Kettle to the left of Campfire"" predicate=put
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=written name=Kettle
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=left_of words=""to the left of"" operator=relation phase=result
-@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=Campfire operator=relation phase=selector"
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=Campfire operator=relation phase=selector","@r1 w.request.request act=place mood=do predicate=put
+@r1.t w.request.target request=$r1 family=drawn mode=existing fill=written name=Kettle
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=left_of words=""to the left of"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=Campfire operator=relation phase=selector
+@r1.a1 w.request.lookup request=$r1 constraint=$r1.c2 key=thing from=page"
 Let us move Tarp to the left of Tent. That would help.,"@f1 w.request.filler text=help
 @r1 w.request.request act=place mood=do words=""move Tarp to the left of Tent"" predicate=move
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=written name=Tarp
@@ -2107,7 +2115,12 @@ Could you move Car to the left of Tree 1. I appreciate it.,"@f1 w.request.filler
 @r1 w.request.request act=place mood=do words=""put House to the left of Tree 1"" predicate=put
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=written name=House
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=left_of words=""to the left of"" operator=relation phase=result
-@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""Tree 1"" operator=relation phase=selector"
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""Tree 1"" operator=relation phase=selector","@r1 w.request.request act=place mood=do predicate=put
+@r1.t w.request.target request=$r1 family=drawn mode=existing fill=written name=House
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=left_of words=""to the left of"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""Tree 1"" operator=relation phase=selector
+@r1.a1 w.request.lookup request=$r1 constraint=$r1.c2 key=thing from=page
+@f1 w.request.filler text=""Thanks"""
 put House to the left of Tree 1.,"@r1 w.request.request act=place mood=do words=""put House to the left of Tree 1"" predicate=put
 @r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=written name=House
 @r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=left_of words=""to the left of"" operator=relation phase=result
