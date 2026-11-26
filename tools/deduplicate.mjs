@@ -51,7 +51,7 @@ function* csvRecords(source, file) {
   }
 }
 
-function readTable(source, path) {
+export function readTable(source, path) {
   const bom = source.startsWith('\uFEFF') ? '\uFEFF' : ''
   source = source.slice(bom.length)
   const records = csvRecords(source, path)
@@ -63,7 +63,7 @@ function readTable(source, path) {
   return {path, source, bom, header, columns: columns.length, records}
 }
 
-function recordCircuits(record, table) {
+export function recordCircuits(record, table) {
   const circuits = []
   for (let index = 1; index < record.values.length; index++) {
     const value = record.values[index]
@@ -76,7 +76,7 @@ function recordCircuits(record, table) {
   return circuits
 }
 
-function* dataRecords(table) {
+export function* dataRecords(table) {
   for (const record of table.records) {
     if (record.values.length === 1 && record.values[0] === '') continue
     yield record
@@ -85,7 +85,7 @@ function* dataRecords(table) {
 
 const normalize = value => value.normalize('NFKC').toLowerCase().trim().replace(/\s+/gu, ' ')
 
-function headerWithWidth(table, width) {
+export function headerWithWidth(table, width) {
   const cells = [...table.header.raw]
   for (let index = table.columns; index < width; index++) cells[index] = 'sop' + (index - 1)
   return cells.join(',') + table.header.eol
@@ -188,7 +188,7 @@ export function planDeduplication(files) {
   }
 }
 
-function* csvPaths(directory, prefix = '') {
+export function* csvPaths(directory, prefix = '') {
   for (const entry of readdirSync(join(directory, prefix), {withFileTypes: true})) {
     if (entry.name.startsWith('.') || entry.name === 'node_modules') continue
     const path = prefix ? prefix + '/' + entry.name : entry.name
@@ -197,12 +197,12 @@ function* csvPaths(directory, prefix = '') {
   }
 }
 
-function writeChanges(dataset, files, changes) {
+export function writeChanges(dataset, files, changes, operation = 'deduplicate') {
   const pending = new Map()
   try {
     for (const [relative, output] of changes) {
       const path = join(dataset, relative)
-      const temporary = path + '.deduplicate-' + randomUUID()
+      const temporary = path + '.' + operation + '-' + randomUUID()
       const fd = openSync(temporary, 'wx', statSync(path).mode & 0o777)
       pending.set(path, temporary)
       try { writeFileSync(fd, output) } finally { closeSync(fd) }
