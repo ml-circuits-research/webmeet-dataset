@@ -18,3 +18,4 @@ The files are written by `soplang-nlu/strategies/vss/judged.mjs`. A later run of
 | --- | ---: | ---: | ---: |
 | `2026-11-27-vss-03f9abe-strict` | 1,831 (the fixed 1% sample) | 2,216 | 1,154 |
 | `2026-11-27-vss-346876e-plausible` | 912 (the texts of the sample whose readings were not yet accepted) | 197 | 830 |
+| `2026-11-27-vss-7e8e98d-plausible` | 158 (texts whose reading changed) | 47 | 118 |
