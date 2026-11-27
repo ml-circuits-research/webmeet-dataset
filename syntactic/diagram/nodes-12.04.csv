@@ -110,7 +110,8 @@ show me the list of circles,"@c1 syntax.clause form=imperative verb=""show"" com
 @c2 syntax.clause form=imperative verb=""list"" discourse=""please"" complement=$n3
 @n3 syntax.nominal dependent=""all"" dependent=""the"" head=""objects""
 @k1 syntax.coordination conjunct=$c1 conjunct=$c2",spacy+vss,agreement
-list labels,,,
+list labels,"@c1 syntax.clause form=imperative verb=""list"" complement=$n1
+@n1 syntax.nominal head=""labels""",spacy+vss,agreement
 list allthe stars,"@c1 syntax.clause form=imperative verb=""list"" complement=$n1
 @n1 syntax.nominal dependent=""allthe"" head=""stars""",spacy-direct+vss,agreement
 "uhm I lost track, list all the shapes er please",,,
@@ -187,7 +188,11 @@ which colour doest hat have?,,,
 "I am colour blind, what colour is node Order? pls",,,
 alright the square colour?,"@c1 syntax.clause form=fragment discourse=""alright"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""square"" head=""colour""",spacy+vss,agreement
-what is the colourr of the selected one?,,,
+what is the colourr of the selected one?,"@n1 syntax.nominal head=""what""
+@c1 syntax.clause form=interrogative verb=""is"" subject=$n2 complement=$n1
+@n2 syntax.nominal dependent=""the"" head=""colourr""
+@r1 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""selected"" head=""one""",spacy+vss,agreement
 "I am colourblind, what colour isthe Finance shape?",,,
 n4 colour? please,"@n1 syntax.nominal head=""n4 colour""
 @c1 syntax.clause form=fragment discourse=""please"" complement=$n1",vss,agreement
@@ -379,10 +384,13 @@ item n 1 where?,,,
 wyere is n2?,,,
 "ok so, where is the very first one",,,
 "to understand the flow, what is the decision box connected to?",,,
-after the highlighted one?,,,
+after the highlighted one?,"@r1 syntax.relation marker=""after"" from=$c1 to=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""highlighted"" head=""one""
+@c1 syntax.clause form=fragment",spacy+vss,agreement
 what is the Error box connected to?,,,
 "to understand the flow, what is it connected to?",,,
-the only text label connects to?,,,
+the only text label connects to?,"@n1 syntax.nominal dependent=""the"" dependent=""only"" dependent=""text"" head=""label""
+@c1 syntax.clause form=interrogative verb=""connects"" modifier=""to"" subject=$n1",spacy+vss,agreement
 what is n4 connected to?,,,
 box n4 connects to?,,,
 what comes after shape n3?,,,
@@ -678,7 +686,14 @@ is the rhombus connected too n4?,,,
 @r2 syntax.relation marker=""to"" from=$c2 to=$n4
 @n4 syntax.nominal head=""Sales""",spacy-direct+vss,agreement
 are Queue anc the decision box connected?,,,
-"before I add it again, is the circle alreadyc onnected to n4?",,,
+"before I add it again, is the circle alreadyc onnected to n4?","@r1 syntax.relation marker=""before"" from=$c2 to=$c1
+@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""add"" modifier=""again"" subject=$n1 complement=$n2
+@n2 syntax.nominal head=""it""
+@c2 syntax.clause form=interrogative auxiliary=""is"" modifier=""alreadyc"" verb=""onnected"" subject=$n3
+@n3 syntax.nominal dependent=""the"" head=""circle""
+@r2 syntax.relation marker=""to"" from=$c2 to=$n4
+@n4 syntax.nominal head=""n4""",spacy+vss,agreement
 is Worker cyan?,"@c1 syntax.clause form=interrogative verb=""is"" modifier=""cyan"" subject=$n1
 @n1 syntax.nominal head=""Worker""",spacy-direct+vss,agreement
 "did the change work, is the hexagon green now?","@c1 syntax.clause form=interrogative auxiliary=""did"" verb=""work"" subject=$n1
@@ -768,7 +783,13 @@ change the theme to vivid,"@c1 syntax.clause form=imperative verb=""change"" com
 @n1 syntax.nominal dependent=""the"" head=""theme""
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2
 @n2 syntax.nominal head=""vivid""",spacy-direct+vss,agreement
-"hmm, switch the diagram to flowchart so the review goes smoothly",,,
+"hmm, switch the diagram to flowchart so the review goes smoothly","@c1 syntax.clause form=imperative discourse=""hmm"" verb=""switch"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""diagram""
+@r1 syntax.relation marker=""to"" from=$c1 to=$n2
+@n2 syntax.nominal head=""flowchart""
+@r2 syntax.relation marker=""so"" from=$c1 to=$c2
+@n3 syntax.nominal dependent=""the"" head=""review""
+@c2 syntax.clause form=declarative verb=""goes"" modifier=""smoothly"" subject=$n3",spacy+vss,agreement
 night look,"@n1 syntax.nominal dependent=""night"" head=""look""
 @c1 syntax.clause form=fragment complement=$n1",spacy-direct+vss,agreement
 go greyscale,"@c1 syntax.clause form=imperative verb=""go"" complement=$n1
@@ -848,7 +869,9 @@ pastel theme if you can,"@n1 syntax.nominal dependent=""pastel"" head=""theme""
 @c2 syntax.clause form=fragment complement=$n1",spacy-direct+vss,agreement
 "alright, switch thedkagram to printer-friendly otherwise nobodygets it",,,
 night please,,,
-wouldyou make the wholediagram pastel,,,
+wouldyou make the wholediagram pastel,"@n1 syntax.nominal head=""wouldyou""
+@c1 syntax.clause form=declarative verb=""make"" modifier=""pastel"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""the"" head=""wholediagram""",spacy+vss,agreement
 "okay, theme night",,,
 goageada nd change thetheme to ocean,,,
 go monochromme,"@c1 syntax.clause form=imperative verb=""go"" complement=$n1
@@ -1101,7 +1124,10 @@ labels a bit smaller,,,
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""leftmost"" head=""rectangle""",spacy-direct+vss,agreement
 "on a dark fill you need light text, so make the text of our hexagon navy",,,
-normal weight label on n3,,,
+normal weight label on n3,"@n1 syntax.nominal dependent=""normal"" dependent=""weight"" head=""label""
+@r1 syntax.relation marker=""on"" from=$n1 to=$n2
+@n2 syntax.nominal head=""n3""
+@c1 syntax.clause form=fragment complement=$n1",spacy+vss,agreement
 I want to put the text of it bold,,,
 "on a dark fill you need light text, so make the text of all the rectangles grey","@r1 syntax.relation marker=""on"" from=$c1 to=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""dark"" head=""fill""
@@ -1288,7 +1314,9 @@ go ahead and mark it as the subprocess,"@c1 syntax.clause form=imperative verb="
 @r2 syntax.relation marker=""as"" from=$c2 to=$n5
 @n5 syntax.nominal dependent=""the"" head=""subprocess""
 @k1 syntax.coordination conjunct=$c1 conjunct=$c2",vss,agreement
-the highlighted one is the database,,,
+the highlighted one is the database,"@n1 syntax.nominal dependent=""the"" dependent=""highlighted"" head=""one""
+@c1 syntax.clause form=declarative verb=""is"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""the"" head=""database""",spacy+vss,agreement
 "in flowchart terms it is the end, mark the API box as the end","@r1 syntax.relation marker=""in"" from=$c1 to=$n1
 @n1 syntax.nominal dependent=""flowchart"" head=""terms""
 @n2 syntax.nominal head=""it""
@@ -1324,7 +1352,16 @@ the one I selected as output,"@n1 syntax.nominal dependent=""the"" head=""one""
 @n3 syntax.nominal head=""output""
 @c2 syntax.clause form=fragment complement=$n1
 @r2 syntax.relation from=$n1 to=$c1",spacy-direct+vss,judge
-"in flowchart terms it is the end, mark the highlighted one as the subprocess",,,
+"in flowchart terms it is the end, mark the highlighted one as the subprocess","@r1 syntax.relation marker=""in"" from=$c1 to=$n1
+@n1 syntax.nominal dependent=""flowchart"" head=""terms""
+@n2 syntax.nominal head=""it""
+@c1 syntax.clause form=declarative verb=""is"" subject=$n2 complement=$n3
+@n3 syntax.nominal dependent=""the"" head=""end""
+@c2 syntax.clause form=imperative verb=""mark"" complement=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""highlighted"" head=""one""
+@r2 syntax.relation marker=""as"" from=$c2 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""subprocess""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2",spacy+vss,agreement
 it parallelogram,"@n1 syntax.nominal head=""it""
 @n2 syntax.nominal head=""parallelogram""
 @c1 syntax.clause form=fragment complement=$n1 complement=$n2",spacy-direct+vss,agreement
@@ -1475,7 +1512,14 @@ chefron Intake,"@c1 syntax.clause form=imperative verb=""chefron"" complement=$n
 "every flow needsan entry, so draw a finsh node",,,
 "uh, now make a actor um labelled Web app",,,
 "the dats lives somewhere, make a dot calle No",,,
-"you know, I want to drop in a output er step",,,
+"you know, I want to drop in a output er step","@n1 syntax.nominal head=""you""
+@c1 syntax.clause form=declarative verb=""know"" subject=$n1
+@n2 syntax.nominal head=""I""
+@c2 syntax.clause form=declarative verb=""want"" subject=$n2
+@r1 syntax.relation marker=""to"" from=$c2 to=$c3
+@c3 syntax.clause form=nonfinite verb=""drop"" modifier=""in"" complement=$n3
+@n3 syntax.nominal dependent=""a"" dependent=""output"" dependent=""er"" head=""step""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2",spacy+vss,agreement
 just line up these vertically centred,,,
 "they look ragged, align them horizontally centred","@n1 syntax.nominal head=""they""
 @c1 syntax.clause form=declarative verb=""look"" modifier=""ragged"" subject=$n1
@@ -1513,7 +1557,8 @@ please line up Input n3 and Output on the right,,,
 @k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n3 conjunct=$n4
 @n4 syntax.nominal head=""Report centre""
 @k2 syntax.coordination conjunct=$c1 conjunct=$c2",vss,agreement
-align top,,,
+align top,"@c1 syntax.clause form=imperative verb=""align"" complement=$n1
+@n1 syntax.nominal head=""top""",spacy+vss,agreement
 could you align both of them on the right,,,
 "they look ragged, align these two to the left","@n1 syntax.nominal head=""they""
 @c1 syntax.clause form=declarative verb=""look"" modifier=""ragged"" subject=$n1
@@ -1657,7 +1702,13 @@ spread n3 n5 and Design out evenly across,"@c1 syntax.clause form=imperative ver
 @n1 syntax.nominal head=""n3 n5""
 @k1 syntax.coordination conjunction=""and"" conjunct=$n1 conjunct=$n2
 @n2 syntax.nominal head=""Design""",vss,agreement
-"the gaps are uneven, distribute API Deploy and Feedback up and down",,,
+"the gaps are uneven, distribute API Deploy and Feedback up and down","@n1 syntax.nominal dependent=""the"" head=""gaps""
+@c1 syntax.clause form=declarative verb=""are"" modifier=""uneven"" subject=$n1
+@n2 syntax.nominal head=""API Deploy""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n3
+@c2 syntax.clause form=imperative verb=""distribute"" modifier=""up"" discourse=""and"" modifier=""down"" complement=$k1
+@n3 syntax.nominal head=""Feedback""
+@k2 syntax.coordination conjunct=$c1 conjunct=$c2",vss,agreement
 distribute along the width,"@c1 syntax.clause form=imperative verb=""distribute""
 @r1 syntax.relation marker=""along"" from=$c1 to=$n1
 @n1 syntax.nominal dependent=""the"" head=""width""",spacy-direct+vss,agreement
@@ -1695,7 +1746,9 @@ space both n5 and n2 evenly,"@c1 syntax.clause form=imperative verb=""space"" mo
 @n2 syntax.nominal dependent=""each"" head=""node""
 @k1 syntax.coordination conjunct=$c1 conjunct=$c2",spacy+vss,agreement
 distribute horizontally,"@c1 syntax.clause form=imperative verb=""distribute"" modifier=""horizontally""",spacy-direct+vss,agreement
-can you spread all of these out evenly up and down,,,
+can you spread all of these out evenly up and down,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""spread"" modifier=""out"" modifier=""evenly"" modifier=""up"" discourse=""and"" modifier=""down"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""all"" dependent=""of"" head=""these""",vss,agreement
 "the gaps are uneven, distribute all the boxes horizontally","@n1 syntax.nominal dependent=""the"" head=""gaps""
 @c1 syntax.clause form=declarative verb=""are"" modifier=""uneven"" subject=$n1
 @c2 syntax.clause form=imperative verb=""distribute"" modifier=""horizontally"" complement=$n2
@@ -1718,11 +1771,15 @@ space Order Supplier and n1 evenly,"@c1 syntax.clause form=imperative verb=""spa
 @r2 syntax.relation marker=""to"" from=$c2 to=$n6
 @n6 syntax.nominal head=""bottom""
 @k2 syntax.coordination conjunct=$c1 conjunct=$c2",spacy+vss,agreement
-distribute up and down,,,
+distribute up and down,"@c1 syntax.clause form=imperative verb=""distribute"" modifier=""up"" discourse=""and"" modifier=""down""",spacy+vss,agreement
 space both of them out along the width,,,
 would you distribute all of these horizontally,,,
 "the gaps are uneven, distribute both of them up and down",,,
-"the gaps are uneven, distribute all of them up and down",,,
+"the gaps are uneven, distribute all of them up and down","@n1 syntax.nominal dependent=""the"" head=""gaps""
+@c1 syntax.clause form=declarative verb=""are"" modifier=""uneven"" subject=$n1
+@c2 syntax.clause form=imperative verb=""distribute"" modifier=""up"" discourse=""and"" modifier=""down"" complement=$n2
+@n2 syntax.nominal dependent=""all"" dependent=""of"" head=""them""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2",vss,agreement
 "the gaps are uneven, distribute each round node from top to bottom","@n1 syntax.nominal dependent=""the"" head=""gaps""
 @c1 syntax.clause form=declarative verb=""are"" modifier=""uneven"" subject=$n1
 @c2 syntax.clause form=imperative verb=""distribute"" complement=$n2
@@ -1777,7 +1834,11 @@ can you spead al of these out evenly up adn down,,,
 distribuye arcoss,,,
 "the gaps are uneven, distribute Client, n one, and shipping from top too bottom",,,
 space both of them ot along the width,,,
-"da gaps are uneven, distribute these up and down",,,
+"da gaps are uneven, distribute these up and down","@n1 syntax.nominal dependent=""da"" head=""gaps""
+@c1 syntax.clause form=declarative verb=""are"" modifier=""uneven"" subject=$n1
+@c2 syntax.clause form=imperative verb=""distribute"" modifier=""up"" discourse=""and"" modifier=""down"" complement=$n2
+@n2 syntax.nominal head=""these""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2",spacy+vss,agreement
 "like, the gaps are uneven, distribute both of them up and down",,,
 "theg apps are uneven, distrbiute all of them up and down",,,
 "the gals are uneven, distribute ech round node from top to bottom","@n1 syntax.nominal dependent=""the"" head=""gals""
@@ -2019,7 +2080,13 @@ reverse the line between n2 and Error,"@c1 syntax.clause form=imperative verb=""
 @n2 syntax.nominal head=""n2""
 @k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n3
 @n3 syntax.nominal head=""Error""",spacy-direct+vss,agreement
-would you switch the direction of the link Design to n5,,,
+would you switch the direction of the link Design to n5,"@c1 syntax.clause form=interrogative auxiliary=""would"" verb=""switch"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""the"" head=""direction""
+@r1 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""link"" dependent=""Design""
+@r2 syntax.relation marker=""to"" from=$c1 to=$n4
+@n4 syntax.nominal head=""n5""",vss,agreement
 "it goes the wrong way, reverse the arrow connecting Idea and n3","@n1 syntax.nominal head=""it""
 @c1 syntax.clause form=declarative verb=""goes"" subject=$n1 complement=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""wrong"" head=""way""
@@ -2063,7 +2130,12 @@ would you switch the direction of the line that goes from Archive to n6,"@c1 syn
 @n4 syntax.nominal head=""Archive""
 @r4 syntax.relation marker=""to"" from=$c2 to=$n5
 @n5 syntax.nominal head=""n6""",spacy+vss,agreement
-"it goes the wrong way, reverse e1",,,
+"it goes the wrong way, reverse e1","@n1 syntax.nominal head=""it""
+@c1 syntax.clause form=declarative verb=""goes"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""wrong"" head=""way""
+@c2 syntax.clause form=imperative verb=""reverse"" complement=$n3
+@n3 syntax.nominal head=""e1""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2",spacy+vss,agreement
 "it goes the wrong way, reverse n1-Launch connector",,,
 reverse link e1,,,
 please point the line that goes from n2 to n3 the other way,"@c1 syntax.clause form=imperative discourse=""please"" verb=""point"" complement=$n1
@@ -2094,7 +2166,8 @@ reverse the connector oout of Input,"@c1 syntax.clause form=imperative verb=""re
 @n1 syntax.nominal dependent=""the"" dependent=""connector"" head=""oout""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
 @n2 syntax.nominal head=""Input""",spacy-direct+vss,agreement
-flip e 2,,,
+flip e 2,"@c1 syntax.clause form=imperative verb=""flip"" complement=$n1
+@n1 syntax.nominal head=""e"" dependent=""2""",vss,agreement
 would yoy turn the connection between n1 and n2 around,"@c1 syntax.clause form=interrogative auxiliary=""would"" verb=""turn"" modifier=""around"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""yoy""
 @n2 syntax.nominal dependent=""the"" head=""connection""

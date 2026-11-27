@@ -50,13 +50,31 @@ text,sop,source,accepted_by
 "i wonder if you could ease the Shell block into the upper right corner, three and a half widths in from the right and two lengths down from the top, next keep every other block as it is",,,
 rotate the boat 90 degrees the other way and give it a soft shadow underneath,,,
 "spin the sign around its bottom left corner by 30 degrees and keep the top edge level, because I want it to lean out from the wall without the whole board dropping",,,
-and back again,,,
+and back again,"@c1 syntax.clause form=fragment discourse=""and"" modifier=""back"" modifier=""again""",spacy+vss,agreement
 make the wall gradient run vertically,,,
 reverse the gradient on the banner so the deep red sits at the pole and the yellow runs out to the loose end,,,
-"the banner too, no pattern",,,
+"the banner too, no pattern","@n1 syntax.nominal dependent=""the"" head=""banner""
+@c1 syntax.clause form=fragment modifier=""too"" complement=$n1
+@n2 syntax.nominal dependent=""no"" head=""pattern""
+@r1 syntax.relation from=$n1 to=$n2",spacy+vss,agreement
 "make the kid with the kite look serious while the others keep their faces still, so only one expression changes.",,,
 "I want the small tree slightly closer to the bench, so the gap looks natural from the gate.",,,
-"move the wooden bench slightly further from the tree, so there is room to walk between them, and keep it the same size.",,,
+"move the wooden bench slightly further from the tree, so there is room to walk between them, and keep it the same size.","@c1 syntax.clause form=imperative verb=""move"" modifier=""slightly"" modifier=""further"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""wooden"" head=""bench""
+@r1 syntax.relation marker=""from"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""tree""
+@r2 syntax.relation marker=""so"" from=$c1 to=$c2
+@n3 syntax.nominal head=""there""
+@c2 syntax.clause form=declarative verb=""is"" subject=$n3 complement=$n4
+@n4 syntax.nominal head=""room""
+@r3 syntax.relation marker=""to"" from=$n4 to=$c3
+@c3 syntax.clause form=nonfinite verb=""walk""
+@r4 syntax.relation marker=""between"" from=$c3 to=$n5
+@n5 syntax.nominal head=""them""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c4
+@c4 syntax.clause form=imperative verb=""keep"" complement=$n6 complement=$n7
+@n6 syntax.nominal head=""it""
+@n7 syntax.nominal dependent=""the"" dependent=""same"" head=""size""",spacy+vss,agreement
 could you shift it just a touch further from the bench.,,,
 maybe it could go a little bit further away from the well.,,,
 "we need the long table beside the tree, so the two look like a pair.",,,
@@ -620,7 +638,12 @@ swap the kite for a balloon,"@c1 syntax.clause form=imperative verb=""swap"" com
 @n2 syntax.nominal dependent=""a"" head=""balloon""",spacy-direct+vss,agreement
 I'd rather have a biplane instead of the kite,,,
 a fierce dragon instead of the bird,,,
-I think the sun should be a star,,,
+I think the sun should be a star,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""think"" subject=$n1
+@n2 syntax.nominal dependent=""the"" head=""sun""
+@c2 syntax.clause form=declarative auxiliary=""should"" verb=""be"" subject=$n2 complement=$n3
+@n3 syntax.nominal dependent=""a"" head=""star""
+@r1 syntax.relation from=$c1 to=$c2",spacy+vss,agreement
 what if the sun was a moon?,,,
 let the cat on the grass be a Siamese cat,,,
 turn the fish into a goldfish,"@c1 syntax.clause form=imperative verb=""turn"" complement=$n1
@@ -802,7 +825,10 @@ all three ducks face the lake,,,
 put the bench between the lake and the tree and left of the house,,,
 get the bench in the gap between the lake and the tree and left of the house,,,
 put the cat in the same column as the tree and above the house,,,
-have the red-dress woman step to the right,,,
+have the red-dress woman step to the right,"@c1 syntax.clause form=imperative verb=""have"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""red"" dependent=""dress"" dependent=""woman"" head=""step""
+@r1 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""right""",vss,agreement
 the woman in the red dress and no hat gets to the right,,,
 move the man in the orange hat to the left,"@c1 syntax.clause form=imperative verb=""move"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""man""
@@ -832,7 +858,8 @@ shift that bench up against the lake,"@c1 syntax.clause form=imperative verb=""s
 @r1 syntax.relation marker=""against"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""lake""",spacy-direct+vss,agreement
 slide the ebnch touching the lake,,,
-face the tall kid right,,,
+face the tall kid right,"@c1 syntax.clause form=imperative verb=""face"" modifier=""right"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""tall"" head=""kid""",spacy+vss,agreement
 right: the tall kid,,,
 the small dog: face right,,,
 i want the bear behind the house at the top to face the sun,,,
@@ -951,7 +978,9 @@ recast the fence by the path in old tarnished brass,"@c1 syntax.clause form=impe
 @n5 syntax.nominal dependent=""the"" head=""lake""",spacy-direct+vss,agreement
 "that's wrong: the ball by the tree is red, it has to be blue",,,
 actually that thing is a car — change it to be a truck,,,
-now rotate the boat the same way,,,
+now rotate the boat the same way,"@c1 syntax.clause form=imperative modifier=""now"" verb=""rotate"" complement=$n1 complement=$n2
+@n1 syntax.nominal dependent=""the"" head=""boat""
+@n2 syntax.nominal dependent=""the"" dependent=""same"" head=""way""",spacy+vss,agreement
 turn it a bit,"@c1 syntax.clause form=imperative verb=""turn"" modifier=""a"" modifier=""bit"" complement=$n1
 @n1 syntax.nominal head=""it""",vss,agreement
 rotate the gate on its hinge until it stands half open,,,
@@ -1130,7 +1159,20 @@ skew the poster a little,"@c1 syntax.clause form=imperative verb=""skew"" comple
 @n1 syntax.nominal dependent=""the"" head=""poster""
 @n2 syntax.nominal dependent=""a"" head=""little""",vss,agreement
 "slant the letters on the poster so the top of the word leans right, the way the awning above it already slopes",,,
-"skew the banner to the right but keep the left edge vertical, because it is pinned to the pole on that side",,,
+"skew the banner to the right but keep the left edge vertical, because it is pinned to the pole on that side","@c1 syntax.clause form=imperative verb=""skew"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""banner""
+@r1 syntax.relation marker=""to"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""right""
+@k1 syntax.coordination conjunction=""but"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""keep"" modifier=""vertical"" complement=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""left"" head=""edge""
+@r2 syntax.relation marker=""because"" from=$c2 to=$c3
+@n4 syntax.nominal head=""it""
+@c3 syntax.clause form=declarative auxiliary=""is"" verb=""pinned"" subject=$n4
+@r3 syntax.relation marker=""to"" from=$c3 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""pole""
+@r4 syntax.relation marker=""on"" from=$c3 to=$n6
+@n6 syntax.nominal dependent=""that"" head=""side""",vss,agreement
 now slant the title the same way and keep the spacing between the letters even,,,
 the poster too,"@n1 syntax.nominal dependent=""the"" head=""poster""
 @c1 syntax.clause form=fragment modifier=""too"" complement=$n1",spacy-direct+vss,agreement
@@ -1156,7 +1198,15 @@ make the house a bit larger,"@c1 syntax.clause form=imperative verb=""make"" mod
 scale the car down,"@c1 syntax.clause form=imperative verb=""scale"" modifier=""down"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""car""",spacy-direct+vss,agreement
 "make the car bigger but keep the wheels on the road, because the road is only as wide as the house and I do not want it over the grass",,,
-now make the tree bigger by the same amount and keep its roots in the same spot,,,
+now make the tree bigger by the same amount and keep its roots in the same spot,"@c1 syntax.clause form=imperative modifier=""now"" verb=""make"" modifier=""bigger"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""tree""
+@r1 syntax.relation marker=""by"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""same"" head=""amount""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""keep"" complement=$n3
+@n3 syntax.nominal dependent=""its"" head=""roots""
+@r2 syntax.relation marker=""in"" from=$c2 to=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""same"" head=""spot""",vss,agreement
 make the boat a touch bigger,,,
 make the boat twice as big,,,
 shrink the house to half its size,,,
@@ -1196,7 +1246,21 @@ triple the sun,,,
 make it twice the size,,,
 same for the other one,,,
 "make the boat twice as big but keep its bow moored to the same post, because the rope is short and I do not want it to snap",,,
-"now make the poster 30 percent bigger and keep its top edge level, because it has to stay inside the frame above the door",,,
+"now make the poster 30 percent bigger and keep its top edge level, because it has to stay inside the frame above the door","@c1 syntax.clause form=imperative modifier=""now"" verb=""make"" modifier=""bigger"" complement=$n1 complement=$n2
+@n1 syntax.nominal dependent=""the"" head=""poster""
+@n2 syntax.nominal dependent=""30"" head=""percent""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""keep"" complement=$n3
+@n3 syntax.nominal dependent=""its"" dependent=""top"" dependent=""edge"" head=""level""
+@r1 syntax.relation marker=""because"" from=$c2 to=$c3
+@n4 syntax.nominal head=""it""
+@c3 syntax.clause form=declarative verb=""has"" subject=$n4
+@r2 syntax.relation marker=""to"" from=$c3 to=$c4
+@c4 syntax.clause form=nonfinite verb=""stay""
+@r3 syntax.relation marker=""inside"" from=$c4 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""frame""
+@r4 syntax.relation marker=""above"" from=$c4 to=$n6
+@n6 syntax.nominal dependent=""the"" head=""door""",vss,agreement
 make the car narrower,"@c1 syntax.clause form=imperative verb=""make"" modifier=""narrower"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""car""",spacy-direct+vss,agreement
 make the tree taller,"@c1 syntax.clause form=imperative verb=""make"" modifier=""taller"" complement=$n1
@@ -1342,7 +1406,14 @@ hold it.,"@c1 syntax.clause form=imperative verb=""hold"" complement=$n1
 @n3 syntax.nominal dependent=""the"" head=""verge""
 @c2 syntax.clause form=declarative verb=""is"" modifier=""wide"" subject=$n3",spacy-direct+vss,agreement
 "move the old barn clear of the road, so the carts can pass.",,,
-"shift the wooden barn away from the road, so nothing blocks the lane.",,,
+"shift the wooden barn away from the road, so nothing blocks the lane.","@c1 syntax.clause form=imperative verb=""shift"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""wooden"" head=""barn""
+@r1 syntax.relation attachment=ambiguous marker=""away from"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""road""
+@r2 syntax.relation marker=""so"" from=$c1 to=$c2
+@n3 syntax.nominal head=""nothing""
+@c2 syntax.clause form=declarative verb=""blocks"" subject=$n3 complement=$n4
+@n4 syntax.nominal dependent=""the"" head=""lane""",vss,judge
 "would you shift the old barn away from the road, where the verge is wide.","@c1 syntax.clause form=interrogative auxiliary=""would"" verb=""shift"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""the"" dependent=""old"" head=""barn""
@@ -1396,7 +1467,14 @@ hold it.,"@c1 syntax.clause form=imperative verb=""hold"" complement=$n1
 @n4 syntax.nominal dependent=""the"" head=""verge""
 @c2 syntax.clause form=declarative verb=""is"" modifier=""wide"" subject=$n4",spacy-direct+vss,agreement
 "nudge the wooden barn off the road, so the carts can pass.",,,
-"put the little barn off the path, so nothing blocks the lane.",,,
+"put the little barn off the path, so nothing blocks the lane.","@c1 syntax.clause form=imperative verb=""put"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""little"" head=""barn""
+@r1 syntax.relation marker=""off"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""path""
+@r2 syntax.relation marker=""so"" from=$c1 to=$c2
+@n3 syntax.nominal head=""nothing""
+@c2 syntax.clause form=declarative verb=""blocks"" subject=$n3 complement=$n4
+@n4 syntax.nominal dependent=""the"" head=""lane""",vss,judge
 "move the small barn off the track, but keep it near the path.","@c1 syntax.clause form=imperative verb=""move"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""small"" head=""barn""
 @r1 syntax.relation marker=""off"" from=$n1 to=$n2
@@ -1408,7 +1486,17 @@ hold it.,"@c1 syntax.clause form=imperative verb=""hold"" complement=$n1
 @n4 syntax.nominal dependent=""the"" head=""path""",spacy-direct+vss,agreement
 "shift the old barn off the road, and leave the gate clear.",,,
 "I would like the wooden barn off the path, where the verge is wide.",,,
-"shift the small barn off the path, where the verge is wide, and keep it the same size.",,,
+"shift the small barn off the path, where the verge is wide, and keep it the same size.","@c1 syntax.clause form=imperative verb=""shift"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""small"" head=""barn""
+@r1 syntax.relation marker=""off"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""path""
+@r2 syntax.relation marker=""where"" from=$c1 to=$c2
+@n3 syntax.nominal dependent=""the"" head=""verge""
+@c2 syntax.clause form=declarative verb=""is"" modifier=""wide"" subject=$n3
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c3
+@c3 syntax.clause form=imperative verb=""keep"" complement=$n4 complement=$n5
+@n4 syntax.nominal head=""it""
+@n5 syntax.nominal dependent=""the"" dependent=""same"" head=""size""",vss,agreement
 the old barn clear of the road.,,,
 the little barn off the track.,"@n1 syntax.nominal dependent=""the"" dependent=""little"" head=""barn""
 @r1 syntax.relation marker=""off"" from=$n1 to=$n2
@@ -1448,7 +1536,9 @@ please the same for the trees,,,
 the same for the trees please,,,
 "the same for the trees, thanks",,,
 the same for the trees — go on,,,
-"hey, yes, and a bit bigger than the cat",,,
+"hey, yes, and a bit bigger than the cat","@c1 syntax.clause form=fragment discourse=""hey"" discourse=""yes"" discourse=""and"" modifier=""a"" modifier=""bit"" modifier=""bigger""
+@r1 syntax.relation marker=""than"" from=$c1 to=$n1
+@n1 syntax.nominal dependent=""the"" head=""cat""",vss,agreement
 "quick one — yes, and a bit bigger than the cat",,,
 the sun is a sqare now,"@n1 syntax.nominal dependent=""the"" head=""sun""
 @c1 syntax.clause form=declarative verb=""is"" modifier=""now"" subject=$n1 complement=$n2
@@ -1495,7 +1585,9 @@ refinish the fence in stainless steel,"@c1 syntax.clause form=imperative verb=""
 give the tree a pencil sketch,"@c1 syntax.clause form=imperative verb=""give"" complement=$n1 complement=$n2
 @n1 syntax.nominal dependent=""the"" head=""tree""
 @n2 syntax.nominal dependent=""a"" dependent=""pencil"" head=""sketch""",spacy-direct+vss,agreement
-just make the tree a pencil sketch,,,
+just make the tree a pencil sketch,"@c1 syntax.clause form=imperative modifier=""just"" verb=""make"" complement=$n1 complement=$n2
+@n1 syntax.nominal dependent=""the"" head=""tree""
+@n2 syntax.nominal dependent=""a"" dependent=""pencil"" head=""sketch""",spacy+vss,agreement
 have the whole sky come out as a washed-out Polaroid photograph,,,
 recast the garden path in a soft Monet painting,"@c1 syntax.clause form=imperative verb=""recast"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""garden"" head=""path""
@@ -1507,7 +1599,11 @@ crust the old car with wet snow,"@c1 syntax.clause form=imperative verb=""crust"
 @r1 syntax.relation marker=""with"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""wet"" head=""snow""",spacy-direct+vss,agreement
 pile a dark rain stain on the bench by the path,,,
-soaked from the rain across the wooden bench,,,
+soaked from the rain across the wooden bench,"@c1 syntax.clause form=nonfinite verb=""soaked""
+@r1 syntax.relation marker=""from"" from=$c1 to=$n1
+@n1 syntax.nominal dependent=""the"" head=""rain""
+@r2 syntax.relation marker=""across"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""wooden"" head=""bench""",vss,agreement
 dress the path to the door in a smooth layer of snow,"@c1 syntax.clause form=imperative verb=""dress"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""path""
 @r1 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n2
@@ -1525,7 +1621,10 @@ cap the front lawn in soft snow,"@c1 syntax.clause form=imperative verb=""cap"" 
 @r1 syntax.relation marker=""in"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""soft"" head=""snow""",spacy-direct+vss,agreement
 pile rain puddles on the pavement by the kerb,,,
-cp the wet pavement in standing puddles,,,
+cp the wet pavement in standing puddles,"@c1 syntax.clause form=imperative verb=""cp"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""wet"" head=""pavement""
+@r1 syntax.relation marker=""in"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""standing"" head=""puddles""",vss,agreement
 tilt the umbrella into a raw wind,"@c1 syntax.clause form=imperative verb=""tilt"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""umbrella""
 @r1 syntax.relation marker=""into"" from=$c1 to=$n2
@@ -1606,7 +1705,9 @@ the small barn off the path.,"@n1 syntax.nominal dependent=""the"" dependent=""s
 @n2 syntax.nominal dependent=""the"" head=""path""
 @c1 syntax.clause form=fragment complement=$n1",spacy-direct+vss,agreement
 "could you slide the wooden barn clear of the road, so nohing blocks the lane.",,,
-"hmm, yes, and a bit bigger than the cat",,,
+"hmm, yes, and a bit bigger than the cat","@c1 syntax.clause form=fragment discourse=""hmm"" discourse=""yes"" discourse=""and"" modifier=""a"" modifier=""bit"" modifier=""bigger""
+@r1 syntax.relation marker=""than"" from=$c1 to=$n1
+@n1 syntax.nominal dependent=""the"" head=""cat""",vss,agreement
 the cluod should be an oval,"@n1 syntax.nominal dependent=""the"" head=""cluod""
 @c1 syntax.clause form=declarative auxiliary=""should"" verb=""be"" subject=$n1 complement=$n2
 @n2 syntax.nominal dependent=""an"" head=""oval""",spacy-direct+vss,agreement
@@ -1742,7 +1843,15 @@ just make the sky a vintage Polaroid photograph,"@c1 syntax.clause form=imperati
 "rotate the boat back to level and keep its hull on the water line, because the sail was already right before I touched it",,,
 "make the boat much smaller so it sits beside the dock instead of filling the whole lake, and leave the house as it is",,,
 "make the car bigger so it fills more of the road, but keep its wheels on the tarmac and leave the tree and the house at the size they already are",,,
-now do the same to the car and keep its wheels on the road,,,
+now do the same to the car and keep its wheels on the road,"@c1 syntax.clause form=imperative modifier=""now"" verb=""do"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""same""
+@r1 syntax.relation marker=""to"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""car""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""keep"" complement=$n3
+@n3 syntax.nominal dependent=""its"" head=""wheels""
+@r2 syntax.relation marker=""on"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""road""",vss,agreement
 chase the dog.,"@c1 syntax.clause form=imperative verb=""chase"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""dog""",spacy-direct+vss,agreement
 one more thing: the boy should look like he's running after the kite,,,
@@ -1816,7 +1925,10 @@ slant it a bit,"@c1 syntax.clause form=imperative verb=""slant"" modifier=""a"" 
 @n1 syntax.nominal head=""it""",vss,agreement
 "now make the boat bigger by about the same amount and keep it floating beside the dock, not on the grass behind the house",,,
 "shift the wooden barn off the path, so the carts can pass.",,,
-"now the gate, on its hinge",,,
+"now the gate, on its hinge","@c1 syntax.clause form=fragment modifier=""now"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""gate""
+@r1 syntax.relation marker=""on"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""its"" head=""hinge""",spacy+vss,agreement
 give the house some perspective,"@c1 syntax.clause form=imperative verb=""give"" complement=$n1 complement=$n2
 @n1 syntax.nominal dependent=""the"" head=""house""
 @n2 syntax.nominal dependent=""some"" head=""perspective""",spacy-direct+vss,agreement
@@ -2202,7 +2314,12 @@ plus a frog,"@c1 syntax.clause form=fragment discourse=""plus"" complement=$n1
 @n2 syntax.nominal dependent=""a"" head=""basket""
 @k1 syntax.coordination conjunction=""and"" conjunct=$n1 conjunct=$n2 conjunct=$n3
 @n3 syntax.nominal dependent=""a"" head=""woman""",spacy-direct+vss,agreement
-"draw a flowerbed, an owl, a boy, and a watering can",,,
+"draw a flowerbed, an owl, a boy, and a watering can","@c1 syntax.clause form=imperative verb=""draw"" complement=$k1
+@n1 syntax.nominal dependent=""a"" head=""flowerbed""
+@n2 syntax.nominal dependent=""an"" head=""owl""
+@n3 syntax.nominal dependent=""a"" head=""boy""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n1 conjunct=$n2 conjunct=$n3 conjunct=$n4
+@n4 syntax.nominal dependent=""a"" dependent=""watering"" head=""can""",spacy+vss,agreement
 "draw a cloud, a girl, a cat, and a fire","@c1 syntax.clause form=imperative verb=""draw"" complement=$k1
 @n1 syntax.nominal dependent=""a"" head=""cloud""
 @n2 syntax.nominal dependent=""a"" head=""girl""
@@ -2249,8 +2366,14 @@ empty the lake of boats,"@c1 syntax.clause form=imperative verb=""empty"" comple
 "the dogs in the yard have to go — all of them, even the puppy",,,
 let the dogs outt,"@c1 syntax.clause form=imperative verb=""let"" modifier=""outt"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""dogs""",spacy-direct+vss,agreement
-remove all the houses apart from the small one,,,
-"take down every house except the blue one, thanks",,,
+remove all the houses apart from the small one,"@c1 syntax.clause form=imperative verb=""remove"" complement=$n1
+@n1 syntax.nominal dependent=""all"" dependent=""the"" head=""houses""
+@r1 syntax.relation attachment=ambiguous marker=""apart from"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""small"" head=""one""",spacy+vss,agreement
+"take down every house except the blue one, thanks","@c1 syntax.clause form=imperative verb=""take"" modifier=""down"" discourse=""thanks"" complement=$n1
+@n1 syntax.nominal dependent=""every"" head=""house""
+@r1 syntax.relation marker=""except"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""blue"" head=""one""",vss,agreement
 keep only one house,,,
 leave only the baot,,,
 the pair has to go,"@n1 syntax.nominal dependent=""the"" head=""pair""
@@ -2275,7 +2398,12 @@ make the second man leave on the right,,,
 @n1 syntax.nominal dependent=""the"" head=""kites""
 @r1 syntax.relation marker=""out of"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""picture""",spacy-direct+vss,agreement
-"don't draw any kids, right where the picture needs it",,,
+"don't draw any kids, right where the picture needs it","@c1 syntax.clause form=imperative auxiliary=""do"" negation=""n't"" verb=""draw"" modifier=""right"" complement=$n1
+@n1 syntax.nominal dependent=""any"" head=""kids""
+@r1 syntax.relation marker=""where"" from=$c1 to=$c2
+@n2 syntax.nominal dependent=""the"" head=""picture""
+@c2 syntax.clause form=declarative verb=""needs"" subject=$n2 complement=$n3
+@n3 syntax.nominal head=""it""",spacy+vss,agreement
 "keep the kids out of the picture, thanks","@c1 syntax.clause form=imperative verb=""keep"" discourse=""thanks"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""kids""
 @r1 syntax.relation marker=""out of"" from=$n1 to=$n2
@@ -2308,7 +2436,10 @@ the man in the red shirt on the left walks off,"@n1 syntax.nominal dependent=""t
 @r2 syntax.relation marker=""on"" from=$n2 to=$n3
 @n3 syntax.nominal dependent=""the"" head=""left""
 @c1 syntax.clause form=declarative verb=""walks"" modifier=""off"" subject=$n1",spacy-direct+vss,agreement
-the boy in the orange hat exits,,,
+the boy in the orange hat exits,"@n1 syntax.nominal dependent=""the"" head=""boy""
+@r1 syntax.relation marker=""in"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""orange"" head=""hat""
+@c1 syntax.clause form=declarative verb=""exits"" subject=$n1",spacy+vss,agreement
 delete the shadows of the scissors,"@c1 syntax.clause form=imperative verb=""delete"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""shadows""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
@@ -2473,7 +2604,12 @@ rmeove the boy at the right end in the purple shirt,"@c1 syntax.clause form=impe
 @n2 syntax.nominal dependent=""the"" dependent=""right"" head=""end""
 @r2 syntax.relation marker=""in"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""the"" dependent=""purple"" head=""shirt""",vss,agreement
-the boy at the far left in the blue hat exits,,,
+the boy at the far left in the blue hat exits,"@n1 syntax.nominal dependent=""the"" head=""boy""
+@r1 syntax.relation marker=""at"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""far"" head=""left""
+@r2 syntax.relation marker=""in"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""blue"" head=""hat""
+@c1 syntax.clause form=declarative verb=""exits"" subject=$n1",vss,agreement
 i want the boy at the far left in the blue hat gone,,,
 i want the man in the red jacket who now has the blue hat gone,,,
 i want the girl in the red jacket gone,,,
@@ -2548,9 +2684,44 @@ strip the shadow off the boat then brighten the water a little,"@c1 syntax.claus
 @n4 syntax.nominal dependent=""a"" head=""little""",vss,agreement
 take the shadow off,"@c1 syntax.clause form=imperative verb=""take"" modifier=""off"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""shadow""",spacy-direct+vss,agreement
-"remove the shadow under the boat before you touch the water, but keep the thin dark line where the hull meets the lake so the boat still sits on something",,,
+"remove the shadow under the boat before you touch the water, but keep the thin dark line where the hull meets the lake so the boat still sits on something","@c1 syntax.clause form=imperative verb=""remove"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""shadow""
+@r1 syntax.relation marker=""under"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""boat""
+@r2 syntax.relation marker=""before"" from=$c1 to=$c2
+@n3 syntax.nominal head=""you""
+@c2 syntax.clause form=declarative verb=""touch"" subject=$n3 complement=$n4
+@n4 syntax.nominal dependent=""the"" head=""water""
+@k1 syntax.coordination conjunction=""but"" conjunct=$c1 conjunct=$c3
+@c3 syntax.clause form=imperative verb=""keep"" complement=$n5
+@n5 syntax.nominal dependent=""the"" dependent=""thin"" dependent=""dark"" head=""line""
+@r3 syntax.relation marker=""where"" from=$c3 to=$c4
+@n6 syntax.nominal dependent=""the"" head=""hull""
+@c4 syntax.clause form=declarative verb=""meets"" subject=$n6 complement=$n7
+@n7 syntax.nominal dependent=""the"" head=""lake""
+@r4 syntax.relation marker=""so"" from=$c4 to=$c5
+@n8 syntax.nominal dependent=""the"" head=""boat""
+@c5 syntax.clause form=declarative modifier=""still"" verb=""sits"" subject=$n8
+@r5 syntax.relation marker=""on"" from=$c5 to=$n9
+@n9 syntax.nominal head=""something""",vss,agreement
 "take the shadow off the tree and remove the one behind the house, then leave the shadow inside the doorway exactly as it is",,,
-"now take the cat's shadow away and keep its outline as it is, because the shape still needs to read against the grass",,,
+"now take the cat's shadow away and keep its outline as it is, because the shape still needs to read against the grass","@c1 syntax.clause form=imperative modifier=""now"" verb=""take"" modifier=""away"" complement=$n2
+@n1 syntax.nominal dependent=""the"" head=""cat""
+@r1 syntax.relation marker=""'s"" from=$n2 to=$n1
+@n2 syntax.nominal head=""shadow""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""keep"" complement=$n3
+@n3 syntax.nominal dependent=""its"" head=""outline""
+@r2 syntax.relation marker=""as"" from=$c2 to=$c3
+@n4 syntax.nominal head=""it""
+@c3 syntax.clause form=declarative verb=""is"" subject=$n4
+@r3 syntax.relation marker=""because"" from=$c3 to=$c4
+@n5 syntax.nominal dependent=""the"" head=""shape""
+@c4 syntax.clause form=declarative modifier=""still"" verb=""needs"" subject=$n5
+@r4 syntax.relation marker=""to"" from=$c4 to=$c5
+@c5 syntax.clause form=nonfinite verb=""read""
+@r5 syntax.relation marker=""against"" from=$c5 to=$n6
+@n6 syntax.nominal dependent=""the"" head=""grass""",vss,agreement
 take the pattern off the rug and make it solid,"@c1 syntax.clause form=imperative verb=""take"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""pattern""
 @r1 syntax.relation marker=""off"" from=$c1 to=$n2
@@ -2626,5 +2797,11 @@ delete the hills at the back but the ones at the front stay,"@c1 syntax.clause f
 @c2 syntax.clause form=declarative verb=""stay"" subject=$n3",spacy-direct+vss,agreement
 "skip the dogs for now, and a little cloud over on the right — with everything else left where it is",,,
 "ban the boats today, and a small cat on the left — exactly where the picture needs it — so the scene reads the way it should",,,
-just take the flowers out but keep the ones by the gate,,,
+just take the flowers out but keep the ones by the gate,"@c1 syntax.clause form=imperative modifier=""just"" verb=""take"" modifier=""out"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""flowers""
+@k1 syntax.coordination conjunction=""but"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""keep"" complement=$n2
+@n2 syntax.nominal dependent=""the"" head=""ones""
+@r1 syntax.relation marker=""by"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""gate""",spacy+vss,agreement
 I want every house gone but keep the blue one,,,

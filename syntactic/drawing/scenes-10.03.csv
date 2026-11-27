@@ -503,7 +503,14 @@ scoot the woman in the green jacket one spot right and the woman in the yellow d
 edge the boy in the purple cap one spot left and the girl in the orange coat one spot right,,,
 move the man in the red shirt left and the man in the blue shirt right,,,
 shift the woman in the green jacket right and the woman in the yellow dress left,,,
-"instead, the boy in the purple cap left and the girl in the orange coat right",,,
+"instead, the boy in the purple cap left and the girl in the orange coat right","@c1 syntax.clause form=fragment modifier=""instead"" modifier=""left"" modifier=""right"" complement=$k1
+@n1 syntax.nominal dependent=""the"" head=""boy""
+@r1 syntax.relation marker=""in"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""purple"" head=""cap""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n1 conjunct=$n3
+@n3 syntax.nominal dependent=""the"" head=""girl""
+@r2 syntax.relation marker=""in"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""orange"" head=""coat""",spacy+vss,agreement
 poah the woman in the green jacket one spot right and the woman in the yellow dress one spot left,,,
 now — nudge the boy in the purple cap one spot left and the girl in the orange coat one spot right,,,
 swap the two people in green so they end up opposite each other on the line,"@c1 syntax.clause form=imperative verb=""swap"" complement=$n1
@@ -884,7 +891,18 @@ open a gap on the line between the woman in purple and the woman in orange. And 
 "no, guide the man in the red hat a little to the right, next guide the man in the blue hat the other way, swapping their spots on the line",,,
 "scoot the woman in the green scarf a little to the left. And then scoot the woman in the yellow scarf the other way, swapping their spots on the line",,,
 "edge the girl in the orange cap a little to the right, and after that, edge the girl in the purple cap the other way, swapping their spots on the line",,,
-"move the man in the red hat right, then move the man in the blue hat the other way on the line",,,
+"move the man in the red hat right, then move the man in the blue hat the other way on the line","@c1 syntax.clause form=imperative verb=""move"" modifier=""right"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""man""
+@r1 syntax.relation marker=""in"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""red"" head=""hat""
+@k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""move"" complement=$n3 complement=$n5
+@n3 syntax.nominal dependent=""the"" head=""man""
+@r2 syntax.relation marker=""in"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""blue"" head=""hat""
+@n5 syntax.nominal dependent=""the"" dependent=""other"" head=""way""
+@r3 syntax.relation marker=""on"" from=$c2 to=$n6
+@n6 syntax.nominal dependent=""the"" head=""line""",vss,agreement
 "shift the woman in the green scarf left, then shift the woman in the yellow scarf the other way on the line",,,
 "instead, the girl in the orange cap right, then the girl in the purple cap the other way on the line",,,
 "the man in the red hat right, and then the man in the blue hat the other way on the line",,,
@@ -1025,7 +1043,8 @@ shift the whole line left,"@c1 syntax.clause form=imperative verb=""shift"" modi
 @n1 syntax.nominal dependent=""the"" dependent=""whole"" head=""line""",spacy+spacy-direct+vss,agreement
 the whole line right,,,
 psh the whole line one spot left,,,
-nudge the whole liie one spot right,,,
+nudge the whole liie one spot right,"@c1 syntax.clause form=imperative verb=""nudge"" modifier=""right"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""whole"" dependent=""liie"" dependent=""one"" head=""spot""",spacy+vss,agreement
 could you ease the whole line one spot right,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""ease"" subject=$n1 complement=$n2 complement=$n3
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""the"" dependent=""whole"" head=""line""
@@ -1059,23 +1078,140 @@ could you ease the whole line one spot right,"@c1 syntax.clause form=interrogati
 "bring orange blbcks in place of the purple blbcks, in the same shape as the old row",,,
 "what if you move blue blocks in place of the red blocks, in the same shape as the old row",,,
 "i wonder if you could place yellow blocks in place of the green blocks, in the same shape as the old row, thanks",,,
-"put an orange block in the same place, exactly where the purple block was",,,
-"set a green block in the same place, exactly where the red block was",,,
-"could you place a yellow block in the same place, exactly where the blue block was",,,
-"i wonder if you could place an orange block in the same place, exactly where the purple block was",,,
-"actually, drop a green block in the same place, exactly where the red block was",,,
-"bring a yellow block in the same place, exactly where the blue block was",,,
-"maybe you could move an orange block in the same place, exactly where the purple block was",,,
-"what if you build a green block in the same place, exactly where the red block was",,,
-"i wonder if you could build a yellow block in the same place, exactly where the blue block was",,,
-"perhaps you could insert an orange block in the same place, exactly where the purple block was",,,
-"let's fit a green block in the same place, exactly where the red block was",,,
-"maybe you could exchange a yellow block in the same place, exactly where the blue block was",,,
+"put an orange block in the same place, exactly where the purple block was","@c1 syntax.clause form=imperative verb=""put"" modifier=""exactly"" complement=$n1
+@n1 syntax.nominal dependent=""an"" dependent=""orange"" head=""block""
+@r1 syntax.relation marker=""in"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""same"" head=""place""
+@r2 syntax.relation marker=""where"" from=$c1 to=$c2
+@n3 syntax.nominal dependent=""the"" dependent=""purple"" head=""block""
+@c2 syntax.clause form=declarative verb=""was"" subject=$n3",vss,agreement
+"set a green block in the same place, exactly where the red block was","@c1 syntax.clause form=imperative verb=""set"" modifier=""exactly"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""green"" head=""block""
+@r1 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""same"" head=""place""
+@r2 syntax.relation marker=""where"" from=$c1 to=$c2
+@n3 syntax.nominal dependent=""the"" dependent=""red"" head=""block""
+@c2 syntax.clause form=declarative verb=""was"" subject=$n3",vss,agreement
+"could you place a yellow block in the same place, exactly where the blue block was","@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""place"" modifier=""exactly"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""a"" dependent=""yellow"" head=""block""
+@r1 syntax.relation marker=""in"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""same"" head=""place""
+@r2 syntax.relation marker=""where"" from=$c1 to=$c2
+@n4 syntax.nominal dependent=""the"" dependent=""blue"" head=""block""
+@c2 syntax.clause form=declarative verb=""was"" subject=$n4",vss,agreement
+"i wonder if you could place an orange block in the same place, exactly where the purple block was","@n1 syntax.nominal head=""i""
+@c1 syntax.clause form=declarative verb=""wonder"" subject=$n1
+@r1 syntax.relation marker=""if"" from=$c1 to=$c2
+@n2 syntax.nominal head=""you""
+@c2 syntax.clause form=declarative auxiliary=""could"" verb=""place"" modifier=""exactly"" subject=$n2 complement=$n3
+@n3 syntax.nominal dependent=""an"" dependent=""orange"" head=""block""
+@r2 syntax.relation marker=""in"" from=$c2 to=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""same"" head=""place""
+@r3 syntax.relation marker=""where"" from=$c2 to=$c3
+@n5 syntax.nominal dependent=""the"" dependent=""purple"" head=""block""
+@c3 syntax.clause form=declarative verb=""was"" subject=$n5",vss,agreement
+"actually, drop a green block in the same place, exactly where the red block was","@c1 syntax.clause form=imperative modifier=""actually"" verb=""drop"" modifier=""exactly"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""green"" head=""block""
+@r1 syntax.relation marker=""in"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""same"" head=""place""
+@r2 syntax.relation marker=""where"" from=$c1 to=$c2
+@n3 syntax.nominal dependent=""the"" dependent=""red"" head=""block""
+@c2 syntax.clause form=declarative verb=""was"" subject=$n3",vss,agreement
+"bring a yellow block in the same place, exactly where the blue block was","@c1 syntax.clause form=imperative verb=""bring"" modifier=""exactly"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""yellow"" head=""block""
+@r1 syntax.relation marker=""in"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""same"" head=""place""
+@r2 syntax.relation marker=""where"" from=$c1 to=$c2
+@n3 syntax.nominal dependent=""the"" dependent=""blue"" head=""block""
+@c2 syntax.clause form=declarative verb=""was"" subject=$n3",vss,agreement
+"maybe you could move an orange block in the same place, exactly where the purple block was","@c1 syntax.clause form=declarative modifier=""maybe"" auxiliary=""could"" verb=""move"" modifier=""exactly"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""an"" dependent=""orange"" head=""block""
+@r1 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""same"" head=""place""
+@r2 syntax.relation marker=""where"" from=$c1 to=$c2
+@n4 syntax.nominal dependent=""the"" dependent=""purple"" head=""block""
+@c2 syntax.clause form=declarative verb=""was"" subject=$n4",vss,agreement
+"what if you build a green block in the same place, exactly where the red block was","@n1 syntax.nominal head=""what""
+@r1 syntax.relation marker=""if"" from=$c3 to=$c1
+@n2 syntax.nominal head=""you""
+@c1 syntax.clause form=declarative verb=""build"" modifier=""exactly"" subject=$n2 complement=$n3
+@n3 syntax.nominal dependent=""a"" dependent=""green"" head=""block""
+@r2 syntax.relation marker=""in"" from=$c1 to=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""same"" head=""place""
+@r3 syntax.relation marker=""where"" from=$c1 to=$c2
+@n5 syntax.nominal dependent=""the"" dependent=""red"" head=""block""
+@c2 syntax.clause form=declarative verb=""was"" subject=$n5
+@c3 syntax.clause form=fragment complement=$n1",vss,agreement
+"i wonder if you could build a yellow block in the same place, exactly where the blue block was","@n1 syntax.nominal head=""i""
+@c1 syntax.clause form=declarative verb=""wonder"" subject=$n1
+@r1 syntax.relation marker=""if"" from=$c1 to=$c2
+@n2 syntax.nominal head=""you""
+@c2 syntax.clause form=declarative auxiliary=""could"" verb=""build"" modifier=""exactly"" subject=$n2 complement=$n3
+@n3 syntax.nominal dependent=""a"" dependent=""yellow"" head=""block""
+@r2 syntax.relation marker=""in"" from=$c2 to=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""same"" head=""place""
+@r3 syntax.relation marker=""where"" from=$c2 to=$c3
+@n5 syntax.nominal dependent=""the"" dependent=""blue"" head=""block""
+@c3 syntax.clause form=declarative verb=""was"" subject=$n5",vss,agreement
+"perhaps you could insert an orange block in the same place, exactly where the purple block was","@c1 syntax.clause form=declarative modifier=""perhaps"" auxiliary=""could"" verb=""insert"" modifier=""exactly"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""an"" dependent=""orange"" head=""block""
+@r1 syntax.relation marker=""in"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""same"" head=""place""
+@r2 syntax.relation marker=""where"" from=$c1 to=$c2
+@n4 syntax.nominal dependent=""the"" dependent=""purple"" head=""block""
+@c2 syntax.clause form=declarative verb=""was"" subject=$n4",vss,agreement
+"let's fit a green block in the same place, exactly where the red block was","@c1 syntax.clause form=imperative verb=""let"" complement=$n1
+@n1 syntax.nominal head=""'s""
+@c2 syntax.clause form=nonfinite verb=""fit"" modifier=""exactly"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""green"" head=""block""
+@r1 syntax.relation marker=""in"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""same"" head=""place""
+@r2 syntax.relation marker=""where"" from=$c1 to=$c3
+@n4 syntax.nominal dependent=""the"" dependent=""red"" head=""block""
+@c3 syntax.clause form=declarative verb=""was"" subject=$n4
+@r3 syntax.relation from=$c1 to=$c2",vss,agreement
+"maybe you could exchange a yellow block in the same place, exactly where the blue block was","@c1 syntax.clause form=declarative modifier=""maybe"" auxiliary=""could"" verb=""exchange"" modifier=""exactly"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""a"" dependent=""yellow"" head=""block""
+@r1 syntax.relation marker=""in"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""same"" head=""place""
+@r2 syntax.relation marker=""where"" from=$c1 to=$c2
+@n4 syntax.nominal dependent=""the"" dependent=""blue"" head=""block""
+@c2 syntax.clause form=declarative verb=""was"" subject=$n4",vss,agreement
 "now — put an orange block in the same place, exactly where the purple block was",,,
-"instead, a yellow block in the same place, exactly where the blue block was",,,
+"instead, a yellow block in the same place, exactly where the blue block was","@c1 syntax.clause form=fragment modifier=""instead"" modifier=""exactly"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""yellow"" head=""block""
+@r1 syntax.relation marker=""in"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""same"" head=""place""
+@r2 syntax.relation marker=""where"" from=$c1 to=$c2
+@n3 syntax.nominal dependent=""the"" dependent=""blue"" head=""block""
+@c2 syntax.clause form=declarative verb=""was"" subject=$n3",vss,agreement
 "now — bring a yellow block in the same place, exactly where the blue block was",,,
-"what if you move an orange block in the same place, exactly where the purple block was",,,
-"i wonder if you could place a green block in the same place, exactly where the red block was, thanks",,,
+"what if you move an orange block in the same place, exactly where the purple block was","@n1 syntax.nominal head=""what""
+@r1 syntax.relation marker=""if"" from=$c3 to=$c1
+@n2 syntax.nominal head=""you""
+@c1 syntax.clause form=declarative verb=""move"" modifier=""exactly"" subject=$n2 complement=$n3
+@n3 syntax.nominal dependent=""an"" dependent=""orange"" head=""block""
+@r2 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""same"" head=""place""
+@r3 syntax.relation marker=""where"" from=$c1 to=$c2
+@n5 syntax.nominal dependent=""the"" dependent=""purple"" head=""block""
+@c2 syntax.clause form=declarative verb=""was"" subject=$n5
+@c3 syntax.clause form=fragment complement=$n1",vss,agreement
+"i wonder if you could place a green block in the same place, exactly where the red block was, thanks","@n1 syntax.nominal head=""i""
+@c1 syntax.clause form=declarative verb=""wonder"" subject=$n1
+@r1 syntax.relation marker=""if"" from=$c1 to=$c2
+@n2 syntax.nominal head=""you""
+@c2 syntax.clause form=declarative auxiliary=""could"" verb=""place"" modifier=""exactly"" subject=$n2 complement=$n3
+@n3 syntax.nominal dependent=""a"" dependent=""green"" head=""block""
+@r2 syntax.relation marker=""in"" from=$c2 to=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""same"" head=""place""
+@r3 syntax.relation marker=""where"" from=$c2 to=$c3
+@n5 syntax.nominal dependent=""the"" dependent=""red"" head=""block""
+@c3 syntax.clause form=declarative verb=""was"" discourse=""thanks"" subject=$n5",vss,agreement
 move block 16 half a row above block 17 and half a column right of block 19,,,
 shift block 6 half a row above block 20 and half a column right of block 11,,,
 could you slide the SRI block half a row above the Adidas block and half a column right of the Esso block,,,
@@ -1325,7 +1461,20 @@ send the HP block down and slightly left past the Twitter block. And then send t
 "instead, the BMW block down past the Esso block, then the BMW block left to the Target block",,,
 "the Coca Cola block down past the Heineken block, and then the Coca Cola block left to the Nvidia block",,,
 "est the HP block down and slightly left past the Twitter block, next est the HP block left until it is in line with the Coca Cola block",,,
-"put the BMW block down and slightly left past the Esso block, then put the BMW block left until it is in lae with the Target block",,,
+"put the BMW block down and slightly left past the Esso block, then put the BMW block left until it is in lae with the Target block","@c1 syntax.clause form=imperative verb=""put"" modifier=""down"" discourse=""and"" modifier=""slightly"" modifier=""left"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""BMW"" head=""block""
+@r1 syntax.relation marker=""past"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""Esso"" head=""block""
+@k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""put"" modifier=""left"" complement=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""BMW"" head=""block""
+@r2 syntax.relation marker=""until"" from=$c2 to=$c3
+@n4 syntax.nominal head=""it""
+@c3 syntax.clause form=declarative verb=""is"" subject=$n4
+@r3 syntax.relation marker=""in"" from=$c3 to=$n5
+@n5 syntax.nominal head=""lae""
+@r4 syntax.relation attachment=ambiguous marker=""with"" from=$c3 to=$n6
+@n6 syntax.nominal dependent=""the"" dependent=""Target"" head=""block""",vss,agreement
 "what if you place the Coca Cola block down and slightly left past the Heineken block, and then place the Coca Cola block left until it is in line with the Nvidia block",,,
 "bring the HP block down and slightly left past the Twitter block. And after that, bring the HP block left until it is in line with the Coca Cola block, thanks",,,
 "slide the 16 block down and left past the 17 block, then slide the 16 block back until it is even with the 17 block and sits above the 13 block",,,
@@ -1577,12 +1726,42 @@ hey -- reverse the boy in the orange cap and the boy in the purple cap so they t
 "trade the girl in the pink coat and the girl in the grey coat so the pair trade places, then close the gap one place right",,,
 "actually, please transpose the man in the red shirt and the man in the blue shirt so the pair trade places, and after that, close the gap one place left",,,
 "can you invert the woman in the yellow dress and the woman in the green jacket so the pair trade places, then close the gap one place right",,,
-"please flip the girl in the pink coat and the girl in the grey coat so they trade places on the line, then close the gap right",,,
+"please flip the girl in the pink coat and the girl in the grey coat so they trade places on the line, then close the gap right","@c1 syntax.clause form=imperative discourse=""please"" verb=""flip"" complement=$k1
+@n1 syntax.nominal dependent=""the"" head=""girl""
+@r1 syntax.relation marker=""in"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""pink"" head=""coat""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n1 conjunct=$n3
+@n3 syntax.nominal dependent=""the"" head=""girl""
+@r2 syntax.relation marker=""in"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""grey"" head=""coat""
+@r3 syntax.relation marker=""so"" from=$c1 to=$c2
+@n5 syntax.nominal head=""they""
+@c2 syntax.clause form=declarative verb=""trade"" subject=$n5 complement=$n6
+@n6 syntax.nominal head=""places""
+@r4 syntax.relation marker=""on"" from=$c2 to=$n7
+@n7 syntax.nominal dependent=""the"" head=""line""
+@k2 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c3
+@c3 syntax.clause form=imperative verb=""close"" modifier=""right"" complement=$n8
+@n8 syntax.nominal dependent=""the"" head=""gap""",vss,agreement
 "can you alternate the man in the red shirt and the man in the blue shirt so they trade places on the line, then close the gap left",,,
 "no, rotate the woman in the yellow dress and the woman in the green jacket so they trade places, next close the gap behind the pair one place right",,,
 "please interchange the boy in the orange cap and the boy in the purple cap so they trade places, then close the gap behind the pair one place left",,,
 "maybe you could swap the man in the red shirt and the man in the blue shirt so they trade places, then close the gap left",,,
-"switch the woman in the yellow dress and the woman in the green jacket so they trade places, then close the gap right",,,
+"switch the woman in the yellow dress and the woman in the green jacket so they trade places, then close the gap right","@c1 syntax.clause form=imperative verb=""switch"" complement=$k1
+@n1 syntax.nominal dependent=""the"" head=""woman""
+@r1 syntax.relation marker=""in"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""yellow"" head=""dress""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n1 conjunct=$n3
+@n3 syntax.nominal dependent=""the"" head=""woman""
+@r2 syntax.relation marker=""in"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""green"" head=""jacket""
+@r3 syntax.relation marker=""so"" from=$c1 to=$c2
+@n5 syntax.nominal head=""they""
+@c2 syntax.clause form=declarative verb=""trade"" subject=$n5 complement=$n6
+@n6 syntax.nominal head=""places""
+@k2 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c3
+@c3 syntax.clause form=imperative verb=""close"" modifier=""right"" complement=$n7
+@n7 syntax.nominal dependent=""the"" head=""gap""",spacy+vss,agreement
 "instead, the boy in the orange cap and the boy in the purple cap so they trade places, then close the gap left",,,
 "the girl in the pink coat and the girl in the grey coat so they trade places, and then close the gap right",,,
 "now -- can you invert the woman in the yellow dress and the woman in the green jacket so the pair trade places, next close the gap one place right",,,

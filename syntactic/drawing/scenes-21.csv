@@ -65,7 +65,8 @@ put a house,"@c1 syntax.clause form=imperative verb=""put"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""house""",spacy+spacy-direct+vss,agreement
 "another one like that, a house, create it",,,
 "new house, give me",,,
-sketch house,,,
+sketch house,"@c1 syntax.clause form=imperative verb=""sketch"" complement=$n1
+@n1 syntax.nominal head=""house""",spacy+vss,agreement
 want a house,"@c1 syntax.clause form=imperative verb=""want"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""house""",spacy+spacy-direct+vss,agreement
 "could you draw a red house at 120,90, size 80, labelled Home?",,,
@@ -135,7 +136,20 @@ a man would be nice to have,"@n1 syntax.nominal dependent=""a"" head=""man""
 could you place a man here?,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""place"" modifier=""here"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""a"" head=""man""",spacy+spacy-direct+vss,agreement
-"ok, now I'd like you to draw a man, a simple kind of person, to go with the house",,,
+"ok, now I'd like you to draw a man, a simple kind of person, to go with the house","@c1 syntax.clause form=declarative discourse=""ok"" modifier=""now"" auxiliary=""'d"" verb=""like"" subject=$n1
+@n1 syntax.nominal head=""I""
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""draw"" subject=$n2 complement=$k1
+@n3 syntax.nominal dependent=""a"" head=""man""
+@n4 syntax.nominal dependent=""a"" dependent=""simple"" head=""kind""
+@r2 syntax.relation marker=""of"" from=$n4 to=$n5
+@n5 syntax.nominal head=""person""
+@r3 syntax.relation marker=""to"" from=$c2 to=$c3
+@c3 syntax.clause form=nonfinite verb=""go""
+@r4 syntax.relation marker=""with"" from=$c3 to=$n6
+@n6 syntax.nominal dependent=""the"" head=""house""
+@k1 syntax.coordination conjunct=$n3 conjunct=$n4",vss,agreement
 "actually, can you add a man to the drawing? I want someone around so it feels alive","@c1 syntax.clause form=interrogative modifier=""actually"" auxiliary=""can"" verb=""add"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""a"" head=""man""
@@ -232,7 +246,8 @@ turn the house a cool colour,"@c1 syntax.clause form=imperative verb=""turn"" co
 "alright, one object needs fixing: update o1 to width 150, height 120, size 100, x 240, y 180, label Home",,,
 "so I was looking at the canvas and I'd like o1 changed, 150 wide, 120 high, at 240,180, size 100, labelled Home, thanks",,,
 set o1 to 150 wide and 120 high,,,
-label o1 Home,,,
+label o1 Home,"@c1 syntax.clause form=imperative verb=""label"" complement=$n1
+@n1 syntax.nominal head=""o1 Home""",vss,agreement
 "make o1 bigger and put it at 240,180","@c1 syntax.clause form=imperative verb=""make"" modifier=""bigger"" complement=$n1
 @n1 syntax.nominal head=""o1""
 @k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
@@ -300,14 +315,19 @@ I need the house selected,,,
 @r1 syntax.relation from=$c2 to=$c3",spacy+spacy-direct+vss,agreement
 "hey, can you choose the house for me, I'm not sure it is active",,,
 "so there are three shapes here, please grab the house and leave the others alone",,,
-select house,,,
-pick house,,,
+select house,"@c1 syntax.clause form=imperative verb=""select"" complement=$n1
+@n1 syntax.nominal head=""house""",spacy+vss,agreement
+pick house,"@c1 syntax.clause form=imperative verb=""pick"" complement=$n1
+@n1 syntax.nominal head=""house""",spacy+vss,agreement
 "house, choose it",,,
 "just the house, select",,,
 click house,,,
-grab house,,,
-mark house,,,
-highlight house please,,,
+grab house,"@c1 syntax.clause form=imperative verb=""grab"" complement=$n1
+@n1 syntax.nominal head=""house""",spacy+vss,agreement
+mark house,"@c1 syntax.clause form=imperative verb=""mark"" complement=$n1
+@n1 syntax.nominal head=""house""",spacy+vss,agreement
+highlight house please,"@c1 syntax.clause form=imperative verb=""highlight"" discourse=""please"" complement=$n1
+@n1 syntax.nominal head=""house""",spacy+vss,agreement
 pick the house and the circle,"@c1 syntax.clause form=imperative verb=""pick"" complement=$k1
 @n1 syntax.nominal dependent=""the"" head=""house""
 @k1 syntax.coordination conjunction=""and"" conjunct=$n1 conjunct=$n2
@@ -412,12 +432,14 @@ I want the house at x 260 y 180,,,
 "alright, I'd like the house relocated to 260,180, I want the layout a bit balanced",,,
 "so the picture looks lopsided, please drag the house to 260,180",,,
 "move house 260,180",,,
-"shift house 260,180",,,
+"shift house 260,180","@c1 syntax.clause form=imperative verb=""shift"" complement=$n1
+@n1 syntax.nominal head=""house"" dependent=""260"" dependent=""180""",vss,agreement
 "put house at 260,180","@c1 syntax.clause form=imperative verb=""put"" complement=$n1
 @n1 syntax.nominal head=""house""
 @r1 syntax.relation marker=""at"" from=$c1 to=$n2
 @n2 syntax.nominal head=""260,180""",spacy+spacy-direct+vss,agreement
-place house 260 180,,,
+place house 260 180,"@c1 syntax.clause form=imperative verb=""place"" complement=$n1
+@n1 syntax.nominal head=""house"" dependent=""260"" dependent=""180""",vss,agreement
 "nudge house to 260,180","@c1 syntax.clause form=imperative verb=""nudge"" complement=$n1
 @n1 syntax.nominal head=""house""
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2
@@ -842,7 +864,8 @@ I want to undo the last drawing change,"@n1 syntax.nominal head=""I""
 could you revert the last change I made in the drawing?,,,
 "um, undo the last drawing edit","@c1 syntax.clause form=imperative discourse=""um"" verb=""undo"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""last"" dependent=""drawing"" head=""edit""",spacy+spacy-direct+vss,agreement
-take back that last drawing change,,,
+take back that last drawing change,"@c1 syntax.clause form=imperative verb=""take"" modifier=""back"" complement=$n1
+@n1 syntax.nominal dependent=""that"" dependent=""last"" dependent=""drawing"" head=""change""",spacy+vss,agreement
 would you undo the last thing I changed in the drawing?,,,
 "ok, that last edit to the drawing looks wrong, so please undo the last drawing change","@c1 syntax.clause form=declarative discourse=""ok"" verb=""looks"" modifier=""wrong"" subject=$n1
 @n1 syntax.nominal dependent=""that"" dependent=""last"" head=""edit""
@@ -881,7 +904,7 @@ would you redo the drawing edit I just reverted?,,,
 @n5 syntax.nominal head=""me""
 @k1 syntax.coordination conjunct=$c1 conjunct=$c2",vss,agreement
 "hmm, that edit to the picture was fine after all, I need you to redo it",,,
-redo,,,
+redo,"@c1 syntax.clause form=imperative verb=""redo""",spacy+vss,agreement
 redo it please,"@c1 syntax.clause form=imperative verb=""redo"" discourse=""please"" complement=$n1
 @n1 syntax.nominal head=""it""",spacy+spacy-direct+vss,agreement
 redo the last one,"@c1 syntax.clause form=imperative verb=""redo"" complement=$n1
@@ -890,7 +913,7 @@ bring back the edit,"@c1 syntax.clause form=imperative verb=""bring"" modifier="
 @n1 syntax.nominal dependent=""the"" head=""edit""",spacy+spacy-direct+vss,agreement
 restore that,"@c1 syntax.clause form=imperative verb=""restore"" complement=$n1
 @n1 syntax.nominal head=""that""",spacy+spacy-direct+vss,agreement
-"oops, redo",,,
+"oops, redo","@c1 syntax.clause form=imperative discourse=""oops"" verb=""redo""",spacy+vss,agreement
 redo last change,,,
 please show the parts of the house,"@c1 syntax.clause form=imperative discourse=""please"" verb=""show"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""parts""
@@ -901,7 +924,12 @@ show me the parts of the house,"@c1 syntax.clause form=imperative verb=""show"" 
 @n2 syntax.nominal dependent=""the"" head=""parts""
 @r1 syntax.relation marker=""of"" from=$n2 to=$n3
 @n3 syntax.nominal dependent=""the"" head=""house""",spacy+spacy-direct+vss,agreement
-can you show the parts that make up the house?,,,
+can you show the parts that make up the house?,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""show"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""the"" head=""parts""
+@r1 syntax.relation marker=""that"" from=$n2 to=$c2
+@c2 syntax.clause form=declarative verb=""make"" modifier=""up"" complement=$n3
+@n3 syntax.nominal dependent=""the"" head=""house""",spacy+vss,agreement
 I want to see the parts of the house,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""want"" subject=$n1
 @r1 syntax.relation marker=""to"" from=$c1 to=$c2
@@ -1040,7 +1068,10 @@ pick part 0 of the house,"@c1 syntax.clause form=imperative verb=""pick"" comple
 @n2 syntax.nominal dependent=""the"" head=""house""",vss,agreement
 "house, select part 0",,,
 "select part 0, house",,,
-highlight part 0 of the house,,,
+highlight part 0 of the house,"@c1 syntax.clause form=imperative verb=""highlight"" complement=$n1
+@n1 syntax.nominal head=""part"" dependent=""0""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""house""",vss,agreement
 "part 0 of the house, select",,,
 choose house part 0,,,
 can you select the first part of o1?,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""select"" subject=$n1 complement=$n2
@@ -1144,10 +1175,16 @@ let's make part 0 of o1 red and 90 wide with a height of 45,,,
 "actually, let's make part 0 of o1 red, and give it a width of 90 and a height of 45",,,
 "so it matches the rest of the picture, make part 0 of o1 red, 90 wide and 45 high",,,
 "since I'm tidying up the drawing, I need you to make part 0 of o1 red, 90 wide and 45 high",,,
-make part 0 of o1 reddish and smallish,,,
+make part 0 of o1 reddish and smallish,"@c1 syntax.clause form=imperative verb=""make"" modifier=""reddish"" discourse=""and"" modifier=""smallish"" complement=$n1
+@n1 syntax.nominal head=""part"" dependent=""0""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal head=""o1""",vss,agreement
 make part 0 of o1 red,,,
 make part 0 of o1 90 wide and 45 high,,,
-make part 0 of o1 red and a bit bigger,,,
+make part 0 of o1 red and a bit bigger,"@c1 syntax.clause form=imperative verb=""make"" modifier=""red"" discourse=""and"" modifier=""a"" modifier=""bit"" modifier=""bigger"" complement=$n1
+@n1 syntax.nominal head=""part"" dependent=""0""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal head=""o1""",vss,agreement
 make part 0 of o1 kind of red,,,
 resize part 0 of o1 to 90 by 45,"@c1 syntax.clause form=imperative verb=""resize"" complement=$n1
 @n1 syntax.nominal head=""part"" dependent=""0""
@@ -1265,7 +1302,18 @@ set the first house part to a warm red,"@c1 syntax.clause form=imperative verb="
 @k1 syntax.coordination conjunct=$c1 conjunct=$c2
 @r4 syntax.relation from=$c2 to=$c3",vss,agreement
 "to line things up, I need you to move part 0 of o1 to 140,120",,,
-"while I'm rearranging, move part 0 of o1 to 140,120 and leave the rest",,,
+"while I'm rearranging, move part 0 of o1 to 140,120 and leave the rest","@r1 syntax.relation marker=""while"" from=$c2 to=$c1
+@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative auxiliary=""'m"" verb=""rearranging"" subject=$n1
+@c2 syntax.clause form=imperative verb=""move"" complement=$n2
+@n2 syntax.nominal head=""part"" dependent=""0""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal head=""o1""
+@r3 syntax.relation marker=""to"" from=$c2 to=$n4
+@n4 syntax.nominal head=""140,120""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c2 conjunct=$c3
+@c3 syntax.clause form=imperative verb=""leave"" complement=$n5
+@n5 syntax.nominal dependent=""the"" head=""rest""",vss,agreement
 move o1 part 0 to 140 120,,,
 "move o1 part 0, 140,120",,,
 "shift part 0 of o1, 140/120",,,
@@ -1297,7 +1345,14 @@ move o1 part 0 x140 y120,,,
 @r1 syntax.relation marker=""at"" from=$n1 to=$n2
 @n2 syntax.nominal head=""140,120""",spacy-direct+vss,agreement
 "would you put the first house component at x 140, y 120?",,,
-"ok, it's crowding the door, so put the first house component at 140,120",,,
+"ok, it's crowding the door, so put the first house component at 140,120","@c1 syntax.clause form=declarative discourse=""ok"" auxiliary=""'s"" verb=""crowding"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""it""
+@n2 syntax.nominal dependent=""the"" head=""door""
+@k1 syntax.coordination conjunction=""so"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""put"" complement=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""first"" dependent=""house"" head=""component""
+@r1 syntax.relation marker=""at"" from=$n3 to=$n4
+@n4 syntax.nominal head=""140,120""",vss,agreement
 "actually, could you put the first house component over at 140,120?","@c1 syntax.clause form=interrogative modifier=""actually"" auxiliary=""could"" verb=""put"" modifier=""over"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""the"" dependent=""first"" dependent=""house"" head=""component""
@@ -1324,7 +1379,18 @@ move o1 part 0 x140 y120,,,
 @n4 syntax.nominal dependent=""the"" dependent=""first"" dependent=""house"" head=""component""
 @r3 syntax.relation marker=""at"" from=$n4 to=$n5
 @n5 syntax.nominal head=""140,120""",spacy-direct+vss,agreement
-"while we're at it, put the first house component at 140,120 and leave the others",,,
+"while we're at it, put the first house component at 140,120 and leave the others","@r1 syntax.relation marker=""while"" from=$c2 to=$c1
+@n1 syntax.nominal head=""we""
+@c1 syntax.clause form=declarative verb=""'re"" subject=$n1
+@r2 syntax.relation marker=""at"" from=$c1 to=$n2
+@n2 syntax.nominal head=""it""
+@c2 syntax.clause form=imperative verb=""put"" complement=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""first"" dependent=""house"" head=""component""
+@r3 syntax.relation marker=""at"" from=$n3 to=$n4
+@n4 syntax.nominal head=""140,120""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c2 conjunct=$c3
+@c3 syntax.clause form=imperative verb=""leave"" complement=$n5
+@n5 syntax.nominal dependent=""the"" head=""others""",vss,agreement
 "move first house component to 140,120","@c1 syntax.clause form=imperative verb=""move"" complement=$n1
 @n1 syntax.nominal dependent=""first"" dependent=""house"" head=""component""
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2
@@ -1418,7 +1484,8 @@ drop part 0 of the house,"@c1 syntax.clause form=imperative verb=""drop"" comple
 @n1 syntax.nominal head=""part"" dependent=""0""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""house""",vss,agreement
-erase house part 0,,,
+erase house part 0,"@c1 syntax.clause form=imperative verb=""erase"" complement=$n1
+@n1 syntax.nominal dependent=""house"" head=""part"" dependent=""0""",vss,agreement
 "part 0 of the house, delete",,,
 remove part 0 from the house,"@c1 syntax.clause form=imperative verb=""remove"" complement=$n1
 @n1 syntax.nominal head=""part"" dependent=""0""
@@ -1723,12 +1790,14 @@ can you ungroup o4?,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb
 @n2 syntax.nominal head=""o4""",spacy+spacy-direct+vss,agreement
 I want o4 ungrouped,,,
 could you break up o4?,,,
-"um, ungroup o4",,,
+"um, ungroup o4","@c1 syntax.clause form=imperative discourse=""um"" verb=""ungroup"" complement=$n1
+@n1 syntax.nominal head=""o4""",spacy+vss,agreement
 dissolve o4,"@c1 syntax.clause form=imperative verb=""dissolve"" complement=$n1
 @n1 syntax.nominal head=""o4""",spacy+spacy-direct+vss,agreement
 I need o4 ungrouped,,,
 let's ungroup o4,,,
-"ungroup o4, please",,,
+"ungroup o4, please","@c1 syntax.clause form=imperative verb=""ungroup"" discourse=""please"" complement=$n1
+@n1 syntax.nominal head=""o4""",spacy+vss,agreement
 would you ungroup o4?,"@c1 syntax.clause form=interrogative auxiliary=""would"" verb=""ungroup"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""o4""",spacy+spacy-direct+vss,agreement
@@ -1747,7 +1816,8 @@ would you ungroup o4?,"@c1 syntax.clause form=interrogative auxiliary=""would"" 
 "to change one of its members, I need you to ungroup o4 first",,,
 "I grouped it by mistake earlier, so ungroup o4 now",,,
 "ungroup that group, o4",,,
-ungroup o4 please,,,
+ungroup o4 please,"@c1 syntax.clause form=imperative verb=""ungroup"" discourse=""please"" complement=$n1
+@n1 syntax.nominal head=""o4""",spacy+vss,agreement
 "o4, ungroup it",,,
 break up o4,,,
 dissolve the group o4,"@c1 syntax.clause form=imperative verb=""dissolve"" complement=$n1
@@ -1755,7 +1825,8 @@ dissolve the group o4,"@c1 syntax.clause form=imperative verb=""dissolve"" compl
 "ungroup it, o4",,,
 split o4 apart,"@c1 syntax.clause form=imperative verb=""split"" modifier=""apart"" complement=$n1
 @n1 syntax.nominal head=""o4""",spacy+spacy-direct+vss,agreement
-ungroup o4 now,,,
+ungroup o4 now,"@c1 syntax.clause form=imperative verb=""ungroup"" modifier=""now"" complement=$n1
+@n1 syntax.nominal head=""o4""",spacy+vss,agreement
 please let me edit the members separately,,,
 can you let me edit the members separately?,,,
 I want to edit the members separately,"@n1 syntax.nominal head=""I""
@@ -1919,7 +1990,12 @@ select the house and show the parts of it,"@c1 syntax.clause form=imperative ver
 @r1 syntax.relation marker=""of"" from=$n2 to=$n3
 @n3 syntax.nominal head=""it""",spacy+spacy-direct+vss,agreement
 "click the house, show what it's made of",,,
-"select the house, parts of the house",,,
+"select the house, parts of the house","@c1 syntax.clause form=imperative verb=""select"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""house""
+@n2 syntax.nominal head=""parts""
+@r1 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""house""
+@r2 syntax.relation from=$n1 to=$n2",spacy+vss,agreement
 "highlight the house, list the house parts","@c1 syntax.clause form=imperative verb=""highlight"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""house""
 @c2 syntax.clause form=imperative verb=""list"" complement=$n2
@@ -2268,7 +2344,11 @@ draw a smallish man,"@c1 syntax.clause form=imperative verb=""draw"" complement=
 @n1 syntax.nominal dependent=""a"" head=""man""
 @r1 syntax.relation marker=""at"" from=$c1 to=$n2
 @n2 syntax.nominal head=""120,90""",spacy+spacy-direct+vss,agreement
-"I need a man, size 80",,,
+"I need a man, size 80","@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""a"" head=""man""
+@n3 syntax.nominal head=""size"" dependent=""80""
+@r1 syntax.relation from=$n2 to=$n3",vss,agreement
 draw a tiny man in the middle,"@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""tiny"" head=""man""
 @r1 syntax.relation marker=""in"" from=$n1 to=$n2
@@ -2296,7 +2376,8 @@ move the house near the top left,"@c1 syntax.clause form=imperative verb=""move"
 @n1 syntax.nominal dependent=""the"" head=""house""
 @r1 syntax.relation marker=""near"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""top"" head=""left""",spacy-direct+vss,agreement
-make the house smallish and reddish,,,
+make the house smallish and reddish,"@c1 syntax.clause form=imperative verb=""make"" modifier=""smallish"" discourse=""and"" modifier=""reddish"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""house""",spacy+vss,agreement
 change the house,"@c1 syntax.clause form=imperative verb=""change"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""house""",spacy+spacy-direct+vss,agreement
 "set the house to 120,90","@c1 syntax.clause form=imperative verb=""set"" complement=$n1
@@ -2304,8 +2385,15 @@ change the house,"@c1 syntax.clause form=imperative verb=""change"" complement=$
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2
 @n2 syntax.nominal head=""120,90""",spacy-direct+vss,agreement
 "make the house wide and short, quite big",,,
-"recolour the house red, put it at the bottom",,,
-add house,,,
+"recolour the house red, put it at the bottom","@c1 syntax.clause form=imperative verb=""recolour"" modifier=""red"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""house""
+@c2 syntax.clause form=imperative verb=""put"" complement=$n2
+@n2 syntax.nominal head=""it""
+@r1 syntax.relation marker=""at"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""bottom""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2",spacy+vss,agreement
+add house,"@c1 syntax.clause form=imperative verb=""add"" complement=$n1
+@n1 syntax.nominal head=""house""",spacy+vss,agreement
 "please give me a house at 120,90 that's red, size 80 and has the label Home",,,
 give me a man,"@c1 syntax.clause form=imperative verb=""give"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""me""
@@ -2578,7 +2666,16 @@ get rid of the first part of o1,,,
 @n3 syntax.nominal dependent=""the"" head=""house""",spacy+spacy-direct+vss,agreement
 "actually, can you paint the house a darker blue? it should stand out more",,,
 "sketch a house with the label Home at 120,90, 160 wide, 100 high, size 80, coloured red",,,
-"hey, can you turn the house blue? I think it would look better against the rest",,,
+"hey, can you turn the house blue? I think it would look better against the rest","@c1 syntax.clause form=interrogative discourse=""hey"" auxiliary=""can"" verb=""turn"" modifier=""blue"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""the"" head=""house""
+@n3 syntax.nominal head=""I""
+@c2 syntax.clause form=declarative verb=""think"" subject=$n3
+@n4 syntax.nominal head=""it""
+@c3 syntax.clause form=declarative auxiliary=""would"" verb=""look"" modifier=""better"" subject=$n4
+@r1 syntax.relation marker=""against"" from=$c3 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""rest""
+@r2 syntax.relation from=$c2 to=$c3",spacy+vss,agreement
 "hey, I'd like the house and the circle chosen, please, I'm going to change both",,,
 "hey, can you put the house at 260,180? the circle is in its way right now","@c1 syntax.clause form=interrogative discourse=""hey"" auxiliary=""can"" verb=""put"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
@@ -2597,7 +2694,8 @@ what's there?,"@n1 syntax.nominal head=""what""
 @n2 syntax.nominal head=""there""",spacy+spacy-direct+vss,agreement
 I need part 0 of the house to be selected,,,
 pick o1 first part,,,
-make the first house part red-ish and bigger,,,
+make the first house part red-ish and bigger,"@c1 syntax.clause form=imperative verb=""make"" modifier=""red"" modifier=""ish"" discourse=""and"" modifier=""bigger"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""first"" dependent=""house"" head=""part""",spacy+vss,agreement
 "please move part 0 of o1 to 140,120","@c1 syntax.clause form=imperative discourse=""please"" verb=""move"" complement=$n1
 @n1 syntax.nominal head=""part"" dependent=""0""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
@@ -2679,7 +2777,7 @@ it would be nice to have the object IDs shown for 4 seconds,,,
 @r1 syntax.relation marker=""for"" from=$n3 to=$n4
 @n4 syntax.nominal dependent=""4"" head=""seconds""",spacy-direct+vss,agreement
 "actually, I didn't like what I just did, could you undo the last change to the picture?",,,
-"oops, undo",,,
+"oops, undo","@c1 syntax.clause form=imperative discourse=""oops"" verb=""undo""",spacy+vss,agreement
 "I need the first component of o1 gone, remove it",,,
 "delete the first part of o1, please","@c1 syntax.clause form=imperative verb=""delete"" discourse=""please"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""first"" head=""part""

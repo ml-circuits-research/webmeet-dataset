@@ -4,7 +4,14 @@ text,sop,source,accepted_by
 make cow yellow.,,,
 "Hey, make flower red.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""red"" complement=$n1
 @n1 syntax.nominal head=""flower""",spacy-direct+vss,agreement
-Let us make tree 85 pixels wide. That would help.,,,
+Let us make tree 85 pixels wide. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""us""
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n1 complement=$n2 complement=$n3
+@n2 syntax.nominal head=""tree""
+@n3 syntax.nominal dependent=""85"" head=""pixels""
+@n4 syntax.nominal head=""That""
+@c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n4
+@r1 syntax.relation from=$c1 to=$c2",vss,agreement
 make tree blue.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""blue"" complement=$n1
 @n1 syntax.nominal head=""tree""",spacy-direct+vss,agreement
 Could you make sun green. I appreciate it.,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""green"" subject=$n1 complement=$n2
@@ -13,7 +20,9 @@ Could you make sun green. I appreciate it.,"@c1 syntax.clause form=interrogative
 @n3 syntax.nominal head=""I""
 @c2 syntax.clause form=declarative verb=""appreciate"" subject=$n3 complement=$n4
 @n4 syntax.nominal head=""it""",spacy-direct+vss,agreement
-"Please, make boat 81 pixels wide. Thanks!",,,
+"Please, make boat 81 pixels wide. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""wide"" discourse=""Thanks"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""boat""
+@n2 syntax.nominal dependent=""81"" head=""pixels""",vss,agreement
 I need you to make sun purple. I appreciate it.,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""need"" subject=$n1
 @n2 syntax.nominal head=""you""
@@ -47,7 +56,10 @@ Let us make tree green. That would help.,"@c1 syntax.clause form=imperative verb
 @n1 syntax.nominal head=""dog""
 @n2 syntax.nominal head=""That""
 @c2 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n2",spacy-direct+vss,agreement
-"Hey, make tree orange. That would help.",,,
+"Hey, make tree orange. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""orange"" complement=$n1
+@n1 syntax.nominal head=""tree""
+@n2 syntax.nominal head=""That""
+@c2 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n2",spacy+vss,agreement
 Could you make cat purple. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""purple"" discourse=""Thanks"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""cat""",vss,agreement
@@ -92,9 +104,19 @@ Could you make tree green. Thanks!,"@c1 syntax.clause form=interrogative auxilia
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""tree""
 @c2 syntax.clause form=fragment discourse=""Thanks""",distilbert+prolog+spacy+z3,judge
-"Hey, make cat 15 pixels wide.",,,
-Could you make cow 70 pixels wide. I appreciate it.,,,
-make cow 56 pixels wide.,,,
+"Hey, make cat 15 pixels wide.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""cat""
+@n2 syntax.nominal dependent=""15"" head=""pixels""",spacy+vss,agreement
+Could you make cow 70 pixels wide. I appreciate it.,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""wide"" subject=$n1 complement=$n2 complement=$n3
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""cow""
+@n3 syntax.nominal dependent=""70"" head=""pixels""
+@n4 syntax.nominal head=""I""
+@c2 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
+@n5 syntax.nominal head=""it""",spacy+vss,agreement
+make cow 56 pixels wide.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""cow""
+@n2 syntax.nominal dependent=""56"" head=""pixels""",spacy+vss,agreement
 I need you to make cow green. I appreciate it.,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""need"" subject=$n1
 @n2 syntax.nominal head=""you""
@@ -141,7 +163,16 @@ Let us make dog red. That would help.,"@c1 syntax.clause form=imperative verb=""
 Could you make tree yellow. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""yellow"" discourse=""Thanks"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""tree""",vss,agreement
-I need you to make sun 29 pixels wide. I appreciate it.,,,
+I need you to make sun 29 pixels wide. I appreciate it.,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n2 complement=$n3 complement=$n4
+@n3 syntax.nominal head=""sun""
+@n4 syntax.nominal dependent=""29"" head=""pixels""
+@n5 syntax.nominal head=""I""
+@c3 syntax.clause form=declarative verb=""appreciate"" subject=$n5 complement=$n6
+@n6 syntax.nominal head=""it""",spacy+vss,agreement
 "Hey, make dog red.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""red"" complement=$n1
 @n1 syntax.nominal head=""dog""",spacy-direct+vss,agreement
 "Hey, make house green. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""green"" complement=$n1
@@ -180,8 +211,16 @@ Let us make tree red. That would help.,"@c1 syntax.clause form=imperative verb="
 @n3 syntax.nominal head=""That""
 @c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
-Could you make barn 72 pixels wide. I appreciate it.,,,
-"Please, make tree 43 pixels wide. Thanks!",,,
+Could you make barn 72 pixels wide. I appreciate it.,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""wide"" subject=$n1 complement=$n2 complement=$n3
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""barn""
+@n3 syntax.nominal dependent=""72"" head=""pixels""
+@n4 syntax.nominal head=""I""
+@c2 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
+@n5 syntax.nominal head=""it""",spacy+vss,agreement
+"Please, make tree 43 pixels wide. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""wide"" discourse=""Thanks"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""tree""
+@n2 syntax.nominal dependent=""43"" head=""pixels""",vss,agreement
 Let us make cat red. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
 @n1 syntax.nominal head=""us""
 @c2 syntax.clause form=nonfinite verb=""make"" modifier=""red"" subject=$n1 complement=$n2
@@ -206,7 +245,14 @@ make cloud purple.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""p
 @n1 syntax.nominal head=""bird""",vss,agreement
 "Please, make river red. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""red"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""river""",vss,agreement
-Let us make lake 69 pixels wide. That would help.,,,
+Let us make lake 69 pixels wide. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""us""
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n1 complement=$n2 complement=$n3
+@n2 syntax.nominal head=""lake""
+@n3 syntax.nominal dependent=""69"" head=""pixels""
+@n4 syntax.nominal head=""That""
+@c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n4
+@r1 syntax.relation from=$c1 to=$c2",vss,agreement
 Let us make mountains green. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
 @n1 syntax.nominal head=""us""
 @c2 syntax.clause form=nonfinite verb=""make"" modifier=""green"" subject=$n1 complement=$n2
@@ -254,16 +300,36 @@ make mountain blue.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""
 Could you make mountain yellow. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""yellow"" discourse=""Thanks"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""mountain""",vss,agreement
-Let us make reeds 38 pixels wide. That would help.,,,
+Let us make reeds 38 pixels wide. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""us""
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n1 complement=$n2 complement=$n3
+@n2 syntax.nominal head=""reeds""
+@n3 syntax.nominal dependent=""38"" head=""pixels""
+@n4 syntax.nominal head=""That""
+@c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n4
+@r1 syntax.relation from=$c1 to=$c2",vss,agreement
 "Hey, make lake green.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""green"" complement=$n1
 @n1 syntax.nominal head=""lake""",spacy-direct+vss,agreement
 Could you make lake yellow. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""yellow"" discourse=""Thanks"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""lake""",vss,agreement
-I need you to make mountain 14 pixels wide. I appreciate it.,,,
+I need you to make mountain 14 pixels wide. I appreciate it.,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n2 complement=$n3 complement=$n4
+@n3 syntax.nominal head=""mountain""
+@n4 syntax.nominal dependent=""14"" head=""pixels""
+@n5 syntax.nominal head=""I""
+@c3 syntax.clause form=declarative verb=""appreciate"" subject=$n5 complement=$n6
+@n6 syntax.nominal head=""it""",spacy+vss,judge
 "Hey, make lake red.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""red"" complement=$n1
 @n1 syntax.nominal head=""lake""",spacy-direct+vss,agreement
-"Hey, make river 44 pixels wide. That would help.",,,
+"Hey, make river 44 pixels wide. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""river""
+@n2 syntax.nominal dependent=""44"" head=""pixels""
+@n3 syntax.nominal head=""That""
+@c2 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3",spacy+vss,agreement
 Let us make sun purple. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
 @n1 syntax.nominal head=""us""
 @c2 syntax.clause form=nonfinite verb=""make"" modifier=""purple"" subject=$n1 complement=$n2
@@ -271,7 +337,11 @@ Let us make sun purple. That would help.,"@c1 syntax.clause form=imperative verb
 @n3 syntax.nominal head=""That""
 @c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
-"Hey, make forest 75 pixels wide. That would help.",,,
+"Hey, make forest 75 pixels wide. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""forest""
+@n2 syntax.nominal dependent=""75"" head=""pixels""
+@n3 syntax.nominal head=""That""
+@c2 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3",spacy+vss,agreement
 Let us make sun blue. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
 @n1 syntax.nominal head=""us""
 @c2 syntax.clause form=nonfinite verb=""make"" modifier=""blue"" subject=$n1 complement=$n2
@@ -285,7 +355,14 @@ Could you make lake red. I appreciate it.,"@c1 syntax.clause form=interrogative 
 @n3 syntax.nominal head=""I""
 @c2 syntax.clause form=declarative verb=""appreciate"" subject=$n3 complement=$n4
 @n4 syntax.nominal head=""it""",spacy-direct+vss,agreement
-Let us make lake 23 pixels wide. That would help.,,,
+Let us make lake 23 pixels wide. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""us""
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n1 complement=$n2 complement=$n3
+@n2 syntax.nominal head=""lake""
+@n3 syntax.nominal dependent=""23"" head=""pixels""
+@n4 syntax.nominal head=""That""
+@c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n4
+@r1 syntax.relation from=$c1 to=$c2",vss,agreement
 Let us make birds purple. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
 @n1 syntax.nominal head=""us""
 @c2 syntax.clause form=nonfinite verb=""make"" modifier=""purple"" subject=$n1 complement=$n2
@@ -293,9 +370,19 @@ Let us make birds purple. That would help.,"@c1 syntax.clause form=imperative ve
 @n3 syntax.nominal head=""That""
 @c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
-Could you make sun 41 pixels wide. I appreciate it.,,,
-make mountain 20 pixels wide.,,,
-"Please, make forest 44 pixels wide. Thanks!",,,
+Could you make sun 41 pixels wide. I appreciate it.,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""wide"" subject=$n1 complement=$n2 complement=$n3
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""sun""
+@n3 syntax.nominal dependent=""41"" head=""pixels""
+@n4 syntax.nominal head=""I""
+@c2 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
+@n5 syntax.nominal head=""it""",spacy+vss,agreement
+make mountain 20 pixels wide.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""mountain""
+@n2 syntax.nominal dependent=""20"" head=""pixels""",spacy+vss,agreement
+"Please, make forest 44 pixels wide. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""wide"" discourse=""Thanks"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""forest""
+@n2 syntax.nominal dependent=""44"" head=""pixels""",vss,agreement
 I need you to make river purple. I appreciate it.,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""need"" subject=$n1
 @n2 syntax.nominal head=""you""
@@ -316,17 +403,41 @@ I need you to make river yellow. I appreciate it.,"@n1 syntax.nominal head=""I""
 @n5 syntax.nominal head=""it""",spacy-direct+vss,agreement
 "Please, make mountain purple. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""purple"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""mountain""",vss,judge
-"Hey, make river 13 pixels wide. That would help.",,,
+"Hey, make river 13 pixels wide. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""river""
+@n2 syntax.nominal dependent=""13"" head=""pixels""
+@n3 syntax.nominal head=""That""
+@c2 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3",spacy+vss,agreement
 "Hey, make mountain blue. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""blue"" complement=$n1
 @n1 syntax.nominal head=""mountain""
 @n2 syntax.nominal head=""That""
 @c2 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n2",spacy-direct+vss,agreement
-"Please, make lake 14 pixels wide. Thanks!",,,
-I need you to make sun 17 pixels wide. I appreciate it.,,,
-Let us make sun 87 pixels wide. That would help.,,,
+"Please, make lake 14 pixels wide. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""wide"" discourse=""Thanks"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""lake""
+@n2 syntax.nominal dependent=""14"" head=""pixels""",vss,agreement
+I need you to make sun 17 pixels wide. I appreciate it.,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n2 complement=$n3 complement=$n4
+@n3 syntax.nominal head=""sun""
+@n4 syntax.nominal dependent=""17"" head=""pixels""
+@n5 syntax.nominal head=""I""
+@c3 syntax.clause form=declarative verb=""appreciate"" subject=$n5 complement=$n6
+@n6 syntax.nominal head=""it""",spacy+vss,agreement
+Let us make sun 87 pixels wide. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""us""
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n1 complement=$n2 complement=$n3
+@n2 syntax.nominal head=""sun""
+@n3 syntax.nominal dependent=""87"" head=""pixels""
+@n4 syntax.nominal head=""That""
+@c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n4
+@r1 syntax.relation from=$c1 to=$c2",vss,agreement
 "Please, make lake purple. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""purple"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""lake""",vss,agreement
-make river 66 pixels wide.,,,
+make river 66 pixels wide.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""river""
+@n2 syntax.nominal dependent=""66"" head=""pixels""",spacy+vss,agreement
 make lake blue.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""blue"" complement=$n1
 @n1 syntax.nominal head=""lake""",spacy-direct+vss,agreement
 I need you to make sun yellow. I appreciate it.,"@n1 syntax.nominal head=""I""
@@ -382,7 +493,9 @@ Could you make bus yellow. I appreciate it.,"@c1 syntax.clause form=interrogativ
 Could you make sun blue. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""blue"" discourse=""Thanks"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""sun""",vss,agreement
-"Hey, make shop 49 pixels wide.",,,
+"Hey, make shop 49 pixels wide.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""shop""
+@n2 syntax.nominal dependent=""49"" head=""pixels""",spacy+vss,agreement
 Let us make bus green. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
 @n1 syntax.nominal head=""us""
 @c2 syntax.clause form=nonfinite verb=""make"" modifier=""green"" subject=$n1 complement=$n2
@@ -390,14 +503,22 @@ Let us make bus green. That would help.,"@c1 syntax.clause form=imperative verb=
 @n3 syntax.nominal head=""That""
 @c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
-"Please, make cake orange. Thanks!",,,
+"Please, make cake orange. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""orange"" discourse=""Thanks"" complement=$n1
+@n1 syntax.nominal head=""cake""",vss,agreement
 "Hey, make gift box yellow. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""yellow"" complement=$n1
 @n1 syntax.nominal dependent=""gift"" head=""box""
 @n2 syntax.nominal head=""That""
 @c2 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n2",spacy-direct+vss,agreement
 make gift box purple.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""purple"" complement=$n1
 @n1 syntax.nominal dependent=""gift"" head=""box""",spacy-direct+vss,agreement
-Let us make cake 67 pixels wide. That would help.,,,
+Let us make cake 67 pixels wide. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""us""
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n1 complement=$n2 complement=$n3
+@n2 syntax.nominal head=""cake""
+@n3 syntax.nominal dependent=""67"" head=""pixels""
+@n4 syntax.nominal head=""That""
+@c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n4
+@r1 syntax.relation from=$c1 to=$c2",vss,agreement
 "Hey, make gift box orange. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""orange"" complement=$n1
 @n1 syntax.nominal dependent=""gift"" head=""box""
 @n2 syntax.nominal head=""That""
@@ -436,7 +557,9 @@ Let us make cake green. That would help.,"@c1 syntax.clause form=imperative verb
 @n3 syntax.nominal head=""That""
 @c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
-"Please, make balloon 48 pixels wide. Thanks!",,,
+"Please, make balloon 48 pixels wide. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""wide"" discourse=""Thanks"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""balloon""
+@n2 syntax.nominal dependent=""48"" head=""pixels""",vss,agreement
 Let us make star red. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
 @n1 syntax.nominal head=""us""
 @c2 syntax.clause form=nonfinite verb=""make"" modifier=""red"" subject=$n1 complement=$n2
@@ -444,7 +567,9 @@ Let us make star red. That would help.,"@c1 syntax.clause form=imperative verb="
 @n3 syntax.nominal head=""That""
 @c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
 @r1 syntax.relation from=$c1 to=$c2",vss,judge
-make gift box 37 pixels wide.,,,
+make gift box 37 pixels wide.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal dependent=""gift"" head=""box""
+@n2 syntax.nominal dependent=""37"" head=""pixels""",spacy+vss,agreement
 I need you to make cake purple. I appreciate it.,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""need"" subject=$n1
 @n2 syntax.nominal head=""you""
@@ -491,7 +616,12 @@ Let us make gift box red. That would help.,"@c1 syntax.clause form=imperative ve
 @n3 syntax.nominal head=""That""
 @c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
-Could you make star orange. I appreciate it.,,,
+Could you make star orange. I appreciate it.,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""orange"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""star""
+@n3 syntax.nominal head=""I""
+@c2 syntax.clause form=declarative verb=""appreciate"" subject=$n3 complement=$n4
+@n4 syntax.nominal head=""it""",spacy+vss,agreement
 "Please, make gift box purple. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""purple"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal dependent=""gift"" head=""box""",vss,agreement
 Let us make banner purple. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
@@ -501,8 +631,11 @@ Let us make banner purple. That would help.,"@c1 syntax.clause form=imperative v
 @n3 syntax.nominal head=""That""
 @c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
-"Please, make star 13 pixels wide. Thanks!",,,
-"Please, make balloon orange. Thanks!",,,
+"Please, make star 13 pixels wide. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""wide"" discourse=""Thanks"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""star""
+@n2 syntax.nominal dependent=""13"" head=""pixels""",vss,agreement
+"Please, make balloon orange. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""orange"" discourse=""Thanks"" complement=$n1
+@n1 syntax.nominal head=""balloon""",vss,agreement
 Let us make star purple. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
 @n1 syntax.nominal head=""us""
 @c2 syntax.clause form=nonfinite verb=""make"" modifier=""purple"" subject=$n1 complement=$n2
@@ -563,7 +696,8 @@ I need you to make gift box blue. I appreciate it.,"@n1 syntax.nominal head=""I"
 @n5 syntax.nominal head=""it""",spacy-direct+vss,agreement
 make star purple.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""purple"" complement=$n1
 @n1 syntax.nominal head=""star""",spacy-direct+vss,agreement
-make cake orange.,,,
+make cake orange.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""orange"" complement=$n1
+@n1 syntax.nominal head=""cake""",spacy+vss,agreement
 "Please, make balloon red. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""red"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""balloon""",vss,agreement
 make star blue.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""blue"" complement=$n1
@@ -637,7 +771,16 @@ Let us make avatar red. That would help.,"@c1 syntax.clause form=imperative verb
 @n3 syntax.nominal head=""That""
 @c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
-I need you to make avatar 32 pixels wide. I appreciate it.,,,
+I need you to make avatar 32 pixels wide. I appreciate it.,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n2 complement=$n3 complement=$n4
+@n3 syntax.nominal head=""avatar""
+@n4 syntax.nominal dependent=""32"" head=""pixels""
+@n5 syntax.nominal head=""I""
+@c3 syntax.clause form=declarative verb=""appreciate"" subject=$n5 complement=$n6
+@n6 syntax.nominal head=""it""",spacy+vss,agreement
 Let us make sun red. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
 @n1 syntax.nominal head=""us""
 @c2 syntax.clause form=nonfinite verb=""make"" modifier=""red"" subject=$n1 complement=$n2
@@ -659,7 +802,9 @@ Could you make avatar orange. I appreciate it.,"@c1 syntax.clause form=interroga
 @n3 syntax.nominal head=""I""
 @c2 syntax.clause form=declarative verb=""appreciate"" subject=$n3 complement=$n4
 @n4 syntax.nominal head=""it""",spacy-direct+vss,agreement
-"Hey, make sun 80 pixels wide.",,,
+"Hey, make sun 80 pixels wide.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""sun""
+@n2 syntax.nominal dependent=""80"" head=""pixels""",spacy+vss,judge
 I need you to make hat purple. I appreciate it.,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""need"" subject=$n1
 @n2 syntax.nominal head=""you""
@@ -673,7 +818,10 @@ make sun purple.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""pur
 @n1 syntax.nominal head=""sun""",spacy-direct+vss,agreement
 make background blue.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""blue"" complement=$n1
 @n1 syntax.nominal head=""background""",spacy-direct+vss,agreement
-Could you make sun 68 pixels wide. Thanks!,,,
+Could you make sun 68 pixels wide. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""wide"" discourse=""Thanks"" subject=$n1 complement=$n2 complement=$n3
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""sun""
+@n3 syntax.nominal dependent=""68"" head=""pixels""",vss,judge
 Let us make avatar purple. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
 @n1 syntax.nominal head=""us""
 @c2 syntax.clause form=nonfinite verb=""make"" modifier=""purple"" subject=$n1 complement=$n2
@@ -681,7 +829,8 @@ Let us make avatar purple. That would help.,"@c1 syntax.clause form=imperative v
 @n3 syntax.nominal head=""That""
 @c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
-"Please, make portrait orange. Thanks!",,,
+"Please, make portrait orange. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""orange"" discourse=""Thanks"" complement=$n1
+@n1 syntax.nominal head=""portrait""",vss,agreement
 make avatar blue.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""blue"" complement=$n1
 @n1 syntax.nominal head=""avatar""",spacy-direct+vss,agreement
 make avatar orange.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""orange"" complement=$n1
@@ -709,7 +858,9 @@ Could you make avatar blue. I appreciate it.,"@c1 syntax.clause form=interrogati
 @n3 syntax.nominal head=""I""
 @c2 syntax.clause form=declarative verb=""appreciate"" subject=$n3 complement=$n4
 @n4 syntax.nominal head=""it""",spacy-direct+vss,agreement
-"Please, make sun 29 pixels wide. Thanks!",,,
+"Please, make sun 29 pixels wide. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""wide"" discourse=""Thanks"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""sun""
+@n2 syntax.nominal dependent=""29"" head=""pixels""",vss,agreement
 "Hey, make portrait orange. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""orange"" complement=$n1
 @n1 syntax.nominal head=""portrait""
 @n2 syntax.nominal head=""That""
@@ -723,7 +874,14 @@ I need you to make tree purple. I appreciate it.,"@n1 syntax.nominal head=""I""
 @n4 syntax.nominal head=""I""
 @c3 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
 @n5 syntax.nominal head=""it""",spacy-direct+vss,agreement
-Let us make sun 38 pixels wide. That would help.,,,
+Let us make sun 38 pixels wide. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""us""
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n1 complement=$n2 complement=$n3
+@n2 syntax.nominal head=""sun""
+@n3 syntax.nominal dependent=""38"" head=""pixels""
+@n4 syntax.nominal head=""That""
+@c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n4
+@r1 syntax.relation from=$c1 to=$c2",vss,agreement
 Let us make background orange. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
 @n1 syntax.nominal head=""us""
 @c2 syntax.clause form=nonfinite verb=""make"" modifier=""orange"" subject=$n1 complement=$n2
@@ -731,7 +889,13 @@ Let us make background orange. That would help.,"@c1 syntax.clause form=imperati
 @n3 syntax.nominal head=""That""
 @c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
-Let us make avatar orange. That would help.,,,
+Let us make avatar orange. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""us""
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""orange"" subject=$n1 complement=$n2
+@n2 syntax.nominal head=""avatar""
+@n3 syntax.nominal head=""That""
+@c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
+@r1 syntax.relation from=$c1 to=$c2",vss,agreement
 make scarf blue.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""blue"" complement=$n1
 @n1 syntax.nominal head=""scarf""",spacy-direct+vss,agreement
 I need you to make tree green. I appreciate it.,"@n1 syntax.nominal head=""I""
@@ -747,15 +911,31 @@ make face yellow.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""ye
 @n1 syntax.nominal head=""face""",spacy-direct+vss,agreement
 "Hey, make cow blue.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""blue"" complement=$n1
 @n1 syntax.nominal head=""cow""",spacy-direct+vss,agreement
-I need you to make sun orange. I appreciate it.,,,
-Could you make barn 53 pixels wide. Thanks!,,,
+I need you to make sun orange. I appreciate it.,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""orange"" subject=$n2 complement=$n3
+@n3 syntax.nominal head=""sun""
+@n4 syntax.nominal head=""I""
+@c3 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
+@n5 syntax.nominal head=""it""",spacy+vss,agreement
+Could you make barn 53 pixels wide. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""wide"" discourse=""Thanks"" subject=$n1 complement=$n2 complement=$n3
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""barn""
+@n3 syntax.nominal dependent=""53"" head=""pixels""",vss,agreement
 Could you make barn red. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""red"" discourse=""Thanks"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""barn""",vss,agreement
-make hen house 39 pixels wide.,,,
+make hen house 39 pixels wide.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal dependent=""hen"" head=""house""
+@n2 syntax.nominal dependent=""39"" head=""pixels""",spacy+vss,agreement
 make grass blue.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""blue"" complement=$n1
 @n1 syntax.nominal head=""grass""",spacy-direct+vss,agreement
-Could you make barn 68 pixels wide. Thanks!,,,
+Could you make barn 68 pixels wide. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""wide"" discourse=""Thanks"" subject=$n1 complement=$n2 complement=$n3
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""barn""
+@n3 syntax.nominal dependent=""68"" head=""pixels""",vss,agreement
 "Please, make hen house yellow. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""yellow"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal dependent=""hen"" head=""house""",vss,agreement
 I need you to make tractor red. I appreciate it.,"@n1 syntax.nominal head=""I""
@@ -777,8 +957,18 @@ I need you to make hay bale green. I appreciate it.,"@n1 syntax.nominal head=""I
 @c3 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
 @n5 syntax.nominal head=""it""",spacy-direct+vss,agreement
 "Hey, make cow yellow. That would help.",,,
-"Please, make barn orange. Thanks!",,,
-I need you to make barn 75 pixels wide. I appreciate it.,,,
+"Please, make barn orange. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""orange"" discourse=""Thanks"" complement=$n1
+@n1 syntax.nominal head=""barn""",vss,agreement
+I need you to make barn 75 pixels wide. I appreciate it.,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n2 complement=$n3 complement=$n4
+@n3 syntax.nominal head=""barn""
+@n4 syntax.nominal dependent=""75"" head=""pixels""
+@n5 syntax.nominal head=""I""
+@c3 syntax.clause form=declarative verb=""appreciate"" subject=$n5 complement=$n6
+@n6 syntax.nominal head=""it""",spacy+vss,agreement
 "Hey, make barn purple. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""purple"" complement=$n1
 @n1 syntax.nominal head=""barn""
 @n2 syntax.nominal head=""That""
@@ -804,7 +994,9 @@ Could you make barn yellow. I appreciate it.,"@c1 syntax.clause form=interrogati
 @n1 syntax.nominal head=""barn""
 @n2 syntax.nominal head=""That""
 @c2 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n2",spacy-direct+vss,agreement
-make cow 88 pixels wide.,,,
+make cow 88 pixels wide.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""cow""
+@n2 syntax.nominal dependent=""88"" head=""pixels""",spacy+vss,agreement
 make cow blue.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""blue"" complement=$n1
 @n1 syntax.nominal head=""cow""",spacy-direct+vss,agreement
 I need you to make barn yellow. I appreciate it.,"@n1 syntax.nominal head=""I""
@@ -816,11 +1008,21 @@ I need you to make barn yellow. I appreciate it.,"@n1 syntax.nominal head=""I""
 @n4 syntax.nominal head=""I""
 @c3 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
 @n5 syntax.nominal head=""it""",spacy-direct+vss,agreement
-Let us make pond 39 pixels wide. That would help.,,,
-Could you make barn orange. Thanks!,,,
+Let us make pond 39 pixels wide. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""us""
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n1 complement=$n2 complement=$n3
+@n2 syntax.nominal head=""pond""
+@n3 syntax.nominal dependent=""39"" head=""pixels""
+@n4 syntax.nominal head=""That""
+@c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n4
+@r1 syntax.relation from=$c1 to=$c2",vss,agreement
+Could you make barn orange. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""orange"" discourse=""Thanks"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""barn""",vss,agreement
 "Hey, make farmer purple.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""purple"" complement=$n1
 @n1 syntax.nominal head=""farmer""",spacy-direct+vss,agreement
-make barn orange.,,,
+make barn orange.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""orange"" complement=$n1
+@n1 syntax.nominal head=""barn""",spacy+vss,agreement
 Let us make barn green. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
 @n1 syntax.nominal head=""us""
 @c2 syntax.clause form=nonfinite verb=""make"" modifier=""green"" subject=$n1 complement=$n2
@@ -867,12 +1069,23 @@ Let us make vegetable patch green. That would help.,"@c1 syntax.clause form=impe
 @n3 syntax.nominal head=""That""
 @c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
-I need you to make barn 64 pixels wide. I appreciate it.,,,
+I need you to make barn 64 pixels wide. I appreciate it.,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n2 complement=$n3 complement=$n4
+@n3 syntax.nominal head=""barn""
+@n4 syntax.nominal dependent=""64"" head=""pixels""
+@n5 syntax.nominal head=""I""
+@c3 syntax.clause form=declarative verb=""appreciate"" subject=$n5 complement=$n6
+@n6 syntax.nominal head=""it""",spacy+vss,agreement
 Let us make pig green. That would help.,,,
 Could you make pig yellow. I appreciate it.,,,
 "Please, make girl blue. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""blue"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""girl""",vss,agreement
-"Hey, make girl 80 pixels wide.",,,
+"Hey, make girl 80 pixels wide.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""girl""
+@n2 syntax.nominal dependent=""80"" head=""pixels""",spacy+vss,agreement
 "Hey, make dog yellow. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""yellow"" complement=$n1
 @n1 syntax.nominal head=""dog""
 @n2 syntax.nominal head=""That""
@@ -888,7 +1101,9 @@ Let us make barn blue. That would help.,"@c1 syntax.clause form=imperative verb=
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
 "Please, make gate orange. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""orange"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""gate""",vss,agreement
-make gate 84 pixels wide.,,,
+make gate 84 pixels wide.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""gate""
+@n2 syntax.nominal dependent=""84"" head=""pixels""",spacy+vss,agreement
 Could you make gate yellow. I appreciate it.,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""yellow"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""gate""
@@ -905,7 +1120,13 @@ Could you make star red. I appreciate it.,"@c1 syntax.clause form=interrogative 
 @n3 syntax.nominal head=""I""
 @c2 syntax.clause form=declarative verb=""appreciate"" subject=$n3 complement=$n4
 @n4 syntax.nominal head=""it""",spacy-direct+vss,agreement
-Could you make big circle 22 pixels wide. I appreciate it.,,,
+Could you make big circle 22 pixels wide. I appreciate it.,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""wide"" subject=$n1 complement=$n2 complement=$n3
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""big"" head=""circle""
+@n3 syntax.nominal dependent=""22"" head=""pixels""
+@n4 syntax.nominal head=""I""
+@c2 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
+@n5 syntax.nominal head=""it""",spacy+vss,judge
 make flower blue.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""blue"" complement=$n1
 @n1 syntax.nominal head=""flower""",spacy-direct+vss,agreement
 Let us make circle green. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
@@ -915,8 +1136,15 @@ Let us make circle green. That would help.,"@c1 syntax.clause form=imperative ve
 @n3 syntax.nominal head=""That""
 @c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
-make line green.,,,
-Could you make square 86 pixels wide. I appreciate it.,,,
+make line green.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""green"" complement=$n1
+@n1 syntax.nominal head=""line""",spacy+vss,agreement
+Could you make square 86 pixels wide. I appreciate it.,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""wide"" subject=$n1 complement=$n2 complement=$n3
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""square""
+@n3 syntax.nominal dependent=""86"" head=""pixels""
+@n4 syntax.nominal head=""I""
+@c2 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
+@n5 syntax.nominal head=""it""",spacy+vss,agreement
 make flower yellow.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""yellow"" complement=$n1
 @n1 syntax.nominal head=""flower""",spacy-direct+vss,agreement
 Could you make circle purple. I appreciate it.,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""purple"" subject=$n1 complement=$n2
@@ -935,7 +1163,9 @@ I need you to make heart blue. I appreciate it.,"@n1 syntax.nominal head=""I""
 @n4 syntax.nominal head=""I""
 @c3 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
 @n5 syntax.nominal head=""it""",spacy-direct+vss,agreement
-make heart 71 pixels wide.,,,
+make heart 71 pixels wide.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""heart""
+@n2 syntax.nominal dependent=""71"" head=""pixels""",spacy+vss,agreement
 make Item 2490 blue.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""blue"" complement=$n1
 @n1 syntax.nominal head=""Item 2490""",vss,agreement
 Could you make sun yellow. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""yellow"" discourse=""Thanks"" subject=$n1 complement=$n2
@@ -950,8 +1180,24 @@ Could you make star blue. I appreciate it.,"@c1 syntax.clause form=interrogative
 Let us make square green. That would help.,,,
 "Please, make circle orange. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""orange"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""circle""",vss,agreement
-I need you to make star orange. I appreciate it.,,,
-I need you to make flower orange. I appreciate it.,,,
+I need you to make star orange. I appreciate it.,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""orange"" subject=$n2 complement=$n3
+@n3 syntax.nominal head=""star""
+@n4 syntax.nominal head=""I""
+@c3 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
+@n5 syntax.nominal head=""it""",spacy+vss,agreement
+I need you to make flower orange. I appreciate it.,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""orange"" subject=$n2 complement=$n3
+@n3 syntax.nominal head=""flower""
+@n4 syntax.nominal head=""I""
+@c3 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
+@n5 syntax.nominal head=""it""",spacy+vss,agreement
 "Hey, make circle yellow. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""yellow"" complement=$n1
 @n1 syntax.nominal head=""circle""
 @n2 syntax.nominal head=""That""
@@ -967,12 +1213,27 @@ I need you to make star purple. I appreciate it.,"@n1 syntax.nominal head=""I""
 @n4 syntax.nominal head=""I""
 @c3 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
 @n5 syntax.nominal head=""it""",spacy-direct+vss,agreement
-Let us make triangle orange. That would help.,,,
+Let us make triangle orange. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""us""
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""orange"" subject=$n1 complement=$n2
+@n2 syntax.nominal head=""triangle""
+@n3 syntax.nominal head=""That""
+@c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
+@r1 syntax.relation from=$c1 to=$c2",vss,agreement
 "Hey, make circle blue. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""blue"" complement=$n1
 @n1 syntax.nominal head=""circle""
 @n2 syntax.nominal head=""That""
 @c2 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n2",spacy-direct+vss,agreement
-I need you to make square 33 pixels wide. I appreciate it.,,,
+I need you to make square 33 pixels wide. I appreciate it.,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n2 complement=$n3 complement=$n4
+@n3 syntax.nominal head=""square""
+@n4 syntax.nominal dependent=""33"" head=""pixels""
+@n5 syntax.nominal head=""I""
+@c3 syntax.clause form=declarative verb=""appreciate"" subject=$n5 complement=$n6
+@n6 syntax.nominal head=""it""",spacy+vss,agreement
 I need you to make heart red. I appreciate it.,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""need"" subject=$n1
 @n2 syntax.nominal head=""you""
@@ -982,7 +1243,8 @@ I need you to make heart red. I appreciate it.,"@n1 syntax.nominal head=""I""
 @n4 syntax.nominal head=""I""
 @c3 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
 @n5 syntax.nominal head=""it""",spacy-direct+vss,agreement
-make star orange.,,,
+make star orange.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""orange"" complement=$n1
+@n1 syntax.nominal head=""star""",spacy+vss,agreement
 I need you to make heart yellow. I appreciate it.,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""need"" subject=$n1
 @n2 syntax.nominal head=""you""
@@ -1002,10 +1264,16 @@ Let us make heart yellow. That would help.,"@c1 syntax.clause form=imperative ve
 Could you make star blue. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""blue"" discourse=""Thanks"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""star""",vss,agreement
-"Please, make circle 47 pixels wide. Thanks!",,,
+"Please, make circle 47 pixels wide. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""wide"" discourse=""Thanks"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""circle""
+@n2 syntax.nominal dependent=""47"" head=""pixels""",vss,agreement
 make heart red.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""red"" complement=$n1
 @n1 syntax.nominal head=""heart""",spacy-direct+vss,agreement
-"Hey, make square 29 pixels wide. That would help.",,,
+"Hey, make square 29 pixels wide. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""square""
+@n2 syntax.nominal dependent=""29"" head=""pixels""
+@n3 syntax.nominal head=""That""
+@c2 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3",spacy+vss,agreement
 Let us make line purple. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
 @n1 syntax.nominal head=""us""
 @c2 syntax.clause form=nonfinite verb=""make"" modifier=""purple"" subject=$n1 complement=$n2
@@ -1028,7 +1296,9 @@ Let us make heart purple. That would help.,"@c1 syntax.clause form=imperative ve
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
 make Item 4345 green.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""green"" complement=$n1
 @n1 syntax.nominal head=""Item 4345""",vss,agreement
-"Please, make heart 48 pixels wide. Thanks!",,,
+"Please, make heart 48 pixels wide. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""wide"" discourse=""Thanks"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""heart""
+@n2 syntax.nominal dependent=""48"" head=""pixels""",vss,agreement
 "Please, make star blue. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""blue"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""star""",vss,agreement
 I need you to make heart orange. I appreciate it.,"@n1 syntax.nominal head=""I""
@@ -1040,7 +1310,8 @@ I need you to make heart orange. I appreciate it.,"@n1 syntax.nominal head=""I""
 @n4 syntax.nominal head=""I""
 @c3 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
 @n5 syntax.nominal head=""it""",spacy-direct+vss,agreement
-"Please, make star orange. Thanks!",,,
+"Please, make star orange. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""orange"" discourse=""Thanks"" complement=$n1
+@n1 syntax.nominal head=""star""",vss,agreement
 Let us make heart blue. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
 @n1 syntax.nominal head=""us""
 @c2 syntax.clause form=nonfinite verb=""make"" modifier=""blue"" subject=$n1 complement=$n2
@@ -1049,7 +1320,16 @@ Let us make heart blue. That would help.,"@c1 syntax.clause form=imperative verb
 @c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
 make square orange.,,,
-I need you to make heart 64 pixels wide. I appreciate it.,,,
+I need you to make heart 64 pixels wide. I appreciate it.,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n2 complement=$n3 complement=$n4
+@n3 syntax.nominal head=""heart""
+@n4 syntax.nominal dependent=""64"" head=""pixels""
+@n5 syntax.nominal head=""I""
+@c3 syntax.clause form=declarative verb=""appreciate"" subject=$n5 complement=$n6
+@n6 syntax.nominal head=""it""",spacy+vss,agreement
 "Hey, make heart purple.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""purple"" complement=$n1
 @n1 syntax.nominal head=""heart""",spacy-direct+vss,agreement
 I need you to make Item 1811 yellow. I appreciate it.,"@n1 syntax.nominal head=""I""
@@ -1069,8 +1349,17 @@ Let us make heart orange. That would help.,"@c1 syntax.clause form=imperative ve
 @n3 syntax.nominal head=""That""
 @c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
-Could you make heart orange. I appreciate it.,,,
-"Hey, make circle 11 pixels wide. That would help.",,,
+Could you make heart orange. I appreciate it.,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""orange"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""heart""
+@n3 syntax.nominal head=""I""
+@c2 syntax.clause form=declarative verb=""appreciate"" subject=$n3 complement=$n4
+@n4 syntax.nominal head=""it""",spacy+vss,agreement
+"Hey, make circle 11 pixels wide. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""circle""
+@n2 syntax.nominal dependent=""11"" head=""pixels""
+@n3 syntax.nominal head=""That""
+@c2 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3",spacy+vss,agreement
 "Hey, make star green.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""green"" complement=$n1
 @n1 syntax.nominal head=""star""",spacy-direct+vss,agreement
 Could you make square orange. Thanks!,,,
@@ -1085,7 +1374,11 @@ Let us make star blue. That would help.,"@c1 syntax.clause form=imperative verb=
 @n3 syntax.nominal head=""That""
 @c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
-"Hey, make moon 26 pixels wide. That would help.",,,
+"Hey, make moon 26 pixels wide. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""moon""
+@n2 syntax.nominal dependent=""26"" head=""pixels""
+@n3 syntax.nominal head=""That""
+@c2 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3",spacy+vss,agreement
 Could you make waves orange. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""orange"" discourse=""Thanks"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""waves""",vss,agreement
@@ -1136,7 +1429,8 @@ Could you make shells green. I appreciate it.,"@c1 syntax.clause form=interrogat
 @n3 syntax.nominal head=""I""
 @c2 syntax.clause form=declarative verb=""appreciate"" subject=$n3 complement=$n4
 @n4 syntax.nominal head=""it""",spacy-direct+vss,agreement
-make sandcastle orange.,,,
+make sandcastle orange.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""orange"" complement=$n1
+@n1 syntax.nominal head=""sandcastle""",spacy+vss,agreement
 "Please, make umbrella purple. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""purple"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""umbrella""",vss,agreement
 Could you make umbrella orange. I appreciate it.,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""orange"" subject=$n1 complement=$n2
@@ -1178,7 +1472,8 @@ Let us make umbrella red. That would help.,"@c1 syntax.clause form=imperative ve
 @n3 syntax.nominal head=""That""
 @c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
-make sun orange.,,,
+make sun orange.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""orange"" complement=$n1
+@n1 syntax.nominal head=""sun""",spacy+vss,agreement
 "Please, make waves blue. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""blue"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""waves""",vss,agreement
 I need you to make sun blue. I appreciate it.,"@n1 syntax.nominal head=""I""
@@ -1190,7 +1485,12 @@ I need you to make sun blue. I appreciate it.,"@n1 syntax.nominal head=""I""
 @n4 syntax.nominal head=""I""
 @c3 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
 @n5 syntax.nominal head=""it""",spacy-direct+vss,agreement
-Could you make fish orange. I appreciate it.,,,
+Could you make fish orange. I appreciate it.,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""orange"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""fish""
+@n3 syntax.nominal head=""I""
+@c2 syntax.clause form=declarative verb=""appreciate"" subject=$n3 complement=$n4
+@n4 syntax.nominal head=""it""",spacy+vss,agreement
 Could you make sea purple. I appreciate it.,,,
 Could you make sky yellow. I appreciate it.,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""yellow"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
@@ -1320,7 +1620,11 @@ Could you make fish green. I appreciate it.,"@c1 syntax.clause form=interrogativ
 @n3 syntax.nominal head=""I""
 @c2 syntax.clause form=declarative verb=""appreciate"" subject=$n3 complement=$n4
 @n4 syntax.nominal head=""it""",spacy-direct+vss,agreement
-"Hey, make sun 60 pixels wide. That would help.",,,
+"Hey, make sun 60 pixels wide. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""sun""
+@n2 syntax.nominal dependent=""60"" head=""pixels""
+@n3 syntax.nominal head=""That""
+@c2 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3",spacy+vss,agreement
 Could you make sea 34 pixels wide. Thanks!,,,
 "Hey, make sun purple.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""purple"" complement=$n1
 @n1 syntax.nominal head=""sun""",spacy-direct+vss,agreement
@@ -1341,7 +1645,14 @@ Let us make fish green. That would help.,"@c1 syntax.clause form=imperative verb
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
 I need you to make sea red. I appreciate it.,,,
 Let us make sea red. That would help.,,,
-Let us make rocket 85 pixels wide. That would help.,,,
+Let us make rocket 85 pixels wide. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""us""
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n1 complement=$n2 complement=$n3
+@n2 syntax.nominal head=""rocket""
+@n3 syntax.nominal dependent=""85"" head=""pixels""
+@n4 syntax.nominal head=""That""
+@c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n4
+@r1 syntax.relation from=$c1 to=$c2",vss,agreement
 Let us make moon red. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
 @n1 syntax.nominal head=""us""
 @c2 syntax.clause form=nonfinite verb=""make"" modifier=""red"" subject=$n1 complement=$n2
@@ -1377,16 +1688,44 @@ Let us make sun green. That would help.,"@c1 syntax.clause form=imperative verb=
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
 "Hey, make rocket red.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""red"" complement=$n1
 @n1 syntax.nominal head=""rocket""",spacy-direct+vss,agreement
-I need you to make moon orange. I appreciate it.,,,
+I need you to make moon orange. I appreciate it.,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""orange"" subject=$n2 complement=$n3
+@n3 syntax.nominal head=""moon""
+@n4 syntax.nominal head=""I""
+@c3 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
+@n5 syntax.nominal head=""it""",spacy+vss,agreement
 make Saturn purple.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""purple"" complement=$n1
 @n1 syntax.nominal head=""Saturn""",spacy-direct+vss,judge
 "Please, make Mars blue. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""blue"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""Mars""",vss,agreement
-Let us make Saturn 72 pixels wide. That would help.,,,
+Let us make Saturn 72 pixels wide. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""us""
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n1 complement=$n2 complement=$n3
+@n2 syntax.nominal head=""Saturn""
+@n3 syntax.nominal dependent=""72"" head=""pixels""
+@n4 syntax.nominal head=""That""
+@c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n4
+@r1 syntax.relation from=$c1 to=$c2",vss,agreement
 "Please, make flag green. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""green"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""flag""",vss,agreement
-"Hey, make rocket 45 pixels wide. That would help.",,,
-I need you to make rocket 15 pixels wide. I appreciate it.,,,
+"Hey, make rocket 45 pixels wide. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""rocket""
+@n2 syntax.nominal dependent=""45"" head=""pixels""
+@n3 syntax.nominal head=""That""
+@c2 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3",spacy+vss,agreement
+I need you to make rocket 15 pixels wide. I appreciate it.,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n2 complement=$n3 complement=$n4
+@n3 syntax.nominal head=""rocket""
+@n4 syntax.nominal dependent=""15"" head=""pixels""
+@n5 syntax.nominal head=""I""
+@c3 syntax.clause form=declarative verb=""appreciate"" subject=$n5 complement=$n6
+@n6 syntax.nominal head=""it""",spacy+vss,agreement
 Let us make Saturn red. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
 @n1 syntax.nominal head=""us""
 @c2 syntax.clause form=nonfinite verb=""make"" modifier=""red"" subject=$n1 complement=$n2
@@ -1403,20 +1742,61 @@ I need you to make Saturn orange. I appreciate it.,"@n1 syntax.nominal head=""I"
 @n4 syntax.nominal head=""I""
 @c3 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
 @n5 syntax.nominal head=""it""",spacy-direct+vss,agreement
-Let us make Saturn 54 pixels wide. That would help.,,,
+Let us make Saturn 54 pixels wide. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""us""
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n1 complement=$n2 complement=$n3
+@n2 syntax.nominal head=""Saturn""
+@n3 syntax.nominal dependent=""54"" head=""pixels""
+@n4 syntax.nominal head=""That""
+@c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n4
+@r1 syntax.relation from=$c1 to=$c2",vss,agreement
 make flag green.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""green"" complement=$n1
 @n1 syntax.nominal head=""flag""",spacy-direct+vss,agreement
-Could you make tree 20 pixels wide. Thanks!,,,
+Could you make tree 20 pixels wide. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""wide"" discourse=""Thanks"" subject=$n1 complement=$n2 complement=$n3
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""tree""
+@n3 syntax.nominal dependent=""20"" head=""pixels""",vss,agreement
 Could you make house orange. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""orange"" discourse=""Thanks"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""house""",vss,agreement
 make sun blue.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""blue"" complement=$n1
 @n1 syntax.nominal head=""sun""",spacy-direct+vss,judge
-make comet purple.,,,
-I need you to make satellite orange. I appreciate it.,,,
-I need you to make sun 16 pixels wide. I appreciate it.,,,
-Could you make sun 55 pixels wide. I appreciate it.,,,
-Let us make moon 39 pixels wide. That would help.,,,
+make comet purple.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""purple"" complement=$n1
+@n1 syntax.nominal head=""comet""",spacy+vss,agreement
+I need you to make satellite orange. I appreciate it.,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""orange"" subject=$n2 complement=$n3
+@n3 syntax.nominal head=""satellite""
+@n4 syntax.nominal head=""I""
+@c3 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
+@n5 syntax.nominal head=""it""",spacy+vss,agreement
+I need you to make sun 16 pixels wide. I appreciate it.,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n2 complement=$n3 complement=$n4
+@n3 syntax.nominal head=""sun""
+@n4 syntax.nominal dependent=""16"" head=""pixels""
+@n5 syntax.nominal head=""I""
+@c3 syntax.clause form=declarative verb=""appreciate"" subject=$n5 complement=$n6
+@n6 syntax.nominal head=""it""",spacy+vss,agreement
+Could you make sun 55 pixels wide. I appreciate it.,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""wide"" subject=$n1 complement=$n2 complement=$n3
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""sun""
+@n3 syntax.nominal dependent=""55"" head=""pixels""
+@n4 syntax.nominal head=""I""
+@c2 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
+@n5 syntax.nominal head=""it""",spacy+vss,agreement
+Let us make moon 39 pixels wide. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""us""
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n1 complement=$n2 complement=$n3
+@n2 syntax.nominal head=""moon""
+@n3 syntax.nominal dependent=""39"" head=""pixels""
+@n4 syntax.nominal head=""That""
+@c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n4
+@r1 syntax.relation from=$c1 to=$c2",vss,agreement
 Let us make Venus purple. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
 @n1 syntax.nominal head=""us""
 @c2 syntax.clause form=nonfinite verb=""make"" modifier=""purple"" subject=$n1 complement=$n2
@@ -1440,9 +1820,23 @@ I need you to make Earth yellow. I appreciate it.,"@n1 syntax.nominal head=""I""
 @n4 syntax.nominal head=""I""
 @c3 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
 @n5 syntax.nominal head=""it""",spacy-direct+vss,agreement
-Let us make rocket 40 pixels wide. That would help.,,,
-make sun 66 pixels wide.,,,
-Could you make comet purple. I appreciate it.,,,
+Let us make rocket 40 pixels wide. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""us""
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n1 complement=$n2 complement=$n3
+@n2 syntax.nominal head=""rocket""
+@n3 syntax.nominal dependent=""40"" head=""pixels""
+@n4 syntax.nominal head=""That""
+@c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n4
+@r1 syntax.relation from=$c1 to=$c2",vss,agreement
+make sun 66 pixels wide.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""sun""
+@n2 syntax.nominal dependent=""66"" head=""pixels""",spacy+vss,agreement
+Could you make comet purple. I appreciate it.,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""purple"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""comet""
+@n3 syntax.nominal head=""I""
+@c2 syntax.clause form=declarative verb=""appreciate"" subject=$n3 complement=$n4
+@n4 syntax.nominal head=""it""",spacy+vss,agreement
 "Hey, make sun blue. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""blue"" complement=$n1
 @n1 syntax.nominal head=""sun""
 @n2 syntax.nominal head=""That""
@@ -1456,7 +1850,9 @@ Let us make Saturn yellow. That would help.,"@c1 syntax.clause form=imperative v
 @r1 syntax.relation from=$c1 to=$c2",vss,judge
 "Please, make Venus green. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""green"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""Venus""",vss,agreement
-make sun 36 pixels wide.,,,
+make sun 36 pixels wide.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""sun""
+@n2 syntax.nominal dependent=""36"" head=""pixels""",spacy+vss,agreement
 Let us make ufo yellow. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
 @n1 syntax.nominal head=""us""
 @c2 syntax.clause form=nonfinite verb=""make"" modifier=""yellow"" complement=$n2
@@ -1464,7 +1860,9 @@ Let us make ufo yellow. That would help.,"@c1 syntax.clause form=imperative verb
 @n3 syntax.nominal head=""That""
 @c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
 @r1 syntax.relation from=$c1 to=$c2",prolog+z3,judge
-"Hey, make moon 64 pixels wide.",,,
+"Hey, make moon 64 pixels wide.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""moon""
+@n2 syntax.nominal dependent=""64"" head=""pixels""",spacy+vss,agreement
 I need you to make star yellow. I appreciate it.,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""need"" subject=$n1
 @n2 syntax.nominal head=""you""
@@ -1485,7 +1883,10 @@ Let us make snowman red. That would help.,"@c1 syntax.clause form=imperative ver
 @n1 syntax.nominal head=""sled""",vss,agreement
 make sled yellow.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""yellow"" complement=$n1
 @n1 syntax.nominal head=""sled""",spacy-direct+vss,agreement
-Could you make tree 52 pixels wide. Thanks!,,,
+Could you make tree 52 pixels wide. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""wide"" discourse=""Thanks"" subject=$n1 complement=$n2 complement=$n3
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""tree""
+@n3 syntax.nominal dependent=""52"" head=""pixels""",vss,judge
 "Please, make sled red. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""red"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""sled""",vss,agreement
 I need you to make hill yellow. I appreciate it.,"@n1 syntax.nominal head=""I""
@@ -1497,17 +1898,28 @@ I need you to make hill yellow. I appreciate it.,"@n1 syntax.nominal head=""I""
 @n4 syntax.nominal head=""I""
 @c3 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
 @n5 syntax.nominal head=""it""",spacy-direct+vss,agreement
-"Please, make snowman 17 pixels wide. Thanks!",,,
+"Please, make snowman 17 pixels wide. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""wide"" discourse=""Thanks"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""snowman""
+@n2 syntax.nominal dependent=""17"" head=""pixels""",vss,agreement
 "Please, make pine tree green. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""green"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal dependent=""pine"" head=""tree""",vss,agreement
-I need you to make sled orange. I appreciate it.,,,
+I need you to make sled orange. I appreciate it.,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""orange"" subject=$n2 complement=$n3
+@n3 syntax.nominal head=""sled""
+@n4 syntax.nominal head=""I""
+@c3 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
+@n5 syntax.nominal head=""it""",spacy+vss,agreement
 make snowman orange.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""orange"" complement=$n1
 @n1 syntax.nominal head=""snowman""",spacy-direct+vss,agreement
 "Please, make snowman blue. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""blue"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""snowman""",vss,agreement
 "Hey, make tree purple.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""purple"" complement=$n1
 @n1 syntax.nominal head=""tree""",spacy-direct+vss,agreement
-"Please, make snowman orange. Thanks!",,,
+"Please, make snowman orange. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""orange"" discourse=""Thanks"" complement=$n1
+@n1 syntax.nominal head=""snowman""",vss,agreement
 Could you make sled purple. I appreciate it.,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""purple"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""sled""
@@ -1516,27 +1928,57 @@ Could you make sled purple. I appreciate it.,"@c1 syntax.clause form=interrogati
 @n4 syntax.nominal head=""it""",spacy-direct+vss,agreement
 make snowman yellow.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""yellow"" complement=$n1
 @n1 syntax.nominal head=""snowman""",spacy-direct+vss,agreement
-"Hey, make pine tree 59 pixels wide. That would help.",,,
+"Hey, make pine tree 59 pixels wide. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal dependent=""pine"" head=""tree""
+@n2 syntax.nominal dependent=""59"" head=""pixels""
+@n3 syntax.nominal head=""That""
+@c2 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3",spacy+vss,agreement
 Could you make cabin blue. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""blue"" discourse=""Thanks"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""cabin""",vss,agreement
-"Hey, make snowman 76 pixels wide. That would help.",,,
+"Hey, make snowman 76 pixels wide. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""snowman""
+@n2 syntax.nominal dependent=""76"" head=""pixels""
+@n3 syntax.nominal head=""That""
+@c2 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3",spacy+vss,agreement
 "Hey, make snowman yellow. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""yellow"" complement=$n1
 @n1 syntax.nominal head=""snowman""
 @n2 syntax.nominal head=""That""
 @c2 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n2",spacy-direct+vss,agreement
-I need you to make cabin 47 pixels wide. I appreciate it.,,,
+I need you to make cabin 47 pixels wide. I appreciate it.,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n2 complement=$n3 complement=$n4
+@n3 syntax.nominal head=""cabin""
+@n4 syntax.nominal dependent=""47"" head=""pixels""
+@n5 syntax.nominal head=""I""
+@c3 syntax.clause form=declarative verb=""appreciate"" subject=$n5 complement=$n6
+@n6 syntax.nominal head=""it""",spacy+vss,agreement
 "Hey, make snowman orange. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""orange"" complement=$n1
 @n1 syntax.nominal head=""snowman""
 @n2 syntax.nominal head=""That""
 @c2 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n2",spacy-direct+vss,agreement
-Could you make pine tree 19 pixels wide. Thanks!,,,
+Could you make pine tree 19 pixels wide. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""wide"" discourse=""Thanks"" subject=$n1 complement=$n2 complement=$n3
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""pine"" head=""tree""
+@n3 syntax.nominal dependent=""19"" head=""pixels""",vss,agreement
 "Hey, make cabin purple.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""purple"" complement=$n1
 @n1 syntax.nominal head=""cabin""",spacy-direct+vss,agreement
 make snowman blue.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""blue"" complement=$n1
 @n1 syntax.nominal head=""snowman""",spacy-direct+vss,agreement
-I need you to make hill 43 pixels wide. I appreciate it.,,,
-make sled orange.,,,
+I need you to make hill 43 pixels wide. I appreciate it.,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n2 complement=$n3 complement=$n4
+@n3 syntax.nominal head=""hill""
+@n4 syntax.nominal dependent=""43"" head=""pixels""
+@n5 syntax.nominal head=""I""
+@c3 syntax.clause form=declarative verb=""appreciate"" subject=$n5 complement=$n6
+@n6 syntax.nominal head=""it""",spacy+vss,agreement
+make sled orange.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""orange"" complement=$n1
+@n1 syntax.nominal head=""sled""",spacy+vss,agreement
 Let us make hill orange. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
 @n1 syntax.nominal head=""us""
 @c2 syntax.clause form=nonfinite verb=""make"" modifier=""orange"" subject=$n1 complement=$n2
@@ -1544,7 +1986,9 @@ Let us make hill orange. That would help.,"@c1 syntax.clause form=imperative ver
 @n3 syntax.nominal head=""That""
 @c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
-Could you make sled orange. Thanks!,,,
+Could you make sled orange. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""orange"" discourse=""Thanks"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""sled""",vss,agreement
 Could you make sled blue. I appreciate it.,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""blue"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""sled""
@@ -1555,12 +1999,19 @@ Could you make sled blue. I appreciate it.,"@c1 syntax.clause form=interrogative
 @n1 syntax.nominal head=""tree""",vss,agreement
 make cabin orange.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""orange"" complement=$n1
 @n1 syntax.nominal head=""cabin""",spacy-direct+vss,agreement
-"Hey, make sled 74 pixels wide. That would help.",,,
+"Hey, make sled 74 pixels wide. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""sled""
+@n2 syntax.nominal dependent=""74"" head=""pixels""
+@n3 syntax.nominal head=""That""
+@c2 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3",spacy+vss,agreement
 "Please, make cabin red. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""red"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""cabin""",vss,agreement
 "Please, make hill red. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""red"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""hill""",vss,agreement
-Could you make tree 35 pixels wide. Thanks!,,,
+Could you make tree 35 pixels wide. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""wide"" discourse=""Thanks"" subject=$n1 complement=$n2 complement=$n3
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""tree""
+@n3 syntax.nominal dependent=""35"" head=""pixels""",vss,agreement
 "Hey, make snowman green. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""green"" complement=$n1
 @n1 syntax.nominal head=""snowman""
 @n2 syntax.nominal head=""That""
@@ -1571,7 +2022,9 @@ Could you make snowman blue. Thanks!,"@c1 syntax.clause form=interrogative auxil
 Could you make cabin orange. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""orange"" discourse=""Thanks"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""cabin""",vss,agreement
-"Please, make snowman 48 pixels wide. Thanks!",,,
+"Please, make snowman 48 pixels wide. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""wide"" discourse=""Thanks"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""snowman""
+@n2 syntax.nominal dependent=""48"" head=""pixels""",vss,agreement
 "Please, make snowman green. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""green"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""snowman""",vss,agreement
 I need you to make snowman blue. I appreciate it.,"@n1 syntax.nominal head=""I""
@@ -1585,8 +2038,22 @@ I need you to make snowman blue. I appreciate it.,"@n1 syntax.nominal head=""I""
 @n5 syntax.nominal head=""it""",spacy-direct+vss,agreement
 "Please, make sled yellow. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""yellow"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""sled""",vss,agreement
-Let us make sled 24 pixels wide. That would help.,,,
-Let us make cabin 73 pixels wide. That would help.,,,
+Let us make sled 24 pixels wide. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""us""
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n1 complement=$n2 complement=$n3
+@n2 syntax.nominal head=""sled""
+@n3 syntax.nominal dependent=""24"" head=""pixels""
+@n4 syntax.nominal head=""That""
+@c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n4
+@r1 syntax.relation from=$c1 to=$c2",vss,agreement
+Let us make cabin 73 pixels wide. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""us""
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n1 complement=$n2 complement=$n3
+@n2 syntax.nominal head=""cabin""
+@n3 syntax.nominal dependent=""73"" head=""pixels""
+@n4 syntax.nominal head=""That""
+@c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n4
+@r1 syntax.relation from=$c1 to=$c2",vss,agreement
 Let us make pine tree purple. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
 @n1 syntax.nominal head=""us""
 @c2 syntax.clause form=nonfinite verb=""make"" modifier=""purple"" subject=$n1 complement=$n2
@@ -1607,7 +2074,9 @@ I need you to make octopus orange. I appreciate it.,,,
 @c2 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n2",spacy-direct+vss,agreement
 "Please, make coral purple. Thanks!",,,
 I need you to make coral green. I appreciate it.,,,
-Could you make diver blue. Thanks!,,,
+Could you make diver blue. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""blue"" discourse=""Thanks"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""diver""",vss,agreement
 I need you to make submarine orange. I appreciate it.,,,
 Could you make shark yellow. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""yellow"" discourse=""Thanks"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
@@ -1616,8 +2085,19 @@ Could you make shark yellow. Thanks!,"@c1 syntax.clause form=interrogative auxil
 "Please, make fish blue. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""blue"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""fish""",vss,agreement
 make coral orange.,,,
-Could you make coral 34 pixels wide. Thanks!,,,
-I need you to make crab orange. I appreciate it.,,,
+Could you make coral 34 pixels wide. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""wide"" discourse=""Thanks"" subject=$n1 complement=$n2 complement=$n3
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""coral""
+@n3 syntax.nominal dependent=""34"" head=""pixels""",vss,agreement
+I need you to make crab orange. I appreciate it.,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""orange"" subject=$n2 complement=$n3
+@n3 syntax.nominal head=""crab""
+@n4 syntax.nominal head=""I""
+@c3 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
+@n5 syntax.nominal head=""it""",spacy+vss,agreement
 "Please, make submarine orange. Thanks!",,,
 make slide blue.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""blue"" complement=$n1
 @n1 syntax.nominal head=""slide""",spacy-direct+vss,agreement
@@ -1636,7 +2116,8 @@ Let us make pigeon purple. That would help.,"@c1 syntax.clause form=imperative v
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
 make bench green.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""green"" complement=$n1
 @n1 syntax.nominal head=""bench""",spacy-direct+vss,agreement
-make duck orange.,,,
+make duck orange.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""orange"" complement=$n1
+@n1 syntax.nominal head=""duck""",spacy+vss,agreement
 make bush yellow.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""yellow"" complement=$n1
 @n1 syntax.nominal head=""bush""",spacy-direct+vss,agreement
 "Please, make child green. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""green"" discourse=""Thanks"" complement=$n1
@@ -1645,7 +2126,16 @@ make bush yellow.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""ye
 @n1 syntax.nominal head=""child""",vss,agreement
 "Please, make ball orange. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""orange"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""ball""",vss,agreement
-I need you to make fountain 47 pixels wide. I appreciate it.,,,
+I need you to make fountain 47 pixels wide. I appreciate it.,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n2 complement=$n3 complement=$n4
+@n3 syntax.nominal head=""fountain""
+@n4 syntax.nominal dependent=""47"" head=""pixels""
+@n5 syntax.nominal head=""I""
+@c3 syntax.clause form=declarative verb=""appreciate"" subject=$n5 complement=$n6
+@n6 syntax.nominal head=""it""",spacy+vss,agreement
 "Please, make dog green. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""green"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""dog""",vss,agreement
 "Hey, make slide red. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""red"" complement=$n1
@@ -1706,7 +2196,8 @@ Let us make child red. That would help.,"@c1 syntax.clause form=imperative verb=
 @n3 syntax.nominal head=""That""
 @c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
-"Please, make dog orange. Thanks!",,,
+"Please, make dog orange. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""orange"" discourse=""Thanks"" complement=$n1
+@n1 syntax.nominal head=""dog""",vss,agreement
 "Please, make ball green. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""green"" complement=$n1
 @n1 syntax.nominal head=""ball""
 @c2 syntax.clause form=fragment discourse=""Thanks""",distilbert+prolog+spacy+z3,judge
@@ -1728,12 +2219,16 @@ Let us make dog yellow. That would help.,"@c1 syntax.clause form=imperative verb
 @n3 syntax.nominal head=""That""
 @c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
-make bench 73 pixels wide.,,,
+make bench 73 pixels wide.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""bench""
+@n2 syntax.nominal dependent=""73"" head=""pixels""",spacy+vss,agreement
 "Hey, make sandpit yellow. That would help.",,,
 "Please, make swing set blue. Thanks!",,,
 "Please, make slide green. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""green"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""slide""",vss,agreement
-"Please, make slide 59 pixels wide. Thanks!",,,
+"Please, make slide 59 pixels wide. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""wide"" discourse=""Thanks"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""slide""
+@n2 syntax.nominal dependent=""59"" head=""pixels""",vss,agreement
 Could you make bench green. I appreciate it.,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""green"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""bench""
@@ -1770,7 +2265,8 @@ Let us make slide red. That would help.,"@c1 syntax.clause form=imperative verb=
 @n1 syntax.nominal head=""dog""",spacy-direct+vss,agreement
 make fence orange.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""orange"" complement=$n1
 @n1 syntax.nominal head=""fence""",spacy-direct+vss,agreement
-make dog orange.,,,
+make dog orange.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""orange"" complement=$n1
+@n1 syntax.nominal head=""dog""",spacy+vss,agreement
 Let us make dog green. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
 @n1 syntax.nominal head=""us""
 @c2 syntax.clause form=nonfinite verb=""make"" modifier=""green"" subject=$n1 complement=$n2
@@ -1792,7 +2288,11 @@ Could you make dog yellow. Thanks!,"@c1 syntax.clause form=interrogative auxilia
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""dog""",vss,agreement
 I need you to make sandpit blue. I appreciate it.,,,
-"Hey, make swing 12 pixels wide. That would help.",,,
+"Hey, make swing 12 pixels wide. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""swing""
+@n2 syntax.nominal dependent=""12"" head=""pixels""
+@n3 syntax.nominal head=""That""
+@c2 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3",spacy+vss,agreement
 Let us make bench blue. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
 @n1 syntax.nominal head=""us""
 @c2 syntax.clause form=nonfinite verb=""make"" modifier=""blue"" subject=$n1 complement=$n2
@@ -1802,29 +2302,45 @@ Let us make bench blue. That would help.,"@c1 syntax.clause form=imperative verb
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
 "Hey, make swing green.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""green"" complement=$n1
 @n1 syntax.nominal head=""swing""",spacy-direct+vss,agreement
-Could you make kid orange. Thanks!,,,
-make dog 71 pixels wide.,,,
+Could you make kid orange. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""orange"" discourse=""Thanks"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""kid""",vss,agreement
+make dog 71 pixels wide.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""dog""
+@n2 syntax.nominal dependent=""71"" head=""pixels""",spacy+vss,agreement
 "Please, make swing red. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""red"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""swing""",vss,agreement
 Could you make tower yellow. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""yellow"" discourse=""Thanks"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""tower""",vss,agreement
-Could you make dragon orange. Thanks!,,,
+Could you make dragon orange. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""orange"" discourse=""Thanks"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""dragon""",vss,agreement
 Could you make dragon blue. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""blue"" discourse=""Thanks"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""dragon""",vss,agreement
 "Please, make moat 80 pixels wide. Thanks!",,,
 Let us make castle yellow. That would help.,,,
 make castle blue.,,,
-make knight 20 pixels wide.,,,
+make knight 20 pixels wide.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""knight""
+@n2 syntax.nominal dependent=""20"" head=""pixels""",spacy+vss,agreement
 make moat orange.,,,
-"Please, make banner orange. Thanks!",,,
+"Please, make banner orange. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""orange"" discourse=""Thanks"" complement=$n1
+@n1 syntax.nominal head=""banner""",vss,agreement
 "Please, make dragon blue. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""blue"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""dragon""",vss,agreement
 "Please, make tower yellow. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""yellow"" complement=$n1
 @n1 syntax.nominal head=""tower""
 @c2 syntax.clause form=fragment discourse=""Thanks""",spacy-direct+vss,judge
-Let us make knight 66 pixels wide. That would help.,,,
+Let us make knight 66 pixels wide. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""us""
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n1 complement=$n2 complement=$n3
+@n2 syntax.nominal head=""knight""
+@n3 syntax.nominal dependent=""66"" head=""pixels""
+@n4 syntax.nominal head=""That""
+@c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n4
+@r1 syntax.relation from=$c1 to=$c2",vss,agreement
 I need you to make moat red. I appreciate it.,,,
 Let us make tower green. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
 @n1 syntax.nominal head=""us""
@@ -1870,12 +2386,32 @@ make knight green.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""g
 @n1 syntax.nominal head=""knight""",spacy-direct+vss,agreement
 make castle orange.,,,
 "Please, make castle blue. Thanks!",,,
-I need you to make knight 65 pixels wide. I appreciate it.,,,
-I need you to make knight orange. I appreciate it.,,,
-make kitchen table 23 pixels wide.,,,
+I need you to make knight 65 pixels wide. I appreciate it.,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n2 complement=$n3 complement=$n4
+@n3 syntax.nominal head=""knight""
+@n4 syntax.nominal dependent=""65"" head=""pixels""
+@n5 syntax.nominal head=""I""
+@c3 syntax.clause form=declarative verb=""appreciate"" subject=$n5 complement=$n6
+@n6 syntax.nominal head=""it""",spacy+vss,judge
+I need you to make knight orange. I appreciate it.,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""orange"" subject=$n2 complement=$n3
+@n3 syntax.nominal head=""knight""
+@n4 syntax.nominal head=""I""
+@c3 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
+@n5 syntax.nominal head=""it""",spacy+vss,agreement
+make kitchen table 23 pixels wide.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal dependent=""kitchen"" head=""table""
+@n2 syntax.nominal dependent=""23"" head=""pixels""",spacy+vss,agreement
 "Please, make blue cup yellow. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""yellow"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal dependent=""blue"" head=""cup""",vss,agreement
-"Please, make chocolate cake orange. Thanks!",,,
+"Please, make chocolate cake orange. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""orange"" discourse=""Thanks"" complement=$n1
+@n1 syntax.nominal dependent=""chocolate"" head=""cake""",vss,agreement
 I need you to make blue cup red. I appreciate it.,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""need"" subject=$n1
 @n2 syntax.nominal head=""you""
@@ -1918,7 +2454,9 @@ Let us make birthday cake green. That would help.,"@c1 syntax.clause form=impera
 @n3 syntax.nominal head=""That""
 @c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
-"Hey, make blue cup 17 pixels wide.",,,
+"Hey, make blue cup 17 pixels wide.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal dependent=""blue"" head=""cup""
+@n2 syntax.nominal dependent=""17"" head=""pixels""",spacy+vss,agreement
 Could you make cup blue. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""blue"" discourse=""Thanks"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""cup""",vss,agreement
@@ -1929,7 +2467,9 @@ Let us make chocolate cake purple. That would help.,"@c1 syntax.clause form=impe
 @n3 syntax.nominal head=""That""
 @c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
-"Please, make cup 29 pixels wide. Thanks!",,,
+"Please, make cup 29 pixels wide. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""wide"" discourse=""Thanks"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""cup""
+@n2 syntax.nominal dependent=""29"" head=""pixels""",vss,agreement
 Let us make chocolate cake green. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
 @n1 syntax.nominal head=""us""
 @c2 syntax.clause form=nonfinite verb=""make"" modifier=""green"" subject=$n1 complement=$n2
@@ -1948,7 +2488,8 @@ I need you to make cup yellow. I appreciate it.,"@n1 syntax.nominal head=""I""
 @n5 syntax.nominal head=""it""",spacy-direct+vss,agreement
 make birthday cake red.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""red"" complement=$n1
 @n1 syntax.nominal dependent=""birthday"" head=""cake""",spacy-direct+vss,agreement
-make cup orange.,,,
+make cup orange.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""orange"" complement=$n1
+@n1 syntax.nominal head=""cup""",spacy+vss,agreement
 "Please, make kitchen table orange. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""orange"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal dependent=""kitchen"" head=""table""",vss,judge
 I need you to make cup purple. I appreciate it.,"@n1 syntax.nominal head=""I""
@@ -1962,7 +2503,10 @@ I need you to make cup purple. I appreciate it.,"@n1 syntax.nominal head=""I""
 @n5 syntax.nominal head=""it""",spacy-direct+vss,agreement
 make kitchen table yellow.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""yellow"" complement=$n1
 @n1 syntax.nominal dependent=""kitchen"" head=""table""",spacy-direct+vss,agreement
-Could you make blue cup 83 pixels wide. Thanks!,,,
+Could you make blue cup 83 pixels wide. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""wide"" discourse=""Thanks"" subject=$n1 complement=$n2 complement=$n3
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""blue"" head=""cup""
+@n3 syntax.nominal dependent=""83"" head=""pixels""",vss,agreement
 I need you to make cookies red. I appreciate it.,,,
 make cookies red.,,,
 make kitchen table green.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""green"" complement=$n1
@@ -1988,8 +2532,18 @@ make blue cup yellow.,"@c1 syntax.clause form=imperative verb=""make"" modifier=
 @n1 syntax.nominal head=""bread""",vss,agreement
 make blue cup purple.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""purple"" complement=$n1
 @n1 syntax.nominal dependent=""blue"" head=""cup""",spacy-direct+vss,agreement
-Could you make birthday cake 69 pixels wide. Thanks!,,,
-Let us make fruit bowl 51 pixels wide. That would help.,,,
+Could you make birthday cake 69 pixels wide. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""wide"" discourse=""Thanks"" subject=$n1 complement=$n2 complement=$n3
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""birthday"" head=""cake""
+@n3 syntax.nominal dependent=""69"" head=""pixels""",vss,agreement
+Let us make fruit bowl 51 pixels wide. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""us""
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n1 complement=$n2 complement=$n3
+@n2 syntax.nominal dependent=""fruit"" head=""bowl""
+@n3 syntax.nominal dependent=""51"" head=""pixels""
+@n4 syntax.nominal head=""That""
+@c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n4
+@r1 syntax.relation from=$c1 to=$c2",vss,agreement
 Let us make cup green. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
 @n1 syntax.nominal head=""us""
 @c2 syntax.clause form=nonfinite verb=""make"" modifier=""green"" subject=$n1 complement=$n2
@@ -1997,7 +2551,9 @@ Let us make cup green. That would help.,"@c1 syntax.clause form=imperative verb=
 @n3 syntax.nominal head=""That""
 @c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
-"Please, make apples 33 pixels wide. Thanks!",,,
+"Please, make apples 33 pixels wide. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""wide"" discourse=""Thanks"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""apples""
+@n2 syntax.nominal dependent=""33"" head=""pixels""",vss,agreement
 "Please, make kitchen table green. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""green"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal dependent=""kitchen"" head=""table""",vss,agreement
 "Please, make chocolate cake green. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""green"" discourse=""Thanks"" complement=$n1
@@ -2046,7 +2602,11 @@ Could you make Pip green. I appreciate it.,"@c1 syntax.clause form=interrogative
 @n3 syntax.nominal head=""I""
 @c2 syntax.clause form=declarative verb=""appreciate"" subject=$n3 complement=$n4
 @n4 syntax.nominal head=""it""",spacy-direct+vss,agreement
-"Hey, make Luna 28 pixels wide. That would help.",,,
+"Hey, make Luna 28 pixels wide. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""Luna""
+@n2 syntax.nominal dependent=""28"" head=""pixels""
+@n3 syntax.nominal head=""That""
+@c2 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3",spacy+vss,agreement
 I need you to make Pip purple. I appreciate it.,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""need"" subject=$n1
 @n2 syntax.nominal head=""you""
@@ -2081,7 +2641,13 @@ Could you make Luna yellow. I appreciate it.,"@c1 syntax.clause form=interrogati
 @n1 syntax.nominal head=""Luna""",vss,agreement
 make Luna orange.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""orange"" complement=$n1
 @n1 syntax.nominal head=""Luna""",spacy-direct+vss,agreement
-Could you make Luna 89 pixels wide. I appreciate it.,,,
+Could you make Luna 89 pixels wide. I appreciate it.,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""wide"" subject=$n1 complement=$n2 complement=$n3
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""Luna""
+@n3 syntax.nominal dependent=""89"" head=""pixels""
+@n4 syntax.nominal head=""I""
+@c2 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
+@n5 syntax.nominal head=""it""",spacy+vss,agreement
 "Hey, make Pip purple.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""purple"" complement=$n1
 @n1 syntax.nominal head=""Pip""",spacy-direct+vss,agreement
 I need you to make Mo yellow. I appreciate it.,"@n1 syntax.nominal head=""I""
@@ -2135,7 +2701,14 @@ I need you to make Biscuit yellow. I appreciate it.,"@n1 syntax.nominal head=""I
 @n4 syntax.nominal head=""I""
 @c3 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
 @n5 syntax.nominal head=""it""",spacy-direct+vss,agreement
-Let us make Pip 84 pixels wide. That would help.,,,
+Let us make Pip 84 pixels wide. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""us""
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n1 complement=$n2 complement=$n3
+@n2 syntax.nominal head=""Pip""
+@n3 syntax.nominal dependent=""84"" head=""pixels""
+@n4 syntax.nominal head=""That""
+@c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n4
+@r1 syntax.relation from=$c1 to=$c2",vss,agreement
 Could you make Luna orange. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""orange"" discourse=""Thanks"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""Luna""",vss,agreement
@@ -2146,9 +2719,18 @@ Let us make Luna yellow. That would help.,"@c1 syntax.clause form=imperative ver
 @n3 syntax.nominal head=""That""
 @c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
 @r1 syntax.relation from=$c1 to=$c2",vss,judge
-Let us make Pip 36 pixels wide. That would help.,,,
+Let us make Pip 36 pixels wide. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""us""
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n1 complement=$n2 complement=$n3
+@n2 syntax.nominal head=""Pip""
+@n3 syntax.nominal dependent=""36"" head=""pixels""
+@n4 syntax.nominal head=""That""
+@c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n4
+@r1 syntax.relation from=$c1 to=$c2",vss,agreement
 make Luna yellow.,,,
-"Please, make Pip 15 pixels wide. Thanks!",,,
+"Please, make Pip 15 pixels wide. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""wide"" discourse=""Thanks"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""Pip""
+@n2 syntax.nominal dependent=""15"" head=""pixels""",vss,agreement
 make Mo orange.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""orange"" complement=$n1
 @n1 syntax.nominal head=""Mo""",spacy-direct+vss,agreement
 Could you make Biscuit red. I appreciate it.,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""red"" subject=$n1 complement=$n2
@@ -2170,7 +2752,16 @@ I need you to make frame orange. I appreciate it.,"@n1 syntax.nominal head=""I""
 @n1 syntax.nominal head=""Luna""
 @n2 syntax.nominal head=""That""
 @c2 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n2",spacy-direct+vss,agreement
-I need you to make Biscuit 43 pixels wide. I appreciate it.,,,
+I need you to make Biscuit 43 pixels wide. I appreciate it.,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n2 complement=$n3 complement=$n4
+@n3 syntax.nominal head=""Biscuit""
+@n4 syntax.nominal dependent=""43"" head=""pixels""
+@n5 syntax.nominal head=""I""
+@c3 syntax.clause form=declarative verb=""appreciate"" subject=$n5 complement=$n6
+@n6 syntax.nominal head=""it""",spacy+vss,agreement
 "Please, make Ada blue. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""blue"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""Ada""",vss,agreement
 Let us make Mo orange. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
@@ -2219,7 +2810,14 @@ Let us make fence blue. That would help.,"@c1 syntax.clause form=imperative verb
 @n3 syntax.nominal head=""That""
 @c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
-Let us make Pip 18 pixels wide. That would help.,,,
+Let us make Pip 18 pixels wide. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""us""
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n1 complement=$n2 complement=$n3
+@n2 syntax.nominal head=""Pip""
+@n3 syntax.nominal dependent=""18"" head=""pixels""
+@n4 syntax.nominal head=""That""
+@c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n4
+@r1 syntax.relation from=$c1 to=$c2",vss,agreement
 "Please, make Ada purple. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""purple"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""Ada""",vss,agreement
 "Please, make Mo red. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""red"" discourse=""Thanks"" complement=$n1
@@ -2261,7 +2859,10 @@ Could you make Luna purple. I appreciate it.,"@c1 syntax.clause form=interrogati
 @n3 syntax.nominal head=""I""
 @c2 syntax.clause form=declarative verb=""appreciate"" subject=$n3 complement=$n4
 @n4 syntax.nominal head=""it""",spacy-direct+vss,agreement
-Could you make Pip 35 pixels wide. Thanks!,,,
+Could you make Pip 35 pixels wide. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""wide"" discourse=""Thanks"" subject=$n1 complement=$n2 complement=$n3
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""Pip""
+@n3 syntax.nominal dependent=""35"" head=""pixels""",vss,agreement
 Let us make Mo yellow. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
 @n1 syntax.nominal head=""us""
 @c2 syntax.clause form=nonfinite verb=""make"" modifier=""yellow"" subject=$n1 complement=$n2
@@ -2928,12 +3529,20 @@ make Avatar purple.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""
 @n1 syntax.nominal head=""Avatar""",spacy-direct+vss,agreement
 make Avatar blue.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""blue"" complement=$n1
 @n1 syntax.nominal head=""Avatar""",spacy-direct+vss,agreement
-"Hey, make house 61 pixels wide. That would help.",,,
+"Hey, make house 61 pixels wide. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""house""
+@n2 syntax.nominal dependent=""61"" head=""pixels""
+@n3 syntax.nominal head=""That""
+@c2 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3",spacy+vss,agreement
 make cat blue.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""blue"" complement=$n1
 @n1 syntax.nominal head=""cat""",spacy-direct+vss,agreement
 "Hey, make Avatar orange.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""orange"" complement=$n1
 @n1 syntax.nominal head=""Avatar""",spacy-direct+vss,agreement
-"Hey, make sun 77 pixels wide. That would help.",,,
+"Hey, make sun 77 pixels wide. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""sun""
+@n2 syntax.nominal dependent=""77"" head=""pixels""
+@n3 syntax.nominal head=""That""
+@c2 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3",spacy+vss,agreement
 I need you to make Background yellow. I appreciate it.,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""need"" subject=$n1
 @n2 syntax.nominal head=""you""
@@ -3016,7 +3625,15 @@ Let us make Avatar orange. That would help.,"@c1 syntax.clause form=imperative v
 @n1 syntax.nominal head=""Boat""
 @n2 syntax.nominal head=""That""
 @c2 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n2",spacy-direct+vss,agreement
-I need you to make Flower orange. I appreciate it.,,,
+I need you to make Flower orange. I appreciate it.,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""orange"" subject=$n2 complement=$n3
+@n3 syntax.nominal head=""Flower""
+@n4 syntax.nominal head=""I""
+@c3 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
+@n5 syntax.nominal head=""it""",spacy+vss,agreement
 Let us make House yellow. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
 @n1 syntax.nominal head=""us""
 @c2 syntax.clause form=nonfinite verb=""make"" modifier=""yellow"" subject=$n1 complement=$n2
@@ -3033,7 +3650,8 @@ Let us make Tree green. That would help.,"@c1 syntax.clause form=imperative verb
 @n3 syntax.nominal head=""That""
 @c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
-make Tree orange.,,,
+make Tree orange.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""orange"" complement=$n1
+@n1 syntax.nominal head=""Tree""",spacy+vss,agreement
 "Please, make Flower green. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""green"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""Flower""",vss,agreement
 Let us make Car green. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
@@ -3108,7 +3726,8 @@ Let us make Face orange. That would help.,"@c1 syntax.clause form=imperative ver
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
 "Please, make Flower purple. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""purple"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""Flower""",vss,judge
-"Please, make Plant orange. Thanks!",,,
+"Please, make Plant orange. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""orange"" discourse=""Thanks"" complement=$n1
+@n1 syntax.nominal head=""Plant""",vss,judge
 "Hey, make Cat purple.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""purple"" complement=$n1
 @n1 syntax.nominal head=""Cat""",spacy-direct+vss,agreement
 I need you to make Face purple. I appreciate it.,"@n1 syntax.nominal head=""I""
@@ -3121,7 +3740,15 @@ I need you to make Face purple. I appreciate it.,"@n1 syntax.nominal head=""I""
 @c3 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
 @n5 syntax.nominal head=""it""",spacy-direct+vss,agreement
 make Flower yellow.,,,
-I need you to make Bird orange. I appreciate it.,,,
+I need you to make Bird orange. I appreciate it.,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""orange"" subject=$n2 complement=$n3
+@n3 syntax.nominal head=""Bird""
+@n4 syntax.nominal head=""I""
+@c3 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
+@n5 syntax.nominal head=""it""",spacy+vss,agreement
 make Bird blue.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""blue"" complement=$n1
 @n1 syntax.nominal head=""Bird""",spacy-direct+vss,agreement
 "Please, make House green. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""green"" discourse=""Thanks"" complement=$n1
@@ -3186,7 +3813,8 @@ Let us make Angel orange. That would help.,"@c1 syntax.clause form=imperative ve
 Could you make Truck purple. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""purple"" discourse=""Thanks"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""Truck""",vss,agreement
-"Please, make Flower orange. Thanks!",,,
+"Please, make Flower orange. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""orange"" discourse=""Thanks"" complement=$n1
+@n1 syntax.nominal head=""Flower""",vss,agreement
 I need you to make Bike purple. I appreciate it.,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""need"" subject=$n1
 @n2 syntax.nominal head=""you""
@@ -3257,7 +3885,8 @@ Could you make House red. I appreciate it.,"@c1 syntax.clause form=interrogative
 @n1 syntax.nominal head=""House""
 @n2 syntax.nominal head=""That""
 @c2 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n2",spacy-direct+vss,agreement
-make Flower orange.,,,
+make Flower orange.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""orange"" complement=$n1
+@n1 syntax.nominal head=""Flower""",spacy+vss,agreement
 "Please, make Car purple. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""purple"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""Car""",vss,agreement
 make Bear red.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""red"" complement=$n1
@@ -3285,7 +3914,15 @@ Could you make Window purple. Thanks!,"@c1 syntax.clause form=interrogative auxi
 Could you make Background blue. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""blue"" discourse=""Thanks"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""Background""",vss,agreement
-I need you to make Picture orange. I appreciate it.,,,
+I need you to make Picture orange. I appreciate it.,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""orange"" subject=$n2 complement=$n3
+@n3 syntax.nominal head=""Picture""
+@n4 syntax.nominal head=""I""
+@c3 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
+@n5 syntax.nominal head=""it""",spacy+vss,agreement
 make Balloon blue.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""blue"" complement=$n1
 @n1 syntax.nominal head=""Balloon""",spacy-direct+vss,judge
 I need you to make Background green. I appreciate it.,"@n1 syntax.nominal head=""I""
@@ -3299,7 +3936,14 @@ I need you to make Background green. I appreciate it.,"@n1 syntax.nominal head="
 @n5 syntax.nominal head=""it""",spacy-direct+vss,agreement
 make Village yellow.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""yellow"" complement=$n1
 @n1 syntax.nominal head=""Village""",spacy-direct+vss,agreement
-Let us make Boat 51 pixels wide. That would help.,,,
+Let us make Boat 51 pixels wide. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""us""
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n1 complement=$n2 complement=$n3
+@n2 syntax.nominal head=""Boat""
+@n3 syntax.nominal dependent=""51"" head=""pixels""
+@n4 syntax.nominal head=""That""
+@c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n4
+@r1 syntax.relation from=$c1 to=$c2",vss,agreement
 "Please, make Item 2537 green. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""green"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""Item 2537""",vss,agreement
 I need you to make Background orange. I appreciate it.,"@n1 syntax.nominal head=""I""
@@ -3318,7 +3962,14 @@ Let us make Barn yellow. That would help.,"@c1 syntax.clause form=imperative ver
 @n3 syntax.nominal head=""That""
 @c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
-Let us make Background 69 pixels wide. That would help.,,,
+Let us make Background 69 pixels wide. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""us""
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n1 complement=$n2 complement=$n3
+@n2 syntax.nominal head=""Background""
+@n3 syntax.nominal dependent=""69"" head=""pixels""
+@n4 syntax.nominal head=""That""
+@c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n4
+@r1 syntax.relation from=$c1 to=$c2",vss,agreement
 Could you make Background green. I appreciate it.,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""green"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""Background""
@@ -3336,15 +3987,27 @@ Could you make Flower blue. I appreciate it.,"@c1 syntax.clause form=interrogati
 @n4 syntax.nominal head=""it""",spacy-direct+vss,agreement
 "Please, make Background blue. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""blue"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""Background""",vss,agreement
-I need you to make Bubble 59 pixels wide. I appreciate it.,,,
+I need you to make Bubble 59 pixels wide. I appreciate it.,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""wide"" subject=$n2 complement=$n3 complement=$n4
+@n3 syntax.nominal head=""Bubble""
+@n4 syntax.nominal dependent=""59"" head=""pixels""
+@n5 syntax.nominal head=""I""
+@c3 syntax.clause form=declarative verb=""appreciate"" subject=$n5 complement=$n6
+@n6 syntax.nominal head=""it""",spacy+vss,agreement
 "Please, make Picture red. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""red"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""Picture""",vss,agreement
 "Please, make Background green. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""green"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""Background""",vss,agreement
-"Hey, make Background 48 pixels wide.",,,
+"Hey, make Background 48 pixels wide.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""Background""
+@n2 syntax.nominal dependent=""48"" head=""pixels""",spacy+vss,agreement
 "Hey, make Page green.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""green"" complement=$n1
 @n1 syntax.nominal head=""Page""",spacy-direct+vss,agreement
-"Please, make Flag orange. Thanks!",,,
+"Please, make Flag orange. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""orange"" discourse=""Thanks"" complement=$n1
+@n1 syntax.nominal head=""Flag""",vss,agreement
 I need you to make Scene red. I appreciate it.,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""need"" subject=$n1
 @n2 syntax.nominal head=""you""
@@ -3377,7 +4040,10 @@ I need you to make Background blue. I appreciate it.,"@n1 syntax.nominal head=""
 @n1 syntax.nominal head=""Door""",vss,agreement
 "Hey, make Tree red.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""red"" complement=$n1
 @n1 syntax.nominal head=""Tree""",spacy-direct+vss,agreement
-Could you make House 69 pixels wide. Thanks!,,,
+Could you make House 69 pixels wide. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""wide"" discourse=""Thanks"" subject=$n1 complement=$n2 complement=$n3
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""House""
+@n3 syntax.nominal dependent=""69"" head=""pixels""",vss,agreement
 I need you to make Cat blue. I appreciate it.,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""need"" subject=$n1
 @n2 syntax.nominal head=""you""
@@ -3438,7 +4104,13 @@ I need you to make Flower red. I appreciate it.,"@n1 syntax.nominal head=""I""
 @n4 syntax.nominal head=""I""
 @c3 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
 @n5 syntax.nominal head=""it""",spacy-direct+vss,agreement
-Could you make Tree 23 pixels wide. I appreciate it.,,,
+Could you make Tree 23 pixels wide. I appreciate it.,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""wide"" subject=$n1 complement=$n2 complement=$n3
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""Tree""
+@n3 syntax.nominal dependent=""23"" head=""pixels""
+@n4 syntax.nominal head=""I""
+@c2 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
+@n5 syntax.nominal head=""it""",spacy+vss,agreement
 "Please, make Sea green. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""green"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""Sea""",vss,agreement
 "Please, make Sky purple. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""purple"" discourse=""Thanks"" complement=$n1
@@ -3462,11 +4134,15 @@ Let us make Window green. That would help.,"@c1 syntax.clause form=imperative ve
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
 "Please, make Balloon blue. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""blue"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""Balloon""",vss,agreement
-"Hey, make Duck 31 pixels wide.",,,
+"Hey, make Duck 31 pixels wide.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""wide"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""Duck""
+@n2 syntax.nominal dependent=""31"" head=""pixels""",spacy+vss,agreement
 Could you make Background red. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""red"" discourse=""Thanks"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""Background""",vss,judge
-"Please, make Background 46 pixels wide. Thanks!",,,
+"Please, make Background 46 pixels wide. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""wide"" discourse=""Thanks"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""Background""
+@n2 syntax.nominal dependent=""46"" head=""pixels""",vss,agreement
 "Please, make triangle purple. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""purple"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""triangle""",vss,agreement
 "Please, make house green. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""green"" discourse=""Thanks"" complement=$n1
@@ -3517,7 +4193,15 @@ Let us make Item 9114 purple. That would help.,"@c1 syntax.clause form=imperativ
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
 "Please, make man yellow. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""yellow"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""man""",vss,agreement
-I need you to make cat orange. I appreciate it.,,,
+I need you to make cat orange. I appreciate it.,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""orange"" subject=$n2 complement=$n3
+@n3 syntax.nominal head=""cat""
+@n4 syntax.nominal head=""I""
+@c3 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
+@n5 syntax.nominal head=""it""",spacy+vss,agreement
 Let us make roof purple. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
 @n1 syntax.nominal head=""us""
 @c2 syntax.clause form=nonfinite verb=""make"" modifier=""purple"" subject=$n1 complement=$n2
@@ -3525,8 +4209,22 @@ Let us make roof purple. That would help.,"@c1 syntax.clause form=imperative ver
 @n3 syntax.nominal head=""That""
 @c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
 @r1 syntax.relation from=$c1 to=$c2",vss,agreement
-Let us make kite orange. That would help.,,,
-I need you to make big circle orange. I appreciate it.,,,
+Let us make kite orange. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""us""
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""orange"" subject=$n1 complement=$n2
+@n2 syntax.nominal head=""kite""
+@n3 syntax.nominal head=""That""
+@c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
+@r1 syntax.relation from=$c1 to=$c2",vss,agreement
+I need you to make big circle orange. I appreciate it.,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""orange"" subject=$n2 complement=$n3
+@n3 syntax.nominal dependent=""big"" head=""circle""
+@n4 syntax.nominal head=""I""
+@c3 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
+@n5 syntax.nominal head=""it""",spacy+vss,agreement
 Could you make tree blue. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""blue"" discourse=""Thanks"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""tree""",vss,agreement
@@ -3546,7 +4244,8 @@ Could you make big star yellow. Thanks!,"@c1 syntax.clause form=interrogative au
 @n2 syntax.nominal dependent=""big"" head=""star""",vss,agreement
 "Please, make hat yellow. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""yellow"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""hat""",vss,agreement
-"Please, make apple tree orange. Thanks!",,,
+"Please, make apple tree orange. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""orange"" discourse=""Thanks"" complement=$n1
+@n1 syntax.nominal dependent=""apple"" head=""tree""",vss,agreement
 I need you to make star 1 red. I appreciate it.,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""need"" subject=$n1
 @n2 syntax.nominal head=""you""
@@ -3686,10 +4385,19 @@ I need you to make rocket green. I appreciate it.,"@n1 syntax.nominal head=""I""
 @n4 syntax.nominal head=""I""
 @c3 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
 @n5 syntax.nominal head=""it""",spacy-direct+vss,agreement
-make baby green.,,,
+make baby green.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""green"" complement=$n1
+@n1 syntax.nominal head=""baby""",spacy+vss,agreement
 "Hey, make flag green.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""green"" complement=$n1
 @n1 syntax.nominal head=""flag""",spacy-direct+vss,agreement
-I need you to make windmill orange. I appreciate it.,,,
+I need you to make windmill orange. I appreciate it.,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""orange"" subject=$n2 complement=$n3
+@n3 syntax.nominal head=""windmill""
+@n4 syntax.nominal head=""I""
+@c3 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
+@n5 syntax.nominal head=""it""",spacy+vss,agreement
 "Hey, make fox green.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""green"" complement=$n1
 @n1 syntax.nominal head=""fox""",spacy-direct+vss,agreement
 I need you to make duck blue. I appreciate it.,"@n1 syntax.nominal head=""I""
@@ -3709,7 +4417,10 @@ Could you make dog blue. Thanks!,"@c1 syntax.clause form=interrogative auxiliary
 @c2 syntax.clause form=fragment discourse=""Thanks""",distilbert+prolog+spacy+z3,judge
 "Please, make star 1 yellow. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""yellow"" discourse=""Thanks"" complement=$n1
 @n1 syntax.nominal head=""star"" dependent=""1""",vss,agreement
-Could you make sun 85 pixels wide. Thanks!,,,
+Could you make sun 85 pixels wide. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""wide"" discourse=""Thanks"" subject=$n1 complement=$n2 complement=$n3
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""sun""
+@n3 syntax.nominal dependent=""85"" head=""pixels""",vss,agreement
 make house orange.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""orange"" complement=$n1
 @n1 syntax.nominal head=""house""",spacy-direct+vss,agreement
 make cloud 1 blue.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""blue"" complement=$n1
@@ -3726,7 +4437,13 @@ Could you make flag 1 red. I appreciate it.,"@c1 syntax.clause form=interrogativ
 @n4 syntax.nominal head=""it""",vss,agreement
 make Item 5082 blue.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""blue"" complement=$n1
 @n1 syntax.nominal head=""Item 5082""",vss,agreement
-Let us make scarf orange. That would help.,,,
+Let us make scarf orange. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""us""
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""orange"" subject=$n1 complement=$n2
+@n2 syntax.nominal head=""scarf""
+@n3 syntax.nominal head=""That""
+@c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
+@r1 syntax.relation from=$c1 to=$c2",vss,agreement
 Could you make grass purple. I appreciate it.,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""purple"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""grass""
