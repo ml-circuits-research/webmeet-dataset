@@ -9,8 +9,14 @@ A file here has the name and the place of its source file: `syntactic/drawing/st
 | `text` | The message, exactly as typed. |
 | `sop` | Its circuit in the `syntax` schema, one wire per line. Empty when no circuit has been settled yet. |
 | `source` | Who wrote the circuit: the names of the formalizers that wrote it, joined by `+`, or `judge` when a judge wrote it. |
-| `accepted_by` | How the circuit was accepted: `agreement` (formalizers of different kinds wrote the same circuit), `judge` (a judge read and accepted it), `written` (a judge wrote it because no formalizer's circuit was acceptable), or empty. |
+| `accepted_by` | How the circuit was accepted: `agreement` (formalizers that read the message from different sources wrote the same circuit, up to where a phrase with a linking word attaches; no judge read it), `judge` (a judge read and accepted it), `written` (a judge wrote it because no formalizer's circuit was acceptable), or empty when the message has no circuit yet. |
 
-The files are filled in rounds. A round takes the next file of `semantic/` that has no file here, runs the formalizers on its messages, has a judge read the circuits that are not settled by agreement, and writes the file. A file is written only when its round is complete, so every file present here is whole.
+Every file of `semantic/` has its file here. A file is filled in steps, and a message whose circuit is not settled yet has an empty `sop` cell:
+
+1. Formalizers that read a message from different sources write a circuit for every message. A circuit that they wrote alike is settled by agreement and written here without a judge having read it; a judge reads a random share of these circuits as a control (on 2026-11-27: 1,154 read, 10 rejected).
+2. For the other messages a judge reads one circuit, and the circuit is written here when the judge accepts it.
+3. Where the judge rejects it, a judge writes the circuit.
+
+A later step fills empty cells and never changes a circuit that is already here. `accepted_by` says which step settled each circuit.
 
 The folder `../annotations/syntax/v1/` keeps what the judges decided: every circuit they accepted or rejected, and the label of each judged message.
