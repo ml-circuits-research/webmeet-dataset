@@ -26,6 +26,7 @@ Each `*.jsonl` file holds one circuit per line.
 | `judge` | The model that judged. |
 | `run` | The run or round that produced the line. It is also the name of the file. |
 | `source` | Who wrote the circuit: the name of a formalizer, several names joined by `+` when several wrote the same circuit, or `judge` when a judge wrote it. |
+| `supersedes` | Only on a line that publishes a circuit judged again after the judges' rules changed: the name of the file in this folder whose line for the same message and core it replaces. |
 
 Two circuits of one message are the same when their `core` is equal. A message can have several lines: several accepted circuits, since more than one reading can be right, and rejected ones. The label of the message is the circuit in its row of the syntactic files.
 
@@ -48,4 +49,4 @@ The tools compute the core again from `text` and `sop` when they read this folde
 
 The tools of `soplang-nlu/tests/benchmark/syntax/` write one new file for each run that a judge worked on, and never overwrite a file: `judge-publish.mjs` for a benchmark run, `round.mjs write` for a conversion round. A run in which no judge decided anything writes no file here. The same call writes the labels into the syntactic files. The files are not edited by hand.
 
-A circuit is decided once: when a line for a message and a core is already here, a later run keeps it and does not add a second one.
+A circuit is decided once: when a line for a message and a core is already here, a later run keeps it and does not add a second one. The exception is a circuit judged again because the judges' rules changed (`rejudge.mjs`): its new verdict gets a line in a new file, with `supersedes` naming the file of the line it replaces, and the old line stays. For a message and a core the tools read the line that no other line supersedes; of several such lines, the one with the longest chain of `supersedes` behind it; of lines still equal, the first in the order of the file names. The order of the files matters only when no line supersedes another.
