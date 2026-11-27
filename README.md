@@ -3,7 +3,16 @@
 Training data for the PSys2 reader. The reader takes a message someone types in one tab of the app (Drawing, Diagram,
 Document, Calendar). From that message it produces SOP Lang wires that say what was asked.
 
-Each row is one message with the wires the reader should produce for it. Use the [shared grading legend](LEGEND.md) to report formaliser quality.
+Each row is one message with the wires the reader should produce for it. Use the [shared grading legend](semantic/LEGEND.md) to report formaliser quality.
+
+## Two layers of labels
+
+| Folder | Contents |
+| --- | --- |
+| `semantic/` | The messages with their semantic circuits (`w.request` and related worlds): what was asked. Everything this dataset held before 2026-11-27 is here, with `LEGEND.md` and `NAMES.md`. |
+| `syntactic/` | The same messages with their syntactic circuits (`syntax` schema): clauses, nominals and how they are tied. Filled file by file; see `syntactic/README.md`. |
+
+The sections below describe the semantic layer. Its paths are relative to `semantic/`.
 
 ## Layout
 
