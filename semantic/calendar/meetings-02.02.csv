@@ -1,0 +1,80 @@
+text,sop
+Let us add a room called Training room with 3 seats. That would help.,"@f1 w.request.filler text=help
+@r1 w.request.request act=make mood=do words=""add a room called Training room with 3 seats"" predicate=add
+@r1.t w.request.target request=$r1 family=room mode=new determiner=indefinite family_words=room
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.name value=""Training room"" operator=eq phase=result key_words=called
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=room.seats value=""3"" words=""3 seats"" operator=eq phase=result unit=seat measure=3"
+Let us add a room called Room 4 with 4 seats. That would help.,"@f1 w.request.filler text=help
+@r1 w.request.request act=make mood=do words=""add a room called Room 4 with 4 seats"" predicate=add
+@r1.t w.request.target request=$r1 family=room mode=new determiner=indefinite family_words=room
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.name value=""Room 4"" operator=eq phase=result key_words=called
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=room.seats value=""4"" words=""4 seats"" operator=eq phase=result unit=seat measure=4"
+make a room called Room 4 with 6 seats.,"@r1 w.request.request act=make mood=do words=""make a room called Room 4 with 6 seats"" predicate=make
+@r1.t w.request.target request=$r1 family=room mode=new determiner=indefinite family_words=room
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.name value=""Room 4"" operator=eq phase=result key_words=called
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=room.seats value=""6"" words=""6 seats"" operator=eq phase=result unit=seat measure=6"
+"Hey, make a room called Room 4 with 3 seats. That would help.","@f1 w.request.filler text=Hey
+@f2 w.request.filler text=help
+@r1 w.request.request act=make mood=do words=""make a room called Room 4 with 3 seats"" predicate=make
+@r1.t w.request.target request=$r1 family=room mode=new determiner=indefinite family_words=room
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.name value=""Room 4"" operator=eq phase=result key_words=called
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=room.seats value=""3"" words=""3 seats"" operator=eq phase=result unit=seat measure=3"
+make Oak room seat 8 people and put Floor 2 as its location,"@r1 w.request.request act=change mood=do words=""make Oak room seat 8 people"" predicate=make
+@r1.t w.request.target request=$r1 family=room mode=existing determiner=definite fill=written name=""Oak room""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.seats value=""8"" words=""8 people"" operator=eq phase=result unit=person measure=8 key_words=seat
+@r2 w.request.request act=change mood=do words=""put Floor 2 as its location"" predicate=put
+@r2.t w.request.target request=$r2 family=room mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=room.location value=""Floor 2"" operator=eq phase=result key_words=location"
+make Retro 45 minutes and put Retro in Cedar,"@r1 w.request.request act=change mood=do words=""make Retro 45 minutes"" predicate=make
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Retro
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""45"" words=""45 minutes"" operator=eq phase=result unit=minute measure=45 measure_words=""45 minutes""
+@r2 w.request.request act=change mood=do words=""put Retro in Cedar"" predicate=put
+@r2.t w.request.target request=$r2 family=meeting mode=existing determiner=definite fill=written name=Retro
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=meeting.room value=Cedar operator=eq phase=result"
+put the new onboarding flow and the two open bugs in the notes for design review,"@r1 w.request.request act=change mood=do predicate=put
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""design review"" name_words=notes
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.agenda value=""the new onboarding flow and the two open bugs"" operator=eq phase=result"
+change the attendee on Design review from Ben to Bea,"@r1 w.request.request act=change mood=do predicate=change
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""Design review""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Ben want=no operator=eq phase=result key_words=attendee
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Bea operator=eq phase=result"
+stand up - put Standup in ROOM 4 pls,"@f1 w.request.filler text=""stand up""
+@f2 w.request.filler text=pls
+@r1 w.request.request act=change mood=do words=""put Standup in ROOM 4"" predicate=put
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Standup
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.room value=""ROOM 4"" operator=eq phase=result"
+change tomorrow's Standup to 90 minutes,"@r1 w.request.request act=change mood=do predicate=change
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Standup
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=tomorrow operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""90"" words=""90 minutes"" operator=eq phase=result unit=minute measure=90 measure_words=""90 minutes"""
+add Ines to Planning and remove Lee from Planning,"@r1 w.request.request act=change mood=do words=""add Ines to Planning"" predicate=add
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Planning
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Ines operator=eq phase=result
+@r2 w.request.request act=remove mood=do words=""remove Lee from Planning"" predicate=remove
+@r2.t w.request.target request=$r2 family=meeting mode=existing determiner=definite fill=written name=Planning
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=meeting.people value=Lee want=no operator=eq phase=result"
+"rename team review to sprint planning, thanks","@f1 w.request.filler text=thanks
+@r1 w.request.request act=change mood=do words=""rename team review to sprint planning"" predicate=rename
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""team review""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=""sprint planning"" operator=eq phase=result"
+"for Interview, notes should say resume walk-through, system design, then 10 min for questions","@r1 w.request.request act=change mood=do predicate=say
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Interview
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.agenda value=""resume walk-through, system design, then 10 min for questions"" operator=eq phase=result key_words=notes"
+any chance you can make the planning meeting 45 mins? thanks,"@f1 w.request.filler text=chance
+@f2 w.request.filler text=thanks
+@r1 w.request.request act=change mood=do words=""make the planning meeting 45 mins"" predicate=make
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""planning meeting""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""45"" words=""45 mins"" operator=eq phase=result unit=minute measure=45 measure_words=""45 mins"""
+what rooms have at least 8 seats?,"@r1 w.request.request act=ask mood=ask words=""what rooms have at least 8 seats"" predicate=what question=which asked=room.name
+@r1.t w.request.target request=$r1 family=room mode=existing determiner=definite fill=all family_words=rooms
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.seats value=""8"" words=""at least 8 seats"" operator=greater.equal phase=selector"
+"how long is mid-year, and which room is mid-year in?","@r1 w.request.request act=ask mood=ask words=""how long is mid-year"" predicate=""how long"" question=what asked=meeting.length
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=mid-year
+@r2 w.request.request act=ask mood=ask words=""which room is mid-year in"" predicate=""which room"" question=where asked=meeting.room
+@r2.t w.request.target request=$r2 family=meeting mode=existing determiner=definite fill=written name=mid-year"
+delete the Tuesday check-in and rename Personal to Home,"@r1 w.request.request act=remove mood=do words=""delete the Tuesday check-in"" predicate=delete
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""Tuesday check-in""
+@r2 w.request.request act=change mood=do words=""rename Personal to Home"" predicate=rename
+@r2.t w.request.target request=$r2 family=calendar mode=existing determiner=definite fill=written name=Personal
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=calendar.name value=Home operator=eq phase=result"

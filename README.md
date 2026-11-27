@@ -19,13 +19,15 @@ report formaliser quality.
 | `semantic/` | The messages with their semantic circuits (`w.request` and related worlds): what was asked. Everything this dataset held before 2026-11-27 is here, with `LEGEND.md` and `NAMES.md`. |
 | `syntactic/` | The same messages with their syntactic circuits (`syntax` schema): clauses, nominals and how they are tied. Filled file by file; see `syntactic/README.md`. |
 
+The two folders mirror each other: a file of `syntactic/` has the path of its file in `semantic/` and holds the same messages in the same order; only the circuits differ. No file holds more than 1,000 messages. A larger source is split into parts `<name>.01.csv`, `<name>.02.csv`, … in the order of its rows (`node tools/layers.mjs split`), and `node tools/layers.mjs check` checks the mirror. Neither uses a language model.
+
 The sections below describe the semantic layer. Its paths are relative to `semantic/`.
 
 ## Layout
 
 ```text
 <tab>/<source>.csv          tab: drawing, diagram, document, calendar
-<tab>/<source>.N.csv        a large source split into parts of at most ~10 MB (one source)
+<tab>/<source>.NN.csv       a source of more than 1,000 messages, split into parts of at most 1,000 (one source)
 tools/check.mjs             the checker: run it on every new file before adding it
 tools/rows-diff.mjs         rows on disk against the last commit, per source: lost, added, changed (no example may be lost)
 ```
