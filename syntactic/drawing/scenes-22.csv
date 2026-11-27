@@ -24,7 +24,8 @@ put a chair in the picture,"@c1 syntax.clause form=imperative verb=""put"" compl
 @n2 syntax.nominal dependent=""the"" head=""picture""",spacy-direct+vss,agreement
 make the house blue,"@c1 syntax.clause form=imperative verb=""make"" modifier=""blue"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""house""",spacy-direct+vss,agreement
-colour the house blue,,,
+colour the house blue,"@c1 syntax.clause form=imperative verb=""colour"" modifier=""blue"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""house""",spacy+vss,agreement
 change the house to blue,"@c1 syntax.clause form=imperative verb=""change"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""house""
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2
@@ -82,7 +83,8 @@ what's in my drawing?,"@n1 syntax.nominal head=""what""
 show me the current scene,"@c1 syntax.clause form=imperative verb=""show"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""me""
 @n2 syntax.nominal dependent=""the"" dependent=""current"" head=""scene""",spacy-direct+vss,agreement
-redo that drawing edit,,,
+redo that drawing edit,"@c1 syntax.clause form=imperative verb=""redo"" complement=$n1
+@n1 syntax.nominal dependent=""that"" dependent=""drawing"" head=""edit""",spacy+vss,agreement
 bring back the change I undid,"@c1 syntax.clause form=imperative verb=""bring"" modifier=""back"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""change""
 @n2 syntax.nominal head=""I""
@@ -93,7 +95,10 @@ show the parts of the house,"@c1 syntax.clause form=imperative verb=""show"" com
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""house""",spacy-direct+vss,agreement
 what is this house made of?,,,
-select part 0 of the house,,,
+select part 0 of the house,"@c1 syntax.clause form=imperative verb=""select"" complement=$n1
+@n1 syntax.nominal head=""part"" dependent=""0""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""house""",vss,agreement
 pick the first part of o1,"@c1 syntax.clause form=imperative verb=""pick"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""first"" head=""part""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
@@ -108,12 +113,20 @@ set the first house part to red and resize it to 90 by 45,,,
 @n1 syntax.nominal dependent=""the"" dependent=""first"" dependent=""house"" head=""component""
 @r1 syntax.relation marker=""at"" from=$n1 to=$n2
 @n2 syntax.nominal head=""140,120""",spacy-direct+vss,agreement
-delete part 0 of the house,,,
+delete part 0 of the house,"@c1 syntax.clause form=imperative verb=""delete"" complement=$n1
+@n1 syntax.nominal head=""part"" dependent=""0""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""house""",vss,agreement
 remove the first component from o1,"@c1 syntax.clause form=imperative verb=""remove"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""first"" head=""component""
 @r1 syntax.relation marker=""from"" from=$c1 to=$n2
 @n2 syntax.nominal head=""o1""",spacy-direct+vss,agreement
-take part 0 out of the house as its own object,,,
+take part 0 out of the house as its own object,"@c1 syntax.clause form=imperative verb=""take"" complement=$n1
+@n1 syntax.nominal head=""part"" dependent=""0""
+@r1 syntax.relation marker=""out of"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""house""
+@r2 syntax.relation marker=""as"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""its"" dependent=""own"" head=""object""",vss,agreement
 separate the first house component so I can move it independently,"@c1 syntax.clause form=imperative verb=""separate"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""first"" dependent=""house"" head=""component""
 @r1 syntax.relation marker=""so"" from=$c1 to=$c2
@@ -322,7 +335,11 @@ add three little fish beside the house,"@c1 syntax.clause form=imperative verb="
 @n1 syntax.nominal dependent=""three"" dependent=""little"" head=""fish""
 @r1 syntax.relation marker=""beside"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""house""",spacy-direct+vss,agreement
-move the red shapes a little to the right,,,
+move the red shapes a little to the right,"@c1 syntax.clause form=imperative verb=""move"" complement=$n1 complement=$n2
+@n1 syntax.nominal dependent=""the"" dependent=""red"" head=""shapes""
+@n2 syntax.nominal dependent=""a"" head=""little""
+@r1 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""right""",vss,agreement
 put a new house in the picture,"@c1 syntax.clause form=imperative verb=""put"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""new"" head=""house""
 @r1 syntax.relation marker=""in"" from=$c1 to=$n2
@@ -396,7 +413,13 @@ take the circle out of the picture,"@c1 syntax.clause form=imperative verb=""tak
 the circle removed,,,
 display the drawing object IDs for 4 seconds,,,
 let me see the drawing IDs for 4 seconds,,,
-tell me which objects are in the drawing,,,
+tell me which objects are in the drawing,"@c1 syntax.clause form=imperative verb=""tell"" complement=$n1
+@n1 syntax.nominal head=""me""
+@n2 syntax.nominal dependent=""which"" head=""objects""
+@c2 syntax.clause form=declarative verb=""are"" subject=$n2
+@r1 syntax.relation marker=""in"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""drawing""
+@r2 syntax.relation from=$c1 to=$c2",spacy+vss,agreement
 one drawing edit back,,,
 go forward one drawing edit,,,
 the undone drawing edit again,,,
@@ -407,7 +430,10 @@ the parts of the house?,"@n1 syntax.nominal dependent=""the"" head=""parts""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""house""
 @c1 syntax.clause form=fragment complement=$n1",spacy-direct+vss,agreement
-choose component 0 of the house,,,
+choose component 0 of the house,"@c1 syntax.clause form=imperative verb=""choose"" complement=$n1
+@n1 syntax.nominal head=""component"" dependent=""0""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""house""",vss,agreement
 focus on the first component of the house,"@c1 syntax.clause form=imperative verb=""focus""
 @r1 syntax.relation marker=""on"" from=$c1 to=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""first"" head=""component""
@@ -432,7 +458,10 @@ erase component 0 from the house,,,
 take the first house component away,"@c1 syntax.clause form=imperative verb=""take"" modifier=""away"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""first"" dependent=""house"" head=""component""",spacy-direct+vss,agreement
 house component 0 removed,,,
-detach component 0 from the house,,,
+detach component 0 from the house,"@c1 syntax.clause form=imperative verb=""detach"" complement=$n1
+@n1 syntax.nominal head=""component"" dependent=""0""
+@r1 syntax.relation marker=""from"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""house""",vss,agreement
 make the first house component an independent object,"@c1 syntax.clause form=imperative verb=""make"" complement=$n1 complement=$n2
 @n1 syntax.nominal dependent=""the"" dependent=""first"" dependent=""house"" head=""component""
 @n2 syntax.nominal dependent=""an"" dependent=""independent"" head=""object""",spacy-direct+vss,agreement
@@ -477,7 +506,11 @@ the members of o4 separated,,,
 "draw a house, 160 wide, 100 high, size 80",,,
 "draw a house, at y 90, 160 wide, 100 high, size 80",,,
 "draw a house, at x 120, at y 90, 160 wide, 100 high, size 80",,,
-"draw a house, coloured red",,,
+"draw a house, coloured red","@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""house""
+@c2 syntax.clause form=nonfinite verb=""coloured"" complement=$n2
+@n2 syntax.nominal head=""red""
+@r1 syntax.relation from=$n1 to=$c2",spacy+vss,agreement
 "draw a house, at y 90, coloured red",,,
 "draw a house, 160 wide, coloured red",,,
 "draw a house, at x 120, 160 wide, coloured red",,,
@@ -500,7 +533,11 @@ the members of o4 separated,,,
 "draw a house, at x 120, 100 high, size 80, coloured red",,,
 "draw a house, 160 wide, 100 high, size 80, coloured red",,,
 "draw a house, at x 120, at y 90, 160 wide, 100 high, size 80, coloured red",,,
-"draw a house, labelled Home",,,
+"draw a house, labelled Home","@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""house""
+@c2 syntax.clause form=nonfinite verb=""labelled"" complement=$n2
+@n2 syntax.nominal head=""Home""
+@r1 syntax.relation from=$n1 to=$c2",spacy+vss,agreement
 "draw a house, at x 120, labelled Home",,,
 "draw a house, at x 120, at y 90, labelled Home",,,
 "draw a house, 160 wide, labelled Home",,,
@@ -528,7 +565,14 @@ the members of o4 separated,,,
 "draw a house, 160 wide, 100 high, size 80, labelled Home",,,
 "draw a house, at y 90, 160 wide, 100 high, size 80, labelled Home",,,
 "draw a house, at x 120, at y 90, 160 wide, 100 high, size 80, labelled Home",,,
-"draw a house, coloured red, labelled Home",,,
+"draw a house, coloured red, labelled Home","@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""house""
+@c2 syntax.clause form=nonfinite verb=""coloured"" complement=$n2
+@n2 syntax.nominal head=""red""
+@c3 syntax.clause form=nonfinite verb=""labelled"" complement=$n3
+@n3 syntax.nominal head=""Home""
+@r1 syntax.relation from=$n1 to=$c2
+@r2 syntax.relation from=$n1 to=$c3",spacy+vss,agreement
 "draw a house, at x 120, coloured red, labelled Home",,,
 "draw a house, at y 90, coloured red, labelled Home",,,
 "draw a house, at x 120, at y 90, coloured red, labelled Home",,,
@@ -610,7 +654,11 @@ the members of o4 separated,,,
 "update the house, at x 120, 160 wide, 100 high, size 80, coloured red",,,
 "update the house, at y 90, 160 wide, 100 high, size 80, coloured red",,,
 "update the house, at x 120, at y 90, 160 wide, 100 high, size 80, coloured red",,,
-"update the house, labelled Home",,,
+"update the house, labelled Home","@c1 syntax.clause form=imperative verb=""update"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""house""
+@c2 syntax.clause form=nonfinite verb=""labelled"" complement=$n2
+@n2 syntax.nominal head=""Home""
+@r1 syntax.relation from=$n1 to=$c2",spacy+vss,agreement
 "update the house, at x 120, labelled Home",,,
 "update the house, at y 90, labelled Home",,,
 "update the house, at x 120, at y 90, labelled Home",,,
@@ -638,7 +686,14 @@ the members of o4 separated,,,
 "update the house, at x 120, at y 90, 100 high, size 80, labelled Home",,,
 "update the house, at y 90, 160 wide, 100 high, size 80, labelled Home",,,
 "update the house, at x 120, at y 90, 160 wide, 100 high, size 80, labelled Home",,,
-"update the house, coloured red, labelled Home",,,
+"update the house, coloured red, labelled Home","@c1 syntax.clause form=imperative verb=""update"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""house""
+@c2 syntax.clause form=nonfinite verb=""coloured"" complement=$n2
+@n2 syntax.nominal head=""red""
+@c3 syntax.clause form=nonfinite verb=""labelled"" complement=$n3
+@n3 syntax.nominal head=""Home""
+@r1 syntax.relation from=$n1 to=$c2
+@r2 syntax.relation from=$n1 to=$c3",spacy+vss,agreement
 "update the house, at x 120, coloured red, labelled Home",,,
 "update the house, at y 90, coloured red, labelled Home",,,
 "update the house, at x 120, at y 90, coloured red, labelled Home",,,
@@ -673,7 +728,10 @@ the members of o4 separated,,,
 "update part 0 of the house, coloured red, 45 high",,,
 "update part 0 of the house, 90 wide, 45 high",,,
 "update part 0 of the house, coloured red, 90 wide, 45 high",,,
-group the house and circle,,,
+group the house and circle,"@c1 syntax.clause form=imperative verb=""group"" complement=$k1
+@n1 syntax.nominal dependent=""the"" head=""house""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n1 conjunct=$n2
+@n2 syntax.nominal head=""circle""",spacy+vss,agreement
 "group the house and circle, called Scene",,,
 "group the house and circle, labelled Village",,,
 "group the house and circle, called Scene, labelled Village",,,
@@ -687,7 +745,12 @@ list the objects on the canvas,"@c1 syntax.clause form=imperative verb=""list"" 
 @n1 syntax.nominal dependent=""the"" head=""objects""
 @r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""canvas""",spacy-direct+vss,agreement
-"move part 0 of o1 to 140,120",,,
+"move part 0 of o1 to 140,120","@c1 syntax.clause form=imperative verb=""move"" complement=$n1
+@n1 syntax.nominal head=""part"" dependent=""0""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal head=""o1""
+@r2 syntax.relation marker=""to"" from=$c1 to=$n3
+@n3 syntax.nominal head=""140,120""",vss,agreement
 draw a rectangle,"@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""rectangle""",spacy-direct+vss,agreement
 draw a balloon,"@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
@@ -780,13 +843,17 @@ add a star to the picture,"@c1 syntax.clause form=imperative verb=""add"" comple
 "update part 0 of the house, 90 wide",,,
 "draw a house, at y 90, labelled Home",,,
 undo the last drawing change,,,
-empty the drawing canvas,,,
+empty the drawing canvas,"@c1 syntax.clause form=imperative verb=""empty"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""drawing"" head=""canvas""",spacy+vss,agreement
 "update the house, at x 120, 160 wide, size 80, coloured red",,,
 draw a star,"@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""star""",spacy-direct+vss,agreement
 draw a hill,"@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""hill""",spacy-direct+vss,agreement
-house component 0 as an independent object,,,
+house component 0 as an independent object,"@n1 syntax.nominal dependent=""house"" head=""component"" dependent=""0""
+@r1 syntax.relation marker=""as"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""an"" dependent=""independent"" head=""object""
+@c1 syntax.clause form=fragment complement=$n1",vss,agreement
 "draw a house, at x 120, 160 wide",,,
 "draw a house, at x 120, at y 90, coloured red",,,
 "draw a house, at x 120, at y 90, 100 high, size 80, coloured red",,,
@@ -824,11 +891,13 @@ sketch me a boat next to the house,"@c1 syntax.clause form=imperative verb=""ske
 Paint the house blue.,"@c1 syntax.clause form=imperative verb=""Paint"" modifier=""blue"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""house""",spacy-direct+vss,agreement
 house should be blue pls,,,
-color the house green,,,
+color the house green,"@c1 syntax.clause form=imperative verb=""color"" modifier=""green"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""house""",spacy+vss,agreement
 turn the house purple,"@c1 syntax.clause form=imperative verb=""turn"" modifier=""purple"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""house""",spacy-direct+vss,agreement
 can u paint the house pink,,,
-colour the house brown,,,
+colour the house brown,"@c1 syntax.clause form=imperative verb=""colour"" modifier=""brown"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""house""",spacy+vss,agreement
 change the house to navy,"@c1 syntax.clause form=imperative verb=""change"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""house""
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2
@@ -849,12 +918,14 @@ bigger house pls,,,
 can u make the house larger,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""make"" modifier=""larger"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""u""
 @n2 syntax.nominal dependent=""the"" head=""house""",spacy-direct+vss,agreement
-enlarge the house a bit,,,
-house a little bigger,,,
+enlarge the house a bit,"@c1 syntax.clause form=imperative verb=""enlarge"" modifier=""a"" modifier=""bit"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""house""",vss,agreement
+house a little bigger,"@c1 syntax.clause form=imperative verb=""house"" modifier=""a"" modifier=""little"" modifier=""bigger""",spacy+vss,agreement
 blow up the house a lot,,,
 grow the house,"@c1 syntax.clause form=imperative verb=""grow"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""house""",spacy-direct+vss,agreement
-increase the house size a bit,,,
+increase the house size a bit,"@c1 syntax.clause form=imperative verb=""increase"" modifier=""a"" modifier=""bit"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""house"" head=""size""",vss,agreement
 make the house taller,"@c1 syntax.clause form=imperative verb=""make"" modifier=""taller"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""house""",spacy-direct+vss,agreement
 make the house twice as big,,,
@@ -933,15 +1004,26 @@ change it so its sunset,,,
 Draw a blue car.,"@c1 syntax.clause form=imperative verb=""Draw"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""blue"" head=""car""",spacy-direct+vss,agreement
 blue car pls,,,
-um can u draw a blue car,,,
+um can u draw a blue car,"@c1 syntax.clause form=interrogative discourse=""um"" auxiliary=""can"" verb=""draw"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""u""
+@n2 syntax.nominal dependent=""a"" dependent=""blue"" head=""car""",spacy+vss,agreement
 i want u to draw a car in blue,,,
 could you sketch a blue car for me,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""sketch"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""a"" dependent=""blue"" head=""car""
 @r1 syntax.relation marker=""for"" from=$c1 to=$n3
 @n3 syntax.nominal head=""me""",spacy-direct+vss,agreement
-"draw me a car, make it blue",,,
-"a blue car would be nice, draw one",,,
+"draw me a car, make it blue","@c1 syntax.clause form=imperative verb=""draw"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""me""
+@n2 syntax.nominal dependent=""a"" head=""car""
+@c2 syntax.clause form=imperative verb=""make"" modifier=""blue"" complement=$n3
+@n3 syntax.nominal head=""it""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2",spacy+vss,agreement
+"a blue car would be nice, draw one","@n1 syntax.nominal dependent=""a"" dependent=""blue"" head=""car""
+@c1 syntax.clause form=declarative auxiliary=""would"" verb=""be"" modifier=""nice"" subject=$n1
+@c2 syntax.clause form=imperative verb=""draw"" complement=$n2
+@n2 syntax.nominal head=""one""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2",spacy+vss,agreement
 pls draw a bloo car,,,
 draw a car colored blue thx,,,
 so like draw a blue car yeah,,,
@@ -986,7 +1068,8 @@ can u make the sky dark blue,"@c1 syntax.clause form=interrogative auxiliary=""c
 @n2 syntax.nominal dependent=""the"" head=""sky""",spacy-direct+vss,agreement
 sky should be dark blue,"@n1 syntax.nominal head=""sky""
 @c1 syntax.clause form=declarative auxiliary=""should"" verb=""be"" modifier=""dark"" modifier=""blue"" subject=$n1",spacy-direct+vss,agreement
-color the sky dark blue,,,
+color the sky dark blue,"@c1 syntax.clause form=imperative verb=""color"" modifier=""dark"" modifier=""blue"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""sky""",spacy+vss,agreement
 i want the sky dark blue,"@n1 syntax.nominal head=""i""
 @c1 syntax.clause form=declarative verb=""want"" modifier=""dark"" modifier=""blue"" subject=$n1 complement=$n2
 @n2 syntax.nominal dependent=""the"" head=""sky""",spacy-direct+vss,agreement
@@ -1033,20 +1116,32 @@ move it to the upper right,"@c1 syntax.clause form=imperative verb=""move"" comp
 Make the sun higher.,"@c1 syntax.clause form=imperative verb=""Make"" modifier=""higher"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""sun""",spacy-direct+vss,agreement
 sun up a bit,,,
-raise the sun a little,,,
+raise the sun a little,"@c1 syntax.clause form=imperative verb=""raise"" complement=$n1 complement=$n2
+@n1 syntax.nominal dependent=""the"" head=""sun""
+@n2 syntax.nominal dependent=""a"" head=""little""",vss,agreement
 nudge the sun higher,"@c1 syntax.clause form=imperative verb=""nudge"" modifier=""higher"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""sun""",spacy-direct+vss,agreement
 lower the sun a bit pls,,,
 move the sun down slightly,"@c1 syntax.clause form=imperative verb=""move"" modifier=""down"" modifier=""slightly"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""sun""",spacy-direct+vss,agreement
-sun a tiny bit to the left,,,
+sun a tiny bit to the left,"@c1 syntax.clause form=imperative verb=""sun"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""tiny"" head=""bit""
+@r1 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""left""",vss,agreement
 can u push the sun up,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""push"" modifier=""up"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""u""
 @n2 syntax.nominal dependent=""the"" head=""sun""",spacy-direct+vss,agreement
-the sun needs to go up a bit,,,
+the sun needs to go up a bit,"@n1 syntax.nominal dependent=""the"" head=""sun""
+@c1 syntax.clause form=declarative verb=""needs"" subject=$n1
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""go"" modifier=""up"" modifier=""a"" modifier=""bit""",vss,agreement
 bring the sun lower please,"@c1 syntax.clause form=imperative verb=""bring"" modifier=""lower"" discourse=""please"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""sun""",spacy-direct+vss,agreement
-shift the sun a little to the right,,,
+shift the sun a little to the right,"@c1 syntax.clause form=imperative verb=""shift"" complement=$n1 complement=$n2
+@n1 syntax.nominal dependent=""the"" head=""sun""
+@n2 syntax.nominal dependent=""a"" head=""little""
+@r1 syntax.relation marker=""to"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""right""",vss,agreement
 Turn the car around.,"@c1 syntax.clause form=imperative verb=""Turn"" modifier=""around"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""car""",spacy-direct+vss,agreement
 car around pls,,,
@@ -1068,7 +1163,9 @@ mirror the car,"@c1 syntax.clause form=imperative verb=""mirror"" complement=$n1
 the car should look the other way,"@n1 syntax.nominal dependent=""the"" head=""car""
 @c1 syntax.clause form=declarative auxiliary=""should"" verb=""look"" subject=$n1 complement=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""other"" head=""way""",spacy-direct+vss,agreement
-tilt the car a little,,,
+tilt the car a little,"@c1 syntax.clause form=imperative verb=""tilt"" complement=$n1 complement=$n2
+@n1 syntax.nominal dependent=""the"" head=""car""
+@n2 syntax.nominal dependent=""a"" head=""little""",vss,agreement
 How many things are in my picture?,"@n1 syntax.nominal dependent=""How"" dependent=""many"" head=""things""
 @c1 syntax.clause form=interrogative verb=""are"" subject=$n1
 @r1 syntax.relation marker=""in"" from=$c1 to=$n2
@@ -1127,7 +1224,8 @@ clear the whole picture,"@c1 syntax.clause form=imperative verb=""clear"" comple
 @n1 syntax.nominal dependent=""the"" dependent=""whole"" head=""picture""",spacy-direct+vss,agreement
 erase everything,"@c1 syntax.clause form=imperative verb=""erase"" complement=$n1
 @n1 syntax.nominal head=""everything""",spacy-direct+vss,agreement
-clean the drawing board,,,
+clean the drawing board,"@c1 syntax.clause form=imperative verb=""clean"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""drawing"" head=""board""",spacy+vss,agreement
 empty the paper,"@c1 syntax.clause form=imperative verb=""empty"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""paper""",spacy-direct+vss,agreement
 delete everything in my picture,"@c1 syntax.clause form=imperative verb=""delete"" complement=$n1
@@ -1162,7 +1260,11 @@ i want a fresh drawing,"@n1 syntax.nominal head=""i""
 @n2 syntax.nominal dependent=""a"" dependent=""fresh"" head=""drawing""",spacy-direct+vss,agreement
 open a blank drawing,"@c1 syntax.clause form=imperative verb=""open"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""blank"" head=""drawing""",spacy-direct+vss,agreement
-let's start a new painting,,,
+let's start a new painting,"@c1 syntax.clause form=imperative verb=""let"" complement=$n1
+@n1 syntax.nominal head=""'s""
+@c2 syntax.clause form=nonfinite verb=""start"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""new"" head=""painting""
+@r1 syntax.relation from=$c1 to=$c2",vss,agreement
 make a new sheet,"@c1 syntax.clause form=imperative verb=""make"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""new"" head=""sheet""",spacy-direct+vss,agreement
 Undo.,,,
@@ -1181,7 +1283,8 @@ put it back pls,"@c1 syntax.clause form=imperative verb=""put"" modifier=""back"
 @n1 syntax.nominal head=""it""",spacy-direct+vss,agreement
 restore the house,"@c1 syntax.clause form=imperative verb=""restore"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""house""",spacy-direct+vss,agreement
-redo the last step,,,
+redo the last step,"@c1 syntax.clause form=imperative verb=""redo"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""last"" head=""step""",spacy+vss,agreement
 undo the undo,,,
 can u redo,,,
 get that back please,"@c1 syntax.clause form=imperative verb=""get"" modifier=""back"" discourse=""please"" complement=$n1
@@ -1367,8 +1470,19 @@ put sum sand on the floor,"@c1 syntax.clause form=imperative verb=""put"" comple
 @n1 syntax.nominal dependent=""sum"" head=""sand""
 @r1 syntax.relation marker=""on"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""floor""",spacy-direct+vss,agreement
-"it needs sand, add it",,,
-"sand on the ground would look good, do that",,,
+"it needs sand, add it","@n1 syntax.nominal head=""it""
+@c1 syntax.clause form=declarative verb=""needs"" subject=$n1 complement=$n2
+@n2 syntax.nominal head=""sand""
+@c2 syntax.clause form=imperative verb=""add"" complement=$n3
+@n3 syntax.nominal head=""it""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2",spacy+vss,agreement
+"sand on the ground would look good, do that","@n1 syntax.nominal head=""sand""
+@r1 syntax.relation marker=""on"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""ground""
+@c1 syntax.clause form=declarative auxiliary=""would"" verb=""look"" modifier=""good"" subject=$n1
+@c2 syntax.clause form=imperative verb=""do"" complement=$n3
+@n3 syntax.nominal head=""that""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2",spacy+vss,agreement
 how many trees u got,,,
 tell me how many trees there are,,,
 number of trees in the picture?,,,
@@ -1425,7 +1539,12 @@ what can u see in my picture,"@n1 syntax.nominal head=""what""
 @n2 syntax.nominal head=""u""
 @r1 syntax.relation marker=""in"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""my"" head=""picture""",spacy-direct+vss,agreement
-explain what's on the page,,,
+explain what's on the page,"@c1 syntax.clause form=imperative verb=""explain""
+@n1 syntax.nominal head=""what""
+@c2 syntax.clause form=declarative verb=""'s"" subject=$n1
+@r1 syntax.relation marker=""on"" from=$c2 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""page""
+@r2 syntax.relation from=$c1 to=$c2",spacy+vss,agreement
 describe my art,"@c1 syntax.clause form=imperative verb=""describe"" complement=$n1
 @n1 syntax.nominal dependent=""my"" head=""art""",spacy-direct+vss,agreement
 what's in the picture right now,"@n1 syntax.nominal head=""what""
@@ -1691,7 +1810,10 @@ fill the sky with gold,"@c1 syntax.clause form=imperative verb=""fill"" compleme
 @n2 syntax.nominal head=""gold""",spacy-direct+vss,agreement
 make the sky cyan please,"@c1 syntax.clause form=imperative verb=""make"" modifier=""cyan"" discourse=""please"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""sky""",spacy-direct+vss,agreement
-delete what's selected,,,
+delete what's selected,"@c1 syntax.clause form=imperative verb=""delete""
+@n1 syntax.nominal head=""what""
+@c2 syntax.clause form=declarative auxiliary=""'s"" verb=""selected"" subject=$n1
+@r1 syntax.relation from=$c1 to=$c2",spacy+vss,agreement
 delete the chosen one,,,
 delete the highlighted one,,,
 erase whatever is selected,,,
@@ -1907,7 +2029,12 @@ what things can we paint,"@n1 syntax.nominal dependent=""what"" head=""things""
 @c1 syntax.clause form=interrogative auxiliary=""can"" verb=""paint"" subject=$n2 complement=$n1
 @n2 syntax.nominal head=""we""",spacy-direct+vss,agreement
 what can u draw,,,
-show me what i can draw,,,
+show me what i can draw,"@c1 syntax.clause form=imperative verb=""show"" complement=$n1
+@n1 syntax.nominal head=""me""
+@n2 syntax.nominal head=""what""
+@n3 syntax.nominal head=""i""
+@c2 syntax.clause form=declarative auxiliary=""can"" verb=""draw"" subject=$n3 complement=$n2
+@r1 syntax.relation from=$c1 to=$c2",spacy+vss,agreement
 what crayons do you have,,,
 what paints are there,,,
 Save my drawing.,"@c1 syntax.clause form=imperative verb=""Save"" complement=$n1

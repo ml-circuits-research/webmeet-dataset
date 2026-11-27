@@ -7,11 +7,11 @@ text,sop,source,accepted_by
 "please a lake, a little boat on it, a house beside the lake",,,
 "the background should be mountains, thanks","@n1 syntax.nominal dependent=""the"" head=""background""
 @c1 syntax.clause form=declarative auxiliary=""should"" verb=""be"" discourse=""thanks"" subject=$n1 complement=$n2
-@n2 syntax.nominal head=""mountains""",spacy-direct+vss,agreement
+@n2 syntax.nominal head=""mountains""",spacy+spacy-direct+vss,agreement
 "a few cllouds in the sky, thanks","@n1 syntax.nominal dependent=""a"" dependent=""few"" head=""cllouds""
 @r1 syntax.relation marker=""in"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""sky""
-@c1 syntax.clause form=fragment discourse=""thanks"" complement=$n1",spacy-direct+vss,agreement
+@c1 syntax.clause form=fragment discourse=""thanks"" complement=$n1",spacy+spacy-direct+vss,agreement
 "there's a big girl smiling looking right next to the lake, thanks","@n1 syntax.nominal head=""there""
 @c1 syntax.clause form=declarative verb=""'s"" modifier=""right"" discourse=""thanks"" subject=$n1 complement=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""big"" head=""girl""
@@ -26,10 +26,40 @@ text,sop,source,accepted_by
 "a small cat way off on the left, then give me three small kids next to the bench — just like that in the scene",,,
 "a small cat in the bottom left corner, then relocate the bird beside the lake and above the tree, with both conditions holding — the exact distance matters here",,,
 "a little cat near the bench, then send the man in the purple hat next to the bench as well, just that one move for now",,,
-"a big girl waving, on the left, keeping everything else where it is",,,
+"a big girl waving, on the left, keeping everything else where it is","@n1 syntax.nominal dependent=""a"" dependent=""big"" head=""girl""
+@c1 syntax.clause form=nonfinite verb=""waving""
+@r1 syntax.relation marker=""on"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""left""
+@c2 syntax.clause form=nonfinite verb=""keeping"" complement=$n3
+@n3 syntax.nominal head=""everything"" dependent=""else""
+@r2 syntax.relation marker=""where"" from=$c2 to=$c3
+@n4 syntax.nominal head=""it""
+@c3 syntax.clause form=declarative verb=""is"" subject=$n4
+@c4 syntax.clause form=fragment complement=$n1
+@r3 syntax.relation from=$n1 to=$c1
+@r4 syntax.relation from=$c1 to=$c2",vss,agreement
 "one more: show a medium kid in front of the tent, then get it to face right, and a tiny bird up near the top",,,
 "show me a large white lighthouse in the right part, next to the lighthouse, a medium red boat, a medium sailor facing right standing right on the boat, and just above the boat, two small white gulls",,,
-"next, add a large brown bear right behind the rock, a small kid with a surprised face in the right part, a medium keeper facing left standing right next to the bear, and right on the rock, two medium green snakes",,,
+"next, add a large brown bear right behind the rock, a small kid with a surprised face in the right part, a medium keeper facing left standing right next to the bear, and right on the rock, two medium green snakes","@c1 syntax.clause form=imperative modifier=""next"" verb=""add"" modifier=""right"" modifier=""right"" complement=$k1
+@n1 syntax.nominal dependent=""a"" dependent=""large"" dependent=""brown"" head=""bear""
+@r1 syntax.relation marker=""behind"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""rock""
+@n3 syntax.nominal dependent=""a"" dependent=""small"" head=""kid""
+@r2 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$n4
+@n4 syntax.nominal dependent=""a"" dependent=""surprised"" head=""face""
+@r3 syntax.relation marker=""in"" from=$n1 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""part"" dependent=""right""
+@n6 syntax.nominal dependent=""a"" dependent=""medium"" head=""keeper""
+@c2 syntax.clause form=nonfinite verb=""facing"" modifier=""left""
+@c3 syntax.clause form=nonfinite verb=""standing"" modifier=""right""
+@r4 syntax.relation marker=""next to"" from=$c3 to=$n7
+@n7 syntax.nominal dependent=""the"" head=""bear""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n1 conjunct=$n3 conjunct=$n6 conjunct=$n9
+@r5 syntax.relation marker=""on"" from=$n9 to=$n8
+@n8 syntax.nominal dependent=""the"" head=""rock""
+@n9 syntax.nominal dependent=""two"" dependent=""medium"" dependent=""green"" head=""snakes""
+@r6 syntax.relation from=$n6 to=$c2
+@r7 syntax.relation from=$n6 to=$c3",vss,agreement
 "draw a large red tractorr in the middle, a small boy facing right with a sad face right next to the tractor, a medium brown dog just next to the boy, and a medium white duck next to the tractor",,,
 "there is a rabbit in the garden facing right, keeping everything else where it is",,,
 "put a boy on the left facing left, and put a girl on the right facing right, and a huge bear in the woods facing left",,,
@@ -47,20 +77,25 @@ make the background a range of mountains,"@c1 syntax.clause form=imperative verb
 @n1 syntax.nominal dependent=""the"" head=""background""
 @n2 syntax.nominal dependent=""a"" head=""range""
 @r1 syntax.relation marker=""of"" from=$n2 to=$n3
-@n3 syntax.nominal head=""mountains""",spacy-direct+vss,agreement
+@n3 syntax.nominal head=""mountains""",spacy+spacy-direct+vss,agreement
 turn the background into a forest,"@c1 syntax.clause form=imperative verb=""turn"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""background""
 @r1 syntax.relation marker=""into"" from=$c1 to=$n2
-@n2 syntax.nominal dependent=""a"" head=""forest""",spacy-direct+vss,agreement
-stick a couple of clouds in the background,,,
+@n2 syntax.nominal dependent=""a"" head=""forest""",spacy+spacy-direct+vss,agreement
+stick a couple of clouds in the background,"@c1 syntax.clause form=imperative verb=""stick"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""couple"" dependent=""of"" head=""clouds""
+@r1 syntax.relation marker=""in"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""background""",vss,agreement
 build three houses close to the lake,"@c1 syntax.clause form=imperative verb=""build"" complement=$n1
 @n1 syntax.nominal dependent=""three"" head=""houses""
 @r1 syntax.relation marker=""close to"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""lake""",spacy-direct+vss,agreement
 "add a few sheep in the field, small ones, near the little house",,,
-the field needs a couple of sheep,,,
+the field needs a couple of sheep,"@n1 syntax.nominal dependent=""the"" head=""field""
+@c1 syntax.clause form=declarative verb=""needs"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""couple"" dependent=""of"" head=""sheep""",vss,agreement
 add a sleeping dog,"@c1 syntax.clause form=imperative verb=""add"" complement=$n1
-@n1 syntax.nominal dependent=""a"" dependent=""sleeping"" head=""dog""",spacy-direct+vss,agreement
+@n1 syntax.nominal dependent=""a"" dependent=""sleeping"" head=""dog""",spacy+spacy-direct+vss,agreement
 add a sleeping dog by the bench and give it a blanket,"@c1 syntax.clause form=imperative verb=""add"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""sleeping"" head=""dog""
 @r1 syntax.relation marker=""by"" from=$n1 to=$n2
@@ -105,12 +140,12 @@ there is a big bench on the left side,"@n1 syntax.nominal head=""there""
 @c1 syntax.clause form=declarative verb=""is"" subject=$n1 complement=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""big"" head=""bench""
 @r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
-@n3 syntax.nominal dependent=""the"" dependent=""left"" head=""side""",spacy-direct+vss,agreement
+@n3 syntax.nominal dependent=""the"" dependent=""left"" head=""side""",spacy+spacy-direct+vss,agreement
 there should be a big bench on the left side,"@n1 syntax.nominal head=""there""
 @c1 syntax.clause form=declarative auxiliary=""should"" verb=""be"" subject=$n1 complement=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""big"" head=""bench""
 @r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
-@n3 syntax.nominal dependent=""the"" dependent=""left"" head=""side""",spacy-direct+vss,agreement
+@n3 syntax.nominal dependent=""the"" dependent=""left"" head=""side""",spacy+spacy-direct+vss,agreement
 "in the picture there is a large bench on the left side, and a small cat under the bench — where it belongs in the picture",,,
 i want a big kite in the top left in the picture,,,
 a boy and a girl facing each other,,,
@@ -120,7 +155,11 @@ place a bird straight below the cloud,"@c1 syntax.clause form=imperative verb=""
 @r1 syntax.relation marker=""below"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""cloud""",spacy-direct+vss,agreement
 "further behind the boy and the girl a bird looking left on the right side, and a small cat down at the bottom",,,
-there's a couple of birds on the bench,,,
+there's a couple of birds on the bench,"@n1 syntax.nominal head=""there""
+@c1 syntax.clause form=declarative verb=""'s"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""couple"" dependent=""of"" head=""birds""
+@r1 syntax.relation marker=""on"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""bench""",vss,agreement
 "a small dog down at the bottom, then set the entire page to a night scene, top to bottom — nothing on the page stays as it was",,,
 letter 'welcome' spelled out along the top edge,,,
 put a small placard saying 'quiet please' up above the bench,,,
@@ -139,7 +178,7 @@ give me a bird above each house,"@c1 syntax.clause form=imperative verb=""give""
 @n1 syntax.nominal head=""me""
 @n2 syntax.nominal dependent=""a"" head=""bird""
 @r1 syntax.relation marker=""above"" from=$n2 to=$n3
-@n3 syntax.nominal dependent=""each"" head=""house""",spacy-direct+vss,agreement
+@n3 syntax.nominal dependent=""each"" head=""house""",spacy+spacy-direct+vss,agreement
 i need a bird on top of each house,,,
 "i need a bench in the middle of the scene, then one tree on every side of it",,,
 "draw two boats on the lake, then a bench right beside them",,,
@@ -151,7 +190,7 @@ i need a bird on top of each house,,,
 @k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n4
 @n4 syntax.nominal dependent=""one"" head=""kite""
 @r2 syntax.relation marker=""between"" from=$n4 to=$n5
-@n5 syntax.nominal head=""them""",spacy-direct+vss,agreement
+@n5 syntax.nominal head=""them""",spacy+spacy-direct+vss,agreement
 "place two clouds at the top, plus a kite between them",,,
 place a bird on the fence,"@c1 syntax.clause form=imperative verb=""place"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""bird""
@@ -162,12 +201,12 @@ draw a medium dog sitting under the bench,"@c1 syntax.clause form=imperative ver
 @c2 syntax.clause form=nonfinite verb=""sitting""
 @r1 syntax.relation marker=""under"" from=$c2 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""bench""
-@r2 syntax.relation from=$n1 to=$c2",spacy-direct+vss,agreement
+@r2 syntax.relation from=$n1 to=$c2",spacy+spacy-direct+vss,agreement
 give me a tiny blue boat on the far right,"@c1 syntax.clause form=imperative verb=""give"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""me""
 @n2 syntax.nominal dependent=""a"" dependent=""tiny"" dependent=""blue"" head=""boat""
 @r1 syntax.relation marker=""on"" from=$n2 to=$n3
-@n3 syntax.nominal dependent=""the"" dependent=""far"" head=""right""",spacy-direct+vss,agreement
+@n3 syntax.nominal dependent=""the"" dependent=""far"" head=""right""",spacy+spacy-direct+vss,agreement
 "show an enormous cloud with the sun hidden behind it high up in the middle in the scene, and a little cloud up at the top",,,
 there's a little oby turned towards us down in the bottom left corner,"@n1 syntax.nominal head=""there""
 @c1 syntax.clause form=declarative verb=""'s"" subject=$n1 complement=$n2
@@ -177,7 +216,7 @@ there's a little oby turned towards us down in the bottom left corner,"@n1 synta
 @n3 syntax.nominal head=""us""
 @r2 syntax.relation marker=""in"" from=$c2 to=$n4
 @n4 syntax.nominal dependent=""the"" dependent=""bottom"" dependent=""left"" head=""corner""
-@r3 syntax.relation from=$n2 to=$c2",spacy-direct+vss,agreement
+@r3 syntax.relation from=$n2 to=$c2",spacy+spacy-direct+vss,agreement
 ksetch a medium kite about one inch from the top edge,,,
 "sketch a medium kite about a quarter inch from the top edge, and a little cloud up at the top",,,
 "there is a medium kite about one inch from the top edge, after that a small cat way off on the left",,,
@@ -185,7 +224,7 @@ add a small girl two hand-widths from the right edge,"@c1 syntax.clause form=imp
 @n1 syntax.nominal dependent=""a"" dependent=""small"" head=""girl""
 @n2 syntax.nominal dependent=""two"" head=""hand-widths""
 @r1 syntax.relation marker=""from"" from=$n2 to=$n3
-@n3 syntax.nominal dependent=""the"" dependent=""right"" head=""edge""",spacy-direct+vss,agreement
+@n3 syntax.nominal dependent=""the"" dependent=""right"" head=""edge""",spacy+spacy-direct+vss,agreement
 "draw a small girl in a red coat on the left, then have the girl sitting on the bench, and make the girl smiling",,,
 draw a small boy in a blue cap in the middle,"@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""small"" head=""boy""
@@ -209,7 +248,7 @@ give me 4 balloons lined up above the house,"@c1 syntax.clause form=imperative v
 @c2 syntax.clause form=nonfinite verb=""lined"" modifier=""up""
 @r1 syntax.relation marker=""above"" from=$c2 to=$n3
 @n3 syntax.nominal dependent=""the"" head=""house""
-@r2 syntax.relation from=$n2 to=$c2",spacy-direct+vss,agreement
+@r2 syntax.relation from=$n2 to=$c2",spacy+spacy-direct+vss,agreement
 "start with three cats in a row on the bench all facing right, after that a small dog way off on the left",,,
 "the scene eneds a big sun in the top left, a red kite under it, and a small cloud to the right of the sun","@n1 syntax.nominal dependent=""the"" head=""scene""
 @c1 syntax.clause form=declarative verb=""eneds"" subject=$n1 complement=$k1
@@ -226,13 +265,24 @@ give me 4 balloons lined up above the house,"@c1 syntax.clause form=imperative v
 @r4 syntax.relation marker=""of"" from=$n7 to=$n8
 @n8 syntax.nominal dependent=""the"" head=""sun""",spacy-direct+vss,agreement
 "can you add a little house over on the right side, a large tree to the left of the house, and a small lake under the tree?",,,
-"the scene needs a small house on the right, a big tree left of the house, and a blue lake below the tree",,,
+"the scene needs a small house on the right, a big tree left of the house, and a blue lake below the tree","@n1 syntax.nominal dependent=""the"" head=""scene""
+@c1 syntax.clause form=declarative verb=""needs"" subject=$n1 complement=$k1
+@n2 syntax.nominal dependent=""a"" dependent=""small"" head=""house""
+@r1 syntax.relation marker=""on"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""right""
+@n4 syntax.nominal dependent=""a"" dependent=""big"" head=""tree""
+@r2 syntax.relation marker=""left of"" from=$n4 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""house""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n4 conjunct=$n6
+@n6 syntax.nominal dependent=""a"" dependent=""blue"" head=""lake""
+@r3 syntax.relation marker=""below"" from=$n6 to=$n7
+@n7 syntax.nominal dependent=""the"" head=""tree""",vss,agreement
 "i want a small bird above the house, a big tree behind the house, and a small cloud over the tree in the picture, after that a small cat at the bottom",,,
 "the scene needs a big man over on the right side, a little dog next to the bench looking at the man",,,
 a tiny cat behind the big boat,"@n1 syntax.nominal dependent=""a"" dependent=""tiny"" head=""cat""
 @r1 syntax.relation marker=""behind"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""big"" head=""boat""
-@c1 syntax.clause form=fragment complement=$n1",spacy-direct+vss,agreement
+@c1 syntax.clause form=fragment complement=$n1",spacy+spacy-direct+vss,agreement
 let there be a large sun facing forward up above the small house,,,
 put a big sun over the small house,"@c1 syntax.clause form=imperative verb=""put"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""big"" head=""sun""
@@ -244,28 +294,32 @@ add a small house facing forward in the middle,"@c1 syntax.clause form=imperativ
 @c2 syntax.clause form=nonfinite verb=""facing"" modifier=""forward""
 @r1 syntax.relation marker=""in"" from=$c2 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""middle""
-@r2 syntax.relation from=$n1 to=$c2",spacy-direct+vss,agreement
+@r2 syntax.relation from=$n1 to=$c2",spacy+spacy-direct+vss,agreement
 a small house behind the big bench,"@n1 syntax.nominal dependent=""a"" dependent=""small"" head=""house""
 @r1 syntax.relation marker=""behind"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""big"" head=""bench""
-@c1 syntax.clause form=fragment complement=$n1",spacy-direct+vss,agreement
+@c1 syntax.clause form=fragment complement=$n1",spacy+spacy-direct+vss,agreement
 draw a boy sitting on the bench,"@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""boy""
 @c2 syntax.clause form=nonfinite verb=""sitting""
 @r1 syntax.relation marker=""on"" from=$c2 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""bench""
-@r2 syntax.relation from=$n1 to=$c2",spacy-direct+vss,agreement
+@r2 syntax.relation from=$n1 to=$c2",spacy+spacy-direct+vss,agreement
 draw a girl holding a red kite,"@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""girl""
 @c2 syntax.clause form=nonfinite verb=""holding"" complement=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""red"" head=""kite""
-@r1 syntax.relation from=$n1 to=$c2",spacy-direct+vss,agreement
+@r1 syntax.relation from=$n1 to=$c2",spacy+spacy-direct+vss,agreement
 "add three small kids next to the bench, plus a little cloud over on the right — over on our little canvas",,,
 put six birds in the middle,"@c1 syntax.clause form=imperative verb=""put"" complement=$n1
 @n1 syntax.nominal dependent=""six"" head=""birds""
 @r1 syntax.relation marker=""in"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""middle""",spacy-direct+vss,agreement
-darw a small dog half inch above the bottom edge,,,
+darw a small dog half inch above the bottom edge,"@c1 syntax.clause form=imperative verb=""darw"" complement=$n1 complement=$n2
+@n1 syntax.nominal dependent=""a"" dependent=""small"" head=""dog""
+@n2 syntax.nominal dependent=""half"" head=""inch""
+@r1 syntax.relation marker=""above"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""bottom"" head=""edge""",spacy+vss,judge
 "draw three dkuz on the lake, from smallest to biggest","@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
 @n1 syntax.nominal dependent=""three"" head=""dkuz""
 @r1 syntax.relation marker=""on"" from=$n1 to=$n2
@@ -276,7 +330,10 @@ darw a small dog half inch above the bottom edge,,,
 @n4 syntax.nominal head=""biggest""",spacy-direct+vss,agreement
 "from largest to smallest, ptu three boats on the lake",,,
 "half hidden behind the tree, a big cloud",,,
-darw a duck a little bigger than the bird,,,
+darw a duck a little bigger than the bird,"@n1 syntax.nominal dependent=""a"" head=""duck""
+@c1 syntax.clause form=imperative verb=""darw"" modifier=""a"" modifier=""little"" modifier=""bigger"" complement=$n1
+@r1 syntax.relation attachment=ambiguous marker=""than"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""bird""",vss,agreement
 "drop a small duck beside the tent facing left, and finally a low fence behind the duck, and a big tent on the left",,,
 "a little cloud over on the right, then please leave the top left of the picture clear, always — that is how the picture goes",,,
 "set a kite at the top right corner, and add a cloud right above it","@c1 syntax.clause form=imperative verb=""set"" complement=$n1
@@ -295,9 +352,19 @@ put two more boats on top of the boat,,,
 put two more cats on top of the cat,,,
 i need two more cats on top of the cat,,,
 set two more kites on top of the kite,,,
-upt a pair of trees on each side of the house,,,
+upt a pair of trees on each side of the house,"@c1 syntax.clause form=imperative verb=""upt"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""pair"" dependent=""of"" head=""trees""
+@r1 syntax.relation marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""each"" head=""side""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""house""",vss,agreement
 "a pair of clouds on each side of the sun, that's all",,,
-add a pair of benches on each side of the lake,,,
+add a pair of benches on each side of the lake,"@c1 syntax.clause form=imperative verb=""add"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""pair"" dependent=""of"" head=""benches""
+@r1 syntax.relation marker=""on"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""each"" head=""side""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""lake""",vss,agreement
 "let there be a small kid sitting with his legs stretched out at the bottom, and a little cloud over on the right",,,
 "can you place a medium kid reaching out on the left, just like that",,,
 draw me a balloon half the size of the sun,,,
@@ -314,8 +381,11 @@ draw a big snu at the very left,"@c1 syntax.clause form=imperative verb=""draw""
 put a small dog down on the grass,"@c1 syntax.clause form=imperative verb=""put"" modifier=""down"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""small"" head=""dog""
 @r1 syntax.relation marker=""on"" from=$c1 to=$n2
-@n2 syntax.nominal dependent=""the"" head=""grass""",spacy-direct+vss,agreement
-add a pair of ducks on the lake,,,
+@n2 syntax.nominal dependent=""the"" head=""grass""",spacy+spacy-direct+vss,agreement
+add a pair of ducks on the lake,"@c1 syntax.clause form=imperative verb=""add"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""pair"" dependent=""of"" head=""ducks""
+@r1 syntax.relation marker=""on"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""lake""",vss,agreement
 put a few clouds in the sky,"@c1 syntax.clause form=imperative verb=""put"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""few"" head=""clouds""
 @r1 syntax.relation marker=""in"" from=$n1 to=$n2
@@ -328,14 +398,14 @@ darw a bunch of big balloons above the house,,,
 @n3 syntax.nominal dependent=""a"" head=""bench""
 @n4 syntax.nominal dependent=""three"" head=""ducks""
 @k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n3 conjunct=$n4 conjunct=$n5
-@n5 syntax.nominal dependent=""a"" head=""girl""",spacy-direct+vss,agreement
+@n5 syntax.nominal dependent=""a"" head=""girl""",spacy+spacy-direct+vss,agreement
 "show me a windmill, a cart, a farmer, and two haystacks","@c1 syntax.clause form=imperative verb=""show"" complement=$n1 complement=$k1
 @n1 syntax.nominal head=""me""
 @n2 syntax.nominal dependent=""a"" head=""windmill""
 @n3 syntax.nominal dependent=""a"" head=""cart""
 @n4 syntax.nominal dependent=""a"" head=""farmer""
 @k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n3 conjunct=$n4 conjunct=$n5
-@n5 syntax.nominal dependent=""two"" head=""haystacks""",spacy-direct+vss,agreement
+@n5 syntax.nominal dependent=""two"" head=""haystacks""",spacy+spacy-direct+vss,agreement
 "make the beach scene with two medium yellow dunes on the left, a medium red kite above it, a small kid running next to the dune, two small white gulls at the top, a small blue hat on the kid, and a medium brown dog next to the kid",,,
 "draw two dunes, a kite, a kid, and a hat on the kid","@c1 syntax.clause form=imperative verb=""draw"" complement=$k1
 @n1 syntax.nominal dependent=""two"" head=""dunes""
@@ -351,7 +421,7 @@ darw a bunch of big balloons above the house,,,
 @n3 syntax.nominal dependent=""a"" head=""girl""
 @n4 syntax.nominal dependent=""four"" head=""shells""
 @k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n3 conjunct=$n4 conjunct=$n5
-@n5 syntax.nominal dependent=""a"" head=""seagull""",spacy-direct+vss,agreement
+@n5 syntax.nominal dependent=""a"" head=""seagull""",spacy+spacy-direct+vss,agreement
 "draw a medium brown baskett on the left, four small white shells right in the basket, a small girl sitting toward the right edge, and a medium white seagull next to the basket",,,
 "make the camp scene with a large orange tent on the left, a medium red campfire next to it, a small brown owl on top of the tent, three small white stars at the top, a small boy sitting next to the campfire, and two medium brown logs next to the campfire",,,
 "give me a large blue tent toward the left edge, a medium black telescope in the middle, four small white stars up at the top, and a small boy standing right next to the telescope","@c1 syntax.clause form=imperative verb=""give"" modifier=""up"" complement=$n1 complement=$k1
@@ -377,7 +447,7 @@ darw a bunch of big balloons above the house,,,
 @n3 syntax.nominal dependent=""a"" head=""boy""
 @n4 syntax.nominal dependent=""four"" head=""stars""
 @k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n3 conjunct=$n4 conjunct=$n5
-@n5 syntax.nominal dependent=""a"" head=""tent""",spacy-direct+vss,agreement
+@n5 syntax.nominal dependent=""a"" head=""tent""",spacy+spacy-direct+vss,agreement
 "can you draw a medium blue bus stop on the left, next to the bus stop, a medium brown bench, and a medium woman sitting right next to the bench",,,
 "i want a medium brown desk on the left-hand side, two small yellow birds just above the desk, a medium blue globe on the desk, and a small boy sitting over at the desk","@n1 syntax.nominal head=""i""
 @c1 syntax.clause form=declarative verb=""want"" modifier=""just"" subject=$n1 complement=$k1
@@ -395,14 +465,17 @@ darw a bunch of big balloons above the house,,,
 @c2 syntax.clause form=nonfinite verb=""sitting"" modifier=""over""
 @r4 syntax.relation marker=""at"" from=$c2 to=$n9
 @n9 syntax.nominal dependent=""the"" head=""desk""
-@r5 syntax.relation from=$n8 to=$c2",spacy-direct+vss,agreement
+@r5 syntax.relation from=$n8 to=$c2",spacy+spacy-direct+vss,agreement
 the balloon at the bottom is missing,,,
 there is one more cta by the bench,"@n1 syntax.nominal head=""there""
 @c1 syntax.clause form=declarative verb=""is"" subject=$n1 complement=$n2
 @n2 syntax.nominal dependent=""one"" dependent=""more"" head=""cta""
 @r1 syntax.relation marker=""by"" from=$n2 to=$n3
 @n3 syntax.nominal dependent=""the"" head=""bench""",spacy-direct+vss,agreement
-around the house: a few flowers,,,
+around the house: a few flowers,"@r1 syntax.relation marker=""around"" from=$c1 to=$n1
+@n1 syntax.nominal dependent=""the"" head=""house""
+@n2 syntax.nominal dependent=""a"" dependent=""few"" head=""flowers""
+@c1 syntax.clause form=fragment complement=$n2",spacy+vss,agreement
 draw six tres up and down the hill,,,
 a handful of bushes throughout the garden,"@n1 syntax.nominal dependent=""a"" head=""handful""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
@@ -413,17 +486,41 @@ a handful of bushes throughout the garden,"@n1 syntax.nominal dependent=""a"" he
 draw a few tny stars in the sky,"@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""few"" dependent=""tny"" head=""stars""
 @r1 syntax.relation marker=""in"" from=$n1 to=$n2
-@n2 syntax.nominal dependent=""the"" head=""sky""",spacy-direct+vss,agreement
+@n2 syntax.nominal dependent=""the"" head=""sky""",spacy+spacy-direct+vss,agreement
 add three big boats,"@c1 syntax.clause form=imperative verb=""add"" complement=$n1
-@n1 syntax.nominal dependent=""three"" dependent=""big"" head=""boats""",spacy-direct+vss,agreement
-"a couple of tall trees by the fence, and a big bench down at the bottom — just like that in the scene",,,
+@n1 syntax.nominal dependent=""three"" dependent=""big"" head=""boats""",spacy+spacy-direct+vss,agreement
+"a couple of tall trees by the fence, and a big bench down at the bottom — just like that in the scene","@n1 syntax.nominal dependent=""a"" dependent=""couple"" dependent=""of"" dependent=""tall"" head=""trees""
+@r1 syntax.relation marker=""by"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""fence""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n1 conjunct=$n3
+@n3 syntax.nominal dependent=""a"" dependent=""big"" head=""bench""
+@c1 syntax.clause form=fragment modifier=""down"" modifier=""just"" complement=$k1
+@r2 syntax.relation marker=""at"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""bottom""
+@r3 syntax.relation marker=""like"" from=$n4 to=$n5
+@n5 syntax.nominal head=""that""
+@r4 syntax.relation marker=""in"" from=$c1 to=$n6
+@n6 syntax.nominal dependent=""the"" head=""scene""",vss,agreement
 add several small clouds,"@c1 syntax.clause form=imperative verb=""add"" complement=$n1
-@n1 syntax.nominal dependent=""several"" dependent=""small"" head=""clouds""",spacy-direct+vss,agreement
+@n1 syntax.nominal dependent=""several"" dependent=""small"" head=""clouds""",spacy+spacy-direct+vss,agreement
 six small balloons,"@n1 syntax.nominal dependent=""six"" dependent=""small"" head=""balloons""
-@c1 syntax.clause form=fragment complement=$n1",spacy-direct+vss,agreement
-near the tent: six small balloons,,,
-put a sign with the word 'BAKERY' up above the gate,,,
-stick the word 'CAFE' at the bottom of the page,,,
+@c1 syntax.clause form=fragment complement=$n1",spacy+spacy-direct+vss,agreement
+near the tent: six small balloons,"@r1 syntax.relation marker=""near"" from=$c1 to=$n1
+@n1 syntax.nominal dependent=""the"" head=""tent""
+@n2 syntax.nominal dependent=""six"" dependent=""small"" head=""balloons""
+@c1 syntax.clause form=fragment complement=$n2",spacy+vss,agreement
+put a sign with the word 'BAKERY' up above the gate,"@c1 syntax.clause form=imperative verb=""put"" modifier=""up"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""sign""
+@r1 syntax.relation marker=""with"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""word"" dependent=""BAKERY""
+@r2 syntax.relation marker=""above"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""gate""",vss,agreement
+stick the word 'CAFE' at the bottom of the page,"@c1 syntax.clause form=imperative verb=""stick"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""word"" dependent=""CAFE""
+@r1 syntax.relation marker=""at"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""bottom""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""page""",vss,agreement
 missing: a meadow along the bottom edge,,,
 a patch of woods on the left,"@n1 syntax.nominal dependent=""a"" head=""patch""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
@@ -431,18 +528,26 @@ a patch of woods on the left,"@n1 syntax.nominal dependent=""a"" head=""patch""
 @r2 syntax.relation marker=""on"" from=$n1 to=$n3
 @n3 syntax.nominal dependent=""the"" head=""left""
 @c1 syntax.clause form=fragment complement=$n1",spacy-direct+vss,agreement
-on the left: a patch of woods,,,
+on the left: a patch of woods,"@r1 syntax.relation marker=""on"" from=$c1 to=$n1
+@n1 syntax.nominal dependent=""the"" head=""left""
+@n2 syntax.nominal dependent=""a"" head=""patch""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal head=""woods""
+@c1 syntax.clause form=fragment complement=$n2",spacy+vss,agreement
 missing: a patch of woods on the left,,,
 a thin brook behind the bench,"@n1 syntax.nominal dependent=""a"" dependent=""thin"" head=""brook""
 @r1 syntax.relation marker=""behind"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""bench""
-@c1 syntax.clause form=fragment complement=$n1",spacy-direct+vss,agreement
+@c1 syntax.clause form=fragment complement=$n1",spacy+spacy-direct+vss,agreement
 add a thni brook behind the bench,"@c1 syntax.clause form=imperative verb=""add"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""thni"" head=""brook""
 @r1 syntax.relation marker=""behind"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""bench""",spacy-direct+vss,agreement
 missing: a metal bucket beside the bench,,,
-on the lake: a long blue boat,,,
+on the lake: a long blue boat,"@r1 syntax.relation marker=""on"" from=$c1 to=$n1
+@n1 syntax.nominal dependent=""the"" head=""lake""
+@n2 syntax.nominal dependent=""a"" dependent=""long"" dependent=""blue"" head=""boat""
+@c1 syntax.clause form=fragment complement=$n2",spacy+vss,agreement
 draw a small pnod at the bottom. add a duck on the pond. add a tall reed by the pond.,"@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""small"" head=""pnod""
 @r1 syntax.relation marker=""at"" from=$n1 to=$n2
@@ -475,7 +580,7 @@ the scene: show a lake in the middle. show a boat on the lake. set a duck on the
 @n3 syntax.nominal dependent=""a"" head=""teacher""
 @n4 syntax.nominal dependent=""a"" head=""cage""
 @k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n3 conjunct=$n4 conjunct=$n5
-@n5 syntax.nominal dependent=""a"" head=""hamster""",spacy-direct+vss,agreement
+@n5 syntax.nominal dependent=""a"" head=""hamster""",spacy+spacy-direct+vss,agreement
 "build the party scene: a medium white chair on the left, three small red balloons above the chair, a small boy running in the middle, a small grey cat next to the chair, a small white table next to the chair, and a small girl with a laughing face next to the boy",,,
 "show me a chair, three balloons, a cat, a boy, and a girl","@c1 syntax.clause form=imperative verb=""show"" complement=$n1 complement=$k1
 @n1 syntax.nominal head=""me""
@@ -484,7 +589,7 @@ the scene: show a lake in the middle. show a boat on the lake. set a duck on the
 @n4 syntax.nominal dependent=""a"" head=""cat""
 @n5 syntax.nominal dependent=""a"" head=""boy""
 @k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n3 conjunct=$n4 conjunct=$n5 conjunct=$n6
-@n6 syntax.nominal dependent=""a"" head=""girl""",spacy-direct+vss,agreement
+@n6 syntax.nominal dependent=""a"" head=""girl""",spacy+spacy-direct+vss,agreement
 "a farm at night with a pond, an owl, a girl, and three ducks",,,
 "draw a rocket, a girl, a cat, a desk, and three stars","@c1 syntax.clause form=imperative verb=""draw"" complement=$k1
 @n1 syntax.nominal dependent=""a"" head=""rocket""
@@ -492,7 +597,7 @@ the scene: show a lake in the middle. show a boat on the lake. set a duck on the
 @n3 syntax.nominal dependent=""a"" head=""cat""
 @n4 syntax.nominal dependent=""a"" head=""desk""
 @k1 syntax.coordination conjunction=""and"" conjunct=$n1 conjunct=$n2 conjunct=$n3 conjunct=$n4 conjunct=$n5
-@n5 syntax.nominal dependent=""three"" head=""stars""",spacy-direct+vss,agreement
+@n5 syntax.nominal dependent=""three"" head=""stars""",spacy+spacy-direct+vss,agreement
 "place a large blue window in the left part, a small girl with a happy face right next to it, a large white rocket right behind the window, two medium white chairs over on the right side, and a small grey cat right on it",,,
 "build the space station scene: four medium white chairs in a row in front of the window, a medium astronaut standing next to the chair, a small grey cat with a curious face on the chair, a medium green plant next to the astronaut, a small white cap on the astronaut, and three small yellow stars at the top",,,
 a man in the red shirt and no hat enters and stands to the right of the man in the blue shirt,,,
@@ -534,14 +639,19 @@ put a woman in the orange dress and no hat right beside the man in the orange ha
 @r4 syntax.relation from=$n3 to=$c4",spacy-direct+vss,agreement
 "the word 'BAKERY' in caps in tight Times New Roman along the bottom edge, simple",,,
 put a sign reading 'PLAY' in bold Comic Sans in the bottom right corner,,,
-paint the word 'STOP' in a monotype font across the top,,,
+paint the word 'STOP' in a monotype font across the top,"@c1 syntax.clause form=imperative verb=""paint"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""word"" dependent=""STOP""
+@r1 syntax.relation marker=""in"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""monotype"" head=""font""
+@r2 syntax.relation marker=""across"" from=$n1 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""top""",vss,agreement
 print the big word 'LOVE' in bright red Verdana down the left side,,,
 place a set of fairy lights over the tree,"@c1 syntax.clause form=imperative verb=""place"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""set""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""fairy"" head=""lights""
 @r2 syntax.relation attachment=ambiguous marker=""over"" from=$c1 to=$n3
-@n3 syntax.nominal dependent=""the"" head=""tree""",spacy-direct+vss,agreement
+@n3 syntax.nominal dependent=""the"" head=""tree""",spacy+spacy-direct+vss,agreement
 fix a thin garland across the fence,"@c1 syntax.clause form=imperative verb=""fix"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""thin"" head=""garland""
 @r1 syntax.relation marker=""across"" from=$n1 to=$n2
@@ -554,7 +664,13 @@ put a little owoden sign right above the gate reading BARKERS,"@c1 syntax.clause
 @c2 syntax.clause form=nonfinite verb=""reading"" complement=$n3
 @n3 syntax.nominal head=""BARKERS""
 @r2 syntax.relation from=$n1 to=$c2",spacy-direct+vss,agreement
-stand a small neon sign right over the bench reading OPEN LATE,,,
+stand a small neon sign right over the bench reading OPEN LATE,"@c1 syntax.clause form=imperative verb=""stand"" modifier=""right"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""small"" dependent=""neon"" head=""sign""
+@r1 syntax.relation marker=""over"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""bench""
+@c2 syntax.clause form=nonfinite verb=""reading"" complement=$n3
+@n3 syntax.nominal head=""OPEN LATE""
+@r2 syntax.relation from=$n1 to=$c2",vss,agreement
 nail a little plate beside the path with LAKESIDE painted on,,,
 "place a boy on the lawn, dressed in a red hat and a blue jacket",,,
 finish with a girl by the bench wearing a yellow dress and a red scarf,,,
@@ -568,7 +684,7 @@ a girl by the pond wearing a pink hat and a white dress,"@n1 syntax.nominal depe
 @k1 syntax.coordination conjunction=""and"" conjunct=$n3 conjunct=$n4
 @n4 syntax.nominal dependent=""a"" dependent=""white"" head=""dress""
 @c2 syntax.clause form=fragment complement=$n1
-@r2 syntax.relation from=$n1 to=$c1",spacy-direct+vss,agreement
+@r2 syntax.relation from=$n1 to=$c1",spacy+spacy-direct+vss,agreement
 include a man on the bridge wearing a black hat and a grey coat,"@c1 syntax.clause form=imperative verb=""include"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""man""
 @r1 syntax.relation marker=""on"" from=$c1 to=$n2
@@ -593,7 +709,7 @@ the dog on the lawn has to chase the cat,"@n1 syntax.nominal dependent=""the"" h
 @c1 syntax.clause form=declarative verb=""has"" subject=$n1
 @r2 syntax.relation marker=""to"" from=$c1 to=$c2
 @c2 syntax.clause form=nonfinite verb=""chase"" complement=$n3
-@n3 syntax.nominal dependent=""the"" head=""cat""",spacy-direct+vss,agreement
+@n3 syntax.nominal dependent=""the"" head=""cat""",spacy+spacy-direct+vss,agreement
 amke the dog on the lawn chase the cat,,,
 "the cat by the bench, following the duck","@n1 syntax.nominal dependent=""the"" head=""cat""
 @r1 syntax.relation marker=""by"" from=$n1 to=$n2
@@ -601,14 +717,14 @@ amke the dog on the lawn chase the cat,,,
 @c1 syntax.clause form=nonfinite verb=""following"" complement=$n3
 @n3 syntax.nominal dependent=""the"" head=""duck""
 @c2 syntax.clause form=fragment complement=$n1
-@r2 syntax.relation from=$c2 to=$c1",spacy-direct+vss,agreement
+@r2 syntax.relation from=$c2 to=$c1",spacy+spacy-direct+vss,agreement
 the kid in the garden has to feed the ducks,"@n1 syntax.nominal dependent=""the"" head=""kid""
 @r1 syntax.relation marker=""in"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""garden""
 @c1 syntax.clause form=declarative verb=""has"" subject=$n1
 @r2 syntax.relation marker=""to"" from=$c1 to=$c2
 @c2 syntax.clause form=nonfinite verb=""feed"" complement=$n3
-@n3 syntax.nominal dependent=""the"" head=""ducks""",spacy-direct+vss,agreement
+@n3 syntax.nominal dependent=""the"" head=""ducks""",spacy+spacy-direct+vss,agreement
 "place a kid, beside the path","@c1 syntax.clause form=imperative verb=""place"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""kid""
 @r1 syntax.relation marker=""beside"" from=$n1 to=$n2
