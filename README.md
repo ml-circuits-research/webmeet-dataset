@@ -3,7 +3,14 @@
 Training data for the PSys2 reader. The reader takes a message someone types in one tab of the app (Drawing, Diagram,
 Document, Calendar). From that message it produces SOP Lang wires that say what was asked.
 
-Each row is one message with the wires the reader should produce for it. Use the [shared grading legend](semantic/LEGEND.md) to report formaliser quality.
+Each row is one message with the wires the reader should produce for it. The columns are `text,sop`; when a message
+has more than one reasonable reading, the extra ones go in `sop1,sop2,…` of the *same* row — every populated cell is
+one independent circuit (an interpretation), an empty or whitespace-only cell means no such alternative, the header
+names are canonical (`sop1`, never `sop01`), the first column after `text` (`sop`) is required and no column labels or
+ranks the alternatives. Every checker and review diagnostic names the numeric record, the line it starts on and the
+SOP column. Packing repeated rows into those columns keeps the set of (text, circuit) pairs: `node tools/review.mjs`
+compares that set, so nothing is lost and no alternative is preferred. Use the [shared grading legend](semantic/LEGEND.md) to
+report formaliser quality.
 
 ## Two layers of labels
 
@@ -138,18 +145,21 @@ message when it is given, says:
 - **Leave out what the text does not say**: no page objects (context wires, `thing` links, ids of the page), no
   `goes_to` (the folder gives the tab), no kind or value the text does not say. A value is either words of the text or
   a value of a closed list (blue, near, left_of, much_more). Never write a summary phrase like "x inverted".
-- **Write a lookup** for what a request needs and the text does not give. For "make it shorter" with no previous
-  message, write `lookup key=thing from=page`; with a previous message that names the thing, use `from=previous`.
-  Better still, add examples where the text itself makes the referent clear.
+- **Write a lookup** for what a request needs and the text does not give: `lookup key=thing` on the target. Never say
+  where the referent comes from (`from=page`, `from=previous`, `from=any`): `from` defaults to `any`, and a referent
+  from an earlier message is history this dataset does not carry. Better still, add examples where the text itself
+  makes the referent clear.
 - **Refer to an earlier answer** with `@r2.l2 w.request.lookup request=$r2 key=answer from=request antecedent=$r1 words=them`.
   Name the earlier ask in the same message and quote the referring phrase. Keep any chart or other target lookup on
-  its own wire. If the answer comes from the previous message, write `key=answer from=previous` with evidence words,
-  keep the `w.request.previous` wire, and omit the local antecedent.
+  its own wire. An answer that would come from a previous message is not modelled here: the dataset has no history
+  wires, so such a row waits until the pipeline that resolves history exists.
 - **Put greetings, politeness, hedges and remarks around the request in filler wires.** Words that carry meaning must
   be the evidence of a request, target, constraint or unread wire. Never hide them as filler.
-- **Use the reader keys of the file's tab**, declared as SOP facts in `sop-knowledge-worlds`
-  `docs/worlds/w.request/shards/keys.sop` (`w.request.key tab=… family=… name=… head=… value=…`), and only the values of a key's closed list (or mark
-  `open_value=true` for words outside it, as written).
+- **Use a key the knowledge declares**, wherever it declares it (`sop-knowledge-worlds`
+  `docs/worlds/w.request/shards/keys.sop`: `w.request.key family=… name=… head=… value=…`). No folder conditions a
+  meaning: the checker accepts any declared key and reports a name that two worlds declare with two meanings instead of
+  borrowing one world's values. A value of a closed list must be on it, or the row marks `open_value=true` for a word
+  outside it, as written.
 - **Vary the sentences**: start each row from a real line of a source corpus; no frame with values swapped in.
 - **A one-word value may be written bare** (`value=dusk`, `text=harbour`), as SOP Lang allows; quotes are needed only
   for phrases (`words="at dusk"`). Both forms are accepted.
@@ -286,14 +296,15 @@ spurious extra targets and part-scope mistakes, so no automatic rewrite follows 
 ## Where some examples come from
 
 Most rows are written here. `drawing/scenes-22.csv` carries the examples migrated from PSys2's
-paraphrase store: `psys2/training/paraphrases/out/art.draw.jsonl` at psys2 `dbcfba2db`. It now holds 98 examples
-from nine source groups — `draw-a-red-house` (11, no setup), `color-the-house-blue` (10) and
+paraphrase store: `psys2/training/paraphrases/out/art.draw.jsonl` at psys2 `dbcfba2db`. It now holds 142 examples
+from thirteen source groups — `draw-a-red-house` (11, no setup), `color-the-house-blue` (10) and
 `make-the-house-bigger` (11) in the first batch; `change-the-picture-to-night` (11, no setup) and
 `set-the-cat-size-to-huge` (11, setup `Draw a cat.`) in the second; and
 `change-the-scene-to-sunset`, `draw-a-blue-car`, `put-grass-on-the-ground` and
-`paint-the-sky-dark-blue` (11 each, no setup) in the third. Every single-setup group keeps the
-source's setup message as `w.request.previous` with a previous-message lookup where it supplies
-the referent. Wording is unchanged; the circuits were authored here in the current `w.request`
+`paint-the-sky-dark-blue` (11 each, no setup) in the third. **No setup message is kept**: a previous
+message is history, and a circuit here says only what the current text says (a pronoun whose referent
+would come from an earlier message is left as `fill=context` with a lookup, never resolved by an
+invented antecedent). Wording is unchanged; the circuits were authored here in the current `w.request`
 form (the source's `core.request` labels are legacy and were not used). The legacy store stays in
 place: the path and revision above are the provenance, and the records not migrated yet remain
 available for the next batches — the two-command groups `move-the-tree-to-the-left`,
@@ -306,8 +317,25 @@ not have yet
 
 The second and third batches add 66 examples from the same source revision: 22 in the second
 (`change-the-picture-to-night`, `set-the-cat-size-to-huge`) and 44 in the third (the four no-setup
-groups above). Prior records and their circuits remain unchanged; the source still retains the
-deferred context-bearing and multi-command records.
+groups above). The fourth batch covers `move-the-sun-to-the-top-right`,
+`nudge-the-sun-a-bit-higher`, `turn-the-car-around` and `count-everything-in-the-picture` (11 each),
+again from the current text only: the source's setup sentence is not carried in, so a record that
+needs it stays out rather than borrowing a referent. The 88 `w.request.previous` wires these batches
+once had were removed in the cleanup described above; the source still retains the deferred
+context-bearing and multi-command records.
+
+The fifth and sixth batches do not source circuits from one author alone. Every distinct text of the
+source (`568`) and every row already here were fed as `{"text": …}` to both readers on their common
+`--batch` interface — `pro-formaliser` (Prolog) and `nl-formaliser` (Z3) — and the two candidate sets
+were compared as sets of circuits, normalising `drawn.color` to the canonical `drawn.colour`, not as
+byte-identical first answers. Of the texts still missing here, `160` now have a row: the `88` where
+both engines reach a common reading and the `72` where one engine's reading quotes complete evidence
+from the text (every value or `words=` is in it, the target's kind is said, nothing left in `unread`).
+The other `95` stay out on purpose and are listed in `management/questions.md`: they need a key the
+schema does not have (an export target, `part.kind`) or they only carry a reading that passes the
+checker while saying nothing (`Go to the paint tab.` as `drawn.id value=Go`). A row imported this way
+quotes the text as written and drops the engine's `from=any|page|previous` guess, because a referent
+the text does not give is left out, not invented.
 
 ## Contents (2026-11-23)
 
