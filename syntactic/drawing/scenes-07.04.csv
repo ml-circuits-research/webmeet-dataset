@@ -2256,14 +2256,14 @@ si there a cat by the bench facing the house?,,,
 which way is the boy on the lawn facing?,,,
 which direction is the boy on the lawn facing?,,,
 what way does the boy on the lawn face?,,,
-tell me which way the boy on the lawn is facing,"@c1 syntax.clause form=imperative verb=""tell"" complement=$n1 complement=$n2
+tell me which way the boy on the lawn is facing,"@c1 syntax.clause form=imperative verb=""tell"" complement=$n1
 @n1 syntax.nominal head=""me""
 @n2 syntax.nominal dependent=""which"" head=""way""
 @n3 syntax.nominal dependent=""the"" head=""boy""
 @r1 syntax.relation marker=""on"" from=$n3 to=$n4
 @n4 syntax.nominal dependent=""the"" head=""lawn""
-@c2 syntax.clause form=interrogative auxiliary=""is"" verb=""facing"" subject=$n3 complement=$n2
-@r2 syntax.relation from=$n2 to=$c2",distilbert,judge
+@c2 syntax.clause form=declarative auxiliary=""is"" verb=""facing"" subject=$n3 complement=$n2
+@r2 syntax.relation from=$c1 to=$c2",spacy,judge
 where is the boy on the lawn facing?,,,
 check which direction the boy on the lawn is facing,,,
 the boy on the lawn — which way is it facing?,,,
@@ -2677,9 +2677,9 @@ which way is the oby on the lawn facing?,,,
 "next, draw a castle courtyard in the rain at night: a knight, a princess, two lanterns, and a dog",,,
 "now darw a castle courtyard in the rain at night: a medium knight standing facing right on the far left, a medium brown dog right next to the knight, a small princess with a sad face toward the right edge, and two small yellow lanterns on the gate",,,
 "now draw a castle courtyard in the rain at night: a medium knightt standing facing right on the far left, a medium brown dog right next to the knight, a small princess with a sad face toward the right edge, and two small yellow lanterns on the gate",,,
-"hey - also put a castle courtyard together in the rain at night: a medium knight standing facing right over on the left side, a medium brown dog just next to the knight, two small yellow lanterns on the gate, and a small princess with a sad face on the right-hand side","@c1 syntax.clause form=imperative discourse=""hey"" modifier=""also"" verb=""put"" modifier=""together"" complement=$n1
+"hey - also put a castle courtyard together in the rain at night: a medium knight standing facing right over on the left side, a medium brown dog just next to the knight, two small yellow lanterns on the gate, and a small princess with a sad face on the right-hand side","@c1 syntax.clause form=imperative discourse=""hey"" modifier=""also"" verb=""put"" modifier=""together"" modifier=""just"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""castle"" head=""courtyard""
-@r1 syntax.relation marker=""in"" from=$c1 to=$n2
+@r1 syntax.relation marker=""in"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""rain""
 @r2 syntax.relation marker=""at"" from=$c1 to=$n3
 @n3 syntax.nominal head=""night""
@@ -2688,7 +2688,7 @@ which way is the oby on the lawn facing?,,,
 @c3 syntax.clause form=nonfinite verb=""facing"" modifier=""right"" modifier=""over""
 @r3 syntax.relation marker=""on"" from=$c3 to=$n5
 @n5 syntax.nominal dependent=""the"" dependent=""left"" head=""side""
-@n6 syntax.nominal dependent=""a"" dependent=""medium"" dependent=""brown"" head=""dog"" dependent=""just""
+@n6 syntax.nominal dependent=""a"" dependent=""medium"" dependent=""brown"" head=""dog""
 @r4 syntax.relation marker=""next to"" from=$n6 to=$n7
 @n7 syntax.nominal dependent=""the"" head=""knight""
 @n8 syntax.nominal dependent=""two"" dependent=""small"" dependent=""yellow"" head=""lanterns""
@@ -2702,7 +2702,7 @@ which way is the oby on the lawn facing?,,,
 @n12 syntax.nominal dependent=""the"" dependent=""right"" dependent=""hand"" head=""side""
 @r8 syntax.relation from=$n1 to=$k1
 @r9 syntax.relation from=$n4 to=$c2
-@r10 syntax.relation from=$c2 to=$c3",spacy,judge
+@r10 syntax.relation from=$c2 to=$c3",distilbert,judge
 "now show me a castle courtyard in the rain at night: a small princess with a sad face over on the right side, a medium knight standing facing right toward the left edge, a medium brown dog just next to the knight, and two small yellow lanterns on the gate, thanks",,,
 "draw a castle courtyard in the fog at dusk: a medium sentry standing next to the gate, a medium lord just in front of the tower, a large brown horse right behind the tower, and two small yellow lanterns next to the sentry",,,
 "put a castle courtyard together in the fog at dusk: a medium sentry standing right next to the gate, a medium lord right in front of the tower, two small yellow lanterns next to the sentry, and a large brown horse just behind the tower",,,
@@ -2945,11 +2945,10 @@ which way is the oby on the lawn facing?,,,
 @r2 syntax.relation from=$n2 to=$k1",spacy-direct+vss,agreement
 "hey - put a farm together in the early morning: two large brown cows just behind the fence, a small girl sitting facing right just next to the fence, three small white hens next to the barn, and a medium grey cat right next to the girl",,,
 "show me a farm in the early morning: a small girl sitting facing right next to the fence, a medium grey cat right next to the girl, three small white hens just next to the barn, and two large brown cows behind the fence, thanks",,,
-"draw a farm in the low mist in the early morning: a small boy running next to the apple tree, a small girl with a happy face over on the right side, two medium white sheep right behind the fence, and a large brown dog next to the girl","@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
-@n1 syntax.nominal dependent=""a"" head=""farm""
-@r1 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n2
+"draw a farm in the low mist in the early morning: a small boy running next to the apple tree, a small girl with a happy face over on the right side, two medium white sheep right behind the fence, and a large brown dog next to the girl","@n1 syntax.nominal dependent=""a"" head=""farm""
+@r1 syntax.relation marker=""in"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""low"" head=""mist""
-@r2 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n3
+@r2 syntax.relation marker=""in"" from=$n2 to=$n3
 @n3 syntax.nominal dependent=""the"" dependent=""early"" head=""morning""
 @n4 syntax.nominal dependent=""a"" dependent=""small"" head=""boy""
 @c2 syntax.clause form=nonfinite verb=""running""
@@ -2957,10 +2956,11 @@ which way is the oby on the lawn facing?,,,
 @n5 syntax.nominal dependent=""the"" dependent=""apple"" head=""tree""
 @n6 syntax.nominal dependent=""a"" dependent=""small"" head=""girl""
 @r4 syntax.relation marker=""with"" from=$n6 to=$n7
-@n7 syntax.nominal dependent=""a"" dependent=""happy"" head=""face"" dependent=""over""
-@r5 syntax.relation marker=""on"" from=$n7 to=$n8
+@n7 syntax.nominal dependent=""a"" dependent=""happy"" head=""face""
+@r5 syntax.relation marker=""on"" from=$c1 to=$n8
 @n8 syntax.nominal dependent=""the"" dependent=""right"" head=""side""
-@n9 syntax.nominal dependent=""two"" dependent=""medium"" dependent=""white"" head=""sheep"" dependent=""right""
+@c1 syntax.clause form=imperative verb=""draw"" modifier=""over"" modifier=""right"" complement=$n1
+@n9 syntax.nominal dependent=""two"" dependent=""medium"" dependent=""white"" head=""sheep""
 @r6 syntax.relation marker=""behind"" from=$n9 to=$n10
 @n10 syntax.nominal dependent=""the"" head=""fence""
 @k1 syntax.coordination conjunction=""and"" conjunct=$n4 conjunct=$n6 conjunct=$n9 conjunct=$n11
@@ -2968,7 +2968,7 @@ which way is the oby on the lawn facing?,,,
 @r7 syntax.relation marker=""next to"" from=$n11 to=$n12
 @n12 syntax.nominal dependent=""the"" head=""girl""
 @r8 syntax.relation from=$n1 to=$k1
-@r9 syntax.relation from=$n4 to=$c2",spacy,judge
+@r9 syntax.relation from=$n4 to=$c2",distilbert+vss,judge
 "put a farm together in the low mist in the early morning: a small boy running right next to the apple tree, a small girl with a happy face toward the right edge, a large brown dog next to the girl, and two medium white sheep just behind the fence","@c1 syntax.clause form=imperative verb=""put"" modifier=""together"" modifier=""just"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""farm""
 @r1 syntax.relation marker=""in"" from=$n1 to=$n2
