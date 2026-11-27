@@ -53,9 +53,20 @@ for(const path of conversionPaths){
     converted.set(text,readings.length>0&&readings.every(sop=>hasCompleteSource(validate(text,sop))))
   }
 }
+const raw=new Map()
+const rawPaths=paths.filter(path=>/^annotations\/nlu\/v1\/raw-conversions\/(?:vibe|sol)\/[^/]+\.jsonl\.gz$/u.test(path))
+for(const path of rawPaths){
+  const bytes=execFileSync('git',['-C',root,'show',revision+':'+path],{maxBuffer:128*1024*1024})
+  for(const line of gunzipSync(bytes).toString('utf8').split('\n').filter(Boolean)){
+    const {text,readings,status}=JSON.parse(line)
+    if(typeof text!=='string'||!Array.isArray(readings)||!['raw','rework'].includes(status)||
+      (status==='raw')!==(readings.length>0))throw Error('Invalid raw conversion in '+path)
+    raw.set(text,raw.get(text)===true||status==='raw')
+  }
+}
 const matched=new Set()
 const files=[]
-const rowCounts=()=>({rows:0,legacyOnly:0,nativeCurrent:0,nativeNeedsRecheck:0,withoutDirectAuditDigest:0,convertedStatic:0,conversionRework:0,pendingConversion:0})
+const rowCounts=()=>({rows:0,legacyOnly:0,nativeCurrent:0,nativeNeedsRecheck:0,withoutDirectAuditDigest:0,convertedStatic:0,conversionRework:0,pendingConversion:0,rawAvailable:0,rawRework:0,pendingFirstPass:0})
 const totals=rowCounts()
 for(const path of paths.filter(path=>path.endsWith('.csv'))){
   const input=readRecords(git(root,'show',revision+':'+path))
@@ -69,6 +80,9 @@ for(const path of paths.filter(path=>path.endsWith('.csv'))){
       if(!converted.has(text))counts.pendingConversion++
       else if(converted.get(text))counts.convertedStatic++
       else counts.conversionRework++
+      if(raw.get(text)===true)counts.rawAvailable++
+      else if(raw.has(text))counts.rawRework++
+      if(!converted.get(text)&&!raw.get(text))counts.pendingFirstPass++
       continue
     }
     matched.add(text)
@@ -86,4 +100,5 @@ console.log(JSON.stringify({revision,
   validatorSha256:hash(readFileSync(join(nluDir,'lib/check-analysis.mjs'))),
   nativeSchemaSha256:hash(readFileSync(join(nluDir,'schemas/nlu/schema.sop'))),
   totals,registry:{shards:registry.length,exactTexts:native.size,unmatchedExactTexts:native.size-matched.size,circuits,currentCircuits},
-  conversionRegistry:{shards:conversionPaths.length,exactTexts:converted.size},findingCounts,files},null,2))
+  conversionRegistry:{shards:conversionPaths.length,exactTexts:converted.size},
+  rawRegistry:{shards:rawPaths.length,exactTexts:raw.size},findingCounts,files},null,2))
