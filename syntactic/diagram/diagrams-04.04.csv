@@ -480,11 +480,15 @@ hey thanks for the help,"@c1 syntax.clause form=fragment discourse=""hey"" disco
 @n1 syntax.nominal dependent=""the"" head=""help""",spacy-direct+vss,agreement
 "that's perfect, ty",,,
 "okay that's all for now, cheers",,,
-thx,,,
+thx,"@c1 syntax.clause form=fragment discourse=""thx""",prolog+spacy+z3,judge
 bye,"@c1 syntax.clause form=fragment discourse=""bye""",spacy-direct+vss,agreement
 "yes, that looks right","@c1 syntax.clause form=declarative discourse=""yes"" verb=""looks"" modifier=""right"" subject=$n1
 @n1 syntax.nominal head=""that""",spacy-direct+vss,agreement
-"I'm bored, what should I cook",,,
+"I'm bored, what should I cook","@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative auxiliary=""'m"" verb=""bored"" subject=$n1
+@n2 syntax.nominal head=""what""
+@c2 syntax.clause form=interrogative auxiliary=""should"" verb=""cook"" subject=$n3 complement=$n2
+@n3 syntax.nominal head=""I""",distilbert,judge
 hmm thanks,"@c1 syntax.clause form=fragment discourse=""hmm"" discourse=""thanks""",spacy-direct+vss,agreement
 "i think this works, thanks",,,
 yeah do that,"@c1 syntax.clause form=imperative discourse=""yeah"" verb=""do"" complement=$n1
@@ -651,7 +655,17 @@ sort Sales from largest to smallest.,"@c1 syntax.clause form=imperative verb=""s
 @n2 syntax.nominal head=""largest""
 @r2 syntax.relation marker=""to"" from=$c1 to=$n3
 @n3 syntax.nominal head=""smallest""",spacy-direct+vss,agreement
-Let us sort Q1 bars from largest to smallest. That would help.,,,
+Let us sort Q1 bars from largest to smallest. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""us""
+@c2 syntax.clause form=nonfinite verb=""sort"" complement=$n2
+@n2 syntax.nominal dependent=""Q1"" head=""bars""
+@r1 syntax.relation attachment=ambiguous marker=""from"" from=$c2 to=$n3
+@n3 syntax.nominal head=""largest""
+@r2 syntax.relation attachment=ambiguous marker=""to"" from=$c2 to=$n4
+@n4 syntax.nominal head=""smallest""
+@n5 syntax.nominal head=""That""
+@c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n5
+@r3 syntax.relation from=$c1 to=$c2",prolog+z3,judge
 "Hey, sort Scores from largest to smallest.",,,
 "Hey, sort Expenses from largest to smallest.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""sort"" complement=$n1
 @n1 syntax.nominal head=""Expenses""
@@ -959,7 +973,15 @@ Could you sort Prices from largest to smallest. I appreciate it.,"@c1 syntax.cla
 @n5 syntax.nominal head=""I""
 @c2 syntax.clause form=declarative verb=""appreciate"" subject=$n5 complement=$n6
 @n6 syntax.nominal head=""it""",spacy-direct+vss,agreement
-"Please, sort Hours per project from largest to smallest. Thanks!",,,
+"Please, sort Hours per project from largest to smallest. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""sort"" complement=$n1
+@n1 syntax.nominal head=""Hours""
+@r1 syntax.relation attachment=ambiguous marker=""per"" from=$c1 to=$n2
+@n2 syntax.nominal head=""project""
+@r2 syntax.relation attachment=ambiguous marker=""from"" from=$c1 to=$n3
+@n3 syntax.nominal head=""largest""
+@r3 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n4
+@n4 syntax.nominal head=""smallest""
+@c2 syntax.clause form=fragment discourse=""Thanks""",prolog+z3,judge
 "Hey, sort Survey results from largest to smallest. That would help.",,,
 "Hey, sort Market share from largest to smallest.",,,
 "Please, sort Traffic from largest to smallest. Thanks!",,,

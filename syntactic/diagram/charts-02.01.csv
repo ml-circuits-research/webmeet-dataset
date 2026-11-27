@@ -75,11 +75,18 @@ leave the legend out,"@c1 syntax.clause form=imperative verb=""leave"" modifier=
 I don't want a legend on the bar chart,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative auxiliary=""do"" negation=""n't"" verb=""want"" subject=$n1 complement=$n2
 @n2 syntax.nominal dependent=""a"" head=""legend""
-@r1 syntax.relation marker=""on"" from=$n2 to=$n3
-@n3 syntax.nominal dependent=""the"" dependent=""bar"" head=""chart""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""bar"" head=""chart""",prolog+z3,judge
 "the legend is eating space we need for the labels, take it off",,,
 "there's only one series anyway, so hide the legend",,,
-"for the printout, strip the legend from the Sales by month chart",,,
+"for the printout, strip the legend from the Sales by month chart","@r1 syntax.relation marker=""for"" from=$c1 to=$n1
+@n1 syntax.nominal dependent=""the"" head=""printout""
+@c1 syntax.clause form=imperative verb=""strip"" complement=$n2
+@n2 syntax.nominal dependent=""the"" head=""legend""
+@r2 syntax.relation marker=""from"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""Sales""
+@r3 syntax.relation marker=""by"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""month"" head=""chart""",distilbert,judge
 hide the legend on the Expenses by department chart and the values as well,,,
 "the legend just clutters the bar chart, so take the legend off","@n1 syntax.nominal dependent=""the"" head=""legend""
 @c1 syntax.clause form=declarative modifier=""just"" verb=""clutters"" subject=$n1 complement=$n2
@@ -427,10 +434,10 @@ clean the grid off the Revenue chart,"@c1 syntax.clause form=imperative verb=""c
 @n2 syntax.nominal dependent=""the"" dependent=""Revenue"" head=""chart""",spacy-direct+vss,judge
 turn the grid off on Expenses by department,"@c1 syntax.clause form=imperative verb=""turn"" modifier=""off"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""grid""
-@r1 syntax.relation marker=""on"" from=$n1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
 @n2 syntax.nominal head=""Expenses""
-@r2 syntax.relation marker=""by"" from=$c1 to=$n3
-@n3 syntax.nominal head=""department""",spacy-direct+vss,agreement
+@r2 syntax.relation attachment=ambiguous marker=""by"" from=$c1 to=$n3
+@n3 syntax.nominal head=""department""",prolog,judge
 remove the gridlines,"@c1 syntax.clause form=imperative verb=""remove"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""gridlines""",spacy-direct+vss,agreement
 ditch the gridlines,"@c1 syntax.clause form=imperative verb=""ditch"" complement=$n1
@@ -695,7 +702,13 @@ I'd rather see this horizontal,"@n1 syntax.nominal head=""I""
 please make the bars horizontal on the Sales by month chart,,,
 go horizontal with the bars,,,
 "the department labels get cut off standing up, so lay the bars on their side",,,
-make the bars horizontal and move the legend to the right,,,
+make the bars horizontal and move the legend to the right,"@c1 syntax.clause form=imperative verb=""make"" modifier=""horizontal"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""bars""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""move"" complement=$n2
+@n2 syntax.nominal dependent=""the"" head=""legend""
+@r1 syntax.relation marker=""to"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""right""",distilbert+spacy,judge
 "boss reads landscape slides only, so make it a horizontal bar chart","@n1 syntax.nominal head=""boss""
 @c1 syntax.clause form=declarative verb=""reads"" modifier=""only"" subject=$n1 complement=$n2
 @n2 syntax.nominal dependent=""landscape"" head=""slides""
@@ -1070,7 +1083,17 @@ how about 3 inches by 5 for the chart?,,,
 the chart wants 3 inches of height and 5 of width,,,
 "pin the chart at 4 by 4 inches, edges clean",,,
 please to resize the chart to 3 inches by 5 inches,,,
-"the chart settles at 3 by 5 inches, margins breathing, before the demo",,,
+"the chart settles at 3 by 5 inches, margins breathing, before the demo","@n1 syntax.nominal dependent=""the"" head=""chart""
+@c1 syntax.clause form=declarative verb=""settles"" subject=$n1 complement=$n4
+@r1 syntax.relation marker=""at"" from=$c1 to=$n2
+@n2 syntax.nominal head=""3""
+@r2 syntax.relation marker=""by"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""5"" head=""inches""
+@n4 syntax.nominal head=""margins""
+@c2 syntax.clause form=nonfinite verb=""breathing""
+@r3 syntax.relation marker=""before"" from=$c2 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""demo""
+@r4 syntax.relation from=$n4 to=$c2",distilbert,judge
 "one resize to 4 inches by 4, and let the wedges re-cut themselves",,,
 "the chart goes 3 inches square, 5 to match, and centres itself",,,
 hold the chart to 4 inches by 4 — not a pixel more,,,
@@ -1609,8 +1632,8 @@ keep the grid lines thinner; plus put the y axis on the right,"@c1 syntax.clause
 @k1 syntax.coordination conjunction=""plus"" conjunct=$c1 conjunct=$c2
 @c2 syntax.clause form=imperative verb=""put"" complement=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""y"" head=""axis""
-@r1 syntax.relation marker=""on"" from=$n2 to=$n3
-@n3 syntax.nominal dependent=""the"" head=""right""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""right""",z3,judge
 grid lines thinner. y axis on the right,,,
 the grid lines on Sales by month should be thinner. legend on the right,"@n1 syntax.nominal dependent=""the"" dependent=""grid"" head=""lines""
 @r1 syntax.relation marker=""on"" from=$n1 to=$n2
@@ -1851,7 +1874,10 @@ switch both axes to log,"@c1 syntax.clause form=imperative verb=""switch"" compl
 @n1 syntax.nominal dependent=""both"" head=""axes""
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2
 @n2 syntax.nominal head=""log""",spacy-direct+vss,agreement
-can you make axis scales log?,,,
+can you make axis scales log?,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""make"" subject=$n1 complement=$n2 complement=$n3
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""axis"" head=""scales""
+@n3 syntax.nominal head=""log""",z3,judge
 the axis scales should be log,"@n1 syntax.nominal dependent=""the"" dependent=""axis"" head=""scales""
 @c1 syntax.clause form=declarative auxiliary=""should"" verb=""be"" subject=$n1 complement=$n2
 @n2 syntax.nominal head=""log""",spacy-direct+vss,agreement
@@ -1945,7 +1971,13 @@ the x axis on the top would read better. legend on the right,"@n1 syntax.nominal
 "while you're there, put the x axis on the top",,,
 and also Monthly profit: x axis on the top,,,
 "um, Monthly profit: x axis on the top",,,
-excuse me — drop the x axis on the top,,,
+excuse me — drop the x axis on the top,"@c1 syntax.clause form=imperative verb=""excuse"" complement=$n1
+@n1 syntax.nominal head=""me""
+@c2 syntax.clause form=imperative verb=""drop"" complement=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""x"" head=""axis""
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""top""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2",prolog+z3,judge
 the x axis onthe top would read better,,,
 I want the x axis on the toop instead,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""want"" modifier=""instead"" subject=$n1 complement=$n2
@@ -2109,7 +2141,11 @@ I'd like the chart titled Q2 sales,,,
 let's put Q2 sales up as the title,,,
 we want the chart heading to read Q2 sales,,,
 the chart heading has to say Q2 sales,,,
-how about Q2 sales as the heading?,,,
+how about Q2 sales as the heading?,"@c1 syntax.clause form=fragment modifier=""how""
+@r1 syntax.relation marker=""about"" from=$c1 to=$n1
+@n1 syntax.nominal dependent=""Q2"" head=""sales""
+@r2 syntax.relation marker=""as"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""heading""",distilbert+prolog+spacy+z3,judge
 "I showed Sales by month to the team; they were fine with the numbers but not how it reads at a glance, so as a first fix title the sales chart Q2 sales, then we look again next week. and then show both grid lines",,,
 "for the management review on Friday I need the sales chart readable from the back of the room, so title the sales chart Q2 sales before we send it round, also stack the bars by category",,,
 "I keep squinting at Sales by month whenever I export it for the weekly summary; this week, title the sales chart Q2 sales as well, would you, also drop the legend on the right",,,
@@ -2358,7 +2394,12 @@ could you set the line to dash-dot?,"@c1 syntax.clause form=interrogative auxili
 @n2 syntax.nominal dependent=""the"" head=""line""
 @r1 syntax.relation marker=""to"" from=$c1 to=$n3
 @n3 syntax.nominal head=""dash-dot""",spacy-direct+vss,agreement
-the line on the profit chart need to be dash-dot,,,
+the line on the profit chart need to be dash-dot,"@n1 syntax.nominal dependent=""the"" head=""line""
+@r1 syntax.relation marker=""on"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""profit"" head=""chart""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@r2 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""be"" modifier=""dash"" modifier=""dot""",distilbert+vss,judge
 do the line dash-dot on the profit chart,,,
 I want the line dash-dot on the profit chart,,,
 "I keep squinting at Monthly profit whenever I export it for the weekly summary; this week, make the line dash-dot as well, would you, could you also make the font a bit bigger",,,

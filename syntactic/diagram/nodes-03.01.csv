@@ -195,11 +195,11 @@ could an emphasis box be outlined thickly?,"@c1 syntax.clause form=interrogative
 @r5 syntax.relation from=$n2 to=$c2",spacy-direct+vss,agreement
 "draw an emphasis box outlined thickly for me first; after that add a title line on top, without overlaps, with every label clear",,,
 "same idea, except an emphasis box outlined thickly","@n1 syntax.nominal dependent=""same"" head=""idea""
-@r1 syntax.relation marker=""except"" from=$n1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""except"" from=$c2 to=$n2
 @n2 syntax.nominal dependent=""an"" dependent=""emphasis"" head=""box""
 @c1 syntax.clause form=nonfinite verb=""outlined"" modifier=""thickly""
 @c2 syntax.clause form=fragment complement=$n1
-@r2 syntax.relation from=$n2 to=$c1",spacy-direct+vss,agreement
+@r2 syntax.relation from=$c2 to=$c1",prolog,judge
 pleese put an emphasis box outlined thickly,,,
 I nede this before the talk: I need an emphasis box outlined thickly,,,
 put a group inside a dashed frame,"@c1 syntax.clause form=imperative verb=""put"" complement=$n1
@@ -244,7 +244,11 @@ could a group be inside a dashed frame?,"@c1 syntax.clause form=interrogative au
 @r1 syntax.relation marker=""inside"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""dashed"" head=""frame""
 @c1 syntax.clause form=fragment complement=$n1",spacy-direct+vss,agreement
-"group only, inside a dashed frame",,,
+"group only, inside a dashed frame","@c1 syntax.clause form=imperative verb=""group"" modifier=""only""
+@r1 syntax.relation marker=""inside"" from=$c2 to=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""dashed"" head=""frame""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=fragment",prolog,judge
 "group, inside a dashed frame",,,
 what about a group inside a dashed frame?,"@n1 syntax.nominal head=""what""
 @r1 syntax.relation marker=""about"" from=$c1 to=$n2
@@ -548,8 +552,8 @@ what I want is an overbrace across the terms on the diagram,,,
 could the diagram have an overbrace across the terms?,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""have"" subject=$n1 complement=$n2
 @n1 syntax.nominal dependent=""the"" head=""diagram""
 @n2 syntax.nominal dependent=""an"" head=""overbrace""
-@r1 syntax.relation marker=""across"" from=$n2 to=$n3
-@n3 syntax.nominal dependent=""the"" head=""terms""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""across"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""terms""",prolog+spacy+z3,judge
 "the usual diagram, an overbrace across the terms",,,
 "diagram only, an overbrace across the terms",,,
 what about an overbrace across the terms for the diagram?,,,
@@ -997,8 +1001,8 @@ give the layers names on the left,,,
 the layers should have names on the left,"@n1 syntax.nominal dependent=""the"" head=""layers""
 @c1 syntax.clause form=declarative auxiliary=""should"" verb=""have"" subject=$n1 complement=$n2
 @n2 syntax.nominal head=""names""
-@r1 syntax.relation marker=""on"" from=$n2 to=$n3
-@n3 syntax.nominal dependent=""the"" head=""left""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""left""",prolog+spacy+z3,judge
 how do I get names on the left on the layers?,"@c1 syntax.clause form=interrogative modifier=""how"" auxiliary=""do"" verb=""get"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""I""
 @n2 syntax.nominal head=""names""
@@ -1407,7 +1411,24 @@ the arrow labels must be near the start of the line,"@n1 syntax.nominal dependen
 @n3 syntax.nominal dependent=""the"" head=""line""",spacy-direct+vss,agreement
 could the arrow labels be near the start of the line?,,,
 "start from the arrow labels near the start of the line, then make the label bold, and keep the whole diagram readable on one page",,,
-"here is the plan: the arrow labels near the start of the line, plus make the label bold, so it still fits on a single slide without crowding",,,
+"here is the plan: the arrow labels near the start of the line, plus make the label bold, so it still fits on a single slide without crowding","@c1 syntax.clause form=declarative modifier=""here"" verb=""is"" subject=$n1
+@n1 syntax.nominal dependent=""the"" head=""plan""
+@n2 syntax.nominal dependent=""the"" dependent=""arrow"" head=""labels""
+@r1 syntax.relation marker=""near"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""start""
+@r2 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""line""
+@k1 syntax.coordination conjunction=""plus"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""make"" modifier=""bold"" complement=$n5
+@n5 syntax.nominal dependent=""the"" head=""label""
+@r3 syntax.relation marker=""so"" from=$c2 to=$c3
+@n6 syntax.nominal head=""it""
+@c3 syntax.clause form=declarative modifier=""still"" verb=""fits"" subject=$n6
+@r4 syntax.relation marker=""on"" from=$c3 to=$n7
+@n7 syntax.nominal dependent=""a"" dependent=""single"" head=""slide""
+@r5 syntax.relation marker=""without"" from=$c3 to=$c4
+@c4 syntax.clause form=nonfinite verb=""crowding""
+@r6 syntax.relation from=$n1 to=$n2",spacy,judge
 "for the flow between two boxes, set up the arrow labels near the start of the line, then make the label bold, with enough space between the parts","@r1 syntax.relation marker=""for"" from=$c1 to=$n1
 @n1 syntax.nominal dependent=""the"" head=""flow""
 @r2 syntax.relation marker=""between"" from=$n1 to=$n2
@@ -1731,7 +1752,33 @@ I nede this before the talk: take the overbrace off,,,
 "Show me a three-panel overview: a bar chart for units by store, returns by week as a line chart, and a column chart showing spend by department. Then give the first chart the title 'Units, returns and spend summary'",,,
 "Try a three-panel summary page: units by store as a bar chart, a line chart showing returns by week, and a column chart of spend by department and then add gridlines behind the first chart",,,
 "How about a three-panel summary page: a bar chart showing units by store, a line chart of returns by week, and a column chart for spend by department, then give the first chart the title 'Units, returns and spend summary'",,,
-"Give me a summary page in three panels: a bar chart showing units by store, a line chart of returns by week, and a column chart for spend by department, one more for the appendix page",,,
+"Give me a summary page in three panels: a bar chart showing units by store, a line chart of returns by week, and a column chart for spend by department, one more for the appendix page","@c1 syntax.clause form=imperative verb=""Give"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""me""
+@n2 syntax.nominal dependent=""a"" dependent=""summary"" head=""page""
+@r1 syntax.relation marker=""in"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""three"" head=""panels""
+@n4 syntax.nominal dependent=""a"" dependent=""bar"" head=""chart""
+@c2 syntax.clause form=nonfinite verb=""showing"" complement=$n5
+@n5 syntax.nominal head=""units""
+@r2 syntax.relation attachment=ambiguous marker=""by"" from=$c2 to=$n6
+@n6 syntax.nominal head=""store""
+@n7 syntax.nominal dependent=""a"" dependent=""line"" head=""chart""
+@r3 syntax.relation marker=""of"" from=$n7 to=$n8
+@n8 syntax.nominal head=""returns""
+@r4 syntax.relation attachment=ambiguous marker=""by"" from=$c3 to=$n9
+@n9 syntax.nominal head=""week""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n4 conjunct=$n7 conjunct=$n10
+@n10 syntax.nominal dependent=""a"" dependent=""column"" head=""chart""
+@r5 syntax.relation attachment=ambiguous marker=""for"" from=$c3 to=$n11
+@n11 syntax.nominal head=""spend""
+@r6 syntax.relation attachment=ambiguous marker=""by"" from=$c3 to=$n12
+@n12 syntax.nominal head=""department""
+@n13 syntax.nominal head=""one""
+@c3 syntax.clause form=fragment modifier=""more"" complement=$k1 complement=$n13
+@r7 syntax.relation attachment=ambiguous marker=""for"" from=$c3 to=$n14
+@n14 syntax.nominal dependent=""the"" dependent=""appendix"" head=""page""
+@k2 syntax.coordination conjunct=$c1 conjunct=$c3
+@r8 syntax.relation from=$n4 to=$c2",z3,judge
 "and while you're at it, I want a three-panel summary: a bar chart of units by store, a line chart for returns by week, and spend by department as a column chart",,,
 "while you're there: Let's do a three-panel overview page: a bar chart for units by store, returns by week as a line chart, and a column chart showing spend by department",,,
 "excuse me, Put together a summary page with three panels: units by store as a bar chart, a line chart showing returns by week, and a column chart of spend by department, please",,,
@@ -1774,12 +1821,75 @@ I nede this before the talk: take the overbrace off,,,
 "Show me a three-panel overview: a bar chart for traffic by source, conversion by channel as a column chart, and a line chart showing revenue by cohort. Then give the first chart the title 'Traffic, conversion and revenue summary'",,,
 "Try a three-panel summary page: traffic by source as a bar chart, a column chart showing conversion by channel, and a line chart of revenue by cohort and then add gridlines behind the first chart",,,
 "How about a three-panel summary page: a bar chart showing traffic by source, a column chart of conversion by channel, and a line chart for revenue by cohort, then give the first chart the title 'Traffic, conversion and revenue summary'",,,
-"and while you're at it, Assemble a three-panel dashboard: traffic by source as a bar chart, a column chart showing conversion by channel, and a line chart of revenue by cohort",,,
+"and while you're at it, Assemble a three-panel dashboard: traffic by source as a bar chart, a column chart showing conversion by channel, and a line chart of revenue by cohort","@c1 syntax.clause form=imperative discourse=""and"" verb=""Assemble"" complement=$n3
+@r1 syntax.relation marker=""while"" from=$c1 to=$c2
+@n1 syntax.nominal head=""you""
+@c2 syntax.clause form=declarative verb=""'re"" subject=$n1
+@r2 syntax.relation marker=""at"" from=$c2 to=$n2
+@n2 syntax.nominal head=""it""
+@n3 syntax.nominal dependent=""a"" dependent=""three"" dependent=""panel"" head=""dashboard""
+@n4 syntax.nominal head=""traffic""
+@r3 syntax.relation marker=""by"" from=$n4 to=$n5
+@n5 syntax.nominal head=""source""
+@r4 syntax.relation marker=""as"" from=$n4 to=$n6
+@n6 syntax.nominal dependent=""a"" dependent=""bar"" head=""chart""
+@n7 syntax.nominal dependent=""a"" dependent=""column"" head=""chart""
+@c3 syntax.clause form=nonfinite verb=""showing"" complement=$n8
+@n8 syntax.nominal head=""conversion""
+@r5 syntax.relation marker=""by"" from=$n8 to=$n9
+@n9 syntax.nominal head=""channel""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n4 conjunct=$n7 conjunct=$n10
+@n10 syntax.nominal dependent=""a"" dependent=""line"" head=""chart""
+@r6 syntax.relation marker=""of"" from=$n10 to=$n11
+@n11 syntax.nominal head=""revenue""
+@r7 syntax.relation marker=""by"" from=$n11 to=$n12
+@n12 syntax.nominal head=""cohort""
+@r8 syntax.relation from=$n3 to=$k1
+@r9 syntax.relation from=$n7 to=$c3",spacy,judge
 "Give me a summary page in three panels: a bar chart showing traffic by source, a column chart of conversion by channel, and a line chart for revenue by cohort too, for the second slide",,,
 "and meanwhile, I want a three-panel summary: a bar chart of traffic by source, a column chart for conversion by channel, and revenue by cohort as a line chart",,,
 "um, Build a three-panel summary page: a bar chart for traffic by source, conversion by channel as a column chart, and a line chart showing revenue by cohort, please",,,
-"hey — Put together a summary page with three panels: traffic by source as a bar chart, a column chart showing conversion by channel, and a line chart of revenue by cohort, thanks",,,
-"Try a three-panel summary page: a bar chart for traffic by source, conversion by channel as a column chart, and a line chart shoiwng revenue by cohort",,,
+"hey — Put together a summary page with three panels: traffic by source as a bar chart, a column chart showing conversion by channel, and a line chart of revenue by cohort, thanks","@c1 syntax.clause form=imperative discourse=""hey"" verb=""Put"" modifier=""together"" discourse=""thanks"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""summary"" head=""page""
+@r1 syntax.relation marker=""with"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""three"" head=""panels""
+@n3 syntax.nominal head=""traffic""
+@r2 syntax.relation marker=""by"" from=$n3 to=$n4
+@n4 syntax.nominal head=""source""
+@r3 syntax.relation marker=""as"" from=$n3 to=$n5
+@n5 syntax.nominal dependent=""a"" dependent=""bar"" head=""chart""
+@n6 syntax.nominal dependent=""a"" dependent=""column"" head=""chart""
+@c2 syntax.clause form=nonfinite verb=""showing"" complement=$n7
+@n7 syntax.nominal head=""conversion""
+@r4 syntax.relation marker=""by"" from=$n7 to=$n8
+@n8 syntax.nominal head=""channel""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n3 conjunct=$n6 conjunct=$n9
+@n9 syntax.nominal dependent=""a"" dependent=""line"" head=""chart""
+@r5 syntax.relation marker=""of"" from=$n9 to=$n10
+@n10 syntax.nominal head=""revenue""
+@r6 syntax.relation marker=""by"" from=$n10 to=$n11
+@n11 syntax.nominal head=""cohort""
+@r7 syntax.relation from=$n2 to=$k1
+@r8 syntax.relation from=$n6 to=$c2",spacy,judge
+"Try a three-panel summary page: a bar chart for traffic by source, conversion by channel as a column chart, and a line chart shoiwng revenue by cohort","@c1 syntax.clause form=imperative verb=""Try"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""three"" dependent=""panel"" dependent=""summary"" head=""page""
+@n2 syntax.nominal dependent=""a"" dependent=""bar"" head=""chart""
+@r1 syntax.relation marker=""for"" from=$n2 to=$n3
+@n3 syntax.nominal head=""traffic""
+@r2 syntax.relation marker=""by"" from=$n3 to=$n4
+@n4 syntax.nominal head=""source""
+@n5 syntax.nominal head=""conversion""
+@r3 syntax.relation marker=""by"" from=$n5 to=$n6
+@n6 syntax.nominal head=""channel""
+@r4 syntax.relation marker=""as"" from=$n5 to=$n7
+@n7 syntax.nominal dependent=""a"" dependent=""column"" head=""chart""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n5 conjunct=$n8
+@n8 syntax.nominal dependent=""a"" dependent=""line"" head=""chart""
+@r5 syntax.relation marker=""shoiwng"" from=$n8 to=$n9
+@n9 syntax.nominal head=""revenue""
+@r6 syntax.relation marker=""by"" from=$n9 to=$n10
+@n10 syntax.nominal head=""cohort""
+@r7 syntax.relation from=$n1 to=$k1",spacy,judge
 "We need a summary page with three panels: trffic by source as a bar chart, a column chart showing conversion by channel, and a line chart of revenue by cohort",,,
 "Try a three-panel summary page: trafic by source as a bar chart, a column chart showing conversion by channel, and a line chart of revenue by cohort",,,
 "Build a three-panel summary page: a column chart of claims by region, a line chart for approvals by month, and loss ratio by product as a bar chart",,,
@@ -1911,7 +2021,20 @@ append a slide after this one and keep everything inside the page margins,"@c1 s
 @n3 syntax.nominal head=""it""
 @r2 syntax.relation marker=""with"" from=$c2 to=$n4
 @n4 syntax.nominal dependent=""the"" head=""box""",spacy-direct+vss,agreement
-put a new slide after this one and keep everything inside the page margins so nothing gets cut off at the edge,,,
+put a new slide after this one and keep everything inside the page margins so nothing gets cut off at the edge,"@c1 syntax.clause form=imperative verb=""put"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""new"" head=""slide""
+@r1 syntax.relation attachment=ambiguous marker=""after"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""this"" head=""one""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""keep"" complement=$n3
+@n3 syntax.nominal head=""everything""
+@r2 syntax.relation marker=""inside"" from=$c2 to=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""page"" head=""margins""
+@r3 syntax.relation marker=""so"" from=$c2 to=$c3
+@n5 syntax.nominal head=""nothing""
+@c3 syntax.clause form=declarative auxiliary=""gets"" verb=""cut"" modifier=""off"" subject=$n5
+@r4 syntax.relation marker=""at"" from=$c3 to=$n6
+@n6 syntax.nominal dependent=""the"" head=""edge""",spacy,judge
 just a new slide after this one,,,
 "a new slide after this one, that's all",,,
 a new slide after this one only,"@n1 syntax.nominal dependent=""a"" dependent=""new"" head=""slide""
@@ -2011,7 +2134,8 @@ what is the point of the Archive box?,"@n1 syntax.nominal head=""what""
 what does the third box mean?,"@n1 syntax.nominal head=""what""
 @c1 syntax.clause form=interrogative auxiliary=""does"" verb=""mean"" subject=$n2 complement=$n1
 @n2 syntax.nominal dependent=""the"" dependent=""third"" head=""box""",spacy-direct+vss,agreement
-now the last box,,,
+now the last box,"@c1 syntax.clause form=fragment modifier=""now"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""last"" head=""box""",distilbert+prolog+vss+z3,judge
 what does the second box mean and why does it point to the third?,"@n1 syntax.nominal head=""what""
 @c1 syntax.clause form=interrogative auxiliary=""does"" verb=""mean"" subject=$n2 complement=$n1
 @n2 syntax.nominal dependent=""the"" dependent=""second"" head=""box""
@@ -2082,7 +2206,14 @@ put the deleted figures from steps 1 and 2 back in the row,,,
 add both removed boxes back,"@c1 syntax.clause form=imperative verb=""add"" modifier=""back"" complement=$n1
 @n1 syntax.nominal dependent=""both"" dependent=""removed"" head=""boxes""",spacy-direct+vss,judge
 add them both back,,,
-restore it and the one from step 3,,,
+restore it and the one from step 3,"@c1 syntax.clause form=imperative verb=""restore"" complement=$k1
+@n1 syntax.nominal head=""it""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n1 conjunct=$n2
+@n2 syntax.nominal dependent=""the"" head=""one""
+@r1 syntax.relation attachment=ambiguous marker=""from"" from=$c1 to=$n3
+@n3 syntax.nominal head=""step""
+@n4 syntax.nominal head=""3""
+@r2 syntax.relation from=$n3 to=$n4",prolog+z3,judge
 "bring that back too, with the first one","@c1 syntax.clause form=imperative verb=""bring"" modifier=""back"" modifier=""too"" complement=$n1
 @n1 syntax.nominal head=""that""
 @r1 syntax.relation marker=""with"" from=$c1 to=$n2

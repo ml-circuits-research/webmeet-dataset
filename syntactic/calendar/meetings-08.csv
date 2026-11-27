@@ -130,7 +130,12 @@ edit event review: 10:00 to 11:00,"@c1 syntax.clause form=imperative verb=""edit
 @r1 syntax.relation marker=""to"" from=$n2 to=$n3
 @n3 syntax.nominal head=""11:00""
 @r2 syntax.relation from=$n1 to=$n2",spacy-direct+vss,agreement
-"event review notes Bring draft, update it",,,
+"event review notes Bring draft, update it","@n1 syntax.nominal dependent=""event"" dependent=""review"" head=""notes""
+@c1 syntax.clause form=declarative verb=""Bring"" subject=$n1 complement=$n2
+@n2 syntax.nominal head=""draft""
+@c2 syntax.clause form=imperative verb=""update"" complement=$n3
+@n3 syntax.nominal head=""it""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2",distilbert+spacy,judge
 change the review event title to Weekly review,,,
 can you rename the review event Weekly review?,,,
 I want the review event titled Weekly review,,,
@@ -142,7 +147,13 @@ I need the review event's title changed to Weekly review,,,
 "actually, the name is misleading, so please rename the review event to Weekly review",,,
 "so the meeting happens every Monday, call the review event Weekly review",,,
 rename review to Weekly review,,,
-"review event title: Weekly review, set it",,,
+"review event title: Weekly review, set it","@n1 syntax.nominal dependent=""review"" dependent=""event"" head=""title""
+@n2 syntax.nominal dependent=""Weekly"" head=""review""
+@c1 syntax.clause form=imperative verb=""set"" complement=$n3
+@n3 syntax.nominal head=""it""
+@c2 syntax.clause form=fragment complement=$n1
+@k1 syntax.coordination conjunct=$c2 conjunct=$c1
+@r1 syntax.relation from=$n1 to=$n2",spacy,judge
 call the review event something weekly,"@c1 syntax.clause form=imperative verb=""call"" modifier=""weekly"" complement=$n1 complement=$n2
 @n1 syntax.nominal dependent=""the"" dependent=""review"" head=""event""
 @n2 syntax.nominal head=""something""",spacy-direct+vss,agreement
@@ -322,7 +333,14 @@ a short planning meeting tomorrow morning would be nice to have,,,
 give me a short planning meeting tomorrow morning,,,
 "ok, the Review is already on the calendar, now please add a short planning meeting tomorrow morning",,,
 "actually, I need a planning meeting tomorrow morning, a short one, so we can sort out who does what",,,
-"before the week gets busy, could you schedule a short planning meeting for tomorrow morning?",,,
+"before the week gets busy, could you schedule a short planning meeting for tomorrow morning?","@r1 syntax.relation marker=""before"" from=$c2 to=$c1
+@n1 syntax.nominal dependent=""the"" head=""week""
+@c1 syntax.clause form=declarative verb=""gets"" modifier=""busy"" subject=$n1
+@c2 syntax.clause form=interrogative auxiliary=""could"" verb=""schedule"" subject=$n2 complement=$n3
+@n2 syntax.nominal head=""you""
+@n3 syntax.nominal dependent=""a"" dependent=""short"" dependent=""planning"" head=""meeting""
+@r2 syntax.relation marker=""for"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""tomorrow"" head=""morning""",distilbert+spacy,judge
 "hey, I'd like to book a short planning meeting tomorrow morning since the team wants to align",,,
 add a planning meeting,"@c1 syntax.clause form=imperative verb=""add"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""planning"" head=""meeting""",spacy-direct+vss,agreement
@@ -354,7 +372,9 @@ move Review later,"@c1 syntax.clause form=imperative verb=""move"" modifier=""la
 @n1 syntax.nominal head=""Review""",spacy-direct+vss,agreement
 move Review,,,
 push Review back a little,,,
-"shift Review later, same length",,,
+"shift Review later, same length","@c1 syntax.clause form=imperative verb=""shift"" modifier=""later"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""Review""
+@n2 syntax.nominal dependent=""same"" head=""length""",distilbert+z3,judge
 move Review to the afternoon,"@c1 syntax.clause form=imperative verb=""move"" complement=$n1
 @n1 syntax.nominal head=""Review""
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2

@@ -144,7 +144,10 @@ make one bullet Goal Proposal,,,
 set one bullet Goal Proposal,,,
 change a bullet Proposal Goal,,,
 change a bullet Proposal Plan Backup,,,
-make one bullet Proposal Plan Backup,,,
+make one bullet Proposal Plan Backup,"@c1 syntax.clause form=imperative verb=""make"" complement=$n1
+@n1 syntax.nominal dependent=""one"" head=""bullet""
+@n2 syntax.nominal dependent=""Proposal"" dependent=""Plan"" head=""Backup""
+@r1 syntax.relation from=$n1 to=$n2",prolog+z3,judge
 update a bullet Proposal Plan Backup,,,
 set one bullet Proposal Plan Backup,,,
 change a bullet Backup Plan Proposal,,,
@@ -329,7 +332,8 @@ make one quote Proposal,,,
 update a quote Proposal,,,
 set one quote Proposal,,,
 change a quote Plan Backup,,,
-make one quote Plan Backup,,,
+make one quote Plan Backup,"@c1 syntax.clause form=imperative verb=""make"" complement=$n1
+@n1 syntax.nominal dependent=""one"" dependent=""quote"" dependent=""Plan"" head=""Backup""",z3,judge
 update a quote Plan Backup,,,
 set one quote Plan Backup,,,
 change a quote Backup Plan,,,
@@ -515,8 +519,8 @@ Tell me the number of tables.,"@c1 syntax.clause form=imperative verb=""Tell"" c
 @n3 syntax.nominal head=""tables""",spacy-direct+vss,agreement
 Count the tables for me.,"@c1 syntax.clause form=imperative verb=""Count"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""tables""
-@r1 syntax.relation marker=""for"" from=$c1 to=$n2
-@n2 syntax.nominal head=""me""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n2
+@n2 syntax.nominal head=""me""",prolog+spacy+z3,judge
 "Of the things on display, how many are tables?","@r1 syntax.relation marker=""Of"" from=$c1 to=$n1
 @n1 syntax.nominal dependent=""the"" head=""things""
 @r2 syntax.relation marker=""on"" from=$c1 to=$n2
@@ -694,7 +698,14 @@ update a paragraph Intro Main 3 justify,,,
 set one paragraph Intro Main 3 justify,,,
 change a paragraph justify 3 Main Intro,,,
 change a heading Intro Main 3 justify,,,
-make one heading Intro Main 3 justify,,,
+make one heading Intro Main 3 justify,"@c1 syntax.clause form=imperative verb=""make"" complement=$n1
+@n1 syntax.nominal dependent=""one"" head=""heading""
+@n2 syntax.nominal dependent=""Intro"" head=""Main""
+@n3 syntax.nominal head=""3""
+@c2 syntax.clause form=nonfinite verb=""justify""
+@r1 syntax.relation from=$c1 to=$c2
+@r2 syntax.relation from=$n1 to=$n2
+@r3 syntax.relation from=$n2 to=$n3",prolog,judge
 update a heading Intro Main 3 justify,,,
 set one heading Intro Main 3 justify,,,
 change a heading justify 3 Main Intro,,,
@@ -799,7 +810,8 @@ change a secction Draft 1 2 bold Sketch Deep Dive,,,
 "North Area 2 3 italic Deep Dive Status Summary — change a section, please",,,
 can you add a numbered Follow-up Roadmap?,,,
 add a heaading Roundup Sketch,,,
-add a qutoe Plan Backup Core,,,
+add a qutoe Plan Backup Core,"@c1 syntax.clause form=imperative verb=""add"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""qutoe"" dependent=""Plan"" dependent=""Backup"" head=""Core""",distilbert+spacy+z3,judge
 add a setcion Main Track Second Pass Kickoff,,,
 add a secction Kickoff 2 Draft,,,
 "Follow-up — change a heading, please",,,
@@ -908,7 +920,12 @@ add a nubered Follow-up Roadmap,,,
 add a nubmered Roadmap Rough Take 2,,,
 can you add a block North Area Idea Roundup?,,,
 add a blcok North Area Idea Roundup,,,
-"a block for me, Sketch",,,
+"a block for me, Sketch","@n1 syntax.nominal dependent=""a"" head=""block""
+@r1 syntax.relation marker=""for"" from=$n1 to=$n2
+@n2 syntax.nominal head=""me""
+@n3 syntax.nominal head=""Sketch""
+@c1 syntax.clause form=fragment complement=$k1
+@k1 syntax.coordination conjunct=$n1 conjunct=$n3",prolog+vss,judge
 "Status Summary — change a block, please",,,
 add a doument Roadmap Rough,,,
 "Hub Main Track — add a paragraph, please",,,
@@ -965,7 +982,10 @@ Which quotes do we have?,"@n1 syntax.nominal dependent=""Which"" head=""quotes""
 @n2 syntax.nominal head=""we""",spacy-direct+vss,agreement
 give me a heading Backup 1,,,
 give me a bullet Goal,,,
-place a paragraph Sketch Status about three,,,
+place a paragraph Sketch Status about three,"@c1 syntax.clause form=imperative verb=""place"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""paragraph"" dependent=""Sketch"" dependent=""Status""
+@r1 syntax.relation marker=""about"" from=$c1 to=$n2
+@n2 syntax.nominal head=""three""",vss,judge
 add a setion Core,,,
 "reshape the title Intro with name Main, level 2, justify",,,
 "My next wish: heading Intro on name Main, level 2, justify.",,,
@@ -987,7 +1007,9 @@ set one section Idea 3 1 underline Status Summary,,,
 change a block Status Deep Dive,,,
 change a block Status Summary,,,
 add a section Kickoff Second Pass Main Track,,,
-"give me a block North Area Idea, quickly please",,,
+"give me a block North Area Idea, quickly please","@c1 syntax.clause form=imperative verb=""give"" modifier=""quickly"" discourse=""please"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""me""
+@n2 syntax.nominal dependent=""a"" dependent=""block"" dependent=""North"" dependent=""Area"" head=""Idea""",distilbert+spacy,judge
 set one section Intro 2 3 underline Main Second,,,
 "haeding Intro gets name Main, level 3, justify",,,
 "start a paragraph block within Intro — contents Main, level 3 — named after the parent",,,

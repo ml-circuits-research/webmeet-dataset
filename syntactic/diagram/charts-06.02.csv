@@ -956,8 +956,8 @@ The font I want on it is smaller.,,,
 I want the font on this chart larger.,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""want"" modifier=""larger"" subject=$n1 complement=$n2
 @n2 syntax.nominal dependent=""the"" head=""font""
-@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
-@n3 syntax.nominal dependent=""this"" head=""chart""",spacy-direct+vss,agreement
+@r1 syntax.relation marker=""on"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""this"" head=""chart""",spacy,judge
 Maybe only the font on the regional revenue chart should be smaller.,,,
 The font on the chart needs to be smaller.,"@n1 syntax.nominal dependent=""The"" head=""font""
 @r1 syntax.relation marker=""on"" from=$n1 to=$n2
@@ -1585,7 +1585,22 @@ Could you pick out everything under 20 on the chart in red?,"@c1 syntax.clause f
 @n7 syntax.nominal head=""Monthly sales""",spacy-direct+vss,agreement
 "I'd like you to make the months below target orange on Orders by weekday, and make the font bigger.",,,
 "Maybe highlight values below 50 on Monthly sales in red, and show the grid.",,,
-"Let's highlight the months below target on Revenue by region in orange, and hide the legend.",,,
+"Let's highlight the months below target on Revenue by region in orange, and hide the legend.","@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""'s""
+@c2 syntax.clause form=nonfinite verb=""highlight"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""the"" head=""months""
+@r1 syntax.relation marker=""below"" from=$c2 to=$n3
+@n3 syntax.nominal head=""target""
+@r2 syntax.relation marker=""on"" from=$n3 to=$n4
+@n4 syntax.nominal head=""Revenue""
+@r3 syntax.relation marker=""by"" from=$n4 to=$n5
+@n5 syntax.nominal head=""region""
+@r4 syntax.relation marker=""in"" from=$c2 to=$n6
+@n6 syntax.nominal head=""orange""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c3
+@c3 syntax.clause form=imperative verb=""hide"" complement=$n7
+@n7 syntax.nominal dependent=""the"" head=""legend""
+@r5 syntax.relation from=$c1 to=$c2",vss,judge
 "Highlight values below 50 on Orders by weekday in red, and show the values on the chart.","@c1 syntax.clause form=imperative verb=""Highlight"" complement=$n1
 @n1 syntax.nominal head=""values""
 @r1 syntax.relation marker=""below"" from=$c1 to=$n2
@@ -1985,7 +2000,9 @@ make the chart title bold black,,,
 please make the chart title bold black,,,
 make the chart title bold black please,,,
 "make the chart title bold black, thanks",,,
-make the chart title bold black — go on,,,
+make the chart title bold black — go on,"@c1 syntax.clause form=imperative verb=""make"" modifier=""bold"" modifier=""black"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""chart"" head=""title""
+@c2 syntax.clause form=imperative verb=""go"" modifier=""on""",distilbert,judge
 set the title of Sales by month to Revenue overview,,,
 please set the title of Sales by month to Revenue overview,,,
 set the title of Sales by month to Revenue overview please,,,
@@ -2111,7 +2128,18 @@ take the error bars away,"@c1 syntax.clause form=imperative verb=""take"" modifi
 and also how about removing the error bars entirely?,,,
 the one thing missing: caps on the error bars smaller on the department chart. legend on the right,,,
 "I showed Sales by month to the team; they were fine with the numbers but not how it reads at a glance, so as a first fix make the error bars red, then we look again next week, and show both grid lines",,,
-the one thing missing: colour scheme yellow to magenta on the orders chart. flip the x axis,,,
+the one thing missing: colour scheme yellow to magenta on the orders chart. flip the x axis,"@n1 syntax.nominal dependent=""the"" dependent=""one"" head=""thing""
+@c1 syntax.clause form=nonfinite verb=""missing""
+@n2 syntax.nominal dependent=""colour"" head=""scheme"" dependent=""yellow""
+@r1 syntax.relation marker=""to"" from=$n2 to=$n3
+@n3 syntax.nominal head=""magenta""
+@r2 syntax.relation marker=""on"" from=$n2 to=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""orders"" head=""chart""
+@c2 syntax.clause form=imperative verb=""flip"" complement=$n5
+@n5 syntax.nominal dependent=""the"" dependent=""x"" head=""axis""
+@c3 syntax.clause form=fragment complement=$n1
+@r3 syntax.relation from=$n1 to=$c1
+@r4 syntax.relation from=$n1 to=$n2",distilbert+vss,judge
 "keep the bars narrower, and flip the x axis over","@c1 syntax.clause form=imperative verb=""keep"" modifier=""narrower"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""bars""
 @k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2

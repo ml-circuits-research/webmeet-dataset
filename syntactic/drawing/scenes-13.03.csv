@@ -189,7 +189,13 @@ hey — shift the boy in the red jacket and no hat off to one side of the bench,
 @n4 syntax.nominal dependent=""one"" head=""side""
 @r3 syntax.relation marker=""of"" from=$n4 to=$n5
 @n5 syntax.nominal dependent=""the"" head=""bench""",spacy-direct+vss,agreement
-"actually, leave the boat where it is — don't nudge it left after all, thanks",,,
+"actually, leave the boat where it is — don't nudge it left after all, thanks","@c1 syntax.clause form=imperative modifier=""actually"" verb=""leave"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""boat""
+@r1 syntax.relation marker=""where"" from=$c1 to=$c2
+@n2 syntax.nominal head=""it""
+@c2 syntax.clause form=declarative verb=""is"" subject=$n2
+@c3 syntax.clause form=imperative auxiliary=""do"" negation=""n't"" verb=""nudge"" modifier=""left"" modifier=""after"" modifier=""all"" discourse=""thanks"" complement=$n3
+@n3 syntax.nominal head=""it""",distilbert+vss,judge
 "the boy faces left, so let him kneel",,,
 "make the girl face right, and see her wave at the sun, as drawn so far",,,
 "turn the boy left; see him sit cross-legged on the bench, and a small cat on the left — and that is the whole scene",,,
@@ -227,7 +233,15 @@ face the bear behind the tree near the meadow to the right — and that is the w
 "it's right, not left — the kid by the tent — just like that in the scene — keeping the rest of the scene as it is",,,
 change the duck on the lake to left — exactly where the picture needs it — so the scene reads the way it should,,,
 just the woman with the hat all the way to the right end,,,
-hey — bring the woman who is now wearing the green hat right beside the hatless woman in the yellow dress,,,
+hey — bring the woman who is now wearing the green hat right beside the hatless woman in the yellow dress,"@c1 syntax.clause form=imperative discourse=""hey"" verb=""bring"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""woman""
+@r1 syntax.relation marker=""who"" from=$n1 to=$c2
+@c2 syntax.clause form=declarative auxiliary=""is"" modifier=""now"" verb=""wearing"" modifier=""right"" complement=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""green"" head=""hat""
+@r2 syntax.relation marker=""beside"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""hatless"" head=""woman""
+@r3 syntax.relation marker=""in"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""yellow"" head=""dress""",distilbert+spacy,judge
 "actually, push the second woman from the left just beside the woman in the red dress","@c1 syntax.clause form=imperative modifier=""actually"" verb=""push"" modifier=""just"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""second"" head=""woman""
 @r1 syntax.relation marker=""from"" from=$c1 to=$n2
@@ -246,7 +260,15 @@ scoot the second boy from the left to the left of the girl in the green shirt,"@
 @n4 syntax.nominal dependent=""the"" head=""girl""
 @r4 syntax.relation marker=""in"" from=$n1 to=$n5
 @n5 syntax.nominal dependent=""the"" dependent=""green"" head=""shirt""",spacy-direct+vss,agreement
-hey — bring the second woman from the left in the red dress one spot to the left,,,
+hey — bring the second woman from the left in the red dress one spot to the left,"@c1 syntax.clause form=imperative discourse=""hey"" verb=""bring"" complement=$n1 complement=$n4
+@n1 syntax.nominal dependent=""the"" dependent=""second"" head=""woman""
+@r1 syntax.relation attachment=ambiguous marker=""from"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""left""
+@r2 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""red"" head=""dress""
+@n4 syntax.nominal dependent=""one"" head=""spot""
+@r3 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""left""",prolog,judge
 psuh the man in the green jacket second from the right,,,
 put the boy in the yellow jacket right next to the second boy from the left,"@c1 syntax.clause form=imperative verb=""put"" modifier=""right"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""boy""
@@ -331,7 +353,14 @@ keep the little duck on the lake facing right — right there in the picture —
 the cat by the bench needs on the right instead of on the left — and that is the whole scene,,,
 "actually the cat by the bench is on the left, and i want on the right instead, with nothing else touched",,,
 "i meant on the right for the cat by the bench, not on the left, thanks",,,
-"sorry, that thing is a car; i meant a truck, on the canvas",,,
+"sorry, that thing is a car; i meant a truck, on the canvas","@c1 syntax.clause form=declarative discourse=""sorry"" verb=""is"" subject=$n1 complement=$n2
+@n1 syntax.nominal dependent=""that"" head=""thing""
+@n2 syntax.nominal dependent=""a"" head=""car""
+@n3 syntax.nominal head=""i""
+@c2 syntax.clause form=declarative verb=""meant"" subject=$n3 complement=$n4
+@n4 syntax.nominal dependent=""a"" head=""truck""
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c2 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""canvas""",prolog+vss,judge
 "i meant a truck for that thing, not a car, with the rest unchanged",,,
 no — that thing should be a truck,"@c1 syntax.clause form=declarative discourse=""no"" auxiliary=""should"" verb=""be"" subject=$n1 complement=$n2
 @n1 syntax.nominal dependent=""that"" head=""thing""
@@ -392,7 +421,14 @@ run a smoky haze across the room so the whole surface goes soft,,,
 "hey -- edge block 18 one space to the left, clear of the second block",,,
 "no, guide block 9 two spaces down to leave it past the red block",,,
 "hey -- bring block 14 half a space down, and then correct the direction: block 14 half a space up",,,
-"move block 6 two spaces left, then add two blocks next to the block",,,
+"move block 6 two spaces left, then add two blocks next to the block","@c1 syntax.clause form=imperative verb=""move"" modifier=""left"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""block"" dependent=""6""
+@n2 syntax.nominal dependent=""two"" head=""spaces""
+@k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""add"" complement=$n3
+@n3 syntax.nominal dependent=""two"" head=""blocks""
+@r1 syntax.relation attachment=ambiguous marker=""next to"" from=$c2 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""block""",distilbert,judge
 "move block 15 two spaces left, then block 15 one space up",,,
 "please shift block 3 one space down, then block 3 two spaces right",,,
 "maybe you could move block 15 two spaces left, then block 15 one space up",,,
@@ -973,7 +1009,22 @@ now lean the lamp to the left and keep its base flat on the table,"@c1 syntax.cl
 @n4 syntax.nominal dependent=""the"" head=""table""",spacy-direct+vss,agreement
 lean it a bit,,,
 "make the toothbrush lean to the left by about 15 degrees, but keep the bristles pointing up and leave the cup standing straight on the shelf",,,
-"now lean the lamp to the left by the same amount and keep its base flat on the table, because the shade should not slide towards the edge",,,
+"now lean the lamp to the left by the same amount and keep its base flat on the table, because the shade should not slide towards the edge","@c1 syntax.clause form=imperative modifier=""now"" verb=""lean"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""lamp""
+@r1 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""left""
+@r2 syntax.relation attachment=ambiguous marker=""by"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""same"" head=""amount""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""keep"" modifier=""flat"" complement=$n4
+@n4 syntax.nominal dependent=""its"" head=""base""
+@r3 syntax.relation attachment=ambiguous marker=""on"" from=$c2 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""table""
+@r4 syntax.relation marker=""because"" from=$c2 to=$c3
+@n6 syntax.nominal dependent=""the"" head=""shade""
+@c3 syntax.clause form=declarative auxiliary=""should"" negation=""not"" verb=""slide"" subject=$n6
+@r5 syntax.relation marker=""towards"" from=$c3 to=$n7
+@n7 syntax.nominal dependent=""the"" head=""edge""",prolog+z3,judge
 slant the letters on the poster,"@c1 syntax.clause form=imperative verb=""slant"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""letters""
 @r1 syntax.relation marker=""on"" from=$c1 to=$n2
@@ -984,8 +1035,8 @@ shear the sign to the left,"@c1 syntax.clause form=imperative verb=""shear"" com
 @n2 syntax.nominal dependent=""the"" head=""left""",spacy-direct+vss,agreement
 skew the awning at the top,"@c1 syntax.clause form=imperative verb=""skew"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""awning""
-@r1 syntax.relation marker=""at"" from=$c1 to=$n2
-@n2 syntax.nominal dependent=""the"" head=""top""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""at"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""top""",distilbert+prolog+z3,judge
 slant the word on the banner,"@c1 syntax.clause form=imperative verb=""slant"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""word""
 @r1 syntax.relation marker=""on"" from=$c1 to=$n2
@@ -1041,7 +1092,8 @@ cut the banner in half,"@c1 syntax.clause form=imperative verb=""cut"" complemen
 @n1 syntax.nominal dependent=""the"" head=""banner""
 @r1 syntax.relation marker=""in"" from=$c1 to=$n2
 @n2 syntax.nominal head=""half""",spacy-direct+vss,agreement
-make the tree twice as tall,,,
+make the tree twice as tall,"@c1 syntax.clause form=imperative verb=""make"" modifier=""twice"" modifier=""as"" modifier=""tall"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""tree""",distilbert+spacy,judge
 scale the poster up by 50 percent,"@c1 syntax.clause form=imperative verb=""scale"" modifier=""up"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""poster""
 @r1 syntax.relation marker=""by"" from=$c1 to=$n2
@@ -1285,7 +1337,15 @@ the little barn off the track.,"@n1 syntax.nominal dependent=""the"" dependent="
 make the house look like it's seen from the street,,,
 please make the house look like it's seen from the street,,,
 make the house look like it's seen from the street please,,,
-"make the house look like it's seen from the street, thanks",,,
+"make the house look like it's seen from the street, thanks","@c1 syntax.clause form=imperative verb=""make"" discourse=""thanks""
+@n1 syntax.nominal dependent=""the"" head=""house""
+@c2 syntax.clause form=nonfinite verb=""look"" subject=$n1
+@r1 syntax.relation marker=""like"" from=$c2 to=$c3
+@n2 syntax.nominal head=""it""
+@c3 syntax.clause form=declarative auxiliary=""'s"" verb=""seen"" subject=$n2
+@r2 syntax.relation marker=""from"" from=$c3 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""street""
+@r3 syntax.relation from=$c1 to=$c2",spacy,judge
 make the house look like it's seen from the street — go on,,,
 "hey, the boy should look like he's running after the kite",,,
 quick one — the boy should look like he's running after the kite,,,
@@ -1484,7 +1544,14 @@ redo the old house as a wet watercolour,"@c1 syntax.clause form=imperative verb=
 @n1 syntax.nominal dependent=""the"" dependent=""old"" head=""house""
 @r1 syntax.relation marker=""as"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""wet"" head=""watercolour""",spacy-direct+vss,agreement
-make the boat by the dock look like a dark oil painting,,,
+make the boat by the dock look like a dark oil painting,"@c1 syntax.clause form=imperative verb=""make"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""boat""
+@r1 syntax.relation marker=""by"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""dock""
+@c2 syntax.clause form=nonfinite verb=""look"" complement=$n1
+@r2 syntax.relation marker=""like"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""a"" dependent=""dark"" dependent=""oil"" head=""painting""
+@r3 syntax.relation from=$c1 to=$c2",distilbert,judge
 "a soft Monet painting for the garden path, nothing else",,,
 turn the flower bed full of flowers into a bold Picasso painting,,,
 amke the lake mirror the house,,,
@@ -1741,7 +1808,18 @@ put a thin outline only round the window,,,
 "the best spot for a small windmill is directly across the road, and leave space for the milk stand opposite.",,,
 "maybe an old gate could go across the road, with the bridge further along the road.",,,
 "there should be a little barn over on the far side of the road, where the ground is firm and the grass is dry.",,,
-"could you add a long bench across from the road, on the far bank where the ground is higher.",,,
+"could you add a long bench across from the road, on the far bank where the ground is higher.","@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""add"" modifier=""across"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""a"" dependent=""long"" head=""bench""
+@r1 syntax.relation attachment=ambiguous marker=""from"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""road""
+@r2 syntax.relation marker=""on"" from=$c3 to=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""far"" head=""bank""
+@c2 syntax.clause form=declarative modifier=""where"" verb=""is"" modifier=""higher"" subject=$n5
+@n5 syntax.nominal dependent=""the"" head=""ground""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c3
+@r3 syntax.relation from=$n4 to=$c2
+@c3 syntax.clause form=fragment",prolog,judge
 "add a stone well directly across the road, and keep the milestone on the near side visible.",,,
 "would you add a small tree across the road, facing back toward the near side.","@c1 syntax.clause form=interrogative auxiliary=""would"" verb=""add"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
@@ -1915,12 +1993,12 @@ send a man in a red shirt and no hat in from the left,"@n1 syntax.nominal depend
 "draw a wooden gate on the other side of the road, facing back toward the near side.",,,
 "draw a wooden bench across the road, on the side away from the lake.","@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""wooden"" head=""bench""
-@r1 syntax.relation marker=""across"" from=$c1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""across"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""road""
-@r2 syntax.relation marker=""on"" from=$c1 to=$n3
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""the"" head=""side""
-@r3 syntax.relation marker=""away from"" from=$n3 to=$n4
-@n4 syntax.nominal dependent=""the"" head=""lake""",spacy-direct+vss,agreement
+@r3 syntax.relation attachment=ambiguous marker=""away from"" from=$c1 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""lake""",prolog+z3,judge
 "could you add one more little tree on the other side of the road, with the bridge further along the road.",,,
 put a girl,"@c1 syntax.clause form=imperative verb=""put"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""girl""",spacy-direct+vss,agreement
@@ -2373,8 +2451,8 @@ take it off,"@c1 syntax.clause form=imperative verb=""take"" modifier=""off"" co
 "remove the neon from the letters and take the blur off the background, then leave the shadow under the boat so it still sits on the water",,,
 remove each boat from the lake,"@c1 syntax.clause form=imperative verb=""remove"" complement=$n1
 @n1 syntax.nominal dependent=""each"" head=""boat""
-@r1 syntax.relation marker=""from"" from=$c1 to=$n2
-@n2 syntax.nominal dependent=""the"" head=""lake""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""from"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""lake""",prolog+z3,judge
 take the boats out of the picture — the dock stays,,,
 the scarf on the snowman needs to go,"@n1 syntax.nominal dependent=""the"" head=""scarf""
 @r1 syntax.relation marker=""on"" from=$n1 to=$n2

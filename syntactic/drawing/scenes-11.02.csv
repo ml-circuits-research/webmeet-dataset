@@ -99,10 +99,10 @@ close the space between the yellow towers with four orange blbcks,"@c1 syntax.cl
 @n3 syntax.nominal dependent=""four"" dependent=""orange"" head=""blbcks""",spacy-direct+vss,agreement
 hey — fill the gap between the two purple columns with three green blocks,"@c1 syntax.clause form=imperative discourse=""hey"" verb=""fill"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""gap""
-@r1 syntax.relation marker=""between"" from=$n1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""between"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""two"" dependent=""purple"" head=""columns""
-@r2 syntax.relation marker=""with"" from=$c1 to=$n3
-@n3 syntax.nominal dependent=""three"" dependent=""green"" head=""blocks""",spacy-direct+vss,agreement
+@r2 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""three"" dependent=""green"" head=""blocks""",prolog,judge
 "bring the gap between the red columns with two blue blocks, thanks","@c1 syntax.clause form=imperative verb=""bring"" discourse=""thanks"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""gap""
 @r1 syntax.relation marker=""between"" from=$n1 to=$n2
@@ -278,7 +278,13 @@ what if you add a yellow block on each of the four remaining corners,,,
 "instead, a small dog down at the bottom, next i want the boy in the orange cap and the boy in the purple cap to exchange so they trade places, then close the gap left, so nothing is left open between them -- keep the rest as it is",,,
 "a little cat near the bench, then first trade the girl in the pink coat and the girl in the grey coat so they trade places, then next close the gap right behind the swapped pair, no other change to the scene",,,
 "build four blue blocks two rows above, the same as the first row",,,
-"could you raise five green blocks two rows above, the same as the top row",,,
+"could you raise five green blocks two rows above, the same as the top row","@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""raise"" modifier=""above"" subject=$n1 complement=$n2 complement=$n3 complement=$n4
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""five"" dependent=""green"" head=""blocks""
+@n3 syntax.nominal dependent=""two"" head=""rows""
+@n4 syntax.nominal dependent=""the"" head=""same""
+@r1 syntax.relation attachment=ambiguous marker=""as"" from=$c1 to=$n5
+@n5 syntax.nominal dependent=""the"" dependent=""top"" head=""row""",z3,judge
 "can you set three red blocks two rows above so it matches, the same as the lowest row",,,
 "maybe you could stand five green blocks two rows above, the same as the top row, block for block",,,
 "can you add four blue blocks two rows above, the same as the first row, block for block",,,
@@ -426,7 +432,11 @@ two red columns the same height on either side of the green column,,,
 "a little cat near the bench, then start with place a red column between the two yellow columns, the same size, so the three read as one group, no other change to the scene",,,
 maybe you could build an orange column the same size between the two purple columns,,,
 make a green column the same size between the two red columns,,,
-"instead, a yellow column the same size between the two blue columns",,,
+"instead, a yellow column the same size between the two blue columns","@c1 syntax.clause form=fragment modifier=""instead"" complement=$n1 complement=$n2
+@n1 syntax.nominal dependent=""a"" dependent=""yellow"" head=""column""
+@n2 syntax.nominal dependent=""the"" dependent=""same"" head=""size""
+@r1 syntax.relation marker=""between"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""two"" dependent=""blue"" head=""columns""",distilbert+prolog+vss,judge
 a red column the same size between the two yellow columns,,,
 "please ua an orange column the same size, between the two purple columns",,,
 "now -- can you set a green column the same size, between the two red columns",,,
@@ -632,7 +642,15 @@ place two blocks on the blue column so it reaches five,"@c1 syntax.clause form=i
 @n3 syntax.nominal head=""it""
 @c2 syntax.clause form=declarative verb=""reaches"" subject=$n3 complement=$n4
 @n4 syntax.nominal head=""five""",spacy-direct+vss,agreement
-"actually, please stand two blocks on top of the blue column to make five",,,
+"actually, please stand two blocks on top of the blue column to make five","@c1 syntax.clause form=imperative modifier=""actually"" discourse=""please"" verb=""stand"" complement=$n1
+@n1 syntax.nominal dependent=""two"" head=""blocks""
+@r1 syntax.relation marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""blue"" head=""column""
+@r3 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" complement=$n4
+@n4 syntax.nominal head=""five""",spacy,judge
 can you drop two blocks on top of the red column to make five,,,
 "build one block to the yellow column until it stands five high: add that, please",,,
 "okay, add two blocks to the blue column until it stands five high: arrange that",,,
@@ -768,7 +786,27 @@ please sandd a layer of four blocks above the first layer,"@c1 syntax.clause for
 "a little bird up in the top right, then please shift all of the red tower to the middle of the board, without taking the courses apart, and that's the whole change",,,
 "instead, a small dog down at the bottom, next i want the blue tower carried to the middle of the board as a single unit, courses and all -- keep the rest as it is",,,
 "a little cat near the bench, then start with send the yellow tower to the middle of the board, holding the stack together, no other change to the scene",,,
-"a small cat in the bottom left corner, then move the lower block to the north of the leftmost stack, touching the side of the stack and leaving the courses intact -- nothing else moves",,,
+"a small cat in the bottom left corner, then move the lower block to the north of the leftmost stack, touching the side of the stack and leaving the courses intact -- nothing else moves","@n1 syntax.nominal dependent=""a"" dependent=""small"" head=""cat""
+@r1 syntax.relation marker=""in"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""bottom"" dependent=""left"" head=""corner""
+@c1 syntax.clause form=imperative modifier=""then"" verb=""move"" complement=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""lower"" head=""block""
+@r2 syntax.relation marker=""to"" from=$c1 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""north""
+@r3 syntax.relation marker=""of"" from=$n4 to=$n5
+@n5 syntax.nominal dependent=""the"" dependent=""leftmost"" head=""stack""
+@c2 syntax.clause form=nonfinite verb=""touching"" complement=$n6
+@n6 syntax.nominal dependent=""the"" head=""side""
+@r4 syntax.relation marker=""of"" from=$n6 to=$n7
+@n7 syntax.nominal dependent=""the"" head=""stack""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c2 conjunct=$c3
+@c3 syntax.clause form=nonfinite verb=""leaving"" modifier=""intact"" complement=$n8
+@n8 syntax.nominal dependent=""the"" head=""courses""
+@n9 syntax.nominal head=""nothing""
+@c4 syntax.clause form=declarative modifier=""else"" verb=""moves"" subject=$n9
+@c5 syntax.clause form=fragment complement=$n1
+@k2 syntax.coordination conjunct=$c5 conjunct=$c1 conjunct=$c4
+@r5 syntax.relation from=$c1 to=$k1",spacy,judge
 "a small cat in the bottom left corner, then move the three-block stack to the northeast of the middle block, keeping every course of the stack together -- nothing else moves",,,
 "a little bird up in the top right, then please shift the two-block stack so it stands northeast of the middle block, clear of the other blocks, and that's the whole change",,,
 "instead, a small dog down at the bottom, next i want the four-block stack diagonally northeast of the middle block, with the courses still aligned -- keep the rest as it is",,,
@@ -1259,7 +1297,33 @@ bring a boy in an orange siaht with no hat down on the left between the boy on t
 "i wonder if you could build a tower of three yellow blocks to the left of the red structure. And then build another tower of three yellow blocks to the right of the red structure, then remove the middle yellow block of each tower?",,,
 "dad a tower of three yellow blocks to the left of the red structure, next dad another tower of three yellow blocks to the right of the red structure. Then remove the middle yellow block of each tower",,,
 "build a taofer of three yellow blocks to the left of the red structure, then build another taofer of three yellow blocks to the right of the red structure, then take out the middle yellow block of each taofer",,,
-"what if you drop a tower of three yellow blocks to the left of the red structure. And then drop another tower of three yellow blocks to the right of the red structure, then destroy the middle yellow block of each tower",,,
+"what if you drop a tower of three yellow blocks to the left of the red structure. And then drop another tower of three yellow blocks to the right of the red structure, then destroy the middle yellow block of each tower","@n1 syntax.nominal head=""what""
+@r1 syntax.relation marker=""if"" from=$c5 to=$c1
+@n2 syntax.nominal head=""you""
+@c1 syntax.clause form=declarative verb=""drop"" subject=$n2 complement=$n3
+@n3 syntax.nominal dependent=""a"" head=""tower""
+@r2 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""three"" dependent=""yellow"" head=""blocks""
+@r3 syntax.relation marker=""to"" from=$c1 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""left""
+@r4 syntax.relation marker=""of"" from=$n5 to=$n6
+@n6 syntax.nominal dependent=""the"" dependent=""red"" head=""structure""
+@c2 syntax.clause form=fragment discourse=""And""
+@k1 syntax.coordination conjunction=""then"" conjunct=$c2 conjunct=$c3
+@c3 syntax.clause form=imperative verb=""drop"" complement=$n7
+@n7 syntax.nominal dependent=""another"" head=""tower""
+@r5 syntax.relation marker=""of"" from=$n7 to=$n8
+@n8 syntax.nominal dependent=""three"" dependent=""yellow"" head=""blocks""
+@r6 syntax.relation attachment=ambiguous marker=""to"" from=$c3 to=$n9
+@n9 syntax.nominal dependent=""the"" head=""right""
+@r7 syntax.relation marker=""of"" from=$n9 to=$n10
+@n10 syntax.nominal dependent=""the"" dependent=""red"" head=""structure""
+@k2 syntax.coordination conjunction=""then"" conjunct=$c3 conjunct=$c4
+@c4 syntax.clause form=imperative verb=""destroy"" complement=$n11
+@n11 syntax.nominal dependent=""the"" dependent=""middle"" dependent=""yellow"" head=""block""
+@r8 syntax.relation marker=""of"" from=$n11 to=$n12
+@n12 syntax.nominal dependent=""each"" head=""tower""
+@c5 syntax.clause form=fragment complement=$n1",vss,judge
 "i wonder if you could stand a tower of three yellow blocks to the left of the red structure, then raise another tower of three yellow blocks to the right of the red structure, then remove the middle yellow block of each tower, thanks",,,
 "place two orange blocks on both sides of the two red blocks, then place another orange block on top of the second red block, then remove the first red block",,,
 "put two orange blocks on both sides of the two red blocks, then put another orange block on top of the second red block, then take the first red block away",,,
@@ -1610,7 +1674,21 @@ hey — drop a green block on top of each yellow block,,,
 "i wonder if you could pile two purple blocks on top of each other on the existing structure, then stack one orange block in front of the top purple block",,,
 "actually, add two purple blocks on top of each other above the existing structure, and after that, add one orange block in front of the top purple block",,,
 "i think you should build two purple blocks on top of each other on the existing structure, then build one orange block in front of the top purple block",,,
-"what if you build two purple blocks on top of each other above the existing structure, then raise one orange block in front of the top purple block",,,
+"what if you build two purple blocks on top of each other above the existing structure, then raise one orange block in front of the top purple block","@n1 syntax.nominal head=""what""
+@r1 syntax.relation marker=""if"" from=$c3 to=$c1
+@n2 syntax.nominal head=""you""
+@c1 syntax.clause form=declarative verb=""build"" subject=$n2 complement=$n3
+@n3 syntax.nominal dependent=""two"" dependent=""purple"" head=""blocks""
+@r2 syntax.relation attachment=ambiguous marker=""on top of"" from=$c1 to=$n4
+@n4 syntax.nominal dependent=""each"" head=""other""
+@r3 syntax.relation attachment=ambiguous marker=""above"" from=$c1 to=$n5
+@n5 syntax.nominal dependent=""the"" dependent=""existing"" head=""structure""
+@k1 syntax.coordination conjunction=""then"" conjunct=$c3 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""raise"" complement=$n6
+@n6 syntax.nominal dependent=""one"" dependent=""orange"" head=""block""
+@r4 syntax.relation attachment=ambiguous marker=""in front of"" from=$c2 to=$n7
+@n7 syntax.nominal dependent=""the"" dependent=""top"" dependent=""purple"" head=""block""
+@c3 syntax.clause form=fragment complement=$n1",prolog,judge
 "i wonder if you could fit two purple blocks on top of each other on the existing structure, next fit one orange block in front of the top purple block","@n1 syntax.nominal head=""i""
 @c1 syntax.clause form=declarative verb=""wonder"" subject=$n1
 @r1 syntax.relation marker=""if"" from=$c1 to=$c2

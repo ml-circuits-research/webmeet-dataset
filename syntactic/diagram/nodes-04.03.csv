@@ -78,8 +78,8 @@ could you include a strikethrough line across the deleted leaf?,"@c1 syntax.clau
 @n3 syntax.nominal dependent=""the"" dependent=""deleted"" head=""leaf""",spacy-direct+vss,agreement
 just add a strikethrough line across the deleted leaf,"@c1 syntax.clause form=imperative modifier=""just"" verb=""add"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""strikethrough"" head=""line""
-@r1 syntax.relation marker=""across"" from=$n1 to=$n2
-@n2 syntax.nominal dependent=""the"" dependent=""deleted"" head=""leaf""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""across"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""deleted"" head=""leaf""",prolog+spacy+z3,judge
 add a strikethrough line across the deleted leaf only,,,
 "add a strikethrough line across the deleted leaf, nothing else",,,
 "add a strikethrough line across the deleted leaf, then keep the leaf label readable, so the figure still reads clearly at a glance",,,
@@ -161,7 +161,15 @@ can you add a thin frame around the whole figure?,"@c1 syntax.clause form=interr
 @n2 syntax.nominal dependent=""a"" dependent=""thin"" head=""frame""
 @r1 syntax.relation marker=""around"" from=$n2 to=$n3
 @n3 syntax.nominal dependent=""the"" dependent=""whole"" head=""figure""",spacy-direct+vss,agreement
-"quick one: add a thin frame around the whole figure, for the final version",,,
+"quick one: add a thin frame around the whole figure, for the final version","@n1 syntax.nominal dependent=""quick"" head=""one""
+@c1 syntax.clause form=imperative verb=""add"" complement=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""thin"" head=""frame""
+@r1 syntax.relation attachment=ambiguous marker=""around"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""whole"" head=""figure""
+@r2 syntax.relation marker=""for"" from=$c1 to=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""final"" head=""version""
+@c2 syntax.clause form=fragment complement=$n1
+@k1 syntax.coordination conjunct=$c2 conjunct=$c1",spacy,judge
 let's add a thin frame around the whole figure,,,
 could you make sure there is a thin frame around the whole figure,,,
 "for the figure, add a thin frame around the whole figure","@r1 syntax.relation marker=""for"" from=$c1 to=$n1
@@ -227,7 +235,25 @@ could the group be inside a frame?,"@c1 syntax.clause form=interrogative auxilia
 @n1 syntax.nominal dependent=""the"" head=""group""
 @r1 syntax.relation marker=""inside"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""a"" head=""frame""",spacy-direct+vss,agreement
-"draw an emphasis box filled yellow for me first; after that put a small caption under each box, without overlaps, with every label clear",,,
+"draw an emphasis box filled yellow for me first; after that put a small caption under each box, without overlaps, with every label clear","@c1 syntax.clause form=imperative verb=""draw"" modifier=""first"" complement=$n1
+@n1 syntax.nominal dependent=""an"" dependent=""emphasis"" head=""box""
+@c2 syntax.clause form=nonfinite verb=""filled"" complement=$n2
+@n2 syntax.nominal head=""yellow""
+@r1 syntax.relation marker=""for"" from=$c1 to=$n3
+@n3 syntax.nominal head=""me""
+@r2 syntax.relation marker=""after"" from=$c3 to=$n4
+@n4 syntax.nominal head=""that""
+@c3 syntax.clause form=imperative verb=""put"" complement=$n5
+@n5 syntax.nominal dependent=""a"" dependent=""small"" head=""caption""
+@r3 syntax.relation marker=""under"" from=$c3 to=$n6
+@n6 syntax.nominal dependent=""each"" head=""box""
+@r4 syntax.relation marker=""without"" from=$c3 to=$n7
+@n7 syntax.nominal head=""overlaps""
+@r5 syntax.relation marker=""with"" from=$c3 to=$c4
+@n8 syntax.nominal dependent=""every"" head=""label""
+@c4 syntax.clause form=fragment modifier=""clear"" complement=$n8
+@k1 syntax.coordination conjunct=$c1 conjunct=$c3
+@r6 syntax.relation from=$n1 to=$c2",spacy,judge
 let's put a group inside a dotted frame,,,
 "here is the plan: a group inside a dotted frame, plus put a caption under the group, so it still fits on a single slide without crowding",,,
 "for the figure, add a thin frame around the whole figure, then leave a caption strip under the frame, with enough room around each part",,,
@@ -432,8 +458,8 @@ start the presentation if you can,"@c1 syntax.clause form=imperative verb=""star
 @c2 syntax.clause form=declarative verb=""can"" subject=$n2",spacy-direct+vss,agreement
 show it to the audience,"@c1 syntax.clause form=imperative verb=""show"" complement=$n1
 @n1 syntax.nominal head=""it""
-@r1 syntax.relation marker=""to"" from=$c1 to=$n2
-@n2 syntax.nominal dependent=""the"" head=""audience""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""audience""",spacy,judge
 put it in presentation moed,,,
 show it full scren,,,
 go ahead and present it,"@c1 syntax.clause form=imperative verb=""go"" modifier=""ahead""
@@ -1127,8 +1153,8 @@ set up the boxes and arrows but leave the text out,"@c1 syntax.clause form=imper
 @n3 syntax.nominal dependent=""the"" head=""text""",spacy-direct+vss,agreement
 a starter diagram for the team to fill in,,,
 "just the emty template, no content",,,
-empty template please,"@n1 syntax.nominal dependent=""empty"" head=""template""
-@c1 syntax.clause form=fragment discourse=""please"" complement=$n1",spacy-direct+vss,agreement
+empty template please,"@c1 syntax.clause form=imperative verb=""empty"" discourse=""please"" complement=$n1
+@n1 syntax.nominal head=""template""",prolog,judge
 go ahead and make the empty template and put a title on the page,,,
 "the reviewers keep arguing about the rule, so draw every check as a yes or no question and put the answer that stops the process on the left",,,
 same thing but actually do it this time,"@n1 syntax.nominal dependent=""same"" head=""thing""
@@ -1245,7 +1271,12 @@ draw the compnents of my stack,"@c1 syntax.clause form=imperative verb=""draw"" 
 @n1 syntax.nominal dependent=""the"" head=""compnents""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""my"" head=""stack""",spacy-direct+vss,agreement
-show what talks to wath in the app,,,
+show what talks to wath in the app,"@c1 syntax.clause form=imperative verb=""show"" complement=$n1
+@n1 syntax.nominal dependent=""what"" head=""talks""
+@r1 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n2
+@n2 syntax.nominal head=""wath""
+@r2 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""app""",prolog,judge
 map the stack as a dependency graph if you can,"@c1 syntax.clause form=imperative verb=""map"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""stack""
 @r1 syntax.relation marker=""as"" from=$c1 to=$n2
@@ -1446,8 +1477,8 @@ rebuild the row from step one and move the last figrue to the front,,,
 @k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c2
 @c2 syntax.clause form=imperative verb=""move"" complement=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""third"" head=""figure""
-@r2 syntax.relation marker=""to"" from=$c2 to=$n3
-@n3 syntax.nominal dependent=""the"" head=""end""",spacy-direct+vss,agreement
+@r2 syntax.relation attachment=ambiguous marker=""to"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""end""",prolog+z3,judge
 rebuild it,"@c1 syntax.clause form=imperative verb=""rebuild"" complement=$n1
 @n1 syntax.nominal head=""it""",spacy-direct+vss,agreement
 then move one figure,,,
@@ -1633,7 +1664,10 @@ could you add tick marks to both axes?,"@c1 syntax.clause form=interrogative aux
 @n3 syntax.nominal dependent=""both"" head=""axes""",spacy-direct+vss,agreement
 now add tick marks,"@c1 syntax.clause form=imperative modifier=""now"" verb=""add"" complement=$n1
 @n1 syntax.nominal dependent=""tick"" head=""marks""",spacy-direct+vss,agreement
-"just the scale bar, 5 units",,,
+"just the scale bar, 5 units","@n1 syntax.nominal dependent=""just"" dependent=""the"" dependent=""scale"" head=""bar""
+@n2 syntax.nominal dependent=""5"" head=""units""
+@c1 syntax.clause form=fragment complement=$n1
+@r1 syntax.relation from=$n1 to=$n2",spacy,judge
 let's move the origin to the lower left,"@c1 syntax.clause form=imperative verb=""let"" complement=$n1
 @n1 syntax.nominal head=""'s""
 @c2 syntax.clause form=nonfinite verb=""move"" subject=$n1 complement=$n2
@@ -2755,8 +2789,8 @@ what is the number of steps?,"@n1 syntax.nominal head=""what""
 @n3 syntax.nominal head=""steps""",spacy-direct+vss,agreement
 count the steps in the process,"@c1 syntax.clause form=imperative verb=""count"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""steps""
-@r1 syntax.relation marker=""in"" from=$c1 to=$n2
-@n2 syntax.nominal dependent=""the"" head=""process""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""process""",prolog+z3,judge
 i'm wondering how many boxes are on the page?,,,
 tell me how many stages there are,,,
 i have to describe this process in the report and i need to know how many steps it contains before i write the summary,,,

@@ -13,7 +13,22 @@ text,sop,source,accepted_by
 @n5 syntax.nominal dependent=""an"" dependent=""orange"" head=""hat""
 @r4 syntax.relation marker=""at"" from=$c2 to=$n6
 @n6 syntax.nominal dependent=""the"" dependent=""far"" head=""right""",spacy-direct+vss,agreement
-"please sweep the woman in the yellow dress out at the far left, and after that, sweep a man in a green jacket in at the far right, thanks",,,
+"please sweep the woman in the yellow dress out at the far left, and after that, sweep a man in a green jacket in at the far right, thanks","@c1 syntax.clause form=imperative discourse=""please"" verb=""sweep"" modifier=""out"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""woman""
+@r1 syntax.relation marker=""in"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""yellow"" head=""dress""
+@r2 syntax.relation marker=""at"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""far"" head=""left""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2 conjunct=$c3
+@r3 syntax.relation marker=""after"" from=$c2 to=$n4
+@n4 syntax.nominal head=""that""
+@n5 syntax.nominal dependent=""a"" head=""man""
+@r4 syntax.relation marker=""in"" from=$n5 to=$n6
+@c2 syntax.clause form=imperative verb=""sweep"" modifier=""in"" complement=$n5
+@n6 syntax.nominal dependent=""a"" dependent=""green"" head=""jacket""
+@r5 syntax.relation marker=""at"" from=$c2 to=$n7
+@n7 syntax.nominal dependent=""the"" dependent=""far"" head=""right""
+@c3 syntax.clause form=fragment discourse=""thanks""",spacy,judge
 "could you clear the one who stayed put last turn out of the line, then leave the rest of the line as it is",,,
 "maybe you could pull the one who stayed put last turn out of the line, then leave the rest of the line as it is",,,
 "can you dismiss the one who stayed put last turn out of the line, then leave the rest of the line as it is",,,
@@ -57,7 +72,7 @@ text,sop,source,accepted_by
 "now — please cut the non-red blocks away, next keep the red blocks exactly as they are",,,
 "hey — please pull every block without red, then leave the red blocks and the layout as they are","@c1 syntax.clause form=imperative discourse=""hey"" discourse=""please"" verb=""pull"" complement=$n1
 @n1 syntax.nominal dependent=""every"" head=""block""
-@r1 syntax.relation marker=""without"" from=$c1 to=$n2
+@r1 syntax.relation marker=""without"" from=$n1 to=$n2
 @n2 syntax.nominal head=""red""
 @k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c2
 @c2 syntax.clause form=imperative verb=""leave"" complement=$k2
@@ -66,7 +81,7 @@ text,sop,source,accepted_by
 @n4 syntax.nominal dependent=""the"" head=""layout""
 @r2 syntax.relation marker=""as"" from=$c2 to=$c3
 @n5 syntax.nominal head=""they""
-@c3 syntax.clause form=declarative verb=""are"" subject=$n5",spacy-direct+vss,agreement
+@c3 syntax.clause form=declarative verb=""are"" subject=$n5",spacy,judge
 "please sweep away with the blocks that are not red, then keep the red blocks where they stand, thanks",,,
 "remove the three middle blocks of the north wall, then leave the wall standing on both sides of the doorway",,,
 "could you clear away the three middle blocks, then leave the wall standing on both sides of the doorway",,,
@@ -1042,7 +1057,13 @@ run smooth silk texture across the folded blanket,"@c1 syntax.clause form=impera
 @n1 syntax.nominal dependent=""smooth"" dependent=""silk"" head=""texture""
 @r1 syntax.relation marker=""across"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""folded"" head=""blanket""",spacy-direct+vss,agreement
-build the blanket on the sofa heavy silk texture,,,
+build the blanket on the sofa heavy silk texture,"@c1 syntax.clause form=imperative verb=""build"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""blanket""
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""sofa""
+@n3 syntax.nominal dependent=""heavy"" dependent=""silk"" head=""texture""
+@r2 syntax.relation from=$c2 to=$c1
+@c2 syntax.clause form=fragment complement=$n3",spacy,judge
 recover the throw blanket with smooth silk,"@c1 syntax.clause form=imperative verb=""recover"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""throw"" head=""blanket""
 @r1 syntax.relation marker=""with"" from=$c1 to=$n2
@@ -1339,7 +1360,17 @@ st the scene in a heavy snowstorm. And give the woman a wide umbrella,"@c1 synta
 "keep the scene in a rainy afternoon, and fit the child with a pair of rain boots",,,
 "hold the whole scene in a wet afternoon, and place a pair of yellow boots in the girl's grasp",,,
 "cast the scene in a drizzly day, and equip the boy with a pair of tall boots",,,
-"fix the scene in a damp evening, and supply the toddler with a pair of rubber boots",,,
+"fix the scene in a damp evening, and supply the toddler with a pair of rubber boots","@c1 syntax.clause form=imperative verb=""fix"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""scene""
+@r1 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""damp"" head=""evening""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""supply"" complement=$n3
+@n3 syntax.nominal dependent=""the"" head=""toddler""
+@r2 syntax.relation attachment=ambiguous marker=""with"" from=$c2 to=$n4
+@n4 syntax.nominal dependent=""a"" head=""pair""
+@r3 syntax.relation marker=""of"" from=$n4 to=$n5
+@n5 syntax.nominal dependent=""rubber"" head=""boots""",prolog+z3,judge
 "wrap the scene in a wet afternoon, keeping every other object where it stands, and hand a pair of yellow boots to the girl without disturbing the rest, and nothing else in the picture is touched",,,
 "hold the scene in a drizzly day from edge to edge, and fit the boy with a pair of tall boots and leave the pose alone — just the person and the weather, nothing else",,,
 "make it a rainy afternoon, and give the child a pair of rain boots",,,
@@ -1871,8 +1902,8 @@ maybe you could create everything in the room into a centred arrangement,"@c1 sy
 maybe you could swap the room into a centred composition,"@c1 syntax.clause form=declarative modifier=""maybe"" auxiliary=""could"" verb=""swap"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""the"" head=""room""
-@r1 syntax.relation marker=""into"" from=$n2 to=$n3
-@n3 syntax.nominal dependent=""a"" dependent=""centred"" head=""composition""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""into"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""a"" dependent=""centred"" head=""composition""",prolog+z3,judge
 reset the whole room as a middle-set layout,"@c1 syntax.clause form=imperative verb=""reset"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""whole"" head=""room""
 @r1 syntax.relation marker=""as"" from=$c1 to=$n2
@@ -2334,7 +2365,13 @@ give the whole picture a bordered art-print layout with a clear top band and a q
 @n3 syntax.nominal dependent=""a"" dependent=""clear"" dependent=""top"" head=""band""
 @k1 syntax.coordination conjunction=""and"" conjunct=$n3 conjunct=$n4
 @n4 syntax.nominal dependent=""a"" dependent=""quiet"" head=""base""",spacy-direct+vss,agreement
-shape the whole picture into a bordered art-print layout with a wide even margin all the way round,,,
+shape the whole picture into a bordered art-print layout with a wide even margin all the way round,"@c1 syntax.clause form=imperative verb=""shape"" modifier=""round"" complement=$n1 complement=$n4
+@n1 syntax.nominal dependent=""the"" dependent=""whole"" head=""picture""
+@r1 syntax.relation marker=""into"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""bordered"" dependent=""art"" dependent=""print"" head=""layout""
+@r2 syntax.relation marker=""with"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""a"" dependent=""wide"" dependent=""even"" head=""margin""
+@n4 syntax.nominal dependent=""all"" dependent=""the"" head=""way""",distilbert,judge
 work the scene up as a print-with-margin composition while every object keeps its own shape,"@c1 syntax.clause form=imperative verb=""work"" modifier=""up"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""scene""
 @r1 syntax.relation marker=""as"" from=$c1 to=$n2
@@ -2493,7 +2530,16 @@ comose the page as a centred poster composition,"@c1 syntax.clause form=imperati
 @n1 syntax.nominal dependent=""the"" head=""page""
 @r1 syntax.relation marker=""as"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""centred"" dependent=""poster"" head=""composition""",spacy-direct+vss,agreement
-ly out the whole picture like a poster layout centred on the subject,,,
+ly out the whole picture like a poster layout centred on the subject,"@n1 syntax.nominal head=""ly""
+@r1 syntax.relation marker=""out"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""whole"" head=""picture""
+@r2 syntax.relation marker=""like"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""a"" dependent=""poster"" head=""layout""
+@c1 syntax.clause form=nonfinite verb=""centred""
+@r3 syntax.relation marker=""on"" from=$c1 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""subject""
+@c2 syntax.clause form=fragment complement=$n1
+@r4 syntax.relation from=$c2 to=$c1",prolog,judge
 hey — set the drawing in a symmetric centred composition,"@c1 syntax.clause form=imperative discourse=""hey"" verb=""set"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""drawing""
 @r1 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n2

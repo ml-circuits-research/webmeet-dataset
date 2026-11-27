@@ -347,13 +347,13 @@ set aside the right half — right there in the picture — that is how the pict
 "leave the right half open, then put the tent there — just like that in the scene — keeping the rest of the scene as it is",,,
 "reserve the right half for the tent, then place the tent there, as drawn so far","@c1 syntax.clause form=imperative verb=""reserve"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""right"" head=""half""
-@r1 syntax.relation marker=""for"" from=$c1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""tent""
 @k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c2
 @c2 syntax.clause form=imperative verb=""place"" modifier=""there"" complement=$n3
 @n3 syntax.nominal dependent=""the"" head=""tent""
 @r2 syntax.relation marker=""as"" from=$c2 to=$c3
-@c3 syntax.clause form=nonfinite verb=""drawn"" modifier=""so"" modifier=""far""",spacy-direct+vss,agreement
+@c3 syntax.clause form=nonfinite verb=""drawn"" modifier=""so"" modifier=""far""",spacy,judge
 "room in the right half, please",,,
 the right half: keep it clear,,,
 don't put anything in the right half,"@c1 syntax.clause form=imperative auxiliary=""do"" negation=""n't"" verb=""put"" complement=$n1
@@ -819,7 +819,13 @@ turn the little house into pure orugh stone,,,
 hey — give the house wall a grey stone finish,"@c1 syntax.clause form=imperative discourse=""hey"" verb=""give"" complement=$n1 complement=$n2
 @n1 syntax.nominal dependent=""the"" dependent=""house"" head=""wall""
 @n2 syntax.nominal dependent=""a"" dependent=""grey"" dependent=""stone"" head=""finish""",spacy-direct+vss,agreement
-"change the old house's texture over to cut stone blocks, thanks",,,
+"change the old house's texture over to cut stone blocks, thanks","@c1 syntax.clause form=imperative verb=""change"" modifier=""over"" complement=$n2
+@n1 syntax.nominal dependent=""the"" dependent=""old"" head=""house""
+@r1 syntax.relation marker=""'s"" from=$n2 to=$n1
+@n2 syntax.nominal head=""texture""
+@r2 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""cut"" discourse=""thanks"" complement=$n3
+@n3 syntax.nominal dependent=""stone"" head=""blocks""",distilbert+prolog+vss,judge
 turn the old bench into pure white marble,"@c1 syntax.clause form=imperative verb=""turn"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""old"" head=""bench""
 @r1 syntax.relation marker=""into"" from=$c1 to=$n2
@@ -1171,8 +1177,8 @@ hey — turn the whole drawing into a clean black and white photograph,,,
 make everything look like an art deco poster,,,
 convert the whole page into a retro art deco design,"@c1 syntax.clause form=imperative verb=""convert"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""whole"" head=""page""
-@r1 syntax.relation marker=""into"" from=$c1 to=$n2
-@n2 syntax.nominal dependent=""a"" dependent=""retro"" dependent=""art"" dependent=""deco"" head=""design""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""into"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""retro"" dependent=""art"" dependent=""deco"" head=""design""",prolog,judge
 redo everything as an art deco poster,,,
 render the whole drawing as a glossy art deco print,"@c1 syntax.clause form=imperative verb=""render"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""whole"" head=""drawing""
@@ -1300,8 +1306,8 @@ make the page a bright pop art panel,"@c1 syntax.clause form=imperative verb=""m
 amke everything look like a pop art poster,,,
 change the whole picture to a obld pop art print,"@c1 syntax.clause form=imperative verb=""change"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""whole"" head=""picture""
-@r1 syntax.relation marker=""to"" from=$c1 to=$n2
-@n2 syntax.nominal dependent=""a"" dependent=""obld"" dependent=""pop"" dependent=""art"" head=""print""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""obld"" dependent=""pop"" dependent=""art"" head=""print""",prolog,judge
 hey — turn the whole drawing into a bright pop art panel,"@c1 syntax.clause form=imperative discourse=""hey"" verb=""turn"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""whole"" head=""drawing""
 @r1 syntax.relation marker=""into"" from=$c1 to=$n2
@@ -1888,7 +1894,12 @@ just swap the background for a cave in the mountains,"@c1 syntax.clause form=imp
 @n2 syntax.nominal dependent=""a"" head=""cave""
 @r2 syntax.relation marker=""in"" from=$n2 to=$n3
 @n3 syntax.nominal dependent=""the"" head=""mountains""",spacy-direct+vss,agreement
-"the backdrop is a dark cave mouth now, that's all",,,
+"the backdrop is a dark cave mouth now, that's all","@n1 syntax.nominal dependent=""the"" head=""backdrop""
+@c1 syntax.clause form=declarative verb=""is"" modifier=""now"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""dark"" dependent=""cave"" head=""mouth""
+@n3 syntax.nominal head=""that""
+@c2 syntax.clause form=declarative verb=""'s"" subject=$n3 complement=$n4
+@n4 syntax.nominal head=""all""",distilbert+vss,judge
 set the backdrop to a rocky cave,"@c1 syntax.clause form=imperative verb=""set"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""backdrop""
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2
@@ -1910,12 +1921,12 @@ hey — turn the whole setting into a rocky cave,"@c1 syntax.clause form=imperat
 @n2 syntax.nominal dependent=""a"" dependent=""rocky"" head=""cave""",spacy-direct+vss,agreement
 "swap the scenery behind everything for a cave with stalactites, thanks","@c1 syntax.clause form=imperative verb=""swap"" discourse=""thanks"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""scenery""
-@r1 syntax.relation marker=""behind"" from=$n1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""behind"" from=$c1 to=$n2
 @n2 syntax.nominal head=""everything""
-@r2 syntax.relation marker=""for"" from=$c1 to=$n3
+@r2 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""a"" head=""cave""
-@r3 syntax.relation marker=""with"" from=$c1 to=$n4
-@n4 syntax.nominal head=""stalactites""",spacy-direct+vss,agreement
+@r3 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$n4
+@n4 syntax.nominal head=""stalactites""",prolog+z3,judge
 make the background a home kitchen,,,
 change the backdrop to a cosy kitchen,"@c1 syntax.clause form=imperative verb=""change"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""backdrop""
@@ -2290,14 +2301,23 @@ change the time of day to the middle of the day,"@c1 syntax.clause form=imperati
 @n3 syntax.nominal dependent=""the"" head=""middle""
 @r3 syntax.relation marker=""of"" from=$n3 to=$n4
 @n4 syntax.nominal dependent=""the"" head=""day""",spacy-direct+vss,agreement
-the page needs to be in noon light by now,,,
+the page needs to be in noon light by now,"@n1 syntax.nominal dependent=""the"" head=""page""
+@c1 syntax.clause form=declarative verb=""needs"" subject=$n1
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""be""
+@r2 syntax.relation marker=""in"" from=$c2 to=$n2
+@n2 syntax.nominal dependent=""noon"" head=""light""
+@r3 syntax.relation attachment=ambiguous marker=""by"" from=$c2 to=$n3
+@n3 syntax.nominal head=""now""",prolog+z3,judge
 swap the current hour for the noon hour,"@c1 syntax.clause form=imperative verb=""swap"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""current"" head=""hour""
 @r1 syntax.relation marker=""for"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""noon"" head=""hour""",spacy-direct+vss,agreement
 light the page as if it were high noon,,,
 let the page be the middle of the day,,,
-make it noon light,,,
+make it noon light,"@c1 syntax.clause form=imperative verb=""make"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""it""
+@n2 syntax.nominal dependent=""noon"" head=""light""",distilbert+prolog+z3,judge
 "the noon hour, that's all",,,
 set it all to high noon,,,
 let's have the middle of the day here,,,

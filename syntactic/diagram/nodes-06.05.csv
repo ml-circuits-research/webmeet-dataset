@@ -123,7 +123,24 @@ add a hexagon labelled Visits by month; then connect Visits by month to Jan.,"@c
 @r4 syntax.relation from=$n1 to=$c2",spacy-direct+vss,agreement
 Let us add a hexagon labelled Test scores; then link Test scores to Group A. That would help.,,,
 "Hey, create a triangle labelled Sales Q1-Q4; then connect Sales Q1-Q4 to Q3.",,,
-create a circle labelled Visits by month; then link Visits by month to Jan; then make Visits by month blue.,,,
+create a circle labelled Visits by month; then link Visits by month to Jan; then make Visits by month blue.,"@c1 syntax.clause form=imperative verb=""create"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""circle""
+@c2 syntax.clause form=nonfinite verb=""labelled"" complement=$n2
+@n2 syntax.nominal head=""Visits""
+@r1 syntax.relation attachment=ambiguous marker=""by"" from=$c1 to=$n3
+@n3 syntax.nominal head=""month""
+@k1 syntax.coordination conjunction=""then"" conjunction=""then"" conjunct=$c1 conjunct=$c3 conjunct=$c4
+@c3 syntax.clause form=imperative verb=""link"" complement=$n4
+@n4 syntax.nominal head=""Visits""
+@r2 syntax.relation marker=""by"" from=$c3 to=$n5
+@n5 syntax.nominal head=""month""
+@r3 syntax.relation marker=""to"" from=$c3 to=$n6
+@n6 syntax.nominal head=""Jan""
+@c4 syntax.clause form=imperative verb=""make"" modifier=""blue"" complement=$n7
+@n7 syntax.nominal head=""Visits""
+@r4 syntax.relation marker=""by"" from=$n7 to=$n8
+@n8 syntax.nominal head=""month""
+@r5 syntax.relation from=$n1 to=$c2",spacy,judge
 make a hexagon labelled Test scores; then link Test scores to Group A; then make Test scores purple.,,,
 create a diamond labelled Expenses; then connect Expenses to Rent.,"@c1 syntax.clause form=imperative verb=""create"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""diamond""
@@ -243,22 +260,22 @@ Could you create a triangle labelled Q3; then connect Q3 to Sales. I appreciate 
 @n7 syntax.nominal head=""it""
 @r2 syntax.relation from=$n2 to=$c2",spacy-direct+vss,agreement
 I need you to add a ellipse labelled Login; then link Login to Dashboard. I appreciate it.,"@n1 syntax.nominal head=""I""
-@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1 complement=$n2
 @n2 syntax.nominal head=""you""
 @r1 syntax.relation marker=""to"" from=$c1 to=$c2
-@c2 syntax.clause form=nonfinite verb=""add"" subject=$n2 complement=$n3
+@c2 syntax.clause form=nonfinite verb=""add"" complement=$n3
 @n3 syntax.nominal dependent=""a"" head=""ellipse""
 @c3 syntax.clause form=nonfinite verb=""labelled"" complement=$n4
 @n4 syntax.nominal head=""Login""
 @k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c4
 @c4 syntax.clause form=imperative verb=""link"" complement=$n5
 @n5 syntax.nominal head=""Login""
-@r2 syntax.relation marker=""to"" from=$c4 to=$n6
+@r2 syntax.relation attachment=ambiguous marker=""to"" from=$c4 to=$n6
 @n6 syntax.nominal head=""Dashboard""
 @n7 syntax.nominal head=""I""
 @c5 syntax.clause form=declarative verb=""appreciate"" subject=$n7 complement=$n8
 @n8 syntax.nominal head=""it""
-@r3 syntax.relation from=$n3 to=$c3",spacy-direct+vss,agreement
+@r3 syntax.relation from=$n3 to=$c3",z3,judge
 I need you to make a circle labelled Ana; then connect Ana to Ben; then make Ana yellow. I appreciate it.,,,
 "Hey, create a ellipse labelled Ana; then link Ana to Ben. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""create"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""ellipse""
@@ -277,7 +294,26 @@ make a rectangle labelled Q1; then connect Q1 to Q2; then make Q1 orange.,,,
 "Please, add a rectangle labelled Start; then connect Start to End; then make Start red. Thanks!",,,
 "Please, add a diamond labelled Cache; then link Cache to API. Thanks!",,,
 Let us make a hexagon labelled Design; then connect Design to Platform. That would help.,,,
-I need you to add a ellipse labelled Rob; then connect Rob to Sal; then make Rob purple. I appreciate it.,,,
+I need you to add a ellipse labelled Rob; then connect Rob to Sal; then make Rob purple. I appreciate it.,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""add"" subject=$n2 complement=$n3
+@n3 syntax.nominal dependent=""a"" head=""ellipse""
+@c3 syntax.clause form=nonfinite verb=""labelled"" complement=$n4
+@n4 syntax.nominal head=""Rob""
+@k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c4
+@c4 syntax.clause form=imperative verb=""connect"" complement=$n5
+@n5 syntax.nominal head=""Rob""
+@r2 syntax.relation marker=""to"" from=$c4 to=$n6
+@n6 syntax.nominal head=""Sal""
+@k2 syntax.coordination conjunction=""then"" conjunct=$c4 conjunct=$c5
+@c5 syntax.clause form=imperative verb=""make"" modifier=""purple"" complement=$n7
+@n7 syntax.nominal head=""Rob""
+@n8 syntax.nominal head=""I""
+@c6 syntax.clause form=declarative verb=""appreciate"" subject=$n8 complement=$n9
+@n9 syntax.nominal head=""it""
+@r3 syntax.relation from=$n3 to=$c3",distilbert+vss,judge
 "Please, add a diamond labelled Sales; then link Sales to Cy; then make Sales purple. Thanks!",,,
 Let us add a rectangle labelled Wed; then link Wed to Reference; then make Wed purple. That would help.,,,
 "Please, create a rectangle labelled Sun; then connect Sun to Moon. Thanks!",,,
@@ -612,7 +648,23 @@ add a star labelled Hugo; then connect Hugo to Lia; then make Hugo orange.,,,
 "Please, make a hexagon labelled Opal; then connect Opal to Onyx; then make Opal purple. Thanks!",,,
 Could you create a hexagon labelled Lamp; then link Lamp to Switch. Thanks!,,,
 "Please, add a rectangle labelled Pond; then link Pond to Frog. Thanks!",,,
-I need you to make a triangle labelled Mesh A; then connect Mesh A to North. I appreciate it.,,,
+I need you to make a triangle labelled Mesh A; then connect Mesh A to North. I appreciate it.,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" subject=$n2 complement=$n3
+@n3 syntax.nominal dependent=""a"" head=""triangle""
+@c3 syntax.clause form=nonfinite verb=""labelled"" complement=$n4
+@n4 syntax.nominal head=""Mesh A""
+@k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c4
+@c4 syntax.clause form=imperative verb=""connect"" complement=$n5
+@n5 syntax.nominal head=""Mesh A""
+@r2 syntax.relation marker=""to"" from=$c4 to=$n6
+@n6 syntax.nominal head=""North""
+@n7 syntax.nominal head=""I""
+@c5 syntax.clause form=declarative verb=""appreciate"" subject=$n7 complement=$n8
+@n8 syntax.nominal head=""it""
+@r3 syntax.relation from=$n3 to=$c3",distilbert+vss,judge
 I need you to make a hexagon labelled Dot; then connect Dot to Kip; then make Dot orange. I appreciate it.,,,
 Could you make a rectangle labelled Q1; then link Q1 to Q2. Thanks!,,,
 "Hey, make a ellipse labelled Oak; then link Oak to Elm; then make Oak red. That would help.",,,
@@ -743,7 +795,18 @@ make a triangle labelled Mix batter; then connect Mix batter to Bake.,,,
 "Please, create a red circle labelled Issue resolved?. Thanks!",,,
 Could you make a blue circle labelled Close ticket. I appreciate it.,,,
 "Hey, create a yellow star labelled Tier 1.",,,
-Could you add a circle labelled Lead; then connect Lead to Qualified. Thanks!,,,
+Could you add a circle labelled Lead; then connect Lead to Qualified. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""add"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""a"" head=""circle""
+@c2 syntax.clause form=nonfinite verb=""labelled"" complement=$n3
+@n3 syntax.nominal head=""Lead""
+@k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c3
+@c3 syntax.clause form=imperative verb=""connect"" complement=$n4
+@n4 syntax.nominal head=""Lead""
+@r1 syntax.relation marker=""to"" from=$c3 to=$n5
+@n5 syntax.nominal head=""Qualified""
+@c4 syntax.clause form=fragment discourse=""Thanks""
+@r2 syntax.relation from=$n2 to=$c2",distilbert+spacy,judge
 I need you to add a blue ellipse labelled Q3 sales. I appreciate it.,,,
 make a orange ellipse labelled Pipeline.,"@c1 syntax.clause form=imperative verb=""make"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""orange"" head=""ellipse""
@@ -1308,9 +1371,9 @@ add a rectangle labelled Team below About; then add a rectangle labelled Press b
 @k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c3
 @c3 syntax.clause form=imperative verb=""connect"" complement=$n3
 @n3 syntax.nominal head=""Circle""
-@r1 syntax.relation marker=""to"" from=$c3 to=$n4
+@r1 syntax.relation attachment=ambiguous marker=""to"" from=$c3 to=$n4
 @n4 syntax.nominal head=""Reference""
-@r2 syntax.relation from=$n1 to=$c2",spacy-direct+vss,agreement
+@r2 syntax.relation from=$n1 to=$c2",z3,judge
 "Please, make a green star labelled Refunded. Thanks!",,,
 Let us create a diamond labelled Cart; then connect Cart to Placed. That would help.,,,
 I need you to make a yellow rectangle labelled Packed. I appreciate it.,,,
@@ -1709,7 +1772,19 @@ Could you make a triangle labelled Footfall; then connect Footfall to Door 1; th
 @r1 syntax.relation marker=""to"" from=$c3 to=$n4
 @n4 syntax.nominal head=""Moons""
 @r2 syntax.relation from=$n1 to=$c2",spacy-direct+vss,agreement
-create a star labelled Temps; then connect Temps to Day 1; then make Temps blue.,,,
+create a star labelled Temps; then connect Temps to Day 1; then make Temps blue.,"@c1 syntax.clause form=imperative verb=""create"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""star""
+@c2 syntax.clause form=nonfinite verb=""labelled"" complement=$n2
+@n2 syntax.nominal head=""Temps""
+@k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c3
+@c3 syntax.clause form=imperative verb=""connect"" complement=$n3
+@n3 syntax.nominal head=""Temps""
+@r1 syntax.relation marker=""to"" from=$c3 to=$n4
+@n4 syntax.nominal head=""Day 1""
+@k2 syntax.coordination conjunction=""then"" conjunct=$c3 conjunct=$c4
+@c4 syntax.clause form=imperative verb=""make"" modifier=""blue"" complement=$n5
+@n5 syntax.nominal head=""Temps""
+@r2 syntax.relation from=$n1 to=$c2",distilbert+vss,judge
 create a circle labelled Pattern shift; then link Pattern shift to Early.,,,
 Could you create a blue ellipse labelled Queue. Thanks!,,,
 "Please, create a orange rectangle labelled Book ideas. Thanks!",,,
@@ -2247,7 +2322,11 @@ add a blue ellipse labelled Sun.,"@c1 syntax.clause form=imperative verb=""add""
 @n2 syntax.nominal head=""Sun""
 @r1 syntax.relation from=$n1 to=$c2",spacy-direct+vss,agreement
 make a blue hexagon labelled Sales Q1-Q4.,,,
-make a yellow star labelled Budget bars.,,,
+make a yellow star labelled Budget bars.,"@c1 syntax.clause form=imperative verb=""make"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""yellow"" head=""star""
+@c2 syntax.clause form=nonfinite verb=""labelled"" complement=$n2
+@n2 syntax.nominal dependent=""Budget"" head=""bars""
+@r1 syntax.relation from=$n1 to=$c2",spacy+z3,judge
 make a yellow diamond labelled Revenue.,"@c1 syntax.clause form=imperative verb=""make"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""yellow"" head=""diamond""
 @c2 syntax.clause form=nonfinite verb=""labelled"" complement=$n2

@@ -203,8 +203,8 @@ shade the profit,"@c1 syntax.clause form=imperative verb=""shade"" complement=$n
 @n1 syntax.nominal dependent=""the"" head=""profit""",spacy-direct+vss,agreement
 colour the boxes by category,"@c1 syntax.clause form=imperative verb=""colour"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""boxes""
-@r1 syntax.relation marker=""by"" from=$c1 to=$n2
-@n2 syntax.nominal head=""category""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""by"" from=$c1 to=$n2
+@n2 syntax.nominal head=""category""",prolog+spacy+z3,judge
 give each group its own colour,"@c1 syntax.clause form=imperative verb=""give"" complement=$n1 complement=$n2
 @n1 syntax.nominal dependent=""each"" head=""group""
 @n2 syntax.nominal dependent=""its"" dependent=""own"" head=""colour""",spacy-direct+vss,judge
@@ -453,7 +453,16 @@ Could you apply the grid rule to each new diagram?,"@c1 syntax.clause form=inter
 @r1 syntax.relation marker=""to"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""each"" dependent=""new"" head=""diagram""",spacy-direct+vss,agreement
 Can you make the legend rule cover all my diagrams?,,,
-Would it be possible to use the values rule for every diagram I make?,,,
+Would it be possible to use the values rule for every diagram I make?,"@c1 syntax.clause form=interrogative auxiliary=""Would"" verb=""be"" modifier=""possible"" subject=$n1
+@n1 syntax.nominal head=""it""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""use"" complement=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""values"" head=""rule""
+@r2 syntax.relation attachment=ambiguous marker=""for"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""every"" head=""diagram""
+@n4 syntax.nominal head=""I""
+@c3 syntax.clause form=declarative verb=""make"" subject=$n4
+@r3 syntax.relation from=$n3 to=$c3",distilbert+prolog,judge
 Maybe the dashed lines rule should apply to every diagram.,"@c1 syntax.clause form=declarative modifier=""Maybe"" auxiliary=""should"" verb=""apply"" subject=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""dashed"" dependent=""lines"" head=""rule""
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2
@@ -493,8 +502,8 @@ Extend the IDs rule to every diagram I open.,"@c1 syntax.clause form=imperative 
 @r2 syntax.relation from=$n2 to=$c2",spacy-direct+vss,agreement
 Point the grid rule at each new diagram.,"@c1 syntax.clause form=imperative verb=""Point"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""grid"" head=""rule""
-@r1 syntax.relation marker=""at"" from=$c1 to=$n2
-@n2 syntax.nominal dependent=""each"" dependent=""new"" head=""diagram""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""at"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""each"" dependent=""new"" head=""diagram""",prolog+spacy+z3,judge
 "every future diagram, always.","@n1 syntax.nominal dependent=""every"" dependent=""future"" head=""diagram""
 @c1 syntax.clause form=fragment modifier=""always"" complement=$n1",spacy-direct+vss,agreement
 "every diagram, please.","@n1 syntax.nominal dependent=""every"" head=""diagram""
@@ -1982,7 +1991,13 @@ The next thing is to create a bar chart for total revenue by region.,"@n1 syntax
 Let's build a bar chart of overall profit for every department.,,,
 "Can you render total sales by month as a bar chart on this slide, since the ops crew asked for one picture instead of a table",,,
 I'd like to see total revenue split by region in a bar chart.,,,
-"The channel comparison of total orders should be a bar chart, not another table.",,,
+"The channel comparison of total orders should be a bar chart, not another table.","@n1 syntax.nominal dependent=""The"" dependent=""channel"" head=""comparison""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""total"" head=""orders""
+@c1 syntax.clause form=declarative auxiliary=""should"" verb=""be"" subject=$n1 complement=$n3
+@n3 syntax.nominal dependent=""a"" dependent=""bar"" head=""chart""
+@r2 syntax.relation negation=""not"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""another"" head=""table""",spacy,judge
 Let's see total revenue by region as a bar chart.,,,
 The bar chart needs to show total orders by channel.,,,
 "Give me a bar chart showing total revenue by region, and show the values on the chart.",,,
@@ -2046,13 +2061,18 @@ The bar chart needs to show total orders by channel.,,,
 A scatter plot of spend against conversions should show whether they move together.,"@n1 syntax.nominal dependent=""A"" dependent=""scatter"" head=""plot""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
 @n2 syntax.nominal head=""spend""
-@r2 syntax.relation marker=""against"" from=$n2 to=$n3
+@r2 syntax.relation attachment=ambiguous marker=""against"" from=$c1 to=$n3
 @n3 syntax.nominal head=""conversions""
 @c1 syntax.clause form=declarative auxiliary=""should"" verb=""show"" subject=$n1
 @r3 syntax.relation marker=""whether"" from=$c1 to=$c2
 @n4 syntax.nominal head=""they""
-@c2 syntax.clause form=declarative verb=""move"" modifier=""together"" subject=$n4",spacy-direct+vss,agreement
-Maybe plot revenue against orders as a scatter plot.,,,
+@c2 syntax.clause form=declarative verb=""move"" modifier=""together"" subject=$n4",z3,judge
+Maybe plot revenue against orders as a scatter plot.,"@c1 syntax.clause form=imperative modifier=""Maybe"" verb=""plot"" complement=$n1
+@n1 syntax.nominal head=""revenue""
+@r1 syntax.relation marker=""against"" from=$c1 to=$n2
+@n2 syntax.nominal head=""orders""
+@r2 syntax.relation marker=""as"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""a"" dependent=""scatter"" head=""plot""",distilbert+spacy,judge
 "For the pricing review, scatter profit against sales on a scatter plot, since the chart has to match the deck template",,,
 a scatter plot of spend versus conversions,,,
 Could you show the relationship between salary and tenure in a scatter plot?,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""show"" subject=$n1 complement=$n2
@@ -2448,8 +2468,19 @@ Could you make a horizontal bar chart of orders by store for the review?,"@c1 sy
 @n4 syntax.nominal head=""store""
 @r3 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n5
 @n5 syntax.nominal dependent=""the"" head=""review""",spacy-direct+vss,agreement
-"spend by category, as a horizontal bar chart, please.",,,
-Maybe give me a horizontal bar chart showing sales by region.,,,
+"spend by category, as a horizontal bar chart, please.","@c1 syntax.clause form=imperative verb=""spend"" discourse=""please""
+@r1 syntax.relation marker=""by"" from=$c1 to=$n1
+@n1 syntax.nominal head=""category""
+@r2 syntax.relation attachment=ambiguous marker=""as"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""horizontal"" dependent=""bar"" head=""chart""",prolog,judge
+Maybe give me a horizontal bar chart showing sales by region.,"@c1 syntax.clause form=imperative modifier=""Maybe"" verb=""give"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""me""
+@n2 syntax.nominal dependent=""a"" dependent=""horizontal"" dependent=""bar"" head=""chart""
+@c2 syntax.clause form=nonfinite verb=""showing"" complement=$n3
+@n3 syntax.nominal head=""sales""
+@r1 syntax.relation attachment=ambiguous marker=""by"" from=$c2 to=$n4
+@n4 syntax.nominal head=""region""
+@r2 syntax.relation from=$n2 to=$c2",prolog+z3,judge
 "We need a horizontal bar chart of headcount by team for the Monday meeting, since the board asked for one picture instead of a table",,,
 a horizontal bar chart of orders by store,"@n1 syntax.nominal dependent=""a"" dependent=""horizontal"" dependent=""bar"" head=""chart""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
@@ -3663,7 +3694,16 @@ I need to see sales by price band as a bar chart,"@n1 syntax.nominal head=""I""
 @r3 syntax.relation marker=""as"" from=$c2 to=$n4
 @n4 syntax.nominal dependent=""a"" dependent=""bar"" head=""chart""",spacy-direct+vss,agreement
 Give me a bar chart of sales by 500-wide price band,,,
-Put together a bar chart of orders grouped by band of order quantity,,,
+Put together a bar chart of orders grouped by band of order quantity,"@c1 syntax.clause form=imperative verb=""Put"" modifier=""together"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""bar"" head=""chart""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal head=""orders""
+@c2 syntax.clause form=nonfinite verb=""grouped""
+@r2 syntax.relation marker=""by"" from=$c2 to=$n3
+@n3 syntax.nominal head=""band""
+@r3 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""order"" head=""quantity""
+@r4 syntax.relation from=$n2 to=$c2",distilbert+spacy,judge
 "and meanwhile, Draw a bar chart of bucket of order quantities against orders",,,
 Display the quarter the order fell in breakdown of total sales as a line chart. Make the line blue,,,
 Build me a line chart of order-date quarter against total slaes,"@c1 syntax.clause form=imperative verb=""Build"" complement=$n1 complement=$n2
@@ -3698,7 +3738,14 @@ How about a scatter plot with profit running along the bottom and sales up the s
 I need to see a scatter plot with the x axis titled profit and the y axis titled sales,,,
 I want a line chart with the x axis titled month and the y axis titled revenue,,,
 "while you're there: Draw a bar chart, x axis region, y axis total profit",,,
-Try a scatter plot with coloour mapped from region,,,
+Try a scatter plot with coloour mapped from region,"@c1 syntax.clause form=imperative verb=""Try"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""scatter"" head=""plot""
+@r1 syntax.relation marker=""with"" from=$n1 to=$n2
+@n2 syntax.nominal head=""coloour""
+@c2 syntax.clause form=nonfinite verb=""mapped""
+@r2 syntax.relation marker=""from"" from=$c2 to=$n3
+@n3 syntax.nominal head=""region""
+@r3 syntax.relation from=$n1 to=$c2",distilbert+vss,judge
 We need a scatter plot wtih marks distinguished by region,,,
 Render a line chart with region added to the key,"@c1 syntax.clause form=imperative verb=""Render"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""line"" head=""chart""
@@ -3724,7 +3771,40 @@ Bar chart with bars distinguished by segment in a colour-blind-safe palette,,,
 "Draw a line chart of quarter-by-quarter revenue, one line per region, with the legend on the right, sorted from high to low",,,
 Make a bar chart with bars for sales and a line for profit by region,,,
 "I want a bar chart with bar marks for sales plus a line for profit by region, with the values shown on the bars, with gridlines behind it and use a colour-blind-safe palette",,,
-"Let's do a bar chart with the revenue with target drawn as a line over it per month, with the y axis starting at zero, with the values shown on the bars, move the legend to the right",,,
+"Let's do a bar chart with the revenue with target drawn as a line over it per month, with the y axis starting at zero, with the values shown on the bars, move the legend to the right","@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""'s""
+@c2 syntax.clause form=nonfinite verb=""do"" complement=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""bar"" head=""chart""
+@r1 syntax.relation attachment=ambiguous marker=""with"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""revenue""
+@r2 syntax.relation attachment=ambiguous marker=""with"" from=$c2 to=$n4
+@n4 syntax.nominal head=""target""
+@c3 syntax.clause form=nonfinite verb=""drawn""
+@r3 syntax.relation marker=""as"" from=$c3 to=$n5
+@n5 syntax.nominal dependent=""a"" head=""line""
+@r4 syntax.relation attachment=ambiguous marker=""over"" from=$c3 to=$n6
+@n6 syntax.nominal head=""it""
+@r5 syntax.relation attachment=ambiguous marker=""per"" from=$c3 to=$n7
+@n7 syntax.nominal head=""month""
+@r6 syntax.relation attachment=ambiguous marker=""with"" from=$c2 to=$n8
+@n8 syntax.nominal dependent=""the"" dependent=""y"" head=""axis""
+@c4 syntax.clause form=nonfinite verb=""starting""
+@r7 syntax.relation marker=""at"" from=$c4 to=$n9
+@n9 syntax.nominal head=""zero""
+@r8 syntax.relation attachment=ambiguous marker=""with"" from=$c2 to=$n10
+@n10 syntax.nominal dependent=""the"" head=""values""
+@c5 syntax.clause form=nonfinite verb=""shown""
+@r9 syntax.relation marker=""on"" from=$c5 to=$n11
+@n11 syntax.nominal dependent=""the"" head=""bars""
+@c6 syntax.clause form=imperative verb=""move"" complement=$n12
+@n12 syntax.nominal dependent=""the"" head=""legend""
+@r10 syntax.relation attachment=ambiguous marker=""to"" from=$c6 to=$n13
+@n13 syntax.nominal dependent=""the"" head=""right""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c6
+@r11 syntax.relation from=$c1 to=$c2
+@r12 syntax.relation from=$n4 to=$c3
+@r13 syntax.relation from=$n8 to=$c4
+@r14 syntax.relation from=$n10 to=$c5",z3,judge
 "Make a bar chart with the profit with cumulative sales drawn as a line over it per quarter, with the legend on the right, with the values shown on the bars, make the bars blue",,,
 Make a bar chart with profit as bars beside a cumulative sales line by quarter,"@c1 syntax.clause form=imperative verb=""Make"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""bar"" head=""chart""

@@ -46,8 +46,8 @@ the walls could be stonier,"@n1 syntax.nominal dependent=""the"" head=""walls""
 let the house front be stone,,,
 build the walls out of stnoe,"@c1 syntax.clause form=imperative verb=""build"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""walls""
-@r1 syntax.relation marker=""out of"" from=$n1 to=$n2
-@n2 syntax.nominal head=""stnoe""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""out of"" from=$c1 to=$n2
+@n2 syntax.nominal head=""stnoe""",prolog+spacy+z3,judge
 "draw round glasses on the gril, then make the girl face right on the bench",,,
 the scene could do with a stream,"@n1 syntax.nominal dependent=""the"" head=""scene""
 @c1 syntax.clause form=declarative auxiliary=""could"" verb=""do"" subject=$n1
@@ -919,7 +919,13 @@ the scenery behind everything needs to be a wide cactus desert,,,
 set the backdrop to a bare sandy desert,,,
 a wide cactus desert behind everything,,,
 amke the background an empty sweep of desert,,,
-hey — turn the whole setting into a bare sandy desert exactly as i said,,,
+hey — turn the whole setting into a bare sandy desert exactly as i said,"@c1 syntax.clause form=imperative discourse=""hey"" verb=""turn"" modifier=""exactly"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""whole"" head=""setting""
+@r1 syntax.relation attachment=ambiguous marker=""into"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""bare"" dependent=""sandy"" head=""desert""
+@r2 syntax.relation marker=""as"" from=$c1 to=$c2
+@n3 syntax.nominal head=""i""
+@c2 syntax.clause form=declarative verb=""said"" subject=$n3",prolog,judge
 "swap the scenery behind everything for a wide cactus desert exactly as i said, thanks",,,
 make the background a forest,"@c1 syntax.clause form=imperative verb=""make"" complement=$n1 complement=$n2
 @n1 syntax.nominal dependent=""the"" head=""background""
@@ -1222,7 +1228,17 @@ change the backdrop to a lgacial lake with ice floes,"@c1 syntax.clause form=imp
 @n2 syntax.nominal dependent=""a"" dependent=""lgacial"" head=""lake""
 @r2 syntax.relation marker=""with"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""ice"" head=""floes""",spacy-direct+vss,agreement
-hey — turn the whole setting into a frozen lake ringed by glaciers exactly as i said,,,
+hey — turn the whole setting into a frozen lake ringed by glaciers exactly as i said,"@c1 syntax.clause form=imperative discourse=""hey"" verb=""turn"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""whole"" head=""setting""
+@r1 syntax.relation marker=""into"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""frozen"" head=""lake""
+@c2 syntax.clause form=nonfinite verb=""ringed""
+@r2 syntax.relation marker=""by"" from=$c2 to=$n3
+@n3 syntax.nominal head=""glaciers""
+@c3 syntax.clause form=declarative modifier=""exactly"" verb=""said"" subject=$n4
+@r3 syntax.relation marker=""as"" from=$c1 to=$c3
+@n4 syntax.nominal head=""i""
+@r4 syntax.relation from=$n2 to=$c2",spacy,judge
 "swap the scenery behind everything for a cold glacial lake exactly as i said, thanks",,,
 make everything look like a watercolour painting,,,
 change the whole picture to a soft watercolour wash,"@c1 syntax.clause form=imperative verb=""change"" complement=$n1
@@ -2026,7 +2042,11 @@ remove both trees and let the sun through,"@c1 syntax.clause form=imperative ver
 @n2 syntax.nominal dependent=""the"" head=""sun""",spacy-direct+vss,agreement
 kindly remove both trees — the sun is struggling to reach the house,,,
 "both trees gone, if you can",,,
-"the trees should be gone, the two of them",,,
+"the trees should be gone, the two of them","@n1 syntax.nominal dependent=""the"" head=""trees""
+@c1 syntax.clause form=declarative auxiliary=""should"" auxiliary=""be"" verb=""gone"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""the"" head=""two""
+@r1 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal head=""them""",distilbert+prolog+z3,judge
 remove both trese,"@c1 syntax.clause form=imperative verb=""remove"" complement=$n1
 @n1 syntax.nominal dependent=""both"" head=""trese""",spacy-direct+vss,agreement
 get rid of both treees,,,
@@ -2103,8 +2123,8 @@ replcae the bushes with ferns,"@c1 syntax.clause form=imperative verb=""replcae"
 @n2 syntax.nominal head=""ferns""",spacy-direct+vss,agreement
 swpa the clouds for gulls,"@c1 syntax.clause form=imperative verb=""swpa"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""clouds""
-@r1 syntax.relation marker=""for"" from=$c1 to=$n2
-@n2 syntax.nominal head=""gulls""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n2
+@n2 syntax.nominal head=""gulls""",prolog+spacy+z3,judge
 "swap the clouds for gulls, please","@c1 syntax.clause form=imperative verb=""swap"" discourse=""please"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""clouds""
 @r1 syntax.relation marker=""for"" from=$c1 to=$n2
@@ -2343,7 +2363,14 @@ we can do this without any clouds — with everything else left where it is — 
 "make sure no clouds show up, right where the picture needs it",,,
 never any clouds in this scene — and that is the whole scene — the way the drawing looks so far,,,
 "draw anything except clouds, just the way the drawing looks",,,
-"anything but clouds, over on the other side of the canvas",,,
+"anything but clouds, over on the other side of the canvas","@n1 syntax.nominal head=""anything""
+@k1 syntax.coordination conjunction=""but"" conjunct=$n1 conjunct=$n2
+@n2 syntax.nominal head=""clouds""
+@c1 syntax.clause form=fragment modifier=""over"" complement=$k1
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""other"" head=""side""
+@r2 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""canvas""",prolog,judge
 no clouds today,"@n1 syntax.nominal dependent=""no"" head=""clouds""
 @c1 syntax.clause form=fragment modifier=""today"" complement=$n1",spacy-direct+vss,judge
 skip the clouds,"@c1 syntax.clause form=imperative verb=""skip"" complement=$n1

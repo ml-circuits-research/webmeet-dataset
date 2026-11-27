@@ -45,7 +45,12 @@ are Reject and Review in a column?,"@c1 syntax.clause form=interrogative verb=""
 @n2 syntax.nominal head=""Review""
 @r1 syntax.relation marker=""in"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""a"" head=""column""",spacy-direct+vss,agreement
-did Reject and Check end up in one column?,,,
+did Reject and Check end up in one column?,"@c1 syntax.clause form=interrogative auxiliary=""did"" verb=""end"" modifier=""up"" subject=$k1
+@n1 syntax.nominal head=""Reject""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n1 conjunct=$n2
+@n2 syntax.nominal head=""Check""
+@r1 syntax.relation marker=""in"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""one"" head=""column""",distilbert+spacy,judge
 does the top edge of Archive match Reject?,,,
 is Counter level with Tray?,,,
 did Table end up flush with Oven?,,,
@@ -645,10 +650,10 @@ shift the first item to the far end of the row,"@c1 syntax.clause form=imperativ
 send the box at position two to the tail,,,
 move the first box past everything to the end,"@c1 syntax.clause form=imperative verb=""move"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""first"" head=""box""
-@r1 syntax.relation marker=""past"" from=$c1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""past"" from=$c1 to=$n2
 @n2 syntax.nominal head=""everything""
-@r2 syntax.relation marker=""to"" from=$c1 to=$n3
-@n3 syntax.nominal dependent=""the"" head=""end""",spacy-direct+vss,agreement
+@r2 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""end""",prolog+spacy+z3,judge
 bring figure three to the back,,,
 move the first figure all the way to the end of the row and let the other four slide one place to the left,,,
 take the box in the second position out of the line and insert it after the one that is currently last,,,
@@ -781,7 +786,11 @@ push the middle pair one spot right as a block,"@c1 syntax.clause form=imperativ
 now move both of them one place left,,,
 "and shift the whole row left, no swapping",,,
 move both end boxes one place inwrd without swapping them,,,
-"shift the first and second figures left togther, no exchange",,,
+"shift the first and second figures left togther, no exchange","@c1 syntax.clause form=imperative verb=""shift"" modifier=""left"" modifier=""togther"" complement=$k1
+@n1 syntax.nominal dependent=""the"" head=""first""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n1 conjunct=$n2
+@n2 syntax.nominal dependent=""second"" head=""figures""
+@c2 syntax.clause form=imperative negation=""no"" verb=""exchange""",vss,judge
 "both of them, no exchange",,,
 move both end boxes one place inward without swapping them and leave every one of the other figures in the row exactly where it is so the arrangement stays clear and readable,,,
 "move the fourth figure to position two, swapping with what is there",,,
@@ -842,8 +851,8 @@ arrange the figures in order of label length when you get a chance,,,
 i want the row in ascending label-length order,"@n1 syntax.nominal head=""i""
 @c1 syntax.clause form=declarative verb=""want"" subject=$n1 complement=$n2
 @n2 syntax.nominal dependent=""the"" head=""row""
-@r1 syntax.relation marker=""in"" from=$c1 to=$n3
-@n3 syntax.nominal dependent=""ascending"" dependent=""label"" dependent=""length"" head=""order""",spacy-direct+vss,agreement
+@r1 syntax.relation marker=""in"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""ascending"" dependent=""label"" dependent=""length"" head=""order""",spacy,judge
 reorder everything into label-length order,"@c1 syntax.clause form=imperative verb=""reorder"" complement=$n1
 @n1 syntax.nominal head=""everything""
 @r1 syntax.relation marker=""into"" from=$c1 to=$n2
@@ -1601,7 +1610,11 @@ i need you to clear the centre of the row,"@n1 syntax.nominal head=""i""
 @n4 syntax.nominal dependent=""the"" dependent=""first"" head=""figure""",spacy-direct+vss,agreement
 "remove the thrid figure, move the last box to the front, then restore the removed one",,,
 "remove, move, restore",,,
-remove all but the two ends,,,
+remove all but the two ends,"@c1 syntax.clause form=imperative verb=""remove"" complement=$n1
+@n1 syntax.nominal head=""all""
+@k1 syntax.coordination conjunction=""but"" conjunct=$c1 conjunct=$c2
+@n2 syntax.nominal dependent=""the"" dependent=""two"" head=""ends""
+@c2 syntax.clause form=fragment complement=$n2",vss,judge
 "remove all but the two figures that are already labelled, because the rest are placeholders",,,
 the shape that started in the fourth spot leaves,,,
 remove the figure that originally started in the third position,,,
@@ -2005,13 +2018,13 @@ remove the backward arrows if you can,"@c1 syntax.clause form=imperative verb=""
 @c2 syntax.clause form=declarative verb=""can"" subject=$n2",spacy-direct+vss,agreement
 put Open in the first slot and keep the rest in order,"@c1 syntax.clause form=imperative verb=""put"" complement=$n1
 @n1 syntax.nominal head=""Open""
-@r1 syntax.relation marker=""in"" from=$c1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""first"" head=""slot""
 @k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
 @c2 syntax.clause form=imperative verb=""keep"" complement=$n3
 @n3 syntax.nominal dependent=""the"" head=""rest""
-@r2 syntax.relation marker=""in"" from=$c2 to=$n4
-@n4 syntax.nominal head=""order""",spacy-direct+vss,agreement
+@r2 syntax.relation attachment=ambiguous marker=""in"" from=$c2 to=$n4
+@n4 syntax.nominal head=""order""",prolog+z3,judge
 bring the earlier figure into this slot and renumber,"@c1 syntax.clause form=imperative verb=""bring"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""earlier"" head=""figure""
 @r1 syntax.relation marker=""into"" from=$c1 to=$n2
@@ -2061,7 +2074,14 @@ Frame the chart in black and put a caption under it.,"@c1 syntax.clause form=imp
 "I'd like you to insert a Forecast series on the Monthly sales chart with 15, 20 and 26.",,,
 "What if the Monthly sales chart carried a Budget series with 11, 17 and 23?",,,
 "Maybe the Monthly sales chart should carry a Actual series: 9, 14, 22.",,,
-"Does the Monthly sales chart already carry a Plan series with 12, 18 and 24?",,,
+"Does the Monthly sales chart already carry a Plan series with 12, 18 and 24?","@c1 syntax.clause form=interrogative auxiliary=""Does"" modifier=""already"" verb=""carry"" subject=$n1 complement=$n2
+@n1 syntax.nominal dependent=""the"" dependent=""Monthly"" dependent=""sales"" head=""chart""
+@n2 syntax.nominal dependent=""a"" dependent=""Plan"" head=""series""
+@r1 syntax.relation marker=""with"" from=$n2 to=$k1
+@n3 syntax.nominal head=""12""
+@n4 syntax.nominal head=""18""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n3 conjunct=$n4 conjunct=$n5
+@n5 syntax.nominal head=""24""",distilbert+spacy,judge
 "The extra series I want on the Monthly sales chart is Budget: 11, 17, 23.",,,
 "I want a Actual series on the Monthly sales chart with 9, 14 and 22.",,,
 "Maybe only a Forecast series should be added to the Monthly sales chart, with 15, 20 and 26.",,,
@@ -2097,9 +2117,11 @@ one more series: Profit,"@n1 syntax.nominal dependent=""one"" dependent=""more""
 @c1 syntax.clause form=fragment complement=$n1
 @r1 syntax.relation from=$n1 to=$n2",spacy-direct+vss,agreement
 "Add a Plan series to it with 12, 18 and 24, and title it ""Monthly sales"".",,,
-"could you try the oval instead, please?","@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""try"" modifier=""instead"" discourse=""please"" subject=$n1 complement=$n2
+"could you try the oval instead, please?","@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""try"" modifier=""instead"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
-@n2 syntax.nominal dependent=""the"" head=""oval""",spacy-direct+vss,agreement
+@n2 syntax.nominal dependent=""the"" head=""oval""
+@c2 syntax.clause form=fragment discourse=""please""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2",prolog,judge
 "please could you try the oval instead, please?","@c1 syntax.clause form=interrogative discourse=""please"" auxiliary=""could"" verb=""try"" modifier=""instead"" discourse=""please"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""the"" head=""oval""",spacy-direct+vss,agreement

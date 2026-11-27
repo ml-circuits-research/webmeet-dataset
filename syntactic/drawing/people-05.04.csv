@@ -651,9 +651,11 @@ just give me a pressed mouth,"@c1 syntax.clause form=imperative modifier=""just"
 give me a pressed mouth small,"@c1 syntax.clause form=imperative verb=""give"" modifier=""small"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""me""
 @n2 syntax.nominal dependent=""a"" dependent=""pressed"" head=""mouth""",spacy-direct+vss,agreement
-"give me a pressed mouth small, quickly please","@c1 syntax.clause form=imperative verb=""give"" modifier=""small"" modifier=""quickly"" discourse=""please"" complement=$n1 complement=$n2
+"give me a pressed mouth small, quickly please","@c1 syntax.clause form=imperative verb=""give"" modifier=""small"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""me""
-@n2 syntax.nominal dependent=""a"" dependent=""pressed"" head=""mouth""",spacy-direct+vss,agreement
+@n2 syntax.nominal dependent=""a"" dependent=""pressed"" head=""mouth""
+@c2 syntax.clause form=fragment modifier=""quickly"" discourse=""please""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2",prolog,judge
 just give me a pressed mouth small,"@c1 syntax.clause form=imperative modifier=""just"" verb=""give"" modifier=""small"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""me""
 @n2 syntax.nominal dependent=""a"" dependent=""pressed"" head=""mouth""",spacy-direct+vss,agreement
@@ -1234,7 +1236,8 @@ change a medium neck,"@c1 syntax.clause form=imperative verb=""change"" compleme
 @n1 syntax.nominal dependent=""a"" dependent=""medium"" head=""neck""",spacy-direct+vss,agreement
 make one medium neck tiny,"@c1 syntax.clause form=imperative verb=""make"" modifier=""tiny"" complement=$n1
 @n1 syntax.nominal dependent=""one"" dependent=""medium"" head=""neck""",spacy-direct+vss,agreement
-update a thin moustache purple huge,,,
+update a thin moustache purple huge,"@c1 syntax.clause form=imperative verb=""update"" modifier=""purple"" modifier=""huge"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""thin"" head=""moustache""",distilbert+prolog+vss+z3,judge
 make one thick eyebrow,"@c1 syntax.clause form=imperative verb=""make"" complement=$n1
 @n1 syntax.nominal dependent=""one"" dependent=""thick"" head=""eyebrow""",spacy-direct+vss,agreement
 update a thick eyebrow pale,,,
@@ -1518,7 +1521,11 @@ just give me a cat-eye glasses,"@c1 syntax.clause form=imperative modifier=""jus
 change a bigg smile mouth,"@c1 syntax.clause form=imperative verb=""change"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""bigg"" dependent=""smile"" head=""mouth""",spacy-direct+vss,agreement
 "cheek white — change a round blush, please",,,
-"cheek default — change a dimple, please",,,
+"cheek default — change a dimple, please","@n1 syntax.nominal dependent=""cheek"" head=""default""
+@c1 syntax.clause form=imperative verb=""change"" discourse=""please"" complement=$n2
+@n2 syntax.nominal dependent=""a"" head=""dimple""
+@c2 syntax.clause form=fragment complement=$n1
+@k1 syntax.coordination conjunct=$c2 conjunct=$c1",z3,judge
 change a lipp bite mouth,"@c1 syntax.clause form=imperative verb=""change"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""lipp"" dependent=""bite"" head=""mouth""",spacy-direct+vss,judge
 "eye olive tiny — change a closed, please",,,

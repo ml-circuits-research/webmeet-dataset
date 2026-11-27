@@ -527,7 +527,7 @@ draw a rectangle behind the title and send it behind the table,"@c1 syntax.claus
 @n4 syntax.nominal dependent=""the"" head=""table""",spacy-direct+vss,agreement
 "insert a rectangle behind the title, give it a thin outline, then label it Banner","@c1 syntax.clause form=imperative verb=""insert"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""rectangle""
-@r1 syntax.relation marker=""behind"" from=$n1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""behind"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""title""
 @c2 syntax.clause form=imperative verb=""give"" complement=$n3 complement=$n4
 @n3 syntax.nominal head=""it""
@@ -535,7 +535,7 @@ draw a rectangle behind the title and send it behind the table,"@c1 syntax.claus
 @k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c2 conjunct=$c3
 @c3 syntax.clause form=imperative verb=""label"" complement=$n5 complement=$n6
 @n5 syntax.nominal head=""it""
-@n6 syntax.nominal head=""Banner""",spacy-direct+vss,agreement
+@n6 syntax.nominal head=""Banner""",prolog+z3,judge
 add a rectangle behind the title in sand and keep it on top of everything else,,,
 "rectangle, behind the title","@n1 syntax.nominal head=""rectangle""
 @r1 syntax.relation marker=""behind"" from=$n1 to=$n2
@@ -664,7 +664,19 @@ draw a circle on the Draft box and send it behind the table,"@c1 syntax.clause f
 @c3 syntax.clause form=imperative verb=""label"" complement=$n5 complement=$n6
 @n5 syntax.nominal head=""it""
 @n6 syntax.nominal head=""1""",spacy-direct+vss,agreement
-add a circle on the Draft box in red and keep it on top of everything else,,,
+add a circle on the Draft box in red and keep it on top of everything else,"@c1 syntax.clause form=imperative verb=""add"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""circle""
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""Draft"" head=""box""
+@r2 syntax.relation marker=""in"" from=$n2 to=$n3
+@n3 syntax.nominal head=""red""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""keep"" complement=$n4
+@n4 syntax.nominal head=""it""
+@r3 syntax.relation marker=""on"" from=$c2 to=$n5
+@n5 syntax.nominal head=""top""
+@r4 syntax.relation marker=""of"" from=$n5 to=$n6
+@n6 syntax.nominal head=""everything"" dependent=""else""",spacy,judge
 "circle, on the Draft box","@n1 syntax.nominal head=""circle""
 @r1 syntax.relation marker=""on"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""Draft"" head=""box""
@@ -942,7 +954,21 @@ put a bullet list in the notes and make the bullets teal,"@c1 syntax.clause form
 @n6 syntax.nominal head=""Timeline""
 @r3 syntax.relation from=$n1 to=$k1",spacy-direct+vss,agreement
 "start a bullet list in the notes with Scope, Budget and Timeline, and keep the text teal",,,
-"add a bullet list in the notes with Scope, Budget and Timeline, colour the text teal and give the box a thin outline",,,
+"add a bullet list in the notes with Scope, Budget and Timeline, colour the text teal and give the box a thin outline","@c1 syntax.clause form=imperative verb=""add"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""bullet"" head=""list""
+@r1 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""notes""
+@r2 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$k1
+@n3 syntax.nominal head=""Scope""
+@n4 syntax.nominal head=""Budget""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n3 conjunct=$n4 conjunct=$n5
+@n5 syntax.nominal head=""Timeline""
+@c2 syntax.clause form=imperative verb=""colour"" modifier=""teal"" complement=$n6
+@n6 syntax.nominal dependent=""the"" head=""text""
+@k2 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2 conjunct=$c3
+@c3 syntax.clause form=imperative verb=""give"" complement=$n7 complement=$n8
+@n7 syntax.nominal dependent=""the"" head=""box""
+@n8 syntax.nominal dependent=""a"" dependent=""thin"" head=""outline""",z3,judge
 "add a bullet list in the ontes with three items: Scope, Budget and Timeline",,,
 "add a bullet list in the notes with three ittems: Scope, Budget and Timeline",,,
 "another bullet list in the notes with the same items, and colour it teal this time","@n1 syntax.nominal dependent=""another"" dependent=""bullet"" head=""list""
@@ -1276,7 +1302,24 @@ could you add a numbered list on the page?,"@c1 syntax.clause form=interrogative
 @r1 syntax.relation marker=""on"" from=$n2 to=$n3
 @n3 syntax.nominal dependent=""the"" head=""page""",spacy-direct+vss,agreement
 "let's add a numbered list on the page with Sunday, Monday and Tuesday",,,
-"when you get a chance, add a numbered list on the page with Sunday, Monday and Tuesday so the options are easy to scan",,,
+"when you get a chance, add a numbered list on the page with Sunday, Monday and Tuesday so the options are easy to scan","@r1 syntax.relation marker=""when"" from=$c2 to=$c1
+@n1 syntax.nominal head=""you""
+@c1 syntax.clause form=declarative verb=""get"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""a"" head=""chance""
+@c2 syntax.clause form=imperative verb=""add"" complement=$n3
+@n3 syntax.nominal dependent=""a"" dependent=""numbered"" head=""list""
+@r2 syntax.relation marker=""on"" from=$c2 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""page""
+@r3 syntax.relation attachment=ambiguous marker=""with"" from=$c2 to=$k1
+@n5 syntax.nominal head=""Sunday""
+@n6 syntax.nominal head=""Monday""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n5 conjunct=$n6 conjunct=$n7
+@n7 syntax.nominal head=""Tuesday""
+@r4 syntax.relation marker=""so"" from=$c2 to=$c3
+@n8 syntax.nominal dependent=""the"" head=""options""
+@c3 syntax.clause form=declarative verb=""are"" modifier=""easy"" subject=$n8
+@r5 syntax.relation marker=""to"" from=$c3 to=$c4
+@c4 syntax.clause form=nonfinite verb=""scan""",spacy,judge
 "when you have a minute, add a numbered list on the page with Sunday, Monday and Tuesday, keep the bullets tight and leave the spacing even",,,
 "three bullet points on the page, one per line: Sunday, Monday and Tuesday",,,
 "add a numbered list on the page with Sunday, Monday and Tuesday and number the items",,,
@@ -1734,7 +1777,16 @@ same connector from Review to n3,"@n1 syntax.nominal dependent=""same"" head=""c
 @n2 syntax.nominal head=""Draft""
 @r2 syntax.relation marker=""to"" from=$n1 to=$n3
 @n3 syntax.nominal head=""Review""",spacy-direct+vss,agreement
-draw an arrow from Draft to Review and label it retry,,,
+draw an arrow from Draft to Review and label it retry,"@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
+@n1 syntax.nominal dependent=""an"" head=""arrow""
+@r1 syntax.relation marker=""from"" from=$n1 to=$n2
+@n2 syntax.nominal head=""Draft""
+@r2 syntax.relation marker=""to"" from=$n1 to=$n3
+@n3 syntax.nominal head=""Review""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""label"" complement=$n4 complement=$n5
+@n4 syntax.nominal head=""it""
+@n5 syntax.nominal head=""retry""",distilbert+vss,judge
 add a labelled arrow from Draft to Review that says retry,,,
 connect Draft to Review with an arrow labelled retry,"@c1 syntax.clause form=imperative verb=""connect"" complement=$n1
 @n1 syntax.nominal head=""Draft""
@@ -1863,7 +1915,14 @@ swap the direction of the arrow between Start and Bake,"@c1 syntax.clause form=i
 the arrow between n3 and n4 should go the other way,,,
 turn link e1 around so it flows back,,,
 make the Start to Bake arrow end at Start instead,,,
-"make the Start to Bake arrow end at Start instead, please",,,
+"make the Start to Bake arrow end at Start instead, please","@c1 syntax.clause form=imperative verb=""make"" modifier=""instead"" discourse=""please""
+@n1 syntax.nominal dependent=""the"" dependent=""Start"" head=""arrow""
+@r1 syntax.relation marker=""to"" from=$n1 to=$n2
+@n2 syntax.nominal head=""Bake""
+@c2 syntax.clause form=nonfinite verb=""end"" subject=$n1
+@r2 syntax.relation marker=""at"" from=$c2 to=$n3
+@n3 syntax.nominal head=""Start""
+@r3 syntax.relation from=$c1 to=$c2",spacy,judge
 switch the arrowhead on the Start Bake link,"@c1 syntax.clause form=imperative verb=""switch"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""arrowhead""
 @r1 syntax.relation marker=""on"" from=$n1 to=$n2
@@ -1928,7 +1987,14 @@ etch feeds onto the e1 connector,,,
 right: the e1 arrow reads feeds from now on,,,
 caption the link out of Edit: submit,,,
 "caption the Draft–Edit link submit, and italicise the caption",,,
-"write feeds on the e1 arrow, then thicken it a touch",,,
+"write feeds on the e1 arrow, then thicken it a touch","@c1 syntax.clause form=imperative verb=""write"" complement=$n1
+@n1 syntax.nominal head=""feeds""
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""e1"" head=""arrow""
+@k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""thicken"" complement=$n3 complement=$n4
+@n3 syntax.nominal head=""it""
+@n4 syntax.nominal dependent=""a"" head=""touch""",prolog+spacy+z3,judge
 the e1 arrow becomes submit — reviewers need the verb,,,
 "the e1 arrow needs a caption, your words",,,
 the link out of Sift wants naming,,,
@@ -2061,7 +2127,21 @@ the link out of Load could do with recolouring,"@n1 syntax.nominal dependent=""t
 "the e1 arrow could do with some presence — a bit wider, a bit taller, a touch of a turn",,,
 "sort the e1 arrow's build out, will you — width, height, angle",,,
 "the e1 arrow wants beefing up and a roll, sizes to taste",,,
-"make the e1 arrow larger — width 5.0, heigth 4.0 — and rotate it 90 degree",,,
+"make the e1 arrow larger — width 5.0, heigth 4.0 — and rotate it 90 degree","@c1 syntax.clause form=imperative verb=""make"" modifier=""larger"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""e1"" head=""arrow""
+@n2 syntax.nominal head=""width""
+@n3 syntax.nominal head=""5.0""
+@n4 syntax.nominal head=""heigth""
+@n5 syntax.nominal head=""4.0""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""rotate"" complement=$n6 complement=$n7
+@n6 syntax.nominal head=""it""
+@n7 syntax.nominal dependent=""90"" head=""degree""
+@r1 syntax.relation from=$c1 to=$c3
+@c3 syntax.clause form=fragment complement=$k2
+@k2 syntax.coordination conjunct=$n2 conjunct=$n4
+@r2 syntax.relation from=$n2 to=$n3
+@r3 syntax.relation from=$n4 to=$n5",prolog,judge
 make the connectors curved instead of straight,,,
 could you bend the arrows between the steps?,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""bend"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
@@ -2210,7 +2290,10 @@ how do I keep the arrows straight instead of slanted?,,,
 @n3 syntax.nominal dependent=""left"" dependent=""to"" dependent=""right"" head=""tracks""
 @k1 syntax.coordination conjunct=$n2 conjunct=$n3",vss,judge
 "keep the arrows on the level, nothing diagonal",,,
-"the connectors need straight lines only, flat ones",,,
+"the connectors need straight lines only, flat ones","@n1 syntax.nominal dependent=""the"" head=""connectors""
+@c1 syntax.clause form=declarative verb=""need"" modifier=""only"" subject=$n1 complement=$n2 complement=$n3
+@n2 syntax.nominal dependent=""straight"" head=""lines""
+@n3 syntax.nominal dependent=""flat"" head=""ones""",distilbert+z3,judge
 please to make the arrows straight and level,,,
 we want dead-straight connectors across the flow,"@n1 syntax.nominal head=""we""
 @c1 syntax.clause form=declarative verb=""want"" subject=$n1 complement=$n2
@@ -2456,7 +2539,8 @@ same dashed style on the Trim link,"@n1 syntax.nominal dependent=""same"" depend
 @r1 syntax.relation marker=""on"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""Trim"" head=""link""
 @c1 syntax.clause form=fragment complement=$n1",spacy-direct+vss,agreement
-"dotted too, that one",,,
+"dotted too, that one","@c1 syntax.clause form=fragment modifier=""dotted"" modifier=""too"" complement=$n1
+@n1 syntax.nominal dependent=""that"" head=""one""",distilbert+prolog+vss+z3,judge
 dash the arrow into Trim and dot the one into Grow,"@c1 syntax.clause form=imperative verb=""dash"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""arrow""
 @r1 syntax.relation marker=""into"" from=$n1 to=$n2
@@ -2582,7 +2666,15 @@ could you wire the incoming arrow to the top pin of Login?,"@c1 syntax.clause fo
 @n3 syntax.nominal dependent=""the"" dependent=""top"" head=""pin""
 @r2 syntax.relation marker=""of"" from=$n3 to=$n4
 @n4 syntax.nominal head=""Login""",spacy-direct+vss,agreement
-I'd like the arrow out of Scan to leave from its left pin,,,
+I'd like the arrow out of Scan to leave from its left pin,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative auxiliary=""'d"" verb=""like"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""the"" head=""arrow""
+@r1 syntax.relation attachment=ambiguous marker=""out of"" from=$c1 to=$n3
+@n3 syntax.nominal head=""Scan""
+@r2 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""leave""
+@r3 syntax.relation marker=""from"" from=$c2 to=$n4
+@n4 syntax.nominal dependent=""its"" dependent=""left"" head=""pin""",prolog+z3,judge
 let the connector land on the bottom port of the Home node,,,
 give the arrow's tail the upper-left pin of Verify,"@c1 syntax.clause form=imperative verb=""give"" complement=$n2 complement=$n3
 @n1 syntax.nominal dependent=""the"" head=""arrow""
@@ -2598,7 +2690,12 @@ hook the arrow leaving Scan onto its west port,"@c1 syntax.clause form=imperativ
 @r1 syntax.relation marker=""onto"" from=$c2 to=$n3
 @n3 syntax.nominal dependent=""its"" dependent=""west"" head=""port""
 @r2 syntax.relation from=$n1 to=$c2",spacy-direct+vss,agreement
-dock the Start arrows at the top port rather than the middle,,,
+dock the Start arrows at the top port rather than the middle,"@c1 syntax.clause form=imperative verb=""dock"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""Start"" head=""arrows""
+@r1 syntax.relation attachment=ambiguous marker=""at"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""top"" head=""port""
+@r2 syntax.relation attachment=ambiguous marker=""rather than"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""middle""",prolog,judge
 we want every connector out of Start to start at its west pin,,,
 "same port rule for the Scan arrow, top side",,,
 anchor the arrow out of Scan at its top-left pin and land the one into Approve on the right port,"@c1 syntax.clause form=imperative verb=""anchor"" complement=$n1

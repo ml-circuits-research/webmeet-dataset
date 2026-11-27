@@ -2,7 +2,14 @@ text,sop,source,accepted_by
 attach e1 with node Review,,,
 attach arrow from Start to Review with end from and node Review,,,
 attach e1 with end from and node Review,,,
-attach it with end from and node Review,,,
+attach it with end from and node Review,"@c1 syntax.clause form=imperative verb=""attach"" modifier=""from"" complement=$n1
+@n1 syntax.nominal head=""it""
+@r1 syntax.relation marker=""with"" from=$c1 to=$k1
+@n2 syntax.nominal head=""end""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n3
+@n3 syntax.nominal head=""node""
+@n4 syntax.nominal head=""Review""
+@r2 syntax.relation from=$n3 to=$n4",prolog+z3,judge
 attach e1 with end to and node Review,,,
 attach it with end end and node Review,,,
 attach all the arrows with end source and node Review,,,
@@ -59,8 +66,8 @@ detach arrow from Start to Review with end from,"@n1 syntax.nominal head=""arrow
 @n4 syntax.nominal head=""end""",spacy-direct+vss,agreement
 detach e1 with end from,"@c1 syntax.clause form=imperative verb=""detach"" modifier=""from"" complement=$n1
 @n1 syntax.nominal head=""e1""
-@r1 syntax.relation marker=""with"" from=$c1 to=$n2
-@n2 syntax.nominal head=""end""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$n2
+@n2 syntax.nominal head=""end""",prolog+spacy+z3,judge
 detach it with end from,"@c1 syntax.clause form=imperative verb=""detach"" modifier=""from"" complement=$n1
 @n1 syntax.nominal head=""it""
 @r1 syntax.relation marker=""with"" from=$c1 to=$n2
@@ -478,14 +485,14 @@ move c1 with x 120 and y 80,"@c1 syntax.clause form=imperative verb=""move"" com
 @r3 syntax.relation from=$n4 to=$n5",spacy-direct+vss,agreement
 move c1 with x 300 and y 80,"@c1 syntax.clause form=imperative verb=""move"" complement=$n1
 @n1 syntax.nominal head=""c1""
-@r1 syntax.relation marker=""with"" from=$c1 to=$k1
+@r1 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$k1
 @n2 syntax.nominal head=""x""
 @n3 syntax.nominal head=""300""
 @k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n4
 @n4 syntax.nominal head=""y""
 @n5 syntax.nominal head=""80""
 @r2 syntax.relation from=$n2 to=$n3
-@r3 syntax.relation from=$n4 to=$n5",spacy-direct+vss,agreement
+@r3 syntax.relation from=$n4 to=$n5",prolog,judge
 move Sales by region with y 80 and x 120,,,
 move c1 with y 80 and x 120,"@c1 syntax.clause form=imperative verb=""move"" complement=$n1
 @n1 syntax.nominal head=""c1""
@@ -516,7 +523,21 @@ move c1 with height 180 and x 120 and y 80,,,
 move it with height 180 and x 120 and y 80,,,
 move Sales by region with x 120 and width 240 and y 80,,,
 move Sales by region with x 120 and height 180 and y 80,,,
-move Sales by region with y 80 and width 240 and x 120,,,
+move Sales by region with y 80 and width 240 and x 120,"@c1 syntax.clause form=imperative verb=""move"" complement=$n1
+@n1 syntax.nominal head=""Sales""
+@r1 syntax.relation attachment=ambiguous marker=""by"" from=$c1 to=$n2
+@n2 syntax.nominal head=""region""
+@r2 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$k1
+@n3 syntax.nominal head=""y""
+@n4 syntax.nominal head=""80""
+@k1 syntax.coordination conjunction=""and"" conjunction=""and"" conjunct=$n3 conjunct=$n5 conjunct=$n7
+@n5 syntax.nominal head=""width""
+@n6 syntax.nominal head=""240""
+@n7 syntax.nominal head=""x""
+@n8 syntax.nominal head=""120""
+@r3 syntax.relation from=$n3 to=$n4
+@r4 syntax.relation from=$n5 to=$n6
+@r5 syntax.relation from=$n7 to=$n8",prolog,judge
 move Sales by region with y 80 and height 180 and x 120,,,
 move Sales by region with width 240 and height 180 and x 120 and y 80,,,
 move Sales by region with x 120 and y 80 and width 240,,,
@@ -889,7 +910,19 @@ set the title of Sales by region to Quarterly plan and the horizontal to on,,,
 set the type of Sales by region to bar and the horizontal to on,,,
 set the chart of the series to Sales by region and the index to 1 and the colour to teal,,,
 delete the series with chart Sales by region,,,
-set the value of the point to 7 and the chart to Sales by region,,,
+set the value of the point to 7 and the chart to Sales by region,"@c1 syntax.clause form=imperative verb=""set"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""value""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""point""
+@r2 syntax.relation marker=""to"" from=$c1 to=$n3
+@n3 syntax.nominal head=""7""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@n4 syntax.nominal dependent=""the"" head=""chart""
+@r3 syntax.relation marker=""to"" from=$c2 to=$n5
+@n5 syntax.nominal head=""Sales""
+@r4 syntax.relation marker=""by"" from=$n5 to=$n6
+@n6 syntax.nominal head=""region""
+@c2 syntax.clause form=fragment complement=$n4 ellipsis=$c1",distilbert+vss,judge
 move Sales by region with x 120 and y 80,,,
 add a rectangle with colour lime,"@c1 syntax.clause form=imperative verb=""add"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""rectangle""
@@ -1321,7 +1354,12 @@ duplicate all the rectangles,"@c1 syntax.clause form=imperative verb=""duplicate
 set the x of arrow from Start to Review to 120 and the y to 80,,,
 set the category of Sales by region to North and the label to Review,,,
 add a rectangle with outline gray,,,
-add a rectangle with layout tree and outline red,,,
+add a rectangle with layout tree and outline red,"@c1 syntax.clause form=imperative verb=""add"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""rectangle""
+@r1 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$k1
+@n2 syntax.nominal dependent=""layout"" head=""tree""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n3
+@n3 syntax.nominal head=""outline"" dependent=""red""",prolog+vss+z3,judge
 add a rectangle with label Review and outline red and font weight normal,,,
 set the size of Start to tiny,"@c1 syntax.clause form=imperative verb=""set"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""size""

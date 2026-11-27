@@ -1351,7 +1351,10 @@ could you roll back the last edit?,"@c1 syntax.clause form=interrogative auxilia
 "um, undo that","@c1 syntax.clause form=imperative discourse=""um"" verb=""undo"" complement=$n1
 @n1 syntax.nominal head=""that""",spacy-direct+vss,agreement
 let's undo the last edit in the document,,,
-would be nice to undo my last document edit,,,
+would be nice to undo my last document edit,"@c1 syntax.clause form=declarative auxiliary=""would"" verb=""be"" modifier=""nice""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""undo"" complement=$n1
+@n1 syntax.nominal dependent=""my"" dependent=""last"" dependent=""document"" head=""edit""",distilbert+prolog+spacy+z3,judge
 I need that last change reverted,,,
 "wait, go back one step in the document, the previous version was better",,,
 "hmm, now that I look at it, please revert the last change, it made things worse",,,
@@ -1636,7 +1639,15 @@ upgrade the subchapter to a chapter,"@c1 syntax.clause form=imperative verb=""up
 @n1 syntax.nominal dependent=""the"" head=""subchapter""
 @r1 syntax.relation marker=""into"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""a"" head=""chapter""",spacy-direct+vss,agreement
-"let's promote the subchapter, it should be a chapter",,,
+"let's promote the subchapter, it should be a chapter","@c1 syntax.clause form=imperative verb=""let"" complement=$n1
+@n1 syntax.nominal head=""'s""
+@c2 syntax.clause form=nonfinite verb=""promote"" complement=$n2
+@n2 syntax.nominal dependent=""the"" head=""subchapter""
+@n3 syntax.nominal head=""it""
+@c3 syntax.clause form=declarative auxiliary=""should"" verb=""be"" subject=$n3 complement=$n4
+@n4 syntax.nominal dependent=""a"" head=""chapter""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c3
+@r1 syntax.relation from=$c1 to=$c2",prolog+z3,judge
 could you raise the subchapter to a chapter level?,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""raise"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""the"" head=""subchapter""
@@ -1887,7 +1898,11 @@ I need Chapter in the heading formatted in italics,"@n1 syntax.nominal head=""I"
 @r1 syntax.relation marker=""in"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""the"" head=""centre""",spacy-direct+vss,agreement
 put paragraph b2 in the centre,,,
-"b2, make it centred",,,
+"b2, make it centred","@n1 syntax.nominal head=""b2""
+@c1 syntax.clause form=imperative verb=""make"" modifier=""centred"" complement=$n2
+@n2 syntax.nominal head=""it""
+@c2 syntax.clause form=fragment complement=$n1
+@k1 syntax.coordination conjunct=$c2 conjunct=$c1",z3,judge
 "the table rows should be set to Item,Cost and Paper,15, without a header row",,,
 "actually, the price went up, so set the table rows to Item,Cost and Paper,15, without a header row",,,
 "Updated paragraph for paragraph one, swap it in",,,

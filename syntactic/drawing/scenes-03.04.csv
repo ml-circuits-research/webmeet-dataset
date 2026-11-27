@@ -26,7 +26,19 @@ make the girl face right and let her wave at the sun,,,
 "point the girl right and tell her to wave at the sun, thanks",,,
 "turn the gril to face right, then get her to wave at the sun",,,
 "turn the man to face left, then see him run toward the house — with everything else left where it is",,,
-"make the man face left, and watch him run toward the house, as drawn so far",,,
+"make the man face left, and watch him run toward the house, as drawn so far","@c1 syntax.clause form=imperative verb=""make""
+@n1 syntax.nominal dependent=""the"" head=""man""
+@c2 syntax.clause form=nonfinite verb=""face"" modifier=""left"" subject=$n1
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c3
+@c3 syntax.clause form=imperative verb=""watch""
+@n2 syntax.nominal head=""him""
+@c4 syntax.clause form=nonfinite verb=""run"" subject=$n2
+@r1 syntax.relation marker=""toward"" from=$c4 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""house""
+@r2 syntax.relation marker=""as"" from=$c4 to=$c5
+@c5 syntax.clause form=nonfinite verb=""drawn"" modifier=""so"" modifier=""far""
+@r3 syntax.relation from=$c1 to=$c2
+@r4 syntax.relation from=$c3 to=$c4",spacy,judge
 have the man face left; help him run toward the house — and that is the whole scene — the way the drawing looks so far,,,
 "the man should face left, so ask him to run toward the house",,,
 keep the man facing left; tell him to run toward the house — exactly where the picture needs it — so the scene reads the way it should,,,
@@ -559,7 +571,11 @@ the boy is to keep watching the dog,"@n1 syntax.nominal dependent=""the"" head="
 @c3 syntax.clause form=nonfinite verb=""watching"" complement=$n2
 @n2 syntax.nominal dependent=""the"" head=""dog""
 @r2 syntax.relation from=$c2 to=$c3",spacy-direct+vss,agreement
-rather have the dog watching the birds,,,
+rather have the dog watching the birds,"@c1 syntax.clause form=imperative modifier=""rather"" verb=""have"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""dog""
+@c2 syntax.clause form=nonfinite verb=""watching"" complement=$n2
+@n2 syntax.nominal dependent=""the"" head=""birds""
+@r1 syntax.relation from=$n1 to=$c2",distilbert+prolog+vss+z3,judge
 have the cat watching the bird all afternoon,,,
 I'd like the boy to study the lake,,,
 make the dog watch the bird and the cat watch the dog,,,
@@ -617,8 +633,8 @@ make the basket so full of pears it can hardly close,,,
 "a full basket, that's what this needs",,,
 fill the baskte with plums,"@c1 syntax.clause form=imperative verb=""fill"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""baskte""
-@r1 syntax.relation marker=""with"" from=$c1 to=$n2
-@n2 syntax.nominal head=""plums""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$n2
+@n2 syntax.nominal head=""plums""",prolog+z3,judge
 the basket should be ful of apples,"@n1 syntax.nominal dependent=""the"" head=""basket""
 @c1 syntax.clause form=declarative auxiliary=""should"" verb=""be"" modifier=""ful"" subject=$n1
 @r1 syntax.relation marker=""of"" from=$c1 to=$n2
@@ -1206,10 +1222,10 @@ can you put the blue-dress girl back to where she was before?,,,
 could you bring the girl with the blue dress back to her old spot?,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""bring"" modifier=""back"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""the"" head=""girl""
-@r1 syntax.relation marker=""with"" from=$n2 to=$n3
+@r1 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""the"" dependent=""blue"" head=""dress""
-@r2 syntax.relation marker=""to"" from=$c1 to=$n4
-@n4 syntax.nominal dependent=""her"" dependent=""old"" head=""spot""",spacy-direct+vss,agreement
+@r2 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n4
+@n4 syntax.nominal dependent=""her"" dependent=""old"" head=""spot""",z3,judge
 undo that — the girl in the blue dress back exactly where she was,,,
 the girl with the blue dress needs to go back to her old spot,"@n1 syntax.nominal dependent=""the"" head=""girl""
 @r1 syntax.relation marker=""with"" from=$n1 to=$n2
@@ -1316,7 +1332,15 @@ move the dog to half an inch above the bottom edge,,,
 "no — the blue-dress woman needs to go next, not the man in the green jacket",,,
 "no — i want the woman in blue to go next, not the man in the green hat",,,
 "no — let the woman in the blue dress go next, not the man in the orange hat",,,
-"no — have the blue-dress woman take the next turn, not the man in the green jacket",,,
+"no — have the blue-dress woman take the next turn, not the man in the green jacket","@c1 syntax.clause form=imperative discourse=""no"" verb=""have"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""blue"" dependent=""dress"" head=""woman""
+@c2 syntax.clause form=nonfinite verb=""take"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""next"" head=""turn""
+@c3 syntax.clause form=fragment negation=""not"" complement=$n3 ellipsis=$c2
+@n3 syntax.nominal dependent=""the"" head=""man""
+@r1 syntax.relation marker=""in"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""green"" head=""jacket""
+@r2 syntax.relation from=$c1 to=$c2",vss,judge
 "no — begin the next step with the woman in blue, not the man in the green hat",,,
 "no — then it's the blue-dress woman who goes, not the man in the green jacket",,,
 "now — no — the woman in the blue dress first, not the man in the orange hat",,,
@@ -1424,7 +1448,10 @@ make the boy's shirt red and draw a star on it,"@c1 syntax.clause form=imperativ
 @n3 syntax.nominal dependent=""a"" head=""star""
 @r2 syntax.relation marker=""on"" from=$c2 to=$n4
 @n4 syntax.nominal head=""it""",spacy-direct+vss,agreement
-girl's shirt red,,,
+girl's shirt red,"@n1 syntax.nominal head=""girl""
+@r1 syntax.relation marker=""'s"" from=$n2 to=$n1
+@n2 syntax.nominal head=""shirt""
+@c1 syntax.clause form=fragment modifier=""red"" complement=$n2",distilbert+prolog+spacy+z3,judge
 shirt on the boy — red,,,
 make her shirt red,"@c1 syntax.clause form=imperative verb=""make"" modifier=""red"" complement=$n1
 @n1 syntax.nominal dependent=""her"" head=""shirt""",spacy-direct+vss,agreement
@@ -1624,7 +1651,17 @@ have the walls of the house be brick,,,
 the walls should be red brick,,,
 have the walls of the house made out of brick,,,
 "the walls should be stone, grey like river rock",,,
-"brick walls for the house — and the shed walls too, if it's easy",,,
+"brick walls for the house — and the shed walls too, if it's easy","@n1 syntax.nominal dependent=""brick"" head=""walls""
+@r1 syntax.relation marker=""for"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""house""
+@c1 syntax.clause form=fragment discourse=""and"" modifier=""too"" complement=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""shed"" head=""walls""
+@r2 syntax.relation marker=""if"" from=$c1 to=$c2
+@n4 syntax.nominal head=""it""
+@c2 syntax.clause form=declarative verb=""'s"" subject=$n4 complement=$n5
+@n5 syntax.nominal head=""easy""
+@c3 syntax.clause form=fragment complement=$n1
+@k1 syntax.coordination conjunct=$c3 conjunct=$c1",z3,judge
 wouldn't it be fun if the house had rounder windows?,,,
 "paint the roof of the house red, thanks","@c1 syntax.clause form=imperative verb=""paint"" modifier=""red"" discourse=""thanks"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""roof""
@@ -1863,7 +1900,13 @@ change the colour of the fence posts to a bright lbue,"@c1 syntax.clause form=im
 @n2 syntax.nominal dependent=""the"" dependent=""fence"" head=""posts""
 @r2 syntax.relation marker=""to"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""a"" dependent=""bright"" head=""lbue""",spacy-direct+vss,agreement
-hey — turn just the upright posts on the fence proper blue exactly as i said,,,
+hey — turn just the upright posts on the fence proper blue exactly as i said,"@c1 syntax.clause form=imperative discourse=""hey"" verb=""turn"" modifier=""just"" modifier=""proper"" modifier=""blue"" modifier=""exactly"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""upright"" head=""posts""
+@r1 syntax.relation marker=""on"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""fence""
+@r2 syntax.relation marker=""as"" from=$c1 to=$c2
+@n3 syntax.nominal head=""i""
+@c2 syntax.clause form=declarative verb=""said"" subject=$n3",distilbert+vss,judge
 "paint the fence's posts a bold blue exactly as i said, thanks",,,
 swap the roof of the house out for a barn-style roof,"@c1 syntax.clause form=imperative verb=""swap"" modifier=""out"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""roof""
@@ -2016,8 +2059,8 @@ dress the boy in a blue cap,"@c1 syntax.clause form=imperative verb=""dress"" co
 "put a straw hat on the girl, then add purple glasses under the hat brim, and finish with a green ribbon around the hat",,,
 put a straw hat on the girl,"@c1 syntax.clause form=imperative verb=""put"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""straw"" head=""hat""
-@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
-@n2 syntax.nominal dependent=""the"" head=""girl""",spacy-direct+vss,agreement
+@r1 syntax.relation marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""girl""",spacy,judge
 give the girl a straw hat,"@c1 syntax.clause form=imperative verb=""give"" complement=$n1 complement=$n2
 @n1 syntax.nominal dependent=""the"" head=""girl""
 @n2 syntax.nominal dependent=""a"" dependent=""straw"" head=""hat""",spacy-direct+vss,agreement
@@ -2184,14 +2227,14 @@ dress the kid in a striped shirt,"@c1 syntax.clause form=imperative verb=""dress
 @n2 syntax.nominal dependent=""a"" dependent=""pink"" head=""dress""
 @k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n3
 @n3 syntax.nominal dependent=""a"" dependent=""white"" head=""apron""
-@r1 syntax.relation marker=""over"" from=$n3 to=$n4
+@r1 syntax.relation attachment=ambiguous marker=""over"" from=$c1 to=$n4
 @n4 syntax.nominal dependent=""the"" head=""dress""
 @k2 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
 @c2 syntax.clause form=imperative verb=""finish""
 @r2 syntax.relation marker=""with"" from=$c2 to=$n5
 @n5 syntax.nominal dependent=""a"" dependent=""blue"" head=""shawl""
-@r3 syntax.relation marker=""over"" from=$n5 to=$n6
-@n6 syntax.nominal dependent=""the"" head=""apron""",spacy-direct+vss,agreement
+@r3 syntax.relation attachment=ambiguous marker=""over"" from=$c2 to=$n6
+@n6 syntax.nominal dependent=""the"" head=""apron""",prolog+z3,judge
 "dress the woman in a pink dress, after that, put a white apron over the dress, and finish with a blue shawl over the apron",,,
 put a pink dress on the woman,"@c1 syntax.clause form=imperative verb=""put"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""pink"" head=""dress""
@@ -2328,7 +2371,20 @@ dress the boy in brown boots,"@c1 syntax.clause form=imperative verb=""dress"" c
 "layer a small crown onto the girl, then a red cape over her dress",,,
 "try a small crown on the girl, over that, a red cape over her dress",,,
 "get a small crown onto the girl, next layer a red cape over her dress",,,
-"add a small crown to the girl, next, a red cape over her dress, and finish with white gloves under the cape",,,
+"add a small crown to the girl, next, a red cape over her dress, and finish with white gloves under the cape","@c1 syntax.clause form=imperative verb=""add"" modifier=""next"" complement=$k2
+@n1 syntax.nominal dependent=""a"" dependent=""small"" head=""crown""
+@r1 syntax.relation marker=""to"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""girl""
+@n3 syntax.nominal dependent=""a"" dependent=""red"" head=""cape""
+@r2 syntax.relation attachment=ambiguous marker=""over"" from=$c1 to=$n4
+@n4 syntax.nominal dependent=""her"" head=""dress""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""finish""
+@r3 syntax.relation marker=""with"" from=$c2 to=$n5
+@n5 syntax.nominal dependent=""white"" head=""gloves""
+@r4 syntax.relation attachment=ambiguous marker=""under"" from=$c2 to=$n6
+@n6 syntax.nominal dependent=""the"" head=""cape""
+@k2 syntax.coordination conjunct=$n1 conjunct=$n3",prolog,judge
 "dress the girl in a small crown, after that, put a red cape over her dress, and finish with white gloves under the cape",,,
 "slide a small crown onto the girl, finally, a red cape over her dress, and finish with white gloves under the cape",,,
 "start the girl with a small crown, top it with a red cape over her dress, and finish with white gloves under the cape",,,

@@ -185,7 +185,8 @@ tidyup,,,
 could you space things uot nicely,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""space"" modifier=""uot"" modifier=""nicely"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""things""",spacy-direct+vss,agreement
-imporvet hhelayout,,,
+imporvet hhelayout,"@n1 syntax.nominal dependent=""imporvet"" head=""hhelayout""
+@c1 syntax.clause form=fragment complement=$n1",distilbert+prolog+spacy+z3,judge
 "I mean, let's make the diagram neater",,,
 um better layout,"@c1 syntax.clause form=fragment discourse=""um"" complement=$n1
 @n1 syntax.nominal dependent=""better"" head=""layout""",spacy-direct+vss,agreement
@@ -454,7 +455,17 @@ round node called Send email,,,
 "next in the process comes Risk, so sketch a triangle for it labelled Check stock",,,
 a diamond Order placed,,,
 "would you draw a step ""Q3 target""",,,
-"after login there is a check, pop in a hexagon saying ""Notify user""",,,
+"after login there is a check, pop in a hexagon saying ""Notify user""","@r1 syntax.relation marker=""after"" from=$c1 to=$n1
+@n1 syntax.nominal head=""login""
+@n2 syntax.nominal head=""there""
+@c1 syntax.clause form=declarative verb=""is"" subject=$n2 complement=$n3
+@n3 syntax.nominal dependent=""a"" head=""check""
+@c2 syntax.clause form=imperative verb=""pop"" modifier=""in"" complement=$n4
+@n4 syntax.nominal dependent=""a"" head=""hexagon""
+@c3 syntax.clause form=nonfinite verb=""saying"" complement=$n5
+@n5 syntax.nominal head=""Notify user""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2
+@r2 syntax.relation from=$n4 to=$c3",spacy,judge
 Gateway star,,,
 drop in a box labelled Yes,,,
 we need a step for approvals: pop in a circle called Mobile app,,,
@@ -775,7 +786,8 @@ put massive text boox,"@c1 syntax.clause form=imperative verb=""put"" complement
 @n1 syntax.nominal dependent=""massive"" dependent=""text"" head=""boox""",spacy-direct+vss,agreement
 "buildd a star, regular",,,
 for a footnote I want to stick in a litle ellipse,,,
-"basically, a normal oval",,,
+"basically, a normal oval","@c1 syntax.clause form=fragment modifier=""basically"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""normal"" head=""oval""",distilbert+prolog+vss,judge
 for a footnote would you draw a giant star for me,"@r1 syntax.relation marker=""for"" from=$c1 to=$n1
 @n1 syntax.nominal dependent=""a"" head=""footnote""
 @c1 syntax.clause form=interrogative auxiliary=""would"" verb=""draw"" subject=$n2 complement=$n3
@@ -784,7 +796,13 @@ for a footnote would you draw a giant star for me,"@r1 syntax.relation marker=""
 @r2 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n4
 @n4 syntax.nominal head=""me""",spacy-direct+vss,agreement
 "well hey, sketch a big um rect",,,
-"er the main idea should dominate, put a large star uh for it",,,
+"er the main idea should dominate, put a large star uh for it","@c1 syntax.clause form=imperative discourse=""er"" verb=""put"" discourse=""uh"" complement=$n2
+@n1 syntax.nominal dependent=""the"" dependent=""main"" head=""idea""
+@c2 syntax.clause form=declarative auxiliary=""should"" verb=""dominate"" subject=$n1
+@n2 syntax.nominal dependent=""a"" dependent=""large"" head=""star""
+@r1 syntax.relation marker=""for"" from=$c1 to=$n3
+@n3 syntax.nominal head=""it""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2",spacy,judge
 massive trianhle,"@n1 syntax.nominal dependent=""massive"" head=""trianhle""
 @c1 syntax.clause form=fragment complement=$n1",spacy-direct+vss,agreement
 can you create a blocks that is normal,,,
@@ -1214,7 +1232,10 @@ the selected box in purple,"@n1 syntax.nominal dependent=""the"" dependent=""sel
 @n2 syntax.nominal head=""purple""
 @c1 syntax.clause form=fragment complement=$n1",spacy-direct+vss,agreement
 shade shape n4 magenta,,,
-now switch the colour of it black,,,
+now switch the colour of it black,"@c1 syntax.clause form=imperative modifier=""now"" verb=""switch"" modifier=""black"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""colour""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal head=""it""",distilbert+prolog+vss+z3,judge
 da last rectangle -> brown,,,
 "the hexagon in teal, thanks","@n1 syntax.nominal dependent=""the"" head=""hexagon""
 @r1 syntax.relation marker=""in"" from=$n1 to=$n2
@@ -1387,7 +1408,10 @@ just turn box n1 into a triangle,,,
 "our rectangle is a data store, turn it into a rectangle",,,
 let's set n2 square-shaped,,,
 "decisions are diamonds in our notation, so turn our triangle a oval",,,
-just change the node n6 to a diamond,,,
+just change the node n6 to a diamond,"@c1 syntax.clause form=imperative modifier=""just"" verb=""change"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""node"" head=""n6""
+@r1 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""a"" head=""diamond""",z3,judge
 "it is a data store, just turn it into a cloud",,,
 our circle -> rounded rectangle,,,
 I need you to make n1 rounded rectangle-shaped,,,
@@ -1549,7 +1573,11 @@ set the bottom round node larger,"@c1 syntax.clause form=imperative verb=""set""
 @n1 syntax.nominal dependent=""the"" dependent=""bottom"" dependent=""round"" head=""node""",spacy-direct+vss,agreement
 "hey, set the node n3 a lot larger",,,
 "I can hardly read the shape n1, make it slightly smaller",,,
-set box Onboarding a little smaller,,,
+set box Onboarding a little smaller,"@c1 syntax.clause form=imperative verb=""set"" modifier=""smaller"" complement=$n1 complement=$n3
+@n1 syntax.nominal head=""box""
+@n2 syntax.nominal head=""Onboarding""
+@n3 syntax.nominal dependent=""a"" head=""little""
+@r1 syntax.relation from=$n1 to=$n2",prolog+z3,judge
 I need you to change that one much smaller please,,,
 "I can hardly read Inbox, make it a little smaller",,,
 all the elements larger,,,
@@ -1598,7 +1626,14 @@ let's call that one Q3 target,,,
 retitle the only diamond Notify user,,,
 "the client wants different wording: name this to ""Mobile app""",,,
 rename it No,,,
-go ahead and set the label of n1 to Phase 2,,,
+go ahead and set the label of n1 to Phase 2,"@c1 syntax.clause form=imperative verb=""go"" modifier=""ahead""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""set"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""label""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal head=""n1""
+@r2 syntax.relation marker=""to"" from=$c2 to=$n3
+@n3 syntax.nominal head=""Phase 2""",distilbert+vss,judge
 label the one labelled Release Wait,,,
 call that round node Mobile app,,,
 "quick one: relabel shape n4 to Maybe, because it looks cluttered",,,

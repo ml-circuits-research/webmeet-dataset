@@ -94,8 +94,8 @@ a normal-size square,"@n1 syntax.nominal dependent=""a"" dependent=""normal"" de
 @c1 syntax.clause form=fragment complement=$n1",spacy-direct+vss,agreement
 add four circles in a row,"@c1 syntax.clause form=imperative verb=""add"" complement=$n1
 @n1 syntax.nominal dependent=""four"" head=""circles""
-@r1 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n2
-@n2 syntax.nominal dependent=""a"" head=""row""",spacy-direct+vss,agreement
+@r1 syntax.relation marker=""in"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""a"" head=""row""",spacy,judge
 create six squares arranged as a grid,"@c1 syntax.clause form=imperative verb=""create"" complement=$n1
 @n1 syntax.nominal dependent=""six"" head=""squares""
 @c2 syntax.clause form=nonfinite verb=""arranged""
@@ -611,11 +611,11 @@ please point an arrow from it to the Note,"@c1 syntax.clause form=imperative dis
 ok so Marketing is selected; connect it to Sales since they share a budget,,,
 "If Engineering is still selected, link it to Support too","@r1 syntax.relation marker=""If"" from=$c2 to=$c1
 @n1 syntax.nominal head=""Engineering""
-@c1 syntax.clause form=declarative auxiliary=""is"" modifier=""still"" verb=""selected"" subject=$n1
+@c1 syntax.clause form=declarative verb=""is"" modifier=""still"" modifier=""selected"" subject=$n1
 @c2 syntax.clause form=imperative verb=""link"" modifier=""too"" complement=$n2
 @n2 syntax.nominal head=""it""
 @r2 syntax.relation marker=""to"" from=$c2 to=$n3
-@n3 syntax.nominal head=""Support""",spacy-direct+vss,agreement
+@n3 syntax.nominal head=""Support""",z3,judge
 connect to Review,"@c1 syntax.clause form=imperative verb=""connect""
 @r1 syntax.relation marker=""to"" from=$c1 to=$n1
 @n1 syntax.nominal head=""Review""",spacy-direct+vss,agreement
@@ -847,7 +847,14 @@ remove Review and its arrows,"@c1 syntax.clause form=imperative verb=""remove"" 
 @n1 syntax.nominal head=""Review""
 @k1 syntax.coordination conjunction=""and"" conjunct=$n1 conjunct=$n2
 @n2 syntax.nominal dependent=""its"" head=""arrows""",spacy-direct+vss,agreement
-Note and the arrow to Done - gone,,,
+Note and the arrow to Done - gone,"@n1 syntax.nominal head=""Note""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n1 conjunct=$n2
+@n2 syntax.nominal dependent=""the"" head=""arrow""
+@r1 syntax.relation marker=""to"" from=$n2 to=$n3
+@n3 syntax.nominal head=""Done""
+@c1 syntax.clause form=nonfinite verb=""gone""
+@c2 syntax.clause form=fragment complement=$k1
+@k2 syntax.coordination conjunct=$c2 conjunct=$c1",prolog,judge
 bin the diamond with its arrows,,,
 drop Engineering and the CEO arrow to it,"@c1 syntax.clause form=imperative verb=""drop"" complement=$k1
 @n1 syntax.nominal head=""Engineering""
@@ -1090,7 +1097,17 @@ how many links go out of the CEO?,"@n1 syntax.nominal dependent=""how"" dependen
 "The slide only fits about six steps, so how many nodes are in this flow?",,,
 I think some arrows got duplicated. How many arrows point into Done?,,,
 Quick sanity check before I send it: how many departments are in the chart?,,,
-"count the circles, and if there are more than one, tell me which",,,
+"count the circles, and if there are more than one, tell me which","@c1 syntax.clause form=imperative verb=""count"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""circles""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c3
+@r1 syntax.relation marker=""if"" from=$c3 to=$c2
+@n2 syntax.nominal head=""there""
+@c2 syntax.clause form=declarative verb=""are"" modifier=""more"" subject=$n2
+@r2 syntax.relation marker=""than"" from=$c2 to=$n3
+@n3 syntax.nominal head=""one""
+@c3 syntax.clause form=imperative verb=""tell"" complement=$n4 complement=$n5
+@n4 syntax.nominal head=""me""
+@n5 syntax.nominal head=""which""",distilbert,judge
 Do you know how many text notes I left on the diagram?,,,
 how many rectangles are there and how many arrows?,,,
 number of arrows?,,,
@@ -1474,7 +1491,11 @@ delete that group,"@c1 syntax.clause form=imperative verb=""delete"" complement=
 Survey results group: delete,,,
 bin the Approval steps group,,,
 ungroup the Approval steps group,,,
-break up the Departments group but keep the boxes,,,
+break up the Departments group but keep the boxes,"@c1 syntax.clause form=imperative verb=""break"" modifier=""up"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""Departments"" head=""group""
+@k1 syntax.coordination conjunction=""but"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""keep"" complement=$n2
+@n2 syntax.nominal dependent=""the"" head=""boxes""",distilbert+prolog+spacy,judge
 dissolve the Leadership group,"@c1 syntax.clause form=imperative verb=""dissolve"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""Leadership"" head=""group""",spacy-direct+vss,agreement
 "I need to move Review on its own, so ungroup Approval steps first",,,
@@ -1614,7 +1635,9 @@ select it with links,"@c1 syntax.clause form=imperative verb=""select"" compleme
 @n1 syntax.nominal head=""it""
 @r1 syntax.relation marker=""with"" from=$c1 to=$n2
 @n2 syntax.nominal head=""links""",spacy-direct+vss,agreement
-get rid of the diamond,,,
+get rid of the diamond,"@c1 syntax.clause form=imperative auxiliary=""get"" verb=""rid""
+@r1 syntax.relation marker=""of"" from=$c1 to=$n1
+@n1 syntax.nominal dependent=""the"" head=""diamond""",distilbert+spacy,judge
 could you delete the circle at the end?,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""delete"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""the"" head=""circle""
@@ -1765,7 +1788,11 @@ retarget that arrow to the Note,"@c1 syntax.clause form=imperative verb=""retarg
 @n1 syntax.nominal dependent=""that"" head=""arrow""
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""Note""",spacy-direct+vss,agreement
-which ID is which? show them briefly,,,
+which ID is which? show them briefly,"@n1 syntax.nominal dependent=""which"" head=""ID""
+@c1 syntax.clause form=interrogative verb=""is"" subject=$n1 complement=$n2
+@n2 syntax.nominal head=""which""
+@c2 syntax.clause form=imperative verb=""show"" modifier=""briefly"" complement=$n3
+@n3 syntax.nominal head=""them""",prolog+spacy,judge
 "I'm cross-checking the arrows against the spec, so keep the IDs visible while I work",,,
 permanent IDs please,,,
 can you get the IDs off the screen?,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""get"" subject=$n1 complement=$n2

@@ -645,7 +645,11 @@ swap the old dog for something younger,"@c1 syntax.clause form=imperative verb="
 @n1 syntax.nominal dependent=""the"" dependent=""old"" head=""dog""
 @r1 syntax.relation marker=""for"" from=$c1 to=$n2
 @n2 syntax.nominal head=""something"" dependent=""younger""",spacy-direct+vss,agreement
-let the house be a newer design,,,
+let the house be a newer design,"@c1 syntax.clause form=imperative verb=""let"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""house""
+@c2 syntax.clause form=nonfinite verb=""be"" complement=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""newer"" head=""design""
+@r1 syntax.relation from=$c1 to=$c2",prolog+z3,judge
 give the kite something sturdier,"@c1 syntax.clause form=imperative verb=""give"" modifier=""sturdier"" complement=$n1 complement=$n2
 @n1 syntax.nominal dependent=""the"" head=""kite""
 @n2 syntax.nominal head=""something""",spacy-direct+vss,agreement
@@ -671,7 +675,11 @@ let the fat cat on the grass be a lynx,,,
 let the small dog be a friendly wolf,,,
 let the old boat on the lake be a galleon,,,
 let the fish under the cloud be a crab,,,
-let the cat be some other pet,,,
+let the cat be some other pet,"@c1 syntax.clause form=imperative verb=""let"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""cat""
+@c2 syntax.clause form=nonfinite verb=""be"" complement=$n2
+@n2 syntax.nominal dependent=""some"" dependent=""other"" head=""pet""
+@r1 syntax.relation from=$c1 to=$c2",distilbert+prolog+z3,judge
 let the sun be something less harsh,,,
 let the house be some other building,,,
 let the dgo be a wolf,,,
@@ -735,8 +743,8 @@ change the cats sitting on the grass into otters,"@c1 syntax.clause form=imperat
 @r3 syntax.relation from=$n1 to=$c2",spacy-direct+vss,agreement
 swap the two big dogs for wolves,"@c1 syntax.clause form=imperative verb=""swap"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""two"" dependent=""big"" head=""dogs""
-@r1 syntax.relation marker=""for"" from=$c1 to=$n2
-@n2 syntax.nominal head=""wolves""",spacy-direct+vss,judge
+@r1 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n2
+@n2 syntax.nominal head=""wolves""",prolog+spacy+z3,judge
 change the cats into some other animals,"@c1 syntax.clause form=imperative verb=""change"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""cats""
 @r1 syntax.relation marker=""into"" from=$c1 to=$n2
@@ -836,7 +844,12 @@ turn one of the birds into something friendlier,,,
 make one of the fish a faster one,,,
 turn one of the biirds into a dragonfly,,,
 change one of the fsih into a crab,,,
-let the fish change into birds,,,
+let the fish change into birds,"@c1 syntax.clause form=imperative verb=""let"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""fish""
+@c2 syntax.clause form=nonfinite verb=""change""
+@r1 syntax.relation marker=""into"" from=$c2 to=$n2
+@n2 syntax.nominal head=""birds""
+@r2 syntax.relation from=$c1 to=$c2",prolog+z3,judge
 let the clouds change into whales,,,
 let the fish turn into crabs,,,
 let the trees change into topiary dinosaurs,,,
@@ -1154,7 +1167,13 @@ add a beard to the man,"@c1 syntax.clause form=imperative verb=""add"" complemen
 give the man a long bushy beard,"@c1 syntax.clause form=imperative verb=""give"" complement=$n1 complement=$n2
 @n1 syntax.nominal dependent=""the"" head=""man""
 @n2 syntax.nominal dependent=""a"" dependent=""long"" dependent=""bushy"" head=""beard""",spacy-direct+vss,agreement
-the man looks too young for the scene — a beard would age him,,,
+the man looks too young for the scene — a beard would age him,"@n1 syntax.nominal dependent=""the"" head=""man""
+@c1 syntax.clause form=declarative verb=""looks"" modifier=""too"" modifier=""young"" subject=$n1
+@r1 syntax.relation marker=""for"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""scene""
+@n3 syntax.nominal dependent=""a"" head=""beard""
+@c2 syntax.clause form=declarative auxiliary=""would"" verb=""age"" subject=$n3 complement=$n4
+@n4 syntax.nominal head=""him""",distilbert+vss,judge
 give the man a beard and mustache,,,
 the winter scene says it — give the man a proper beard,,,
 beard on the man,"@n1 syntax.nominal head=""beard""
@@ -2019,7 +2038,10 @@ can you give the man a sad face?,"@c1 syntax.clause form=interrogative auxiliary
 @n2 syntax.nominal dependent=""the"" head=""man""
 @n3 syntax.nominal dependent=""a"" dependent=""sad"" head=""face""",spacy-direct+vss,judge
 I want the man to look sad,,,
-get the man looking sad,,,
+get the man looking sad,"@c1 syntax.clause form=imperative verb=""get"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""man""
+@c2 syntax.clause form=nonfinite verb=""looking"" modifier=""sad""
+@r1 syntax.relation from=$n1 to=$c2",distilbert+vss,judge
 could you make the man look sad?,,,
 "give the man a sad, gloomy face",,,
 make the woman angry and the man sad,"@c1 syntax.clause form=imperative verb=""make"" modifier=""angry"" complement=$n1
@@ -2210,7 +2232,10 @@ the lke is a deeper blue now,"@n1 syntax.nominal dependent=""the"" head=""lke""
 @n2 syntax.nominal dependent=""a"" dependent=""deeper"" head=""blue""",spacy-direct+vss,agreement
 let the boat be white,,,
 let the sun be orange,,,
-let the kite be purple,,,
+let the kite be purple,"@c1 syntax.clause form=imperative verb=""let"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""kite""
+@c2 syntax.clause form=nonfinite verb=""be"" modifier=""purple""
+@r1 syntax.relation from=$c1 to=$c2",prolog+z3,judge
 let the dog be brown,,,
 let the cat be grey,,,
 let the sun be a warm yellow,,,
@@ -2244,7 +2269,12 @@ let the kite be turned into a glider,,,
 let the house be turned into a cottage,,,
 let the cat be turned into a sleek panther,,,
 let the dog be turned into a shaggy bear,,,
-do let the bird be turned into an owl,,,
+do let the bird be turned into an owl,"@c1 syntax.clause form=imperative auxiliary=""do"" verb=""let""
+@n1 syntax.nominal dependent=""the"" head=""bird""
+@c2 syntax.clause form=declarative auxiliary=""be"" verb=""turned"" subject=$n1
+@r1 syntax.relation marker=""into"" from=$c2 to=$n2
+@n2 syntax.nominal dependent=""an"" head=""owl""
+@r2 syntax.relation from=$c1 to=$c2",spacy+z3,judge
 let the kite become a dragon,,,
 why not let the cloud be turned into a thunderhead?,,,
 "hey, let the boat be turned into a ferry",,,

@@ -297,10 +297,23 @@ drop every single tree from the drawing but the ones beside the house can stay,"
 @r2 syntax.relation marker=""beside"" from=$n3 to=$n4
 @n4 syntax.nominal dependent=""the"" head=""house""
 @c2 syntax.clause form=declarative auxiliary=""can"" verb=""stay"" subject=$n3",spacy-direct+vss,agreement
-just take the trees out but keep the ones beside the house,,,
+just take the trees out but keep the ones beside the house,"@c1 syntax.clause form=imperative modifier=""just"" verb=""take"" modifier=""out"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""trees""
+@k1 syntax.coordination conjunction=""but"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""keep"" complement=$n2
+@n2 syntax.nominal dependent=""the"" head=""ones""
+@r1 syntax.relation attachment=ambiguous marker=""beside"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""house""",prolog+z3,judge
 erase only every single tree except for the trees beside the house,,,
 remove all the trees — the ones beside the house stay,,,
-out with the trees but the ones beside the house can stay,,,
+out with the trees but the ones beside the house can stay,"@c1 syntax.clause form=fragment modifier=""out""
+@r1 syntax.relation marker=""with"" from=$c1 to=$n1
+@n1 syntax.nominal dependent=""the"" head=""trees""
+@k1 syntax.coordination conjunction=""but"" conjunct=$c1 conjunct=$c2
+@n2 syntax.nominal dependent=""the"" head=""ones""
+@r2 syntax.relation marker=""beside"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""house""
+@c2 syntax.clause form=declarative auxiliary=""can"" verb=""stay"" subject=$n2",distilbert+vss,judge
 ermove every single tree from the scene but keep the ones beside the house,"@c1 syntax.clause form=imperative verb=""ermove"" complement=$n1
 @n1 syntax.nominal dependent=""every"" dependent=""single"" head=""tree""
 @r1 syntax.relation marker=""from"" from=$c1 to=$n2
@@ -613,7 +626,10 @@ chase the kite,"@c1 syntax.clause form=imperative verb=""chase"" complement=$n1
 let the bird chse the kite,,,
 make the two boats collide,,,
 have the boats collide,,,
-"hey, have the boats collide",,,
+"hey, have the boats collide","@c1 syntax.clause form=imperative discourse=""hey"" verb=""have"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""boats""
+@c2 syntax.clause form=nonfinite verb=""collide"" subject=$n1
+@r1 syntax.relation from=$c1 to=$c2",vss,judge
 let the boats crash into each other,,,
 can you make the boats collide?,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""make"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
@@ -654,7 +670,13 @@ spread the clouds out evenly and make the sun a little smaller,"@c1 syntax.claus
 @k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
 @c2 syntax.clause form=imperative verb=""make"" modifier=""a"" modifier=""little"" modifier=""smaller"" complement=$n2
 @n2 syntax.nominal dependent=""the"" head=""sun""",spacy-direct+vss,agreement
-make the dog chase the cat around the bench,,,
+make the dog chase the cat around the bench,"@c1 syntax.clause form=imperative verb=""make"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""dog""
+@c2 syntax.clause form=nonfinite verb=""chase"" complement=$n2
+@n2 syntax.nominal dependent=""the"" head=""cat""
+@r1 syntax.relation attachment=ambiguous marker=""around"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""bench""
+@r2 syntax.relation from=$c1 to=$c2",prolog+z3,judge
 have the dog chase the cat under the tree,,,
 "put the dog right behind the cat, chasing it",,,
 make the dog chase the cat all the way to the boat,,,
@@ -689,7 +711,13 @@ the dog runs to the boy,"@n1 syntax.nominal dependent=""the"" head=""dog""
 @c1 syntax.clause form=declarative verb=""runs"" subject=$n1
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""boy""",spacy-direct+vss,agreement
-could you have the dog run to the boy?,,,
+could you have the dog run to the boy?,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""have"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""the"" head=""dog""
+@c2 syntax.clause form=nonfinite verb=""run""
+@r1 syntax.relation marker=""to"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""boy""
+@r2 syntax.relation from=$c1 to=$c2",prolog+z3,judge
 how about the dog running to the boy?,,,
 make the dog run to the boy under the tree,,,
 have the dog run to the boy and sit down at his feet,,,
@@ -956,7 +984,13 @@ no moving the boy in the picture — a bit above the horizon line — and that's
 "from now on, make sure everyone in the scene stays facing the viewer",,,
 "always, have everyone here stay facing the viewer",,,
 make sure everyone stays facing the viewer — from now on,,,
-could everyone in the scene stay facing the viewer — always,,,
+could everyone in the scene stay facing the viewer — always,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""stay"" subject=$n1
+@n1 syntax.nominal head=""everyone""
+@r1 syntax.relation marker=""in"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""scene""
+@c2 syntax.clause form=nonfinite verb=""facing"" modifier=""always"" complement=$n3
+@n3 syntax.nominal dependent=""the"" head=""viewer""
+@r2 syntax.relation from=$c1 to=$c2",distilbert+spacy,judge
 i'd rather everyone here stayed facing the viewer — from now on,,,
 let's have everyone stay facing the viewer — always,,,
 "always, i want everyone here to stay facing the viewer",,,
@@ -1133,8 +1167,8 @@ place both dogs right by the bench,"@c1 syntax.clause form=imperative verb=""pla
 @n2 syntax.nominal dependent=""the"" head=""bench""",spacy-direct+vss,agreement
 keep both dogs together by the bench,"@c1 syntax.clause form=imperative verb=""keep"" modifier=""together"" complement=$n1
 @n1 syntax.nominal dependent=""both"" head=""dogs""
-@r1 syntax.relation marker=""by"" from=$n1 to=$n2
-@n2 syntax.nominal dependent=""the"" head=""bench""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""by"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""bench""",prolog+z3,judge
 "put both dogs by the bench, keeping everything else where it is",,,
 set both dogs by the bench — over on our little canvas — and that is the whole scene — the way the drawing looks so far,,,
 park both dogs by the bench — the way the drawing looks so far — exactly where the picture needs it,,,
@@ -1179,7 +1213,16 @@ send both cats to the left side — over on our little canvas — and that is th
 take both cats to the left side — the way the drawing looks so far — exactly where the picture needs it,,,
 "nudge both cats to the left side, keeping everything else where it is",,,
 push both cats to the left side — so the scene reads the way it should — right there in the picture,,,
-"place both cats at the left side, keeping everything else where it is",,,
+"place both cats at the left side, keeping everything else where it is","@c1 syntax.clause form=imperative verb=""place"" complement=$n1
+@n1 syntax.nominal dependent=""both"" head=""cats""
+@r1 syntax.relation attachment=ambiguous marker=""at"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""left"" head=""side""
+@c2 syntax.clause form=nonfinite verb=""keeping"" complement=$n3
+@n3 syntax.nominal head=""everything"" dependent=""else""
+@c3 syntax.clause form=declarative modifier=""where"" verb=""is"" subject=$n4
+@n4 syntax.nominal head=""it""
+@r2 syntax.relation from=$c1 to=$c2
+@r3 syntax.relation from=$n3 to=$c3",prolog,judge
 "set both cats at the left side, keeping everything else where it is",,,
 "carry both cats to the left side, keeping everything else where it is",,,
 "place both cats at the left side, and a small cat way off on the left — with everything else left where it is",,,
@@ -1686,7 +1729,14 @@ scracth that for me,"@c1 syntax.clause form=imperative verb=""scracth"" compleme
 "no, wait — cancel, thanks",,,
 "please don't touch the tree, I like it as drawn",,,
 "not the sun — whatever you do, don't paint the sun",,,
-"hold off on the cat for now, hands off",,,
+"hold off on the cat for now, hands off","@c1 syntax.clause form=imperative verb=""hold"" modifier=""off""
+@r1 syntax.relation marker=""on"" from=$c1 to=$n1
+@n1 syntax.nominal dependent=""the"" head=""cat""
+@r2 syntax.relation marker=""for"" from=$c1 to=$n2
+@n2 syntax.nominal head=""now""
+@n3 syntax.nominal head=""hands""
+@c2 syntax.clause form=fragment modifier=""off"" complement=$n3
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2",spacy,judge
 leave the lake out of this round of changes,"@c1 syntax.clause form=imperative verb=""leave"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""lake""
 @r1 syntax.relation marker=""out of"" from=$c1 to=$n2
@@ -1748,7 +1798,12 @@ how many trees have I got in the picture?,"@n1 syntax.nominal dependent=""how"" 
 @n2 syntax.nominal head=""I""
 @r1 syntax.relation marker=""in"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""the"" head=""picture""",spacy-direct+vss,agreement
-"how many trees are there, and how many birds?",,,
+"how many trees are there, and how many birds?","@n1 syntax.nominal dependent=""how"" dependent=""many"" head=""trees""
+@c1 syntax.clause form=interrogative verb=""are"" subject=$n2 complement=$n1
+@n2 syntax.nominal head=""there""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@n3 syntax.nominal dependent=""how"" dependent=""many"" head=""birds""
+@c2 syntax.clause form=fragment complement=$n3 ellipsis=$c1",spacy,judge
 "count the trees for me first, then tell me how many birds there are",,,
 how many?,"@c1 syntax.clause form=fragment modifier=""how"" modifier=""many""",spacy-direct+vss,agreement
 what's the count?,"@n1 syntax.nominal head=""what""
@@ -1868,8 +1923,8 @@ is there a girl in the picture?,"@c1 syntax.clause form=interrogative verb=""is"
 do we have a cat on the page?,"@c1 syntax.clause form=interrogative auxiliary=""do"" verb=""have"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""we""
 @n2 syntax.nominal dependent=""a"" head=""cat""
-@r1 syntax.relation marker=""on"" from=$n2 to=$n3
-@n3 syntax.nominal dependent=""the"" head=""page""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""page""",prolog+spacy+z3,judge
 any boat visible?,,,
 "did I ever add a bird, or is that not there?",,,
 does the drawing have a dog — or a cat at all?,,,

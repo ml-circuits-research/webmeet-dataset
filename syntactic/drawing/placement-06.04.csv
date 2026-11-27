@@ -48,8 +48,8 @@ Give me a rattle snake under the tree.,"@c1 syntax.clause form=imperative verb="
 could you draw a rattle snake underneath that tree,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""draw"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""a"" dependent=""rattle"" head=""snake""
-@r1 syntax.relation marker=""underneath"" from=$n2 to=$n3
-@n3 syntax.nominal dependent=""that"" head=""tree""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""underneath"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""that"" head=""tree""",prolog+spacy+z3,judge
 I'd like a rattle snake underneath the tree,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative auxiliary=""'d"" verb=""like"" subject=$n1 complement=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""rattle"" head=""snake""
@@ -413,8 +413,8 @@ Add a sandwich beneath that tree.,"@c1 syntax.clause form=imperative verb=""Add"
 @n2 syntax.nominal dependent=""that"" head=""tree""",spacy-direct+vss,agreement
 place a sandwich beneath the tree,"@c1 syntax.clause form=imperative verb=""place"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""sandwich""
-@r1 syntax.relation marker=""beneath"" from=$n1 to=$n2
-@n2 syntax.nominal dependent=""the"" head=""tree""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""beneath"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""tree""",prolog+z3,judge
 put a sandwich under the tree there,"@c1 syntax.clause form=imperative verb=""put"" modifier=""there"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""sandwich""
 @r1 syntax.relation marker=""under"" from=$n1 to=$n2
@@ -821,8 +821,8 @@ sketch a little tarantula under the tree there,"@c1 syntax.clause form=imperativ
 @n2 syntax.nominal dependent=""the"" head=""tree""",spacy-direct+vss,agreement
 put a tarantula underneath the tree there,"@c1 syntax.clause form=imperative verb=""put"" modifier=""there"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""tarantula""
-@r1 syntax.relation marker=""underneath"" from=$n1 to=$n2
-@n2 syntax.nominal dependent=""the"" head=""tree""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""underneath"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""tree""",prolog+z3,judge
 can you add a tarantula below the tree,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""add"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""a"" head=""tarantula""
@@ -881,8 +881,8 @@ place a tea underneath that tree,"@c1 syntax.clause form=imperative verb=""place
 give me a tea below the tree,"@c1 syntax.clause form=imperative verb=""give"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""me""
 @n2 syntax.nominal dependent=""a"" head=""tea""
-@r1 syntax.relation marker=""below"" from=$n2 to=$n3
-@n3 syntax.nominal dependent=""the"" head=""tree""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""below"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""tree""",prolog,judge
 "please put a tea below the tree there, please","@c1 syntax.clause form=imperative discourse=""please"" verb=""put"" modifier=""there"" discourse=""please"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""tea""
 @r1 syntax.relation marker=""below"" from=$n1 to=$n2
@@ -1258,8 +1258,8 @@ Make a water below the tree.,"@c1 syntax.clause form=imperative verb=""Make"" co
 "give me a water underneath the tree, please","@c1 syntax.clause form=imperative verb=""give"" discourse=""please"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""me""
 @n2 syntax.nominal dependent=""a"" head=""water""
-@r1 syntax.relation marker=""underneath"" from=$n2 to=$n3
-@n3 syntax.nominal dependent=""the"" head=""tree""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""underneath"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""tree""",prolog,judge
 "please put a water underneath the tree, please","@c1 syntax.clause form=imperative discourse=""please"" verb=""put"" discourse=""please"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""water""
 @r1 syntax.relation marker=""underneath"" from=$n1 to=$n2
@@ -1302,8 +1302,8 @@ give me a weasel under the tree,"@c1 syntax.clause form=imperative verb=""give""
 could you draw a weasel beneath the tree,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""draw"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""a"" head=""weasel""
-@r1 syntax.relation marker=""beneath"" from=$n2 to=$n3
-@n3 syntax.nominal dependent=""the"" head=""tree""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""beneath"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""tree""",prolog+spacy+z3,judge
 place a weasel below the tree,"@c1 syntax.clause form=imperative verb=""place"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""weasel""
 @r1 syntax.relation marker=""below"" from=$n1 to=$n2
@@ -1632,7 +1632,13 @@ Make a barracuda into that lake.,"@c1 syntax.clause form=imperative verb=""Make"
 @r1 syntax.relation marker=""into"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""that"" head=""lake""",spacy-direct+vss,agreement
 can you add a barracuda into the lake there,,,
-let's add a barracuda inside the lake,,,
+let's add a barracuda inside the lake,"@c1 syntax.clause form=imperative verb=""let"" complement=$n1
+@n1 syntax.nominal head=""'s""
+@c2 syntax.clause form=nonfinite verb=""add"" complement=$n2
+@n2 syntax.nominal dependent=""a"" head=""barracuda""
+@r1 syntax.relation attachment=ambiguous marker=""inside"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""lake""
+@r2 syntax.relation from=$c1 to=$c2",prolog+z3,judge
 "could you draw a barracuda into the lake there, please",,,
 can you add a barracuda in the lake,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""add"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
@@ -1769,8 +1775,8 @@ place a bird into the tree,"@c1 syntax.clause form=imperative verb=""place"" com
 @n2 syntax.nominal dependent=""the"" head=""tree""",spacy-direct+vss,agreement
 make a bird inside the tree,"@c1 syntax.clause form=imperative verb=""make"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""bird""
-@r1 syntax.relation marker=""inside"" from=$n1 to=$n2
-@n2 syntax.nominal dependent=""the"" head=""tree""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""inside"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""tree""",prolog+spacy,judge
 add a blowfish inside the lake,"@c1 syntax.clause form=imperative verb=""add"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""blowfish""
 @r1 syntax.relation marker=""inside"" from=$n1 to=$n2
@@ -1921,8 +1927,8 @@ Add a big bullfrog into the lake there.,,,
 Place a bullfrog inside the lake there.,,,
 please put a bullfrog in the lake,"@c1 syntax.clause form=imperative discourse=""please"" verb=""put"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""bullfrog""
-@r1 syntax.relation marker=""in"" from=$n1 to=$n2
-@n2 syntax.nominal dependent=""the"" head=""lake""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""lake""",prolog+z3,judge
 "place a bullfrog into that lake, please","@c1 syntax.clause form=imperative verb=""place"" discourse=""please"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""bullfrog""
 @r1 syntax.relation marker=""into"" from=$n1 to=$n2

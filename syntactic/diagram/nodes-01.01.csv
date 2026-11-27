@@ -94,7 +94,20 @@ make the fisrt series red,"@c1 syntax.clause form=imperative verb=""make"" modif
 "I re-exported the sheet, so reset Series 2's values to 12, 14, 16",,,
 "enter new numbers for the first series: 20, 25, 30 — the old export was stale",,,
 "the quarterly numbers are in — load the second series with 33, 35, 37",,,
-"Series 1 carries outdated figures — fill it with 24, 26, 28",,,
+"Series 1 carries outdated figures — fill it with 24, 26, 28","@n1 syntax.nominal head=""Series""
+@n2 syntax.nominal head=""1""
+@c1 syntax.clause form=declarative verb=""carries"" subject=$n1 complement=$n3
+@n3 syntax.nominal dependent=""outdated"" head=""figures""
+@c2 syntax.clause form=imperative verb=""fill"" complement=$n4
+@n4 syntax.nominal head=""it""
+@r1 syntax.relation marker=""with"" from=$c2 to=$n5
+@n5 syntax.nominal head=""24""
+@n6 syntax.nominal head=""26""
+@n7 syntax.nominal head=""28""
+@r2 syntax.relation from=$n1 to=$n2
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2
+@r3 syntax.relation from=$n5 to=$n7
+@r4 syntax.relation from=$n5 to=$n6",spacy,judge
 "while we're at it, update Series 2's values to 12, 14, 16 as well",,,
 refresh the first series' numbers,,,
 new numbers for Series 2,,,
@@ -102,7 +115,9 @@ update the first series' data,,,
 "set the vaules of Series 1 to 30, 32, 35",,,
 "enter new numebrs for the first series: 20, 25, 30",,,
 rename the online series Direct orders,,,
-the online series should be called Direct orders,,,
+the online series should be called Direct orders,"@n1 syntax.nominal dependent=""the"" dependent=""online"" head=""series""
+@c1 syntax.clause form=declarative auxiliary=""should"" auxiliary=""be"" verb=""called"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""Direct"" head=""orders""",distilbert+prolog+spacy+z3,judge
 can you rename the online series Direct orders?,,,
 I'd like the online series renamed to Direct orders,,,
 let's call the online series Direct orders,,,
@@ -762,7 +777,14 @@ stick an approval box between n3 and n4,"@c1 syntax.clause form=imperative verb=
 @n3 syntax.nominal head=""n4""",spacy-direct+vss,agreement
 "slip a box in between Order and Ship, would you",,,
 insert a diamond step between Start and Bake for the decision,,,
-"insert a diamond step between Start and Bake for the decision, please",,,
+"insert a diamond step between Start and Bake for the decision, please","@c1 syntax.clause form=imperative verb=""insert"" discourse=""please"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""diamond"" head=""step""
+@r1 syntax.relation attachment=ambiguous marker=""between"" from=$c1 to=$k1
+@n2 syntax.nominal head=""Start""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n3
+@n3 syntax.nominal head=""Bake""
+@r2 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""decision""",prolog+z3,judge
 "one more stage between Order and Ship, make it so",,,
 "the gap between Start and Bake needs a step, add one now",,,
 insert one more decision box between Order and Ship,,,
@@ -845,7 +867,12 @@ add two steps and rotate the first one 45 degrees,,,
 "give me six boxes stacked on the right — wait no, put it back the way it was before I confuse myself",,,
 "I need nine more boxes to cover the exception paths — scrap that for now, undo, we're out of room on the canvas",,,
 "another five boxes — no, undo",,,
-"two ovals — no wait, undo",,,
+"two ovals — no wait, undo","@n1 syntax.nominal dependent=""two"" head=""ovals""
+@n2 syntax.nominal dependent=""no"" head=""wait""
+@c1 syntax.clause form=imperative verb=""undo""
+@c2 syntax.clause form=fragment complement=$n1
+@k1 syntax.coordination conjunct=$c2 conjunct=$c3 conjunct=$c1
+@c3 syntax.clause form=fragment complement=$n2",z3,judge
 "more boxes, four of them... undo that",,,
 "hey — add three more boxes below Review — no, undo that",,,
 "can you make two extra ovals? no wait, undo that, thanks",,,
@@ -1366,7 +1393,12 @@ drop in a text box carrying notes by the on-call nurse,"@c1 syntax.clause form=i
 "let's put a text box in, words: notes by the on-call nurse",,,
 could you make a text box and write served by the morning crew in it?,,,
 one text box with the line notes by the on-call nurse inside,,,
-"one text box with the line notes by the on-call nurse inside, please",,,
+"one text box with the line notes by the on-call nurse inside, please","@n1 syntax.nominal dependent=""one"" dependent=""text"" head=""box""
+@r1 syntax.relation marker=""with"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""line"" head=""notes""
+@r2 syntax.relation marker=""by"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""on"" dependent=""call"" head=""nurse""
+@c1 syntax.clause form=fragment modifier=""inside"" discourse=""please"" complement=$n1",distilbert+prolog,judge
 I'd like a text box holding just served by the morning crew,,,
 pop a text box on and fill it with notes by the on-call nurse,"@c1 syntax.clause form=imperative verb=""pop"" modifier=""on"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""text"" head=""box""
@@ -1576,7 +1608,13 @@ insert a cloud shape left of the Rota table and blur it sky so it stays soft,,,
 "the cloud shape goes in on the table's left side, a hand's width away",,,
 "one cloud, parked left of the Rota table, and its bottom riding the table line",,,
 drop a cloud shape by the table — left of it — and let it breathe,,,
-"a cloud shape over by the table, wherever it sits best",,,
+"a cloud shape over by the table, wherever it sits best","@n1 syntax.nominal dependent=""a"" dependent=""cloud"" head=""shape""
+@r1 syntax.relation marker=""over by"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""table""
+@r2 syntax.relation marker=""wherever"" from=$c2 to=$c1
+@n3 syntax.nominal head=""it""
+@c1 syntax.clause form=declarative verb=""sits"" modifier=""best"" subject=$n3
+@c2 syntax.clause form=fragment complement=$n1",spacy+z3,judge
 "one cloud, table side, to taste",,,
 the usual cloud against the table,"@n1 syntax.nominal dependent=""the"" dependent=""usual"" head=""cloud""
 @r1 syntax.relation marker=""against"" from=$n1 to=$n2
@@ -1968,7 +2006,17 @@ could you drop in an image of the sorter and push it down to the bottom side?,"@
 "right, an image of the cellar hand — and the bottom side takes it",,,
 "how about an image of the sorter, walked down to the bottom side?",,,
 "pin an image of the sorter in, then let it sink to the bottom",,,
-"insert the cellar hand image, take it to the bottom side, and keep its edges off the Crush flow",,,
+"insert the cellar hand image, take it to the bottom side, and keep its edges off the Crush flow","@c1 syntax.clause form=imperative verb=""insert"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""cellar"" dependent=""hand"" head=""image""
+@c2 syntax.clause form=imperative verb=""take"" complement=$n2
+@n2 syntax.nominal head=""it""
+@r1 syntax.relation marker=""to"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""bottom"" head=""side""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2 conjunct=$c3
+@c3 syntax.clause form=imperative verb=""keep"" complement=$n4
+@n4 syntax.nominal dependent=""its"" head=""edges""
+@r2 syntax.relation attachment=ambiguous marker=""off"" from=$c3 to=$n5
+@n5 syntax.nominal dependent=""the"" dependent=""Crush"" head=""flow""",prolog+z3,judge
 "an image of the sorter that ends up on the bottom edge, face to the reader",,,
 "add the sorter image, usher it to the bottom side, halfway clear of the fold",,,
 "one cellar hand image with its bottom-side berth, close to the Age line",,,

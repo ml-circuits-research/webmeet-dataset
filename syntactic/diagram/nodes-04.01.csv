@@ -843,11 +843,11 @@ diagram my workout plan and start it at warm-up,"@c1 syntax.clause form=imperati
 @n3 syntax.nominal head=""warm-up""",spacy-direct+vss,agreement
 show my morning routine as a timeline and label the 7am step,"@c1 syntax.clause form=imperative verb=""show"" complement=$n1
 @n1 syntax.nominal dependent=""my"" dependent=""morning"" head=""routine""
-@r1 syntax.relation marker=""as"" from=$n1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""as"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""a"" head=""timeline""
 @k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
 @c2 syntax.clause form=imperative verb=""label"" complement=$n3
-@n3 syntax.nominal dependent=""the"" dependent=""7am"" head=""step""",spacy-direct+vss,agreement
+@n3 syntax.nominal dependent=""the"" dependent=""7am"" head=""step""",prolog+z3,judge
 diagram our deploy pipeline as a pipeline with numbered stages,,,
 show the stages of our data ingestion pipeline as boxes in order,"@c1 syntax.clause form=imperative verb=""show"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""stages""
@@ -2025,7 +2025,8 @@ make an org chart with the support department at the top,"@c1 syntax.clause form
 @n2 syntax.nominal dependent=""the"" dependent=""support"" head=""department""
 @r2 syntax.relation marker=""at"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""the"" head=""top""",spacy-direct+vss,agreement
-just the bars,,,
+just the bars,"@c1 syntax.clause form=fragment modifier=""just"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""bars""",distilbert+prolog+vss+z3,judge
 "for the login flow, set up a sequence diagram with three participants and one lifeline each, then put the actors in this order: Client, Server, Database, with enough space between the parts",,,
 "here is the plan: a radar diagram with six spokes and a ring per level, plus label each spoke, so it still fits on a single slide without crowding",,,
 "for the spelling lesson, set up a prefix tree with word endings marked at the leaves, then keep the root empty, with enough space between the parts","@r1 syntax.relation marker=""for"" from=$c1 to=$n1
@@ -2615,11 +2616,11 @@ shift the arrowhead to the start,"@c1 syntax.clause form=imperative verb=""shift
 @n2 syntax.nominal dependent=""the"" head=""start""",spacy-direct+vss,agreement
 maybe turn the arrow around so it points at Email,"@c1 syntax.clause form=imperative modifier=""maybe"" verb=""turn"" modifier=""around"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""arrow""
-@r1 syntax.relation marker=""so"" from=$c1 to=$c2
+@k1 syntax.coordination conjunction=""so"" conjunct=$c1 conjunct=$c2
 @n2 syntax.nominal head=""it""
 @c2 syntax.clause form=declarative verb=""points"" subject=$n2
-@r2 syntax.relation marker=""at"" from=$c2 to=$n3
-@n3 syntax.nominal head=""Email""",spacy-direct+vss,agreement
+@r1 syntax.relation marker=""at"" from=$c2 to=$n3
+@n3 syntax.nominal head=""Email""",prolog,judge
 perhaps give the e2 arrow a head at the source instead of the target,,,
 turn the e2 arrow around and make it dashed,"@c1 syntax.clause form=imperative verb=""turn"" modifier=""around"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""e2"" head=""arrow""
@@ -2689,7 +2690,28 @@ clear the head at the Confirm end and dash the line,"@c1 syntax.clause form=impe
 now remove the one at Email,,,
 remove the head at Confirm and keep the one pointing into Payment,,,
 make the e2 arrow headless at both ends but keep the line solid and colour it grey,,,
-"I'd like you to take the head off Profile but leave the head at Email and dash it, so the arrow still shows where it came from",,,
+"I'd like you to take the head off Profile but leave the head at Email and dash it, so the arrow still shows where it came from","@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative auxiliary=""'d"" verb=""like"" subject=$n1 complement=$n2
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""take"" complement=$n3
+@n3 syntax.nominal dependent=""the"" head=""head""
+@r2 syntax.relation attachment=ambiguous marker=""off"" from=$c2 to=$n4
+@n4 syntax.nominal head=""Profile""
+@k1 syntax.coordination conjunction=""but"" conjunct=$c1 conjunct=$c3
+@c3 syntax.clause form=imperative verb=""leave"" complement=$n5
+@n5 syntax.nominal dependent=""the"" head=""head""
+@r3 syntax.relation attachment=ambiguous marker=""at"" from=$c3 to=$n6
+@n6 syntax.nominal head=""Email""
+@k2 syntax.coordination conjunction=""and"" conjunct=$c3 conjunct=$c4
+@c4 syntax.clause form=imperative verb=""dash"" complement=$n7
+@n7 syntax.nominal head=""it""
+@k3 syntax.coordination conjunction=""so"" conjunct=$c4 conjunct=$c5
+@n8 syntax.nominal dependent=""the"" head=""arrow""
+@c5 syntax.clause form=declarative modifier=""still"" verb=""shows"" subject=$n8
+@r4 syntax.relation marker=""where"" from=$c5 to=$c6
+@n9 syntax.nominal head=""it""
+@c6 syntax.clause form=declarative verb=""came"" modifier=""from"" subject=$n9",z3,judge
 let's take one head off the e2 arrow,,,
 maybe rename the label on the e2 arrow to retry,,,
 change the text on the e1 arrow to done,"@c1 syntax.clause form=imperative verb=""change"" complement=$n1

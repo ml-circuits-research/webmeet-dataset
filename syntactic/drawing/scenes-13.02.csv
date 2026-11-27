@@ -91,8 +91,8 @@ make the tree a palm tree please,"@c1 syntax.clause form=imperative verb=""make"
 @n2 syntax.nominal dependent=""a"" dependent=""palm"" head=""tree""",spacy-direct+vss,agreement
 change the grass to water,"@c1 syntax.clause form=imperative verb=""change"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""grass""
-@r1 syntax.relation marker=""to"" from=$c1 to=$n2
-@n2 syntax.nominal head=""water""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n2
+@n2 syntax.nominal head=""water""",prolog+z3,judge
 please change the grass to water,"@c1 syntax.clause form=imperative discourse=""please"" verb=""change"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""grass""
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2
@@ -423,7 +423,17 @@ can you move the bench right at the centre of the page?,"@c1 syntax.clause form=
 make sure the man faces left; have him run toward the house — just like that in the scene — keeping the rest of the scene as it is,,,
 "make sure the man faces left; have him run toward the house, and a big bench down at the bottom",,,
 "turn the mna to face left, then see him run toward the house",,,
-point the girl right and have her sit with her legs out on the grass,,,
+point the girl right and have her sit with her legs out on the grass,"@c1 syntax.clause form=imperative verb=""point"" modifier=""right"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""girl""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""have"" complement=$n2
+@n2 syntax.nominal head=""her""
+@c3 syntax.clause form=nonfinite verb=""sit"" modifier=""out""
+@r1 syntax.relation marker=""with"" from=$c3 to=$n3
+@n3 syntax.nominal dependent=""her"" head=""legs""
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""grass""
+@r3 syntax.relation from=$c2 to=$c3",prolog,judge
 "let the girl face right, then let her sit with her legs out on the grass — just like that in the scene",,,
 "girl, facing right; let her sit with her legs out",,,
 hey — make the small cat near the tree face right,,,
@@ -605,7 +615,16 @@ hey — make the car on the path face the house,,,
 the cat by the bench should look at the bird — right there in the picture — that is how the picture goes,,,
 hey — make the girl in the yellow dress face right,,,
 "keep the man in the blue jacket facing left, thanks",,,
-"keep the woman in the green scarf facing right, over on the other side of the canvas",,,
+"keep the woman in the green scarf facing right, over on the other side of the canvas","@c1 syntax.clause form=imperative verb=""keep"" modifier=""over"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""woman""
+@r1 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""green"" head=""scarf""
+@c2 syntax.clause form=nonfinite verb=""facing"" modifier=""right""
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""other"" head=""side""
+@r3 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""canvas""
+@r4 syntax.relation from=$c1 to=$c2",prolog,judge
 "keep the woman in the green scarf facing right, thanks",,,
 "point the tall boy on the left toward the house, just like that",,,
 the small dog by the bench should face left — right there in the picture — that is how the picture goes,,,
@@ -675,7 +694,16 @@ I want the red kite as a small real bird,"@n1 syntax.nominal head=""I""
 @r1 syntax.relation marker=""as"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""a"" dependent=""small"" dependent=""real"" head=""bird""",spacy-direct+vss,agreement
 "get the boy waving, and turn the whole page into a acrtoon style",,,
-"I want the man sitting down, and style the whole page as loose watercolour",,,
+"I want the man sitting down, and style the whole page as loose watercolour","@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""want"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""the"" head=""man""
+@c2 syntax.clause form=nonfinite verb=""sitting"" modifier=""down""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c3
+@c3 syntax.clause form=imperative verb=""style"" complement=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""whole"" head=""page""
+@r1 syntax.relation attachment=ambiguous marker=""as"" from=$c3 to=$n4
+@n4 syntax.nominal dependent=""loose"" head=""watercolour""
+@r2 syntax.relation from=$n2 to=$c2",prolog+z3,judge
 "keep the boy dancing right where they are, and push the whole page into anime style, edge to edge, with everything else on the page unchanged",,,
 "the boy dancing, and anime style look for the page",,,
 "the boy standing still, and pop art style look for the page",,,
@@ -1024,12 +1052,12 @@ the man in the green shirt and green hat right one place,,,
 "and again — put the SRI block above the Starbucks block, evenly aligned. And after that, slide the SRI block up until it is just past the NVidia block, its upper right corner touching the NVidia block's lower left corner",,,
 ease the Pepsi block until it is two spaces above the SRI block,"@c1 syntax.clause form=imperative verb=""ease"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""Pepsi"" head=""block""
-@r1 syntax.relation marker=""until"" from=$c1 to=$c2
+@r1 syntax.relation attachment=ambiguous marker=""until"" from=$c1 to=$c2
 @n2 syntax.nominal head=""it""
 @c2 syntax.clause form=declarative verb=""is"" subject=$n2 complement=$n3
 @n3 syntax.nominal dependent=""two"" head=""spaces""
-@r2 syntax.relation marker=""above"" from=$n3 to=$n4
-@n4 syntax.nominal dependent=""the"" dependent=""SRI"" head=""block""",spacy-direct+vss,agreement
+@r2 syntax.relation attachment=ambiguous marker=""above"" from=$c2 to=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""SRI"" head=""block""",z3,judge
 i wonder if you could ease the Esso block two spaces to the right of the Mercedes block,,,
 what if you place the Esso block two spaces to the right of the Mercedes block,"@n1 syntax.nominal head=""what""
 @r1 syntax.relation marker=""if"" from=$c2 to=$c1
@@ -1770,7 +1798,12 @@ go back to the right side with the girl in the green jacket,"@c1 syntax.clause f
 "slide the kite down until it sits on the boat, then right, and then settle next to the bench",,,
 a bear in front of the woods — face left — with everything else left where it is — over on our little canvas,,,
 "a small boat on the lake — facing left, please",,,
-"a rabbit in the garden — facing right, please",,,
+"a rabbit in the garden — facing right, please","@n1 syntax.nominal dependent=""a"" head=""rabbit""
+@r1 syntax.relation marker=""in"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""garden""
+@c1 syntax.clause form=nonfinite verb=""facing"" modifier=""right"" discourse=""please""
+@c2 syntax.clause form=fragment complement=$n1
+@r2 syntax.relation from=$c2 to=$c1",vss,judge
 "two dogs by the tent, facing each other",,,
 a cat on the left facing right,,,
 facing right: a small boat on the left,,,
@@ -1802,7 +1835,17 @@ just make the fire hydrant a stop sign,"@c1 syntax.clause form=imperative modifi
 "get the man waving for the whole turn, and wash the whole page over with flat cartoon style, corner to corner, and leave the background objects alone",,,
 "I want the girl waving, and style the whole page as cartoon style, thanks",,,
 "get the boy jumping in the air, and turn the whole page into a comic book style",,,
-"picture the man jumping in the air, and push the whole page into heavy comic book style",,,
+"picture the man jumping in the air, and push the whole page into heavy comic book style","@c1 syntax.clause form=imperative verb=""picture"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""man""
+@c2 syntax.clause form=nonfinite verb=""jumping""
+@r1 syntax.relation marker=""in"" from=$c2 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""air""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c3
+@c3 syntax.clause form=imperative verb=""push"" complement=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""whole"" head=""page""
+@r2 syntax.relation marker=""into"" from=$c3 to=$n4
+@n4 syntax.nominal dependent=""heavy"" dependent=""comic"" dependent=""book"" head=""style""
+@r3 syntax.relation from=$n1 to=$c2",distilbert+vss,judge
 "I'd like the man jumping in the air, and set the whole page in heavy comic book style",,,
 "show the woman dancing, clear as day, and dress the whole page in a clean anime look, top to bottom — the other objects stay put",,,
 "have the girl walking, and give the whole page a pencil sketch look",,,
@@ -2089,7 +2132,14 @@ hey — shift the tree level with the house on both sides,"@c1 syntax.clause for
 @n2 syntax.nominal dependent=""the"" head=""house""
 @r2 syntax.relation marker=""on"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""both"" head=""sides""",spacy-direct+vss,agreement
-"actually, leave the man where he is — don't send him left after all",,,
+"actually, leave the man where he is — don't send him left after all","@c1 syntax.clause form=imperative modifier=""actually"" verb=""leave"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""man""
+@r1 syntax.relation marker=""where"" from=$n1 to=$c2
+@n2 syntax.nominal head=""he""
+@c2 syntax.clause form=declarative verb=""is"" subject=$n2
+@c3 syntax.clause form=imperative auxiliary=""do"" negation=""n't"" verb=""send"" modifier=""left"" modifier=""after"" modifier=""all"" complement=$n3
+@n3 syntax.nominal head=""him""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c3",spacy,judge
 keep the boy facing left; help him kneel by the tent — right there in the picture — that is how the picture goes,,,
 "the man faces left, so let him run",,,
 "the kid should face right, so tell him to run toward the tent",,,

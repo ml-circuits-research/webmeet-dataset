@@ -264,7 +264,12 @@ add a circle with align end,"@c1 syntax.clause form=imperative verb=""add"" comp
 @n1 syntax.nominal dependent=""a"" head=""circle""
 @r1 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""align"" head=""end""",spacy-direct+vss,agreement
-add a circle with frame none,,,
+add a circle with frame none,"@c1 syntax.clause form=imperative verb=""add"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""circle""
+@r1 syntax.relation marker=""with"" from=$n1 to=$n2
+@n2 syntax.nominal head=""frame""
+@n3 syntax.nominal head=""none""
+@r2 syntax.relation from=$n2 to=$n3",distilbert+vss,judge
 add a circle with frame speech,"@c1 syntax.clause form=imperative verb=""add"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""circle""
 @r1 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$n2
@@ -334,7 +339,13 @@ add a circle with facing left and behind the house,,,
 add a circle with wear a red scarf and seat the bench,,,
 add a circle with edge left and cause the rain,,,
 add a circle with cut 0.23 and cause the rain,,,
-add a circle with behind the house and holds an umbrella,,,
+add a circle with behind the house and holds an umbrella,"@c1 syntax.clause form=imperative verb=""add"" modifier=""with"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""circle""
+@r1 syntax.relation marker=""behind"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""house""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=declarative verb=""holds"" complement=$n3
+@n3 syntax.nominal dependent=""an"" head=""umbrella""",spacy,judge
 add a circle with hidden 0.25 and text Hello there,,,
 add a circle with side left and slant normal,,,
 add a circle with offset 20 and opacity 0.5,,,
@@ -351,7 +362,15 @@ add a circle with seat the bench and fill solid,"@c1 syntax.clause form=imperati
 add a circle with text Hello there and font serif,,,
 add a circle with weight normal and effect none,,,
 add a circle with name Main and label Review and width 180,,,
-add a circle with height 90 and pose arms up and hidden 0.25,,,
+add a circle with height 90 and pose arms up and hidden 0.25,"@c1 syntax.clause form=imperative verb=""add"" modifier=""up"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""circle""
+@r1 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$k1
+@n2 syntax.nominal head=""height""
+@n3 syntax.nominal head=""90""
+@k1 syntax.coordination conjunction=""and"" conjunction=""and"" conjunct=$n2 conjunct=$n4 conjunct=$n5
+@n4 syntax.nominal dependent=""pose"" head=""arms""
+@n5 syntax.nominal dependent=""hidden"" head=""0.25""
+@r2 syntax.relation from=$n2 to=$n3",prolog,judge
 add a circle with color teal and behind the house and hidden 0.25,,,
 add a circle with expression angry and trait bald and cause the rain,,,
 add a circle with edge left and side left and fill solid,,,
@@ -473,7 +492,10 @@ add a giraffe with hidden 0.25,,,
 add a giraffe with hidden 0.75,,,
 add a giraffe with side left,,,
 add a giraffe with side right,,,
-add a giraffe with side above,,,
+add a giraffe with side above,"@c1 syntax.clause form=imperative verb=""add"" modifier=""above"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""giraffe""
+@r1 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$n2
+@n2 syntax.nominal head=""side""",prolog+z3,judge
 add a giraffe with side below,"@c1 syntax.clause form=imperative verb=""add"" modifier=""below"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""giraffe""
 @r1 syntax.relation marker=""with"" from=$n1 to=$n2
@@ -858,8 +880,8 @@ set the skew of the house to -37.5,"@c1 syntax.clause form=imperative verb=""set
 @n1 syntax.nominal dependent=""the"" head=""skew""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""house""
-@r2 syntax.relation marker=""to"" from=$c1 to=$n3
-@n3 syntax.nominal head=""-37.5""",spacy-direct+vss,agreement
+@r2 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n3
+@n3 syntax.nominal head=""-37.5""",prolog+spacy+z3,judge
 set its skew to -37.5,"@c1 syntax.clause form=imperative verb=""set"" complement=$n1
 @n1 syntax.nominal dependent=""its"" head=""skew""
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2
@@ -1588,8 +1610,8 @@ set the font of all the trees to serif,"@c1 syntax.clause form=imperative verb="
 @n1 syntax.nominal dependent=""the"" head=""font""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""all"" dependent=""the"" head=""trees""
-@r2 syntax.relation marker=""to"" from=$c1 to=$n3
-@n3 syntax.nominal head=""serif""",spacy-direct+vss,agreement
+@r2 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n3
+@n3 syntax.nominal head=""serif""",prolog,judge
 set the font of o1 to sans,"@c1 syntax.clause form=imperative verb=""set"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""font""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
@@ -1744,14 +1766,14 @@ move House with x 120 and y 80,"@c1 syntax.clause form=imperative verb=""move"" 
 @r3 syntax.relation from=$n4 to=$n5",spacy-direct+vss,agreement
 move o1 with x 120 and y 80,"@c1 syntax.clause form=imperative verb=""move"" complement=$n1
 @n1 syntax.nominal head=""o1""
-@r1 syntax.relation marker=""with"" from=$c1 to=$k1
+@r1 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$k1
 @n2 syntax.nominal head=""x""
 @n3 syntax.nominal head=""120""
 @k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n4
 @n4 syntax.nominal head=""y""
 @n5 syntax.nominal head=""80""
 @r2 syntax.relation from=$n2 to=$n3
-@r3 syntax.relation from=$n4 to=$n5",spacy-direct+vss,agreement
+@r3 syntax.relation from=$n4 to=$n5",prolog,judge
 move the house with x 120 and y 80,"@c1 syntax.clause form=imperative verb=""move"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""house""
 @r1 syntax.relation marker=""with"" from=$c1 to=$k1
@@ -2419,7 +2441,12 @@ set the trait of o1 to grey-haired,"@c1 syntax.clause form=imperative verb=""set
 @n2 syntax.nominal head=""o1""
 @r2 syntax.relation marker=""to"" from=$c1 to=$n3
 @n3 syntax.nominal head=""grey-haired""",spacy-direct+vss,agreement
-set the trait of all the trees to mohawk,,,
+set the trait of all the trees to mohawk,"@c1 syntax.clause form=imperative verb=""set"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""trait""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""all"" dependent=""the"" head=""trees""
+@r2 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n3
+@n3 syntax.nominal head=""mohawk""",prolog+z3,judge
 set the offset of o1 to 40,"@c1 syntax.clause form=imperative verb=""set"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""offset""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
@@ -2453,8 +2480,8 @@ set the width of roof of the house to 180,"@c1 syntax.clause form=imperative ver
 @n2 syntax.nominal head=""roof""
 @r2 syntax.relation marker=""of"" from=$n2 to=$n3
 @n3 syntax.nominal dependent=""the"" head=""house""
-@r3 syntax.relation marker=""to"" from=$c1 to=$n4
-@n4 syntax.nominal head=""180""",spacy-direct+vss,agreement
+@r3 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n4
+@n4 syntax.nominal head=""180""",prolog+spacy+z3,judge
 set the effect of roof of the house to none,"@c1 syntax.clause form=imperative verb=""set"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""effect""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2

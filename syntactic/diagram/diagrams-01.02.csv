@@ -52,20 +52,20 @@ this diagram reads better if House sits directly under Gate,"@n1 syntax.nominal 
 @n3 syntax.nominal head=""Gate""",spacy-direct+vss,agreement
 the place for House is tight under Path,,,
 I also need you to move House right under Pond so the flow reads from top to bottom,"@n1 syntax.nominal head=""I""
-@c1 syntax.clause form=declarative modifier=""also"" verb=""need"" subject=$n1
+@c1 syntax.clause form=declarative modifier=""also"" verb=""need"" subject=$n1 complement=$n2
 @n2 syntax.nominal head=""you""
 @r1 syntax.relation marker=""to"" from=$c1 to=$c2
-@c2 syntax.clause form=nonfinite verb=""move"" modifier=""right"" subject=$n2 complement=$n3
+@c2 syntax.clause form=nonfinite verb=""move"" modifier=""right"" complement=$n3
 @n3 syntax.nominal head=""House""
-@r2 syntax.relation marker=""under"" from=$c2 to=$n4
+@r2 syntax.relation attachment=ambiguous marker=""under"" from=$c2 to=$n4
 @n4 syntax.nominal head=""Pond""
-@r3 syntax.relation marker=""so"" from=$c1 to=$c3
+@k1 syntax.coordination conjunction=""so"" conjunct=$c1 conjunct=$c3
 @n5 syntax.nominal dependent=""the"" head=""flow""
 @c3 syntax.clause form=declarative verb=""reads"" subject=$n5
-@r4 syntax.relation marker=""from"" from=$c3 to=$n6
+@r3 syntax.relation marker=""from"" from=$c3 to=$n6
 @n6 syntax.nominal head=""top""
-@r5 syntax.relation marker=""to"" from=$c3 to=$n7
-@n7 syntax.nominal head=""bottom""",spacy-direct+vss,agreement
+@r4 syntax.relation attachment=ambiguous marker=""to"" from=$c3 to=$n7
+@n7 syntax.nominal head=""bottom""",prolog,judge
 after that put Barn flush under House and then check that nothing else on the canvas moved,,,
 would you slide Barn directly under Hill and keep the spacing between them the same as it was before we started rearranging,,,
 next drag Barn tight under Tree because that is the order the two steps happen in when the diagram is read aloud,,,
@@ -132,7 +132,18 @@ next drag it flush under Path because that is the order the two steps happen in 
 "I'd like you to slide Gate so it sits tight under House, and connect Gate to House so the two stages read in order",,,
 "I'd like you to shift Gate right under Barn, and leave a small even gap between them so the labels do not touch",,,
 "would you move the Gate box tight under the Fence box, and keep a little air between them so the arrows stay visible",,,
-"the Gate box should go right under Path, and align their tops so the pair sits on one clean line",,,
+"the Gate box should go right under Path, and align their tops so the pair sits on one clean line","@n1 syntax.nominal dependent=""the"" dependent=""Gate"" head=""box""
+@c1 syntax.clause form=declarative auxiliary=""should"" verb=""go"" modifier=""right"" subject=$n1
+@r1 syntax.relation marker=""under"" from=$c1 to=$n2
+@n2 syntax.nominal head=""Path""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""align"" complement=$n3
+@n3 syntax.nominal dependent=""their"" head=""tops""
+@r2 syntax.relation marker=""so"" from=$c2 to=$c3
+@n4 syntax.nominal dependent=""the"" head=""pair""
+@c3 syntax.clause form=declarative verb=""sits"" subject=$n4
+@r3 syntax.relation marker=""on"" from=$c3 to=$n5
+@n5 syntax.nominal dependent=""one"" dependent=""clean"" head=""line""",distilbert+vss,judge
 "Gate is the box that goes flush under Pond, and connect Gate to Pond so the two stages read in order",,,
 "can you move Path directly under House so the flow reads from top to bottom, and leave a small even gap between them so the labels do not touch",,,
 "let's slide Path right under Hill and keep the spacing between them the same as it was before we started rearranging, and align their left edges so the blocks look deliberate",,,
@@ -243,7 +254,17 @@ then put it above and to the left of Draft and then check that nothing else on t
 "move Reject above and to the left of Ship, and align their tops so the pair sits on one clean line",,,
 "I'd like you to slide Reject so it sits diagonally up and left of Approve, and connect Reject to Approve so the two stages read in order",,,
 "let's shift Reject up and to the left of Publish, and leave a small even gap between them so the labels do not touch",,,
-"would you drop Archive diagonally up and left of Draft, and align their left edges so the blocks look deliberate",,,
+"would you drop Archive diagonally up and left of Draft, and align their left edges so the blocks look deliberate","@c1 syntax.clause form=interrogative auxiliary=""would"" verb=""drop"" modifier=""diagonally"" modifier=""up"" discourse=""and"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""Archive""
+@r1 syntax.relation marker=""left of"" from=$n2 to=$n3
+@n3 syntax.nominal head=""Draft""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""align"" complement=$n4
+@n4 syntax.nominal dependent=""their"" dependent=""left"" head=""edges""
+@r2 syntax.relation marker=""so"" from=$c2 to=$c3
+@n5 syntax.nominal dependent=""the"" head=""blocks""
+@c3 syntax.clause form=declarative verb=""look"" modifier=""deliberate"" subject=$n5",vss,judge
 "perhaps move the Archive box up and to the left of the Review box, and keep a little air between them so the arrows stay visible",,,
 "the Archive box should go above and to the left of Check, and align their tops so the pair sits on one clean line",,,
 "Archive is the box that goes diagonally up and left of Ship, and connect Archive to Ship so the two stages read in order",,,
@@ -592,7 +613,10 @@ open a gap up to Bounce,,,
 Trash further from Flag,"@c1 syntax.clause form=imperative verb=""Trash"" modifier=""further""
 @r1 syntax.relation marker=""from"" from=$c1 to=$n1
 @n1 syntax.nominal head=""Flag""",spacy-direct+vss,agreement
-then pull it away from Payment,,,
+then pull it away from Payment,"@c1 syntax.clause form=imperative modifier=""then"" verb=""pull"" complement=$n1
+@n1 syntax.nominal head=""it""
+@r1 syntax.relation marker=""away from"" from=$c1 to=$n2
+@n2 syntax.nominal head=""Payment""",prolog+spacy+z3,judge
 next push it further from Confirm,"@c1 syntax.clause form=imperative modifier=""next"" verb=""push"" modifier=""further"" complement=$n1
 @n1 syntax.nominal head=""it""
 @r1 syntax.relation marker=""from"" from=$c1 to=$n2
@@ -619,23 +643,35 @@ one more move: move it away from Confirm because the boxes are almost touching,,
 "I think you should pull Payment away from Return, and align their tops so the pair sits on one clean line",,,
 "I think you should move Payment away from Refund, and connect Payment to Refund so the two stages read in order",,,
 "what if we take Payment farther from Track, and leave a small even gap between them so the labels do not touch",,,
-"then drag Payment away from Label, and put them on the same row so the group reads as one band",,,
+"then drag Payment away from Label, and put them on the same row so the group reads as one band","@c1 syntax.clause form=imperative discourse=""then"" verb=""drag"" complement=$n1
+@n1 syntax.nominal head=""Payment""
+@r1 syntax.relation marker=""away from"" from=$c1 to=$n2
+@n2 syntax.nominal head=""Label""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""put"" complement=$n3
+@n3 syntax.nominal head=""them""
+@r2 syntax.relation marker=""on"" from=$c2 to=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""same"" head=""row""
+@r3 syntax.relation marker=""so"" from=$c2 to=$c3
+@n5 syntax.nominal dependent=""the"" head=""group""
+@c3 syntax.clause form=declarative verb=""reads"" subject=$n5
+@r4 syntax.relation marker=""as"" from=$c3 to=$n6
+@n6 syntax.nominal dependent=""one"" head=""band""",distilbert+vss,judge
 "now space Confirm further from Cart, and align their left edges so the blocks look deliberate",,,
 "move Confirm further away from Payment, and keep a little air between them so the arrows stay visible",,,
 "also open a gap between Confirm and Pack, and align their tops so the pair sits on one clean line","@c1 syntax.clause form=imperative modifier=""also"" verb=""open"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""gap""
-@r1 syntax.relation marker=""between"" from=$n1 to=$k1
+@r1 syntax.relation attachment=ambiguous marker=""between"" from=$c1 to=$k1
 @n2 syntax.nominal head=""Confirm""
 @k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n3
 @n3 syntax.nominal head=""Pack""
-@k2 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@k2 syntax.coordination conjunction=""and"" conjunction=""so"" conjunct=$c1 conjunct=$c2 conjunct=$c3
 @c2 syntax.clause form=imperative verb=""align"" complement=$n4
 @n4 syntax.nominal dependent=""their"" head=""tops""
-@r2 syntax.relation marker=""so"" from=$c2 to=$c3
 @n5 syntax.nominal dependent=""the"" head=""pair""
 @c3 syntax.clause form=declarative verb=""sits"" subject=$n5
-@r3 syntax.relation marker=""on"" from=$c3 to=$n6
-@n6 syntax.nominal dependent=""one"" dependent=""clean"" head=""line""",spacy-direct+vss,agreement
+@r2 syntax.relation marker=""on"" from=$c3 to=$n6
+@n6 syntax.nominal dependent=""one"" dependent=""clean"" head=""line""",prolog,judge
 "the Confirm box should be further from Return, and connect Confirm to Return so the two stages read in order",,,
 "pull Confirm away from Refund so the arrow is long enough to read, and leave a small even gap between them so the labels do not touch",,,
 "could you push Confirm further from Track so the two stages look separate, and put them on the same row so the group reads as one band",,,
@@ -648,8 +684,8 @@ now move Pack away from Return,"@c1 syntax.clause form=imperative modifier=""now
 @n2 syntax.nominal head=""Return""",spacy-direct+vss,agreement
 shift Pack away from Refund,"@c1 syntax.clause form=imperative verb=""shift"" complement=$n1
 @n1 syntax.nominal head=""Pack""
-@r1 syntax.relation marker=""away from"" from=$c1 to=$n2
-@n2 syntax.nominal head=""Refund""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""away from"" from=$c1 to=$n2
+@n2 syntax.nominal head=""Refund""",prolog+z3,judge
 also take Pack farther from Track,,,
 could you slide Pack further from Label,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""slide"" modifier=""further"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
@@ -1209,7 +1245,20 @@ I also need you to line up the left sides of Rug and Plant because right now the
 @c3 syntax.clause form=declarative modifier=""right"" modifier=""now"" verb=""looks"" modifier=""ragged"" subject=$n6
 @n6 syntax.nominal dependent=""the"" head=""pair""",spacy-direct+vss,agreement
 after that make the left edges of Rug and Shelf match so the eye does not catch the difference,,,
-would you bring the left sides of Rug and Door into line before the slide is shown to the client,,,
+would you bring the left sides of Rug and Door into line before the slide is shown to the client,"@c1 syntax.clause form=interrogative auxiliary=""would"" verb=""bring"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""the"" dependent=""left"" head=""sides""
+@r1 syntax.relation marker=""of"" from=$n2 to=$k1
+@n3 syntax.nominal head=""Rug""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n3 conjunct=$n4
+@n4 syntax.nominal head=""Door""
+@r2 syntax.relation marker=""into"" from=$c1 to=$n5
+@n5 syntax.nominal head=""line""
+@r3 syntax.relation marker=""before"" from=$c1 to=$c2
+@n6 syntax.nominal dependent=""the"" head=""slide""
+@c2 syntax.clause form=declarative auxiliary=""is"" verb=""shown"" subject=$n6
+@r4 syntax.relation marker=""to"" from=$c2 to=$n7
+@n7 syntax.nominal dependent=""the"" head=""client""",distilbert+spacy,judge
 next put Rug and Bin on the same left side and leave the rest of the diagram alone,"@c1 syntax.clause form=imperative modifier=""next"" verb=""put"" complement=$k1
 @n1 syntax.nominal head=""Rug""
 @k1 syntax.coordination conjunction=""and"" conjunct=$n1 conjunct=$n2
@@ -1264,13 +1313,13 @@ now align it and Flask on their left edges so the row reads as one band,"@c1 syn
 @n1 syntax.nominal head=""it""
 @k1 syntax.coordination conjunction=""and"" conjunct=$n1 conjunct=$n2
 @n2 syntax.nominal head=""Flask""
-@r1 syntax.relation marker=""on"" from=$c1 to=$n3
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""their"" dependent=""left"" head=""edges""
-@r2 syntax.relation marker=""so"" from=$c1 to=$c2
+@k2 syntax.coordination conjunction=""so"" conjunct=$c1 conjunct=$c2
 @n4 syntax.nominal dependent=""the"" head=""row""
 @c2 syntax.clause form=declarative verb=""reads"" subject=$n4
-@r3 syntax.relation marker=""as"" from=$c2 to=$n5
-@n5 syntax.nominal dependent=""one"" head=""band""",spacy-direct+vss,agreement
+@r2 syntax.relation marker=""as"" from=$c2 to=$n5
+@n5 syntax.nominal dependent=""one"" head=""band""",prolog+z3,judge
 then line up the left sides of it and Chart because right now the pair looks ragged,,,
 next make the left edges of it and Sample match so the eye does not catch the difference,,,
 and now bring the left sides of it and Scope into line before the slide is shown to the client,,,
@@ -1865,8 +1914,8 @@ bring the top edges of the boxes into line,"@c1 syntax.clause form=imperative ve
 @n3 syntax.nominal head=""line""",spacy-direct+vss,agreement
 also set all the boxes to the same top edge,"@c1 syntax.clause form=imperative modifier=""also"" verb=""set"" complement=$n1
 @n1 syntax.nominal dependent=""all"" dependent=""the"" head=""boxes""
-@r1 syntax.relation marker=""to"" from=$c1 to=$n2
-@n2 syntax.nominal dependent=""the"" dependent=""same"" dependent=""top"" head=""edge""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""same"" dependent=""top"" head=""edge""",prolog+z3,judge
 have every box share the same top edge,,,
 the top lines of all the boxes should line up,"@n1 syntax.nominal dependent=""the"" dependent=""top"" head=""lines""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
@@ -1884,15 +1933,15 @@ I'd like you to pull every box onto the same top edge,"@n1 syntax.nominal head="
 @n4 syntax.nominal dependent=""the"" dependent=""same"" dependent=""top"" head=""edge""",spacy-direct+vss,agreement
 next align all the boxes on their top lines so the row reads as one band across the slide,"@c1 syntax.clause form=imperative modifier=""next"" verb=""align"" complement=$n1
 @n1 syntax.nominal dependent=""all"" dependent=""the"" head=""boxes""
-@r1 syntax.relation marker=""on"" from=$c1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""their"" dependent=""top"" head=""lines""
-@r2 syntax.relation marker=""so"" from=$c1 to=$c2
+@k1 syntax.coordination conjunction=""so"" conjunct=$c1 conjunct=$c2
 @n3 syntax.nominal dependent=""the"" head=""row""
 @c2 syntax.clause form=declarative verb=""reads"" subject=$n3
-@r3 syntax.relation marker=""as"" from=$c2 to=$n4
+@r2 syntax.relation marker=""as"" from=$c2 to=$n4
 @n4 syntax.nominal dependent=""one"" head=""band""
-@r4 syntax.relation marker=""across"" from=$c2 to=$n5
-@n5 syntax.nominal dependent=""the"" head=""slide""",spacy-direct+vss,agreement
+@r3 syntax.relation attachment=ambiguous marker=""across"" from=$c2 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""slide""",prolog+z3,judge
 line up every box on its top edge because the current row looks ragged from the back of the room,,,
 also even up the tops of the whole row and leave the spacing to me,"@c1 syntax.clause form=fragment modifier=""also"" modifier=""even""
 @r1 syntax.relation marker=""up"" from=$c1 to=$n1
@@ -2226,7 +2275,12 @@ move Ship so it is in one horizontal line with Publish,"@c1 syntax.clause form=i
 @n4 syntax.nominal head=""Publish""",spacy-direct+vss,agreement
 I think you should line up Ship with Reject in a row,,,
 then darg Approve until it is in a single row with Draft,,,
-now snxp Approve and Review to a single row,,,
+now snxp Approve and Review to a single row,"@c1 syntax.clause form=imperative modifier=""now"" verb=""snxp"" complement=$k1
+@n1 syntax.nominal head=""Approve""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n1 conjunct=$n2
+@n2 syntax.nominal head=""Review""
+@r1 syntax.relation marker=""to"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""a"" dependent=""single"" head=""row""",distilbert+vss,judge
 maake a row out of Approve and Check,,,
 is it possible to put Stove and Table in a column,"@c1 syntax.clause form=interrogative verb=""is"" modifier=""possible"" subject=$n1
 @n1 syntax.nominal head=""it""
@@ -2388,7 +2442,22 @@ one more move: get it and Approve onto the same column before the diagram is sho
 @c3 syntax.clause form=declarative verb=""sits"" subject=$n5
 @r3 syntax.relation marker=""on"" from=$c3 to=$n6
 @n6 syntax.nominal dependent=""one"" head=""line""",spacy-direct+vss,agreement
-"is it possible to keep Ship and Approve in a column, and align their left edges so the column has one clean margin",,,
+"is it possible to keep Ship and Approve in a column, and align their left edges so the column has one clean margin","@c1 syntax.clause form=interrogative verb=""is"" modifier=""possible"" subject=$n1
+@n1 syntax.nominal head=""it""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""keep"" complement=$k1
+@n2 syntax.nominal head=""Ship""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n3
+@n3 syntax.nominal head=""Approve""
+@r2 syntax.relation marker=""in"" from=$c2 to=$n4
+@n4 syntax.nominal dependent=""a"" head=""column""
+@k2 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c3
+@c3 syntax.clause form=imperative verb=""align"" complement=$n5
+@n5 syntax.nominal dependent=""their"" dependent=""left"" head=""edges""
+@r3 syntax.relation marker=""so"" from=$c3 to=$c4
+@n6 syntax.nominal dependent=""the"" head=""column""
+@c4 syntax.clause form=declarative verb=""has"" subject=$n6 complement=$n7
+@n7 syntax.nominal dependent=""one"" dependent=""clean"" head=""margin""",distilbert+vss,judge
 "the Ship box should be in one column with Publish, and connect Ship to Publish so the two boxes read as one step",,,
 "after that put Ship and Reject in a single column so the two steps read left to right, and distribute them evenly so the gap on each side matches",,,
 "would you line Ship and Archive up in one vertical line because the current arrangement jumps around, and put them on the same row so the group reads as one band",,,
@@ -2420,7 +2489,19 @@ sanp Publish and Reject to a single column,,,
 also maxe a column out of Publish and Archive,,,
 could you keeep Reject and Draft in a single column,,,
 align Monitor so its top edge matches the top edge of Plan,,,
-what if we put Monitor so its top edge sits on the top edge of Build,,,
+what if we put Monitor so its top edge sits on the top edge of Build,"@n1 syntax.nominal head=""what""
+@r1 syntax.relation marker=""if"" from=$c3 to=$c1
+@n2 syntax.nominal head=""we""
+@c1 syntax.clause form=declarative verb=""put"" subject=$n2 complement=$n3
+@n3 syntax.nominal head=""Monitor""
+@r2 syntax.relation marker=""so"" from=$c1 to=$c2
+@n4 syntax.nominal dependent=""its"" dependent=""top"" head=""edge""
+@c2 syntax.clause form=declarative verb=""sits"" subject=$n4
+@r3 syntax.relation marker=""on"" from=$c2 to=$n5
+@n5 syntax.nominal dependent=""the"" dependent=""top"" head=""edge""
+@r4 syntax.relation marker=""of"" from=$n5 to=$n6
+@n6 syntax.nominal head=""Build""
+@c3 syntax.clause form=fragment complement=$n1",distilbert+spacy,judge
 then match the top line of Monitor to Test,,,
 now make the top edge of Monitor meet the top edge of Fix,,,
 bring the top line of Monitor level with the top line of Deploy,,,

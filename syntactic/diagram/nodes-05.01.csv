@@ -51,7 +51,11 @@ undo that and change the fourth box instead,"@c1 syntax.clause form=imperative v
 try again on the fifth box,"@c1 syntax.clause form=imperative verb=""try"" modifier=""again""
 @r1 syntax.relation marker=""on"" from=$c1 to=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""fifth"" head=""box""",spacy-direct+vss,agreement
-"the change did not take, set it once more",,,
+"the change did not take, set it once more","@n1 syntax.nominal dependent=""the"" head=""change""
+@c1 syntax.clause form=declarative auxiliary=""did"" negation=""not"" verb=""take"" subject=$n1
+@c2 syntax.clause form=imperative verb=""set"" modifier=""once"" modifier=""more"" complement=$n2
+@n2 syntax.nominal head=""it""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2",prolog+spacy,judge
 "that didnt work, put the label on the second box instead",,,
 the fourth one instead,"@n1 syntax.nominal dependent=""the"" dependent=""fourth"" head=""one""
 @c1 syntax.clause form=fragment modifier=""instead"" complement=$n1",spacy-direct+vss,agreement
@@ -733,7 +737,23 @@ turn the first tuo and the last two right and the middle two left,,,
 rotate the outer pairs write and the inner pair left,,,
 "ends right, middle left",,,
 would you turn the outer pairs right and the middle pair left so the three pairs face opposite directions,,,
-rotate the outer pairs right and the inner pair left and leave every one of the other figures in the row exactly where it is so the arrangement stays clear and readable,,,
+rotate the outer pairs right and the inner pair left and leave every one of the other figures in the row exactly where it is so the arrangement stays clear and readable,"@c1 syntax.clause form=imperative verb=""rotate"" modifier=""right"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""outer"" head=""pairs""
+@k1 syntax.coordination conjunction=""and"" conjunction=""and"" conjunction=""so"" conjunction=""and"" conjunct=$c1 conjunct=$c2 conjunct=$c3 conjunct=$c5 conjunct=$c6
+@n2 syntax.nominal dependent=""the"" dependent=""inner"" head=""pair""
+@c2 syntax.clause form=fragment modifier=""left"" complement=$n2 ellipsis=$c1
+@c3 syntax.clause form=imperative verb=""leave"" modifier=""exactly"" complement=$n3
+@n3 syntax.nominal dependent=""every"" head=""one""
+@r1 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""other"" head=""figures""
+@r2 syntax.relation attachment=ambiguous marker=""in"" from=$c3 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""row""
+@c4 syntax.clause form=declarative modifier=""where"" verb=""is"" subject=$n6
+@n6 syntax.nominal head=""it""
+@n7 syntax.nominal dependent=""the"" head=""arrangement""
+@c5 syntax.clause form=declarative verb=""stays"" modifier=""clear"" subject=$n7
+@c6 syntax.clause form=fragment modifier=""readable"" ellipsis=$c5
+@r3 syntax.relation from=$n5 to=$c4",prolog,judge
 "swap the first and the last boxes, not the first two",,,
 "switch the first with the last, not with the second when you get a chance","@c1 syntax.clause form=imperative verb=""switch"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""first""
@@ -1391,7 +1411,18 @@ swap the frist and second and the third and fourth,"@c1 syntax.clause form=imper
 @n2 syntax.nominal head=""second""
 @n3 syntax.nominal dependent=""the"" head=""third""
 @n4 syntax.nominal head=""fourth""",spacy-direct+vss,agreement
-"and do the even pairs this time instead: swap the second and third, then swap the fourth and fifth",,,
+"and do the even pairs this time instead: swap the second and third, then swap the fourth and fifth","@c1 syntax.clause form=imperative discourse=""and"" verb=""swap"" complement=$k1
+@c2 syntax.clause form=imperative verb=""do"" modifier=""instead"" complement=$n1 complement=$n2
+@n1 syntax.nominal dependent=""the"" dependent=""even"" head=""pairs""
+@n2 syntax.nominal dependent=""this"" head=""time""
+@n3 syntax.nominal dependent=""the"" head=""second""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n3 conjunct=$n4
+@n4 syntax.nominal head=""third""
+@k2 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c2 conjunct=$c3
+@c3 syntax.clause form=imperative verb=""swap"" complement=$k3
+@n5 syntax.nominal dependent=""the"" head=""fourth""
+@k3 syntax.coordination conjunction=""and"" conjunct=$n5 conjunct=$n6
+@n6 syntax.nominal head=""fifth""",spacy,judge
 "i want the odd pairs swapped and the even pairs left exactly as they are, so start with the first and second and then do the third and fourth",,,
 apply the pair swap to the first and second and let the third and fourth sit still,,,
 "the same swap on each pair, one after the other: first and second, then second and third, then third and fourth, then fourth and fifth",,,
@@ -1788,7 +1819,20 @@ move the last figure to the front and leave the gap closed,,,
 @k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
 @c2 syntax.clause form=imperative verb=""make"" modifier=""bold"" complement=$n4
 @n4 syntax.nominal head=""it""",spacy-direct+vss,agreement
-"Chnge the font size of the title into 24, so the heading still reads from the back of the room.",,,
+"Chnge the font size of the title into 24, so the heading still reads from the back of the room.","@c1 syntax.clause form=imperative verb=""Chnge"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""font"" head=""size""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""title""
+@r2 syntax.relation marker=""into"" from=$c1 to=$n3
+@n3 syntax.nominal head=""24""
+@k1 syntax.coordination conjunction=""so"" conjunct=$c1 conjunct=$c2
+@n4 syntax.nominal dependent=""the"" head=""heading""
+@c2 syntax.clause form=declarative modifier=""still"" verb=""reads"" subject=$n4
+@r3 syntax.relation marker=""from"" from=$c2 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""back""
+@r4 syntax.relation marker=""of"" from=$n5 to=$n6
+@n6 syntax.nominal dependent=""the"" head=""room""
+@r5 syntax.relation from=$c1 to=$c2",distilbert,judge
 Set the title to 48 points.,"@c1 syntax.clause form=imperative verb=""Set"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""title""
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2
@@ -2092,7 +2136,14 @@ can you tilt the Roast label 15 degrees and push it left?,"@c1 syntax.clause for
 @c2 syntax.clause form=interrogative verb=""push"" modifier=""left"" complement=$n4
 @n4 syntax.nominal head=""it""",spacy-direct+vss,agreement
 "the n3 box wants re-angling and re-placing, do both",,,
-giving the Water box corners was wrong — circle it,,,
+giving the Water box corners was wrong — circle it,"@c1 syntax.clause form=nonfinite verb=""giving"" complement=$n1 complement=$n2
+@n1 syntax.nominal dependent=""the"" dependent=""Water"" head=""box""
+@n2 syntax.nominal head=""corners""
+@c2 syntax.clause form=declarative verb=""was"" modifier=""wrong""
+@c3 syntax.clause form=imperative verb=""circle"" complement=$n3
+@n3 syntax.nominal head=""it""
+@r1 syntax.relation from=$c2 to=$c1
+@k1 syntax.coordination conjunct=$c2 conjunct=$c3",spacy,judge
 "I'd have the picture at 5cm, all sides equal, please",,,
 "right, the picture goes 6cm wide, boxed in as a square",,,
 "how about 5cm on the picture, square and done?",,,

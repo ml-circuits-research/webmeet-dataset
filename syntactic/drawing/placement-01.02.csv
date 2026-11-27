@@ -287,8 +287,8 @@ draw a dog facing right under the tree,"@c1 syntax.clause form=imperative verb="
 @r2 syntax.relation from=$n1 to=$c2",spacy-direct+vss,agreement
 place a dog under the tree,"@c1 syntax.clause form=imperative verb=""place"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""dog""
-@r1 syntax.relation marker=""under"" from=$n1 to=$n2
-@n2 syntax.nominal dependent=""the"" head=""tree""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""under"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""tree""",prolog+z3,judge
 "can you add a dog looking right right underneath the tree?, thanks",,,
 i'd like a bird facing left up at the top of the tree,,,
 there should be a bird looking left in the top of the tree,,,
@@ -408,7 +408,26 @@ hey — give me a bird facing right straight below the cloud,"@c1 syntax.clause 
 "give me a tree behind the boy, half hidden behind the boy's head, just so, in our little drawing",,,
 "i'd like a tree behind the boy, with the boy's head covering the bottom of the trunk — and that's it for this bit of the picture",,,
 "can you add a tree behind the boy, half hidden behind the boy's head? — where it belongs in the picture",,,
-"could you draw a tree behind the boy, with the boy's head covering the bottom of the trunk? — right where the scene needs it",,,
+"could you draw a tree behind the boy, with the boy's head covering the bottom of the trunk? — right where the scene needs it","@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""draw"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""a"" head=""tree""
+@r1 syntax.relation attachment=ambiguous marker=""behind"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""boy""
+@r2 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$n5
+@n4 syntax.nominal dependent=""the"" head=""boy""
+@r3 syntax.relation marker=""'s"" from=$n5 to=$n4
+@n5 syntax.nominal head=""head""
+@c2 syntax.clause form=nonfinite verb=""covering"" complement=$n6
+@n6 syntax.nominal dependent=""the"" head=""bottom""
+@r4 syntax.relation marker=""of"" from=$n6 to=$n7
+@n7 syntax.nominal dependent=""the"" head=""trunk""
+@n8 syntax.nominal head=""right""
+@r5 syntax.relation marker=""where"" from=$n8 to=$c3
+@n9 syntax.nominal dependent=""the"" head=""scene""
+@c3 syntax.clause form=declarative verb=""needs"" subject=$n9 complement=$n10
+@n10 syntax.nominal head=""it""
+@r6 syntax.relation from=$n5 to=$c2
+@c4 syntax.clause form=fragment complement=$n8",z3,judge
 "there is a tree behind the boy, half hidden behind the boy's head — and there we have it in the scene",,,
 "i want a tree behind the boy, half hidden behind the boy's head in the picture — that's how the picture goes",,,
 "there's a tree behind the boy, with the boy's head covering the bottom of the trunk, and that's the picture so far",,,
@@ -1095,7 +1114,13 @@ have a bird sit above one per house,,,
 "a little bird up in the top right, then i want a bird above every house, so every one of them gets its own so the whole arrangement stays balanced",,,
 "a small dog down at the bottom, then place a bird on top of one per house, and repeat that down the whole line — keep it that way for the rest of the scene",,,
 "a bird above one per house, that's all",,,
-put a bird on top of each house exactly as i said,,,
+put a bird on top of each house exactly as i said,"@c1 syntax.clause form=imperative verb=""put"" modifier=""exactly"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""bird""
+@r1 syntax.relation attachment=ambiguous marker=""on top of"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""each"" head=""house""
+@r2 syntax.relation marker=""as"" from=$c1 to=$c2
+@n3 syntax.nominal head=""i""
+@c2 syntax.clause form=declarative verb=""said"" subject=$n3",prolog,judge
 just a bird above every house,,,
 upt a bird on top of one per house,,,
 place a ibrd above each house,"@c1 syntax.clause form=imperative verb=""place"" complement=$n1
@@ -1522,7 +1547,24 @@ hey — add a kite to the right of every cloud,"@c1 syntax.clause form=imperativ
 "a small dog down at the bottom, then change it so the man in the green shirt goes first this time, and leave the rest, just that one move for now",,,
 "a little boat on the lake to fill the gap, then reverse that — the woman in blue goes next, correcting the order after all — that's where he belongs",,,
 "a small cat by the bench to keep it company, then hold on — the blue-dress woman moves second, the order i meant from the start — exactly like it was before",,,
-"a little bird up top beside the sun, then no — the woman in the blue dress takes the next turn, before anything else moves — no other change",,,
+"a little bird up top beside the sun, then no — the woman in the blue dress takes the next turn, before anything else moves — no other change","@n1 syntax.nominal dependent=""a"" dependent=""little"" head=""bird""
+@r1 syntax.relation marker=""up"" from=$n1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""beside"" from=$n1 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""sun""
+@k1 syntax.coordination conjunction=""then"" conjunct=$c4 conjunct=$c1
+@c1 syntax.clause form=fragment discourse=""no""
+@n4 syntax.nominal dependent=""the"" head=""woman""
+@r3 syntax.relation marker=""in"" from=$n4 to=$n5
+@n5 syntax.nominal dependent=""the"" dependent=""blue"" head=""dress""
+@c2 syntax.clause form=declarative verb=""takes"" subject=$n4 complement=$n6
+@n6 syntax.nominal dependent=""the"" dependent=""next"" head=""turn""
+@r4 syntax.relation marker=""before"" from=$c2 to=$c3
+@n7 syntax.nominal head=""anything""
+@c3 syntax.clause form=declarative modifier=""else"" verb=""moves"" subject=$n7
+@n8 syntax.nominal dependent=""no"" dependent=""other"" head=""change""
+@c4 syntax.clause form=fragment complement=$n1
+@c5 syntax.clause form=fragment complement=$n8",vss,judge
 "a small dog down at the bottom, then change it so the woman in blue goes next this time, and leave the rest, just that one move for now",,,
 "a little boat on the lake to fill the gap, then reverse that — the man in the yellow shirt goes first this time, correcting the order after all — that's where he belongs",,,
 "a little bird up top beside the sun, then no — the one in the yellow shirt takes the first turn again, before anything else moves — no other change",,,

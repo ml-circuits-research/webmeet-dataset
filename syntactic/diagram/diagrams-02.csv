@@ -80,7 +80,18 @@ text,sop,source,accepted_by
 @n3 syntax.nominal dependent=""this"" head=""chart""",spacy-direct+vss,agreement
 "I'd like the legend shown, and use pastel colours in this chart.",,,
 "I want the values displayed, then turn on the grid in this diagram.",,,
-"Make sure to keep labels on the bars, plus show the values on this chart.",,,
+"Make sure to keep labels on the bars, plus show the values on this chart.","@c1 syntax.clause form=imperative verb=""Make"" complement=$n1
+@n1 syntax.nominal head=""sure""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""keep"" complement=$n2
+@n2 syntax.nominal head=""labels""
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""bars""
+@k1 syntax.coordination conjunction=""plus"" conjunct=$c2 conjunct=$c3
+@c3 syntax.clause form=nonfinite verb=""show"" complement=$n4
+@n4 syntax.nominal dependent=""the"" head=""values""
+@r3 syntax.relation attachment=ambiguous marker=""on"" from=$c3 to=$n5
+@n5 syntax.nominal dependent=""this"" head=""chart""",prolog,judge
 "I'd like value labels on, and use pastel colours in this chart.",,,
 "Make thicker strokes the default, then turn on the grid in this diagram.","@c1 syntax.clause form=imperative verb=""Make"" complement=$n1 complement=$n2
 @n1 syntax.nominal dependent=""thicker"" head=""strokes""
@@ -631,7 +642,10 @@ the total sales for each category?,"@n1 syntax.nominal dependent=""the"" depende
 @c1 syntax.clause form=fragment complement=$n1",spacy-direct+vss,agreement
 "one more thing: On the chart, how does the median profit split by region, please?",,,
 Which region sits closest to the median porfit?,,,
-Are the sales numbers going up or coming down?,,,
+Are the sales numbers going up or coming down?,"@c1 syntax.clause form=interrogative auxiliary=""Are"" verb=""going"" modifier=""up"" subject=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""sales"" head=""numbers""
+@k1 syntax.coordination conjunction=""or"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=interrogative verb=""coming"" modifier=""down""",spacy,judge
 So is sales trending uppward or not?,,,
 Can you quntify the weekly growth in orders?,"@c1 syntax.clause form=interrogative auxiliary=""Can"" verb=""quntify"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
@@ -820,7 +834,15 @@ move the legend to the top right,"@c1 syntax.clause form=imperative verb=""move"
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""top"" head=""right""",spacy-direct+vss,agreement
 what I want is the legend sitting at the top right,,,
-I need Draft and Review merged into one,,,
+I need Draft and Review merged into one,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1 complement=$k1
+@n2 syntax.nominal head=""Draft""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n3
+@n3 syntax.nominal head=""Review""
+@c2 syntax.clause form=nonfinite verb=""merged""
+@r1 syntax.relation marker=""into"" from=$c2 to=$n4
+@n4 syntax.nominal head=""one""
+@r2 syntax.relation from=$n3 to=$c2",prolog+z3,judge
 "I want Draft and Review collapsed into a single wider box, keeping the text of both and every arrow that used to touch them",,,
 go for marker interval 3 on the revenue trend plus have the series name Trajectory and then make the font a bit bigger,,,
 "try the marker interval 3 — while you're at it, keep the series name Trajectory",,,

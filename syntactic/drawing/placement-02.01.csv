@@ -214,7 +214,19 @@ text,sop,source,accepted_by
 "instead, two more blocks to the right end, and then leave the rest of the row as it is",,,
 "two more blocks to the right end, and after that, leave the rest of the row as it is",,,
 "please extnd two more blocks to the right end, next to the last block, next leave the rest of the row as it is",,,
-"please continue two bloocks onto the right end of the row, next keep the rest of the row as it is",,,
+"please continue two bloocks onto the right end of the row, next keep the rest of the row as it is","@c1 syntax.clause form=imperative discourse=""please"" verb=""continue"" complement=$n1
+@n1 syntax.nominal dependent=""two"" head=""bloocks""
+@r1 syntax.relation marker=""onto"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""right"" head=""end""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""row""
+@c2 syntax.clause form=imperative modifier=""next"" verb=""keep"" complement=$n4
+@n4 syntax.nominal dependent=""the"" head=""rest""
+@r3 syntax.relation marker=""of"" from=$n4 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""row""
+@r4 syntax.relation marker=""as"" from=$c2 to=$c3
+@n6 syntax.nominal head=""it""
+@c3 syntax.clause form=declarative verb=""is"" subject=$n6",distilbert+vss,judge
 "hey — please carry two more at the right end, beside the last block. And then leave the rest of the row where it is",,,
 "please run the row longer by two on the right, then keep every other block in place, thanks",,,
 "could you put three more at the left end, past the first block, then keep the rest of the row where it is",,,
@@ -301,13 +313,13 @@ text,sop,source,accepted_by
 "actually, please extend one more block at the left end, and after that, extend one more block at the right end",,,
 "please continue one block onto the left end, then continue one block onto the right end","@c1 syntax.clause form=imperative discourse=""please"" verb=""continue"" complement=$n1
 @n1 syntax.nominal dependent=""one"" head=""block""
-@r1 syntax.relation marker=""onto"" from=$c1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""onto"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""left"" head=""end""
 @k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c2
 @c2 syntax.clause form=imperative verb=""continue"" complement=$n3
 @n3 syntax.nominal dependent=""one"" head=""block""
-@r2 syntax.relation marker=""onto"" from=$c2 to=$n4
-@n4 syntax.nominal dependent=""the"" dependent=""right"" head=""end""",spacy-direct+vss,agreement
+@r2 syntax.relation attachment=ambiguous marker=""onto"" from=$c2 to=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""right"" head=""end""",prolog+z3,judge
 "please carry a block at the left end, then carry a block at the right end","@c1 syntax.clause form=imperative discourse=""please"" verb=""carry"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""block""
 @r1 syntax.relation marker=""at"" from=$c1 to=$n2
@@ -416,7 +428,18 @@ text,sop,source,accepted_by
 @r3 syntax.relation marker=""as"" from=$c2 to=$c3
 @n5 syntax.nominal head=""it""
 @c3 syntax.clause form=declarative verb=""is"" subject=$n5",spacy-direct+vss,agreement
-"please carry two blocks more, making eight in the row, then keep every other block in place",,,
+"please carry two blocks more, making eight in the row, then keep every other block in place","@c1 syntax.clause form=imperative discourse=""please"" verb=""carry"" complement=$n1
+@n1 syntax.nominal dependent=""two"" head=""blocks"" dependent=""more""
+@c2 syntax.clause form=nonfinite verb=""making"" complement=$n2
+@n2 syntax.nominal head=""eight""
+@r1 syntax.relation marker=""in"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""row""
+@k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c3
+@c3 syntax.clause form=imperative verb=""keep"" complement=$n4
+@n4 syntax.nominal dependent=""every"" dependent=""other"" head=""block""
+@r2 syntax.relation marker=""in"" from=$c3 to=$n5
+@n5 syntax.nominal head=""place""
+@r3 syntax.relation from=$n1 to=$c2",vss,judge
 "please run the row to eight blocks exactly, and after that, leave the rest of the row where it is",,,
 "can you stretch two more blocks so the row has eight, then keep the rest of the row as it is",,,
 "no, can you push the row up to eight blocks, next leave the rest of the row as it is",,,
@@ -664,7 +687,17 @@ hey — please carry two blocks so the row reaches the tower. And then keep the 
 "please ua a line from the centre of the north wall all the way to the south wall, alternating red and purple, next keep both walls as they are",,,
 "please set a straight lae from the north wall centre to the south wall, red and purple in turn, next leave both walls as they are",,,
 "hey — please stand red and purple blocks in a line between the two walls, then keep both walls as they are",,,
-"please layer one line joining the two walls, colours alternating, then leave both walls untouched, thanks",,,
+"please layer one line joining the two walls, colours alternating, then leave both walls untouched, thanks","@c1 syntax.clause form=imperative discourse=""please"" verb=""layer"" discourse=""thanks"" complement=$n1
+@n1 syntax.nominal dependent=""one"" head=""line""
+@c2 syntax.clause form=nonfinite verb=""joining"" complement=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""two"" head=""walls""
+@n3 syntax.nominal head=""colours""
+@c3 syntax.clause form=nonfinite verb=""alternating"" subject=$n3
+@k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c4
+@c4 syntax.clause form=imperative verb=""leave"" modifier=""untouched"" complement=$n4
+@n4 syntax.nominal dependent=""both"" head=""walls""
+@r1 syntax.relation from=$c1 to=$c3
+@r2 syntax.relation from=$n1 to=$c2",spacy,judge
 "build two blue, one green and one red block in the row, in that order, then build two green blocks on top of the green block",,,
 "make the row as two blue, one green, one red, then make two green blocks above the green one",,,
 "could you raise a row of two blue, one green and one red in order, then raise a vertical pair of green on the green block",,,
@@ -972,7 +1005,10 @@ add a thin red outline to the poster,"@c1 syntax.clause form=imperative verb=""a
 @n1 syntax.nominal dependent=""a"" dependent=""thin"" dependent=""red"" head=""outline""
 @r1 syntax.relation marker=""to"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""poster""",spacy-direct+vss,agreement
-put a dark outline round the boat,,,
+put a dark outline round the boat,"@c1 syntax.clause form=imperative verb=""put"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""dark"" head=""outline""
+@r1 syntax.relation attachment=ambiguous marker=""round"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""boat""",prolog+spacy,judge
 give the letters a gold outline,"@c1 syntax.clause form=imperative verb=""give"" complement=$n1 complement=$n2
 @n1 syntax.nominal dependent=""the"" head=""letters""
 @n2 syntax.nominal dependent=""a"" dependent=""gold"" head=""outline""",spacy-direct+vss,agreement
@@ -1982,7 +2018,20 @@ a single flower right next to the small house.,"@n1 syntax.nominal dependent=""a
 "put a small house next to the small barn, on the firm ground where the hay cart turns, and make it red.",,,
 "put a small house next to the old barn, on the firm ground where the hay cart turns, and make it a little bigger.",,,
 "put a small house next to the barn, on the firm ground where the hay cart turns, and turn it slightly to the left.",,,
-"add an old well beside the small barn, with the yard clear between it and the doors, and make it a little smaller.",,,
+"add an old well beside the small barn, with the yard clear between it and the doors, and make it a little smaller.","@c1 syntax.clause form=imperative verb=""add"" complement=$n1
+@n1 syntax.nominal dependent=""an"" dependent=""old"" head=""well""
+@r1 syntax.relation attachment=ambiguous marker=""beside"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""small"" head=""barn""
+@r2 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""yard"" dependent=""clear""
+@r3 syntax.relation attachment=ambiguous marker=""between"" from=$c1 to=$k1
+@n4 syntax.nominal head=""it""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n4 conjunct=$n5
+@n5 syntax.nominal dependent=""the"" head=""doors""
+@k2 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""make"" modifier=""smaller"" complement=$n6 complement=$n7
+@n6 syntax.nominal head=""it""
+@n7 syntax.nominal dependent=""a"" head=""little""",prolog+z3,judge
 "put a small house next to the old barn, on the firm ground where the hay cart turns, and turn it half a turn.",,,
 "put a small house next to the barn, on the firm ground where the hay cart turns, and keep it the same size.",,,
 "there should be a small tower by the side of the small barn, and leave the muddy patch by the gate alone, and make it red.",,,
@@ -2066,7 +2115,14 @@ a single flower right next to the small house.,"@n1 syntax.nominal dependent=""a
 @r5 syntax.relation marker=""where"" from=$c1 to=$c2
 @n6 syntax.nominal dependent=""the"" dependent=""hay"" head=""cart""
 @c2 syntax.clause form=declarative verb=""turns"" subject=$n6",spacy-direct+vss,agreement
-"we could use a wooden windmill next to the red barn, just clar of the big barn doors.",,,
+"we could use a wooden windmill next to the red barn, just clar of the big barn doors.","@n1 syntax.nominal head=""we""
+@c1 syntax.clause form=declarative auxiliary=""could"" verb=""use"" modifier=""just"" subject=$n1 complement=$n2 complement=$n4
+@n2 syntax.nominal dependent=""a"" dependent=""wooden"" head=""windmill""
+@r1 syntax.relation attachment=ambiguous marker=""next to"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""red"" head=""barn""
+@n4 syntax.nominal head=""clar""
+@r2 syntax.relation marker=""of"" from=$n4 to=$n5
+@n5 syntax.nominal dependent=""the"" dependent=""big"" dependent=""barn"" head=""doors""",prolog+z3,judge
 "beside the red barn, there should be a little fence, on the firm ground where the hay cat turns.","@r1 syntax.relation marker=""beside"" from=$c1 to=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""red"" head=""barn""
 @n2 syntax.nominal head=""there""
@@ -2120,7 +2176,16 @@ a single flower right next to the small house.,"@n1 syntax.nominal dependent=""a
 "how about a little table just by the bench, where people can still sit without stepping over it.",,,
 "what if we put a little tree near the old bench, so it is close enough to see from the seat.",,,
 "draw a white flower a short way from the old bench, so the bench does not have to be moved.",,,
-"a few steps from the old bench, put a round rock, and leave the space under the bench empty.",,,
+"a few steps from the old bench, put a round rock, and leave the space under the bench empty.","@n1 syntax.nominal dependent=""a"" dependent=""few"" head=""steps""
+@r1 syntax.relation marker=""from"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""old"" head=""bench""
+@c1 syntax.clause form=imperative verb=""put"" complement=$n1 complement=$n3
+@n3 syntax.nominal dependent=""a"" dependent=""round"" head=""rock""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""leave"" modifier=""empty"" complement=$n4
+@n4 syntax.nominal dependent=""the"" head=""space""
+@r2 syntax.relation marker=""under"" from=$n4 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""bench""",distilbert+spacy,judge
 "we could use a green bush not far from the wooden bench, just outside the shadow of the seat.",,,
 "the best spot for a grey cat is not too far from the wooden bench, with the path and the bench legs left clear.",,,
 "could you put a little dog close to the wooden bench, where people can still sit without stepping over it.",,,
@@ -2209,7 +2274,11 @@ a wooden table close to the wooden bench.,"@n1 syntax.nominal dependent=""a"" de
 @r2 syntax.relation marker=""on"" from=$n3 to=$n4
 @n4 syntax.nominal dependent=""the"" head=""left""
 @c1 syntax.clause form=fragment complement=$n1 complement=$n2",spacy-direct+vss,agreement
-"a bush a few steps from the bench, for now.",,,
+"a bush a few steps from the bench, for now.","@n1 syntax.nominal dependent=""a"" head=""bush""
+@n2 syntax.nominal dependent=""a"" dependent=""few"" head=""steps""
+@r1 syntax.relation marker=""from"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""bench""
+@c1 syntax.clause form=fragment modifier=""for"" modifier=""now"" complement=$n1 complement=$n2",distilbert+vss,judge
 "what if we put a little bush not far from the small bench, waere people can still sit without stepping over it.",,,
 "put a young tree near the bench, where people can still sit without stpeping over it.",,,
 "could you put a white flower not far from the bench, so it is close enough to see from the seat.",,,
@@ -2453,7 +2522,16 @@ a wooden bench close to the barn.,"@n1 syntax.nominal dependent=""a"" dependent=
 @n7 syntax.nominal dependent=""the"" head=""left""",spacy-direct+vss,agreement
 "would you add an old rock in the deep lake, and keep it away from the shallow edge where the mud shows, and make it a little smaller.",,,
 "add a little fish in the river, among the reeds on the quiet side of the water, and turn it half a turn.",,,
-"now a second wooden boat in the same little pond, among the reeds on the quiet side of the water.",,,
+"now a second wooden boat in the same little pond, among the reeds on the quiet side of the water.","@c1 syntax.clause form=fragment modifier=""now"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""second"" dependent=""wooden"" head=""boat""
+@r1 syntax.relation marker=""in"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""same"" dependent=""little"" head=""pond""
+@r2 syntax.relation attachment=ambiguous marker=""among"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""reeds""
+@r3 syntax.relation marker=""on"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""quiet"" head=""side""
+@r4 syntax.relation marker=""of"" from=$n4 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""water""",prolog,judge
 "and one more gold fish right in the same deep lake, so its reflection shows clearly from the shore.",,,
 "do the same with a grey swan inside the same lake, with the deep channel on one side and the reeds on the other.",,,
 "how about another yellow duck in the same pond, so it sits below the surface and the ripples stay small.",,,
@@ -2518,7 +2596,18 @@ a small boat inside the river.,"@n1 syntax.nominal dependent=""a"" dependent=""s
 "is there room for a small duck on the river, and let it drift a little away from the shore?",,,
 "put a little raft on the river, where the current is slow and the water is flat.",,,
 "can you place a wooden boat on the river, where the water is wide enough for it to turn.",,,
-"let there be a young swan on the still lake, and keep its whole shape above the water.",,,
+"let there be a young swan on the still lake, and keep its whole shape above the water.","@c1 syntax.clause form=imperative verb=""let""
+@n1 syntax.nominal head=""there""
+@c2 syntax.clause form=nonfinite verb=""be"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""young"" head=""swan""
+@r1 syntax.relation marker=""on"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""still"" head=""lake""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c3
+@c3 syntax.clause form=imperative verb=""keep"" complement=$n4
+@n4 syntax.nominal dependent=""its"" dependent=""whole"" head=""shape""
+@r2 syntax.relation marker=""above"" from=$c3 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""water""
+@r3 syntax.relation from=$c1 to=$c2",spacy,judge
 "draw a young duck on the still lake, floating clear of the bank and the reeds.",,,
 "can you place a small boat on the wide river, where the current is slow and the water is flat.",,,
 "could you add a small swan on the wide river, near the middle where the ripples spread out.","@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""add"" subject=$n1 complement=$n2
@@ -2537,7 +2626,19 @@ a small boat inside the river.,"@n1 syntax.nominal dependent=""a"" dependent=""s
 "is there room for a proud swan on the quiet pond, with its reflection steady on the calm surface?",,,
 "I would like a small duck on the lake, so it sits on the surface without touching the bottom.",,,
 "the best spot for a little raft is on the lake, so the ducks can swim around it without crowding.",,,
-"can you place a wooden boat on the lake, and let it drift a little away from the shore.",,,
+"can you place a wooden boat on the lake, and let it drift a little away from the shore.","@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""place"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""a"" dependent=""wooden"" head=""boat""
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""lake""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""let"" complement=$n4
+@n4 syntax.nominal head=""it""
+@c3 syntax.clause form=nonfinite verb=""drift"" complement=$n5
+@n5 syntax.nominal dependent=""a"" head=""little""
+@r2 syntax.relation attachment=ambiguous marker=""away from"" from=$c3 to=$n6
+@n6 syntax.nominal dependent=""the"" head=""shore""
+@r3 syntax.relation from=$c2 to=$c3",z3,judge
 "let there be a young swan on the pond, where the water is wide enough for it to turn.",,,
 "the best spot for a young duck is on the pond, floating clear of the bank and the reeds.",,,
 "on the pond, there should be a grey raft, with its reflection steady on the calm surface.",,,

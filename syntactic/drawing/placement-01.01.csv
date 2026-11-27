@@ -304,7 +304,13 @@ a cloud near the sun would balance the sky,"@n1 syntax.nominal dependent=""a"" h
 @n2 syntax.nominal dependent=""the"" head=""sun""
 @c1 syntax.clause form=declarative auxiliary=""would"" verb=""balance"" subject=$n1 complement=$n3
 @n3 syntax.nominal dependent=""the"" head=""sky""",spacy-direct+vss,agreement
-let there be a tree beside the house,,,
+let there be a tree beside the house,"@c1 syntax.clause form=imperative verb=""let"" complement=$n1
+@n1 syntax.nominal head=""there""
+@c2 syntax.clause form=nonfinite verb=""be"" complement=$n2
+@n2 syntax.nominal dependent=""a"" head=""tree""
+@r1 syntax.relation attachment=ambiguous marker=""beside"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""house""
+@r2 syntax.relation from=$c1 to=$c2",z3,judge
 drop a bush next to the tree,"@c1 syntax.clause form=imperative verb=""drop"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""bush""
 @r1 syntax.relation marker=""next to"" from=$n1 to=$n2
@@ -946,7 +952,19 @@ i'd like a big boy looking left just in front of the tree trunk — that's how t
 "there should be a large boy facing left in front of the tree, and that's the picture so far",,,
 amke it so there is a large boy facing left in front of the tree,,,
 place abig boy looking left just in front of the tree trunk,,,
-"to start, a red kite high in the sky, then in front of the tree a large boy facing left",,,
+"to start, a red kite high in the sky, then in front of the tree a large boy facing left","@r1 syntax.relation marker=""to"" from=$c2 to=$c1
+@c1 syntax.clause form=nonfinite verb=""start""
+@n1 syntax.nominal dependent=""a"" dependent=""red"" head=""kite""
+@c2 syntax.clause form=fragment modifier=""high"" complement=$n1
+@r2 syntax.relation marker=""in"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""sky""
+@k1 syntax.coordination conjunction=""then"" conjunct=$c2 conjunct=$c4
+@r3 syntax.relation marker=""in front of"" from=$c4 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""tree""
+@n4 syntax.nominal dependent=""a"" dependent=""large"" head=""boy""
+@c3 syntax.clause form=nonfinite verb=""facing"" modifier=""left""
+@c4 syntax.clause form=fragment complement=$n4
+@r4 syntax.relation from=$n4 to=$c3",distilbert,judge
 "make it so there is a big boy looking left just in front of the tree trunk, and a small cat under the tree",,,
 "the picture needs a large boy facing left in front of the tree, after that a red kite high in the sky",,,
 "to start, a small cat under the tree, then i'd like a big boy looking left just in front of the tree trunk",,,
@@ -1133,7 +1151,22 @@ could you draw a little obat pointing right on the left side of the scene?,"@c1 
 @r2 syntax.relation marker=""of"" from=$n3 to=$n4
 @n4 syntax.nominal dependent=""the"" head=""scene""
 @r3 syntax.relation from=$n2 to=$c2",spacy-direct+vss,agreement
-"to start, a bird above the lake, then i want a small boat facing right on the left in the picture",,,
+"to start, a bird above the lake, then i want a small boat facing right on the left in the picture","@r1 syntax.relation marker=""to"" from=$c4 to=$c1
+@c1 syntax.clause form=nonfinite verb=""start""
+@n1 syntax.nominal dependent=""a"" head=""bird""
+@r2 syntax.relation marker=""above"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""lake""
+@k1 syntax.coordination conjunction=""then"" conjunct=$c4 conjunct=$c2
+@n3 syntax.nominal head=""i""
+@c2 syntax.clause form=declarative verb=""want"" subject=$n3 complement=$n4
+@n4 syntax.nominal dependent=""a"" dependent=""small"" head=""boat""
+@c3 syntax.clause form=nonfinite verb=""facing"" modifier=""right""
+@r3 syntax.relation marker=""on"" from=$c3 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""left""
+@r4 syntax.relation attachment=ambiguous marker=""in"" from=$c3 to=$n6
+@n6 syntax.nominal dependent=""the"" head=""picture""
+@c4 syntax.clause form=fragment complement=$n1
+@r5 syntax.relation from=$n4 to=$c3",prolog,judge
 "a little boat pointing right on the left side of the scene, and a little boat out in the middle",,,
 "to start, a little boat out in the middle, then let there be a little boat pointing right on the left side of the scene",,,
 draw a boat facing right on the left,"@c1 syntax.clause form=imperative verb=""draw"" complement=$n1

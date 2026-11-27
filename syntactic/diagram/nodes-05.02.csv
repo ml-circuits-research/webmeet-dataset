@@ -931,7 +931,12 @@ bring the second deleted figure back into the third spot,"@c1 syntax.clause form
 @n1 syntax.nominal dependent=""the"" dependent=""second"" dependent=""deleted"" head=""figure""
 @r1 syntax.relation marker=""into"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""third"" head=""spot""",spacy-direct+vss,agreement
-keep going back until the square comes back,,,
+keep going back until the square comes back,"@c1 syntax.clause form=imperative verb=""keep""
+@c2 syntax.clause form=nonfinite verb=""going"" modifier=""back""
+@r1 syntax.relation marker=""until"" from=$c2 to=$c3
+@n1 syntax.nominal dependent=""the"" head=""square""
+@c3 syntax.clause form=declarative verb=""comes"" modifier=""back"" subject=$n1
+@r2 syntax.relation from=$c1 to=$c2",prolog+spacy,judge
 return exactly the two boxes that were cleared,,,
 put the deleted figure back in its original spot,"@c1 syntax.clause form=imperative verb=""put"" modifier=""back"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""deleted"" head=""figure""
@@ -1323,7 +1328,12 @@ the outer pair,"@n1 syntax.nominal dependent=""the"" dependent=""outer"" head=""
 "swap the outer pair and then the inner pair, and leave the middle figure alone",,,
 make the first pair cross with the second pair,,,
 "put the fourth box first and the first box fourth, and put the third box second and the second box third",,,
-cross the pairs one-four and two-three,,,
+cross the pairs one-four and two-three,"@c1 syntax.clause form=imperative verb=""cross"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""pairs""
+@n2 syntax.nominal head=""one-four""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n3
+@n3 syntax.nominal head=""two-three""
+@r1 syntax.relation from=$n1 to=$k1",spacy,judge
 the crossed pairs,"@n1 syntax.nominal dependent=""the"" dependent=""crossed"" head=""pairs""
 @c1 syntax.clause form=fragment complement=$n1",spacy-direct+vss,agreement
 "trade the rightmost pair of the first five, then the leftmost pair",,,
@@ -1607,7 +1617,11 @@ exchange each neighbouring pair from left to right,"@c1 syntax.clause form=imper
 pairs swapped,,,
 swap them again but the other way round,,,
 run the same swap again but back the other way,,,
-do that swap again but the other way round,,,
+do that swap again but the other way round,"@c1 syntax.clause form=imperative verb=""do"" modifier=""again"" complement=$n1
+@n1 syntax.nominal dependent=""that"" head=""swap""
+@k1 syntax.coordination conjunction=""but"" conjunct=$c1 conjunct=$c2
+@n2 syntax.nominal dependent=""the"" dependent=""other"" head=""way""
+@c2 syntax.clause form=fragment modifier=""round"" complement=$n2 ellipsis=$c1",prolog,judge
 perform the swap once more with the operands reversed,,,
 swap them again but back the other way,,,
 perform the swap again but the other way round,,,
@@ -2508,7 +2522,18 @@ bring back the second deleted figure and put it back in the row where it belongs
 @r2 syntax.relation marker=""where"" from=$c2 to=$c3
 @n4 syntax.nominal head=""it""
 @c3 syntax.clause form=declarative verb=""belongs"" modifier=""now"" subject=$n4",spacy-direct+vss,agreement
-"go ahead and restore the figure from step 2, then redo the move on the feurth figure",,,
+"go ahead and restore the figure from step 2, then redo the move on the feurth figure","@c1 syntax.clause form=imperative verb=""go"" modifier=""ahead""
+@k1 syntax.coordination conjunction=""and"" conjunction=""then"" conjunct=$c1 conjunct=$c2 conjunct=$c3
+@c2 syntax.clause form=imperative verb=""restore"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""figure""
+@r1 syntax.relation attachment=ambiguous marker=""from"" from=$c2 to=$n2
+@n2 syntax.nominal head=""step""
+@n3 syntax.nominal head=""2""
+@c3 syntax.clause form=imperative verb=""redo"" complement=$n4
+@n4 syntax.nominal dependent=""the"" head=""move""
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c3 to=$n5
+@n5 syntax.nominal dependent=""the"" dependent=""feurth"" head=""figure""
+@r3 syntax.relation from=$n2 to=$n3",prolog,judge
 "add back the deleted box, and rapeat the swap on the pair next to it","@c1 syntax.clause form=imperative verb=""add"" modifier=""back"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""deleted"" head=""box""
 @k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2

@@ -166,9 +166,9 @@ try the numbers on the x axis three digits,,,
 could you set the numbers on the x axis three digits?,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""set"" subject=$n1 complement=$n2 complement=$n4
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""the"" head=""numbers""
-@r1 syntax.relation marker=""on"" from=$n2 to=$n3
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""the"" dependent=""x"" head=""axis""
-@n4 syntax.nominal dependent=""three"" head=""digits""",spacy-direct+vss,agreement
+@n4 syntax.nominal dependent=""three"" head=""digits""",prolog+z3,judge
 do the numbers on the x axis three digits on the orders chart,,,
 I want the numbers on the x axis three digits on the orders chart,,,
 how about three digits x axis numbers?,,,
@@ -242,7 +242,18 @@ the missing piece: grid lines behind the data on the sales chart. title Q2 sales
 "keep the grid lines every two units, also make the font a bit bigger",,,
 "have the grid lines every two units, also make the markers a bit bigger",,,
 grid lines every two units. markers bigger,,,
-the missing piece: grid lines every two units on the revenue trend. title Revenue by month,,,
+the missing piece: grid lines every two units on the revenue trend. title Revenue by month,"@n1 syntax.nominal dependent=""the"" dependent=""missing"" head=""piece""
+@n2 syntax.nominal dependent=""grid"" head=""lines""
+@n3 syntax.nominal dependent=""every"" dependent=""two"" head=""units""
+@r1 syntax.relation marker=""on"" from=$n2 to=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""revenue"" head=""trend""
+@n5 syntax.nominal dependent=""title"" head=""Revenue""
+@r2 syntax.relation marker=""by"" from=$n5 to=$n6
+@n6 syntax.nominal head=""month""
+@c1 syntax.clause form=fragment complement=$n1
+@r3 syntax.relation from=$n1 to=$n2
+@r4 syntax.relation from=$n2 to=$n3
+@c2 syntax.clause form=fragment complement=$n5",spacy,judge
 "the junior pulled the figures together overnight and left the department chart looking unfinished round the edges, so make the grid lines blue and I'll take it from there; plus drop the legend on the right",,,
 "when the board dials in tomorrow morning the first chart they open is Revenue by department, so for their sake make the grid lines blue before the meeting starts, could you also give it the title Revenue by department",,,
 "I walked the team through Revenue by department this morning; nobody argued with the data, only with how it reads at a glance, so as a first pass make the grid lines blue, then we revisit next week, and make the font a bit bigger",,,
@@ -495,7 +506,34 @@ go for 0.8 bar spacing on the sales chart,"@c1 syntax.clause form=imperative ver
 @n2 syntax.nominal dependent=""the"" dependent=""sales"" head=""chart""",spacy-direct+vss,agreement
 do the bar spacing 0.8 on the sales chart,,,
 how about 0.8 bar spacing?,,,
-"when the board dials in tomorrow morning the first chart they open is Sales by month, so for their sake make the bar spacing 0.8 before the meeting starts — while you're at it, show both grid lines",,,
+"when the board dials in tomorrow morning the first chart they open is Sales by month, so for their sake make the bar spacing 0.8 before the meeting starts — while you're at it, show both grid lines","@r1 syntax.relation marker=""when"" from=$c3 to=$c1
+@n1 syntax.nominal dependent=""the"" head=""board""
+@c1 syntax.clause form=declarative verb=""dials"" modifier=""in"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""tomorrow"" head=""morning""
+@n3 syntax.nominal dependent=""the"" dependent=""first"" head=""chart""
+@n4 syntax.nominal head=""they""
+@c2 syntax.clause form=declarative verb=""open"" subject=$n4
+@c3 syntax.clause form=declarative verb=""is"" subject=$n3 complement=$n5
+@n5 syntax.nominal head=""Sales""
+@r2 syntax.relation marker=""by"" from=$n5 to=$n6
+@n6 syntax.nominal head=""month""
+@k1 syntax.coordination conjunction=""so"" conjunct=$c3 conjunct=$c4 conjunct=$c7
+@r3 syntax.relation marker=""for"" from=$c4 to=$n7
+@n7 syntax.nominal dependent=""their"" head=""sake""
+@c4 syntax.clause form=imperative verb=""make"" complement=$n8 complement=$n9
+@n8 syntax.nominal dependent=""the"" dependent=""bar"" head=""spacing""
+@n9 syntax.nominal head=""0.8""
+@r4 syntax.relation marker=""before"" from=$c4 to=$c5
+@n10 syntax.nominal dependent=""the"" head=""meeting""
+@c5 syntax.clause form=declarative verb=""starts"" subject=$n10
+@r5 syntax.relation marker=""while"" from=$c7 to=$c6
+@n11 syntax.nominal head=""you""
+@c6 syntax.clause form=declarative verb=""'re"" subject=$n11
+@r6 syntax.relation marker=""at"" from=$c6 to=$n12
+@n12 syntax.nominal head=""it""
+@c7 syntax.clause form=imperative verb=""show"" complement=$n13
+@n13 syntax.nominal dependent=""both"" dependent=""grid"" head=""lines""
+@r7 syntax.relation from=$n3 to=$c2",spacy,judge
 "I keep squinting at Sales by month every time I paste it into the weekly newsletter; this week, make the bar spacing 0.8 as well, would you, also make the font a bit bigger",,,
 "I walked the team through Sales by month this morning; nobody argued with the data, only with how it reads at a glance, so as a first pass make the bar spacing 0.8, then we revisit next week, also put the y axis on the right",,,
 "half the stand-up was grumbling that the numbers were impossible to read from the corridor screen; to settle it, make the bar spacing 0.8 going forward; plus drop the legend on the right",,,
@@ -960,7 +998,9 @@ and also Headcount by department: pie percentages one decimal place,,,
 excuse me — keep the pie percentages one decimal place,,,
 quick one: have the pie percentages one decimal place,,,
 "set the pie percentages oni decimal place, that's the tweak",,,
-have the pie percentages une decimal place,,,
+have the pie percentages une decimal place,"@c1 syntax.clause form=imperative verb=""have"" complement=$n1 complement=$n2
+@n1 syntax.nominal dependent=""the"" dependent=""pie"" head=""percentages""
+@n2 syntax.nominal dependent=""une"" dependent=""decimal"" head=""place""",distilbert,judge
 try the pie percentages one decimaal place,,,
 "I walked the team through Budget split this morning; nobody argued with the data, only with how it reads at a glance, so as a first pass make the pie border grey, then we revisit next week; plus make the font a bit bigger",,,
 "when the board dials in tomorrow morning the first chart they open is Budget split, so for their sake make the pie border grey before the meeting starts, could you also drop the legend on the right",,,

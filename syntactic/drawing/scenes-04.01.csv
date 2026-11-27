@@ -766,7 +766,18 @@ draw a small blal on the grass,"@c1 syntax.clause form=imperative verb=""draw"" 
 @n2 syntax.nominal dependent=""the"" head=""grass""",spacy-direct+vss,agreement
 "there is a pair of small ducks on the lake, as drawn so far",,,
 put a pair of small ducks on the lake — and that is the whole scene — the way the drawing looks so far,,,
-"add a pair of small ducks on the lake, keeping everything else where it is",,,
+"add a pair of small ducks on the lake, keeping everything else where it is","@c1 syntax.clause form=imperative verb=""add"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""pair""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""small"" head=""ducks""
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""lake""
+@c2 syntax.clause form=nonfinite verb=""keeping"" complement=$n4
+@n4 syntax.nominal head=""everything"" dependent=""else""
+@c3 syntax.clause form=declarative modifier=""where"" verb=""is"" subject=$n5
+@n5 syntax.nominal head=""it""
+@r3 syntax.relation from=$c1 to=$c2
+@r4 syntax.relation from=$n4 to=$c3",prolog,judge
 i want a pair of small ducks on the lake — exactly where the picture needs it — so the scene reads the way it should,,,
 "i need a pair of small ducks on the lake, just like that",,,
 can you place a pair of small ducks on the lake — right there in the picture — that is how the picture goes,,,
@@ -1063,14 +1074,31 @@ also i want a small boat on the lake and make sure it faces left — right there
 "once that is in, can you draw a small boat on the lake and make it face left, and a big bench down at the bottom",,,
 "for the next step, let there be a small boat on the lake and let it face left, and a small cat on the left",,,
 "a tiny bird up near the top, then now draw a small boat on the lake and get it to face left",,,
-"next put a small boat on the lake, facing left",,,
+"next put a small boat on the lake, facing left","@c1 syntax.clause form=imperative modifier=""next"" verb=""put"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""small"" head=""boat""
+@r1 syntax.relation marker=""on"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""lake""
+@c2 syntax.clause form=nonfinite verb=""facing"" modifier=""left""
+@r2 syntax.relation from=$n1 to=$c2",distilbert+vss,judge
 "add a boat on the lake, turn it left",,,
 "boat on the lake next, facing left",,,
 "hey — next put a small boat on the lake, then set it facing left",,,
 "finally i need a small boat on the lake, then facing left, thanks",,,
 now darw a small boat on the lake and get it to face left,,,
 now draw a smal boat on the lake and get it to face left,,,
-now draw a small dog in front of the house and set it facing right — right there in the picture,,,
+now draw a small dog in front of the house and set it facing right — right there in the picture,"@c1 syntax.clause form=imperative discourse=""now"" verb=""draw"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""small"" head=""dog""
+@r1 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n2
+@n2 syntax.nominal head=""front""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""house""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""set"" complement=$n4
+@n4 syntax.nominal head=""it""
+@c3 syntax.clause form=nonfinite verb=""facing"" modifier=""right"" modifier=""right"" modifier=""there""
+@r3 syntax.relation marker=""in"" from=$c3 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""picture""
+@r4 syntax.relation from=$c2 to=$c3",spacy,judge
 "next put a small dog in front of the house, then point it right",,,
 then add a small dog in front of the house and make it look right — just like that in the scene,,,
 "after that, place a small dog in front of the house, then make sure it faces right",,,
@@ -1145,7 +1173,12 @@ also i want a small cat on the bench and have it face left — and that is the w
 "then add a small cat on the bench and make it face left, and a small cat on the left",,,
 "a tiny bird up near the top, then also i want a small cat on the bench and have it face left",,,
 now draw a small cat on the bench; make it face left,,,
-"next put a small cat on the bench, facing left",,,
+"next put a small cat on the bench, facing left","@c1 syntax.clause form=imperative modifier=""next"" verb=""put"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""small"" head=""cat""
+@r1 syntax.relation marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""bench""
+@c2 syntax.clause form=nonfinite verb=""facing"" modifier=""left""
+@r2 syntax.relation from=$n1 to=$c2",distilbert+vss,judge
 "add a cat on the bench, turn it left",,,
 "cat on the bench next, facing left",,,
 "finally i need a small cat on the bench, then turn it left, thanks",,,
@@ -1187,7 +1220,12 @@ also i want a big cloud beside the sun and let it face left — with everything 
 now draw a big cloud beside the sun; make it face left,,,
 "next put a big cloud beside the sun, facing left",,,
 "add a cloud beside the sun, turn it left",,,
-"cloud beside the sun next, facing left",,,
+"cloud beside the sun next, facing left","@n1 syntax.nominal head=""cloud""
+@r1 syntax.relation marker=""beside"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""sun""
+@c1 syntax.clause form=fragment modifier=""next"" complement=$n1
+@c2 syntax.clause form=nonfinite verb=""facing"" modifier=""left""
+@r2 syntax.relation from=$c1 to=$c2",distilbert+vss,judge
 "hey — next put a big cloud beside the sun, then turn it to face left",,,
 "finally i need a big cloud beside the sun, then keep it facing left, thanks",,,
 now darw a big cloud beside the sun and make it face left,,,
@@ -1327,7 +1365,25 @@ now draw a bigg cloud beside the sun and make it face left,,,
 "i want a medium brown shed on the left-hand side, a small kid facing left running on the right, a medium white goat next to the shed, and a large grey boulder just behind the shed",,,
 "can you draw a medium brown shed on the left, a small kid facing left running over on the right side, just behind the shed, a large grey boulder, and just next to the shed, a medium white goat",,,
 "could you put a small kid facing left running over on the right side, a medium brown shed toward the left edge, a medium white goat just next to the shed, and a large grey boulder behind the shed",,,
-"give me a small kid facing left running toward the right edge, a medium brown shed in the left part, a large grey boulder behind it, and a medium white goat right next to the shed",,,
+"give me a small kid facing left running toward the right edge, a medium brown shed in the left part, a large grey boulder behind it, and a medium white goat right next to the shed","@n1 syntax.nominal head=""me""
+@n2 syntax.nominal dependent=""a"" dependent=""small"" head=""kid""
+@c2 syntax.clause form=nonfinite verb=""facing"" modifier=""left""
+@c3 syntax.clause form=nonfinite verb=""running""
+@r1 syntax.relation marker=""toward"" from=$c3 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""right"" head=""edge""
+@c1 syntax.clause form=imperative verb=""give"" modifier=""right"" complement=$n1 complement=$k1
+@n4 syntax.nominal dependent=""a"" dependent=""medium"" dependent=""brown"" head=""shed""
+@r2 syntax.relation marker=""in"" from=$n4 to=$n5
+@n5 syntax.nominal dependent=""the"" dependent=""left"" head=""part""
+@n6 syntax.nominal dependent=""a"" dependent=""large"" dependent=""grey"" head=""boulder""
+@r3 syntax.relation marker=""behind"" from=$n6 to=$n7
+@n7 syntax.nominal head=""it""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n4 conjunct=$n6 conjunct=$n8
+@n8 syntax.nominal dependent=""a"" dependent=""medium"" dependent=""white"" head=""goat""
+@r4 syntax.relation marker=""next to"" from=$n8 to=$n9
+@n9 syntax.nominal dependent=""the"" head=""shed""
+@r5 syntax.relation from=$n2 to=$c2
+@r6 syntax.relation from=$n2 to=$c3",spacy,judge
 "show me a medium brown shed in the left part, next to the shed, a medium white goat, just behind the shed, a large grey boulder, and a small kid facing left running over on the right side",,,
 "a farm with a medium brown shed on the left-hand side, a medium white goat right next to the shed, a small kid facing left running over on the right side, and a large grey boulder behind the shed",,,
 "on the farm, a medium brown shed on the left, a large grey boulder right behind the shed, a medium white goat next to the shed, and a small kid facing left running in the right part",,,
@@ -1578,7 +1634,22 @@ now draw a bigg cloud beside the sun and make it face left,,,
 "could you put a large white lighthouse over on the right side, a medium red boat right next to the lighthouse, a medium sailor facing right standing right on the boat, and two small white gulls above the boat, thanks",,,
 "draw a large red umbrella on the left, a medium yellow sandcastle right next to the umbrella, a small girl kneeling just next to the sandcastle, and a small yellow hat on the girl",,,
 "put a large red umbrella over on the left side, a medium yellow sandcastle just next to the umbrella, a small girl kneeling next to the sandcastle, and a small yellow hat on the girl together",,,
-"add a large red umbrella toward the left edge, next to the umbrella, a medium yellow sandcastle, a small girl kneeling right next to the sandcastle, and a small yellow hat on the girl",,,
+"add a large red umbrella toward the left edge, next to the umbrella, a medium yellow sandcastle, a small girl kneeling right next to the sandcastle, and a small yellow hat on the girl","@c1 syntax.clause form=imperative verb=""add"" complement=$k1
+@n1 syntax.nominal dependent=""a"" dependent=""large"" dependent=""red"" head=""umbrella""
+@r1 syntax.relation marker=""toward"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""left"" head=""edge""
+@r2 syntax.relation marker=""next to"" from=$n1 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""umbrella""
+@n4 syntax.nominal dependent=""a"" dependent=""medium"" dependent=""yellow"" head=""sandcastle""
+@n5 syntax.nominal dependent=""a"" dependent=""small"" head=""girl""
+@c2 syntax.clause form=nonfinite verb=""kneeling"" modifier=""right""
+@r3 syntax.relation marker=""next to"" from=$c2 to=$n6
+@n6 syntax.nominal dependent=""the"" head=""sandcastle""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n1 conjunct=$n4 conjunct=$n5 conjunct=$n7
+@n7 syntax.nominal dependent=""a"" dependent=""small"" dependent=""yellow"" head=""hat""
+@r4 syntax.relation marker=""on"" from=$n7 to=$n8
+@n8 syntax.nominal dependent=""the"" head=""girl""
+@r5 syntax.relation from=$n5 to=$c2",distilbert+vss,judge
 "place a large red umbrella in the left part, a medium yellow sandcastle right next to it, a small girl kneeling just next to it, and a small yellow hat on the girl",,,
 "i want a large red umbrella on the left-hand side, a medium yellow sandcastle just next to the umbrella, a small girl kneeling next to the sandcastle, and a small yellow hat on the girl",,,
 "can you draw a large red umbrella on the left, next to the umbrella, a medium yellow sandcastle, a small girl kneeling right next to the sandcastle, and a small yellow hat on the girl","@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""draw"" subject=$n1 complement=$k1

@@ -23,7 +23,17 @@ the width of the product photo should be 6 inches and its height 4 inches and ke
 "I'd like the product photo 6 inches wide and 4 inches tall, and keep the gap even",,,
 "set the width of the product photo to 6 inches and the height to 4 inches, and keep the rest of the page as it is",,,
 "when you get a moment, make the product photo 6 inches wide and 4 inches tall and make sure the slide is easy to read for everyone",,,
-"I want the product photo at 6 inches wide and 4 inches high, and give it a thin outline",,,
+"I want the product photo at 6 inches wide and 4 inches high, and give it a thin outline","@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""want"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""product"" head=""photo""
+@r1 syntax.relation attachment=ambiguous marker=""at"" from=$c1 to=$k1
+@n3 syntax.nominal dependent=""6"" head=""inches"" dependent=""wide""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n3 conjunct=$n4
+@n4 syntax.nominal dependent=""4"" head=""inches"" dependent=""high""
+@k2 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""give"" complement=$n5 complement=$n6
+@n5 syntax.nominal head=""it""
+@n6 syntax.nominal dependent=""a"" dependent=""thin"" head=""outline""",prolog+z3,judge
 just the product photo 6 inches by 4 inches,,,
 "the product photo 6 inches by 4 inches, that's all",,,
 set the iwdth of the product photo to 6 inches and the height to 4 inches,,,
@@ -921,7 +931,14 @@ just put the role name in each lane header,"@c1 syntax.clause form=imperative mo
 @r1 syntax.relation marker=""in"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""each"" dependent=""lane"" head=""header""",spacy-direct+vss,agreement
 put the role name in each lane header only,,,
-"put the role name in each lane header, that's all",,,
+"put the role name in each lane header, that's all","@c1 syntax.clause form=imperative verb=""put"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""role"" head=""name""
+@r1 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""each"" dependent=""lane"" head=""header""
+@n3 syntax.nominal head=""that""
+@c2 syntax.clause form=declarative verb=""'s"" subject=$n3 complement=$n4
+@n4 syntax.nominal head=""all""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2",prolog+spacy,judge
 "i need you to start by putting the role name in each lane header; after that keep the header text short, so the figure still fits on a slide",,,
 "for the process diagram, label each lane header with the role name, then keep the header text short, with enough room around each label","@r1 syntax.relation marker=""for"" from=$c1 to=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""process"" head=""diagram""
@@ -1053,7 +1070,15 @@ please turn the straight link into a right angle path with a rounded bend,"@c1 s
 @n3 syntax.nominal dependent=""a"" dependent=""rounded"" head=""bend""",spacy-direct+vss,agreement
 just make it right angle with rounded corners,,,
 right angles with rounded corners,,,
-"route the link at a right angle and keep the corner rounded, not sharp",,,
+"route the link at a right angle and keep the corner rounded, not sharp","@c1 syntax.clause form=imperative verb=""route"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""link""
+@r1 syntax.relation attachment=ambiguous marker=""at"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""right"" head=""angle""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2 conjunct=$c3
+@c2 syntax.clause form=imperative verb=""keep"" modifier=""rounded"" complement=$n3
+@n3 syntax.nominal dependent=""the"" head=""corner""
+@c3 syntax.clause form=fragment negation=""not"" complement=$n4 ellipsis=$c2
+@n4 syntax.nominal head=""sharp""",prolog,judge
 "send the connector across and then down at a right angle, with the corner rounded so it looks like a bent pipe",,,
 "the link should leave the first box, run horizontally, turn at a right angle and continue down, with that corner rounded off",,,
 route the arrow with right angels and rounded corners,"@c1 syntax.clause form=imperative verb=""route"" complement=$n1
@@ -1155,7 +1180,12 @@ let's set flow along the curve of the link,,,
 @r1 syntax.relation marker=""along"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""curve""
 @c1 syntax.clause form=fragment complement=$n1",spacy-direct+vss,agreement
-please to place flow along the curve,,,
+please to place flow along the curve,"@c1 syntax.clause form=fragment discourse=""please""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""place"" complement=$n1
+@n1 syntax.nominal head=""flow""
+@r2 syntax.relation attachment=ambiguous marker=""along"" from=$c2 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""curve""",prolog+z3,judge
 "what I want is flow written along the curve, not across it",,,
 make sure flow follows the bend all the way,,,
 would it be possible to have flow follow the curve?,,,
@@ -1453,8 +1483,18 @@ could the message arrows be filled at the head?,"@c1 syntax.clause form=interrog
 @r1 syntax.relation marker=""at"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""head""",spacy-direct+vss,agreement
 "the usual message arrows, filled at the head",,,
-"message arrows only, filled at the head",,,
-"message arrows, filled at the head",,,
+"message arrows only, filled at the head","@n1 syntax.nominal dependent=""message"" head=""arrows""
+@c1 syntax.clause form=fragment modifier=""only"" complement=$n1
+@c2 syntax.clause form=nonfinite verb=""filled""
+@r1 syntax.relation marker=""at"" from=$c2 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""head""
+@r2 syntax.relation from=$n1 to=$c2",distilbert+spacy,judge
+"message arrows, filled at the head","@n1 syntax.nominal dependent=""message"" head=""arrows""
+@c1 syntax.clause form=nonfinite verb=""filled"" complement=$n1
+@r1 syntax.relation marker=""at"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""head""
+@c2 syntax.clause form=fragment complement=$n1
+@r2 syntax.relation from=$n1 to=$c1",distilbert,judge
 "start with the message arrows filled at the head, then make the return arrows dashed, and keep the whole diagram readable on one page",,,
 "here is the plan: the message arrows filled at the head, plus make the return arrows dashed, so it still fits on a single slide without crowding",,,
 "please make sure you make the message arrows filled at the head; after that make the return arrows dashed, without overlaps, with every label clear",,,
@@ -1697,7 +1737,8 @@ the connectors must be dashed,"@n1 syntax.nominal dependent=""the"" head=""conne
 could the connectors be dashed?,"@c1 syntax.clause form=interrogative auxiliary=""could"" auxiliary=""be"" verb=""dashed"" subject=$n1
 @n1 syntax.nominal dependent=""the"" head=""connectors""",spacy-direct+vss,agreement
 "the usual connectors, dashed",,,
-"connectors only, dashed",,,
+"connectors only, dashed","@n1 syntax.nominal head=""connectors""
+@c1 syntax.clause form=fragment modifier=""only"" modifier=""dashed"" complement=$n1",distilbert+prolog+vss+z3,judge
 "connectors, dashed","@n1 syntax.nominal head=""connectors""
 @c1 syntax.clause form=fragment modifier=""dashed"" complement=$n1",spacy-direct+vss,agreement
 "start with the connectors dashed, then add an arrowhead in the middle, and keep the whole diagram readable on one page",,,
@@ -1884,7 +1925,9 @@ please keep the transition arrows labelled a for the talk,"@c1 syntax.clause for
 @n2 syntax.nominal dependent=""the"" head=""talk""
 @r2 syntax.relation from=$n1 to=$c2",spacy-direct+vss,agreement
 the transition arrows must be labelled a,,,
-could the transition arrows be labelled a?,,,
+could the transition arrows be labelled a?,"@c1 syntax.clause form=interrogative auxiliary=""could"" auxiliary=""be"" verb=""labelled"" subject=$n1 complement=$n2
+@n1 syntax.nominal dependent=""the"" dependent=""transition"" head=""arrows""
+@n2 syntax.nominal head=""a""",distilbert+spacy,judge
 "the usual transition arrows, labelled a",,,
 "transition arrows only, labelled a",,,
 "transition arrows, labelled a",,,
@@ -2182,7 +2225,10 @@ I need a rectangle around the two middle nodes,"@n1 syntax.nominal head=""I""
 @n2 syntax.nominal dependent=""a"" head=""rectangle""
 @r1 syntax.relation marker=""around"" from=$n2 to=$n3
 @n3 syntax.nominal dependent=""the"" dependent=""two"" dependent=""middle"" head=""nodes""",spacy-direct+vss,agreement
-"rectangle around the Alpha branch, please",,,
+"rectangle around the Alpha branch, please","@n1 syntax.nominal head=""rectangle""
+@r1 syntax.relation marker=""around"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""Alpha"" head=""branch""
+@c1 syntax.clause form=fragment discourse=""please"" complement=$n1",distilbert+vss+z3,judge
 box the Alpha subtree,,,
 please to draw a rectangle around the Left subtree,,,
 what I want is one rectangle enclosing the whole Alpha subtree,,,

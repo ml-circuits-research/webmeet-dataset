@@ -211,7 +211,11 @@ the return leg was missing: loop it back in,,,
 "ring the boxes round, keeping the forward arrows crisp",,,
 "loop the flow shut, then tilt the Paid? diamond for a badge look",,,
 "the full circle needs every node in — Sift included, whatever it takes",,,
-the flow wants its return journey sorted,,,
+the flow wants its return journey sorted,"@n1 syntax.nominal dependent=""the"" head=""flow""
+@c1 syntax.clause form=declarative verb=""wants"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""its"" dependent=""return"" head=""journey""
+@c2 syntax.clause form=nonfinite verb=""sorted""
+@r1 syntax.relation from=$n2 to=$c2",distilbert+vss+z3,judge
 "close it up at the back, whatever closes it",,,
 make the flow come back round somehow,,,
 close the cycel: last box back to the first,,,
@@ -1309,7 +1313,11 @@ paint all the boxes teal,"@c1 syntax.clause form=imperative verb=""paint"" modif
 @n1 syntax.nominal dependent=""all"" dependent=""the"" head=""boxes""",spacy-direct+vss,agreement
 give teal to each node in the flow,,,
 can you tint all the boxes amber in one go?,,,
-"hey, can you tint all the boxes amber in one go?",,,
+"hey, can you tint all the boxes amber in one go?","@c1 syntax.clause form=interrogative discourse=""hey"" auxiliary=""can"" verb=""tint"" modifier=""amber"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""all"" dependent=""the"" head=""boxes""
+@r1 syntax.relation marker=""in"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""one"" head=""go""",distilbert,judge
 let's colour the whole set of diamonds teal,,,
 the boxes all want to be amber,,,
 one sweep: teal ink over every node,"@n1 syntax.nominal dependent=""one"" head=""sweep""
@@ -1513,7 +1521,25 @@ rotate all the boxes 15 degrres,,,
 @n6 syntax.nominal head=""olive""",spacy-direct+vss,agreement
 "go fancy: the first of the trio gets plum, the second amber and the third navy",,,
 "the first three boxes take teal on the first, coral on the second and olive on the third, with maroon outlines all round",,,
-"box one plum and bold, box two amber, and box three navy italic",,,
+"box one plum and bold, box two amber, and box three navy italic","@n1 syntax.nominal head=""box""
+@n2 syntax.nominal head=""one""
+@n3 syntax.nominal head=""plum""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n3 conjunct=$n4
+@n4 syntax.nominal head=""bold""
+@n5 syntax.nominal head=""box""
+@n6 syntax.nominal head=""two""
+@n7 syntax.nominal head=""amber""
+@k2 syntax.coordination conjunction=""and"" conjunct=$n1 conjunct=$n5 conjunct=$n8
+@n8 syntax.nominal head=""box""
+@n9 syntax.nominal head=""three""
+@n10 syntax.nominal dependent=""navy"" head=""italic""
+@r1 syntax.relation from=$n1 to=$n2
+@r2 syntax.relation from=$n1 to=$k1
+@r3 syntax.relation from=$n5 to=$n6
+@r4 syntax.relation from=$n5 to=$n7
+@c1 syntax.clause form=fragment complement=$k2
+@r5 syntax.relation from=$n8 to=$n9
+@r6 syntax.relation from=$n8 to=$n10",spacy,judge
 "blend the opening trio: the first box teal, the second box coral and the third box olive",,,
 "the first gets plum, the second amber and the third navy, same order as the flow",,,
 "the trio goes: the first teal, the next coral, the last olive",,,
@@ -1737,7 +1763,12 @@ the Load box wants to be a circel,"@n1 syntax.nominal dependent=""the"" dependen
 @r1 syntax.relation marker=""to"" from=$c1 to=$c2
 @c2 syntax.clause form=nonfinite verb=""be"" complement=$n2
 @n2 syntax.nominal dependent=""a"" head=""circel""",spacy-direct+vss,agreement
-"the table belongs elsewhere, down where the text runs out",,,
+"the table belongs elsewhere, down where the text runs out","@n1 syntax.nominal dependent=""the"" head=""table""
+@c1 syntax.clause form=declarative verb=""belongs"" subject=$n1 complement=$n2
+@n2 syntax.nominal head=""elsewhere""
+@r1 syntax.relation attachment=ambiguous marker=""down"" from=$c1 to=$c2
+@c2 syntax.clause form=declarative modifier=""where"" verb=""runs"" modifier=""out"" subject=$n3
+@n3 syntax.nominal dependent=""the"" head=""text""",prolog,judge
 put the table somewhere less in the way,"@c1 syntax.clause form=imperative verb=""put"" modifier=""somewhere"" modifier=""less"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""table""
 @r1 syntax.relation marker=""in"" from=$c1 to=$n2
@@ -2011,7 +2042,17 @@ I'd have the picture at 9 tall and call this page Notes from the Lane Crew,,,
 "right, the picture goes to 10 in height, the page to Relevant Information from the Ward in name",,,
 "how about height 9 on the picture, and a page title of Notes from the Lane Crew?, please",,,
 "the screen picture climbs to 10; meanwhile the page is Relevant Information from the Ward, its title",,,
-"stretch that picture to 9, and christen the page Notes from the Lane Crew",,,
+"stretch that picture to 9, and christen the page Notes from the Lane Crew","@c1 syntax.clause form=imperative verb=""stretch"" complement=$n1
+@n1 syntax.nominal dependent=""that"" head=""picture""
+@r1 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n2
+@n2 syntax.nominal head=""9""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""christen"" complement=$n3
+@n3 syntax.nominal dependent=""the"" head=""page""
+@n4 syntax.nominal head=""Notes""
+@r2 syntax.relation attachment=ambiguous marker=""from"" from=$c2 to=$n5
+@n5 syntax.nominal dependent=""the"" dependent=""Lane"" head=""Crew""
+@r3 syntax.relation from=$n3 to=$n4",prolog,judge
 "a 10-high picture and a page called Relevant Information from the Ward — both, please",,,
 "the picture height goes to 10 sharp, and the page title settles at Relevant Information from the Ward so both read clean",,,
 "put 9 of height under the picture, then the title Notes from the Lane Crew over the page, and check the pair",,,

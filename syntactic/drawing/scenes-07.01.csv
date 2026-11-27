@@ -238,7 +238,15 @@ have the huge bear behind the tree face right — exactly where the picture need
 keep the huge bear behind the tree facing right — right there in the picture — that is how the picture goes,,,
 let the huge bear behind the tree face right — just like that in the scene — keeping the rest of the scene as it is,,,
 "get the huge bear behind the tree facing right, keeping everything else where it is",,,
-"i want the huge bear behind the tree facing right, as drawn so far",,,
+"i want the huge bear behind the tree facing right, as drawn so far","@n1 syntax.nominal head=""i""
+@c1 syntax.clause form=declarative verb=""want"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""huge"" head=""bear""
+@r1 syntax.relation marker=""behind"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""tree""
+@c2 syntax.clause form=nonfinite verb=""facing"" modifier=""right""
+@r2 syntax.relation marker=""as"" from=$c1 to=$c3
+@c3 syntax.clause form=nonfinite verb=""drawn"" modifier=""so"" modifier=""far""
+@r3 syntax.relation from=$n2 to=$c2",distilbert+vss,judge
 the huge bear behind the tree needs to face right — and that is the whole scene — the way the drawing looks so far,,,
 "the huge bear behind the tree, facing right, keeping everything else where it is",,,
 "i want the huge bear behind the tree facing right, and a tiny bird up near the top — exactly where the picture needs it",,,
@@ -292,7 +300,10 @@ face the big cat beside the fence to the left — just like that in the scene �
 the big cat beside the fence needs to face left — with everything else left where it is — over on our little canvas,,,
 "the big cat beside the fence, facing left, and a little cloud over on the right — and that is the whole scene",,,
 face the big cat left,,,
-the big cat: face left,,,
+the big cat: face left,"@n1 syntax.nominal dependent=""the"" dependent=""big"" head=""cat""
+@n2 syntax.nominal head=""face"" dependent=""left""
+@c1 syntax.clause form=fragment complement=$n1
+@r1 syntax.relation from=$n1 to=$n2",distilbert,judge
 turn the cat left,"@c1 syntax.clause form=imperative verb=""turn"" modifier=""left"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""cat""",spacy-direct+vss,agreement
 left: the big cat,,,
@@ -1120,7 +1131,22 @@ let the tall boy in the red hat face left — with everything else left where it
 @r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""the"" head=""canvas""
 @r3 syntax.relation from=$n1 to=$c2",spacy-direct+vss,agreement
-face the tall boy in the red hat to the left — and that is the whole scene — the way the drawing looks so far,,,
+face the tall boy in the red hat to the left — and that is the whole scene — the way the drawing looks so far,"@c1 syntax.clause form=imperative verb=""face"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""tall"" head=""boy""
+@r1 syntax.relation marker=""in"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""red"" head=""hat""
+@r2 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""left""
+@c2 syntax.clause form=declarative discourse=""and"" verb=""is"" subject=$n4 complement=$n5
+@n4 syntax.nominal head=""that""
+@n5 syntax.nominal dependent=""the"" dependent=""whole"" head=""scene""
+@n6 syntax.nominal dependent=""the"" head=""way""
+@n7 syntax.nominal dependent=""the"" head=""drawing""
+@c3 syntax.clause form=declarative verb=""looks"" modifier=""so"" modifier=""far"" subject=$n7
+@k1 syntax.coordination conjunct=$c1 conjunct=$c4
+@r3 syntax.relation from=$n6 to=$c2
+@c4 syntax.clause form=fragment complement=$n6
+@r4 syntax.relation from=$n6 to=$c3",spacy,judge
 "the tall boy in the red hat, facing left, over on the other side of the canvas",,,
 "turn the tall boy in the red hat to face left, and a small cat on the left — exactly where the picture needs it",,,
 "keep the tall boy in the red hat facing left, and a big bench at the bottom — right there in the picture",,,
@@ -1557,7 +1583,20 @@ wrong: the house on the left is white,"@c1 syntax.clause form=declarative discou
 @n2 syntax.nominal dependent=""the"" head=""left""",spacy-direct+vss,agreement
 change the house on the left to white — exactly where the picture needs it — so the scene reads the way it should,,,
 "the house on the left is white, not yellow, remember?",,,
-correct that — the house on the left is white — right there in the picture — that is how the picture goes,,,
+correct that — the house on the left is white — right there in the picture — that is how the picture goes,"@c1 syntax.clause form=imperative verb=""correct"" complement=$n1
+@n1 syntax.nominal head=""that""
+@n2 syntax.nominal dependent=""the"" head=""house""
+@r1 syntax.relation marker=""on"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""left""
+@c2 syntax.clause form=declarative verb=""is"" modifier=""white"" modifier=""right"" modifier=""there"" subject=$n2
+@r2 syntax.relation marker=""in"" from=$c2 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""picture""
+@n5 syntax.nominal head=""that""
+@c3 syntax.clause form=declarative verb=""is"" subject=$n5
+@c4 syntax.clause form=declarative modifier=""how"" verb=""goes"" subject=$n6
+@n6 syntax.nominal dependent=""the"" head=""picture""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2 conjunct=$c3
+@r3 syntax.relation from=$c3 to=$c4",spacy,judge
 not yellow: the house on the left is white,,,
 "wrong: the house on the left is white, and a little cloud on the right — just like that in the scene",,,
 "not yellow: the house on the left is white, and a tiny bird at the top — with everything else left where it is",,,
@@ -1659,7 +1698,25 @@ wrong: the cloud in the sky is small,"@c1 syntax.clause form=declarative discour
 @r1 syntax.relation marker=""in"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""sky""",spacy-direct+vss,agreement
 change the cloud in the sky to small — right there in the picture — that is how the picture goes,,,
-correct that — the cloud in the sky is small — just like that in the scene — keeping the rest of the scene as it is,,,
+correct that — the cloud in the sky is small — just like that in the scene — keeping the rest of the scene as it is,"@c1 syntax.clause form=imperative verb=""correct"" complement=$n1
+@n1 syntax.nominal head=""that""
+@n2 syntax.nominal dependent=""the"" head=""cloud""
+@r1 syntax.relation marker=""in"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""sky""
+@c2 syntax.clause form=declarative verb=""is"" modifier=""small"" modifier=""just"" subject=$n2
+@r2 syntax.relation marker=""like"" from=$c2 to=$n4
+@n4 syntax.nominal head=""that""
+@r3 syntax.relation marker=""in"" from=$n4 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""scene""
+@c3 syntax.clause form=nonfinite verb=""keeping"" complement=$n6
+@n6 syntax.nominal dependent=""the"" head=""rest""
+@r4 syntax.relation marker=""of"" from=$n6 to=$n7
+@n7 syntax.nominal dependent=""the"" head=""scene""
+@r5 syntax.relation marker=""as"" from=$c3 to=$c4
+@n8 syntax.nominal head=""it""
+@c4 syntax.clause form=declarative verb=""is"" subject=$n8
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2
+@r6 syntax.relation from=$c2 to=$c3",spacy,judge
 not big: the cloud in the sky is small,,,
 "correct that — the cloud in the sky is small, and a big bench at the bottom — with everything else left where it is",,,
 "i meant small, not big, for the cloud in the sky, and a small cat on the left — and that is the whole scene",,,
@@ -1676,7 +1733,14 @@ the cloud in the sky — small,"@n1 syntax.nominal dependent=""the"" head=""clou
 @r1 syntax.relation marker=""in"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""sky""",spacy-direct+vss,agreement
 "no — the clodu in the sky is small, not big",,,
-"o — the cloud in the sky is small, not big",,,
+"o — the cloud in the sky is small, not big","@n1 syntax.nominal head=""o""
+@n2 syntax.nominal dependent=""the"" head=""cloud""
+@r1 syntax.relation marker=""in"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""sky""
+@c1 syntax.clause form=declarative verb=""is"" modifier=""small"" subject=$n2
+@c2 syntax.clause form=fragment negation=""not"" modifier=""big"" ellipsis=$c1
+@c3 syntax.clause form=fragment complement=$n1
+@k1 syntax.coordination conjunct=$c3 conjunct=$c1 conjunct=$c2",prolog,judge
 "no — the kid by the tent is right, not left — and that is the whole scene — the way the drawing looks so far",,,
 "make the kid by the tent right, not left, just the way the drawing looks",,,
 "sorry, the kid by the tent is right","@c1 syntax.clause form=declarative discourse=""sorry"" verb=""is"" modifier=""right"" subject=$n1
@@ -1727,12 +1791,12 @@ the duck on the lake — left,,,
 move the man with the yellow hat one space to the right,,,
 shift the woman with the yellow hat to the right by one spot,"@c1 syntax.clause form=imperative verb=""shift"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""woman""
-@r1 syntax.relation marker=""with"" from=$n1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""yellow"" head=""hat""
-@r2 syntax.relation marker=""to"" from=$c1 to=$n3
+@r2 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""the"" head=""right""
-@r3 syntax.relation marker=""by"" from=$c1 to=$n4
-@n4 syntax.nominal dependent=""one"" head=""spot""",spacy-direct+vss,agreement
+@r3 syntax.relation attachment=ambiguous marker=""by"" from=$c1 to=$n4
+@n4 syntax.nominal dependent=""one"" head=""spot""",prolog+z3,judge
 slide the girl with the yellow hat one step over to the right,,,
 nudge the man with the yellow hat one space to the right,,,
 "actually, push the woman with the yellow hat to the right by one spot","@c1 syntax.clause form=imperative modifier=""actually"" verb=""push"" complement=$n1
@@ -1883,7 +1947,17 @@ shift the woman who is now wearing the green hat right beside the hatless woman 
 slide the boy who is now wearing the green hat to the right of the hatless boy in the yellow shirt,,,
 nudge the man who is now wearing the green hat just to the right of the hatless man in the yellow shirt,,,
 "actually, push the woman who is now wearing the green hat right beside the hatless woman in the yellow dress",,,
-scoot the boy who is now wearing the green hat to the right of the hatless boy in the yellow shirt,,,
+scoot the boy who is now wearing the green hat to the right of the hatless boy in the yellow shirt,"@c1 syntax.clause form=imperative verb=""scoot"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""boy""
+@r1 syntax.relation marker=""who"" from=$n1 to=$c2
+@c2 syntax.clause form=declarative auxiliary=""is"" modifier=""now"" verb=""wearing"" complement=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""green"" head=""hat""
+@r2 syntax.relation attachment=ambiguous marker=""to"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""right""
+@r3 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""hatless"" head=""boy""
+@r4 syntax.relation marker=""in"" from=$n4 to=$n5
+@n5 syntax.nominal dependent=""the"" dependent=""yellow"" head=""shirt""",spacy,judge
 bring the man who is now wearing the green hat just to the right of the hatless man in the yellow shirt,,,
 send the woman who is now wearing the green hat right beside the hatless woman in the yellow dress,,,
 take the boy who is now wearing the green hat and move it to the right of the hatless boy in the yellow shirt,,,

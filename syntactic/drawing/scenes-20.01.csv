@@ -3,11 +3,11 @@ now turn the sun a little,,,
 could you rotate that lamp clockwise so it looks like a poster,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""rotate"" modifier=""clockwise"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""that"" head=""lamp""
-@r1 syntax.relation marker=""so"" from=$c1 to=$c2
+@k1 syntax.coordination conjunction=""so"" conjunct=$c1 conjunct=$c2
 @n3 syntax.nominal head=""it""
 @c2 syntax.clause form=declarative verb=""looks"" subject=$n3
-@r2 syntax.relation marker=""like"" from=$c2 to=$n4
-@n4 syntax.nominal dependent=""a"" head=""poster""",spacy-direct+vss,agreement
+@r1 syntax.relation marker=""like"" from=$c2 to=$n4
+@n4 syntax.nominal dependent=""a"" head=""poster""",prolog+z3,judge
 spin a bit to the left,,,
 put the selected one all the way round,,,
 can you turn that arrow clockwise before I print it,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""turn"" modifier=""clockwise"" subject=$n1 complement=$n2
@@ -252,7 +252,12 @@ please mirror that star top to bottom,,,
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""our"" head=""fish""",spacy-direct+vss,agreement
 "it pointst he wrongwy, reverse yhe star left to rigght",,,
-our sun left to right for me,,,
+our sun left to right for me,"@n1 syntax.nominal dependent=""our"" head=""sun""
+@c1 syntax.clause form=fragment modifier=""left"" complement=$n1
+@r1 syntax.relation marker=""to"" from=$n1 to=$n2
+@n2 syntax.nominal head=""right""
+@r2 syntax.relation marker=""for"" from=$n1 to=$n3
+@n3 syntax.nominal head=""me""",distilbert+vss,judge
 "it points the wrong way, reverse thes election upside down",,,
 hey can you reverse this one,"@c1 syntax.clause form=interrogative discourse=""hey"" auxiliary=""can"" verb=""reverse"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
@@ -430,14 +435,18 @@ go ahead and lean that boy by 15,"@c1 syntax.clause form=imperative verb=""go"" 
 @r1 syntax.relation marker=""by"" from=$c2 to=$n2
 @n2 syntax.nominal head=""15""",spacy-direct+vss,agreement
 "to loo like it is in thrwibd, lean the dog 15 degrees",,,
-da selection skewed 45°,,,
+da selection skewed 45°,"@n1 syntax.nominal dependent=""da"" head=""selection""
+@c1 syntax.clause form=declarative verb=""skewed"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""45"" head=""°""",spacy+z3,judge
 "let's lean our house by 10, thanks",,,
 "I mean to look like it is in the wind, lean like this one 30 degrees",,,
 basically lean that kite like 30 degrees,,,
 "now slant this by 20, cheers",,,
 "to looklike it is in the wind, lean all the objects by 10",,,
 "to look like it is in th wind, lean taht arrow by 30",,,
-that flower skewed 20° please,,,
+that flower skewed 20° please,"@n1 syntax.nominal dependent=""that"" head=""flower""
+@c1 syntax.clause form=nonfinite verb=""skewed"" discourse=""please"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""20"" head=""°""",distilbert+spacy,judge
 "two look like it is in da wind, lean it 20 degrees",,,
 go ahead and lean that lamp 10°,,,
 "to look like it is in thew indd, lean our bird 20°",,,
@@ -452,8 +461,8 @@ set that flower fully opaque,,,
 that sign 70 percent,,,
 fade our house to 70 percent,"@c1 syntax.clause form=imperative verb=""fade"" complement=$n1
 @n1 syntax.nominal dependent=""our"" head=""house""
-@r1 syntax.relation marker=""to"" from=$c1 to=$n2
-@n2 syntax.nominal dependent=""70"" head=""percent""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""70"" head=""percent""",prolog+spacy+z3,judge
 "it hides what is behind, so turn our lamp fully opaque",,,
 the heart 30% opacity,,,
 let's make all the fishs see-through,,,
@@ -712,7 +721,13 @@ add a gradient fill to the text,"@c1 syntax.clause form=imperative verb=""add"" 
 @n2 syntax.nominal dependent=""the"" head=""text""",spacy-direct+vss,agreement
 "like a child drew it, switch Title polka dots",,,
 checkered our moon,,,
-"like a child drew it, turn all the flowers stripes",,,
+"like a child drew it, turn all the flowers stripes","@r1 syntax.relation marker=""like"" from=$c2 to=$c1
+@n1 syntax.nominal dependent=""a"" head=""child""
+@c1 syntax.clause form=declarative verb=""drew"" subject=$n1 complement=$n2
+@n2 syntax.nominal head=""it""
+@c2 syntax.clause form=imperative verb=""turn"" complement=$n3 complement=$n4
+@n3 syntax.nominal dependent=""all"" dependent=""the"" head=""flowers""
+@n4 syntax.nominal head=""stripes""",spacy,judge
 ombre please,"@c1 syntax.clause form=fragment modifier=""ombre"" discourse=""please""",spacy-direct+vss,agreement
 now set the inside of everything ombre,,,
 "like a child drew it, set that hollow",,,
@@ -873,7 +888,10 @@ right our boat like fading to orange,,,
 "that kite fading to teal, thank you",,,
 switch a boy fade into blue,,,
 "four a sunset look, set the house fade into yellow",,,
-it fadint to navy,,,
+it fadint to navy,"@n1 syntax.nominal head=""it""
+@c1 syntax.clause form=declarative verb=""fadint"" subject=$n1
+@r1 syntax.relation marker=""to"" from=$c1 to=$n2
+@n2 syntax.nominal head=""navy""",distilbert+vss,judge
 "four a sunset look, turn da selected one fade into black",,,
 please give a gradient too orange on that text,,,
 "for a sunst look, set our dog fadei nto pink",,,
@@ -1262,7 +1280,17 @@ switch tthe border of that 3 px,"@c1 syntax.clause form=imperative verb=""switch
 "a words says ""I love you""","@n1 syntax.nominal dependent=""a"" head=""words""
 @c1 syntax.clause form=declarative verb=""says"" subject=$n1 complement=$n2
 @n2 syntax.nominal head=""I love you""",spacy-direct+vss,agreement
-"let's change the text of title two ""Summer 2026""",,,
+"let's change the text of title two ""Summer 2026""","@c1 syntax.clause form=imperative verb=""let"" complement=$n1
+@n1 syntax.nominal head=""'s""
+@c2 syntax.clause form=nonfinite verb=""change"" complement=$n2
+@n2 syntax.nominal dependent=""the"" head=""text""
+@r1 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal head=""title""
+@n4 syntax.nominal head=""two""
+@n5 syntax.nominal head=""Summer 2026""
+@r2 syntax.relation from=$c1 to=$c2
+@r3 syntax.relation from=$n3 to=$n4
+@r4 syntax.relation from=$n4 to=$n5",prolog,judge
 "te date changd, so cange Title to ""Keep out""",,,
 "te sign sayys ""I love you""","@n1 syntax.nominal dependent=""te"" head=""sign""
 @c1 syntax.clause form=declarative verb=""sayys"" subject=$n1 complement=$n2
@@ -1598,7 +1626,9 @@ set the sign a thought bubble,"@c1 syntax.clause form=imperative verb=""set"" co
 @n1 syntax.nominal dependent=""the"" head=""sign""
 @n2 syntax.nominal dependent=""a"" dependent=""thought"" head=""bubble""",spacy-direct+vss,agreement
 "she is talking, so put the writing in a thought bubble",,,
-Sign in a signboard,,,
+Sign in a signboard,"@c1 syntax.clause form=imperative verb=""Sign""
+@r1 syntax.relation marker=""in"" from=$c1 to=$n1
+@n1 syntax.nominal dependent=""a"" head=""signboard""",distilbert+spacy,judge
 let's use a speech bubble around it,,,
 "she is talking, so put the sign in a thought bubble",,,
 in a sign,"@r1 syntax.relation marker=""in"" from=$c1 to=$n1
@@ -1702,7 +1732,13 @@ tilt the tree's trunk a quarter turn,"@c1 syntax.clause form=imperative verb=""t
 @n3 syntax.nominal dependent=""a"" dependent=""quarter"" head=""turn""",spacy-direct+vss,agreement
 the hat on the boy a little,,,
 can you tilt the mast of the boat a quarter turn,,,
-"it looks odd, spin the chimney on the house upright",,,
+"it looks odd, spin the chimney on the house upright","@n1 syntax.nominal head=""it""
+@c1 syntax.clause form=declarative verb=""looks"" modifier=""odd"" subject=$n1
+@c2 syntax.clause form=imperative verb=""spin"" modifier=""upright"" complement=$n2
+@n2 syntax.nominal dependent=""the"" head=""chimney""
+@r1 syntax.relation marker=""on"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""house""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2",spacy,judge
 can you spin the wheel of the car counterclockwise,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""spin"" modifier=""counterclockwise"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""the"" head=""wheel""
@@ -1737,7 +1773,10 @@ spin the tail on the dog to the righ,"@c1 syntax.clause form=imperative verb=""s
 @n2 syntax.nominal dependent=""the"" head=""dog""
 @r2 syntax.relation marker=""to"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""the"" head=""righ""",spacy-direct+vss,agreement
-hmm ok turn um the trunk on the tree upright,,,
+hmm ok turn um the trunk on the tree upright,"@c1 syntax.clause form=imperative discourse=""hmm"" discourse=""ok"" verb=""turn"" discourse=""um"" modifier=""upright"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""trunk""
+@r1 syntax.relation marker=""on"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""tree""",distilbert+spacy,judge
 "it looks odd, turn the roof on the house the right way up pls",,,
 turn a sun's face a quarter turn,,,
 "it lookks odd, turn the window on thee car clockwise",,,

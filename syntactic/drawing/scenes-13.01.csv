@@ -401,8 +401,8 @@ swing the flag a half turn anticlockwise,,,
 turn the boat right until the sail crosses the sun,,,
 turn the wheel to the left,"@c1 syntax.clause form=imperative verb=""turn"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""wheel""
-@r1 syntax.relation marker=""to"" from=$c1 to=$n2
-@n2 syntax.nominal dependent=""the"" head=""left""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""left""",prolog+spacy+z3,judge
 do the same for the banner,"@c1 syntax.clause form=imperative verb=""do"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""same""
 @r1 syntax.relation marker=""for"" from=$n1 to=$n2
@@ -494,7 +494,23 @@ set the clock back to zero degrees and take the glow off the face,"@c1 syntax.cl
 @n4 syntax.nominal dependent=""the"" head=""face""",spacy-direct+vss,agreement
 turn the ladder upright and move it a little to the left,,,
 that one as well,,,
-"set the picture straight again and remove the shadow it casts on the wall, then leave the clock at the angle it already has",,,
+"set the picture straight again and remove the shadow it casts on the wall, then leave the clock at the angle it already has","@c1 syntax.clause form=imperative verb=""set"" modifier=""straight"" modifier=""again"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""picture""
+@k1 syntax.coordination conjunction=""and"" conjunction=""then"" conjunct=$c1 conjunct=$c2 conjunct=$c4
+@c2 syntax.clause form=imperative verb=""remove"" complement=$n2
+@n2 syntax.nominal dependent=""the"" head=""shadow""
+@n3 syntax.nominal head=""it""
+@c3 syntax.clause form=declarative verb=""casts"" subject=$n3
+@r1 syntax.relation marker=""on"" from=$c3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""wall""
+@c4 syntax.clause form=imperative verb=""leave"" complement=$n5
+@n5 syntax.nominal dependent=""the"" head=""clock""
+@r2 syntax.relation attachment=ambiguous marker=""at"" from=$c4 to=$n6
+@n6 syntax.nominal dependent=""the"" head=""angle""
+@n7 syntax.nominal head=""it""
+@c5 syntax.clause form=declarative modifier=""already"" verb=""has"" subject=$n7
+@r3 syntax.relation from=$n2 to=$c3
+@r4 syntax.relation from=$n6 to=$c5",prolog,judge
 flip the boat horizontally,"@c1 syntax.clause form=imperative verb=""flip"" modifier=""horizontally"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""boat""",spacy-direct+vss,agreement
 miror the car left to right,,,
@@ -667,7 +683,14 @@ flip the picture over both axes and take the glare off the glass,"@c1 syntax.cla
 @n3 syntax.nominal dependent=""the"" head=""glare""
 @r2 syntax.relation marker=""off"" from=$c2 to=$n4
 @n4 syntax.nominal dependent=""the"" head=""glass""",spacy-direct+vss,agreement
-mirror the boat in both directions then blur the waterline a little,,,
+mirror the boat in both directions then blur the waterline a little,"@c1 syntax.clause form=imperative verb=""mirror"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""boat""
+@r1 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""both"" head=""directions""
+@k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""blur"" complement=$n3 complement=$n4
+@n3 syntax.nominal dependent=""the"" head=""waterline""
+@n4 syntax.nominal dependent=""a"" head=""little""",prolog+z3,judge
 turn the card upside down and back to front and put a thin red outline round the border,,,
 flip it both ways,"@c1 syntax.clause form=imperative verb=""flip"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""it""
@@ -1659,7 +1682,15 @@ the green bench a couple of steps closer to the tree.,,,
 "shift the grey barn off the path, so the carts can pass.",,,
 "the red barn should move clear of the road, so nothing blocks the lane.",,,
 "nudge the grey barn clear of the road, so the carts can pass.",,,
-"put the red barn away from the road, so nothing blocks the lane.",,,
+"put the red barn away from the road, so nothing blocks the lane.","@c1 syntax.clause form=imperative verb=""put"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""red"" head=""barn""
+@r1 syntax.relation attachment=ambiguous marker=""away from"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""road""
+@k1 syntax.coordination conjunction=""so"" conjunct=$c1 conjunct=$c2
+@n3 syntax.nominal head=""nothing""
+@c2 syntax.clause form=declarative verb=""blocks"" subject=$n3 complement=$n4
+@n4 syntax.nominal dependent=""the"" head=""lane""
+@r2 syntax.relation from=$c1 to=$c2",distilbert,judge
 "could you slide the grey barn away from the road, but keep it near the path.",,,
 "maybe the red barn could go off the track, and leave the gate clear.",,,
 "let the grey barn go off the track, so nothing blocks the lane.",,,
@@ -1700,7 +1731,15 @@ the red barn off the road.,"@n1 syntax.nominal dependent=""the"" dependent=""red
 "would you shift the wooden bench next to the house, with the shadow falling on the lawn.",,,
 "put the small tree beside the house, so the two look like a pair.",,,
 "let the small well go by the side of the house, and leave room to walk between them.",,,
-"nudge the wooden barn next to the tree, so the view from the road stays open.",,,
+"nudge the wooden barn next to the tree, so the view from the road stays open.","@c1 syntax.clause form=imperative verb=""nudge"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""wooden"" head=""barn""
+@r1 syntax.relation marker=""next to"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""tree""
+@k1 syntax.coordination conjunction=""so"" conjunct=$c1 conjunct=$c2
+@n3 syntax.nominal dependent=""the"" head=""view""
+@r2 syntax.relation marker=""from"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""road""
+@c2 syntax.clause form=declarative verb=""stays"" modifier=""open"" subject=$n3",distilbert+vss,judge
 "take the long table and put it beside the tree, so it can be reached from the gate.",,,
 "could you move the round rock by the side of the tree, so the two look like a pair.",,,
 "slide the wooden bench next to the well, where the light is best in the morning.","@c1 syntax.clause form=imperative verb=""slide"" complement=$n1
@@ -1718,7 +1757,17 @@ the red barn off the road.,"@n1 syntax.nominal dependent=""the"" dependent=""red
 "put the long table beside the bench, where the ground is flat and the grass is short.",,,
 "shift the round rock by the side of the bench, with the hedge and the fence behind it.",,,
 "we need the wooden bench next to the fence, and leave room to walk between them.",,,
-"slide the small well by the side of the fence, but keep it clear of the path.",,,
+"slide the small well by the side of the fence, but keep it clear of the path.","@c1 syntax.clause form=imperative verb=""slide"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""small"" head=""well""
+@r1 syntax.relation attachment=ambiguous marker=""by"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""side""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""fence""
+@k1 syntax.coordination conjunction=""but"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""keep"" modifier=""clear"" complement=$n4
+@n4 syntax.nominal head=""it""
+@r3 syntax.relation marker=""of"" from=$c2 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""path""",z3,judge
 "I want the long table beside the gate, so the two look like a pair.",,,
 "shift the round rock by the side of the gate, and leave room to walk between them.","@c1 syntax.clause form=imperative verb=""shift"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""round"" head=""rock""
@@ -1910,15 +1959,15 @@ the long table right beside the house.,"@n1 syntax.nominal dependent=""the"" dep
 "I want the small truck on the lake, and leave the bridge and the shore in view.","@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""want"" subject=$n1 complement=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""small"" head=""truck""
-@r1 syntax.relation marker=""on"" from=$n2 to=$n3
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""the"" head=""lake""
 @k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
 @c2 syntax.clause form=imperative verb=""leave"" complement=$k2
 @n4 syntax.nominal dependent=""the"" head=""bridge""
 @k2 syntax.coordination conjunction=""and"" conjunct=$n4 conjunct=$n5
 @n5 syntax.nominal dependent=""the"" head=""shore""
-@r2 syntax.relation marker=""in"" from=$n5 to=$n6
-@n6 syntax.nominal head=""view""",spacy-direct+vss,agreement
+@r2 syntax.relation attachment=ambiguous marker=""in"" from=$c2 to=$n6
+@n6 syntax.nominal head=""view""",prolog+z3,judge
 "nudge the small swan on the lake, so it can be seen from the far side.","@c1 syntax.clause form=imperative verb=""nudge"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""small"" head=""swan""
 @r1 syntax.relation marker=""on"" from=$n1 to=$n2

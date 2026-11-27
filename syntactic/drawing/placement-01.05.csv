@@ -30,7 +30,21 @@ start with a big sun in the top right corner; a tall tree on the left after that
 "let there be a small boat on the lake facing left, with a big house in the middle, and the lake at the bottom",,,
 "make a big house in the middle, plus the lake at the bottom, then a small boat on the lake facing left",,,
 "drop the lake at the bottom, and finally a small boat on the lake facing left, and a big house in the middle",,,
-"get a small boat on the lake facing left, while a big house in the middle, and the lake at the bottom",,,
+"get a small boat on the lake facing left, while a big house in the middle, and the lake at the bottom","@c1 syntax.clause form=imperative verb=""get"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""small"" head=""boat""
+@r1 syntax.relation marker=""on"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""lake""
+@c2 syntax.clause form=nonfinite verb=""facing"" modifier=""left""
+@r2 syntax.relation marker=""while"" from=$c1 to=$c3
+@n3 syntax.nominal dependent=""a"" dependent=""big"" head=""house""
+@r3 syntax.relation marker=""in"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""middle""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n3 conjunct=$n5
+@n5 syntax.nominal dependent=""the"" head=""lake""
+@r4 syntax.relation marker=""at"" from=$n5 to=$n6
+@n6 syntax.nominal dependent=""the"" head=""bottom""
+@r5 syntax.relation from=$n1 to=$c2
+@c3 syntax.clause form=fragment complement=$k1",spacy,judge
 "show the lake at the bottom, and finally a small boat on the lake facing left, and a big house in the middle, and a small cat way off on the left",,,
 "a tiny bird up near the top, then i want a big house in the middle, then the lake at the bottom, and a small boat on the lake facing left",,,
 "let there be a small boat on the lake facing left, with a big house in the middle, and the lake at the bottom, and a big bench down at the bottom",,,
@@ -48,7 +62,19 @@ start with a big house in the middle; the lake at the bottom after that,,,
 "draw a wooden bench on the right, then a small cat on the bench facing right, and a tiny bird above the bench",,,
 "put a small cat on the bench facing right, and a tiny bird above the bench, then a wooden bench on the right",,,
 "add a tiny bird above the bench, with a wooden bench on the right, and a small cat on the bench facing right",,,
-"place a wooden bench on the right, plus a small cat on the bench facing right, then a tiny bird above the bench",,,
+"place a wooden bench on the right, plus a small cat on the bench facing right, then a tiny bird above the bench","@c1 syntax.clause form=imperative verb=""place"" complement=$k1
+@n1 syntax.nominal dependent=""a"" dependent=""wooden"" head=""bench""
+@r1 syntax.relation marker=""on"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""right""
+@k1 syntax.coordination conjunction=""plus"" conjunction=""then"" conjunct=$n1 conjunct=$n3 conjunct=$n5
+@n3 syntax.nominal dependent=""a"" dependent=""small"" head=""cat""
+@r2 syntax.relation marker=""on"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""bench""
+@c2 syntax.clause form=nonfinite verb=""facing"" modifier=""right""
+@n5 syntax.nominal dependent=""a"" dependent=""tiny"" head=""bird""
+@r3 syntax.relation attachment=ambiguous marker=""above"" from=$c1 to=$n6
+@n6 syntax.nominal dependent=""the"" head=""bench""
+@r4 syntax.relation from=$c1 to=$c2",prolog,judge
 "show a small cat on the bench facing right, and finally a tiny bird above the bench, and a wooden bench on the right",,,
 "give me a tiny bird above the bench, while a wooden bench on the right, and a small cat on the bench facing right",,,
 "i need a small cat on the bench facing right, and a tiny bird above the bench, then a wooden bench on the right",,,
@@ -673,12 +699,31 @@ get three extra birds on top of the bird,,,
 drop a stack of three birds on top of the bird,,,
 "a small cat in the bottom left corner, then put three more birds on top of the bird, and make it neat — the result should look like one tidy spread",,,
 "a small dog down at the bottom, then place a stack of three birds on top of the bird, no more than that — keep it that way for the rest of the scene",,,
-"a little cat near the bench, then add three more birds on top of the bird as well, the layout has to come out clean",,,
+"a little cat near the bench, then add three more birds on top of the bird as well, the layout has to come out clean","@n1 syntax.nominal dependent=""a"" dependent=""little"" head=""cat""
+@r1 syntax.relation marker=""near"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""bench""
+@c1 syntax.clause form=imperative modifier=""then"" verb=""add"" modifier=""as"" modifier=""well"" complement=$n3
+@n3 syntax.nominal dependent=""three"" dependent=""more"" head=""birds""
+@r2 syntax.relation marker=""on"" from=$c1 to=$n4
+@n4 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n4 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""bird""
+@n6 syntax.nominal dependent=""the"" head=""layout""
+@c2 syntax.clause form=declarative verb=""has"" subject=$n6
+@r4 syntax.relation marker=""to"" from=$c2 to=$c3
+@c3 syntax.clause form=nonfinite verb=""come"" modifier=""out"" modifier=""clean""
+@c4 syntax.clause form=fragment complement=$n1
+@k1 syntax.coordination conjunct=$c4 conjunct=$c1 conjunct=$c2",spacy,judge
 just add three extra birds on top of the bird,,,
 "a stack of three birds on top of the bird, that's all",,,
 stick three more birds on top of the bird,,,
 just three extra birds on top of the bird,,,
-upt a stack of three birds on top of the bird,,,
+upt a stack of three birds on top of the bird,"@c1 syntax.clause form=imperative verb=""upt"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""stack""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""three"" head=""birds""
+@r2 syntax.relation attachment=ambiguous marker=""on top of"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""bird""",prolog+vss+z3,judge
 place three more ibrds on top of the bird,,,
 "set a stack of three birds on top of the bird, thanks",,,
 add a pair of cats on top of the cat,,,
@@ -704,7 +749,11 @@ put two more kites on top of the kite,,,
 add a pair of kites on top of the kite,,,
 stack a pair of kites on top of the kite,,,
 draw two more kites on top of the kite,,,
-give me two extra kites on top of the kite,,,
+give me two extra kites on top of the kite,"@c1 syntax.clause form=imperative verb=""give"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""me""
+@n2 syntax.nominal dependent=""two"" dependent=""extra"" head=""kites""
+@r1 syntax.relation marker=""on top of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""kite""",distilbert+prolog+vss+z3,judge
 i want a pair of kites on top of the kite,,,
 i need two more kites on top of the kite,,,
 get two extra kites on top of the kite,,,
@@ -760,10 +809,10 @@ get a tree on each side of the house,"@c1 syntax.clause form=imperative verb=""g
 @n3 syntax.nominal dependent=""the"" head=""house""",spacy-direct+vss,agreement
 drop one tree on each side of the house,"@c1 syntax.clause form=imperative verb=""drop"" complement=$n1
 @n1 syntax.nominal dependent=""one"" head=""tree""
-@r1 syntax.relation marker=""on"" from=$c1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""each"" head=""side""
 @r2 syntax.relation marker=""of"" from=$n2 to=$n3
-@n3 syntax.nominal dependent=""the"" head=""house""",spacy-direct+vss,agreement
+@n3 syntax.nominal dependent=""the"" head=""house""",prolog+spacy+z3,judge
 mirror a pair of trees so there is on each side of the house,,,
 "a small cat in the bottom left corner, then put a tree on each side of the house, one mirror of the other — the result should look like one tidy spread",,,
 "a little bird up in the top right, then i want one tree on each side of the house, symmetric about it so the whole arrangement stays balanced",,,
@@ -1538,7 +1587,17 @@ draw a medium mna with his hands on his hips near the top,"@c1 syntax.clause for
 there is a small kid sitting with his legs stretched out at the bottom,,,
 put a small kid sitting with his legs stretched out at the bottom — just like that in the scene,,,
 i want a small kid sitting with his legs stretched out at the bottom — with everything else left where it is,,,
-can you place a small kid sitting with his legs stretched out at the bottom,,,
+can you place a small kid sitting with his legs stretched out at the bottom,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""place"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""a"" dependent=""small"" head=""kid""
+@c2 syntax.clause form=nonfinite verb=""sitting""
+@r1 syntax.relation marker=""with"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""his"" head=""legs""
+@c3 syntax.clause form=nonfinite verb=""stretched"" modifier=""out""
+@r2 syntax.relation marker=""at"" from=$c3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""bottom""
+@r3 syntax.relation from=$n2 to=$c2
+@r4 syntax.relation from=$n3 to=$c3",prolog+vss,judge
 could you add a small kid sitting with his legs stretched out at the bottom — and that is the whole scene,,,
 give me a small kid sitting with his legs stretched out at the bottom,,,
 let there be a small kid sitting with his legs stretched out at the bottom,,,
@@ -1568,7 +1627,10 @@ i need a big woman with her arms outstretched in the middle — with everything 
 "could you add a big woman with her arms outstretched in the middle, and a big bench down at the bottom",,,
 "i need a big woman with her arms outstretched in the middle, and a small cat on the left — exactly where the picture needs it",,,
 "a tiny bird up near the top, then draw a big woman with her arms outstretched in the middle — so the scene reads the way it should",,,
-draw a woman with her arms outstretched,,,
+draw a woman with her arms outstretched,"@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""woman""
+@r1 syntax.relation marker=""with"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""her"" head=""arms"" dependent=""outstretched""",distilbert,judge
 "woman with her arms outstretched, in the middle",,,
 a woman with her arms outstretched,,,
 place a woman with her arms outstretched in the middle,,,

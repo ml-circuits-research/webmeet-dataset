@@ -148,12 +148,13 @@ i want three small ducks facing left on the lake — over on our little canvas �
 "can you draw three small ducks facing left across the lake, in our little scene","@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""draw"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""three"" dependent=""small"" head=""ducks""
-@c2 syntax.clause form=nonfinite verb=""facing"" modifier=""left""
-@r1 syntax.relation marker=""across"" from=$c2 to=$n3
-@n3 syntax.nominal dependent=""the"" head=""lake""
-@r2 syntax.relation marker=""in"" from=$c1 to=$n4
-@n4 syntax.nominal dependent=""our"" dependent=""little"" head=""scene""
-@r3 syntax.relation from=$n2 to=$c2",spacy-direct+vss,agreement
+@c2 syntax.clause form=nonfinite verb=""facing"" complement=$n3
+@n3 syntax.nominal head=""left""
+@r1 syntax.relation attachment=ambiguous marker=""across"" from=$c2 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""lake""
+@r2 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n5
+@n5 syntax.nominal dependent=""our"" dependent=""little"" head=""scene""
+@r3 syntax.relation from=$n2 to=$c2",z3,judge
 could you place three little ducks facing left around the lake — the way the drawing looks so far — exactly where the picture needs it,,,
 "give me three small ducks facing left on the lake, just like that",,,
 show three small ducks facing left across the lake — so the scene reads the way it should — right there in the picture,,,
@@ -203,7 +204,14 @@ add three smal ducks facing left on the lake,"@c1 syntax.clause form=imperative 
 @n2 syntax.nominal dependent=""the"" head=""lake""
 @r2 syntax.relation from=$n1 to=$c2",spacy-direct+vss,agreement
 ad three small ducks facing left on the lake,,,
-"add four big balloons above the house, with the rest of the scene unchanged",,,
+"add four big balloons above the house, with the rest of the scene unchanged","@c1 syntax.clause form=imperative verb=""add"" complement=$n1
+@n1 syntax.nominal dependent=""four"" dependent=""big"" head=""balloons""
+@r1 syntax.relation attachment=ambiguous marker=""above"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""house""
+@r2 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""rest""
+@r3 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""scene"" dependent=""unchanged""",z3,judge
 over the house there are four big balloons — the way the drawing looks so far — exactly where the picture needs it,,,
 "put four large balloons high above the house, so the whole scene still reads",,,
 i want four big balloons above the house — so the scene reads the way it should — right there in the picture,,,
@@ -343,7 +351,15 @@ ad five tall trees along the lake,,,
 "put six tiny birds facing left above the house, so the whole scene still reads",,,
 "can you draw six tiny birds facing left over the house, in our little scene",,,
 could you place six tiny birds facing left above the house — keeping the rest of the scene as it is,,,
-"give me six tiny birds facing left above the house, just like that",,,
+"give me six tiny birds facing left above the house, just like that","@c1 syntax.clause form=imperative verb=""give"" modifier=""just"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""me""
+@n2 syntax.nominal dependent=""six"" dependent=""tiny"" head=""birds""
+@c2 syntax.clause form=nonfinite verb=""facing"" modifier=""left""
+@r1 syntax.relation marker=""above"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""house""
+@r2 syntax.relation marker=""like"" from=$n2 to=$n4
+@n4 syntax.nominal head=""that""
+@r3 syntax.relation from=$n2 to=$c2",spacy,judge
 show six tiny birds facing left over the house — over on our little canvas — and that is the whole scene,,,
 "let there be six tiny birds facing left above the house, in the picture",,,
 "i need six tiny birds facing left above the house, on the canvas",,,
@@ -402,7 +418,15 @@ i want two small cats facing right under the bench — over on our little canvas
 @r2 syntax.relation marker=""in"" from=$c1 to=$n4
 @n4 syntax.nominal dependent=""our"" dependent=""little"" head=""scene""
 @r3 syntax.relation from=$n2 to=$c2",spacy-direct+vss,agreement
-"give me two small cats facing right under the bench, just like that",,,
+"give me two small cats facing right under the bench, just like that","@c1 syntax.clause form=imperative verb=""give"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""me""
+@n2 syntax.nominal dependent=""two"" dependent=""small"" head=""cats""
+@c2 syntax.clause form=nonfinite verb=""facing"" modifier=""right"" modifier=""just""
+@r1 syntax.relation marker=""under"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""bench""
+@r2 syntax.relation marker=""like"" from=$n2 to=$n4
+@n4 syntax.nominal head=""that""
+@r3 syntax.relation from=$n2 to=$c2",distilbert,judge
 show two small cats facing right underneath the bench — so the scene reads the way it should — right there in the picture,,,
 "let there be two little cats facing right below the bench, in the picture",,,
 "i need two small cats facing right under the bench, on the canvas","@n1 syntax.nominal head=""i""
@@ -1071,7 +1095,19 @@ can you add a small bench beside the boat too — over on our little canvas — 
 @r3 syntax.relation marker=""in"" from=$c1 to=$n5
 @n5 syntax.nominal dependent=""the"" head=""picture""",spacy-direct+vss,agreement
 "a little cloud over on the right, and then a small bench next to the boat — that is how the picture goes",,,
-"also put a small bench beside the boat, and a small cat way off on the left — just like that in the scene",,,
+"also put a small bench beside the boat, and a small cat way off on the left — just like that in the scene","@c1 syntax.clause form=imperative modifier=""also"" verb=""put"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""small"" head=""bench""
+@r1 syntax.relation marker=""beside"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""boat""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@n3 syntax.nominal dependent=""a"" dependent=""small"" head=""cat""
+@c2 syntax.clause form=fragment modifier=""way"" modifier=""off"" modifier=""just"" complement=$n3 ellipsis=$c1
+@r2 syntax.relation marker=""on"" from=$c2 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""left""
+@r3 syntax.relation marker=""like"" from=$n3 to=$n5
+@n5 syntax.nominal head=""that""
+@r4 syntax.relation marker=""in"" from=$n5 to=$n6
+@n6 syntax.nominal dependent=""the"" head=""scene""",spacy,judge
 "one more bench, next to the boat","@n1 syntax.nominal dependent=""one"" dependent=""more"" head=""bench""
 @r1 syntax.relation marker=""next to"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""boat""
@@ -1813,7 +1849,15 @@ two cats with the smaller one on the left,"@n1 syntax.nominal dependent=""two"" 
 @c1 syntax.clause form=fragment complement=$n1",spacy-direct+vss,agreement
 with the smaller one on the left: two cats on the bench,,,
 hey — there are two cats on the bench with the smaller one on the left,,,
-"could you place two cats on the bench, with the smaller one on the left, thanks",,,
+"could you place two cats on the bench, with the smaller one on the left, thanks","@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""place"" discourse=""thanks"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""two"" head=""cats""
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""bench""
+@r2 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""smaller"" head=""one""
+@r3 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""left""",prolog+vss+z3,judge
 "darw two cats on the bench, with the smaller one on the left","@c1 syntax.clause form=imperative verb=""darw"" complement=$n1
 @n1 syntax.nominal dependent=""two"" head=""cats""
 @r1 syntax.relation marker=""on"" from=$c1 to=$n2

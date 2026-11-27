@@ -586,10 +586,10 @@ give me a bar chart that counts captains per rank,"@c1 syntax.clause form=impera
 how do the captains split by rank? a bar chart please,,,
 put up a bar chart with one bar per rank,"@c1 syntax.clause form=imperative verb=""put"" modifier=""up"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""bar"" head=""chart""
-@r1 syntax.relation marker=""with"" from=$n1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""one"" head=""bar""
-@r2 syntax.relation marker=""per"" from=$n2 to=$n3
-@n3 syntax.nominal head=""rank""",spacy-direct+vss,agreement
+@r2 syntax.relation attachment=ambiguous marker=""per"" from=$c1 to=$n3
+@n3 syntax.nominal head=""rank""",prolog,judge
 "a bar chart of captains per rank, thanks","@n1 syntax.nominal dependent=""a"" dependent=""bar"" head=""chart""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
 @n2 syntax.nominal head=""captains""
@@ -768,8 +768,8 @@ make a pie chart of the people by country,"@c1 syntax.clause form=imperative ver
 @n1 syntax.nominal dependent=""a"" dependent=""pie"" head=""chart""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""people""
-@r2 syntax.relation marker=""by"" from=$c1 to=$n3
-@n3 syntax.nominal head=""country""",spacy-direct+vss,agreement
+@r2 syntax.relation attachment=ambiguous marker=""by"" from=$c1 to=$n3
+@n3 syntax.nominal head=""country""",prolog+spacy+z3,judge
 show me a pie chart of people grouped by country,"@c1 syntax.clause form=imperative verb=""show"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""me""
 @n2 syntax.nominal dependent=""a"" dependent=""pie"" head=""chart""
@@ -1076,8 +1076,8 @@ make a bar chart of the projects by name please,"@c1 syntax.clause form=imperati
 @n1 syntax.nominal dependent=""a"" dependent=""bar"" head=""chart""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""projects""
-@r2 syntax.relation marker=""by"" from=$n2 to=$n3
-@n3 syntax.nominal head=""name""",spacy-direct+vss,agreement
+@r2 syntax.relation attachment=ambiguous marker=""by"" from=$c1 to=$n3
+@n3 syntax.nominal head=""name""",prolog+spacy+z3,judge
 hey — make a bar chart of the projects by name,"@c1 syntax.clause form=imperative discourse=""hey"" verb=""make"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""bar"" head=""chart""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
@@ -1205,8 +1205,8 @@ make a pie chart of the roles by role please,"@c1 syntax.clause form=imperative 
 @n1 syntax.nominal dependent=""a"" dependent=""pie"" head=""chart""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""roles""
-@r2 syntax.relation marker=""by"" from=$c1 to=$n3
-@n3 syntax.nominal head=""role""",spacy-direct+vss,agreement
+@r2 syntax.relation attachment=ambiguous marker=""by"" from=$c1 to=$n3
+@n3 syntax.nominal head=""role""",prolog+spacy+z3,judge
 hey — make a pie chart of the roles by role,"@c1 syntax.clause form=imperative discourse=""hey"" verb=""make"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""pie"" head=""chart""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
@@ -1516,8 +1516,8 @@ give me a bar chart that counts hirings per name,"@c1 syntax.clause form=imperat
 how do the hirings split by name? a bar chart please,,,
 chart the hirings by name,"@c1 syntax.clause form=imperative verb=""chart"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""hirings""
-@r1 syntax.relation marker=""by"" from=$n1 to=$n2
-@n2 syntax.nominal head=""name""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""by"" from=$c1 to=$n2
+@n2 syntax.nominal head=""name""",prolog+spacy+z3,judge
 can you break the hirings down by name in a bar chart?,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""break"" modifier=""down"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""the"" head=""hirings""
@@ -1662,8 +1662,8 @@ make a line chart of the sections by year,"@c1 syntax.clause form=imperative ver
 @n1 syntax.nominal dependent=""a"" dependent=""line"" head=""chart""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""sections""
-@r2 syntax.relation marker=""by"" from=$n2 to=$n3
-@n3 syntax.nominal head=""year""",spacy-direct+vss,agreement
+@r2 syntax.relation attachment=ambiguous marker=""by"" from=$c1 to=$n3
+@n3 syntax.nominal head=""year""",prolog+spacy+z3,judge
 show me a line chart of sections grouped by year,"@c1 syntax.clause form=imperative verb=""show"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""me""
 @n2 syntax.nominal dependent=""a"" dependent=""line"" head=""chart""
@@ -1967,7 +1967,18 @@ please visualise the matches counts for each year as a bar chart,"@c1 syntax.cla
 @n2 syntax.nominal head=""year""
 @c1 syntax.clause form=fragment complement=$n1",spacy-direct+vss,agreement
 count of matches per year,,,
-"make a bar chart with the categories year 1, year 2",,,
+"make a bar chart with the categories year 1, year 2","@c1 syntax.clause form=imperative verb=""make"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""bar"" head=""chart""
+@r1 syntax.relation marker=""with"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""categories""
+@n3 syntax.nominal head=""year""
+@n4 syntax.nominal head=""1""
+@n5 syntax.nominal head=""year""
+@n6 syntax.nominal head=""2""
+@r2 syntax.relation from=$n2 to=$n3
+@r3 syntax.relation from=$n3 to=$n4
+@r4 syntax.relation from=$n3 to=$n5
+@r5 syntax.relation from=$n5 to=$n6",spacy,judge
 make a bar chart of the matches by year please,"@c1 syntax.clause form=imperative verb=""make"" discourse=""please"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""bar"" head=""chart""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
@@ -2006,10 +2017,10 @@ I want a pie chart showing how our customers are distributed across payment meth
 "for the review, a pie chart comparing payment methods would really help",,,
 please visualise the customers counts for each payment as a pie chart,"@c1 syntax.clause form=imperative discourse=""please"" verb=""visualise"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""customers"" head=""counts""
-@r1 syntax.relation marker=""for"" from=$n1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""each"" head=""payment""
-@r2 syntax.relation marker=""as"" from=$c1 to=$n3
-@n3 syntax.nominal dependent=""a"" dependent=""pie"" head=""chart""",spacy-direct+vss,agreement
+@r2 syntax.relation attachment=ambiguous marker=""as"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""a"" dependent=""pie"" head=""chart""",prolog,judge
 pie chart of customers per payment,"@n1 syntax.nominal dependent=""pie"" head=""chart""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
 @n2 syntax.nominal head=""customers""
@@ -2151,8 +2162,8 @@ make a pie chart of the staff by rank,"@c1 syntax.clause form=imperative verb=""
 @n1 syntax.nominal dependent=""a"" dependent=""pie"" head=""chart""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""staff""
-@r2 syntax.relation marker=""by"" from=$c1 to=$n3
-@n3 syntax.nominal head=""rank""",spacy-direct+vss,agreement
+@r2 syntax.relation attachment=ambiguous marker=""by"" from=$c1 to=$n3
+@n3 syntax.nominal head=""rank""",prolog+spacy+z3,judge
 show me a pie chart of staff grouped by rank,"@c1 syntax.clause form=imperative verb=""show"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""me""
 @n2 syntax.nominal dependent=""a"" dependent=""pie"" head=""chart""
@@ -3010,12 +3021,13 @@ please plot the documents per type as a bar chart,"@c1 syntax.clause form=impera
 @r2 syntax.relation marker=""as"" from=$n2 to=$n3
 @n3 syntax.nominal dependent=""a"" dependent=""bar"" head=""chart""",spacy-direct+vss,agreement
 let's get a bar chart up for the documents by type,,,
-drop in a bar chart of the documents by type,"@c1 syntax.clause form=imperative verb=""drop"" modifier=""in"" complement=$n1
+drop in a bar chart of the documents by type,"@c1 syntax.clause form=imperative verb=""drop""
+@r1 syntax.relation marker=""in"" from=$c1 to=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""bar"" head=""chart""
-@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@r2 syntax.relation marker=""of"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""documents""
-@r2 syntax.relation marker=""by"" from=$n2 to=$n3
-@n3 syntax.nominal head=""type""",spacy-direct+vss,agreement
+@r3 syntax.relation attachment=ambiguous marker=""by"" from=$c1 to=$n3
+@n3 syntax.nominal head=""type""",prolog+z3,judge
 hey — make a bar chart of the documents by type,"@c1 syntax.clause form=imperative discourse=""hey"" verb=""make"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""bar"" head=""chart""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
@@ -3046,8 +3058,8 @@ make abar chart of the documents by type,"@c1 syntax.clause form=imperative verb
 @n1 syntax.nominal dependent=""abar"" head=""chart""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""documents""
-@r2 syntax.relation marker=""by"" from=$n2 to=$n3
-@n3 syntax.nominal head=""type""",spacy-direct+vss,agreement
+@r2 syntax.relation attachment=ambiguous marker=""by"" from=$c1 to=$n3
+@n3 syntax.nominal head=""type""",prolog+spacy+z3,judge
 make a pie chart of the policies by type,"@c1 syntax.clause form=imperative verb=""make"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""pie"" head=""chart""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
@@ -3535,7 +3547,13 @@ could you build a bar chart of the transactions by type for me?,"@c1 syntax.clau
 "since the boss wants totals per type, do a bar chart counting the transactions",,,
 "put a bar chart of the transactions by type together and give it the title ""transactions by type""",,,
 "when you get a chance, a bar chart of the transactions by type would help the team a lot",,,
-"bar chart for the transactions, types split",,,
+"bar chart for the transactions, types split","@n1 syntax.nominal dependent=""bar"" head=""chart""
+@r1 syntax.relation marker=""for"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""transactions""
+@n3 syntax.nominal head=""types""
+@c1 syntax.clause form=declarative verb=""split"" subject=$n3
+@c2 syntax.clause form=fragment complement=$n1
+@k1 syntax.coordination conjunct=$c2 conjunct=$c1",prolog+z3,judge
 "just a bar chart, transactions per type",,,
 make abar chart of the transactions by type,"@c1 syntax.clause form=imperative verb=""make"" complement=$n1
 @n1 syntax.nominal dependent=""abar"" head=""chart""
@@ -3602,8 +3620,8 @@ hey — make a pie chart of the allergies by type,"@c1 syntax.clause form=impera
 @n1 syntax.nominal dependent=""a"" dependent=""pie"" head=""chart""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""allergies""
-@r2 syntax.relation marker=""by"" from=$c1 to=$n3
-@n3 syntax.nominal head=""type""",spacy-direct+vss,agreement
+@r2 syntax.relation attachment=ambiguous marker=""by"" from=$c1 to=$n3
+@n3 syntax.nominal head=""type""",prolog,judge
 give me a pie chart that counts the allergies per type please,,,
 "for the review, I want a pie chart showing how the allergies are distributed across types",,,
 "I'm putting the summary together, so visualise the allergies counts for each type as a pie chart","@n1 syntax.nominal head=""I""
@@ -4163,7 +4181,12 @@ pie chart of the stores by city,"@n1 syntax.nominal dependent=""pie"" head=""cha
 @n3 syntax.nominal head=""city""
 @c1 syntax.clause form=fragment complement=$n1",vss,judge
 "pie chart for the stores, cities split",,,
-"just a pie chart, stores per city",,,
+"just a pie chart, stores per city","@c1 syntax.clause form=fragment modifier=""just"" complement=$k1
+@n1 syntax.nominal dependent=""a"" dependent=""pie"" head=""chart""
+@n2 syntax.nominal head=""stores""
+@r1 syntax.relation marker=""per"" from=$n2 to=$n3
+@n3 syntax.nominal head=""city""
+@k1 syntax.coordination conjunct=$n1 conjunct=$n2",prolog+vss,judge
 make apie chart of the stores by city,"@c1 syntax.clause form=imperative verb=""make"" complement=$n1
 @n1 syntax.nominal dependent=""apie"" head=""chart""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2

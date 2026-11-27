@@ -171,8 +171,8 @@ let's have the error bars on it,,,
 we want the error bars on the chart,"@n1 syntax.nominal head=""we""
 @c1 syntax.clause form=declarative verb=""want"" subject=$n1 complement=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""error"" head=""bars""
-@r1 syntax.relation marker=""on"" from=$n2 to=$n3
-@n3 syntax.nominal dependent=""the"" head=""chart""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""chart""",prolog+z3,judge
 put the error bars back on the orders chart,"@c1 syntax.clause form=imperative verb=""put"" modifier=""back"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""error"" head=""bars""
 @r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
@@ -1154,7 +1154,11 @@ try making the pie radius larger,"@c1 syntax.clause form=imperative verb=""try""
 @c2 syntax.clause form=nonfinite verb=""making"" modifier=""larger"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""pie"" head=""radius""
 @r1 syntax.relation from=$c1 to=$c2",spacy-direct+vss,agreement
-go for larger pie radius on the staff pie,,,
+go for larger pie radius on the staff pie,"@c1 syntax.clause form=imperative verb=""go""
+@r1 syntax.relation marker=""for"" from=$c1 to=$n1
+@n1 syntax.nominal dependent=""larger"" dependent=""pie"" head=""radius""
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""staff"" head=""pie""",distilbert+prolog,judge
 could you set the pie radius to larger?,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""set"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""the"" dependent=""pie"" head=""radius""
@@ -1394,9 +1398,44 @@ could you format the tick numbers to three decimals?,"@c1 syntax.clause form=int
 @n3 syntax.nominal dependent=""three"" head=""decimals""",spacy-direct+vss,agreement
 we want the tick numbers read to three decimals,,,
 try tick numbers to three decimals instead,,,
-"I keep squinting at Sales by month every time I paste it into the weekly newsletter; this week, write the tick numbers to three decimals as well, would you, and show both grid lines",,,
+"I keep squinting at Sales by month every time I paste it into the weekly newsletter; this week, write the tick numbers to three decimals as well, would you, and show both grid lines","@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""keep"" subject=$n1
+@c2 syntax.clause form=nonfinite verb=""squinting"" complement=$n4
+@r1 syntax.relation marker=""at"" from=$c2 to=$n2
+@n2 syntax.nominal head=""Sales""
+@r2 syntax.relation attachment=ambiguous marker=""by"" from=$c2 to=$n3
+@n3 syntax.nominal head=""month""
+@n4 syntax.nominal dependent=""every"" head=""time""
+@n5 syntax.nominal head=""I""
+@c3 syntax.clause form=declarative verb=""paste"" subject=$n5 complement=$n6
+@n6 syntax.nominal head=""it""
+@r3 syntax.relation marker=""into"" from=$c3 to=$n7
+@n7 syntax.nominal dependent=""the"" dependent=""weekly"" head=""newsletter""
+@n8 syntax.nominal dependent=""this"" head=""week""
+@c4 syntax.clause form=imperative verb=""write"" modifier=""as"" modifier=""well"" complement=$n8 complement=$n9
+@n9 syntax.nominal dependent=""the"" dependent=""tick"" head=""numbers""
+@r4 syntax.relation marker=""to"" from=$c4 to=$n10
+@n10 syntax.nominal dependent=""three"" head=""decimals""
+@c5 syntax.clause form=declarative verb=""would"" subject=$n11
+@n11 syntax.nominal head=""you""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c4 conjunct=$c6
+@c6 syntax.clause form=imperative verb=""show"" complement=$n12
+@n12 syntax.nominal dependent=""both"" dependent=""grid"" head=""lines""
+@r5 syntax.relation from=$c1 to=$c2
+@r6 syntax.relation from=$n4 to=$c3
+@r7 syntax.relation from=$c4 to=$c5",spacy,judge
 "I showed Sales by month round the team; they didn't argue with the numbers but not with how it reads at a glance, so as a first pass write the tick numbers to three decimals, then we revisit next week; plus drop the legend on the right",,,
-go for tick numbers to three decimals. and then drop the legend on the right,,,
+go for tick numbers to three decimals. and then drop the legend on the right,"@c1 syntax.clause form=imperative verb=""go""
+@r1 syntax.relation marker=""for"" from=$c1 to=$n1
+@n1 syntax.nominal dependent=""tick"" head=""numbers""
+@r2 syntax.relation marker=""to"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""three"" head=""decimals""
+@c2 syntax.clause form=fragment discourse=""and""
+@k1 syntax.coordination conjunction=""then"" conjunct=$c2 conjunct=$c3
+@c3 syntax.clause form=imperative verb=""drop"" complement=$n3
+@n3 syntax.nominal dependent=""the"" head=""legend""
+@r3 syntax.relation marker=""on"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""right""",distilbert+vss,judge
 the tick numbers should read to three decimals. y axis on the right,"@n1 syntax.nominal dependent=""the"" dependent=""tick"" head=""numbers""
 @c1 syntax.clause form=declarative auxiliary=""should"" verb=""read"" subject=$n1
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2
@@ -1896,8 +1935,8 @@ call the y axis Revenue in thousands,"@c1 syntax.clause form=imperative verb=""c
 the y axis should be called Revenue in thousands,"@n1 syntax.nominal dependent=""the"" dependent=""y"" head=""axis""
 @c1 syntax.clause form=declarative auxiliary=""should"" auxiliary=""be"" verb=""called"" subject=$n1 complement=$n2
 @n2 syntax.nominal head=""Revenue""
-@r1 syntax.relation marker=""in"" from=$n2 to=$n3
-@n3 syntax.nominal head=""thousands""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n3
+@n3 syntax.nominal head=""thousands""",prolog+z3,judge
 change the y axis to Revenue in thousands,"@c1 syntax.clause form=imperative verb=""change"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""y"" head=""axis""
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2

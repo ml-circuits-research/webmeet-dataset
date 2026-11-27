@@ -304,7 +304,9 @@ run the last action on the last five figures,"@c1 syntax.clause form=imperative 
 @r1 syntax.relation marker=""on"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""last"" dependent=""five"" head=""figures""",spacy-direct+vss,agreement
 "the last move worked on the pair at the start, so do exactly the same thing to the two figures at the end of the row",,,
-"last two, same step",,,
+"last two, same step","@n1 syntax.nominal dependent=""last"" head=""two""
+@n2 syntax.nominal dependent=""same"" head=""step""
+@c1 syntax.clause form=fragment complement=$n1 complement=$n2",distilbert,judge
 take the step we just performed and apply it to the last three figures instead of the first two,,,
 "the tail of the row still needs the same edit, so repeat the last step on the final two objects","@n1 syntax.nominal dependent=""the"" head=""tail""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
@@ -381,8 +383,8 @@ now the figure in the fourth spot does the same thing as happened in step two,,,
 "repeat the step one action on the first and the rightmost, so the row ends up symmetric",,,
 do the same to the last two positions,"@c1 syntax.clause form=imperative verb=""do"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""same""
-@r1 syntax.relation marker=""to"" from=$n1 to=$n2
-@n2 syntax.nominal dependent=""the"" dependent=""last"" dependent=""two"" head=""positions""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""last"" dependent=""two"" head=""positions""",distilbert+prolog+spacy,judge
 repeat step one with the third and fourth figures and then tell me whether the count changed,,,
 "the same move as step two has to happen again with the second and the sixth figures, because those two were left out of the earlier pass",,,
 "the same swap has to happen at the fourth spot and at the second spot, and the rest of the row should stay exactly where it is",,,
@@ -559,7 +561,8 @@ apply the last move to the neighbouring pair,"@c1 syntax.clause form=imperative 
 @n1 syntax.nominal dependent=""the"" dependent=""last"" head=""move""
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""neighbouring"" head=""pair""",spacy-direct+vss,agreement
-now the adjacent two,,,
+now the adjacent two,"@c1 syntax.clause form=fragment modifier=""now"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""adjacent"" head=""two""",distilbert+z3,judge
 repeat the swap with the pair immediately after,"@c1 syntax.clause form=imperative verb=""repeat"" modifier=""immediately"" modifier=""after"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""swap""
 @r1 syntax.relation marker=""with"" from=$c1 to=$n2
@@ -744,8 +747,8 @@ restore the original layout and leave it there,"@c1 syntax.clause form=imperativ
 @n2 syntax.nominal head=""it""",spacy-direct+vss,agreement
 put the figures back in the original order,"@c1 syntax.clause form=imperative verb=""put"" modifier=""back"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""figures""
-@r1 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n2
-@n2 syntax.nominal dependent=""the"" dependent=""original"" head=""order""",spacy-direct+vss,agreement
+@r1 syntax.relation marker=""in"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""original"" head=""order""",spacy,judge
 rebuild the row in the order it started,,,
 restore the starting sequence,"@c1 syntax.clause form=imperative verb=""restore"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""starting"" head=""sequence""",spacy-direct+vss,agreement
@@ -864,12 +867,12 @@ undo the removal chain until the count climbs back to five figures,,,
 go backwards through the history until there are four boxes in the row again,"@c1 syntax.clause form=imperative verb=""go"" modifier=""backwards""
 @r1 syntax.relation marker=""through"" from=$c1 to=$n1
 @n1 syntax.nominal dependent=""the"" head=""history""
-@r2 syntax.relation marker=""until"" from=$c1 to=$c2
+@r2 syntax.relation attachment=ambiguous marker=""until"" from=$c1 to=$c2
 @n2 syntax.nominal head=""there""
 @c2 syntax.clause form=declarative verb=""are"" modifier=""again"" subject=$n2 complement=$n3
 @n3 syntax.nominal dependent=""four"" head=""boxes""
-@r3 syntax.relation marker=""in"" from=$c2 to=$n4
-@n4 syntax.nominal dependent=""the"" head=""row""",spacy-direct+vss,agreement
+@r3 syntax.relation attachment=ambiguous marker=""in"" from=$c2 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""row""",z3,judge
 now undo until there are five figures,,,
 keep undoing until the row has six again,,,
 and back until the count is five,,,
@@ -951,7 +954,25 @@ and back until the sequence is right,,,
 go ahead and keep undoing until the original order returns and remove the last figure,,,
 undo until the row is back in ordr,,,
 undo until the row is back in order and leave every one of the other figures in the row exactly where it is so the arrangement stays clear and readable,,,
-keep undoing until the original order returns while keeping every other box in the row in the same place so the whole arrangement remains easy to follow,,,
+keep undoing until the original order returns while keeping every other box in the row in the same place so the whole arrangement remains easy to follow,"@c1 syntax.clause form=imperative verb=""keep""
+@c2 syntax.clause form=nonfinite verb=""undoing""
+@r1 syntax.relation marker=""until"" from=$c2 to=$c3
+@n1 syntax.nominal dependent=""the"" dependent=""original"" head=""order""
+@c3 syntax.clause form=declarative verb=""returns"" subject=$n1
+@r2 syntax.relation marker=""while"" from=$c3 to=$c4
+@c4 syntax.clause form=nonfinite verb=""keeping"" complement=$n2
+@n2 syntax.nominal dependent=""every"" dependent=""other"" head=""box""
+@r3 syntax.relation attachment=ambiguous marker=""in"" from=$c4 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""row""
+@r4 syntax.relation attachment=ambiguous marker=""in"" from=$c4 to=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""same"" head=""place""
+@k1 syntax.coordination conjunction=""so"" conjunct=$c1 conjunct=$c5
+@n5 syntax.nominal dependent=""the"" dependent=""whole"" head=""arrangement""
+@c5 syntax.clause form=declarative verb=""remains"" subject=$n5 complement=$n6
+@n6 syntax.nominal head=""easy""
+@r5 syntax.relation marker=""to"" from=$c5 to=$c6
+@c6 syntax.clause form=nonfinite verb=""follow""
+@r6 syntax.relation from=$c1 to=$c2",prolog,judge
 undo until the figures are in the starting order so the row ends up in exactly the order you expect without disturbing any of the other figures around it,,,
 undo the last change and then redo it,,,
 take back step two and immediately redo step two,,,
@@ -1092,7 +1113,13 @@ return every box to its original sequence,"@c1 syntax.clause form=imperative ver
 @n1 syntax.nominal dependent=""every"" head=""box""
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""its"" dependent=""original"" head=""sequence""",spacy-direct+vss,agreement
-"put them back where they were, in the same order",,,
+"put them back where they were, in the same order","@c1 syntax.clause form=imperative verb=""put"" modifier=""back"" complement=$n1
+@n1 syntax.nominal head=""them""
+@r1 syntax.relation marker=""where"" from=$c1 to=$c2
+@n2 syntax.nominal head=""they""
+@c2 syntax.clause form=declarative verb=""were"" subject=$n2
+@r2 syntax.relation marker=""in"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""same"" head=""order""",distilbert+vss,judge
 restore the starting arrangement exactly,"@c1 syntax.clause form=imperative verb=""restore"" modifier=""exactly"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""starting"" head=""arrangement""",spacy-direct+vss,agreement
 bring the figures back to the exact positions they began in,"@c1 syntax.clause form=imperative verb=""bring"" modifier=""back"" complement=$n1
@@ -1476,7 +1503,11 @@ step back twice in the journal,,,
 go back two steps and check the row is complete,,,
 restore step four and leave the rest of the history intact,,,
 undo the last three moves,,,
-put back everything the last three steps changed,,,
+put back everything the last three steps changed,"@c1 syntax.clause form=imperative verb=""put"" modifier=""back"" complement=$n1
+@n1 syntax.nominal head=""everything""
+@n2 syntax.nominal dependent=""the"" dependent=""last"" dependent=""three"" head=""steps""
+@c2 syntax.clause form=declarative verb=""changed"" subject=$n2 complement=$n1
+@r1 syntax.relation from=$c1 to=$c2",distilbert,judge
 revert the last three edits when you get a chance,"@c1 syntax.clause form=imperative verb=""revert"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""last"" dependent=""three"" head=""edits""
 @r1 syntax.relation marker=""when"" from=$c1 to=$c2
@@ -1660,7 +1691,13 @@ cancel the last edit and give me the new count,"@c1 syntax.clause form=imperativ
 @c2 syntax.clause form=imperative verb=""give"" complement=$n2 complement=$n3
 @n2 syntax.nominal head=""me""
 @n3 syntax.nominal dependent=""the"" dependent=""new"" head=""count""",spacy-direct+vss,judge
-undo one move and say how many shapes remain,,,
+undo one move and say how many shapes remain,"@c1 syntax.clause form=imperative verb=""undo"" complement=$n1
+@n1 syntax.nominal dependent=""one"" head=""move""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""say""
+@n2 syntax.nominal dependent=""how"" dependent=""many"" head=""shapes""
+@c3 syntax.clause form=interrogative verb=""remain"" subject=$n2
+@r1 syntax.relation from=$c2 to=$c3",distilbert,judge
 i need you to take the row back a step and count,,,
 "undo the last change, then count the boxes","@c1 syntax.clause form=imperative verb=""undo"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""last"" head=""change""
@@ -1914,7 +1951,17 @@ return the removed figure to the row and swap it with its neighbour,"@c1 syntax.
 @r1 syntax.relation marker=""with"" from=$c2 to=$n3
 @n3 syntax.nominal dependent=""the"" dependent=""last"" head=""one""",spacy-direct+vss,agreement
 restore the figure that was removed in step two and then swap that same figure with its neighbour,,,
-bring the deleted shape back into the row and exchange it with the figure immediately to its right,,,
+bring the deleted shape back into the row and exchange it with the figure immediately to its right,"@c1 syntax.clause form=imperative verb=""bring"" modifier=""back"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""deleted"" head=""shape""
+@r1 syntax.relation attachment=ambiguous marker=""into"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""row""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""exchange"" modifier=""immediately"" complement=$n3
+@n3 syntax.nominal head=""it""
+@r2 syntax.relation marker=""with"" from=$c2 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""figure""
+@r3 syntax.relation attachment=ambiguous marker=""to"" from=$c2 to=$n5
+@n5 syntax.nominal dependent=""its"" head=""right""",prolog+z3,judge
 "restore the removed figure, then swap it right","@c1 syntax.clause form=imperative verb=""restore"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""removed"" head=""figure""
 @k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c2
@@ -2042,7 +2089,13 @@ go back to the arrangement from before the last swap and leave the earlier edits
 @r3 syntax.relation marker=""as"" from=$c2 to=$c3
 @n4 syntax.nominal head=""they""
 @c3 syntax.clause form=declarative verb=""were"" subject=$n4",spacy-direct+vss,agreement
-"would you undo to before the swap, then swap the first two",,,
+"would you undo to before the swap, then swap the first two","@c1 syntax.clause form=interrogative auxiliary=""would"" verb=""undo"" subject=$n1
+@n1 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to before"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""swap""
+@k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""swap"" complement=$n3
+@n3 syntax.nominal dependent=""the"" head=""first"" dependent=""two""",distilbert+vss,judge
 "the swap ran twice, take back the second run",,,
 "undo one of the two identical swaps, the later one",,,
 everything exactly as before the last two steps please,,,

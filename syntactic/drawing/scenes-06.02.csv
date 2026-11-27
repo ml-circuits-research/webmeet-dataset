@@ -221,12 +221,34 @@ hey — place a sign with the word 'CAFE' down at the bottom,,,
 add a small pond at the bottom — right there in the picture — that is how the picture goes,,,
 "put a small pond at the bottom, keeping everything else where it is",,,
 there is a small pond at the bottom — just like that in the scene — keeping the rest of the scene as it is,,,
-"draw a small pond at the bottom, keeping everything else where it is",,,
+"draw a small pond at the bottom, keeping everything else where it is","@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""small"" head=""pond""
+@r1 syntax.relation attachment=ambiguous marker=""at"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""bottom""
+@c2 syntax.clause form=nonfinite verb=""keeping"" complement=$n3
+@n3 syntax.nominal head=""everything"" dependent=""else""
+@c3 syntax.clause form=declarative modifier=""where"" verb=""is"" subject=$n4
+@n4 syntax.nominal head=""it""
+@r2 syntax.relation from=$c1 to=$c2
+@r3 syntax.relation from=$n3 to=$c3",prolog,judge
 i want a small pond at the bottom — with everything else left where it is — over on our little canvas,,,
 give me a small pond at the bottom — and that is the whole scene — the way the drawing looks so far,,,
 "the scene needs a small pond at the bottom, keeping everything else where it is",,,
 let there be a small pond at the bottom — exactly where the picture needs it — so the scene reads the way it should,,,
-show a small pond at the bottom — right there in the picture — that is how the picture goes,,,
+show a small pond at the bottom — right there in the picture — that is how the picture goes,"@c1 syntax.clause form=imperative verb=""show"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""small"" head=""pond""
+@r1 syntax.relation attachment=ambiguous marker=""at"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""bottom""
+@c2 syntax.clause form=fragment modifier=""right"" modifier=""there""
+@r2 syntax.relation marker=""in"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""picture""
+@n4 syntax.nominal head=""that""
+@c3 syntax.clause form=declarative verb=""is"" subject=$n4
+@c4 syntax.clause form=declarative modifier=""how"" verb=""goes"" subject=$n5
+@n5 syntax.nominal dependent=""the"" head=""picture""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c3
+@r3 syntax.relation from=$c1 to=$c2
+@r4 syntax.relation from=$c3 to=$c4",prolog,judge
 "a small pond at the bottom, please, keeping everything else where it is",,,
 "a tiny bird at the top, then there is a small pond at the bottom — keeping the rest of the scene as it is",,,
 "i want a small pond at the bottom, and a big bench at the bottom — with everything else left where it is",,,
@@ -247,7 +269,10 @@ a small pond at the bottom,"@n1 syntax.nominal dependent=""a"" dependent=""small
 @n2 syntax.nominal dependent=""the"" head=""bottom""
 @c1 syntax.clause form=fragment complement=$n1",spacy-direct+vss,agreement
 at the bottom: a small pond,,,
-missing: a small pond at the bottom,,,
+missing: a small pond at the bottom,"@n1 syntax.nominal dependent=""missing"" dependent=""a"" dependent=""small"" head=""pond""
+@r1 syntax.relation marker=""at"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""bottom""
+@c1 syntax.clause form=fragment complement=$n1",spacy,judge
 hey — put a small pond at the bottom,"@c1 syntax.clause form=imperative discourse=""hey"" verb=""put"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""small"" head=""pond""
 @r1 syntax.relation marker=""at"" from=$n1 to=$n2
@@ -752,8 +777,8 @@ hey — put a little flag on the tent,"@c1 syntax.clause form=imperative discour
 @n3 syntax.nominal dependent=""the"" head=""tent""",spacy-direct+vss,agreement
 add a littel flag on the tent,"@c1 syntax.clause form=imperative verb=""add"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""littel"" head=""flag""
-@r1 syntax.relation marker=""on"" from=$n1 to=$n2
-@n2 syntax.nominal dependent=""the"" head=""tent""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""tent""",prolog+spacy+z3,judge
 add a little flg on the tent,"@c1 syntax.clause form=imperative verb=""add"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""little"" head=""flg""
 @r1 syntax.relation marker=""on"" from=$n1 to=$n2
@@ -771,7 +796,17 @@ the scene needs a watering can by the house — with everything else left where 
 leave a watering can by the house — and that is the whole scene — the way the drawing looks so far,,,
 "a watering can by the house, please, keeping everything else where it is",,,
 "a little cloud on the right, then set a watering can by the house — so the scene reads the way it should",,,
-"i want a watering can by the house, and a small cat on the left — right there in the picture",,,
+"i want a watering can by the house, and a small cat on the left — right there in the picture","@n1 syntax.nominal head=""i""
+@c1 syntax.clause form=declarative verb=""want"" modifier=""right"" modifier=""there"" subject=$n1 complement=$k1
+@n2 syntax.nominal dependent=""a"" dependent=""watering"" head=""can""
+@r1 syntax.relation marker=""by"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""house""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n4
+@n4 syntax.nominal dependent=""a"" dependent=""small"" head=""cat""
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""left""
+@r3 syntax.relation marker=""in"" from=$c1 to=$n6
+@n6 syntax.nominal dependent=""the"" head=""picture""",distilbert,judge
 a watering can by the house,,,
 by the house: a watering can,,,
 missing: a watering can by the house,,,
@@ -783,7 +818,22 @@ add a watering cn by the house,"@c1 syntax.clause form=imperative verb=""add"" c
 ad a watering can by the house,,,
 add a small ball in the garden — right there in the picture — that is how the picture goes,,,
 "put a small ball in the garden, keeping everything else where it is",,,
-place a small ball in the garden — just like that in the scene — keeping the rest of the scene as it is,,,
+place a small ball in the garden — just like that in the scene — keeping the rest of the scene as it is,"@c1 syntax.clause form=imperative verb=""place"" modifier=""just"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""small"" head=""ball""
+@r1 syntax.relation marker=""in"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""garden""
+@r2 syntax.relation marker=""like"" from=$n1 to=$n3
+@n3 syntax.nominal head=""that""
+@r3 syntax.relation marker=""in"" from=$c1 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""scene""
+@c2 syntax.clause form=nonfinite verb=""keeping"" complement=$n5
+@n5 syntax.nominal dependent=""the"" head=""rest""
+@r4 syntax.relation marker=""of"" from=$n5 to=$n6
+@n6 syntax.nominal dependent=""the"" head=""scene""
+@r5 syntax.relation marker=""as"" from=$c1 to=$c3
+@n7 syntax.nominal head=""it""
+@c3 syntax.clause form=declarative verb=""is"" subject=$n7
+@r6 syntax.relation from=$n1 to=$c2",distilbert,judge
 "draw a small ball in the garden, keeping everything else where it is",,,
 set a small ball in the garden — with everything else left where it is — over on our little canvas,,,
 "give me a small ball in the garden, keeping everything else where it is",,,
@@ -842,12 +892,12 @@ include a tiny red bird on the fence — with everything else left where it is �
 @n3 syntax.nominal dependent=""the"" head=""fence""
 @k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n4
 @n4 syntax.nominal dependent=""a"" dependent=""small"" head=""cat""
-@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n5
+@r2 syntax.relation marker=""on"" from=$n4 to=$n5
 @n5 syntax.nominal dependent=""the"" head=""left""
 @k2 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
 @n6 syntax.nominal head=""that""
 @c2 syntax.clause form=declarative verb=""is"" subject=$n6 complement=$n7
-@n7 syntax.nominal dependent=""the"" dependent=""whole"" head=""scene""",spacy-direct+vss,agreement
+@n7 syntax.nominal dependent=""the"" dependent=""whole"" head=""scene""",distilbert+spacy,judge
 "a tiny bird at the top, then place a tiny red bird on the fence — the way the drawing looks so far",,,
 "give me a tiny red bird on the fence, and a big bench at the bottom — exactly where the picture needs it",,,
 "a little cloud on the right, then include a tiny red bird on the fence — so the scene reads the way it should",,,
@@ -879,7 +929,21 @@ place a small brown dog by the bench — with everything else left where it is �
 @r2 syntax.relation marker=""as"" from=$c1 to=$c2
 @c2 syntax.clause form=nonfinite verb=""drawn"" modifier=""so"" modifier=""far""",spacy-direct+vss,agreement
 give me a small brown dog by the bench — and that is the whole scene — the way the drawing looks so far,,,
-include a small brown dog by the bench — exactly where the picture needs it — so the scene reads the way it should,,,
+include a small brown dog by the bench — exactly where the picture needs it — so the scene reads the way it should,"@c1 syntax.clause form=imperative verb=""include"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""small"" dependent=""brown"" head=""dog""
+@r1 syntax.relation marker=""by"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""bench""
+@c2 syntax.clause form=declarative modifier=""exactly"" modifier=""where"" verb=""needs"" subject=$n3 complement=$n4
+@n3 syntax.nominal dependent=""the"" head=""picture""
+@n4 syntax.nominal head=""it""
+@r2 syntax.relation marker=""so"" from=$c1 to=$c3
+@n5 syntax.nominal dependent=""the"" head=""scene""
+@c3 syntax.clause form=declarative verb=""reads"" subject=$n5 complement=$n6
+@n6 syntax.nominal dependent=""the"" head=""way""
+@n7 syntax.nominal head=""it""
+@c4 syntax.clause form=declarative verb=""should"" subject=$n7
+@r3 syntax.relation from=$n1 to=$c2
+@r4 syntax.relation from=$n6 to=$c4",spacy,judge
 "a small brown dog by the bench, please, keeping everything else where it is",,,
 "a big bench at the bottom, then can you add a small brown dog by the bench — that is how the picture goes",,,
 "the scene needs a small brown dog by the bench, and a little cloud on the right — just like that in the scene",,,
@@ -1032,7 +1096,23 @@ add a little white dkc on the lake,"@c1 syntax.clause form=imperative verb=""add
 ad a little white duck on the lake,,,
 add a huge grey rock on the hill — right there in the picture — that is how the picture goes,,,
 "put a huge grey rock on the hill, keeping everything else where it is",,,
-there is a huge grey rock on the hill — just like that in the scene — keeping the rest of the scene as it is,,,
+there is a huge grey rock on the hill — just like that in the scene — keeping the rest of the scene as it is,"@n1 syntax.nominal head=""there""
+@c1 syntax.clause form=declarative verb=""is"" modifier=""just"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""huge"" dependent=""grey"" head=""rock""
+@r1 syntax.relation marker=""on"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""hill""
+@r2 syntax.relation attachment=ambiguous marker=""like"" from=$c1 to=$n4
+@n4 syntax.nominal head=""that""
+@r3 syntax.relation marker=""in"" from=$n4 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""scene""
+@c2 syntax.clause form=nonfinite verb=""keeping"" complement=$n6
+@n6 syntax.nominal dependent=""the"" head=""rest""
+@r4 syntax.relation marker=""of"" from=$n6 to=$n7
+@n7 syntax.nominal dependent=""the"" head=""scene""
+@r5 syntax.relation marker=""as"" from=$c2 to=$c3
+@n8 syntax.nominal head=""it""
+@c3 syntax.clause form=declarative verb=""is"" subject=$n8
+@r6 syntax.relation from=$c1 to=$c2",spacy,judge
 "draw a huge grey rock on the hill, keeping everything else where it is",,,
 i want a huge grey rock on the hill — with everything else left where it is — over on our little canvas,,,
 "show a huge grey rock on the hill, keeping everything else where it is",,,
@@ -1284,16 +1364,16 @@ ad a big orange kite in the sky,,,
 "a small cat on the left, then have the woman next to the tent by the garden face left — over on our little canvas",,,
 draw a small pond at the bottom. add a duck on the pond. add a tall reed by the pond.,"@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""small"" head=""pond""
-@r1 syntax.relation marker=""at"" from=$n1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""at"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""bottom""
 @c2 syntax.clause form=imperative verb=""add"" complement=$n3
 @n3 syntax.nominal dependent=""a"" head=""duck""
-@r2 syntax.relation marker=""on"" from=$n3 to=$n4
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c2 to=$n4
 @n4 syntax.nominal dependent=""the"" head=""pond""
 @c3 syntax.clause form=imperative verb=""add"" complement=$n5
 @n5 syntax.nominal dependent=""a"" dependent=""tall"" head=""reed""
-@r3 syntax.relation marker=""by"" from=$n5 to=$n6
-@n6 syntax.nominal dependent=""the"" head=""pond""",spacy-direct+vss,agreement
+@r3 syntax.relation attachment=ambiguous marker=""by"" from=$c3 to=$n6
+@n6 syntax.nominal dependent=""the"" head=""pond""",prolog+z3,judge
 "add a small pond at the bottom, then put a duck on the pond, and finally place a tall reed by the pond.",,,
 "put a small pond at the bottom; after that, place a duck on the pond; last, put a tall reed by the pond.",,,
 "place a small pond at the bottom. next, draw a duck on the pond. then draw a tall reed by the pond.",,,
@@ -1376,7 +1456,21 @@ draw a house on the left. add a tree beside the house. add a sun in the top righ
 "place a house on the left. next, draw a tree beside the house. then draw a sun in the top right corner.",,,
 "sketch a house on the left, and sketch a tree beside the house, and at the end sketch a sun in the top right corner.",,,
 i want make a house on the left; also give me a tree beside the house; and include a sun in the top right corner.,,,
-"can you give me a house on the left, then bring in a tree beside the house, and show a sun in the top right corner?",,,
+"can you give me a house on the left, then bring in a tree beside the house, and show a sun in the top right corner?","@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""give"" subject=$n1 complement=$n2 complement=$n3
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""me""
+@n3 syntax.nominal dependent=""a"" head=""house""
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""left""
+@k1 syntax.coordination conjunction=""then"" conjunction=""and"" conjunct=$c1 conjunct=$c2 conjunct=$c3
+@c2 syntax.clause form=nonfinite verb=""bring"" modifier=""in"" complement=$n5
+@n5 syntax.nominal dependent=""a"" head=""tree""
+@r2 syntax.relation attachment=ambiguous marker=""beside"" from=$c2 to=$n6
+@n6 syntax.nominal dependent=""the"" head=""house""
+@c3 syntax.clause form=nonfinite verb=""show"" complement=$n7
+@n7 syntax.nominal dependent=""a"" head=""sun""
+@r3 syntax.relation attachment=ambiguous marker=""in"" from=$c3 to=$n8
+@n8 syntax.nominal dependent=""the"" dependent=""top"" dependent=""right"" head=""corner""",prolog,judge
 the scene: show a house on the left. show a tree beside the house. set a sun in the top right corner.,,,
 "include a house on the left, set a tree beside the house, and drop a sun in the top right corner.","@c1 syntax.clause form=imperative verb=""include"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""house""
@@ -1798,7 +1892,24 @@ darw a garden on the left. add a watering can by the garden. add a flower in the
 "a small cat on the left, then the house on the left is white, not yellow, remember? — keeping the rest of the scene as it is",,,
 "a big bench at the bottom, then actually the house on the left is white, not yellow — over on our little canvas",,,
 "a tiny bird at the top, then correct that — the boat on the lake is blue — the way the drawing looks so far",,,
-"a little cloud on the right, then i meant blue, not green, for the boat on the lake — so the scene reads the way it should",,,
+"a little cloud on the right, then i meant blue, not green, for the boat on the lake — so the scene reads the way it should","@n1 syntax.nominal dependent=""a"" dependent=""little"" head=""cloud""
+@r1 syntax.relation marker=""on"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""right""
+@k1 syntax.coordination conjunction=""then"" conjunction=""so"" conjunct=$c5 conjunct=$c1 conjunct=$c2 conjunct=$c3
+@n3 syntax.nominal head=""i""
+@c1 syntax.clause form=declarative verb=""meant"" modifier=""blue"" subject=$n3
+@c2 syntax.clause form=fragment negation=""not"" modifier=""green"" ellipsis=$c1
+@r2 syntax.relation marker=""for"" from=$c2 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""boat""
+@r3 syntax.relation marker=""on"" from=$n4 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""lake""
+@n6 syntax.nominal dependent=""the"" head=""scene""
+@c3 syntax.clause form=declarative verb=""reads"" subject=$n6 complement=$n7
+@n7 syntax.nominal dependent=""the"" head=""way""
+@n8 syntax.nominal head=""it""
+@c4 syntax.clause form=declarative verb=""should"" subject=$n8
+@c5 syntax.clause form=fragment complement=$n1
+@r4 syntax.relation from=$n7 to=$c4",prolog,judge
 "a big bench at the bottom, then not small: the dog by the tree is big — that is how the picture goes",,,
 "a small cat on the left, then make the dog by the tree big, not small — keeping the rest of the scene as it is",,,
 "a little cloud on the right, then no — the cloud in the sky is small, not big — over on our little canvas",,,

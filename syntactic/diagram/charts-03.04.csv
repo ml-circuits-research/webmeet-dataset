@@ -28,7 +28,9 @@ switch the error caps off,"@c1 syntax.clause form=imperative verb=""switch"" mod
 excuse me — turn the error caps off,,,
 let's lose the errror caps,,,
 make the error bars medium thickness,,,
-error bars medium thickness,,,
+error bars medium thickness,"@n1 syntax.nominal dependent=""error"" head=""bars""
+@n2 syntax.nominal dependent=""medium"" head=""thickness""
+@c1 syntax.clause form=fragment complement=$n1 complement=$n2",distilbert+z3,judge
 can you make the error bars medium thickness?,,,
 I'd like the error bars medium thickness on the sales chart,,,
 the error bars on Sales by month should be medium thickness,,,
@@ -270,8 +272,8 @@ hey — the missing piece: axis labels smaller on the sales chart,,,
 go for smallr axis labels on the sales chart,"@c1 syntax.clause form=imperative verb=""go""
 @r1 syntax.relation marker=""for"" from=$c1 to=$n1
 @n1 syntax.nominal dependent=""smallr"" dependent=""axis"" head=""labels""
-@r2 syntax.relation marker=""on"" from=$c1 to=$n2
-@n2 syntax.nominal dependent=""the"" dependent=""sales"" head=""chart""",spacy-direct+vss,agreement
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""sales"" head=""chart""",prolog+z3,judge
 make the arrowheads thicker,"@c1 syntax.clause form=imperative verb=""make"" modifier=""thicker"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""arrowheads""",spacy-direct+vss,agreement
 arrowheads thicker,,,
@@ -454,7 +456,11 @@ I'd like the colour bar maximum length on the sensor contour,,,
 let's have the colour bar maximum length on the sensor contour,,,
 the colour bar on Sensor readings by depth should be maximum length,,,
 try the colour bar maximum length,,,
-go for maximum length colour bar on the sensor contour,,,
+go for maximum length colour bar on the sensor contour,"@c1 syntax.clause form=imperative verb=""go""
+@r1 syntax.relation marker=""for"" from=$c1 to=$n1
+@n1 syntax.nominal dependent=""maximum"" dependent=""length"" dependent=""colour"" head=""bar""
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""sensor"" head=""contour""",distilbert+prolog,judge
 could you set the colour bar maximum length?,,,
 do the colour bar maximum length on the sensor contour,,,
 I want the colour bar maximum length on the sensor contour,"@n1 syntax.nominal head=""I""
@@ -489,7 +495,12 @@ how about wide slice explosion?,"@c1 syntax.clause form=fragment modifier=""how"
 slice explosion wide again,,,
 the missing piece: slice explosion wide on the budget pie,,,
 carry the same slice explosion tweak over to the staff pie,,,
-"um, the missing piece: slice explosion wide on the budget pie",,,
+"um, the missing piece: slice explosion wide on the budget pie","@c1 syntax.clause form=fragment discourse=""um"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""missing"" head=""piece""
+@n2 syntax.nominal dependent=""slice"" head=""explosion"" dependent=""wide""
+@r1 syntax.relation marker=""on"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""budget"" head=""pie""
+@r2 syntax.relation from=$n1 to=$n2",distilbert,judge
 try the slice explosion widi,,,
 how about wde slice explosion?,"@c1 syntax.clause form=fragment modifier=""how""
 @r1 syntax.relation marker=""about"" from=$c1 to=$n1
@@ -1045,11 +1056,11 @@ chart out the sum profit by reggion and by segment,,,
 I want the total sales by category and by region,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""want"" subject=$n1 complement=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""total"" head=""sales""
-@r1 syntax.relation marker=""by"" from=$n2 to=$n3
+@r1 syntax.relation attachment=ambiguous marker=""by"" from=$c1 to=$n3
 @n3 syntax.nominal head=""category""
 @k1 syntax.coordination conjunction=""and"" conjunct=$r1 conjunct=$r2
-@r2 syntax.relation marker=""by"" from=$n2 to=$n4
-@n4 syntax.nominal head=""region""",spacy-direct+vss,agreement
+@r2 syntax.relation attachment=ambiguous marker=""by"" from=$c1 to=$n4
+@n4 syntax.nominal head=""region""",prolog+z3,judge
 "chart out the summed sales broken down by region, across categorys",,,
 "total sales per category, the bars stacked by region",,,
 "build the totalled sales broken down by region, across categorys","@c1 syntax.clause form=imperative verb=""build"" complement=$n1
@@ -1509,10 +1520,10 @@ set up a tree of animal groups with three levels of boxes,"@c1 syntax.clause for
 @n1 syntax.nominal dependent=""a"" head=""tree""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""animal"" head=""groups""
-@r2 syntax.relation marker=""with"" from=$c1 to=$n3
+@r2 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""three"" head=""levels""
 @r3 syntax.relation marker=""of"" from=$n3 to=$n4
-@n4 syntax.nominal head=""boxes""",spacy-direct+vss,agreement
+@n4 syntax.nominal head=""boxes""",prolog+spacy,judge
 "create a tree of instrument families, grow it downwards, and give the branches even gaps",,,
 "good, now a tree of instrument families the same way as before, and link the levels left to right this time",,,
 draft a tree of animal groups with the branches fanning out wide,,,
@@ -1896,7 +1907,16 @@ could you draw up swimlanes for the weekly release?,"@c1 syntax.clause form=inte
 @n2 syntax.nominal head=""swimlanes""
 @r1 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""the"" dependent=""weekly"" head=""release""",spacy-direct+vss,agreement
-"I want the the support rota workflow as a swimlane, each squad in its own lane",,,
+"I want the the support rota workflow as a swimlane, each squad in its own lane","@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""want"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""the"" dependent=""support"" dependent=""rota"" head=""workflow""
+@r1 syntax.relation marker=""as"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""a"" head=""swimlane""
+@n4 syntax.nominal dependent=""each"" head=""squad""
+@r2 syntax.relation marker=""in"" from=$n4 to=$n5
+@n5 syntax.nominal dependent=""its"" dependent=""own"" head=""lane""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=fragment complement=$n4",spacy,judge
 let's have a swimlane diagram covering the weekly release,,,
 how do I put the support rota into a swimlane diagram?,"@c1 syntax.clause form=interrogative modifier=""how"" auxiliary=""do"" verb=""put"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""I""
@@ -1970,7 +1990,18 @@ put the lab onboarding stages end to end and wire them in sequence,,,
 "build a left-to-right strip of the invoice approval steps, joined arrow to box",,,
 "sketch the lab onboarding flow as four stops along one line, arrows between the stops",,,
 "a horizontal chain of the invoice approval events, one box after another, please",,,
-"we want the invoice approval steps reading across the page, chained one to the next",,,
+"we want the invoice approval steps reading across the page, chained one to the next","@n1 syntax.nominal head=""we""
+@c1 syntax.clause form=declarative verb=""want"" subject=$n1
+@n2 syntax.nominal dependent=""the"" dependent=""invoice"" dependent=""approval"" head=""steps""
+@c2 syntax.clause form=nonfinite verb=""reading"" subject=$n2
+@r1 syntax.relation marker=""across"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""page""
+@c3 syntax.clause form=nonfinite verb=""chained"" complement=$n4
+@n4 syntax.nominal head=""one""
+@r2 syntax.relation marker=""to"" from=$n4 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""next""
+@r3 syntax.relation from=$c1 to=$c2
+@r4 syntax.relation from=$c2 to=$c3",spacy,judge
 "same invoice approval chain, one more box this time",,,
 "give me the lab onboarding sequence as four cards in one row, chained left to right, with a loop-back running under the row for the repeats",,,
 "set the invoice approval steps across the page, join them in order, and bend the last arrow back to the start","@c1 syntax.clause form=imperative verb=""set"" complement=$n1
@@ -1988,7 +2019,13 @@ put the lab onboarding stages end to end and wire them in sequence,,,
 @n6 syntax.nominal dependent=""the"" head=""start""",spacy-direct+vss,agreement
 draw the invoice approval queue as one horizontal band: five steps in the row and the connectors short and straight,,,
 chain the lab onboarding boxes lfet to right,,,
-could u draw me a simple flow chart of how pizza ordering works,,,
+could u draw me a simple flow chart of how pizza ordering works,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""draw"" subject=$n1 complement=$n2 complement=$n3
+@n1 syntax.nominal head=""u""
+@n2 syntax.nominal head=""me""
+@n3 syntax.nominal dependent=""a"" dependent=""simple"" dependent=""flow"" head=""chart""
+@r1 syntax.relation marker=""of"" from=$n3 to=$c2
+@c2 syntax.clause form=interrogative modifier=""how"" verb=""works"" subject=$n4
+@n4 syntax.nominal dependent=""pizza"" head=""ordering""",distilbert+spacy,judge
 ok so i need a flowchart for the customer refund process,,,
 "flowchart of how a library loan gets processed please, that's all i'm after",,,
 "hi, can you make a flowchart showing how pizza ordering works?",,,

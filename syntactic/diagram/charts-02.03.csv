@@ -259,10 +259,10 @@ do the colour scale pale yellow to deep blue on the sales heatmap,,,
 I want the colour scale pale yellow to deep blue on the sales heatmap,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""want"" modifier=""pale"" modifier=""yellow"" subject=$n1 complement=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""colour"" head=""scale""
-@r1 syntax.relation marker=""to"" from=$c1 to=$n3
+@r1 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""deep"" head=""blue""
 @r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n4
-@n4 syntax.nominal dependent=""the"" dependent=""sales"" head=""heatmap""",spacy-direct+vss,agreement
+@n4 syntax.nominal dependent=""the"" dependent=""sales"" head=""heatmap""",z3,judge
 "half the stand-up was grumbling that the numbers were impossible to read from the corridor screen; to settle it, make the colour scale pale yellow to deep blue going forward, and put the y axis on the right",,,
 "for the monthly ops review on Friday I need the sales heatmap legible from the back of the conference room, so make the colour scale pale yellow to deep blue before we circulate it wider — while you're at it, make the font a bit bigger",,,
 "set the colour scale pale yellow to deep blue, that's the tweak, could you also put the y axis on the right",,,
@@ -612,8 +612,8 @@ turn the chart into a line chart,"@c1 syntax.clause form=imperative verb=""turn"
 @n2 syntax.nominal dependent=""a"" dependent=""line"" head=""chart""",spacy-direct+vss,agreement
 switch the chart over to a line chart,"@c1 syntax.clause form=imperative verb=""switch"" modifier=""over"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""chart""
-@r1 syntax.relation marker=""to"" from=$c1 to=$n2
-@n2 syntax.nominal dependent=""a"" dependent=""line"" head=""chart""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""line"" head=""chart""",prolog,judge
 can you make it a line chart?,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""make"" subject=$n1 complement=$n2 complement=$n3
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""it""
@@ -791,7 +791,35 @@ chart Shop prices there too,,,
 and also Shop prices — that's the title for the chart,,,
 the title on the order histogram should be Shop prces,,,
 I'd like the chart titled Sop prices,,,
-"for the monthly ops review on Friday I need the claims chart legible from the back of the conference room, so put the line width back to the original size before we circulate it wider — while you're at it, drop the legend on the right",,,
+"for the monthly ops review on Friday I need the claims chart legible from the back of the conference room, so put the line width back to the original size before we circulate it wider — while you're at it, drop the legend on the right","@r1 syntax.relation marker=""for"" from=$c1 to=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""monthly"" dependent=""ops"" head=""review""
+@r2 syntax.relation marker=""on"" from=$n1 to=$n2
+@n2 syntax.nominal head=""Friday""
+@n3 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" modifier=""legible"" subject=$n3 complement=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""claims"" head=""chart""
+@r3 syntax.relation marker=""from"" from=$c1 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""back""
+@r4 syntax.relation marker=""of"" from=$n5 to=$n6
+@n6 syntax.nominal dependent=""the"" dependent=""conference"" head=""room""
+@k1 syntax.coordination conjunction=""so"" conjunct=$c1 conjunct=$c2 conjunct=$c5
+@c2 syntax.clause form=imperative verb=""put"" modifier=""back"" complement=$n7
+@n7 syntax.nominal dependent=""the"" dependent=""line"" head=""width""
+@r5 syntax.relation marker=""to"" from=$c2 to=$n8
+@n8 syntax.nominal dependent=""the"" dependent=""original"" head=""size""
+@r6 syntax.relation marker=""before"" from=$c2 to=$c3
+@n9 syntax.nominal head=""we""
+@c3 syntax.clause form=declarative verb=""circulate"" modifier=""wider"" subject=$n9 complement=$n10
+@n10 syntax.nominal head=""it""
+@r7 syntax.relation marker=""while"" from=$c5 to=$c4
+@n11 syntax.nominal head=""you""
+@c4 syntax.clause form=declarative verb=""'re"" subject=$n11
+@r8 syntax.relation marker=""at"" from=$c4 to=$n12
+@n12 syntax.nominal head=""it""
+@c5 syntax.clause form=imperative verb=""drop"" complement=$n13
+@n13 syntax.nominal dependent=""the"" head=""legend""
+@r9 syntax.relation marker=""on"" from=$c5 to=$n14
+@n14 syntax.nominal dependent=""the"" head=""right""",spacy,judge
 "when the board dials in tomorrow morning the first chart they open is Claims by month, so for their sake put the line width back to the original size before the meeting starts. and then put the y axis on the right",,,
 "I'd like the line width returned to the original size, and give it the title Claims history",,,
 "shift the line width back to the original size — while you're at it, show both grid lines",,,
@@ -1267,7 +1295,20 @@ tick spacing in steps of two. show grid lines,"@n1 syntax.nominal dependent=""ti
 @c1 syntax.clause form=imperative verb=""show"" complement=$n4
 @n4 syntax.nominal dependent=""grid"" head=""lines""
 @c2 syntax.clause form=fragment complement=$n1",spacy-direct+vss,agreement
-the tick spacing on Orders by weekday want to be in steps of two. font bigger,,,
+the tick spacing on Orders by weekday want to be in steps of two. font bigger,"@n1 syntax.nominal dependent=""the"" dependent=""tick"" head=""spacing""
+@r1 syntax.relation marker=""on"" from=$n1 to=$n2
+@n2 syntax.nominal head=""Orders""
+@r2 syntax.relation marker=""by"" from=$n2 to=$n3
+@n3 syntax.nominal head=""weekday""
+@c1 syntax.clause form=declarative verb=""want"" subject=$n1
+@r3 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""be""
+@r4 syntax.relation marker=""in"" from=$c2 to=$n4
+@n4 syntax.nominal head=""steps""
+@r5 syntax.relation marker=""of"" from=$n4 to=$n5
+@n5 syntax.nominal head=""two""
+@n6 syntax.nominal head=""font"" dependent=""bigger""
+@c3 syntax.clause form=fragment complement=$n6",vss,judge
 the missing piece: tick spacing in steps of two on the orders chart. title Orders per day,,,
 "half the stand-up was grumbling that the numbers were impossible to read from the corridor screen; to settle it, make the ticks denser going forward. and then make the font a bit bigger",,,
 "when the board dials in tomorrow morning the first chart they open is Revenue by department, so for their sake make the ticks denser before the meeting starts; plus give it the title Revenue by department",,,
@@ -1822,7 +1863,12 @@ could you take the slices back to flush together; plus drop the legend on the ri
 @n3 syntax.nominal dependent=""the"" head=""legend""
 @r2 syntax.relation marker=""on"" from=$n3 to=$n4
 @n4 syntax.nominal dependent=""the"" head=""right""",spacy-direct+vss,agreement
-slices back to flush together. font bigger,,,
+slices back to flush together. font bigger,"@n1 syntax.nominal head=""slices""
+@c1 syntax.clause form=fragment modifier=""back"" modifier=""together"" complement=$n1
+@r1 syntax.relation marker=""to"" from=$n1 to=$n2
+@n2 syntax.nominal head=""flush""
+@n3 syntax.nominal head=""font""
+@c2 syntax.clause form=fragment modifier=""bigger"" complement=$n3",prolog+z3,judge
 Headcount by department: slices back to flush together. legend on the right,,,
 "half the stand-up was grumbling that the numbers were impossible to read from the corridor screen; to settle it, make the gaps between the slices wider going forward, and drop the legend on the right",,,
 "when the board dials in tomorrow morning the first chart they open is Headcount by department, so for their sake make the gaps between the slices wider before the meeting starts, could you also show the percentages",,,
@@ -1833,7 +1879,28 @@ Headcount by department: slices back to flush together. legend on the right,,,
 gaps between the slices wider. font bigger,,,
 the gaps between the slices on Headcount by department want to be wider. percentages on,,,
 the missing piece: gaps between the slices wider on the staff pie. title Team headcount,,,
-"for the monthly ops review on Friday I need the budget pie legible from the back of the conference room, so show the leader lines before we circulate it wider. and then drop the legend on the right",,,
+"for the monthly ops review on Friday I need the budget pie legible from the back of the conference room, so show the leader lines before we circulate it wider. and then drop the legend on the right","@r1 syntax.relation marker=""for"" from=$c1 to=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""monthly"" dependent=""ops"" head=""review""
+@r2 syntax.relation marker=""on"" from=$n1 to=$n2
+@n2 syntax.nominal head=""Friday""
+@n3 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" modifier=""legible"" subject=$n3 complement=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""budget"" head=""pie""
+@r3 syntax.relation marker=""from"" from=$c1 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""back""
+@r4 syntax.relation marker=""of"" from=$n5 to=$n6
+@n6 syntax.nominal dependent=""the"" dependent=""conference"" head=""room""
+@k1 syntax.coordination conjunction=""so"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""show"" complement=$n7
+@n7 syntax.nominal dependent=""the"" dependent=""leader"" head=""lines""
+@r5 syntax.relation marker=""before"" from=$c2 to=$c3
+@n8 syntax.nominal head=""we""
+@c3 syntax.clause form=declarative verb=""circulate"" modifier=""wider"" subject=$n8 complement=$n9
+@n9 syntax.nominal head=""it""
+@c4 syntax.clause form=imperative discourse=""and"" modifier=""then"" verb=""drop"" complement=$n10
+@n10 syntax.nominal dependent=""the"" head=""legend""
+@r6 syntax.relation marker=""on"" from=$c4 to=$n11
+@n11 syntax.nominal dependent=""the"" head=""right""",spacy,judge
 "the junior pulled the figures together overnight and left the budget pie looking unfinished round the edges, so show the leader lines and I'll take it from there, could you also make the font a bit bigger",,,
 how about the leader lines to guide the eye; plus drop the legend on the right,"@c1 syntax.clause form=fragment modifier=""how""
 @r1 syntax.relation marker=""about"" from=$c1 to=$n1

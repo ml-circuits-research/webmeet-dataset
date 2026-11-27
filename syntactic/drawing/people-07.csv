@@ -172,8 +172,8 @@ for the astronaut picture she should have short hair under the helmet,"@r1 synta
 @n2 syntax.nominal head=""she""
 @c1 syntax.clause form=declarative auxiliary=""should"" verb=""have"" subject=$n2 complement=$n3
 @n3 syntax.nominal dependent=""short"" head=""hair""
-@r2 syntax.relation marker=""under"" from=$n3 to=$n4
-@n4 syntax.nominal dependent=""the"" head=""helmet""",spacy-direct+vss,agreement
+@r2 syntax.relation attachment=ambiguous marker=""under"" from=$c1 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""helmet""",prolog+spacy+z3,judge
 "if you can, change her hair to short but keep the colour",,,
 "she got a pixie cut yesterday, so her hair should be short",,,
 "my sister has short hair, so make the avatar match her",,,
@@ -181,7 +181,8 @@ short hair,"@n1 syntax.nominal dependent=""short"" head=""hair""
 @c1 syntax.clause form=fragment complement=$n1",spacy-direct+vss,agreement
 short hair please,"@n1 syntax.nominal dependent=""short"" head=""hair""
 @c1 syntax.clause form=fragment discourse=""please"" complement=$n1",spacy-direct+vss,agreement
-hair short,,,
+hair short,"@n1 syntax.nominal head=""hair""
+@c1 syntax.clause form=fragment modifier=""short"" complement=$n1",prolog+spacy+z3,judge
 short hair for her,"@n1 syntax.nominal dependent=""short"" head=""hair""
 @r1 syntax.relation marker=""for"" from=$n1 to=$n2
 @n2 syntax.nominal head=""her""
@@ -381,7 +382,13 @@ straighten her hair so it's straight,"@c1 syntax.clause form=imperative verb=""s
 please make the hair straight,"@c1 syntax.clause form=imperative discourse=""please"" verb=""make"" modifier=""straight"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""hair""",spacy-direct+vss,agreement
 can her hair be straight,,,
-"she used a straightener this morning, so her hair should be straight",,,
+"she used a straightener this morning, so her hair should be straight","@n1 syntax.nominal head=""she""
+@c1 syntax.clause form=declarative verb=""used"" subject=$n1 complement=$n2 complement=$n3
+@n2 syntax.nominal dependent=""a"" head=""straightener""
+@n3 syntax.nominal dependent=""this"" head=""morning""
+@k1 syntax.coordination conjunction=""so"" conjunct=$c1 conjunct=$c2
+@n4 syntax.nominal dependent=""her"" head=""hair""
+@c2 syntax.clause form=declarative auxiliary=""should"" verb=""be"" modifier=""straight"" subject=$n4",distilbert+prolog+vss+z3,judge
 could you make her hair straight like it was before the perm?,,,
 the curls look too wild; give her straight hair instead,,,
 "for the business photo, make the hair straight and neat",,,

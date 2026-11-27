@@ -299,7 +299,9 @@ i meant the dog a size bigger — the way the drawing looks so far — exactly w
 "keeping the other pieces as they are, the dog again, this time a size bigger — the way the drawing looks so far",,,
 "everything else stays, but no wait, the dog a size bigger — exactly where the picture needs it — so the scene reads the way it should",,,
 "keeping the other pieces, my mistake, the dog a size bigger — so the scene reads the way it should",,,
-the dog a size bigger,,,
+the dog a size bigger,"@n1 syntax.nominal dependent=""the"" head=""dog""
+@n2 syntax.nominal dependent=""a"" head=""size""
+@c1 syntax.clause form=fragment modifier=""bigger"" complement=$n1 complement=$n2",prolog+spacy+z3,judge
 "sorry, a size bigger for the dog",,,
 "actually, a size bigger, the dog",,,
 "hey — sorry, the dog should be a size bigger","@c1 syntax.clause form=declarative discourse=""hey"" discourse=""sorry"" auxiliary=""should"" verb=""be"" modifier=""bigger"" subject=$n1 complement=$n2
@@ -338,8 +340,10 @@ now make the odg bigger,,,
 make the boy face left next to the house,,,
 "turn the boy left, next to the house","@c1 syntax.clause form=imperative verb=""turn"" modifier=""left"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""boy""
-@r1 syntax.relation marker=""next to"" from=$n1 to=$n2
-@n2 syntax.nominal dependent=""the"" head=""house""",spacy-direct+vss,agreement
+@r1 syntax.relation marker=""next to"" from=$c2 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""house""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=fragment",prolog,judge
 make the girl face right beside the tree,,,
 "turn the girl right, beside the tree","@c1 syntax.clause form=imperative verb=""turn"" modifier=""right"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""girl""
@@ -461,7 +465,12 @@ let the first cat face the sun — so the scene reads the way it should — righ
 @r4 syntax.relation from=$c2 to=$c3",spacy-direct+vss,agreement
 "get the first cat to turn to the sun, and a little cloud over on the right — with everything else left where it is",,,
 "i want the first cat to face the sun, and a tiny bird up near the top — and that is the whole scene",,,
-make the first cat look at the sun,,,
+make the first cat look at the sun,"@c1 syntax.clause form=imperative verb=""make"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""first"" head=""cat""
+@c2 syntax.clause form=nonfinite verb=""look""
+@r1 syntax.relation marker=""at"" from=$c2 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""sun""
+@r2 syntax.relation from=$c1 to=$c2",prolog+z3,judge
 "the first cat, facing the sun",,,
 hey — the first cat faces the sun,"@c1 syntax.clause form=declarative discourse=""hey"" verb=""faces"" subject=$n1 complement=$n2
 @n1 syntax.nominal dependent=""the"" dependent=""first"" head=""cat""
@@ -475,7 +484,20 @@ tunr the first cat to face the sun,,,
 the nearer dog faces the bench — the way the drawing looks so far — exactly where the picture needs it,,,
 i want the nearer dog to face the bench — so the scene reads the way it should — right there in the picture,,,
 "can you have the nearer dog face the bench, keeping everything else where it is",,,
-could the nearer dog turn toward the bench — that is how the picture goes — just like that in the scene,,,
+could the nearer dog turn toward the bench — that is how the picture goes — just like that in the scene,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""turn"" modifier=""just"" subject=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""nearer"" head=""dog""
+@r1 syntax.relation marker=""toward"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""bench""
+@n3 syntax.nominal head=""that""
+@c2 syntax.clause form=declarative verb=""is"" subject=$n3
+@c3 syntax.clause form=declarative modifier=""how"" verb=""goes"" subject=$n4
+@n4 syntax.nominal dependent=""the"" head=""picture""
+@r2 syntax.relation marker=""like"" from=$c1 to=$n5
+@n5 syntax.nominal head=""that""
+@r3 syntax.relation marker=""in"" from=$n5 to=$n6
+@n6 syntax.nominal dependent=""the"" head=""scene""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2
+@r4 syntax.relation from=$c2 to=$c3",spacy,judge
 "show the nearer dog facing the bench, keeping everything else where it is",,,
 let the nearer dog face the bench — keeping the rest of the scene as it is — with everything else left where it is,,,
 "put the nearer dog facing the bench, keeping everything else where it is",,,
@@ -674,7 +696,17 @@ could both kids all turn to the tree — over on our little canvas — and that 
 "i want both kids facing the tree, keeping everything else where it is",,,
 get both kids to face the tree — the way the drawing looks so far — exactly where the picture needs it,,,
 "show both kids facing the tree, keeping everything else where it is",,,
-"put both kids facing the tree, keeping everything else where it is",,,
+"put both kids facing the tree, keeping everything else where it is","@c1 syntax.clause form=imperative verb=""put"" complement=$n1
+@n1 syntax.nominal dependent=""both"" head=""kids""
+@c2 syntax.clause form=nonfinite verb=""facing"" complement=$n2
+@n2 syntax.nominal dependent=""the"" head=""tree""
+@c3 syntax.clause form=nonfinite verb=""keeping"" modifier=""else"" complement=$n3
+@n3 syntax.nominal head=""everything""
+@r1 syntax.relation marker=""where"" from=$c3 to=$c4
+@n4 syntax.nominal head=""it""
+@c4 syntax.clause form=declarative verb=""is"" subject=$n4
+@r2 syntax.relation from=$n1 to=$c2
+@r3 syntax.relation from=$c2 to=$c3",z3,judge
 "both kids should face the tree, keeping everything else where it is",,,
 "both kids, all facing the tree, keeping everything else where it is",,,
 "could both kids all turn to the tree, and a tiny bird up near the top — just like that in the scene",,,
@@ -744,7 +776,16 @@ amke both kids bigger,"@c1 syntax.clause form=imperative verb=""amke"" modifier=
 "no, the boat goes to the right side — otherwise it covers the sun from there",,,
 "sorry, move the boat to the right side, because it covers the sun from there — keeping the rest of the scene as it is",,,
 "actually, put the boat to the right side; it covers the sun from there",,,
-"oops, the boat belongs to the right side — it covers the sun from there",,,
+"oops, the boat belongs to the right side — it covers the sun from there","@c1 syntax.clause form=declarative discourse=""oops"" verb=""belongs"" subject=$n1
+@n1 syntax.nominal dependent=""the"" head=""boat""
+@r1 syntax.relation marker=""to"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""right"" head=""side""
+@n3 syntax.nominal head=""it""
+@c2 syntax.clause form=declarative verb=""covers"" subject=$n3 complement=$n4
+@n4 syntax.nominal dependent=""the"" head=""sun""
+@r2 syntax.relation attachment=ambiguous marker=""from"" from=$c2 to=$n5
+@n5 syntax.nominal head=""there""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2",prolog,judge
 "not there, the boat goes to the right side, so it covers the sun from there — the way the drawing looks so far",,,
 "rather, the boat goes to the right side, because it covers the sun from there",,,
 "change that: the boat goes to the right side, because it covers the sun from there — so the scene reads the way it should",,,
@@ -829,7 +870,19 @@ no — the dog goes to the middle,,,
 "the sun again, this time to the top right, because the sky stays empty on the left",,,
 "no wait, the sun goes to the top right — the sky stays empty on the left",,,
 "no wait, the sun goes to the top right — the sky stays empty on the left, and a big bench down at the bottom",,,
-"actually, put the sun to the top right; the sky stays empty on the left, and a small cat way off on the left",,,
+"actually, put the sun to the top right; the sky stays empty on the left, and a small cat way off on the left","@c1 syntax.clause form=imperative modifier=""actually"" verb=""put"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""sun""
+@r1 syntax.relation marker=""to"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""top"" head=""right""
+@n3 syntax.nominal dependent=""the"" head=""sky""
+@c2 syntax.clause form=declarative verb=""stays"" modifier=""empty"" subject=$n3
+@r2 syntax.relation marker=""on"" from=$c2 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""left""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2 conjunct=$c3
+@n5 syntax.nominal dependent=""a"" dependent=""small"" head=""cat""
+@c3 syntax.clause form=fragment modifier=""way"" modifier=""off"" complement=$n5 ellipsis=$c2
+@r3 syntax.relation marker=""on"" from=$c3 to=$n6
+@n6 syntax.nominal dependent=""the"" head=""left""",spacy,judge
 "the sun goes to the top right, because the sky stays empty on the left",,,
 "sorry, the sun goes to the top right, since the sky stays empty on the left",,,
 no — the sun goes to the top right,,,
@@ -877,7 +930,23 @@ no — the cat goes on the bench,,,
 "i meant the cloud to the top, since it hides the sun otherwise — over on our little canvas — and that is the whole scene",,,
 "oops, the cloud belongs to the top — it hides the sun otherwise",,,
 "rather, the cloud goes to the top, because it hides the sun otherwise",,,
-"change that: the cloud goes to the top, because it hides the sun otherwise — so the scene reads the way it should",,,
+"change that: the cloud goes to the top, because it hides the sun otherwise — so the scene reads the way it should","@c1 syntax.clause form=imperative verb=""change"" complement=$n1
+@n1 syntax.nominal head=""that""
+@n2 syntax.nominal dependent=""the"" head=""cloud""
+@c2 syntax.clause form=declarative verb=""goes"" subject=$n2
+@r1 syntax.relation marker=""to"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""top""
+@r2 syntax.relation marker=""because"" from=$c2 to=$c3
+@n4 syntax.nominal head=""it""
+@c3 syntax.clause form=declarative verb=""hides"" modifier=""otherwise"" subject=$n4 complement=$n5
+@n5 syntax.nominal dependent=""the"" head=""sun""
+@k1 syntax.coordination conjunction=""so"" conjunct=$c1 conjunct=$c2 conjunct=$c4
+@n6 syntax.nominal dependent=""the"" head=""scene""
+@c4 syntax.clause form=declarative verb=""reads"" subject=$n6 complement=$n7
+@n7 syntax.nominal dependent=""the"" head=""way""
+@n8 syntax.nominal head=""it""
+@c5 syntax.clause form=declarative verb=""should"" subject=$n8
+@r3 syntax.relation from=$n7 to=$c5",prolog,judge
 "can you correct that and put the cloud to the top, since it hides the sun otherwise",,,
 "the cloud again, this time to the top, because it hides the sun otherwise",,,
 "no wait, the cloud goes to the top — it hides the sun otherwise",,,
@@ -1142,7 +1211,14 @@ shift that kite to the left of the sun and down from the cloud,"@c1 syntax.claus
 @n3 syntax.nominal dependent=""the"" head=""sun""
 @r3 syntax.relation marker=""from"" from=$c1 to=$n4
 @n4 syntax.nominal dependent=""the"" head=""cloud""",spacy-direct+vss,agreement
-park the kite just left of the sun and under the cloud,,,
+park the kite just left of the sun and under the cloud,"@c1 syntax.clause form=imperative verb=""park"" modifier=""just"" complement=$n1 complement=$n2
+@n1 syntax.nominal dependent=""the"" head=""kite""
+@n2 syntax.nominal head=""left""
+@r1 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""sun""
+@k1 syntax.coordination conjunction=""and"" conjunct=$r1 conjunct=$r2
+@r2 syntax.relation marker=""under"" from=$n2 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""cloud""",z3,judge
 can you put the kite left of the sun and lower than the cloud?,,,
 could you move that kite left of the sun and below the cloud?,,,
 the kite needs to go to the left of the sun and down from the cloud,"@n1 syntax.nominal dependent=""the"" head=""kite""
@@ -1497,15 +1573,22 @@ could you shift the woman in the blue hat over to the right?,"@c1 syntax.clause 
 @r2 syntax.relation marker=""to"" from=$c1 to=$n4
 @n4 syntax.nominal dependent=""the"" head=""right""",spacy-direct+vss,agreement
 have the blue-hat woman step to the right,,,
-make the woman in the blue hat and green shirt go right,,,
+make the woman in the blue hat and green shirt go right,"@c1 syntax.clause form=imperative verb=""make""
+@n1 syntax.nominal dependent=""the"" head=""woman""
+@r1 syntax.relation marker=""in"" from=$n1 to=$k1
+@n2 syntax.nominal dependent=""the"" dependent=""blue"" head=""hat""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n3
+@n3 syntax.nominal dependent=""green"" head=""shirt""
+@c2 syntax.clause form=nonfinite verb=""go"" modifier=""right"" subject=$n1
+@r2 syntax.relation from=$c1 to=$c2",spacy,judge
 the woman in the blue hat needs to move over to the right,"@n1 syntax.nominal dependent=""the"" head=""woman""
 @r1 syntax.relation marker=""in"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""blue"" head=""hat""
 @c1 syntax.clause form=declarative verb=""needs"" subject=$n1
 @r2 syntax.relation marker=""to"" from=$c1 to=$c2
-@c2 syntax.clause form=nonfinite verb=""move"" modifier=""over""
-@r3 syntax.relation marker=""to"" from=$c2 to=$n3
-@n3 syntax.nominal dependent=""the"" head=""right""",spacy-direct+vss,agreement
+@c2 syntax.clause form=nonfinite verb=""move""
+@r3 syntax.relation marker=""over to"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""right""",z3,judge
 just move the woman in the blue hat right,,,
 "the blue-hat woman over to the right, that's all",,,
 the woman in the blue hat and green shirt gets to the right,,,
@@ -1567,7 +1650,16 @@ can you move he over to the far right?,"@c1 syntax.clause form=interrogative aux
 @n3 syntax.nominal dependent=""the"" dependent=""far"" head=""right""",spacy-direct+vss,agreement
 could you shift the man in the purple shirt all the way right?,,,
 have the purple-shirt man step to the far right,,,
-make the man in the purple shirt and no hat go over to the far right,,,
+make the man in the purple shirt and no hat go over to the far right,"@c1 syntax.clause form=imperative verb=""make""
+@n1 syntax.nominal dependent=""the"" head=""man""
+@r1 syntax.relation marker=""in"" from=$n1 to=$k1
+@n2 syntax.nominal dependent=""the"" dependent=""purple"" head=""shirt""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n3
+@n3 syntax.nominal dependent=""no"" head=""hat""
+@c2 syntax.clause form=nonfinite verb=""go"" modifier=""over"" subject=$n1
+@r2 syntax.relation marker=""to"" from=$c2 to=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""far"" head=""right""
+@r3 syntax.relation from=$c1 to=$c2",spacy,judge
 the man in the purple shirt needs to move all the way right,,,
 just move the man in the purple shirt over to the far right,"@c1 syntax.clause form=imperative modifier=""just"" verb=""move"" modifier=""over"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""man""

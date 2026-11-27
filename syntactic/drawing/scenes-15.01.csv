@@ -223,9 +223,9 @@ would you clear the man in the purple shirt on the left end?,"@c1 syntax.clause 
 the person in purple on the left end out,"@n1 syntax.nominal dependent=""the"" head=""person""
 @r1 syntax.relation marker=""in"" from=$n1 to=$n2
 @n2 syntax.nominal head=""purple""
-@r2 syntax.relation marker=""on"" from=$n1 to=$n3
+@r2 syntax.relation marker=""on"" from=$n2 to=$n3
 @n3 syntax.nominal dependent=""the"" dependent=""left"" head=""end""
-@c1 syntax.clause form=fragment modifier=""out"" complement=$n1",spacy-direct+vss,agreement
+@c1 syntax.clause form=fragment modifier=""out"" complement=$n1",prolog,judge
 doar the woman in purple on the left end from the line,,,
 creep the person with the orange hat half a fingertip to the left,,,
 inch the boy in the blue shirt a hand-width closer to the house,,,
@@ -617,7 +617,16 @@ a single flower right inside the wooden fence.,"@n1 syntax.nominal dependent=""a
 @c1 syntax.clause form=fragment modifier=""right"" complement=$n1
 @r1 syntax.relation marker=""inside"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""wooden"" head=""fence""",spacy-direct+vss,agreement
-"inside the low fence, there should be a young dog, on the lan with the gate still reachable.",,,
+"inside the low fence, there should be a young dog, on the lan with the gate still reachable.","@r1 syntax.relation marker=""inside"" from=$c1 to=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""low"" head=""fence""
+@n2 syntax.nominal head=""there""
+@c1 syntax.clause form=declarative auxiliary=""should"" verb=""be"" subject=$n2 complement=$n3
+@n3 syntax.nominal dependent=""a"" dependent=""young"" head=""dog""
+@r2 syntax.relation marker=""on"" from=$c1 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""lan""
+@r3 syntax.relation marker=""with"" from=$c1 to=$c2
+@n5 syntax.nominal dependent=""the"" head=""gate""
+@c2 syntax.clause form=fragment modifier=""still"" modifier=""reachable"" complement=$n5",spacy,judge
 "could you put a grey rock on the outside of the wooden fence, on the lane side where the grass is rough.","@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""put"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""a"" dependent=""grey"" head=""rock""
@@ -670,7 +679,13 @@ leave the small bench where it is.,"@c1 syntax.clause form=imperative verb=""lea
 @c2 syntax.clause form=declarative verb=""is"" subject=$n2",spacy-direct+vss,agreement
 leave the old bench exactly as it is.,,,
 "let the small barn go clear of the road, and leave the gate clear.",,,
-"move the small barn off the road, and leave the gate clear.",,,
+"move the small barn off the road, and leave the gate clear.","@c1 syntax.clause form=imperative verb=""move"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""small"" head=""barn""
+@r1 syntax.relation attachment=ambiguous marker=""off"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""road""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""leave"" modifier=""clear"" complement=$n3
+@n3 syntax.nominal dependent=""the"" head=""gate""",prolog+z3,judge
 the wooden barn away from the road.,"@n1 syntax.nominal dependent=""the"" dependent=""wooden"" head=""barn""
 @r1 syntax.relation marker=""away from"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""road""
@@ -1172,7 +1187,33 @@ ban the dogs today — and that is the whole scene — the way the drawing looks
 "draw a large white bandstand in the middle, two medium musicians facing right standing right on the bandstand, three medium brown benches in a row right in front of the bandstand, and a small boy standing next to the bandstand",,,
 "show me a large white bandstand in the middle, in front of the bandstand, three medium brown benches in a row, two medium musicians facing right standing right on the bandstand, and a small boy standing just next to the bandstand",,,
 "show me a medium brown desk in the left part, a small boy sitting at the desk, right on the desk, a medium blue globe, and just above the desk, two small yellow birds",,,
-"set up the room scene: a large grey fireplace on the right, a medium red armchair next to the fireplace, a medium man facing right sitting on the armchair, a small grey scarf on the man, three small brown logs in the fireplace, and a medium brown dog next to the armchair",,,
+"set up the room scene: a large grey fireplace on the right, a medium red armchair next to the fireplace, a medium man facing right sitting on the armchair, a small grey scarf on the man, three small brown logs in the fireplace, and a medium brown dog next to the armchair","@c1 syntax.clause form=imperative verb=""set"" modifier=""up"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""room"" head=""scene""
+@n2 syntax.nominal dependent=""a"" dependent=""large"" dependent=""grey"" head=""fireplace""
+@r1 syntax.relation marker=""on"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""right""
+@n4 syntax.nominal dependent=""a"" dependent=""medium"" dependent=""red"" head=""armchair""
+@r2 syntax.relation marker=""next to"" from=$n4 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""fireplace""
+@n6 syntax.nominal dependent=""a"" dependent=""medium"" head=""man""
+@c2 syntax.clause form=nonfinite verb=""facing"" modifier=""right""
+@c3 syntax.clause form=nonfinite verb=""sitting""
+@r3 syntax.relation marker=""on"" from=$c3 to=$n7
+@n7 syntax.nominal dependent=""the"" head=""armchair""
+@n8 syntax.nominal dependent=""a"" dependent=""small"" dependent=""grey"" head=""scarf""
+@r4 syntax.relation marker=""on"" from=$n8 to=$n9
+@n9 syntax.nominal dependent=""the"" head=""man""
+@n10 syntax.nominal dependent=""three"" dependent=""small"" dependent=""brown"" head=""logs""
+@r5 syntax.relation marker=""in"" from=$n10 to=$n11
+@n11 syntax.nominal dependent=""the"" head=""fireplace""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n4 conjunct=$n6 conjunct=$n8 conjunct=$n10 conjunct=$n12
+@n12 syntax.nominal dependent=""a"" dependent=""medium"" dependent=""brown"" head=""dog""
+@r6 syntax.relation marker=""next to"" from=$n12 to=$n13
+@n13 syntax.nominal dependent=""the"" head=""armchair""
+@r7 syntax.relation from=$c1 to=$c4
+@r8 syntax.relation from=$n6 to=$c2
+@r9 syntax.relation from=$n6 to=$c3
+@c4 syntax.clause form=fragment complement=$k1",prolog,judge
 "make the tall kid beside the house face right, keeping everything else where it is",,,
 "a big bench down at the bottom, then i want the tall kid beside the house facing right — the way the drawing looks so far",,,
 "point the tall man next to the bench to the right, thanks","@c1 syntax.clause form=imperative verb=""point"" discourse=""thanks"" complement=$n1
@@ -1473,7 +1514,27 @@ i want the duck on the lake looking at the boat — right there in the picture �
 "a boy sitting on the bench, facing left, keeping everything else where it is",,,
 "give me a boy sitting on the bench facing left, and a tiny bird on the fence facing left — with everything else left where it is",,,
 "a dog standing, facing left, under the tree",,,
-place a bear standing by the woods facing right — exactly where the picture needs it — so the scene reads the way it should,,,
+place a bear standing by the woods facing right — exactly where the picture needs it — so the scene reads the way it should,"@c1 syntax.clause form=imperative verb=""place"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""bear""
+@c2 syntax.clause form=nonfinite verb=""standing""
+@r1 syntax.relation marker=""by"" from=$c2 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""woods""
+@c3 syntax.clause form=nonfinite verb=""facing"" modifier=""right""
+@c4 syntax.clause form=fragment modifier=""exactly""
+@c5 syntax.clause form=declarative modifier=""where"" verb=""needs"" subject=$n3 complement=$n4
+@n3 syntax.nominal dependent=""the"" head=""picture""
+@n4 syntax.nominal head=""it""
+@k1 syntax.coordination conjunction=""so"" conjunct=$c1 conjunct=$c6
+@n5 syntax.nominal dependent=""the"" head=""scene""
+@c6 syntax.clause form=declarative verb=""reads"" subject=$n5 complement=$n6
+@n6 syntax.nominal dependent=""the"" head=""way""
+@n7 syntax.nominal head=""it""
+@c7 syntax.clause form=declarative verb=""should"" subject=$n7
+@r2 syntax.relation from=$c1 to=$c4
+@r3 syntax.relation from=$n1 to=$c2
+@r4 syntax.relation from=$n2 to=$c3
+@r5 syntax.relation from=$c4 to=$c5
+@r6 syntax.relation from=$n6 to=$c7",prolog,judge
 "give me a bear standing by the woods facing right, as drawn so far",,,
 "turn the girl in the yellow dress to face right, and a small dog on the left facing right — with everything else left where it is",,,
 "the woman in the green scarf, facing right, over on the other side of the canvas",,,
@@ -1525,7 +1586,28 @@ do we have ducks facing the lake?,"@c1 syntax.clause form=interrogative auxiliar
 @n7 syntax.nominal dependent=""a"" head=""goat""
 @r2 syntax.relation from=$n2 to=$k1",spacy-direct+vss,agreement
 "next, give me a desert oasis at night: a medium orange fire right in front of the tent, a small boy sitting facing right next to the fire, right on the tent, a medium brown owl, and right behind the dune, two large brown camels",,,
-"make a desert oasis in the heat haze at noon: a medium traveler standing next to the cactus, a medium white goat on the far right, a medium brown tent right behind the cactus, and two small green lizards on the cactus",,,
+"make a desert oasis in the heat haze at noon: a medium traveler standing next to the cactus, a medium white goat on the far right, a medium brown tent right behind the cactus, and two small green lizards on the cactus","@c1 syntax.clause form=imperative verb=""make"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""desert"" head=""oasis""
+@r1 syntax.relation marker=""in"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""heat"" head=""haze""
+@r2 syntax.relation attachment=ambiguous marker=""at"" from=$c1 to=$n3
+@n3 syntax.nominal head=""noon""
+@n4 syntax.nominal dependent=""a"" dependent=""medium"" head=""traveler""
+@c2 syntax.clause form=nonfinite verb=""standing""
+@r3 syntax.relation marker=""next to"" from=$c2 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""cactus""
+@n6 syntax.nominal dependent=""a"" dependent=""medium"" dependent=""white"" head=""goat""
+@r4 syntax.relation marker=""on"" from=$n6 to=$n7
+@n7 syntax.nominal dependent=""the"" dependent=""far"" head=""right""
+@n8 syntax.nominal dependent=""a"" dependent=""medium"" dependent=""brown"" head=""tent"" dependent=""right""
+@r5 syntax.relation marker=""behind"" from=$n8 to=$n9
+@n9 syntax.nominal dependent=""the"" head=""cactus""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n4 conjunct=$n6 conjunct=$n8 conjunct=$n10
+@n10 syntax.nominal dependent=""two"" dependent=""small"" dependent=""green"" head=""lizards""
+@r6 syntax.relation marker=""on"" from=$n10 to=$n11
+@n11 syntax.nominal dependent=""the"" head=""cactus""
+@r7 syntax.relation from=$n1 to=$k1
+@r8 syntax.relation from=$n4 to=$c2",spacy,judge
 "draw a desert oasis at dusk: three large brown jarss in the bottom left corner, a medium traveler facing left right next to the jar, a large brown camel just next to the traveler, and a small girl on the dune",,,
 "darw a mountain cabin in the falling snow at night: three large brown logs next to the cabin, a medium orange fire just in front of the cabin, a medium brown bear right behind the pine, and a small boy standing facing left next to the fire",,,
 "can you draw a mountain cabin in the falling snow at dusk: three medium brown logs under the window, a medium brown bear just behind the cabin, a small boy just next to the log, and a large grey chimney on the cabin",,,
@@ -2076,7 +2158,22 @@ this one too,,,
 and is the little girl on the bench facing right now?,,,
 why is the man by the apple tree laughing now?,,,
 now have the little girl on the bench stand with arms out.,,,
-"the best spot for a small well is by the side of the lake, so it looks like it has stood there for years.",,,
+"the best spot for a small well is by the side of the lake, so it looks like it has stood there for years.","@n1 syntax.nominal dependent=""the"" dependent=""best"" head=""spot""
+@r1 syntax.relation marker=""for"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""small"" head=""well""
+@c1 syntax.clause form=declarative verb=""is"" subject=$n1
+@r2 syntax.relation marker=""by"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""side""
+@r3 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""lake""
+@c2 syntax.clause form=declarative modifier=""so"" verb=""looks"" subject=$n5
+@n5 syntax.nominal head=""it""
+@r4 syntax.relation marker=""like"" from=$c2 to=$c3
+@n6 syntax.nominal head=""it""
+@c3 syntax.clause form=declarative auxiliary=""has"" verb=""stood"" modifier=""there"" subject=$n6
+@r5 syntax.relation marker=""for"" from=$c3 to=$n7
+@n7 syntax.nominal head=""years""
+@r6 syntax.relation from=$c2 to=$c1",spacy,judge
 "I would like a stone well next to the lake, where the bank is firm and the ground does not slope.",,,
 "add a small bench beside the pine tree, with a small gap so the bark is not touched.","@c1 syntax.clause form=imperative verb=""add"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""small"" head=""bench""
@@ -2217,14 +2314,15 @@ put another cloud at the top — with everything else left where it is — over 
 "every scene, the kite stays in the sky, and a big bench at the bottom — and that is the whole scene",,,
 "draw a farm in the early morning: four haystacks, two roosters, three sacks, and a farmer","@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""farm""
-@r1 syntax.relation marker=""in"" from=$n1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""early"" head=""morning""
 @n3 syntax.nominal dependent=""four"" head=""haystacks""
 @n4 syntax.nominal dependent=""two"" head=""roosters""
 @n5 syntax.nominal dependent=""three"" head=""sacks""
 @k1 syntax.coordination conjunction=""and"" conjunct=$n3 conjunct=$n4 conjunct=$n5 conjunct=$n6
 @n6 syntax.nominal dependent=""a"" head=""farmer""
-@r2 syntax.relation from=$n1 to=$k1",spacy-direct+vss,agreement
+@k2 syntax.coordination conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=fragment complement=$k1",z3,judge
 "by the river, in the low mist at dawn, two medium white swans right on the river, next to the river, a large brown table, a small boy with a surprised face right next to it, and a small girl sitting just next to it, and have the animals stay in the foreground from here on",,,
 "for the next bit, show a big bear in front of the woods facing right — exactly where the picture needs it",,,
 "ad a bear behind the tree facing left, put a kid on the path facing right, and draw an owl in the tree facing left",,,

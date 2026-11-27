@@ -16,7 +16,10 @@ swap the three trees for just two,,,
 just the two trees instead,,,
 "two trees, not three",,,
 "actually, two trees",,,
-only two trees for now,,,
+only two trees for now,"@n1 syntax.nominal dependent=""only"" dependent=""two"" head=""trees""
+@r1 syntax.relation marker=""for"" from=$n1 to=$n2
+@n2 syntax.nominal head=""now""
+@c1 syntax.clause form=fragment complement=$n1",spacy+z3,judge
 "two, not three",,,
 "make it two trees instead of three, and line them up by the lake",,,
 "two trees instead of three, and keep them by the lake",,,
@@ -161,7 +164,10 @@ the man ought to be facing right,"@n1 syntax.nominal dependent=""the"" head=""ma
 @c1 syntax.clause form=declarative verb=""ought"" subject=$n1
 @r1 syntax.relation marker=""to"" from=$c1 to=$c2
 @c2 syntax.clause form=nonfinite auxiliary=""be"" verb=""facing"" modifier=""right""",spacy-direct+vss,agreement
-let the dog look down,,,
+let the dog look down,"@c1 syntax.clause form=imperative verb=""let"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""dog""
+@c2 syntax.clause form=nonfinite verb=""look"" modifier=""down""
+@r1 syntax.relation from=$c1 to=$c2",prolog+z3,judge
 can you turn the man left?,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""turn"" modifier=""left"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""the"" head=""man""",spacy-direct+vss,agreement
@@ -867,7 +873,10 @@ nudge that bird two hand-widths down,,,
 shift the bird over a full two hand-widths downward,,,
 push the bird exactly two hand-widths down,,,
 that bird goes two hand-widths downward,,,
-can you slide the bird a full two hand-widths down?,,,
+can you slide the bird a full two hand-widths down?,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""slide"" modifier=""down"" subject=$n1 complement=$n2 complement=$n3
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""the"" head=""bird""
+@n3 syntax.nominal dependent=""a"" dependent=""full"" dependent=""two"" head=""hand-widths""",distilbert+spacy,judge
 could you move the bird exactly two hand-widths downward?,,,
 that bird needs to shift two hand-widths down,,,
 the bird has to go a full two hand-widths downward,,,
@@ -970,7 +979,10 @@ push the cloud slightly downward,"@c1 syntax.clause form=imperative verb=""push"
 can you slide the cloud slightly down?,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""slide"" modifier=""slightly"" modifier=""down"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""the"" head=""cloud""",spacy-direct+vss,agreement
-could you nudge the cloud a touch downward?,,,
+could you nudge the cloud a touch downward?,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""nudge"" modifier=""downward"" subject=$n1 complement=$n2 complement=$n3
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""the"" head=""cloud""
+@n3 syntax.nominal dependent=""a"" head=""touch""",distilbert+prolog+spacy+z3,judge
 that cloud needs to shift just a little down,,,
 the cloud has to move slightly downward,"@n1 syntax.nominal dependent=""the"" head=""cloud""
 @c1 syntax.clause form=declarative verb=""has"" subject=$n1
@@ -1504,7 +1516,11 @@ have the one in the yellow shirt takes the first turn again instead,,,
 flip the order — the one in the yellow shirt takes the first turn again,,,
 correct that — the one in the yellow shirt takes the first turn again,,,
 "the one in the yellow shirt takes the first turn again, that's all",,,
-awit — the one in the yellow shirt takes the first turn again,,,
+awit — the one in the yellow shirt takes the first turn again,"@c1 syntax.clause form=declarative discourse=""awit"" verb=""takes"" modifier=""again"" subject=$n1 complement=$n3
+@n1 syntax.nominal dependent=""the"" head=""one""
+@r1 syntax.relation marker=""in"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""yellow"" head=""shirt""
+@n3 syntax.nominal dependent=""the"" dependent=""first"" head=""turn""",distilbert+spacy,judge
 "have the one in the yellow shirt takes the first turn again instead exactly as i said, thanks",,,
 the woman in the orange shirt moves to the far right,"@n1 syntax.nominal dependent=""the"" head=""woman""
 @r1 syntax.relation marker=""in"" from=$n1 to=$n2
@@ -1867,7 +1883,19 @@ have it a cat after all,"@c1 syntax.clause form=imperative verb=""have"" modifie
 it shoudl be a cat after all,"@n1 syntax.nominal head=""it""
 @c1 syntax.clause form=declarative auxiliary=""shoudl"" verb=""be"" modifier=""after"" modifier=""all"" subject=$n1 complement=$n2
 @n2 syntax.nominal dependent=""a"" head=""cat""",spacy-direct+vss,agreement
-"keep that one a cat, call it a cat, and a small bird up top — exactly there in our picture",,,
+"keep that one a cat, call it a cat, and a small bird up top — exactly there in our picture","@c1 syntax.clause form=imperative verb=""keep"" complement=$n1 complement=$n2
+@n1 syntax.nominal dependent=""that"" head=""one""
+@n2 syntax.nominal dependent=""a"" head=""cat""
+@c2 syntax.clause form=imperative verb=""call"" complement=$n3 complement=$n4
+@n3 syntax.nominal head=""it""
+@n4 syntax.nominal dependent=""a"" head=""cat""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2 conjunct=$c3
+@n5 syntax.nominal dependent=""a"" dependent=""small"" head=""bird""
+@r1 syntax.relation marker=""up"" from=$n5 to=$n6
+@n6 syntax.nominal head=""top""
+@c3 syntax.clause form=fragment modifier=""exactly"" modifier=""there"" complement=$n5 ellipsis=$c2
+@r2 syntax.relation marker=""in"" from=$c3 to=$n7
+@n7 syntax.nominal dependent=""our"" head=""picture""",spacy,judge
 "how about it a cat, not a dog?, after that a small bird up top, just so, in the little drawing",,,
 "just make it a cat, not a dog",,,
 and it should be a cat after all,"@c1 syntax.clause form=declarative discourse=""and"" auxiliary=""should"" verb=""be"" modifier=""after"" modifier=""all"" subject=$n1 complement=$n2
@@ -2072,10 +2100,10 @@ i'd rather the tall amn was sat down on the bench,,,
 "no, the man needs to be sat down on the bench, and a small bird in the tree, just so, in the little drawing",,,
 "could the man on the right be sitting on the bench?, after that a small bird in the tree — and that's this part of the scene",,,
 just make it sitting on the bench,,,
-and it should be sat down on the bench,"@c1 syntax.clause form=declarative discourse=""and"" auxiliary=""should"" auxiliary=""be"" verb=""sat"" modifier=""down"" subject=$n1
+and it should be sat down on the bench,"@c1 syntax.clause form=declarative discourse=""and"" auxiliary=""should"" auxiliary=""be"" verb=""sat"" subject=$n1
 @n1 syntax.nominal head=""it""
-@r1 syntax.relation marker=""on"" from=$c1 to=$n2
-@n2 syntax.nominal dependent=""the"" head=""bench""",spacy-direct+vss,agreement
+@r1 syntax.relation marker=""down on"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""bench""",z3,judge
 keep it sat down on the bench,,,
 hey — change the man on the right so it's sitting on the bench,"@c1 syntax.clause form=imperative discourse=""hey"" verb=""change"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""man""

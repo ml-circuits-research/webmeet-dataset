@@ -732,22 +732,22 @@ Could you create a circle called Priti; then put Priti below Kitchen. I apprecia
 @r2 syntax.relation from=$n2 to=$c2",spacy-direct+vss,agreement
 "Please, create a fish called Eli; then put Eli below Sign. Thanks!",,,
 I need you to create a square called Kenji; then put Kenji below Bridge. I appreciate it.,"@n1 syntax.nominal head=""I""
-@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1 complement=$n2
 @n2 syntax.nominal head=""you""
 @r1 syntax.relation marker=""to"" from=$c1 to=$c2
-@c2 syntax.clause form=nonfinite verb=""create"" subject=$n2 complement=$n3
+@c2 syntax.clause form=nonfinite verb=""create"" complement=$n3
 @n3 syntax.nominal dependent=""a"" head=""square""
 @c3 syntax.clause form=nonfinite verb=""called"" complement=$n4
 @n4 syntax.nominal head=""Kenji""
 @k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c4
 @c4 syntax.clause form=imperative verb=""put"" complement=$n5
 @n5 syntax.nominal head=""Kenji""
-@r2 syntax.relation marker=""below"" from=$c4 to=$n6
+@r2 syntax.relation attachment=ambiguous marker=""below"" from=$c4 to=$n6
 @n6 syntax.nominal head=""Bridge""
 @n7 syntax.nominal head=""I""
 @c5 syntax.clause form=declarative verb=""appreciate"" subject=$n7 complement=$n8
 @n8 syntax.nominal head=""it""
-@r3 syntax.relation from=$n3 to=$c3",spacy-direct+vss,agreement
+@r3 syntax.relation from=$n3 to=$c3",z3,judge
 Could you add a tree called Pavel; then put Pavel below Dog. I appreciate it.,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""add"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""a"" head=""tree""
@@ -1890,7 +1890,20 @@ create a triangle called church; then put church below well.,"@c1 syntax.clause 
 @r1 syntax.relation marker=""below"" from=$c3 to=$n4
 @n4 syntax.nominal head=""well""
 @r2 syntax.relation from=$n1 to=$c2",spacy-direct+vss,agreement
-"Please, draw a square called anchor 2; then put anchor 2 below buoy. Thanks!",,,
+"Please, draw a square called anchor 2; then put anchor 2 below buoy. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""draw"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""square""
+@c2 syntax.clause form=nonfinite verb=""called"" complement=$n2
+@n2 syntax.nominal head=""anchor""
+@n3 syntax.nominal head=""2""
+@c3 syntax.clause form=imperative modifier=""then"" verb=""put"" complement=$n4
+@n4 syntax.nominal head=""anchor""
+@n5 syntax.nominal head=""2""
+@r1 syntax.relation attachment=ambiguous marker=""below"" from=$c3 to=$n6
+@n6 syntax.nominal head=""buoy""
+@c4 syntax.clause form=fragment discourse=""Thanks""
+@r2 syntax.relation from=$n1 to=$c2
+@r3 syntax.relation from=$n2 to=$n3
+@r4 syntax.relation from=$n4 to=$n5",prolog,judge
 Let us add a red fish and call it puppy. That would help.,,,
 Could you add a blue car and call it fawn. Thanks!,,,
 Could you add a red car and call it snowman 2. Thanks!,,,
@@ -2778,7 +2791,13 @@ Could you make 4 orange house objects. I appreciate it.,"@c1 syntax.clause form=
 @c2 syntax.clause form=declarative verb=""appreciate"" subject=$n3 complement=$n4
 @n4 syntax.nominal head=""it""",spacy-direct+vss,judge
 Could you draw a purple house and call it street. I appreciate it.,,,
-"Please, draw a red circle and call it table. Thanks!",,,
+"Please, draw a red circle and call it table. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""draw"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""red"" head=""circle""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""call"" complement=$n2 complement=$n3
+@n2 syntax.nominal head=""it""
+@n3 syntax.nominal head=""table""
+@c3 syntax.clause form=fragment discourse=""Thanks""",distilbert+prolog+spacy+z3,judge
 I need you to sketch a fish called sky; then put sky below Reference. I appreciate it.,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""need"" subject=$n1
 @n2 syntax.nominal head=""you""
@@ -3086,7 +3105,17 @@ I need you to sketch a car called fence post; then put fence post below wire 2. 
 @r3 syntax.relation from=$n3 to=$c3
 @r4 syntax.relation from=$n6 to=$n7",spacy-direct+vss,agreement
 I need you to draw a orange fish and call it door 2. I appreciate it.,,,
-Let us draw a blue square and call it hedge. That would help.,,,
+Let us draw a blue square and call it hedge. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""us""
+@c2 syntax.clause form=nonfinite verb=""draw"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""blue"" head=""square""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c3
+@c3 syntax.clause form=imperative verb=""call"" complement=$n3 complement=$n4
+@n3 syntax.nominal head=""it""
+@n4 syntax.nominal head=""hedge""
+@n5 syntax.nominal head=""That""
+@c4 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n5
+@r1 syntax.relation from=$c1 to=$c2",vss,judge
 Could you draw a yellow triangle and call it board. Thanks!,,,
 I need you to sketch a car called rock 2; then put rock 2 below sea 2. I appreciate it.,,,
 sketch a car called Item 4809; then put Item 4809 below axle 2.,,,
@@ -3758,7 +3787,20 @@ Could you create 3 orange house objects. I appreciate it.,"@c1 syntax.clause for
 Could you add a blue car and call it king. Thanks!,,,
 Let us sketch a green tree and call it doll. That would help.,,,
 add a flower called garden; then put garden below Reference 862.,,,
-Let us create a house called snowman; then put snowman below head. That would help.,,,
+Let us create a house called snowman; then put snowman below head. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""us""
+@c2 syntax.clause form=nonfinite verb=""create"" complement=$n2
+@n2 syntax.nominal dependent=""a"" head=""house""
+@c3 syntax.clause form=nonfinite verb=""called"" complement=$n3
+@n3 syntax.nominal head=""snowman""
+@c4 syntax.clause form=imperative modifier=""then"" verb=""put"" complement=$n4
+@n4 syntax.nominal head=""snowman""
+@r1 syntax.relation attachment=ambiguous marker=""below"" from=$c4 to=$n5
+@n5 syntax.nominal head=""head""
+@n6 syntax.nominal head=""That""
+@c5 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n6
+@r2 syntax.relation from=$c1 to=$c2
+@r3 syntax.relation from=$n2 to=$c3",prolog,judge
 "Please, sketch a flower called pond; then put pond below reeds. Thanks!",,,
 Let us sketch a green tree and call it cabin. That would help.,,,
 create a square called Ren; then put Ren below sun.,"@c1 syntax.clause form=imperative verb=""create"" complement=$n1

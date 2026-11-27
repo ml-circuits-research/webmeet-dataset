@@ -229,7 +229,12 @@ do the y axis scale liinear as well,,,
 how about moving the y axis on the left?,,,
 the title on the sales chart should be Q2 sales,,,
 marker borders thicker. legend on the right,,,
-the marker borders on Revenue trend should be thicker. flip the x axis,,,
+the marker borders on Revenue trend should be thicker. flip the x axis,"@n1 syntax.nominal dependent=""the"" dependent=""marker"" head=""borders""
+@r1 syntax.relation marker=""on"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""Revenue"" head=""trend""
+@c1 syntax.clause form=declarative auxiliary=""should"" verb=""be"" modifier=""thicker"" subject=$n1
+@c2 syntax.clause form=imperative verb=""flip"" complement=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""x"" head=""axis""",prolog+z3,judge
 ok — the one thing missing: marker borders thicker on the revenue trend,,,
 "set the caps on the error bars smaller, that's the next tweak, could you also drop the legend on the right",,,
 the bars on the orders chart need to be narrower,"@n1 syntax.nominal dependent=""the"" head=""bars""
@@ -354,7 +359,9 @@ the x axis minimum starts at zro,"@n1 syntax.nominal dependent=""the"" dependent
 @r1 syntax.relation marker=""at"" from=$c1 to=$n2
 @n2 syntax.nominal head=""zro""",spacy-direct+vss,agreement
 "I keep squinting at Revenue trend every time I paste it into the weekly newsletter; this week, make the dots on the dashed line wider as well, would you and then put the y axis on the right",,,
-how about small marker size?,,,
+how about small marker size?,"@c1 syntax.clause form=fragment modifier=""how""
+@r1 syntax.relation marker=""about"" from=$c1 to=$n1
+@n1 syntax.nominal dependent=""small"" dependent=""marker"" head=""size""",distilbert+prolog+vss+z3,judge
 "half the stand-up was grumbling that the numbers were impossible to read from the corridor screen; to settle it, make the axis labels smaller going forward; plus put the y axis on the right",,,
 "I keep squinting at Sensor surface by station and depth every time I paste it into the weekly newsletter; this week, make the axes upright as well, would you, and show both grid lines",,,
 "hold on, the x axis should be not inverted",,,
@@ -655,8 +662,8 @@ can you put the y axis on the left?,"@c1 syntax.clause form=interrogative auxili
 we need the y axis on the left,"@n1 syntax.nominal head=""we""
 @c1 syntax.clause form=declarative verb=""need"" subject=$n1 complement=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""y"" head=""axis""
-@r1 syntax.relation marker=""on"" from=$n2 to=$n3
-@n3 syntax.nominal dependent=""the"" head=""left""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""left""",prolog+z3,judge
 "shift the y axis on the left — while you're at it, give it the title Revenue by month",,,
 try titling the sales chart Q2 sales,,,
 "while you're there, title the sales chart Q2 sales",,,
@@ -745,8 +752,8 @@ try making the bars narrower,"@c1 syntax.clause form=imperative verb=""try""
 go for wider bars on the sales chart,"@c1 syntax.clause form=imperative verb=""go""
 @r1 syntax.relation marker=""for"" from=$c1 to=$n1
 @n1 syntax.nominal dependent=""wider"" head=""bars""
-@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
-@n2 syntax.nominal dependent=""the"" dependent=""sales"" head=""chart""",spacy-direct+vss,agreement
+@r2 syntax.relation marker=""on"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""sales"" head=""chart""",spacy,judge
 the bar borders on Revenue by department should be thicker. show grid lines,,,
 can you make the order bars sea green?,,,
 can you remove the gaps between the bars?,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""remove"" subject=$n1 complement=$n2
@@ -1004,13 +1011,13 @@ keep the font one sie smaller,,,
 the grid lines on Revenue by department should be blue. legend on the right,"@n1 syntax.nominal dependent=""the"" dependent=""grid"" head=""lines""
 @r1 syntax.relation marker=""on"" from=$n1 to=$n2
 @n2 syntax.nominal head=""Revenue""
-@r2 syntax.relation marker=""by"" from=$n2 to=$n3
+@r2 syntax.relation attachment=ambiguous marker=""by"" from=$c1 to=$n3
 @n3 syntax.nominal head=""department""
 @c1 syntax.clause form=declarative auxiliary=""should"" verb=""be"" modifier=""blue"" subject=$n1
 @n4 syntax.nominal head=""legend""
 @r3 syntax.relation marker=""on"" from=$n4 to=$n5
 @n5 syntax.nominal dependent=""the"" head=""right""
-@c2 syntax.clause form=fragment complement=$n4",spacy-direct+vss,agreement
+@c2 syntax.clause form=fragment complement=$n4",spacy+z3,judge
 keep the colour map transparent to green green,"@c1 syntax.clause form=imperative verb=""keep"" modifier=""transparent"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""colour"" head=""map""
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2
@@ -1025,7 +1032,15 @@ quick one: the missing piece: colour map green fading to transparent on the traf
 @c2 syntax.clause form=imperative verb=""show"" complement=$n2
 @n2 syntax.nominal dependent=""both"" dependent=""grid"" head=""lines""",spacy-direct+vss,agreement
 "I walked the team through Order value by quantity this morning; nobody argued with the data, only with how it reads at a glance, so as a first pass make the marker outlines thick, then we revisit next week — while you're at it, show both grid lines",,,
-the contour lines on Sensor readings by depth should be transparent blue. font bigger,,,
+the contour lines on Sensor readings by depth should be transparent blue. font bigger,"@n1 syntax.nominal dependent=""the"" dependent=""contour"" head=""lines""
+@r1 syntax.relation marker=""on"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""Sensor"" head=""readings""
+@r2 syntax.relation marker=""by"" from=$n2 to=$n3
+@n3 syntax.nominal head=""depth""
+@c1 syntax.clause form=declarative auxiliary=""should"" verb=""be"" subject=$n1 complement=$n4
+@n4 syntax.nominal dependent=""transparent"" head=""blue""
+@n5 syntax.nominal head=""font""
+@c2 syntax.clause form=fragment modifier=""bigger"" complement=$n5",spacy,judge
 "set the axes upright, that's the tweak; plus make the font a bit bigger",,,
 "set the pie radius maximum, that's the tweak and then drop the legend on the right",,,
 "for the monthly ops review on Friday I need the budget pie legible from the back of the conference room, so make the slice explosion wide before we circulate it wider, could you also drop the legend on the right",,,
@@ -1394,7 +1409,16 @@ Now paint the months below target orange on the chart.,,,
 "0% is not showing up, keep the zero bar",,,
 i need a zero month to still appear with a 0 label,,,
 show the zero values instead of hiding them,,,
-"the stacked bar drops the zero bucket when it is zero, bring it back",,,
+"the stacked bar drops the zero bucket when it is zero, bring it back","@n1 syntax.nominal dependent=""the"" dependent=""stacked"" head=""bar""
+@c1 syntax.clause form=declarative verb=""drops"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""zero"" head=""bucket""
+@r1 syntax.relation marker=""when"" from=$c1 to=$c2
+@n3 syntax.nominal head=""it""
+@c2 syntax.clause form=declarative verb=""is"" subject=$n3 complement=$n4
+@n4 syntax.nominal head=""zero""
+@c3 syntax.clause form=imperative verb=""bring"" modifier=""back"" complement=$n5
+@n5 syntax.nominal head=""it""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c3",prolog+spacy,judge
 "i'm wondering do not hide the zeros, i need to see that they are zero",,,
 put a 0 label on the empty segment,"@c1 syntax.clause form=imperative verb=""put"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""0"" head=""label""
@@ -2350,7 +2374,22 @@ I'd like you to restrict the sales chart to scores from 60 to 90.,"@n1 syntax.no
 @r4 syntax.relation marker=""to"" from=$n4 to=$n6
 @n6 syntax.nominal head=""90""",spacy-direct+vss,agreement
 Maybe plot only values from 20 to 80 on the chart.,,,
-"The middle of the range is what matters, so trim the column chart to orders between 10 and 50.",,,
+"The middle of the range is what matters, so trim the column chart to orders between 10 and 50.","@n1 syntax.nominal dependent=""The"" head=""middle""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""range""
+@c1 syntax.clause form=declarative verb=""is"" subject=$n1
+@n3 syntax.nominal head=""what""
+@c2 syntax.clause form=declarative verb=""matters"" subject=$n3
+@k1 syntax.coordination conjunction=""so"" conjunct=$c1 conjunct=$c3
+@c3 syntax.clause form=imperative verb=""trim"" complement=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""column"" head=""chart""
+@r2 syntax.relation marker=""to"" from=$c3 to=$n5
+@n5 syntax.nominal head=""orders""
+@r3 syntax.relation marker=""between"" from=$n5 to=$k2
+@n6 syntax.nominal head=""10""
+@k2 syntax.coordination conjunction=""and"" conjunct=$n6 conjunct=$n7
+@n7 syntax.nominal head=""50""
+@r4 syntax.relation from=$c1 to=$c2",spacy,judge
 "I'd like it bounded to revenue between 1,000 and 5,000 rather than the full spread.",,,
 I'd like you to use just values from 20 to 80 for this chart.,,,
 The next thing is to trim the orders chart to orders between 10 and 50.,,,
@@ -2470,7 +2509,13 @@ Maybe also show only the months where profit is positive on the sales chart.,,,
 Let's also show only the months where profit is positive on the chart.,,,
 Could you also restrict this chart to the cases where profit is positive?,,,
 Maybe also show only the months where profit is positive on it.,,,
-Now show only the months where the discount was applied on the bar chart.,,,
+Now show only the months where the discount was applied on the bar chart.,"@c1 syntax.clause form=imperative modifier=""Now"" verb=""show"" modifier=""only"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""months""
+@r1 syntax.relation marker=""where"" from=$c1 to=$c2
+@n2 syntax.nominal dependent=""the"" head=""discount""
+@c2 syntax.clause form=declarative auxiliary=""was"" verb=""applied"" subject=$n2
+@r2 syntax.relation marker=""on"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""bar"" head=""chart""",distilbert+vss,judge
 Now keep the months where profit is positive on the chart.,,,
 Could you limit the chart to the top six?,,,
 top 10 only on the bar chart,,,

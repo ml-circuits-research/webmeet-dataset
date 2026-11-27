@@ -45,8 +45,8 @@ colour bar longer,,,
 I'd like the colour bar longer on the sales heatmap,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative auxiliary=""'d"" verb=""like"" modifier=""longer"" subject=$n1 complement=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""colour"" head=""bar""
-@r1 syntax.relation marker=""on"" from=$n2 to=$n3
-@n3 syntax.nominal dependent=""the"" dependent=""sales"" head=""heatmap""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""sales"" head=""heatmap""",prolog+spacy+z3,judge
 the colour bar on Sales by weekday and hour want to be longer,,,
 try the colour bar longer,,,
 go for longer colour bar on the sales heatmap,,,
@@ -407,8 +407,8 @@ let's have the grid lines in both directions on the order histogram,,,
 the grid lines on Order values want to be in both directions,,,
 try the grid lines in both directions,"@c1 syntax.clause form=imperative verb=""try"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""grid"" head=""lines""
-@r1 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n2
-@n2 syntax.nominal dependent=""both"" head=""directions""",spacy-direct+vss,agreement
+@r1 syntax.relation marker=""in"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""both"" head=""directions""",spacy,judge
 go for in both directions grid lines on the order histogram,,,
 could you set the grid lines to in both directions?,,,
 do the grid lines in both directions on the order histogram,"@c1 syntax.clause form=imperative verb=""do"" complement=$n1
@@ -610,7 +610,13 @@ and also Order value by quantity: markers little diamonds,,,
 @r2 syntax.relation marker=""to"" from=$c3 to=$n2
 @n2 syntax.nominal dependent=""little"" head=""diamonds""",spacy-direct+vss,agreement
 "um, set the markers little diamonds, that's the tweak",,,
-Order value by quantity: markers little diamnods,,,
+Order value by quantity: markers little diamnods,"@n1 syntax.nominal dependent=""Order"" head=""value""
+@r1 syntax.relation marker=""by"" from=$n1 to=$n2
+@n2 syntax.nominal head=""quantity""
+@n3 syntax.nominal dependent=""markers"" dependent=""little"" head=""diamnods""
+@c1 syntax.clause form=fragment complement=$n1
+@r2 syntax.relation from=$c1 to=$c2
+@c2 syntax.clause form=fragment complement=$n3",prolog,judge
 go for lottle diamonds markers on the order scatter,,,
 make the markers small circles,,,
 can you make the markers small circles?,,,
@@ -737,7 +743,13 @@ give the sales heatmap the same markers treatment,"@c1 syntax.clause form=impera
 and also Order value by quantity: markers see-through,,,
 "excuse me — set the markers see-through, that's the tweak",,,
 quick one: the missing piece: markers see-through on the order scatter,,,
-the missing piece: markers see-throuh on the order scatter,,,
+the missing piece: markers see-throuh on the order scatter,"@n1 syntax.nominal dependent=""the"" dependent=""missing"" head=""piece""
+@n2 syntax.nominal head=""markers""
+@c1 syntax.clause form=fragment modifier=""see"" modifier=""throuh"" complement=$n2
+@r1 syntax.relation marker=""on"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""order"" head=""scatter""
+@c2 syntax.clause form=fragment complement=$n1
+@r2 syntax.relation from=$c2 to=$c1",prolog,judge
 thin the markers out,"@c1 syntax.clause form=imperative verb=""thin"" modifier=""out"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""markers""",spacy-direct+vss,agreement
 drop a few of the markers,,,
@@ -1195,7 +1207,12 @@ go with fifty euros bins,"@c1 syntax.clause form=imperative verb=""go""
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""the"" head=""values""
 @n3 syntax.nominal dependent=""every"" dependent=""fifty"" head=""euros""",vss,judge
-one more thing: set the bucket width to fifty euros,,,
+one more thing: set the bucket width to fifty euros,"@n1 syntax.nominal dependent=""one"" dependent=""more"" head=""thing""
+@c1 syntax.clause form=imperative verb=""set"" complement=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""bucket"" head=""width""
+@r1 syntax.relation marker=""to"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""fifty"" head=""euros""
+@c2 syntax.clause form=fragment complement=$n1",distilbert+vss,judge
 we want the buckets fiftty euros wide,,,
 make the bins each a different colour,,,
 bins each a different colour,,,
@@ -1537,8 +1554,10 @@ do the same to the bar edges on the sales chart,"@c1 syntax.clause form=imperati
 "while you're there, make the bar edges magenta",,,
 and also Revenue by department: bar edges magenta,,,
 quick one: Revenue by department: bar edges magenta,,,
-ok — keep the bar edges magenta,"@c1 syntax.clause form=imperative discourse=""ok"" verb=""keep"" modifier=""magenta"" complement=$n1
-@n1 syntax.nominal dependent=""the"" dependent=""bar"" head=""edges""",spacy-direct+vss,agreement
+ok — keep the bar edges magenta,"@c1 syntax.clause form=fragment discourse=""ok""
+@c2 syntax.clause form=imperative verb=""keep"" modifier=""magenta"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""bar"" head=""edges""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2",z3,judge
 could you set the bar edges to maginta?,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""set"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""the"" dependent=""bar"" head=""edges""
@@ -2036,7 +2055,8 @@ ok — flip the font over to bold,"@c1 syntax.clause form=imperative discourse="
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2
 @n2 syntax.nominal head=""bold""",spacy-direct+vss,agreement
 keep the font buld,,,
-font bld,,,
+font bld,"@n1 syntax.nominal dependent=""font"" head=""bld""
+@c1 syntax.clause form=fragment complement=$n1",distilbert+prolog+spacy+z3,judge
 make the callout arrows curved,"@c1 syntax.clause form=imperative verb=""make"" modifier=""curved"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""callout"" head=""arrows""",spacy-direct+vss,agreement
 callout arrows curved,,,
@@ -2052,10 +2072,12 @@ let's have the callout arrows curved on the revenue trend,,,
 try the callout arrows curved,"@c1 syntax.clause form=imperative verb=""try"" modifier=""curved"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""callout"" head=""arrows""",spacy-direct+vss,agreement
 could you set the callout arrows to curved?,,,
-do the callout arrows curved on the revenue trend,"@c1 syntax.clause form=interrogative auxiliary=""do"" verb=""curved"" subject=$n1
+do the callout arrows curved on the revenue trend,"@c1 syntax.clause form=imperative verb=""do"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""callout"" head=""arrows""
-@r1 syntax.relation marker=""on"" from=$c1 to=$n2
-@n2 syntax.nominal dependent=""the"" dependent=""revenue"" head=""trend""",spacy-direct+vss,agreement
+@c2 syntax.clause form=nonfinite verb=""curved""
+@r1 syntax.relation marker=""on"" from=$c2 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""revenue"" head=""trend""
+@r2 syntax.relation from=$n1 to=$c2",prolog+z3,judge
 I want the callout arrows curved on the revenue trend,,,
 how about curved callout arrows?,"@c1 syntax.clause form=fragment modifier=""how""
 @r1 syntax.relation marker=""about"" from=$c1 to=$n1
@@ -2136,7 +2158,13 @@ I'd like the grid lines verythin on the order histogram,"@n1 syntax.nominal head
 make the z axis inverted,,,
 z axis inverted,,,
 can you make the z axis inverted?,,,
-I'd like the z axis inverted on the surface chart,,,
+I'd like the z axis inverted on the surface chart,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative auxiliary=""'d"" verb=""like"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""z"" head=""axis""
+@c2 syntax.clause form=nonfinite verb=""inverted""
+@r1 syntax.relation marker=""on"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""surface"" head=""chart""
+@r2 syntax.relation from=$n2 to=$c2",distilbert+prolog+vss,judge
 let's have the z axis inverted on the surface chart,,,
 the z axis on Sensor surface by station and depth want to be inverted,,,
 go for inverted z axis on the surface chart,"@c1 syntax.clause form=imperative verb=""go""

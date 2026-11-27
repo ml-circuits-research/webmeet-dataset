@@ -95,7 +95,12 @@ set two more birds on top of both the middle tree and the westmost tree,,,
 raise two extra birds on top of both the middle bench and the westmost bench,,,
 i want a pair of birds on top of both the middle boat and the westmost boat,,,
 "no, get two more birds on top of both the middle tree and the westmost tree",,,
-drop two extra birds on top of both the middle bench and the westmost bench,,,
+drop two extra birds on top of both the middle bench and the westmost bench,"@c1 syntax.clause form=imperative verb=""drop"" complement=$n1
+@n1 syntax.nominal dependent=""two"" dependent=""extra"" head=""birds""
+@r1 syntax.relation attachment=ambiguous marker=""on top of"" from=$c1 to=$k1
+@n2 syntax.nominal dependent=""both"" dependent=""the"" dependent=""middle"" head=""bench""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""westmost"" head=""bench""",prolog+z3,judge
 lay a pair of birds on top of both the middle boat and the westmost boat,,,
 "a small cat in the bottom left corner, then stack two more birds on top of both the middle tree and the westmost tree, and keep the layers straight — the result should look like one tidy spread",,,
 "a little bird up in the top right, then put two extra birds on top of both the middle bench and the westmost bench, so the column stays even so the whole arrangement stays balanced",,,
@@ -434,12 +439,12 @@ stack seven birds stacked immediately to the west of the westmost tree,,,
 i want seven birds in a column on the west side of the far-west tree,"@n1 syntax.nominal head=""i""
 @c1 syntax.clause form=declarative verb=""want"" subject=$n1 complement=$n2
 @n2 syntax.nominal dependent=""seven"" head=""birds""
-@r1 syntax.relation marker=""in"" from=$c1 to=$n3
+@r1 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""a"" head=""column""
-@r2 syntax.relation marker=""on"" from=$n2 to=$n4
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n4
 @n4 syntax.nominal dependent=""the"" dependent=""west"" head=""side""
 @r3 syntax.relation marker=""of"" from=$n4 to=$n5
-@n5 syntax.nominal dependent=""the"" dependent=""far"" dependent=""west"" head=""tree""",spacy-direct+vss,agreement
+@n5 syntax.nominal dependent=""the"" dependent=""far"" dependent=""west"" head=""tree""",prolog,judge
 "no, get seven birds stacked immediately to the west of the westmost tree",,,
 drop a stack of seven birds to the west of the tree on the west side,"@c1 syntax.clause form=imperative verb=""drop"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""stack""
@@ -532,11 +537,41 @@ hey — stack a stack of seven birds to the west of the tree on the west side,"@
 "a small cat in the bottom left corner, then place a bird on top of the tree, and make it the base, then stack a kite on top of it, neat and level, then one cloud on top of the kite — the result should look like one tidy spread",,,
 "a little bird up in the top right, then put one bird on the top of the tree, keeping it square, then then raise one kite on top of it, balanced, then one cloud on top of the kite so the whole arrangement stays balanced",,,
 "instead, a small dog down at the bottom, then start with a single bird above the tree, then finish with a single kite on top of it, then one cloud on top of the kite — keep it that way for the rest of the scene",,,
-"place one bird on the top of the tree, then one kite on top of it, then one cloud on top of the kite",,,
+"place one bird on the top of the tree, then one kite on top of it, then one cloud on top of the kite","@c1 syntax.clause form=imperative verb=""place"" complement=$n1
+@n1 syntax.nominal dependent=""one"" head=""bird""
+@r1 syntax.relation marker=""on"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""tree""
+@k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c2
+@n4 syntax.nominal dependent=""one"" head=""kite""
+@r3 syntax.relation marker=""on"" from=$n4 to=$n5
+@r4 syntax.relation marker=""top of"" from=$n4 to=$n5
+@n5 syntax.nominal head=""it""
+@k2 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c2 conjunct=$c3
+@n6 syntax.nominal dependent=""one"" head=""cloud""
+@r5 syntax.relation marker=""on"" from=$n6 to=$n7
+@r6 syntax.relation marker=""top of"" from=$n6 to=$n7
+@n7 syntax.nominal dependent=""the"" head=""kite""
+@c2 syntax.clause form=fragment complement=$n4
+@c3 syntax.clause form=fragment complement=$n6",distilbert,judge
 "a single bird above the tree, then then a single kite on top of it, then one cloud on top of the kite",,,
 "instead, stack a bird on top of the tree, then a kite on top of it, then one cloud on top of the kite",,,
 "one bird on the top of the tree, then one kite on top of it, then one cloud on top of the kite",,,
-"est a single bird above the tree, then build a single kite on top of it, then one cloud on top of the kite",,,
+"est a single bird above the tree, then build a single kite on top of it, then one cloud on top of the kite","@c1 syntax.clause form=imperative verb=""est"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""single"" head=""bird""
+@r1 syntax.relation attachment=ambiguous marker=""above"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""tree""
+@k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""build"" complement=$n3
+@n3 syntax.nominal dependent=""a"" dependent=""single"" head=""kite""
+@r2 syntax.relation attachment=ambiguous marker=""on top of"" from=$c2 to=$n4
+@n4 syntax.nominal head=""it""
+@k2 syntax.coordination conjunction=""then"" conjunct=$c2 conjunct=$c3
+@n5 syntax.nominal dependent=""one"" head=""cloud""
+@r3 syntax.relation marker=""on top of"" from=$n5 to=$n6
+@n6 syntax.nominal dependent=""the"" head=""kite""
+@c3 syntax.clause form=fragment complement=$n5",vss,judge
 "build a bird on top of the tree, then put a kite on top of it, then one colud on top of the kite",,,
 "hey — make one bird on the top of the tree, then set one kite on top of it, then one cloud on top of the kite",,,
 "begin with a single bird above the tree, then stack a single kite on top of it, then one cloud on top of the kite, thanks",,,
@@ -660,7 +695,18 @@ hey — put a cat next to the bench facing right,,,
 add a cta next to the bench facing right,,,
 ad a cat next to the bench facing right,,,
 add a bird on the fence facing left — exactly where the picture needs it — so the scene reads the way it should,,,
-"put a bird on the fence facing left, keeping everything else where it is",,,
+"put a bird on the fence facing left, keeping everything else where it is","@c1 syntax.clause form=imperative verb=""put"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""bird""
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""fence""
+@c2 syntax.clause form=nonfinite verb=""facing"" modifier=""left""
+@c3 syntax.clause form=nonfinite verb=""keeping"" complement=$n3
+@n3 syntax.nominal head=""everything"" dependent=""else""
+@c4 syntax.clause form=declarative modifier=""where"" verb=""is"" subject=$n4
+@n4 syntax.nominal head=""it""
+@r2 syntax.relation from=$c1 to=$c2
+@r3 syntax.relation from=$c1 to=$c3
+@r4 syntax.relation from=$n3 to=$c4",prolog,judge
 "draw a bird on the fence, facing left — right there in the picture — that is how the picture goes",,,
 "there is a bird on the fence facing left, keeping everything else where it is",,,
 i want a bird on the fence facing left — just like that in the scene — keeping the rest of the scene as it is,,,
@@ -825,7 +871,18 @@ add a rabbit in the garden facing right — just like that in the scene — keep
 "put a rabbit in the garden facing right, keeping everything else where it is",,,
 "draw a rabbit in the garden, facing right — with everything else left where it is — over on our little canvas",,,
 i want a rabbit in the garden facing right — and that is the whole scene — the way the drawing looks so far,,,
-"place a rabbit in the garden, turned right, keeping everything else where it is",,,
+"place a rabbit in the garden, turned right, keeping everything else where it is","@c1 syntax.clause form=imperative verb=""place"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""rabbit""
+@r1 syntax.relation marker=""in"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""garden""
+@c2 syntax.clause form=nonfinite verb=""turned"" modifier=""right""
+@c3 syntax.clause form=nonfinite verb=""keeping"" modifier=""else"" complement=$n3
+@n3 syntax.nominal head=""everything""
+@r2 syntax.relation marker=""where"" from=$n3 to=$c4
+@n4 syntax.nominal head=""it""
+@c4 syntax.clause form=declarative verb=""is"" subject=$n4
+@r3 syntax.relation from=$c1 to=$c2
+@r4 syntax.relation from=$c1 to=$c3",spacy,judge
 give me a rabbit in the garden that faces right — exactly where the picture needs it — so the scene reads the way it should,,,
 "the scene needs a rabbit in the garden, facing right, as drawn so far","@n1 syntax.nominal dependent=""the"" head=""scene""
 @c1 syntax.clause form=declarative verb=""needs"" subject=$n1 complement=$n2
@@ -1480,7 +1537,20 @@ ad a bear standing by the woods facing right,,,
 "a little duck on the pond facing left, then i want the woman in the green scarf facing right — keeping the rest of the scene as it is",,,
 "a huge bear in the woods facing left, then let the woman in the green scarf face right — over on our little canvas",,,
 "a tall girl by the tree facing right, then point the tall boy on the left toward the house — the way the drawing looks so far",,,
-"a small dog on the left facing right, then get the tall boy on the left to face the house",,,
+"a small dog on the left facing right, then get the tall boy on the left to face the house","@n1 syntax.nominal dependent=""a"" dependent=""small"" head=""dog""
+@r1 syntax.relation marker=""on"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""left""
+@c1 syntax.clause form=nonfinite verb=""facing"" modifier=""right""
+@k1 syntax.coordination conjunction=""then"" conjunct=$c4 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""get""
+@n3 syntax.nominal dependent=""the"" dependent=""tall"" head=""boy""
+@r2 syntax.relation marker=""on"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""left""
+@r3 syntax.relation marker=""to"" from=$c2 to=$c3
+@c3 syntax.clause form=nonfinite verb=""face"" subject=$n3 complement=$n5
+@n5 syntax.nominal dependent=""the"" head=""house""
+@c4 syntax.clause form=fragment complement=$n1
+@r4 syntax.relation from=$n1 to=$c1",spacy,judge
 "a huge bear in the woods facing left, then the small dog by the bench needs to face left — that is how the picture goes",,,
 "a tiny bird on the fence facing left, then face the small dog by the bench left — keeping the rest of the scene as it is",,,
 "a small dog on the left facing right, then i want the big bear in the woods facing the pond","@n1 syntax.nominal dependent=""a"" dependent=""small"" head=""dog""
@@ -1528,7 +1598,13 @@ ad a bear standing by the woods facing right,,,
 @n3 syntax.nominal dependent=""a"" head=""basket""
 @k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n3 conjunct=$n4
 @n4 syntax.nominal dependent=""a"" head=""woman""",spacy-direct+vss,agreement
-"next, a park with a blanket, a woman, and a basket",,,
+"next, a park with a blanket, a woman, and a basket","@c1 syntax.clause form=fragment modifier=""next"" complement=$k1
+@n1 syntax.nominal dependent=""a"" head=""park""
+@r1 syntax.relation marker=""with"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""a"" head=""blanket""
+@n3 syntax.nominal dependent=""a"" head=""woman""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n1 conjunct=$n3 conjunct=$n4
+@n4 syntax.nominal dependent=""a"" head=""basket""",prolog+z3,judge
 "draw a sofa, a rug, a dog, and a boy","@c1 syntax.clause form=imperative verb=""draw"" complement=$k1
 @n1 syntax.nominal dependent=""a"" head=""sofa""
 @n2 syntax.nominal dependent=""a"" head=""rug""

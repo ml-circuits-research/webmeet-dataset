@@ -1,6 +1,9 @@
 text,sop,source,accepted_by
 Let us make Phase 1 green. That would help.,,,
-Could you make Triage yellow. Thanks!,,,
+Could you make Triage yellow. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""make"" modifier=""yellow"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""Triage""
+@c2 syntax.clause form=fragment discourse=""Thanks""",distilbert+prolog+spacy+z3,judge
 make Users blue.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""blue"" complement=$n1
 @n1 syntax.nominal head=""Users""",spacy-direct+vss,agreement
 Could you make Pie A purple. I appreciate it.,,,
@@ -20,20 +23,22 @@ I need you to make Red purple. I appreciate it.,"@n1 syntax.nominal head=""I""
 @n4 syntax.nominal head=""I""
 @c3 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
 @n5 syntax.nominal head=""it""",spacy-direct+vss,agreement
-"Please, make Monolith orange. Thanks!",,,
+"Please, make Monolith orange. Thanks!","@c1 syntax.clause form=imperative discourse=""Please"" verb=""make"" modifier=""orange"" complement=$n1
+@n1 syntax.nominal head=""Monolith""
+@c2 syntax.clause form=fragment discourse=""Thanks""",distilbert+prolog+spacy+z3,judge
 "Hey, make Team Alpha red.",,,
 Could you make Backlog red. Thanks!,,,
 "Please, make Red node blue. Thanks!",,,
 Could you make Server A blue. I appreciate it.,,,
 I need you to make Vendor blue. I appreciate it.,"@n1 syntax.nominal head=""I""
-@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1 complement=$n2
 @n2 syntax.nominal head=""you""
 @r1 syntax.relation marker=""to"" from=$c1 to=$c2
-@c2 syntax.clause form=nonfinite verb=""make"" modifier=""blue"" subject=$n2 complement=$n3
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""blue"" complement=$n3
 @n3 syntax.nominal head=""Vendor""
 @n4 syntax.nominal head=""I""
 @c3 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
-@n5 syntax.nominal head=""it""",spacy-direct+vss,agreement
+@n5 syntax.nominal head=""it""",z3,judge
 Let us make Mesh 1 purple. That would help.,,,
 I need you to make Alice purple. I appreciate it.,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""need"" subject=$n1
@@ -658,7 +663,13 @@ I need you to make Onboarding yellow. I appreciate it.,"@n1 syntax.nominal head=
 @n4 syntax.nominal head=""I""
 @c3 syntax.clause form=declarative verb=""appreciate"" subject=$n4 complement=$n5
 @n5 syntax.nominal head=""it""",spacy-direct+vss,agreement
-Let us make Payments yellow. That would help.,,,
+Let us make Payments yellow. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""us""
+@c2 syntax.clause form=nonfinite verb=""make"" modifier=""yellow"" complement=$n2
+@n2 syntax.nominal head=""Payments""
+@n3 syntax.nominal head=""That""
+@c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n3
+@r1 syntax.relation from=$c1 to=$c2",prolog+z3,judge
 Let us make Power grid green. That would help.,,,
 "Hey, make Start red. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""make"" modifier=""red"" complement=$n1
 @n1 syntax.nominal head=""Start""
@@ -1169,7 +1180,15 @@ Could you make Check billing orange. Thanks!,,,
 make Shipped red.,,,
 I need you to make Class 7B grades blue. I appreciate it.,,,
 "Please, make Transport to school purple. Thanks!",,,
-Let us make Sales per store red. That would help.,,,
+Let us make Sales per store red. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""us""
+@c2 syntax.clause form=nonfinite verb=""make"" complement=$n2
+@n2 syntax.nominal head=""Sales""
+@r1 syntax.relation attachment=ambiguous marker=""per"" from=$c2 to=$n3
+@n3 syntax.nominal head=""store"" dependent=""red""
+@n4 syntax.nominal head=""That""
+@c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n4
+@r2 syntax.relation from=$c1 to=$c2",prolog+z3,judge
 make Factory blue.,"@c1 syntax.clause form=imperative verb=""make"" modifier=""blue"" complement=$n1
 @n1 syntax.nominal head=""Factory""",spacy-direct+vss,agreement
 "Please, make Supplier A blue. Thanks!",,,
@@ -2284,16 +2303,16 @@ link Mill to Dock.,"@c1 syntax.clause form=imperative verb=""link"" complement=$
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2
 @n2 syntax.nominal head=""Dock""",spacy-direct+vss,agreement
 I need you to link Portal to Vault. I appreciate it.,"@n1 syntax.nominal head=""I""
-@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1 complement=$n2
 @n2 syntax.nominal head=""you""
 @r1 syntax.relation marker=""to"" from=$c1 to=$c2
-@c2 syntax.clause form=nonfinite verb=""link"" subject=$n2 complement=$n3
+@c2 syntax.clause form=nonfinite verb=""link"" complement=$n3
 @n3 syntax.nominal head=""Portal""
-@r2 syntax.relation marker=""to"" from=$c2 to=$n4
+@r2 syntax.relation attachment=ambiguous marker=""to"" from=$c2 to=$n4
 @n4 syntax.nominal head=""Vault""
 @n5 syntax.nominal head=""I""
 @c3 syntax.clause form=declarative verb=""appreciate"" subject=$n5 complement=$n6
-@n6 syntax.nominal head=""it""",spacy-direct+vss,agreement
+@n6 syntax.nominal head=""it""",z3,judge
 connect Battery to Inverter.,"@c1 syntax.clause form=imperative verb=""connect"" complement=$n1
 @n1 syntax.nominal head=""Battery""
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2
@@ -2315,7 +2334,12 @@ I need you to link Lift to Car. I appreciate it.,"@n1 syntax.nominal head=""I""
 @n5 syntax.nominal head=""I""
 @c3 syntax.clause form=declarative verb=""appreciate"" subject=$n5 complement=$n6
 @n6 syntax.nominal head=""it""",spacy-direct+vss,agreement
-Could you link Cache to Queue. Thanks!,,,
+Could you link Cache to Queue. Thanks!,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""link"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""Cache""
+@r1 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n3
+@n3 syntax.nominal head=""Queue""
+@c2 syntax.clause form=fragment discourse=""Thanks""",prolog+z3,judge
 "Hey, link Cache to API.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""link"" complement=$n1
 @n1 syntax.nominal head=""Cache""
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2

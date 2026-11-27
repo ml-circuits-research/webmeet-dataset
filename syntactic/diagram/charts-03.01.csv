@@ -122,7 +122,14 @@ I want a new page with a Scope heading box at the top,"@n1 syntax.nominal head="
 "tsart a new page, add a heading box that says Scope, and put it on the top edge",,,
 "start a new page, add a heading box that says Scopa, and put it on the top edge",,,
 "same again on the next page, heading Scope",,,
-"another page like that, heading Scope, on the top edge",,,
+"another page like that, heading Scope, on the top edge","@n1 syntax.nominal dependent=""another"" head=""page""
+@r1 syntax.relation marker=""like"" from=$n1 to=$n2
+@n2 syntax.nominal head=""that""
+@n3 syntax.nominal head=""heading"" dependent=""Scope""
+@r2 syntax.relation marker=""on"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""top"" head=""edge""
+@c1 syntax.clause form=fragment complement=$k1
+@k1 syntax.coordination conjunct=$n1 conjunct=$n3",vss,judge
 "one more, same heading, and make it bold",,,
 "hey, could you add a page with a Scope heading box at the top edge?","@c1 syntax.clause form=interrogative discourse=""hey"" auxiliary=""could"" verb=""add"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
@@ -957,8 +964,8 @@ the grid lines on the department chart need to be thicker,"@n1 syntax.nominal de
 @c2 syntax.clause form=nonfinite verb=""be"" modifier=""thicker""",spacy-direct+vss,judge
 do the grid lines thicker on the department chart,"@c1 syntax.clause form=imperative verb=""do"" modifier=""thicker"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""grid"" head=""lines""
-@r1 syntax.relation marker=""on"" from=$c1 to=$n2
-@n2 syntax.nominal dependent=""the"" dependent=""department"" head=""chart""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""department"" head=""chart""",prolog+z3,judge
 I want the grid lines thicker on the department chart,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""want"" modifier=""thicker"" subject=$n1 complement=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""grid"" head=""lines""
@@ -1154,7 +1161,9 @@ the markers on Claims by month should be balck,"@n1 syntax.nominal dependent=""t
 @r2 syntax.relation marker=""by"" from=$n2 to=$n3
 @n3 syntax.nominal head=""month""
 @c1 syntax.clause form=declarative auxiliary=""should"" verb=""be"" modifier=""balck"" subject=$n1",spacy-direct+vss,agreement
-make the marker interval every fifth point,,,
+make the marker interval every fifth point,"@c1 syntax.clause form=imperative verb=""make"" complement=$n1 complement=$n2
+@n1 syntax.nominal dependent=""the"" dependent=""marker"" head=""interval""
+@n2 syntax.nominal dependent=""every"" dependent=""fifth"" head=""point""",distilbert+prolog+vss,judge
 marker interval every fifth point,,,
 can you make the marker interval every fifth point?,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""make"" subject=$n1 complement=$n2 complement=$n3
 @n1 syntax.nominal head=""you""
@@ -1250,7 +1259,11 @@ copy the same error bars treatment over to the orders chart,"@c1 syntax.clause f
 @n1 syntax.nominal dependent=""the"" dependent=""same"" dependent=""error"" dependent=""bars"" head=""treatment""
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""orders"" head=""chart""",spacy-direct+vss,agreement
-"while you're there, make the error bars red",,,
+"while you're there, make the error bars red","@r1 syntax.relation marker=""while"" from=$c2 to=$c1
+@n1 syntax.nominal head=""you""
+@c1 syntax.clause form=declarative verb=""'re"" modifier=""there"" subject=$n1
+@c2 syntax.clause form=imperative verb=""make"" modifier=""red"" complement=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""error"" head=""bars""",prolog+spacy+z3,judge
 "um, set the error bars red, that's the next tweak",,,
 excuse me — keep the error bars red,,,
 how about rid error bars?,,,
@@ -1660,7 +1673,13 @@ I'd like the lines on the claims chart distinct colours on the revenue trend,"@n
 @r2 syntax.relation marker=""on"" from=$n4 to=$n5
 @n5 syntax.nominal dependent=""the"" dependent=""revenue"" head=""trend""",spacy-direct+vss,agreement
 let's have the lines on the claims chart distinct colours on the revenue trend,,,
-the lines on Revenue trend want to be distinct colours,,,
+the lines on Revenue trend want to be distinct colours,"@n1 syntax.nominal dependent=""the"" head=""lines""
+@r1 syntax.relation marker=""on"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""Revenue"" head=""trend""
+@c1 syntax.clause form=declarative verb=""want"" subject=$n1
+@r2 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""be"" complement=$n3
+@n3 syntax.nominal dependent=""distinct"" head=""colours""",prolog+spacy,judge
 try the lines on the claims chart distinct colours,,,
 go for distinct colours lines on the revenue trend,"@c1 syntax.clause form=imperative verb=""go""
 @r1 syntax.relation marker=""for"" from=$c1 to=$n1
@@ -1756,7 +1775,16 @@ one more thing: Revenue by department: tick marks every five,"@n1 syntax.nominal
 @r2 syntax.relation from=$n1 to=$n2
 @r3 syntax.relation from=$n2 to=$n4
 @r4 syntax.relation from=$n4 to=$n5",spacy-direct+vss,agreement
-excuse me — the missing piece: tick marks every five on the department chart,,,
+excuse me — the missing piece: tick marks every five on the department chart,"@c1 syntax.clause form=imperative verb=""excuse"" complement=$n1
+@n1 syntax.nominal head=""me""
+@n2 syntax.nominal dependent=""the"" dependent=""missing"" head=""piece""
+@n3 syntax.nominal dependent=""tick"" head=""marks""
+@n4 syntax.nominal dependent=""every"" head=""five""
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c3 to=$n5
+@n5 syntax.nominal dependent=""the"" dependent=""department"" head=""chart""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2 conjunct=$c3
+@c2 syntax.clause form=fragment complement=$n2
+@c3 syntax.clause form=fragment complement=$n3 complement=$n4",z3,judge
 the tick marks on Revenue by department want to be everry five,,,
 could you set the tick marks to every fivve?,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""set"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
@@ -1840,7 +1868,9 @@ quick one: I want the x and y axes the other way,,,
 the aes should trade places,"@n1 syntax.nominal dependent=""the"" head=""aes""
 @c1 syntax.clause form=declarative auxiliary=""should"" verb=""trade"" subject=$n1 complement=$n2
 @n2 syntax.nominal head=""places""",spacy-direct+vss,agreement
-the axs the other way round,,,
+the axs the other way round,"@n1 syntax.nominal dependent=""the"" head=""axs""
+@n2 syntax.nominal dependent=""the"" dependent=""other"" head=""way""
+@c1 syntax.clause form=fragment modifier=""round"" complement=$n1 complement=$n2",distilbert+prolog+z3,judge
 turn the value labels vertical,"@c1 syntax.clause form=imperative verb=""turn"" modifier=""vertical"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""value"" head=""labels""",spacy-direct+vss,agreement
 twist the value labels vertical,"@c1 syntax.clause form=imperative verb=""twist"" modifier=""vertical"" complement=$n1

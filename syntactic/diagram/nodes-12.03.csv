@@ -365,8 +365,8 @@ the link from Monitor to Worker insttead,,,
 connecror e1 to Release instead,,,
 now reconnect thetop connection to Support,"@c1 syntax.clause form=imperative modifier=""now"" verb=""reconnect"" complement=$n1
 @n1 syntax.nominal dependent=""thetop"" head=""connection""
-@r1 syntax.relation marker=""to"" from=$c1 to=$n2
-@n2 syntax.nominal head=""Support""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n2
+@n2 syntax.nominal head=""Support""",prolog+z3,judge
 "hte folw cnanged, so go ahead and reconnect the new connector to n4",,,
 Valid?-n3 connecting lane too n1 instead,,,
 could you shift the end of da link leaving n1 two Test,,,
@@ -448,10 +448,10 @@ no the line connecting Done and Worker if you can,"@c1 syntax.clause form=fragme
 @n2 syntax.nominal head=""Done""
 @k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n3
 @n3 syntax.nominal head=""Worker""
-@r1 syntax.relation marker=""if"" from=$c1 to=$c3
+@r1 syntax.relation marker=""if"" from=$c2 to=$c3
 @n4 syntax.nominal head=""you""
 @c3 syntax.clause form=declarative verb=""can"" subject=$n4
-@r2 syntax.relation from=$n1 to=$c2",spacy-direct+vss,agreement
+@r2 syntax.relation from=$n1 to=$c2",prolog,judge
 srap e3,,,
 "that connection is wrong, kill the connection e 1",,,
 srcap the link Reject to n2 please,,,
@@ -494,7 +494,14 @@ drop n3 and e1,"@c1 syntax.clause form=imperative verb=""drop"" complement=$k1
 @k1 syntax.coordination conjunction=""and"" conjunct=$n1 conjunct=$n2
 @n2 syntax.nominal head=""e1""",spacy-direct+vss,agreement
 remove n5 together with connecting line e3,,,
-"both are obsolete, scrap End and e1",,,
+"both are obsolete, scrap End and e1","@n1 syntax.nominal head=""both""
+@c1 syntax.clause form=declarative verb=""are"" subject=$n1 complement=$n2
+@n2 syntax.nominal head=""obsolete""
+@c2 syntax.clause form=imperative verb=""scrap"" complement=$k1
+@n3 syntax.nominal head=""End""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n3 conjunct=$n4
+@n4 syntax.nominal head=""e1""
+@k2 syntax.coordination conjunct=$c1 conjunct=$c2",prolog,judge
 could you erase Hiring together with connector e3,,,
 "both are obsolete, drop n2 and arrow e2",,,
 Marketing and line e1 away,,,
@@ -933,7 +940,10 @@ do again,"@c1 syntax.clause form=imperative verb=""do"" modifier=""again""",spac
 "I undid too much, do again that",,,
 redo it,"@c1 syntax.clause form=imperative verb=""redo"" complement=$n1
 @n1 syntax.nominal head=""it""",spacy-direct+vss,agreement
-"actually it was fine, do again it",,,
+"actually it was fine, do again it","@c1 syntax.clause form=declarative modifier=""actually"" verb=""was"" modifier=""fine"" subject=$n1
+@n1 syntax.nominal head=""it""
+@c2 syntax.clause form=imperative verb=""do"" modifier=""again"" complement=$n2
+@n2 syntax.nominal head=""it""",distilbert+vss,judge
 put it back,"@c1 syntax.clause form=imperative verb=""put"" modifier=""back"" complement=$n1
 @n1 syntax.nominal head=""it""",spacy-direct+vss,agreement
 now bring back what I undid,,,
@@ -1140,8 +1150,8 @@ make a group out of all the circles,"@c1 syntax.clause form=imperative verb=""ma
 cluster em,,,
 make a group out of all the boxes,"@c1 syntax.clause form=imperative verb=""make"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""group""
-@r1 syntax.relation marker=""out of"" from=$n1 to=$n2
-@n2 syntax.nominal dependent=""all"" dependent=""the"" head=""boxes""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""out of"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""all"" dependent=""the"" head=""boxes""",prolog+spacy+z3,judge
 "they belong together, so bundle these",,,
 box up everything,,,
 can you put together all the circles as Review stage,,,
@@ -1235,8 +1245,8 @@ putt together these,"@c1 syntax.clause form=imperative verb=""putt"" modifier=""
 @n1 syntax.nominal head=""these""",spacy-direct+vss,agreement
 just bunsle the selected nodes as Backend,"@c1 syntax.clause form=imperative modifier=""just"" verb=""bunsle"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""selected"" head=""nodes""
-@r1 syntax.relation marker=""as"" from=$c1 to=$n2
-@n2 syntax.nominal head=""Backend""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""as"" from=$c1 to=$n2
+@n2 syntax.nominal head=""Backend""",prolog+z3,judge
 retitle it to Billing,"@c1 syntax.clause form=imperative verb=""retitle"" complement=$n1
 @n1 syntax.nominal head=""it""
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2
@@ -1310,7 +1320,10 @@ a group sprint -> Stage 2,"@n1 syntax.nominal dependent=""a"" head=""group"" dep
 this group brown for me,,,
 can you label grip G 1 to Infra,,,
 "to separate it from therest, switch group g1 gold",,,
-thegroup Departments -> Infra,,,
+thegroup Departments -> Infra,"@n1 syntax.nominal dependent=""thegroup"" head=""Departments""
+@c1 syntax.clause form=fragment modifier="">"" complement=$n1
+@n2 syntax.nominal head=""Infra""
+@r1 syntax.relation from=$n1 to=$n2",spacy,judge
 "het, relabel g1 to Experiments",,,
 "to separate it from da rest, set da Phase 2 section hello",,,
 right that group large,,,
@@ -1650,7 +1663,15 @@ go ahead and split up the Checkout flow group but keep the nodes,,,
 "we do not need that grouping anymore, ungroup group ""Checkout flow""",,,
 break up Approval steps,,,
 let's break up the selected group but keep the nodes,,,
-could you unbundle Phase 1 but keep the nodes if you can,,,
+could you unbundle Phase 1 but keep the nodes if you can,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""unbundle"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""Phase 1""
+@k1 syntax.coordination conjunction=""but"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""keep"" complement=$n3
+@n3 syntax.nominal dependent=""the"" head=""nodes""
+@r1 syntax.relation marker=""if"" from=$c2 to=$c3
+@n4 syntax.nominal head=""you""
+@c3 syntax.clause form=declarative verb=""can"" subject=$n4",distilbert+vss,judge
 "we do not need thatgrouping anymore, solit up thd Phase 2 group",,,
 separate thrs elected group,,,
 "we do not need that grouping anymore, break apart the Phase 1 cluster, thanks",,,
@@ -1986,7 +2007,15 @@ are there any triangles on the canvas?,"@c1 syntax.clause form=interrogative ver
 @n2 syntax.nominal dependent=""any"" head=""triangles""
 @r1 syntax.relation marker=""on"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""the"" head=""canvas""",spacy-direct+vss,agreement
-"I might have deleted it by mistake, is there still a square?",,,
+"I might have deleted it by mistake, is there still a square?","@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative auxiliary=""might"" auxiliary=""have"" verb=""deleted"" subject=$n1 complement=$n2
+@n2 syntax.nominal head=""it""
+@r1 syntax.relation marker=""by"" from=$c1 to=$n3
+@n3 syntax.nominal head=""mistake""
+@c2 syntax.clause form=interrogative verb=""is"" modifier=""still"" subject=$n4 complement=$n5
+@n4 syntax.nominal head=""there""
+@n5 syntax.nominal dependent=""a"" head=""square""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2",spacy,judge
 any decision boxes?,"@n1 syntax.nominal dependent=""any"" dependent=""decision"" head=""boxes""
 @c1 syntax.clause form=fragment complement=$n1",spacy-direct+vss,agreement
 is there a square?,"@c1 syntax.clause form=interrogative verb=""is"" subject=$n1 complement=$n2

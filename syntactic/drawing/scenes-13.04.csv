@@ -19,7 +19,10 @@ lose the bright red outline around the boat on the lake,"@c1 syntax.clause form=
 @n3 syntax.nominal dependent=""the"" head=""lake""",spacy-direct+vss,agreement
 remove all but a pair of the row of four trees,,,
 strip all five flowers back to 4,,,
-3 of all four stones left,,,
+3 of all four stones left,"@n1 syntax.nominal head=""3""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""all"" dependent=""four"" head=""stones"" dependent=""left""
+@c1 syntax.clause form=fragment complement=$n1",prolog+vss,judge
 "remove the other flowers, all but the red flowers",,,
 remove every object but the flowers in the bed,,,
 keep the red flowers and erase everything else,"@c1 syntax.clause form=imperative verb=""keep"" complement=$n1
@@ -405,8 +408,8 @@ i wonder if you could remove the top two of the five yellow blocks,,,
 @k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c2
 @c2 syntax.clause form=imperative verb=""raise"" complement=$n3
 @n3 syntax.nominal dependent=""a"" dependent=""three"" dependent=""block"" dependent=""red"" head=""tower""
-@r1 syntax.relation marker=""in"" from=$c2 to=$n4
-@n4 syntax.nominal dependent=""the"" head=""corner""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""in"" from=$c2 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""corner""",spacy,judge
 "please take out the purple blocks in the corner, then put three red blocks in a row where they stood","@c1 syntax.clause form=imperative discourse=""please"" verb=""take"" modifier=""out"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""purple"" head=""blocks""
 @r1 syntax.relation marker=""in"" from=$n1 to=$n2
@@ -465,7 +468,11 @@ remove all the boats except the dock,"@c1 syntax.clause form=imperative verb=""r
 @n1 syntax.nominal dependent=""all"" dependent=""the"" head=""boats""
 @r1 syntax.relation marker=""except"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""dock""",spacy-direct+vss,agreement
-erase all the stones but the big one can stay,,,
+erase all the stones but the big one can stay,"@c1 syntax.clause form=imperative verb=""erase"" complement=$n1
+@n1 syntax.nominal dependent=""all"" dependent=""the"" head=""stones""
+@k1 syntax.coordination conjunction=""but"" conjunct=$c1 conjunct=$c2
+@n2 syntax.nominal dependent=""the"" dependent=""big"" head=""one""
+@c2 syntax.clause form=declarative auxiliary=""can"" verb=""stay"" subject=$n2",distilbert+z3,judge
 leave a single one of those three lamps,,,
 take out all but a foursome of the bed of five flowers,,,
 clear the rest of the flock but keep two out of the five sheep,"@c1 syntax.clause form=imperative verb=""clear"" complement=$n1
@@ -673,7 +680,11 @@ is the boy by the sandbox facing left?,,,
 does the girl in the red cap face right?,,,
 do you think the tall boy near the fence is looking left?,,,
 which way is the woman in the blue coat facing?,,,
-what direction is the kid with the kite turned?,,,
+what direction is the kid with the kite turned?,"@n1 syntax.nominal dependent=""what"" head=""direction""
+@c1 syntax.clause form=interrogative auxiliary=""is"" verb=""turned"" subject=$n2 complement=$n1
+@n2 syntax.nominal dependent=""the"" head=""kid""
+@r1 syntax.relation marker=""with"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""kite""",distilbert+spacy,judge
 which way is the girl with pigtails looking?,,,
 can you tell me which way the boy in the green shirt faces?,,,
 "which way is the woman by the table facing now, with the swing set still on the left and the others already turned away?",,,
@@ -978,7 +989,13 @@ the pair of round black glasses as well.,"@n1 syntax.nominal dependent=""the"" h
 @c1 syntax.clause form=fragment modifier=""as"" modifier=""well"" complement=$n1",spacy-direct+vss,agreement
 let the boy wear a jacket,,,
 "let the boy wear a jacket, thanks",,,
-let the boy wear a jacket — go on,,,
+let the boy wear a jacket — go on,"@c1 syntax.clause form=imperative verb=""let"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""boy""
+@c2 syntax.clause form=nonfinite verb=""wear"" complement=$n2
+@n2 syntax.nominal dependent=""a"" head=""jacket""
+@c3 syntax.clause form=imperative verb=""go"" modifier=""on""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c3
+@r1 syntax.relation from=$c1 to=$c2",prolog+z3,judge
 put a hat on the girl,"@c1 syntax.clause form=imperative verb=""put"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""hat""
 @r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
@@ -2044,7 +2061,13 @@ don't move the wooden bench.,"@c1 syntax.clause form=imperative auxiliary=""do""
 @n1 syntax.nominal dependent=""the"" dependent=""wooden"" head=""bench""",spacy-direct+vss,agreement
 "the small bench stays where it is, it looks right there.",,,
 the old bench should stay put.,,,
-"leave the small bench exactly as it is, it looks right there.",,,
+"leave the small bench exactly as it is, it looks right there.","@c1 syntax.clause form=imperative verb=""leave"" modifier=""exactly"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""small"" head=""bench""
+@r1 syntax.relation marker=""as"" from=$c1 to=$c2
+@n2 syntax.nominal head=""it""
+@c2 syntax.clause form=declarative verb=""is"" subject=$n2
+@n3 syntax.nominal head=""it""
+@c3 syntax.clause form=declarative verb=""looks"" modifier=""right"" modifier=""there"" subject=$n3",distilbert+vss,judge
 have the two people shake hands,,,
 please have the two people shake hands,,,
 "have the two people shake hands, thanks",,,
@@ -2065,7 +2088,13 @@ I want the bird to chase the kite,"@n1 syntax.nominal head=""I""
 have the brid chase the kite,,,
 don't shift the small bench at all.,"@c1 syntax.clause form=imperative auxiliary=""do"" negation=""n't"" verb=""shift"" modifier=""at"" modifier=""all"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""small"" head=""bench""",spacy-direct+vss,agreement
-"leave the wooden bench where it is, the picture is finished.",,,
+"leave the wooden bench where it is, the picture is finished.","@c1 syntax.clause form=imperative verb=""leave"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""wooden"" head=""bench""
+@r1 syntax.relation marker=""where"" from=$c1 to=$c2
+@n2 syntax.nominal head=""it""
+@c2 syntax.clause form=declarative verb=""is"" subject=$n2
+@n3 syntax.nominal dependent=""the"" head=""picture""
+@c3 syntax.clause form=declarative auxiliary=""is"" verb=""finished"" subject=$n3",distilbert+vss,judge
 the bird after the kite,"@n1 syntax.nominal dependent=""the"" head=""bird""
 @r1 syntax.relation marker=""after"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""kite""

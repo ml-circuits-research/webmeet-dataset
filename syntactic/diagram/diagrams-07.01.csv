@@ -712,8 +712,8 @@ set the text colour of Start to indigo,"@c1 syntax.clause form=imperative verb="
 @n1 syntax.nominal dependent=""the"" dependent=""text"" head=""colour""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
 @n2 syntax.nominal head=""Start""
-@r2 syntax.relation marker=""to"" from=$c1 to=$n3
-@n3 syntax.nominal head=""indigo""",spacy-direct+vss,agreement
+@r2 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n3
+@n3 syntax.nominal head=""indigo""",prolog+z3,judge
 set the text colour of n1 to purple,"@c1 syntax.clause form=imperative verb=""set"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""text"" head=""colour""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
@@ -788,8 +788,8 @@ set the font weight of the diamond to normal,"@c1 syntax.clause form=imperative 
 @n3 syntax.nominal head=""normal""",spacy-direct+vss,agreement
 set its font weight to normal,"@c1 syntax.clause form=imperative verb=""set"" complement=$n1
 @n1 syntax.nominal dependent=""its"" dependent=""font"" head=""weight""
-@r1 syntax.relation marker=""to"" from=$c1 to=$n2
-@n2 syntax.nominal head=""normal""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n2
+@n2 syntax.nominal head=""normal""",prolog+z3,judge
 set the font weight of all the rectangles to normal,"@c1 syntax.clause form=imperative verb=""set"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""font"" head=""weight""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
@@ -935,7 +935,17 @@ set the colour of Start to red and the effect to none,,,
 set the colour of Start to red and the rotation to 45,,,
 set the size of Start to tiny and the kind to rectangle,,,
 set the size of Start to tiny and the font size to 18,,,
-set the size of Start to tiny and the effect to none,,,
+set the size of Start to tiny and the effect to none,"@c1 syntax.clause form=imperative verb=""set"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""size""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal head=""Start""
+@r2 syntax.relation marker=""to"" from=$c1 to=$n3
+@n3 syntax.nominal head=""tiny""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@n4 syntax.nominal dependent=""the"" head=""effect""
+@r3 syntax.relation marker=""to"" from=$c2 to=$n5
+@n5 syntax.nominal head=""none""
+@c2 syntax.clause form=fragment complement=$n4 ellipsis=$c1",distilbert+vss,judge
 set the label of Start to Review and the outline to red,"@c1 syntax.clause form=imperative verb=""set"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""label""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
@@ -1138,7 +1148,12 @@ arrange all the rectangles with layout circle,"@c1 syntax.clause form=imperative
 @r1 syntax.relation marker=""with"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""layout"" head=""circle""",spacy-direct+vss,agreement
 arrange Start with layout radial,,,
-connect a link from Start to Review,,,
+connect a link from Start to Review,"@c1 syntax.clause form=imperative verb=""connect"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""link""
+@r1 syntax.relation attachment=ambiguous marker=""from"" from=$c1 to=$n2
+@n2 syntax.nominal head=""Start""
+@r2 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n3
+@n3 syntax.nominal head=""Review""",prolog+z3,judge
 connect a link to Review from Start,"@c1 syntax.clause form=imperative verb=""connect"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""link""
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2
@@ -1157,7 +1172,14 @@ connect a link from Start to Review with colour navy,,,
 connect a link from Start to Review with colour indigo,,,
 connect a link from Start to Review with colour purple,,,
 connect a link from Start to Review with colour magenta,,,
-connect a link from Start to Review with colour pink,,,
+connect a link from Start to Review with colour pink,"@c1 syntax.clause form=imperative verb=""connect"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""link""
+@r1 syntax.relation attachment=ambiguous marker=""from"" from=$c1 to=$n2
+@n2 syntax.nominal head=""Start""
+@r2 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n3
+@n3 syntax.nominal head=""Review""
+@r3 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$n4
+@n4 syntax.nominal head=""colour"" dependent=""pink""",prolog+z3,judge
 connect a link from Start to Review with colour brown,,,
 connect a link from Start to Review with colour black,,,
 connect a link from Start to Review with colour white,,,
@@ -1188,7 +1210,14 @@ connect a link from Start to Review with to side left,,,
 connect a link from Start to Review with to side centre,,,
 connect a link from Start to Review with head arrow,,,
 connect a link from Start to Review with head open,,,
-connect a link from Start to Review with head diamond,,,
+connect a link from Start to Review with head diamond,"@c1 syntax.clause form=imperative verb=""connect"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""link""
+@r1 syntax.relation marker=""from"" from=$n1 to=$n2
+@n2 syntax.nominal head=""Start""
+@r2 syntax.relation marker=""to"" from=$n1 to=$n3
+@n3 syntax.nominal head=""Review""
+@r3 syntax.relation marker=""with"" from=$c1 to=$n4
+@n4 syntax.nominal dependent=""head"" head=""diamond""",distilbert+vss,judge
 connect a link from Start to Review with head circle,,,
 connect a link from Start to Review with head none,,,
 connect a link from Start to Review with tail arrow,,,
@@ -1283,8 +1312,8 @@ set the colour of all the arrows to navy,"@c1 syntax.clause form=imperative verb
 @n1 syntax.nominal dependent=""the"" head=""colour""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""all"" dependent=""the"" head=""arrows""
-@r2 syntax.relation marker=""to"" from=$c1 to=$n3
-@n3 syntax.nominal head=""navy""",spacy-direct+vss,agreement
+@r2 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n3
+@n3 syntax.nominal head=""navy""",prolog+z3,judge
 set the colour of arrow from Start to Review to indigo,,,
 set the colour of e1 to purple,"@c1 syntax.clause form=imperative verb=""set"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""colour""
@@ -1613,7 +1642,17 @@ set the size of Approval steps to huge,"@c1 syntax.clause form=imperative verb="
 @n3 syntax.nominal head=""huge""",vss,judge
 set the label of Approval steps to Review and the colour to red,,,
 set the label of Approval steps to Review and the size to tiny,,,
-set the colour of Approval steps to red and the size to tiny,,,
+set the colour of Approval steps to red and the size to tiny,"@c1 syntax.clause form=imperative verb=""set"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""colour""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal head=""Approval steps""
+@r2 syntax.relation marker=""to"" from=$c1 to=$n3
+@n3 syntax.nominal head=""red""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@n4 syntax.nominal dependent=""the"" head=""size""
+@r3 syntax.relation marker=""to"" from=$c2 to=$n5
+@n5 syntax.nominal head=""tiny""
+@c2 syntax.clause form=fragment complement=$n4 ellipsis=$c1",distilbert+vss,judge
 set the label of Approval steps to Review and the colour to red and the size to tiny,,,
 arrange Approval steps with layout row,,,
 arrange g1 with layout row,"@c1 syntax.clause form=imperative verb=""arrange"" complement=$n1
@@ -2588,7 +2627,23 @@ set the title of Sales by region to Quarterly plan and the label to Review and t
 set the label of Sales by region to Review and the x axis to bottom and the invert to none,,,
 set the y label of Sales by region to Revenue and the y max to 40 and the pie radius to 97.5,,,
 set the gridlines of Sales by region to on and the y max to 40 and the error cap to 7.5,,,
-set the y max of Sales by region to 40 and the error cap to 7.5 and the bar gap to Bar Gap one,,,
+set the y max of Sales by region to 40 and the error cap to 7.5 and the bar gap to Bar Gap one,"@c1 syntax.clause form=imperative verb=""set"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""y"" head=""max""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal head=""Sales""
+@r2 syntax.relation marker=""by"" from=$n2 to=$n3
+@n3 syntax.nominal head=""region""
+@r3 syntax.relation marker=""to"" from=$c1 to=$n4
+@n4 syntax.nominal head=""40""
+@k1 syntax.coordination conjunction=""and"" conjunction=""and"" conjunct=$c1 conjunct=$c2 conjunct=$c3
+@n5 syntax.nominal dependent=""the"" dependent=""error"" head=""cap""
+@r4 syntax.relation marker=""to"" from=$c2 to=$n6
+@n6 syntax.nominal head=""7.5""
+@n7 syntax.nominal dependent=""the"" dependent=""bar"" head=""gap""
+@r5 syntax.relation marker=""to"" from=$c3 to=$n8
+@n8 syntax.nominal dependent=""Bar"" head=""Gap one""
+@c2 syntax.clause form=fragment complement=$n5 ellipsis=$c1
+@c3 syntax.clause form=fragment complement=$n7 ellipsis=$c1",distilbert,judge
 set the x axis of Sales by region to bottom and the y min to 40 and the stacking to none,,,
 set the bar width of Sales by region to 0.33 and the title position to top and the invert to none,,,
 tidy arrow from Start to Review,,,
@@ -2646,7 +2701,13 @@ add a series with colour purple and label Review,,,
 add a series with colour magenta and label Review,,,
 add a series with colour pink and label Review,,,
 add a series with colour brown and label Review,,,
-add a series with colour gray and label Review,,,
+add a series with colour gray and label Review,"@c1 syntax.clause form=imperative verb=""add"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""series""
+@r1 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""colour"" head=""gray""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""label"" complement=$n3
+@n3 syntax.nominal head=""Review""",distilbert+prolog,judge
 add a series with colour black and label Review,,,
 add a series with colour white and label Review,,,
 "add a series with chart Sales by region and values 3, 5 and 8 and label Review",,,
@@ -2756,7 +2817,20 @@ set the colour of the series to white,"@c1 syntax.clause form=imperative verb=""
 @r2 syntax.relation marker=""to"" from=$c1 to=$n3
 @n3 syntax.nominal head=""white""",spacy-direct+vss,agreement
 "set the label of the series to Review and the values to 3, 5 and 8",,,
-"set the values of the series to 3, 5 and 8 and the colour to red",,,
+"set the values of the series to 3, 5 and 8 and the colour to red","@c1 syntax.clause form=imperative verb=""set"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""values""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""series""
+@r2 syntax.relation marker=""to"" from=$c1 to=$k1
+@n3 syntax.nominal head=""3""
+@n4 syntax.nominal head=""5""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n3 conjunct=$n4 conjunct=$n5
+@n5 syntax.nominal head=""8""
+@k2 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@n6 syntax.nominal dependent=""the"" head=""colour""
+@r3 syntax.relation marker=""to"" from=$n6 to=$n7
+@n7 syntax.nominal head=""red""
+@c2 syntax.clause form=fragment complement=$n6 ellipsis=$c1",spacy,judge
 "set the label of the series to Review and the values to 3, 5 and 8 and the colour to red",,,
 reset the preferences with key palette,"@c1 syntax.clause form=imperative verb=""reset"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""preferences""

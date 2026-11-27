@@ -1467,7 +1467,24 @@ hey — bring a person in an orange shirt with no hat at the right of the three 
 @n6 syntax.nominal dependent=""the"" head=""neighbour""
 @r4 syntax.relation marker=""on"" from=$n6 to=$n7
 @n7 syntax.nominal dependent=""the"" head=""line""",spacy-direct+vss,agreement
-"actually, please drop a man in a blue coat at the far right, and after that, have the new person trade places with the neighbour on the line",,,
+"actually, please drop a man in a blue coat at the far right, and after that, have the new person trade places with the neighbour on the line","@c1 syntax.clause form=imperative modifier=""actually"" discourse=""please"" verb=""drop"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""man""
+@r1 syntax.relation marker=""in"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""blue"" head=""coat""
+@r2 syntax.relation marker=""at"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""far"" head=""right""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@r3 syntax.relation marker=""after"" from=$c2 to=$n4
+@n4 syntax.nominal head=""that""
+@c2 syntax.clause form=imperative verb=""have""
+@n5 syntax.nominal dependent=""the"" dependent=""new"" head=""person""
+@c3 syntax.clause form=nonfinite verb=""trade"" subject=$n5 complement=$n6
+@n6 syntax.nominal head=""places""
+@r4 syntax.relation marker=""with"" from=$c3 to=$n7
+@n7 syntax.nominal dependent=""the"" head=""neighbour""
+@r5 syntax.relation marker=""on"" from=$c3 to=$n8
+@n8 syntax.nominal dependent=""the"" head=""line""
+@r6 syntax.relation from=$c2 to=$c3",spacy,judge
 "please plant a girl in a purple cap at the far right, then let the new person trade places with the neighbour",,,
 "maybe you could seat a woman in a red hat at the far right, then the new person trades places with the neighbour on the line",,,
 "please park a man in a blue coat at the far right, then swap the new person with the neighbour","@c1 syntax.clause form=imperative discourse=""please"" verb=""park"" complement=$n1
@@ -1585,17 +1602,17 @@ hey — bring a person in an orange shirt with no hat at the right of the three 
 "maybe you could seat a girl in a yellow dress at the far left, then seat the man in the red hat out at the far right","@c1 syntax.clause form=declarative modifier=""maybe"" auxiliary=""could"" verb=""seat"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""a"" head=""girl""
-@r1 syntax.relation marker=""in"" from=$c1 to=$n3
+@r1 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""a"" dependent=""yellow"" head=""dress""
-@r2 syntax.relation marker=""at"" from=$c1 to=$n4
+@r2 syntax.relation attachment=ambiguous marker=""at"" from=$c1 to=$n4
 @n4 syntax.nominal dependent=""the"" dependent=""far"" head=""left""
 @k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c2
-@c2 syntax.clause form=imperative verb=""seat"" modifier=""out"" complement=$n5
+@c2 syntax.clause form=nonfinite verb=""seat"" modifier=""out"" complement=$n5
 @n5 syntax.nominal dependent=""the"" head=""man""
-@r3 syntax.relation marker=""in"" from=$n5 to=$n6
+@r3 syntax.relation attachment=ambiguous marker=""in"" from=$c2 to=$n6
 @n6 syntax.nominal dependent=""the"" dependent=""red"" head=""hat""
-@r4 syntax.relation marker=""at"" from=$c2 to=$n7
-@n7 syntax.nominal dependent=""the"" dependent=""far"" head=""right""",spacy-direct+vss,agreement
+@r4 syntax.relation attachment=ambiguous marker=""at"" from=$c2 to=$n7
+@n7 syntax.nominal dependent=""the"" dependent=""far"" head=""right""",prolog,judge
 "please park a man in the orange coat in at the far left, then park the woman in the blue hat off the far right","@n1 syntax.nominal dependent=""a"" head=""man""
 @r1 syntax.relation marker=""in"" from=$n1 to=$n2
 @c1 syntax.clause form=imperative discourse=""please"" verb=""park"" modifier=""in"" complement=$n1
@@ -1975,7 +1992,15 @@ hey — bring a person in an orange shirt with no hat at the right of the three 
 @n5 syntax.nominal head=""it""
 @c3 syntax.clause form=declarative verb=""is"" subject=$n5",spacy-direct+vss,agreement
 "could you raise three blue blocks against the bottom of the wall, then keep the wall exactly as it is",,,
-"put the wall base with a line of three blue blocks, then leave the wall untouched",,,
+"put the wall base with a line of three blue blocks, then leave the wall untouched","@c1 syntax.clause form=imperative verb=""put"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""wall"" head=""base""
+@r1 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""a"" head=""line""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""three"" dependent=""blue"" head=""blocks""
+@k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""leave"" modifier=""untouched"" complement=$n4
+@n4 syntax.nominal dependent=""the"" head=""wall""",prolog+spacy+z3,judge
 "actually, please put three blue blocks in a line touching the base of the wall, and after that, keep the wall as it is",,,
 "please set a line of three blue blocks along the base, next leave the wall as it is",,,
 "maybe you could stand three blue blocks against the bottom of the wall, then keep the wall exactly as it is",,,
@@ -2536,7 +2561,16 @@ hey — bring a person in an orange shirt with no hat at the right of the three 
 "strip the glasses from the man completely, and replace it with a pair of mirrored sunglasses that fits — just the prop, mind",,,
 "clear the glasses off the man once and for all, and fit him out with a pair of black sunglasses, with the rest of the scene untouched",,,
 "take the glasses off the man, and put a pair of sunglasses on him",,,
-"the glasses off the man, and give him a pair of dark sunglasses",,,
+"the glasses off the man, and give him a pair of dark sunglasses","@n1 syntax.nominal dependent=""the"" head=""glasses""
+@r1 syntax.relation marker=""off"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""man""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c2 conjunct=$c1
+@c1 syntax.clause form=imperative verb=""give"" complement=$n3 complement=$n4
+@n3 syntax.nominal head=""him""
+@n4 syntax.nominal dependent=""a"" head=""pair""
+@r2 syntax.relation marker=""of"" from=$n4 to=$n5
+@n5 syntax.nominal dependent=""dark"" head=""sunglasses""
+@c2 syntax.clause form=fragment complement=$n1",distilbert+prolog+spacy+z3,judge
 "remove the glasses from the man, and add a pair of mirrored sunglasses for him",,,
 "the glasses off the man, and swap in a pair of black sunglasses instead",,,
 "atke the glasses off the man, and put a pair of sunglasses on him instead",,,
@@ -2712,7 +2746,16 @@ hey — bring a person in an orange shirt with no hat at the right of the three 
 @n3 syntax.nominal dependent=""a"" dependent=""white"" dependent=""baseball"" head=""uniform""
 @r2 syntax.relation marker=""for"" from=$n3 to=$n4
 @n4 syntax.nominal head=""him""",spacy-direct+vss,agreement
-"slip the outfit off the boy, and have him wear a striped baseball uniform",,,
+"slip the outfit off the boy, and have him wear a striped baseball uniform","@c1 syntax.clause form=imperative verb=""slip"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""outfit""
+@r1 syntax.relation attachment=ambiguous marker=""off"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""boy""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""have"" complement=$n3
+@n3 syntax.nominal head=""him""
+@c3 syntax.clause form=nonfinite verb=""wear"" complement=$n4
+@n4 syntax.nominal dependent=""a"" dependent=""striped"" dependent=""baseball"" head=""uniform""
+@r2 syntax.relation from=$c2 to=$c3",prolog+z3,judge
 "take the outfit off the boy for good, and put a baseball uniform on him instead, straight away — the shape and pose stay the same",,,
 "pull the outfit right off the boy, and swap in a white baseball uniform for it, same spot, and nothing else about the person changes",,,
 "strip the outfit from the boy completely, and replace it with a striped baseball uniform that fits — just the prop, mind",,,

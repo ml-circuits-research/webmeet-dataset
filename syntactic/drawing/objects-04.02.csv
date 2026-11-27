@@ -104,7 +104,12 @@ first things first: a sock,,,
 my current project needs a sock,"@n1 syntax.nominal dependent=""my"" dependent=""current"" head=""project""
 @c1 syntax.clause form=declarative verb=""needs"" subject=$n1 complement=$n2
 @n2 syntax.nominal dependent=""a"" head=""sock""",spacy-direct+vss,agreement
-"if it is not too much trouble, a sock",,,
+"if it is not too much trouble, a sock","@r1 syntax.relation marker=""if"" from=$c2 to=$c1
+@n1 syntax.nominal head=""it""
+@c1 syntax.clause form=declarative verb=""is"" negation=""not"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""too"" dependent=""much"" head=""trouble""
+@n3 syntax.nominal dependent=""a"" head=""sock""
+@c2 syntax.clause form=fragment complement=$n3",distilbert+spacy+z3,judge
 the next thing on my list is a sock,"@n1 syntax.nominal dependent=""the"" dependent=""next"" head=""thing""
 @r1 syntax.relation marker=""on"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""my"" head=""list""
@@ -618,10 +623,10 @@ the next thing on my list is an apple,"@n1 syntax.nominal dependent=""the"" depe
 @c1 syntax.clause form=declarative verb=""forget"" subject=$n1
 @n2 syntax.nominal dependent=""an"" head=""apple""
 @c2 syntax.clause form=fragment complement=$n2",spacy-direct+vss,agreement
-rounding this off with an apple,"@c1 syntax.clause form=nonfinite verb=""rounding"" modifier=""off"" complement=$n1
+rounding this off with an apple,"@c1 syntax.clause form=imperative verb=""rounding"" modifier=""off"" complement=$n1
 @n1 syntax.nominal head=""this""
 @r1 syntax.relation marker=""with"" from=$c1 to=$n2
-@n2 syntax.nominal dependent=""an"" head=""apple""",spacy-direct+vss,agreement
+@n2 syntax.nominal dependent=""an"" head=""apple""",prolog,judge
 "give me an apple, thanks","@c1 syntax.clause form=imperative verb=""give"" discourse=""thanks"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""me""
 @n2 syntax.nominal dependent=""an"" head=""apple""",spacy-direct+vss,agreement
@@ -829,7 +834,8 @@ how about a cave,"@c1 syntax.clause form=fragment modifier=""how""
 one more thing — a cave,"@n1 syntax.nominal dependent=""one"" dependent=""more"" head=""thing""
 @n2 syntax.nominal dependent=""a"" head=""cave""
 @c1 syntax.clause form=fragment complement=$n1
-@r1 syntax.relation from=$n1 to=$n2",spacy-direct+vss,agreement
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=fragment complement=$n2",z3,judge
 how about a chair,"@c1 syntax.clause form=fragment modifier=""how""
 @r1 syntax.relation marker=""about"" from=$c1 to=$n1
 @n1 syntax.nominal dependent=""a"" head=""chair""",spacy-direct+vss,agreement
@@ -1075,7 +1081,10 @@ one more thing — a flour,"@n1 syntax.nominal dependent=""one"" dependent=""mor
 @n2 syntax.nominal dependent=""a"" head=""flour""
 @c1 syntax.clause form=fragment complement=$n1
 @r1 syntax.relation from=$n1 to=$n2",spacy-direct+vss,agreement
-first things first: a flour,,,
+first things first: a flour,"@n1 syntax.nominal dependent=""first"" head=""things"" dependent=""first""
+@n2 syntax.nominal dependent=""a"" head=""flour""
+@c1 syntax.clause form=fragment complement=$n1
+@r1 syntax.relation from=$n1 to=$n2",distilbert+vss,judge
 my current project needs a flour,"@n1 syntax.nominal dependent=""my"" dependent=""current"" head=""project""
 @c1 syntax.clause form=declarative verb=""needs"" subject=$n1 complement=$n2
 @n2 syntax.nominal dependent=""a"" head=""flour""",spacy-direct+vss,agreement
@@ -2773,4 +2782,7 @@ sketch a library for me,"@c1 syntax.clause form=imperative verb=""sketch"" compl
 how about a library,"@c1 syntax.clause form=fragment modifier=""how""
 @r1 syntax.relation marker=""about"" from=$c1 to=$n1
 @n1 syntax.nominal dependent=""a"" head=""library""",spacy-direct+vss,agreement
-"drop in a library, would you",,,
+"drop in a library, would you","@c1 syntax.clause form=imperative verb=""drop"" modifier=""in"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""library""
+@c2 syntax.clause form=interrogative verb=""would"" subject=$n2
+@n2 syntax.nominal head=""you""",distilbert+vss,judge

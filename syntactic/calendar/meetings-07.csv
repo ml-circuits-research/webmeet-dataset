@@ -347,7 +347,10 @@ bin Priya,,,
 Mihai can go from the people list,,,
 lose that contact,"@c1 syntax.clause form=imperative verb=""lose"" complement=$n1
 @n1 syntax.nominal dependent=""that"" head=""contact""",spacy-direct+vss,agreement
-Ana - remove,,,
+Ana - remove,"@n1 syntax.nominal head=""Ana""
+@c1 syntax.clause form=imperative verb=""remove""
+@c2 syntax.clause form=fragment complement=$n1
+@k1 syntax.coordination conjunct=$c2 conjunct=$c1",prolog+z3,judge
 create a new meeting room named Studio B,,,
 "can you set up a room, the Library?",,,
 "facilities just opened a quiet space, so please add it as a room called Quiet corner",,,
@@ -497,7 +500,18 @@ set the board room to 18 seats and book it for the weekly review,"@c1 syntax.cla
 @n3 syntax.nominal head=""it""
 @r2 syntax.relation marker=""for"" from=$c2 to=$n4
 @n4 syntax.nominal dependent=""the"" dependent=""weekly"" head=""review""",spacy-direct+vss,agreement
-"if I'm right that the Focus pod really seats just one person, can you change it to 1?",,,
+"if I'm right that the Focus pod really seats just one person, can you change it to 1?","@r1 syntax.relation marker=""if"" from=$c3 to=$c1
+@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""'m"" modifier=""right"" subject=$n1
+@r2 syntax.relation marker=""that"" from=$c1 to=$c2
+@n2 syntax.nominal dependent=""the"" dependent=""Focus"" head=""pod""
+@c2 syntax.clause form=declarative modifier=""really"" verb=""seats"" modifier=""just"" subject=$n2 complement=$n3
+@n3 syntax.nominal dependent=""one"" head=""person""
+@c3 syntax.clause form=interrogative auxiliary=""can"" verb=""change"" subject=$n4 complement=$n5
+@n4 syntax.nominal head=""you""
+@n5 syntax.nominal head=""it""
+@r3 syntax.relation marker=""to"" from=$c3 to=$n6
+@n6 syntax.nominal head=""1""",distilbert+prolog,judge
 "hey, the Oak room was rebuilt - it's got space for 30 people now",,,
 Board room: 22 seats,"@n1 syntax.nominal dependent=""Board"" head=""room""
 @n2 syntax.nominal dependent=""22"" head=""seats""
@@ -566,7 +580,10 @@ move it to the other building,"@c1 syntax.clause form=imperative verb=""move"" c
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""other"" head=""building""",spacy-direct+vss,agreement
 cedar room location: west wing,,,
-that room's downstairs now,,,
+that room's downstairs now,"@n1 syntax.nominal dependent=""that"" head=""room""
+@r1 syntax.relation marker=""'s"" from=$n2 to=$n1
+@n2 syntax.nominal head=""downstairs""
+@c1 syntax.clause form=fragment modifier=""now"" complement=$n2",prolog+z3,judge
 Board room moved to floor 9,,,
 delete the Focus pod,"@c1 syntax.clause form=imperative verb=""delete"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""Focus"" head=""pod""",spacy-direct+vss,agreement
@@ -584,8 +601,8 @@ drop the cedar room,"@c1 syntax.clause form=imperative verb=""drop"" complement=
 @n1 syntax.nominal dependent=""the"" dependent=""cedar"" head=""room""",spacy-direct+vss,agreement
 erase the Board room from the system,"@c1 syntax.clause form=imperative verb=""erase"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""Board"" head=""room""
-@r1 syntax.relation marker=""from"" from=$c1 to=$n2
-@n2 syntax.nominal dependent=""the"" head=""system""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""from"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""system""",spacy+z3,judge
 "move the budget sync to the Focus pod, then remove the Board room","@c1 syntax.clause form=imperative verb=""move"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""budget"" head=""sync""
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2
@@ -1409,7 +1426,10 @@ do I have any meetings with Priya next week?,"@c1 syntax.clause form=interrogati
 @n3 syntax.nominal head=""Priya""
 @n4 syntax.nominal dependent=""next"" head=""week""",spacy-direct+vss,agreement
 have I got anything booked on Monday morning?,,,
-is Mihai in any of my meetings today?,,,
+is Mihai in any of my meetings today?,"@c1 syntax.clause form=interrogative verb=""is"" modifier=""today"" subject=$n1
+@n1 syntax.nominal head=""Mihai""
+@r1 syntax.relation marker=""in"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""any"" dependent=""of"" dependent=""my"" head=""meetings""",vss,judge
 can you check whether the Cedar room is taken on Wednesday?,,,
 "Ana wants to meet on Thursday at 2, but do I already have something then?","@n1 syntax.nominal head=""Ana""
 @c1 syntax.clause form=declarative verb=""wants"" subject=$n1
@@ -1435,9 +1455,9 @@ Cedar room open after lunch?,,,
 "calendar for Bills, in olive","@n1 syntax.nominal head=""calendar""
 @r1 syntax.relation marker=""for"" from=$n1 to=$n2
 @n2 syntax.nominal head=""Bills""
-@r2 syntax.relation marker=""in"" from=$n2 to=$n3
+@r2 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n3
 @n3 syntax.nominal head=""olive""
-@c1 syntax.clause form=fragment complement=$n1",spacy-direct+vss,agreement
+@c1 syntax.clause form=fragment complement=$n1",prolog+z3,judge
 Gym sounds too serious. Let's call it Move instead,,,
 Gym -> Workouts,,,
 "Family calendar, maroon",,,

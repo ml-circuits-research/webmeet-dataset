@@ -26,7 +26,17 @@ Quick scatter plot of order value against margin for the segment small multiples
 "Give me a scatter plot of order value against margin in small multiples, split by customer segment for the calender quarter",,,
 "Build a scatter plot of order value against margin as small multiples, one per customer segment, it is needed urgenty",,,
 "Plot a bar chart of profit by region, with one chart per region and a shared legend",,,
-"Draw a bar chart of profit by region for the review, one chart per region",,,
+"Draw a bar chart of profit by region for the review, one chart per region","@c1 syntax.clause form=imperative verb=""Draw"" complement=$n1 complement=$n5
+@n1 syntax.nominal dependent=""a"" dependent=""bar"" head=""chart""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal head=""profit""
+@r2 syntax.relation attachment=ambiguous marker=""by"" from=$c1 to=$n3
+@n3 syntax.nominal head=""region""
+@r3 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""review""
+@n5 syntax.nominal dependent=""one"" head=""chart""
+@r4 syntax.relation attachment=ambiguous marker=""per"" from=$c1 to=$n6
+@n6 syntax.nominal head=""region""",z3,judge
 "Show me a bar chart of profit by region, one chart per region",,,
 "Build a bar chart of profit by region drawn separately, one chart per region",,,
 "I want a bar chart of profit by region, with one chart per region and a shared legend",,,
@@ -206,7 +216,33 @@ Give me a scatter plot of order value against profit and colour each point by ch
 "show 20, 30 and 25 as a bar chart for Q1, Q2 and Q3 on the left side and keep everything inside the page margins",,,
 "I want a bar chart of 20, 30 and 25 for Q1, Q2 and Q3 on the left side, and keep the gap even",,,
 "make a bar chart of 20, 30 and 25 for Q1, Q2 and Q3, then move it to the left side, and keep the rest of the page as it is",,,
-"when you get a moment, create a bar chart with 20, 30 and 25 for Q1, Q2 and Q3 on the left side and make sure the slide is easy to read for everyone",,,
+"when you get a moment, create a bar chart with 20, 30 and 25 for Q1, Q2 and Q3 on the left side and make sure the slide is easy to read for everyone","@r1 syntax.relation marker=""when"" from=$c2 to=$c1
+@n1 syntax.nominal head=""you""
+@c1 syntax.clause form=declarative verb=""get"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""a"" head=""moment""
+@c2 syntax.clause form=imperative verb=""create"" complement=$n3
+@n3 syntax.nominal dependent=""a"" dependent=""bar"" head=""chart""
+@r2 syntax.relation marker=""with"" from=$n3 to=$k1
+@n4 syntax.nominal head=""20""
+@n5 syntax.nominal head=""30""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n4 conjunct=$n5 conjunct=$n6
+@n6 syntax.nominal head=""25""
+@r3 syntax.relation attachment=ambiguous marker=""for"" from=$c2 to=$k2
+@n7 syntax.nominal head=""Q1""
+@n8 syntax.nominal head=""Q2""
+@k2 syntax.coordination conjunction=""and"" conjunct=$n7 conjunct=$n8 conjunct=$n9
+@n9 syntax.nominal head=""Q3""
+@r4 syntax.relation attachment=ambiguous marker=""on"" from=$c2 to=$n10
+@n10 syntax.nominal dependent=""the"" dependent=""left"" head=""side""
+@k3 syntax.coordination conjunction=""and"" conjunct=$c2 conjunct=$c3
+@c3 syntax.clause form=imperative verb=""make"" modifier=""sure""
+@n11 syntax.nominal dependent=""the"" head=""slide""
+@c4 syntax.clause form=declarative verb=""is"" modifier=""easy"" subject=$n11
+@r5 syntax.relation marker=""to"" from=$c4 to=$c5
+@c5 syntax.clause form=nonfinite verb=""read""
+@r6 syntax.relation marker=""for"" from=$c4 to=$n12
+@n12 syntax.nominal head=""everyone""
+@r7 syntax.relation from=$c3 to=$c4",spacy,judge
 "build a bar chart for Q1, Q2 and Q3 using 20, 30 and 25, on the left side, then group it with the box",,,
 "bar chart of 20, 30 and 25 for Q1, Q2 and Q3, placed on the left side and keep everything inside the page margins so nothing gets cut off at the edge",,,
 "make a bar chart with 20, 30 and 25 at Q1, Q2 and Q3, on the left side, and give it a thin outline",,,
@@ -648,9 +684,9 @@ Columns for headcount and a line for attrition rate by site,"@n1 syntax.nominal 
 @n3 syntax.nominal dependent=""a"" head=""line""
 @r2 syntax.relation marker=""for"" from=$n3 to=$n4
 @n4 syntax.nominal dependent=""attrition"" head=""rate""
-@r3 syntax.relation marker=""by"" from=$n4 to=$n5
+@r3 syntax.relation attachment=ambiguous marker=""by"" from=$c1 to=$n5
 @n5 syntax.nominal head=""site""
-@c1 syntax.clause form=fragment complement=$k1",spacy-direct+vss,agreement
+@c1 syntax.clause form=fragment complement=$k1",spacy,judge
 Attrition rate as a line over headcount columns by site,"@n1 syntax.nominal dependent=""Attrition"" head=""rate""
 @r1 syntax.relation marker=""as"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""a"" head=""line""
@@ -772,7 +808,10 @@ Does the sales trend go up or down over the months?,,,
 Which way is the sales trend pointing?,"@n1 syntax.nominal dependent=""Which"" head=""way""
 @c1 syntax.clause form=interrogative auxiliary=""is"" verb=""pointing"" subject=$n2 complement=$n1
 @n2 syntax.nominal dependent=""the"" dependent=""sales"" head=""trend""",spacy-direct+vss,agreement
-Has the sales been climbing or falling?,,,
+Has the sales been climbing or falling?,"@c1 syntax.clause form=interrogative auxiliary=""Has"" auxiliary=""been"" verb=""climbing"" subject=$n1
+@n1 syntax.nominal dependent=""the"" head=""sales""
+@k1 syntax.coordination conjunction=""or"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=interrogative verb=""falling""",spacy,judge
 Is the sales line rising or falling?,,,
 What direction is the sales trend taking?,"@n1 syntax.nominal dependent=""What"" head=""direction""
 @c1 syntax.clause form=interrogative auxiliary=""is"" verb=""taking"" subject=$n2 complement=$n1
@@ -863,7 +902,13 @@ while you're there: So which month climbed fastest on revenue?,,,
 Look at the revenue line: which month rises most — same thing once more?,,,
 "same session, next ask: Pick out the fastest-rising month in revenue",,,
 "one more thing: Tell me the month with the steepest revenue increase, if you can",,,
-"um, What's the biggest month-on-month jump in revenue — go on?",,,
+"um, What's the biggest month-on-month jump in revenue — go on?","@c1 syntax.clause form=interrogative discourse=""um"" verb=""'s"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""What""
+@n2 syntax.nominal dependent=""the"" dependent=""biggest"" dependent=""month"" dependent=""on"" dependent=""month"" head=""jump""
+@r1 syntax.relation marker=""in"" from=$n2 to=$n3
+@n3 syntax.nominal head=""revenue""
+@c2 syntax.clause form=interrogative verb=""go"" modifier=""on""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2",spacy,judge
 Can you spot the steeepest revenue climb for me?,"@c1 syntax.clause form=interrogative auxiliary=""Can"" verb=""spot"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""the"" dependent=""steeepest"" dependent=""revenue"" head=""climb""
@@ -900,7 +945,10 @@ What's the mean of the monthly revenue totals?,"@n1 syntax.nominal head=""What""
 @r1 syntax.relation marker=""of"" from=$n2 to=$n3
 @n3 syntax.nominal dependent=""the"" dependent=""monthly"" dependent=""revenue"" head=""totals""",spacy-direct+vss,agreement
 "On average, how much revenue per month?",,,
-What does the typical monthly total look like?,,,
+What does the typical monthly total look like?,"@n1 syntax.nominal head=""What""
+@c1 syntax.clause form=interrogative auxiliary=""does"" verb=""look"" subject=$n2 complement=$n1
+@n2 syntax.nominal dependent=""the"" dependent=""typical"" dependent=""monthly"" head=""total""
+@r1 syntax.relation marker=""like"" from=$c1 to=$n1",distilbert,judge
 Can you work out the average monthly revenue?,"@c1 syntax.clause form=interrogative auxiliary=""Can"" verb=""work"" modifier=""out"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""the"" dependent=""average"" dependent=""monthly"" head=""revenue""",spacy-direct+vss,agreement
@@ -993,7 +1041,11 @@ I want the most improved region on revenue,"@n1 syntax.nominal head=""I""
 So which region improved most over the year?,,,
 "Looking at the change, which region gained most?",,,
 Pick out the region with the best year-on-year gain,,,
-Which region advanced the most in revenue?,,,
+Which region advanced the most in revenue?,"@n1 syntax.nominal dependent=""Which"" head=""region""
+@c1 syntax.clause form=interrogative verb=""advanced"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""the"" head=""most""
+@r1 syntax.relation marker=""in"" from=$c1 to=$n3
+@n3 syntax.nominal head=""revenue""",distilbert,judge
 Which region gained the most revenue over last year?,,,
 The most improved region?,"@n1 syntax.nominal dependent=""The"" dependent=""most"" dependent=""improved"" head=""region""
 @c1 syntax.clause form=fragment complement=$n1",spacy-direct+vss,agreement
@@ -1340,13 +1392,13 @@ Where dooes the median beat the mean in claim cost?,,,
 "Tell me the grand total for sales, and how does it look next to Q3?","@c1 syntax.clause form=imperative verb=""Tell"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""me""
 @n2 syntax.nominal dependent=""the"" dependent=""grand"" head=""total""
-@r1 syntax.relation marker=""for"" from=$n2 to=$n3
+@r1 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n3
 @n3 syntax.nominal head=""sales""
 @k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
 @c2 syntax.clause form=interrogative modifier=""how"" auxiliary=""does"" verb=""look"" subject=$n4
 @n4 syntax.nominal head=""it""
 @r2 syntax.relation marker=""next to"" from=$c2 to=$n5
-@n5 syntax.nominal head=""Q3""",spacy-direct+vss,agreement
+@n5 syntax.nominal head=""Q3""",prolog,judge
 "What's the sum of sales, and how does that compare with last quarter?","@n1 syntax.nominal head=""What""
 @c1 syntax.clause form=interrogative verb=""'s"" subject=$n2 complement=$n1
 @n2 syntax.nominal dependent=""the"" head=""sum""
@@ -1431,7 +1483,16 @@ Where dooes the median beat the mean in claim cost?,,,
 "Read off the best category for profit, and what's the margin to the next category?",,,
 "Tell me the leading category on profit, and how big is the gap to second place?",,,
 "The category with the highest profit, and how far ahead of the runner-up is it?",,,
-"same session, next ask: Who leads on profit, and how far clear is it?",,,
+"same session, next ask: Who leads on profit, and how far clear is it?","@n1 syntax.nominal dependent=""same"" head=""session""
+@c1 syntax.clause form=imperative modifier=""next"" verb=""ask"" complement=$n1
+@n2 syntax.nominal head=""Who""
+@c2 syntax.clause form=interrogative verb=""leads"" subject=$n2
+@r1 syntax.relation marker=""on"" from=$c2 to=$n3
+@n3 syntax.nominal head=""profit""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c2 conjunct=$c3
+@c3 syntax.clause form=interrogative modifier=""how"" modifier=""far"" modifier=""clear"" verb=""is"" subject=$n4
+@n4 syntax.nominal head=""it""
+@r2 syntax.relation from=$c1 to=$k1",spacy,judge
 "What's the biggest category on the chart, and what's the gap between first and second as well?","@n1 syntax.nominal head=""What""
 @c1 syntax.clause form=interrogative verb=""'s"" subject=$n2 complement=$n1
 @n2 syntax.nominal dependent=""the"" dependent=""biggest"" head=""category""
@@ -1484,7 +1545,14 @@ Tell me which regino comes second on profit; now what does the total profit come
 Tell me which category comes first for sales; now what gap separates it from second?,,,
 List the top category by sales — then how much more than the second category?,,,
 "What is the best-selling category, and also, how far ahead of the runner-up is it?",,,
-"Give me the category with the highest sales — finally, how far is second place behind?",,,
+"Give me the category with the highest sales — finally, how far is second place behind?","@c1 syntax.clause form=imperative verb=""Give"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""me""
+@n2 syntax.nominal dependent=""the"" head=""category""
+@r1 syntax.relation marker=""with"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""highest"" head=""sales""
+@c2 syntax.clause form=interrogative modifier=""finally"" modifier=""how"" modifier=""far"" verb=""is"" modifier=""behind"" subject=$n4
+@n4 syntax.nominal dependent=""second"" head=""place""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2",spacy,judge
 "List the top category by sales, and then how much more than the second category?",,,
 "Give me the category with the highest sales, and so what is the lead over the next category?",,,
 "Which category leads on sales; now what gap separates it from second, for the wall chart in the sales room?",,,
@@ -1530,7 +1598,23 @@ List the month that earned the most revenue — then what did that month earn?,,
 "Which month brought in the most revenue; now how large was that month's revenue, for the monthly readout, ready for the big screen?",,,
 "List the month that earned the most revenue — finally, what revenue figure did it reach?",,,
 "What was the best month for revenue; now how large was that month's revenue, as a copy for the appendix?",,,
-"put the same on page two: Give me the strongest month by revenue, next, what was the revenue that month?",,,
+"put the same on page two: Give me the strongest month by revenue, next, what was the revenue that month?","@c1 syntax.clause form=imperative verb=""put"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""same""
+@r1 syntax.relation marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""page""
+@n3 syntax.nominal head=""two""
+@c2 syntax.clause form=imperative verb=""Give"" modifier=""next"" complement=$n4 complement=$n5
+@n4 syntax.nominal head=""me""
+@n5 syntax.nominal dependent=""the"" dependent=""strongest"" head=""month""
+@r2 syntax.relation marker=""by"" from=$n5 to=$n6
+@n6 syntax.nominal head=""revenue""
+@n7 syntax.nominal head=""what""
+@c3 syntax.clause form=interrogative verb=""was"" subject=$n8 complement=$n7 complement=$n9
+@n8 syntax.nominal dependent=""the"" head=""revenue""
+@n9 syntax.nominal dependent=""that"" head=""month""
+@r3 syntax.relation from=$c3 to=$c1
+@r4 syntax.relation from=$n2 to=$n3
+@k1 syntax.coordination conjunct=$c2 conjunct=$c3",spacy,judge
 "List the month that earned the most revenue; so how much did that month make, a repeat for the second section?",,,
 "the same question for the second slide: What was the best month for revenue, now how large was that month's revenue?",,,
 "quick one: Which month brought in the most revenue — also, how much revenue did it bring in — go on?",,,
@@ -1703,7 +1787,10 @@ Where do the loss-making orders pile up,,,
 Check whether discount and margin are related,,,
 Tell me if discount and margin are connected,,,
 Are discount and margin correlated,,,
-Is discount associated with margin,,,
+Is discount associated with margin,"@c1 syntax.clause form=interrogative auxiliary=""Is"" verb=""associated"" subject=$n1
+@n1 syntax.nominal head=""discount""
+@r1 syntax.relation marker=""with"" from=$c1 to=$n2
+@n2 syntax.nominal head=""margin""",distilbert+prolog+spacy,judge
 Do discount and margin track each other,,,
 I want to know whether discount correlates with margin,,,
 Confirm whether discount and margin move together,,,
@@ -2018,7 +2105,12 @@ How much does order value vary by channel,"@c1 syntax.clause form=interrogative 
 @n1 syntax.nominal dependent=""order"" head=""value""
 @r1 syntax.relation marker=""by"" from=$c1 to=$n2
 @n2 syntax.nominal head=""channel""",spacy-direct+vss,agreement
-Report how order value varies by channel,,,
+Report how order value varies by channel,"@c1 syntax.clause form=imperative verb=""Report""
+@c2 syntax.clause form=interrogative modifier=""how"" verb=""varies"" subject=$n1
+@n1 syntax.nominal dependent=""order"" head=""value""
+@r1 syntax.relation marker=""by"" from=$c2 to=$n2
+@n2 syntax.nominal head=""channel""
+@r2 syntax.relation from=$c1 to=$c2",spacy,judge
 "So, Describe how widely order value varies by channel for the client call, please",,,
 "Explain the spread of order value by channel, it is needed urgenty",,,
 "Characterise how order value varies by channel, for the quartar report",,,

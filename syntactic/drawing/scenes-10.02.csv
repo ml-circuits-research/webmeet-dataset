@@ -469,8 +469,8 @@ text,sop,source,accepted_by
 @k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
 @c2 syntax.clause form=imperative verb=""work"" complement=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""marble"" dependent=""tile"" head=""texture""
-@r1 syntax.relation marker=""into"" from=$n2 to=$n3
-@n3 syntax.nominal dependent=""the"" head=""surface""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""into"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""surface""",z3,judge
 "have the kitchen floor painted warm ivory, and get a polished marble finish onto the surface",,,
 "I want the old floor pale cream, and add a honed marble tile surface on top",,,
 "dress the wide floor in cool pale grey, and build up a veined marble skin over the surface",,,
@@ -687,7 +687,10 @@ have all of the floor tiles come out matte charcoal so they match,,,
 "keep every one of the wall tiles deep slate black, a single matching set",,,
 set all of the bathroom tiles to the same soft graphite,,,
 I want every one of the tiles black so the group is consistent,,,
-dress all of the floor tiles in a single matte charcoal shade,,,
+dress all of the floor tiles in a single matte charcoal shade,"@c1 syntax.clause form=imperative verb=""dress"" complement=$n1
+@n1 syntax.nominal dependent=""all"" dependent=""of"" dependent=""the"" dependent=""floor"" head=""tiles""
+@r1 syntax.relation marker=""in"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""single"" dependent=""matte"" dependent=""charcoal"" head=""shade""",vss,judge
 unify the wall tiles in deep slate black,"@c1 syntax.clause form=imperative verb=""unify"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""wall"" head=""tiles""
 @r1 syntax.relation marker=""in"" from=$c1 to=$n2
@@ -698,7 +701,11 @@ all of the floor tiles matte charcoal,,,
 set all of the wall tiles to deep slate black,,,
 soft graphite for all of the bathroom tiles,,,
 amke all of the tiles black so the set matches,,,
-give every one of the floor tiles the same amtte charcoal finish,,,
+give every one of the floor tiles the same amtte charcoal finish,"@c1 syntax.clause form=imperative verb=""give"" complement=$n1 complement=$n3
+@n1 syntax.nominal dependent=""every"" head=""one""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""floor"" head=""tiles""
+@n3 syntax.nominal dependent=""the"" dependent=""same"" dependent=""amtte"" dependent=""charcoal"" head=""finish""",distilbert+prolog+spacy+z3,judge
 hey — turn all of the bathroom tiles soft graphite to match each other,,,
 "recolour the whole set of tiles black, thanks","@c1 syntax.clause form=imperative verb=""recolour"" modifier=""black"" discourse=""thanks"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""whole"" head=""set""
@@ -1517,14 +1524,14 @@ seat a boy in the green caaket to the left of the leftmost person in blue,"@c1 s
 what if you park a man in the green shirt and no hat to the left of the leftmost person,,,
 move the man in the blue shirt to the right of the rightmost person in blue,"@c1 syntax.clause form=imperative verb=""move"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""man""
-@r1 syntax.relation marker=""in"" from=$n1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""blue"" head=""shirt""
-@r2 syntax.relation marker=""to"" from=$c1 to=$n3
+@r2 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""the"" head=""right""
 @r3 syntax.relation marker=""of"" from=$n3 to=$n4
 @n4 syntax.nominal dependent=""the"" dependent=""rightmost"" head=""person""
 @r4 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n5
-@n5 syntax.nominal head=""blue""",spacy-direct+vss,agreement
+@n5 syntax.nominal head=""blue""",prolog,judge
 shift the woman in the yellow jacket to the right of the rightmost person in blue,"@c1 syntax.clause form=imperative verb=""shift"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""woman""
 @r1 syntax.relation marker=""in"" from=$n1 to=$n2
@@ -1969,12 +1976,12 @@ could you pull the person in purple on the left end out of the line,"@c1 syntax.
 @n4 syntax.nominal dependent=""the"" head=""line""",spacy-direct+vss,agreement
 take the woman in the middle with the purple dress out of the line,"@c1 syntax.clause form=imperative verb=""take"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""woman""
-@r1 syntax.relation marker=""in"" from=$n1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""middle""
-@r2 syntax.relation marker=""with"" from=$n1 to=$n3
+@r2 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""the"" dependent=""purple"" head=""dress""
-@r3 syntax.relation marker=""out of"" from=$c1 to=$n4
-@n4 syntax.nominal dependent=""the"" head=""line""",spacy-direct+vss,agreement
+@r3 syntax.relation attachment=ambiguous marker=""out of"" from=$c1 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""line""",prolog+z3,judge
 could you clear the man in the middle with the blue jacket from the line,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""clear"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""the"" head=""man""
@@ -2305,8 +2312,8 @@ hey — diffuse the low hills through a dreamy blur,"@c1 syntax.clause form=impe
 @n2 syntax.nominal dependent=""a"" dependent=""dreamy"" head=""blur""",spacy-direct+vss,agreement
 "melt the far hills into a soft blur, thanks","@c1 syntax.clause form=imperative verb=""melt"" discourse=""thanks"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""far"" head=""hills""
-@r1 syntax.relation marker=""into"" from=$c1 to=$n2
-@n2 syntax.nominal dependent=""a"" dependent=""soft"" head=""blur""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""into"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""soft"" head=""blur""",prolog+z3,judge
 blur the street into a soft blur,"@c1 syntax.clause form=imperative verb=""blur"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""street""
 @r1 syntax.relation marker=""into"" from=$c1 to=$n2
@@ -2484,8 +2491,8 @@ blur the forest into a soft blur,"@c1 syntax.clause form=imperative verb=""blur"
 @n2 syntax.nominal dependent=""a"" dependent=""soft"" head=""blur""",spacy-direct+vss,agreement
 soften the pine forest with a foggy blur,"@c1 syntax.clause form=imperative verb=""soften"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""pine"" head=""forest""
-@r1 syntax.relation marker=""with"" from=$c1 to=$n2
-@n2 syntax.nominal dependent=""a"" dependent=""foggy"" head=""blur""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""foggy"" head=""blur""",prolog+spacy+z3,judge
 melt the dark forest into a hazy blur,"@c1 syntax.clause form=imperative verb=""melt"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""dark"" head=""forest""
 @r1 syntax.relation marker=""into"" from=$c1 to=$n2
@@ -3051,17 +3058,17 @@ leave the bare planks in a drifting haze and keep the rest of the scene sharp,"@
 @n4 syntax.nominal dependent=""the"" head=""scene""",spacy-direct+vss,judge
 throw the planks by the wall out of focus with a soft grey haze and leave the rest of the scene sharp,"@c1 syntax.clause form=imperative verb=""throw"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""planks""
-@r1 syntax.relation marker=""by"" from=$n1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""by"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""wall""
 @r2 syntax.relation attachment=ambiguous marker=""out of"" from=$c1 to=$n3
 @n3 syntax.nominal head=""focus""
-@r3 syntax.relation marker=""with"" from=$c1 to=$n4
+@r3 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$n4
 @n4 syntax.nominal dependent=""a"" dependent=""soft"" dependent=""grey"" head=""haze""
 @k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
-@c2 syntax.clause form=imperative verb=""leave"" modifier=""sharp"" complement=$n5
+@c2 syntax.clause form=imperative verb=""leave"" complement=$n5
 @n5 syntax.nominal dependent=""the"" head=""rest""
 @r4 syntax.relation marker=""of"" from=$n5 to=$n6
-@n6 syntax.nominal dependent=""the"" head=""scene""",spacy-direct+vss,agreement
+@n6 syntax.nominal dependent=""the"" head=""scene"" dependent=""sharp""",z3,judge
 maybe you could blur out the wooden planks into a smoky haze,,,
 a thin smoke haze over the floor planks,"@n1 syntax.nominal dependent=""a"" dependent=""thin"" dependent=""smoke"" head=""haze""
 @r1 syntax.relation marker=""over"" from=$n1 to=$n2
@@ -3329,8 +3336,8 @@ blur out the campfire into a soft glow,,,
 would you soften the open campfire with a red glow?,"@c1 syntax.clause form=interrogative auxiliary=""would"" verb=""soften"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""the"" dependent=""open"" head=""campfire""
-@r1 syntax.relation marker=""with"" from=$c1 to=$n3
-@n3 syntax.nominal dependent=""a"" dependent=""red"" head=""glow""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""a"" dependent=""red"" head=""glow""",prolog+z3,judge
 the campfire by the tent in a low glow,"@n1 syntax.nominal dependent=""the"" head=""campfire""
 @r1 syntax.relation marker=""by"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""tent""

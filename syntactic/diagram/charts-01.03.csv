@@ -505,7 +505,18 @@ hey — make a pie chart of the cards by type,"@c1 syntax.clause form=imperative
 @r2 syntax.relation marker=""by"" from=$c1 to=$n3
 @n3 syntax.nominal head=""type""",spacy-direct+vss,agreement
 give me a pie chart that counts the cards per type please,,,
-"for the review, I want a pie chart showing how the cards are distributed across types",,,
+"for the review, I want a pie chart showing how the cards are distributed across types","@r1 syntax.relation marker=""for"" from=$c1 to=$n1
+@n1 syntax.nominal dependent=""the"" head=""review""
+@n2 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""want"" subject=$n2 complement=$n3
+@n3 syntax.nominal dependent=""a"" dependent=""pie"" head=""chart""
+@c2 syntax.clause form=nonfinite verb=""showing"" modifier=""how""
+@n4 syntax.nominal dependent=""the"" head=""cards""
+@c3 syntax.clause form=declarative auxiliary=""are"" verb=""distributed"" subject=$n4
+@r2 syntax.relation marker=""across"" from=$c3 to=$n5
+@n5 syntax.nominal head=""types""
+@r3 syntax.relation from=$n3 to=$c2
+@r4 syntax.relation from=$c2 to=$c3",z3,judge
 "make a pie chart of the cards by type — I only care about credit, debit and prepaid",,,
 "make a pie chart of the cards by type and label the slices credit, debit and prepaid",,,
 "when you get a chance, a pie chart of the cards by type would help the team a lot",,,
@@ -1399,7 +1410,12 @@ please I need one bar chart for the stations by company,"@c1 syntax.clause form=
 @n3 syntax.nominal dependent=""the"" head=""stations""
 @r2 syntax.relation marker=""by"" from=$n3 to=$n4
 @n4 syntax.nominal head=""company""",spacy-direct+vss,agreement
-kindly do a bar chart of the stations by company,,,
+kindly do a bar chart of the stations by company,"@c1 syntax.clause form=imperative modifier=""kindly"" verb=""do"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""bar"" head=""chart""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""stations""
+@r2 syntax.relation attachment=ambiguous marker=""by"" from=$c1 to=$n3
+@n3 syntax.nominal head=""company""",prolog+spacy+z3,judge
 hey — make a bar chart of the stations by company,"@c1 syntax.clause form=imperative discourse=""hey"" verb=""make"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""bar"" head=""chart""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
@@ -1504,10 +1520,10 @@ could you build a pie chart of the furniture by manufacturer for me?,"@c1 syntax
 @n2 syntax.nominal dependent=""a"" dependent=""pie"" head=""chart""
 @r1 syntax.relation marker=""of"" from=$n2 to=$n3
 @n3 syntax.nominal dependent=""the"" head=""furniture""
-@r2 syntax.relation marker=""by"" from=$c1 to=$n4
+@r2 syntax.relation attachment=ambiguous marker=""by"" from=$c1 to=$n4
 @n4 syntax.nominal head=""manufacturer""
 @r3 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n5
-@n5 syntax.nominal head=""me""",spacy-direct+vss,agreement
+@n5 syntax.nominal head=""me""",prolog+spacy+z3,judge
 "a pie chart of the furniture by manufacturer, please","@n1 syntax.nominal dependent=""a"" dependent=""pie"" head=""chart""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""furniture""
@@ -3429,10 +3445,10 @@ give me a bar chart that counts the wines per grape please,,,
 @k1 syntax.coordination conjunction=""so"" conjunct=$c1 conjunct=$c2
 @c2 syntax.clause form=imperative verb=""visualise"" complement=$n3
 @n3 syntax.nominal dependent=""the"" dependent=""wines"" head=""counts""
-@r1 syntax.relation marker=""for"" from=$n3 to=$n4
+@r1 syntax.relation attachment=ambiguous marker=""for"" from=$c2 to=$n4
 @n4 syntax.nominal dependent=""each"" head=""grape""
-@r2 syntax.relation marker=""as"" from=$c2 to=$n5
-@n5 syntax.nominal dependent=""a"" dependent=""bar"" head=""chart""",spacy-direct+vss,agreement
+@r2 syntax.relation attachment=ambiguous marker=""as"" from=$c2 to=$n5
+@n5 syntax.nominal dependent=""a"" dependent=""bar"" head=""chart""",prolog,judge
 "we need the heavy grapes to stand out, so make a bar chart of the wines by grape sorted from biggest to smallest",,,
 put a bar chart of the wines by grape together and sort the bars from biggest to smallest,"@c1 syntax.clause form=imperative verb=""put"" modifier=""together"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""bar"" head=""chart""
@@ -3571,10 +3587,10 @@ show me a bar chart of the players grouped by hand,"@c1 syntax.clause form=imper
 "put up a bar chart counting the players, one bar per hand",,,
 chart the players by hand as a bar chart,"@c1 syntax.clause form=imperative verb=""chart"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""players""
-@r1 syntax.relation marker=""by"" from=$n1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""by"" from=$c1 to=$n2
 @n2 syntax.nominal head=""hand""
-@r2 syntax.relation marker=""as"" from=$c1 to=$n3
-@n3 syntax.nominal dependent=""a"" dependent=""bar"" head=""chart""",spacy-direct+vss,agreement
+@r2 syntax.relation attachment=ambiguous marker=""as"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""a"" dependent=""bar"" head=""chart""",prolog+z3,judge
 I'd like a bar chart of the players by hand,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative auxiliary=""'d"" verb=""like"" subject=$n1 complement=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""bar"" head=""chart""
@@ -3670,7 +3686,20 @@ make abar chart of the players by hand,"@c1 syntax.clause form=imperative verb="
 "a pie chart cut from marking 40%, paving 30%, cleanup 30%",,,
 "let's pie the three: rides 30%, repairs 25% and spares 45%",,,
 "could you draw a pie chart of marking 40%, paving 30% and cleanup 30%?",,,
-"hey, could you draw a pie chart of marking 40%, paving 30% and cleanup 30%?",,,
+"hey, could you draw a pie chart of marking 40%, paving 30% and cleanup 30%?","@c1 syntax.clause form=interrogative discourse=""hey"" auxiliary=""could"" verb=""draw"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""a"" dependent=""pie"" head=""chart""
+@r1 syntax.relation marker=""of"" from=$n2 to=$k1
+@n3 syntax.nominal head=""marking""
+@n4 syntax.nominal dependent=""40"" head=""%""
+@n5 syntax.nominal head=""paving""
+@n6 syntax.nominal dependent=""30"" head=""%""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n3 conjunct=$n5 conjunct=$n7
+@n7 syntax.nominal head=""cleanup""
+@n8 syntax.nominal dependent=""30"" head=""%""
+@r2 syntax.relation from=$n3 to=$n4
+@r3 syntax.relation from=$n5 to=$n6
+@r4 syntax.relation from=$n7 to=$n8",spacy,judge
 "one pie chart, the wedges rides 30%, repairs 25%, spares 45%",,,
 "I'd cut the pie with marking 40%, paving 30% and cleanup 30%",,,
 "right, a pie chart — rides 30%, repairs 25%, spares 45%, the whole circle",,,
@@ -3750,7 +3779,12 @@ insert the pie chart Ward Pulse plase,,,
 "a bar chart built from Crush, Press, Age, Blend and Bottle with 9.1, 6.4, 5.2, 3.9 and 2.8, then walked left with the numbers readable",,,
 "the cellar tally as a bar chart — Crush, Press, Age, Blend, Bottle against 9.1, 6.4, 5.2, 3.9 and 2.8 — and off to the left side it goes",,,
 "draw up the bar chart row by row — Mark, Dig, Pour, Cure and Open against 8.4, 4.0, 2.7, 2.3 and 1.7 — and quarter it left",,,
-"a bar chart of the usual marks, and off to the left somewhere",,,
+"a bar chart of the usual marks, and off to the left somewhere","@n1 syntax.nominal dependent=""a"" dependent=""bar"" head=""chart""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""usual"" head=""marks""
+@c1 syntax.clause form=fragment discourse=""and"" modifier=""off"" modifier=""somewhere"" complement=$n1
+@r2 syntax.relation marker=""to"" from=$n1 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""left""",distilbert,judge
 "one bar chart, numbers house-picked, parked left",,,
 "the standard bar chart, then over on the left like always",,,
 "insert a bar chart, Mark, Dig, Pour, Cure and Open across, 8.4, 4.0, 2.7, 2.3 adn 1.7 up, and move it to the left side",,,
@@ -3840,13 +3874,13 @@ make a line chart of the average sales by month and and give it the title 'Avera
 "line chart of the average sales per month, then title it 'Average monthly sales'","@n1 syntax.nominal dependent=""line"" head=""chart""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""average"" head=""sales""
-@r2 syntax.relation marker=""per"" from=$n2 to=$n3
+@r2 syntax.relation attachment=ambiguous marker=""per"" from=$c2 to=$n3
 @n3 syntax.nominal head=""month""
-@k1 syntax.coordination conjunction=""then"" conjunct=$c2 conjunct=$c1
-@c1 syntax.clause form=imperative verb=""title"" complement=$n4 complement=$n5
+@c1 syntax.clause form=imperative modifier=""then"" verb=""title"" complement=$n4 complement=$n5
 @n4 syntax.nominal head=""it""
 @n5 syntax.nominal head=""Average monthly sales""
-@c2 syntax.clause form=fragment complement=$n1",spacy-direct+vss,agreement
+@c2 syntax.clause form=fragment complement=$n1
+@k1 syntax.coordination conjunct=$c2 conjunct=$c1",z3,judge
 give me a line chart of the avg sales for each month; and move the legend to the right,"@c1 syntax.clause form=imperative verb=""give"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""me""
 @n2 syntax.nominal dependent=""a"" dependent=""line"" head=""chart""

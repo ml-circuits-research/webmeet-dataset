@@ -12,12 +12,12 @@ outline the house wall with a bold black outline,"@c1 syntax.clause form=imperat
 @n2 syntax.nominal dependent=""a"" dependent=""bold"" dependent=""black"" head=""outline""",spacy-direct+vss,agreement
 draw a solid black outline around the old house,"@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""solid"" dependent=""black"" head=""outline""
-@r1 syntax.relation marker=""around"" from=$n1 to=$n2
-@n2 syntax.nominal dependent=""the"" dependent=""old"" head=""house""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""around"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""old"" head=""house""",prolog+spacy+z3,judge
 wrap the little house in a heavy black outline,"@c1 syntax.clause form=imperative verb=""wrap"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""little"" head=""house""
-@r1 syntax.relation marker=""in"" from=$c1 to=$n2
-@n2 syntax.nominal dependent=""a"" dependent=""heavy"" dependent=""black"" head=""outline""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""heavy"" dependent=""black"" head=""outline""",prolog+z3,judge
 set the house wall off with a bold black outline,"@c1 syntax.clause form=imperative verb=""set"" modifier=""off"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""house"" head=""wall""
 @r1 syntax.relation marker=""with"" from=$c1 to=$n2
@@ -828,8 +828,8 @@ redo the kite above the lake as a white real bird,,,
 have the paper kite become a live bird,,,
 trade the bird kite for a real bird,"@c1 syntax.clause form=imperative verb=""trade"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""bird"" head=""kite""
-@r1 syntax.relation marker=""for"" from=$c1 to=$n2
-@n2 syntax.nominal dependent=""a"" dependent=""real"" head=""bird""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""real"" head=""bird""",prolog+z3,judge
 refit the kite above the lake as a white real bird,"@c1 syntax.clause form=imperative verb=""refit"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""kite""
 @r1 syntax.relation marker=""above"" from=$n1 to=$n2
@@ -905,7 +905,15 @@ hey — change the paper kite into a live bird,"@c1 syntax.clause form=imperativ
 @n3 syntax.nominal dependent=""flat"" dependent=""cartoon"" head=""style""
 @r2 syntax.relation from=$n1 to=$c2",spacy-direct+vss,agreement
 "have the girl sitting down, and give the whole page a watercolour look",,,
-"get the boy sitting down, and turn the whole page into watercolour wash",,,
+"get the boy sitting down, and turn the whole page into watercolour wash","@c1 syntax.clause form=imperative verb=""get"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""boy""
+@c2 syntax.clause form=nonfinite verb=""sitting"" modifier=""down""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c3
+@c3 syntax.clause form=imperative verb=""turn"" complement=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""whole"" head=""page""
+@r1 syntax.relation attachment=ambiguous marker=""into"" from=$c3 to=$n3
+@n3 syntax.nominal dependent=""watercolour"" head=""wash""
+@r2 syntax.relation from=$n1 to=$c2",prolog+z3,judge
 "show the woman sitting down, and dress the whole page in a soft watercolour",,,
 "keep the girl sitting down, and make the whole page watercolour",,,
 "leave the boy sitting down, and have the whole page come out watercolour wash",,,
@@ -1092,7 +1100,8 @@ hey — change the paper kite into a live bird,"@c1 syntax.clause form=imperativ
 "get the boy leaning forward, and turn the whole page into ipxel art style",,,
 "I want the girl leaning forward, and style the whole page as pixel art, thanks",,,
 make the path wet and reflective,,,
-turn the garden path slick and reflective,,,
+turn the garden path slick and reflective,"@c1 syntax.clause form=imperative verb=""turn"" modifier=""slick"" discourse=""and"" modifier=""reflective"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""garden"" head=""path""",distilbert,judge
 have the path by the gate shiny wet,"@c1 syntax.clause form=imperative verb=""have"" modifier=""shiny"" modifier=""wet"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""path""
 @r1 syntax.relation marker=""by"" from=$n1 to=$n2
@@ -1353,7 +1362,10 @@ work the big armchair over in soft brown leather,"@c1 syntax.clause form=imperat
 @n1 syntax.nominal dependent=""the"" dependent=""big"" head=""armchair""
 @r1 syntax.relation marker=""in"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""soft"" dependent=""brown"" head=""leather""",spacy-direct+vss,agreement
-I want the armchair brown leather,,,
+I want the armchair brown leather,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""want"" subject=$n1 complement=$n2 complement=$n3
+@n2 syntax.nominal dependent=""the"" head=""armchair""
+@n3 syntax.nominal dependent=""brown"" head=""leather""",distilbert,judge
 set the old armchair in worn brown leather,"@c1 syntax.clause form=imperative verb=""set"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""old"" head=""armchair""
 @r1 syntax.relation marker=""in"" from=$c1 to=$n2
@@ -1689,7 +1701,17 @@ the bird on the fence: face right instead of facing left,,,
 "the ball by the tree is red, but it should be blue — just like that in the scene — keeping the rest of the scene as it is",,,
 "sorry, the ball by the tree is red; i meant blue, on the canvas",,,
 "i meant blue for the ball by the tree, not red, just like that",,,
-"correct that — the ball by the tree is red, so change it to be blue",,,
+"correct that — the ball by the tree is red, so change it to be blue","@c1 syntax.clause form=imperative verb=""correct"" complement=$n1
+@n1 syntax.nominal head=""that""
+@n2 syntax.nominal dependent=""the"" head=""ball""
+@r1 syntax.relation marker=""by"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""tree""
+@c2 syntax.clause form=declarative verb=""is"" modifier=""red"" subject=$n2
+@k1 syntax.coordination conjunction=""so"" conjunct=$c1 conjunct=$c2 conjunct=$c3
+@c3 syntax.clause form=imperative verb=""change"" complement=$n4
+@n4 syntax.nominal head=""it""
+@r2 syntax.relation marker=""to"" from=$c3 to=$c4
+@c4 syntax.clause form=nonfinite verb=""be"" modifier=""blue""",prolog+spacy+z3,judge
 "the ball by the tree came out red; it should be blue, in the picture",,,
 "fix the ball by the tree: red is wrong, blue is right — that is how the picture goes — just like that in the scene",,,
 "the ball by the tree, not red — blue, keeping everything else where it is",,,
@@ -1972,7 +1994,14 @@ leave 3 of all ifve clouds,"@c1 syntax.clause form=imperative verb=""leave"" com
 @n1 syntax.nominal head=""3""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""all"" dependent=""ifve"" head=""clouds""",spacy-direct+vss,agreement
-hey — remove all but three of them of those five clouds,,,
+hey — remove all but three of them of those five clouds,"@c1 syntax.clause form=imperative discourse=""hey"" verb=""remove"" complement=$k1
+@n1 syntax.nominal head=""all""
+@k1 syntax.coordination conjunction=""but"" conjunct=$n1 conjunct=$n2
+@n2 syntax.nominal head=""three""
+@r1 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal head=""them""
+@r2 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""those"" dependent=""five"" head=""clouds""",prolog,judge
 "take out all but a trio of the bank of five clouds, thanks",,,
 keep one of the two boats,,,
 leave 1 of both boats,"@c1 syntax.clause form=imperative verb=""leave"" complement=$n1
@@ -1999,7 +2028,10 @@ let 1 of both boats stand,,,
 I want a single one of those two boats kept,,,
 have a lone one of the pair of boats remain,,,
 just keep one of the two boats,,,
-1 of both boats left,,,
+1 of both boats left,"@n1 syntax.nominal head=""1""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""both"" head=""boats""
+@c1 syntax.clause form=declarative verb=""left"" subject=$n1",spacy,judge
 leave a single one of those two boats,,,
 only a lone one of the pair of boats,,,
 ekep one of the two boats,,,
@@ -2081,7 +2113,13 @@ leave 4 of all ifve flowers,"@c1 syntax.clause form=imperative verb=""leave"" co
 @n1 syntax.nominal head=""4""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""all"" dependent=""ifve"" head=""flowers""",spacy-direct+vss,agreement
-hey — remove all but all but one of those five flowers,,,
+hey — remove all but all but one of those five flowers,"@c1 syntax.clause form=imperative discourse=""hey"" verb=""remove"" complement=$k1
+@n1 syntax.nominal head=""all""
+@k1 syntax.coordination conjunction=""but"" conjunction=""but"" conjunct=$n1 conjunct=$n2 conjunct=$n3
+@n2 syntax.nominal head=""all""
+@n3 syntax.nominal head=""one""
+@r1 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""those"" dependent=""five"" head=""flowers""",prolog,judge
 "take out all but a foursome of the bed of five flowers, thanks",,,
 keep three of the four stones,"@c1 syntax.clause form=imperative verb=""keep"" complement=$n1
 @n1 syntax.nominal head=""three""

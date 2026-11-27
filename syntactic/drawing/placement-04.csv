@@ -304,18 +304,18 @@ I need you to put balloon to the left of Reference. I appreciate it.,"@n1 syntax
 "Please, move present to the left of bow. Thanks!",,,
 Let us put cake to the left of table. That would help.,,,
 I need you to put cake to the left of candle. I appreciate it.,"@n1 syntax.nominal head=""I""
-@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1 complement=$n2
 @n2 syntax.nominal head=""you""
 @r1 syntax.relation marker=""to"" from=$c1 to=$c2
-@c2 syntax.clause form=nonfinite verb=""put"" subject=$n2 complement=$n3
+@c2 syntax.clause form=nonfinite verb=""put"" complement=$n3
 @n3 syntax.nominal head=""cake""
-@r2 syntax.relation marker=""to"" from=$c2 to=$n4
+@r2 syntax.relation attachment=ambiguous marker=""to"" from=$c2 to=$n4
 @n4 syntax.nominal dependent=""the"" head=""left""
 @r3 syntax.relation marker=""of"" from=$n4 to=$n5
 @n5 syntax.nominal head=""candle""
 @n6 syntax.nominal head=""I""
 @c3 syntax.clause form=declarative verb=""appreciate"" subject=$n6 complement=$n7
-@n7 syntax.nominal head=""it""",spacy-direct+vss,agreement
+@n7 syntax.nominal head=""it""",z3,judge
 "Hey, put present to the left of bow.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""put"" complement=$n1
 @n1 syntax.nominal head=""present""
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2
@@ -901,10 +901,10 @@ put waves to the left of sun.,"@c1 syntax.clause form=imperative verb=""put"" co
 @n3 syntax.nominal head=""sun""",spacy-direct+vss,agreement
 place umbrella to the left of sun.,"@c1 syntax.clause form=imperative verb=""place"" complement=$n1
 @n1 syntax.nominal head=""umbrella""
-@r1 syntax.relation marker=""to"" from=$c1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""left""
 @r2 syntax.relation marker=""of"" from=$n2 to=$n3
-@n3 syntax.nominal head=""sun""",spacy-direct+vss,agreement
+@n3 syntax.nominal head=""sun""",prolog+spacy+z3,judge
 Could you put palm tree to the left of sun. Thanks!,,,
 Could you place umbrella to the left of sun lounger. Thanks!,,,
 Let us place fish to the left of sea. That would help.,,,
@@ -1022,13 +1022,13 @@ Could you place astronaut to the left of moon. I appreciate it.,"@c1 syntax.clau
 Could you place flag to the left of astronaut. I appreciate it.,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""place"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""flag""
-@r1 syntax.relation marker=""to"" from=$c1 to=$n3
+@r1 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""the"" head=""left""
 @r2 syntax.relation marker=""of"" from=$n3 to=$n4
 @n4 syntax.nominal head=""astronaut""
 @n5 syntax.nominal head=""I""
 @c2 syntax.clause form=declarative verb=""appreciate"" subject=$n5 complement=$n6
-@n6 syntax.nominal head=""it""",spacy-direct+vss,agreement
+@n6 syntax.nominal head=""it""",spacy+z3,judge
 "Please, place rocket to the left of star. Thanks!",,,
 "Please, move sun to the left of Mars. Thanks!",,,
 place moon to the left of sun.,"@c1 syntax.clause form=imperative verb=""place"" complement=$n1
@@ -1104,7 +1104,17 @@ I need you to put house to the left of tree. I appreciate it.,"@n1 syntax.nomina
 @n6 syntax.nominal head=""I""
 @c3 syntax.clause form=declarative verb=""appreciate"" subject=$n6 complement=$n7
 @n7 syntax.nominal head=""it""",spacy-direct+vss,agreement
-Let us place tree to the left of house. That would help.,,,
+Let us place tree to the left of house. That would help.,"@c1 syntax.clause form=imperative verb=""Let"" complement=$n1
+@n1 syntax.nominal head=""us""
+@c2 syntax.clause form=nonfinite verb=""place"" complement=$n2
+@n2 syntax.nominal head=""tree""
+@r1 syntax.relation attachment=ambiguous marker=""to"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""left""
+@r2 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal head=""house""
+@n5 syntax.nominal head=""That""
+@c3 syntax.clause form=declarative auxiliary=""would"" verb=""help"" subject=$n5
+@r3 syntax.relation from=$c1 to=$c2",prolog+z3,judge
 I need you to place moon to the left of sun. I appreciate it.,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""need"" subject=$n1
 @n2 syntax.nominal head=""you""
@@ -2749,10 +2759,10 @@ place Robot to the left of Ball.,"@c1 syntax.clause form=imperative verb=""place
 "Please, place Pond to the left of Duck. Thanks!",,,
 move Lamp to the left of Chair.,"@c1 syntax.clause form=imperative verb=""move"" complement=$n1
 @n1 syntax.nominal head=""Lamp""
-@r1 syntax.relation marker=""to"" from=$c1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""left""
 @r2 syntax.relation marker=""of"" from=$n2 to=$n3
-@n3 syntax.nominal head=""Chair""",spacy-direct+vss,agreement
+@n3 syntax.nominal head=""Chair""",prolog+z3,judge
 I need you to move Rocket to the left of Planet. I appreciate it.,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""need"" subject=$n1
 @n2 syntax.nominal head=""you""
@@ -2991,10 +3001,26 @@ put Post to the left of Gate.,"@c1 syntax.clause form=imperative verb=""put"" co
 @n2 syntax.nominal dependent=""the"" head=""left""
 @r2 syntax.relation marker=""of"" from=$n2 to=$n3
 @n3 syntax.nominal head=""Gate""",spacy-direct+vss,agreement
-move Swing to the left of Oak.,,,
+move Swing to the left of Oak.,"@c1 syntax.clause form=imperative verb=""move"" complement=$n1
+@n1 syntax.nominal head=""Swing""
+@r1 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""left""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal head=""Oak""",prolog+z3,judge
 "Please, place Seagull to the left of Sun. Thanks!",,,
 Let us move Cactus to the left of Sand. That would help.,,,
-Could you put Item 3968 to the left of Bench. I appreciate it.,,,
+Could you put Item 3968 to the left of Bench. I appreciate it.,"@c1 syntax.clause form=interrogative auxiliary=""Could"" verb=""put"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""Item""
+@n3 syntax.nominal head=""3968""
+@r1 syntax.relation attachment=ambiguous marker=""to"" from=$c1 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""left""
+@r2 syntax.relation marker=""of"" from=$n4 to=$n5
+@n5 syntax.nominal head=""Bench""
+@n6 syntax.nominal head=""I""
+@c2 syntax.clause form=declarative verb=""appreciate"" subject=$n6 complement=$n7
+@n7 syntax.nominal head=""it""
+@r3 syntax.relation from=$n2 to=$n3",z3,judge
 "Hey, put Boat to the left of Waves. That would help.","@c1 syntax.clause form=imperative discourse=""Hey"" verb=""put"" complement=$n1
 @n1 syntax.nominal head=""Boat""
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2
@@ -3828,7 +3854,7 @@ that looks great,"@n1 syntax.nominal head=""that""
 @c1 syntax.clause form=declarative verb=""looks"" modifier=""great"" subject=$n1",spacy-direct+vss,agreement
 "ok so, thanks",,,
 lol nice,,,
-omg yes,,,
+omg yes,"@c1 syntax.clause form=fragment discourse=""omg"" discourse=""yes""",distilbert+spacy,judge
 "ha, nice one",,,
 lol this farm looks kinda sad honestly,,,
 "thx, that's all",,,

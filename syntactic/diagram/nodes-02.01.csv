@@ -398,7 +398,11 @@ could you squeeze the forest into one tight block?,"@c1 syntax.clause form=inter
 @n2 syntax.nominal dependent=""the"" head=""forest""
 @r1 syntax.relation marker=""into"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""one"" dependent=""tight"" head=""block""",spacy-direct+vss,agreement
-I need the trees packed tight and close together,,,
+I need the trees packed tight and close together,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""the"" head=""trees""
+@c2 syntax.clause form=nonfinite verb=""packed"" modifier=""tight"" modifier=""and"" modifier=""close"" modifier=""together""
+@r1 syntax.relation from=$n2 to=$c2",spacy,judge
 "a tightly packed forest of three trees, please","@n1 syntax.nominal dependent=""a"" dependent=""tightly"" dependent=""packed"" head=""forest""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""three"" head=""trees""
@@ -529,7 +533,24 @@ and one level at a time,"@c1 syntax.clause form=fragment discourse=""and"" compl
 @n1 syntax.nominal dependent=""one"" head=""level""
 @r1 syntax.relation marker=""at"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""a"" head=""time""",spacy-direct+vss,agreement
-"make a diagram with three layers, add a legend and a callout on the top layer, so each layer can be told apart at a glance and every colour is explained",,,
+"make a diagram with three layers, add a legend and a callout on the top layer, so each layer can be told apart at a glance and every colour is explained","@c1 syntax.clause form=imperative verb=""make"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""diagram""
+@r1 syntax.relation marker=""with"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""three"" head=""layers""
+@c2 syntax.clause form=imperative verb=""add"" complement=$k1
+@n3 syntax.nominal dependent=""a"" head=""legend""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n3 conjunct=$n4
+@n4 syntax.nominal dependent=""a"" head=""callout""
+@r2 syntax.relation marker=""on"" from=$n4 to=$n5
+@n5 syntax.nominal dependent=""the"" dependent=""top"" head=""layer""
+@k2 syntax.coordination conjunction=""so"" conjunct=$c1 conjunct=$c2 conjunct=$c3
+@n6 syntax.nominal dependent=""each"" head=""layer""
+@c3 syntax.clause form=declarative auxiliary=""can"" auxiliary=""be"" verb=""told"" modifier=""apart"" subject=$n6
+@r3 syntax.relation marker=""at"" from=$c3 to=$n7
+@n7 syntax.nominal dependent=""a"" head=""glance""
+@k3 syntax.coordination conjunction=""and"" conjunct=$c3 conjunct=$c4
+@n8 syntax.nominal dependent=""every"" head=""colour""
+@c4 syntax.clause form=declarative auxiliary=""is"" verb=""explained"" subject=$n8",vss,judge
 "could you build three layers with a legend and a callout pointing at the front one, with the legend in the corner and the callout pointing at the front layer?",,,
 "I need three layers, a legend for the colours and a callout note, so a reader can understand the stack without any extra explanation",,,
 "how do I get three layers with a legend and a callout, so each layer can be told apart at a glance and every colour is explained?",,,
@@ -682,8 +703,8 @@ the diagram needs four panels in a grid,"@n1 syntax.nominal dependent=""the"" he
 could the diagram have four panels in a grid?,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""have"" subject=$n1 complement=$n2
 @n1 syntax.nominal dependent=""the"" head=""diagram""
 @n2 syntax.nominal dependent=""four"" head=""panels""
-@r1 syntax.relation marker=""in"" from=$n2 to=$n3
-@n3 syntax.nominal dependent=""a"" head=""grid""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""a"" head=""grid""",prolog+z3,judge
 "the usual diagram, four panels in a grid",,,
 "diagram, four panels in a grid",,,
 "start with four panels in a grid on the diagram, then add a title line on top, and keep the whole diagram readable on one page",,,
@@ -1622,10 +1643,10 @@ add a ground symbol at the bottom of the circuit only,,,
 should I add a ground symbol at the bottom of the circuit?,"@c1 syntax.clause form=interrogative auxiliary=""should"" verb=""add"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""I""
 @n2 syntax.nominal dependent=""a"" dependent=""ground"" head=""symbol""
-@r1 syntax.relation marker=""at"" from=$n2 to=$n3
+@r1 syntax.relation attachment=ambiguous marker=""at"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""the"" head=""bottom""
 @r2 syntax.relation marker=""of"" from=$n3 to=$n4
-@n4 syntax.nominal dependent=""the"" head=""circuit""",spacy-direct+vss,agreement
+@n4 syntax.nominal dependent=""the"" head=""circuit""",prolog+spacy+z3,judge
 "no, not that, the previous one was too bare, so add a ground symbol at the bottom of the circuit",,,
 pleese add a ground symbol at the bottom of the circuit,"@n1 syntax.nominal head=""pleese""
 @c1 syntax.clause form=declarative verb=""add"" subject=$n1 complement=$n2
@@ -1812,7 +1833,16 @@ circles on stems for all the dates,"@n1 syntax.nominal head=""circles""
 let's put a circle on top of each stem,,,
 "circle on a stem, every point",,,
 please to draw a circle on a stem under each date,,,
-"what I want is the lollipop style, one circle per stem",,,
+"what I want is the lollipop style, one circle per stem","@n1 syntax.nominal head=""what""
+@n2 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""want"" subject=$n2 complement=$n1
+@c2 syntax.clause form=declarative verb=""is"" complement=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""lollipop"" head=""style""
+@n4 syntax.nominal dependent=""one"" head=""circle""
+@r1 syntax.relation marker=""per"" from=$n4 to=$n5
+@n5 syntax.nominal head=""stem""
+@r2 syntax.relation from=$c2 to=$c1
+@r3 syntax.relation from=$n3 to=$n4",spacy,judge
 make sure each circle sits exactly on its stem,,,
 would it be possible to use circles on stems instead of boxes?,,,
 please replace the boxes with a circle on a stem,"@c1 syntax.clause form=imperative discourse=""please"" verb=""replace"" complement=$n1
@@ -1917,8 +1947,8 @@ the Home box should carry a small coordinate cross so the local directions are c
 "I want a coordinate cross drawn at the centre of Approve, with the horizontal and vertical arms the same length",,,
 put a coordiante cross at Home,"@c1 syntax.clause form=imperative verb=""put"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""coordiante"" head=""cross""
-@r1 syntax.relation marker=""at"" from=$n1 to=$n2
-@n2 syntax.nominal head=""Home""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""at"" from=$c1 to=$n2
+@n2 syntax.nominal head=""Home""",prolog+spacy+z3,judge
 draw a coordinate cros on the Approve node,"@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""coordinate"" head=""cros""
 @r1 syntax.relation marker=""on"" from=$n1 to=$n2
@@ -2109,8 +2139,8 @@ let's make the branches teal now,,,
 what I want is the branches teal,,,
 please keep the branches teal for the talk,"@c1 syntax.clause form=imperative discourse=""please"" verb=""keep"" modifier=""teal"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""branches""
-@r1 syntax.relation marker=""for"" from=$c1 to=$n2
-@n2 syntax.nominal dependent=""the"" head=""talk""",spacy-direct+vss,agreement
+@r1 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""talk""",prolog+z3,judge
 the branches must be teal,"@n1 syntax.nominal dependent=""the"" head=""branches""
 @c1 syntax.clause form=declarative auxiliary=""must"" verb=""be"" modifier=""teal"" subject=$n1",spacy-direct+vss,agreement
 "the usual branches, teal",,,

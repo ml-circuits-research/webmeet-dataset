@@ -589,7 +589,23 @@ text,sop,source,accepted_by
 @r2 syntax.relation marker=""with"" from=$c2 to=$n4
 @n4 syntax.nominal head=""LATTE""",spacy-direct+vss,agreement
 "could you take the label ""TEA"" off the tall cup, and put ""CHAI"" on the tall cup instead",,,
-"clear the text ""JUICE"" from the cup on the table, and write ""CIDER"" on the cup on the table in its place",,,
+"clear the text ""JUICE"" from the cup on the table, and write ""CIDER"" on the cup on the table in its place","@c1 syntax.clause form=imperative verb=""clear"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""text""
+@n2 syntax.nominal head=""JUICE""
+@r1 syntax.relation attachment=ambiguous marker=""from"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""cup""
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""table""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""write"" complement=$n5
+@n5 syntax.nominal head=""CIDER""
+@r3 syntax.relation attachment=ambiguous marker=""on"" from=$c2 to=$n6
+@n6 syntax.nominal dependent=""the"" head=""cup""
+@r4 syntax.relation attachment=ambiguous marker=""on"" from=$c2 to=$n7
+@n7 syntax.nominal dependent=""the"" head=""table""
+@r5 syntax.relation attachment=ambiguous marker=""in"" from=$c2 to=$n8
+@n8 syntax.nominal dependent=""its"" head=""place""
+@r6 syntax.relation from=$n1 to=$n2",prolog,judge
 "clear the old text off the cup, and paint ""LEMONADE"" onto the cup","@c1 syntax.clause form=imperative verb=""clear"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""old"" head=""text""
 @r1 syntax.relation marker=""off"" from=$c1 to=$n2
@@ -614,7 +630,17 @@ text,sop,source,accepted_by
 @r4 syntax.relation marker=""to"" from=$c2 to=$n6
 @n6 syntax.nominal head=""CHAI""",spacy-direct+vss,agreement
 "trade out the label ""JUICE"" on the cup on the table, and trade it for ""CIDER"" on the cup on the table",,,
-"blank out the text ""COFFEE"" on the white cup, and mark the white cup with ""LATTE""",,,
+"blank out the text ""COFFEE"" on the white cup, and mark the white cup with ""LATTE""","@c1 syntax.clause form=imperative verb=""blank"" modifier=""out"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""text""
+@n2 syntax.nominal head=""COFFEE""
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""white"" head=""cup""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""mark"" complement=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""white"" head=""cup""
+@r2 syntax.relation marker=""with"" from=$c2 to=$n5
+@n5 syntax.nominal head=""LATTE""
+@r3 syntax.relation from=$n1 to=$n2",spacy,judge
 "unletter the tall cup where the old label ""TEA"" sits, and brand the tall cup with ""CHAI""",,,
 "coat over the label ""JUICE"" on the cup on the table, and apply ""CIDER"" to the cup on the table",,,
 "scrape the old text ""WATER"" off the cup with a putty knife, and lay ""LEMONADE"" along the cup in clean block letters — the surface keeps its shape and position",,,
@@ -1050,7 +1076,20 @@ what if you remove the man in the green hat and shirt. And then a man in the blu
 "instead, the boy in the orange jacket out, then a girl in the green jacket takes the gap beside the woman in the purple hat",,,
 "the man in the orange shirt gone, and then a man in the green shirt takes the gap beside the man in the purple hat",,,
 "the woman in the orange dress vactes the line, then a woman in the green shirt takes the gap beside the man in the purple hat",,,
-"the boy in the orange cassket goes, next a girl in the green cassket fills the gap beside the woman in the purple hat",,,
+"the boy in the orange cassket goes, next a girl in the green cassket fills the gap beside the woman in the purple hat","@n1 syntax.nominal dependent=""the"" head=""boy""
+@r1 syntax.relation marker=""in"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""orange"" head=""cassket""
+@c1 syntax.clause form=declarative verb=""goes"" subject=$n1
+@k1 syntax.coordination conjunction=""next"" conjunct=$c1 conjunct=$c2
+@n3 syntax.nominal dependent=""a"" head=""girl""
+@r2 syntax.relation marker=""in"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""green"" head=""cassket""
+@c2 syntax.clause form=declarative verb=""fills"" subject=$n3 complement=$n5
+@n5 syntax.nominal dependent=""the"" head=""gap""
+@r3 syntax.relation marker=""beside"" from=$c2 to=$n6
+@n6 syntax.nominal dependent=""the"" head=""woman""
+@r4 syntax.relation marker=""in"" from=$n6 to=$n7
+@n7 syntax.nominal dependent=""the"" dependent=""purple"" head=""hat""",distilbert,judge
 "what if you remove the man in the orange shirt, and then a man in the green shirt moves into the gap beside the man in the purple hat",,,
 "set the woman in the orange dress, and after that, a woman in the green shirt stands in the gap beside the man in the purple hat, thanks",,,
 "the man beside the one in purple leaves, then a man in the yellow shirt takes the spot beside the one in purple","@n1 syntax.nominal dependent=""the"" head=""man""
@@ -1543,7 +1582,18 @@ could you erase the shadow under the railing,"@c1 syntax.clause form=interrogati
 "the three green blocks, and after that, three orange blocks in the same place on the board",,,
 "doar the two yellow blocks from the board, next build two red blocks in the same place on the board",,,
 "cut the four blue blbcks from the board, next build four purple blbcks in the same place on the board",,,
-"sweep the two yellow blocks from the board. And after that, build two red blocks in the same place on the board, thanks",,,
+"sweep the two yellow blocks from the board. And after that, build two red blocks in the same place on the board, thanks","@c1 syntax.clause form=imperative verb=""sweep"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""two"" dependent=""yellow"" head=""blocks""
+@r1 syntax.relation attachment=ambiguous marker=""from"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""board""
+@c2 syntax.clause form=imperative discourse=""And"" verb=""build"" discourse=""thanks"" complement=$n4
+@r2 syntax.relation marker=""after"" from=$c2 to=$n3
+@n3 syntax.nominal head=""that""
+@n4 syntax.nominal dependent=""two"" dependent=""red"" head=""blocks""
+@r3 syntax.relation attachment=ambiguous marker=""in"" from=$c2 to=$n5
+@n5 syntax.nominal dependent=""the"" dependent=""same"" head=""place""
+@r4 syntax.relation attachment=ambiguous marker=""on"" from=$c2 to=$n6
+@n6 syntax.nominal dependent=""the"" head=""board""",prolog+z3,judge
 "remove the man in the blue shirt, then put a man in the green shirt in the same spot, filling the gap",,,
 "could you clear the boy in the yellow jacket, then put a boy in the red jacket in the same spot, filling the gap",,,
 "i wonder if you could remove the man in the blue shirt, then put a man in the green shirt in the same spot, filling the gap",,,
@@ -2648,15 +2698,15 @@ i wonder if you could remove the bottom and top block of the purple tower. And t
 @n2 syntax.nominal dependent=""the"" head=""girl""
 @r1 syntax.relation marker=""in"" from=$n2 to=$n3
 @n3 syntax.nominal dependent=""the"" dependent=""purple"" head=""coat""
-@r2 syntax.relation attachment=ambiguous marker=""away from"" from=$c1 to=$n4
+@r2 syntax.relation marker=""away from"" from=$c1 to=$n4
 @n4 syntax.nominal dependent=""the"" dependent=""far"" head=""left""
 @k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c2
 @c2 syntax.clause form=imperative verb=""clear"" complement=$n5
 @n5 syntax.nominal dependent=""a"" head=""boy""
 @r3 syntax.relation marker=""in"" from=$n5 to=$n6
 @n6 syntax.nominal dependent=""a"" dependent=""red"" head=""cap""
-@r4 syntax.relation attachment=ambiguous marker=""at"" from=$c2 to=$n7
-@n7 syntax.nominal dependent=""the"" dependent=""far"" head=""right""",spacy-direct+vss,agreement
+@r4 syntax.relation marker=""at"" from=$c2 to=$n7
+@n7 syntax.nominal dependent=""the"" dependent=""far"" head=""right""",distilbert+spacy,judge
 "remove the man in the blue shirt out at the far left, then delete a woman in an orange hat in at the far right",,,
 "actually, please drop the woman in the yellow dress from the far left, and after that, drop a man in a green jacket at the far right",,,
 "please cut the girl in the purple coat off the far left end, then cut a boy in a red cap in at the far right end","@c1 syntax.clause form=imperative discourse=""please"" verb=""cut"" complement=$n1

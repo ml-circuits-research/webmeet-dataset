@@ -99,7 +99,8 @@ can you tell me which house is the pink one?,,,
 "which house is red, and how many houses are there?",,,
 which house by the tree is the red one?,,,
 "point at the red house, then tell me which one's green",,,
-which one is red?,,,
+which one is red?,"@n1 syntax.nominal dependent=""which"" head=""one""
+@c1 syntax.clause form=interrogative verb=""is"" modifier=""red"" subject=$n1",distilbert+prolog+spacy+z3,judge
 spot the red one for me,,,
 can you point out the green one?,,,
 which house is the rd one?,"@n1 syntax.nominal dependent=""which"" head=""house""
@@ -154,9 +155,33 @@ isn't there a kid facing the tree? — just like that in the scene — keeping t
 "a kid facing the tree, right?, keeping everything else where it is",,,
 confirm whether a kid is facing the tree — with everything else left where it is — over on our little canvas,,,
 "check if a kid is facing the tree, please, keeping everything else where it is",,,
-is a kid facing the tree? — and that is the whole scene — the way the drawing looks so far,,,
+is a kid facing the tree? — and that is the whole scene — the way the drawing looks so far,"@c1 syntax.clause form=interrogative auxiliary=""is"" verb=""facing"" subject=$n1 complement=$n2
+@n1 syntax.nominal dependent=""a"" head=""kid""
+@n2 syntax.nominal dependent=""the"" head=""tree""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2 conjunct=$c4
+@n3 syntax.nominal head=""that""
+@c2 syntax.clause form=declarative verb=""is"" subject=$n3 complement=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""whole"" head=""scene""
+@n5 syntax.nominal dependent=""the"" head=""way""
+@n6 syntax.nominal dependent=""the"" head=""drawing""
+@c3 syntax.clause form=declarative verb=""looks"" modifier=""so"" modifier=""far"" subject=$n6
+@c4 syntax.clause form=fragment complement=$n5
+@r1 syntax.relation from=$n5 to=$c3",spacy,judge
 "a kid facing the tree — is that so?, over on the other side of the canvas",,,
-do you see a kid facing the tree? and how many kids are there? — exactly where the picture needs it,,,
+do you see a kid facing the tree? and how many kids are there? — exactly where the picture needs it,"@c1 syntax.clause form=interrogative auxiliary=""do"" verb=""see"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""a"" head=""kid""
+@c2 syntax.clause form=nonfinite verb=""facing"" complement=$n3
+@n3 syntax.nominal dependent=""the"" head=""tree""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c3
+@n4 syntax.nominal dependent=""how"" dependent=""many"" head=""kids""
+@c3 syntax.clause form=interrogative verb=""are"" subject=$n5 complement=$n4
+@n5 syntax.nominal head=""there""
+@c4 syntax.clause form=declarative modifier=""exactly"" verb=""needs"" subject=$n6 complement=$n7
+@r1 syntax.relation marker=""where"" from=$c3 to=$c4
+@n6 syntax.nominal dependent=""the"" head=""picture""
+@n7 syntax.nominal head=""it""
+@r2 syntax.relation from=$n2 to=$c2",distilbert,judge
 could you check whether a kid is facing the tree? and how many kids are there? — so the scene reads the way it should,,,
 "tell me, is a kid facing the tree? and how many kids are there? — right there in the picture",,,
 "a kid facing the tree, right? and how many kids are there? — that is how the picture goes — just like that in the scene",,,
@@ -885,7 +910,22 @@ swap them abck,"@c1 syntax.clause form=imperative verb=""swap"" modifier=""abck"
 @n2 syntax.nominal head=""trading""",vss,judge
 "after that, place the blue man and the red-hat man back where they were at the start, and trade the hats back again",,,
 "now shift the blue man and the red-hat man back where they were at the start, and swap the hats back once more",,,
-"right now, take the man in blue and the man in the red hat back where they were at the start, then trade their hats back once more",,,
+"right now, take the man in blue and the man in the red hat back where they were at the start, then trade their hats back once more","@c1 syntax.clause form=imperative modifier=""right"" modifier=""now"" verb=""take"" modifier=""back"" complement=$k1
+@n1 syntax.nominal dependent=""the"" head=""man""
+@r1 syntax.relation marker=""in"" from=$n1 to=$n2
+@n2 syntax.nominal head=""blue""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n1 conjunct=$n3
+@n3 syntax.nominal dependent=""the"" head=""man""
+@r2 syntax.relation marker=""in"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""red"" head=""hat""
+@r3 syntax.relation marker=""where"" from=$c1 to=$c2
+@n5 syntax.nominal head=""they""
+@c2 syntax.clause form=declarative verb=""were"" subject=$n5
+@r4 syntax.relation marker=""at"" from=$c2 to=$n6
+@n6 syntax.nominal dependent=""the"" head=""start""
+@k2 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c3
+@c3 syntax.clause form=imperative verb=""trade"" modifier=""back"" modifier=""once"" modifier=""more"" complement=$n7
+@n7 syntax.nominal dependent=""their"" head=""hats""",distilbert,judge
 "first thing, bring the blue man and the red-hat man back where they were at the start, and trade the hats back again",,,
 "this time, set the man in blue and the man in the red hat back where they were at the start, then trade the hats back again",,,
 "then return the blue man and the red-hat man back where they were at the start, and swap the hats back once more",,,
@@ -1250,7 +1290,11 @@ all the boats should sit in a square,"@n1 syntax.nominal dependent=""all"" depen
 @n2 syntax.nominal dependent=""a"" head=""square""",spacy-direct+vss,agreement
 can you line the boats as a set up in a square?,,,
 could you arrange every one of the boats in a square?,,,
-let all the boats form a square,,,
+let all the boats form a square,"@c1 syntax.clause form=imperative verb=""let"" complement=$n1
+@n1 syntax.nominal dependent=""all"" dependent=""the"" head=""boats""
+@c2 syntax.clause form=nonfinite verb=""form"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""a"" head=""square""
+@r1 syntax.relation from=$c1 to=$c2",vss,judge
 make the boats as a set form a square,,,
 order every one of the boats into a square,,,
 just line the boats as a set up in a square,,,
@@ -1357,7 +1401,11 @@ every one of the trees go a hand-width apart,,,
 could you spread the trees as a set out a hand-width apart?,,,
 let every one of the trees sit a hand-width apart,,,
 make all the trees stand a hand-width apart,,,
-sort the trees as a set out a hand-width apart,,,
+sort the trees as a set out a hand-width apart,"@c1 syntax.clause form=imperative verb=""sort"" modifier=""apart"" complement=$n1 complement=$n3
+@n1 syntax.nominal dependent=""the"" head=""trees""
+@r1 syntax.relation marker=""as"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""a"" head=""set"" dependent=""out""
+@n3 syntax.nominal dependent=""a"" head=""hand-width""",spacy,judge
 measure every one of the trees out a hand-width apart,,,
 "every one of the trees a hand-width apart, that's all",,,
 spread all the trees out a hand-width apart,,,
@@ -1385,7 +1433,11 @@ can you space all the trees a finger-width apart?,"@c1 syntax.clause form=interr
 @n2 syntax.nominal dependent=""all"" dependent=""the"" head=""trees""
 @n3 syntax.nominal dependent=""a"" head=""finger-width""",spacy-direct+vss,judge
 could you spread the trees as a set out a finger-width apart?,,,
-let every one of the trees sit a finger-width apart,,,
+let every one of the trees sit a finger-width apart,"@c1 syntax.clause form=imperative verb=""let"" complement=$n1
+@n1 syntax.nominal dependent=""every"" dependent=""one"" dependent=""of"" dependent=""the"" head=""trees""
+@c2 syntax.clause form=nonfinite verb=""sit"" modifier=""apart"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""a"" head=""finger-width""
+@r1 syntax.relation from=$c1 to=$c2",vss,judge
 make all the trees stand a finger-width apart,,,
 sort the trees as a set out a finger-width apart,,,
 just space the trees as a set a finger-width apart,,,
@@ -1401,7 +1453,11 @@ hey — separate the trees as a set so they sit a finger-width apart,"@c1 syntax
 @n3 syntax.nominal head=""they""
 @c2 syntax.clause form=declarative verb=""sit"" modifier=""apart"" subject=$n3 complement=$n4
 @n4 syntax.nominal dependent=""a"" head=""finger-width""",spacy-direct+vss,agreement
-"put every one of the trees a finger-width apart, thanks",,,
+"put every one of the trees a finger-width apart, thanks","@c1 syntax.clause form=imperative verb=""put"" modifier=""apart"" discourse=""thanks"" complement=$n1 complement=$n3
+@n1 syntax.nominal dependent=""every"" head=""one""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""trees""
+@n3 syntax.nominal dependent=""a"" head=""finger-width""",distilbert+prolog+spacy,judge
 arrange the boats as a set in a straight row through the middle,"@c1 syntax.clause form=imperative verb=""arrange"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""boats""
 @r1 syntax.relation marker=""as"" from=$c1 to=$n2
@@ -1447,12 +1503,12 @@ make the boats as a set form a straight row through the middle,,,
 order every one of the boats into a straight row through the middle,,,
 just arrange the boats as a set in a straight row through the middle,"@c1 syntax.clause form=imperative modifier=""just"" verb=""arrange"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""boats""
-@r1 syntax.relation marker=""as"" from=$c1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""as"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""a"" head=""set""
-@r2 syntax.relation marker=""in"" from=$c1 to=$n3
+@r2 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""a"" dependent=""straight"" head=""row""
-@r3 syntax.relation marker=""through"" from=$c1 to=$n4
-@n4 syntax.nominal dependent=""the"" head=""middle""",spacy-direct+vss,agreement
+@r3 syntax.relation attachment=ambiguous marker=""through"" from=$c1 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""middle""",prolog+z3,judge
 "every one of the boats in a straight row through the middle, that's all",,,
 now arrange all the boats in a straight row through the middle,"@c1 syntax.clause form=imperative modifier=""now"" verb=""arrange"" complement=$n1
 @n1 syntax.nominal dependent=""all"" dependent=""the"" head=""boats""
@@ -1574,7 +1630,12 @@ one rule for this scene: always leave the lake clear — right there in the pict
 "the lake stays clear, always","@n1 syntax.nominal dependent=""the"" head=""lake""
 @c1 syntax.clause form=declarative verb=""stays"" modifier=""clear"" modifier=""always"" subject=$n1",spacy-direct+vss,agreement
 never anything in the lake,,,
-from now on the lake is off limits,,,
+from now on the lake is off limits,"@r1 syntax.relation marker=""from"" from=$c1 to=$n1
+@n1 syntax.nominal head=""now""
+@c1 syntax.clause form=declarative modifier=""on"" verb=""is"" subject=$n2
+@n2 syntax.nominal dependent=""the"" head=""lake""
+@r2 syntax.relation marker=""off"" from=$c1 to=$n3
+@n3 syntax.nominal head=""limits""",spacy,judge
 hey — always leave the lake clear,"@c1 syntax.clause form=imperative discourse=""hey"" modifier=""always"" verb=""leave"" modifier=""clear"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""lake""",spacy-direct+vss,agreement
 "never let anything cover the lake, thanks",,,
