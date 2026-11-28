@@ -1,0 +1,493 @@
+text,sop,sop1,sop2
+just rename the selected group to Customer side,"@f1 w.request.filler text=just
+@r1 w.request.request act=change mood=do predicate=rename
+@r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=context family_words=group description=""selected group""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.label value=""Customer side"" operator=eq phase=result"
+now scale the Core cluster to half the size,"@f1 w.request.filler text=now
+@r1 w.request.request act=change mood=do predicate=scale
+@r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=written name=Core family_words=cluster
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.id value=Core operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=group.scale value=""0.5"" words=""half the size"" operator=factor phase=result"
+"we do not need that grouping anymore, separate Backend services","@f1 w.request.filler text=need
+@r1 w.request.request act=""take apart"" mode=ungroup mood=do predicate=separate words=""separate Backend services""
+@r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=written name=""Backend services""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.id value=""Backend services"" operator=eq phase=selector
+@f2 w.request.filler text=""we do not need that grouping anymore"""
+"you know, before I present it, describe what is on the canvas","@r1 w.request.request act=ask mood=ask predicate=describe question=describe words=""describe what is on the canvas""
+@r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=context family_words=canvas
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@f1 w.request.filler text=""you know, before I present it"""
+whatt is there?,"@r1 w.request.request act=ask mood=ask predicate=""is there"" question=describe
+@r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+"the slide fits six boxes, so how many steps are in this flow?","@f1 w.request.filler text=so
+@r1 w.request.request act=ask mood=ask predicate=""how many"" question=count words=""so how many steps are in this flow?""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=all sort=step sort_words=steps
+@r1.t1 w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context family_words=flow
+@r1.l1 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@f2 w.request.filler text=""the slide fits six boxes"""
+size of this?,"@r1 w.request.request act=ask mood=ask question=what asked=node.size asked_words=size
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+"I mean, what is n4 er connected to?","@f1 w.request.filler text=er
+@r1 w.request.request act=ask mood=ask predicate=what question=which asked=node.edges asked_words=connected words=""what is n4 er connected to?""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=n4
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=n4 operator=eq phase=selector
+@f2 w.request.filler text=""I mean"""
+"before I add it again, is Warehouse already connected too Payment?","@f1 w.request.filler text=too
+@r1 w.request.request act=ask mood=check predicate=connected question=exists
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=definite fill=description
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Warehouse operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Payment operator=eq phase=selector"
+"the presentation has a dark background, use the print theme","@r1 w.request.request act=change mood=do predicate=use words=""use the print theme""
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.theme value=print operator=eq phase=result key_words=theme
+@f1 w.request.filler text=""the presentation has a dark background"""
+go ahead and make node n2 normal weight,"@r1 w.request.request act=change mood=do predicate=make words=""make node n2 normal weight""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=n2 family_words=node
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=n2 operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.fontWeight value=normal words=""normal weight"" operator=eq phase=result
+@f1 w.request.filler text=""go ahead and"""
+ok turn the one labelled Output into a pill,"@f1 w.request.filler text=ok
+@r1 w.request.request act=change mood=do predicate=turn
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Output name_words=labelled
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Output operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.shape value=oval words=pill operator=eq phase=result"
+"in flowchat termsit is the end, mark theh ighlightedone as the subprocess","@r1 w.request.request act=change mood=do predicate=mark words=""mark theh ighlightedone as the subprocess""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.role value=subprocess operator=eq phase=result
+@f1 w.request.filler text=""in flowchat termsit is the end"""
+end node thx,"@r1 w.request.request act=make mood=do words=""end node""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=node
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.role value=end operator=eq phase=result
+@f1 w.request.filler text=thx"
+would you distribute awl of these horizontally,"@r1 w.request.request act=place mode=arrange mood=do predicate=distribute
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.axis value=horizontal words=horizontally operator=eq phase=result"
+"we forgot validation, so insert a step Check stock between n5 and n2","@r1 w.request.request act=make mood=do predicate=insert words=""insert a step Check stock between n5 and n2""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=step
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""Check stock"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.position value=between operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=n5 operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=place attribute=node.anchor value=n2 operator=relation phase=selector
+@f1 w.request.filler text=""we forgot validation, so"""
+draw a pair of bubbles + tie,"@r1 w.request.request act=make mood=do words=""draw a pair of bubbles"" predicate=draw
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=circle sort_words=bubbles
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=""2"" words=""a pair of"" operator=eq phase=result
+@r2 w.request.request act=connect mood=do words=tie predicate=tie
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page"
+"let's turn the first round node huge, recolour it black","@r1 w.request.request act=change mood=do words=""let's turn the first round node huge"" predicate=turn
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=description sort=circle sort_words=""first round node"" ordinal=first
+@r1.c1 w.request.constraint request=$r1 on=size attribute=node.size value=huge operator=degree phase=result
+@r2 w.request.request act=change mood=do words=""recolour it black"" predicate=recolour
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.colour value=black operator=eq phase=result"
+"right where is Support? I cannot see it, put it to the bottom right","@f1 w.request.filler text=right
+@f2 w.request.filler text=see
+@r1 w.request.request act=ask mood=ask words=""where is Support?"" predicate=where question=where
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Support
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Support operator=eq phase=selector
+@r2 w.request.request act=place mood=do words=""put it to the bottom right"" predicate=put
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.at value=bottom_right words=""the bottom right"" operator=region phase=result"
+3D please,"@f1 w.request.filler text=please
+@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.effect words=""3D"" operator=eq phase=result"
+make the diagram look more poished becauseit looks cluttered,"@r1 w.request.request act=place mode=arrange mood=do predicate=make
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context family_words=diagram
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+"hey, drop in a stadium called Analyse","@f1 w.request.filler text=hey
+@r1 w.request.request act=make mood=do predicate=""drop in"" words=""drop in a stadium called Analyse""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=oval sort_words=stadium
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Analyse operator=eq phase=result key_words=called
+@f2 w.request.filler text=hey"
+distribut horizontally,"@r1 w.request.request act=place mode=arrange mood=do predicate=distribut
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.axis value=horizontal words=horizontally operator=eq phase=result"
+ok start a diagrams with a couple of round nodes horizontally,"@f1 w.request.filler text=ok
+@r1 w.request.request act=make mood=do predicate=start
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=circle sort_words=""round nodes""
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=""2"" words=""a couple of"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.layout value=row words=horizontally operator=eq phase=result"
+make it pretty,"@r1 w.request.request act=place mode=arrange mood=do predicate=make
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+make the diagram look more polished otherwisenobody gets it,"@r1 w.request.request act=place mode=arrange mood=do predicate=make
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context family_words=diagram
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+space thingsout nicely,"@r1 w.request.request act=place mode=arrange mood=do
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+now addd in a square please,"@f1 w.request.filler text=now
+@f2 w.request.filler text=please
+@r1 w.request.request act=make mood=do predicate=""addd in""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=square"
+"an item, thanks","@f1 w.request.filler text=thanks
+@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=item"
+"you know we forgot something, just put an item uh at the end","@f1 w.request.filler text=just
+@f2 w.request.filler text=uh
+@r1 w.request.request act=make mood=do predicate=put words=""just put an item uh at the end""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=item
+@f3 w.request.filler text=""you know""
+@f4 w.request.filler text=""we forgot something"""
+"okay, pop in shape","@f1 w.request.filler text=okay
+@r1 w.request.request act=make mood=do predicate=""pop in"" words=""pop in shape""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=shape
+@f2 w.request.filler text=okay"
+"there are several reviewers, so create 2 diamonds for them","@r1 w.request.request act=make mood=do predicate=create words=""create 2 diamonds for them""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=diamond sort_words=diamonds
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=""2"" operator=eq phase=result
+@f1 w.request.filler text=""there are several reviewers, so"""
+"hmm, errors should stand out, insert an orange rectangle for them","@r1 w.request.request act=make mood=do predicate=insert words=""insert an orange rectangle for them""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=rectangle
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.colour value=orange operator=eq phase=result
+@f1 w.request.filler text=""hmm, errors should stand out"""
+for a footnote I want to stick in a little ellipse,"@r1 w.request.request act=make mood=do predicate=""stick in"" words=""stick in a little ellipse""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=ellipse
+@r1.c1 w.request.constraint request=$r1 on=size attribute=node.size value=small words=little operator=degree phase=result
+@f1 w.request.filler text=""for a footnote I want to"""
+please drop in two stars in levels,"@f1 w.request.filler text=please
+@r1 w.request.request act=make mood=do predicate=""drop in""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=star sort_words=stars
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=""2"" words=two operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.layout value=layers words=""in levels"" operator=eq phase=result"
+"hmm, for the team structure add in twelve bubbles radially","@r1 w.request.request act=make mood=do predicate=""add in"" words=""add in twelve bubbles radially""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=circle sort_words=bubbles
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=""12"" words=twelve operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.layout value=radial words=radially operator=eq phase=result
+@f1 w.request.filler text=""hmm, for the team structure"""
+I need you to sketh a star in te lower left of hte page,"@f1 w.request.filler text=need
+@r1 w.request.request act=make mood=do predicate=sketh
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=star
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.at value=bottom_left words=""te lower left"" operator=region phase=result"
+hmm tiny navy decision box,"@f1 w.request.filler text=hmm
+@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=diamond sort_words=""decision box""
+@r1.c1 w.request.constraint request=$r1 on=size attribute=node.size value=tiny operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.colour value=navy operator=eq phase=result"
+"this one is thee rror staet, so set it grye","@r1 w.request.request act=change mood=do predicate=set words=""set it grye""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.colour value=gray words=grye operator=eq phase=result
+@f1 w.request.filler text=""this one is thee rror staet, so"""
+now switch a colour of it black,"@f1 w.request.filler text=now
+@r1 w.request.request act=change mood=do predicate=switch
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.colour value=black operator=eq phase=result key_words=colour"
+diamond for the first one,"@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context ordinal=first description=""first one""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.shape value=diamond operator=eq phase=result"
+"it is a datas tore, just turn it into a cloud","@r1 w.request.request act=change mood=do predicate=turn words=""turn it into a cloud""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.shape value=cloud operator=eq phase=result
+@f1 w.request.filler text=""it is a datas tore, just"""
+"it is only a note, so set the box called CEO huge","@f1 w.request.filler text=so
+@r1 w.request.request act=change mood=do predicate=set words=""so set the box called CEO huge""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=CEO family_words=box
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=CEO operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=size attribute=node.size value=huge operator=degree phase=result
+@f2 w.request.filler text=""it is only a note"""
+"okay, number n1 like default","@f1 w.request.filler text=okay
+@f2 w.request.filler text=like
+@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=n1 family_words=number
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=n1 operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=size attribute=node.size value=default operator=degree phase=result"
+go ahead and change the label of the Budget shape to No,"@r1 w.request.request act=change mood=do predicate=change words=""change the label of the Budget shape to No""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Budget family_words=shape
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Budget operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=No operator=eq phase=result key_words=label
+@f1 w.request.filler text=""go ahead and"""
+"can you change da text of note n three too ""Rejected""","@f1 w.request.filler text=too
+@r1 w.request.request act=change mood=do predicate=change
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=""n three""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=n3 words=""n three"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Rejected operator=eq phase=result key_words=note key_words=text"
+like go ahead and set the label of n1 to Phase 2,"@f1 w.request.filler text=like
+@r1 w.request.request act=change mood=do predicate=set words=""set the label of n1 to Phase 2""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=n1
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=n1 operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=""Phase 2"" operator=eq phase=result key_words=label
+@f2 w.request.filler text=""like go ahead and"""
+violet please,"@f1 w.request.filler text=please
+@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.colour value=purple words=violet operator=eq phase=result"
+red one,"@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.colour value=red operator=eq phase=result"
+let's choose normal in the size options,"@r1 w.request.request act=change mood=do predicate=choose
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=size attribute=node.size value=default words=normal operator=degree phase=result key_words=""size options"""
+"I am going to move it, so pick shape n3 along with its lines","@r1 w.request.request act=pick mood=do predicate=pick words=""pick shape n3 along with its lines""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=n3 family_words=shape
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=n3 operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.edges words=lines operator=eq phase=result
+@f1 w.request.filler text=""I am going to move it, so"""
+could you lose the node named Customer please,"@f1 w.request.filler text=please
+@r1 w.request.request act=remove mood=do predicate=lose
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Customer family_words=node name_words=named
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Customer operator=eq phase=selector"
+drop that,"@r1 w.request.request act=remove mood=do predicate=drop
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+erase this,"@r1 w.request.request act=remove mood=do predicate=erase
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+take the CEO node over to x 590 y 460,"@r1 w.request.request act=place mood=do predicate=take
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=CEO family_words=node
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=CEO operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.x value=""590"" operator=eq phase=result key_words=x
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.y value=""460"" operator=eq phase=result key_words=y"
+"well, this text label uh at (450, 300)","@f1 w.request.filler text=well
+@f2 w.request.filler text=uh
+@r1 w.request.request act=place mood=do
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=description sort=text sort_words=""text label""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.x value=""450"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.y value=""300"" operator=eq phase=result"
+"it should come after a review, so slide the diamond below n2","@r1 w.request.request act=place mood=do predicate=slide words=""slide the diamond below n2""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=description sort=diamond
+@r1.c1 w.request.constraint request=$r1 on=place attribute=node.position value=below operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.anchor value=n2 operator=relation phase=selector
+@f1 w.request.filler text=""it should come after a review, so"""
+"you know, take like the only decision box over n1","@f1 w.request.filler text=like
+@r1 w.request.request act=place mood=do predicate=take words=""take like the only decision box over n1""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=description sort=diamond sort_words=""only decision box""
+@r1.c1 w.request.constraint request=$r1 on=place attribute=node.position value=above words=over operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.anchor value=n1 operator=relation phase=selector
+@f2 w.request.filler text=""you know"""
+now sort each circles as layers,"@f1 w.request.filler text=now
+@r1 w.request.request act=place mode=arrange mood=do predicate=sort
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=all sort=circle sort_words=circles quantifier=each
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.layout value=layers words=""as layers"" operator=eq phase=result"
+ohand wre n3 to Valid? because it is confusingright now,"@f1 w.request.filler text=now
+@r1 w.request.request act=connect mood=do predicate=wre words=""ohand wre n3 to Valid?""
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=n3 operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=""Valid?"" operator=eq phase=result
+@f2 w.request.filler text=""because it is confusingright now"""
+"now that it is selected, wire it to the ellipse","@r1 w.request.request act=connect mood=do predicate=wire words=""wire it to the ellipse""
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.to value=""the ellipse"" operator=eq phase=result
+@f1 w.request.filler text=""now that it is selected"""
+"now that it is selected, connect it to Retry","@r1 w.request.request act=connect mood=do predicate=connect words=""connect it to Retry""
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.to value=Retry operator=eq phase=result
+@f1 w.request.filler text=""now that it is selected"""
+then n5,"@f1 w.request.filler text=then
+@r1 w.request.request act=connect mood=do
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.to value=n5 operator=eq phase=result"
+"hey, tie thatone to the triangle","@f1 w.request.filler text=hey
+@r1 w.request.request act=connect mood=do predicate=tie words=""tie thatone to the triangle""
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.to value=""the triangle"" operator=eq phase=result
+@f2 w.request.filler text=hey"
+please add a double-headed arrow between n1 and the rect,"@f1 w.request.filler text=please
+@r1 w.request.request act=connect mood=do predicate=add
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.arrow value=both words=double-headed operator=eq phase=result key_words=arrow
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.from value=n1 operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.to value=""the rect"" operator=eq phase=result"
+let's tie the diamond too Stock with an edge labelled owns,"@f1 w.request.filler text=too
+@r1 w.request.request act=connect mood=do predicate=tie
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite sort=edge
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=""the diamond"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Stock operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.label value=owns operator=eq phase=result key_words=labelled"
+"if a check passes it goes on, so attach Support too the diamond with da table writes","@f1 w.request.filler text=so
+@f2 w.request.filler text=too
+@r1 w.request.request act=connect mood=do predicate=attach words=""so attach Support too the diamond with da table writes""
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Support operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=""the diamond"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.label value=writes operator=eq phase=result
+@f3 w.request.filler text=""if a check passes it goes on"""
+now join the selected nodes to each other,"@f1 w.request.filler text=now
+@r1 w.request.request act=connect mood=do predicate=join
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context family_words=nodes description=selected
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.pattern value=all words=""to each other"" operator=eq phase=result"
+"that one feeds all of them, so tie Invoice to the rectangles","@r1 w.request.request act=connect mood=do predicate=tie words=""tie Invoice to the rectangles""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=all sort=rectangle sort_words=rectangles
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Invoice operator=eq phase=result
+@f1 w.request.filler text=""that one feeds all of them, so"""
+"I want to restyle it, so mark the arrow that goes from Shipping to n3","@r1 w.request.request act=pick mood=do predicate=mark words=""mark the arrow that goes from Shipping to n3""
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=definite fill=description sort=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Shipping operator=eq phase=selector key_words=""goes from""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=n3 operator=eq phase=selector
+@f1 w.request.filler text=""I want to restyle it, so"""
+"um, I need you to mark connection e3","@f1 w.request.filler text=""um, I need""
+@r1 w.request.request act=pick mood=do predicate=mark words=""I need you to mark connection e3""
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=definite fill=written name=e3 sort=connection
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.ids value=e3 operator=eq phase=selector"
+I want to grab n1-n2 lin please,"@f1 w.request.filler text=want
+@f2 w.request.filler text=please
+@r1 w.request.request act=pick mood=do predicate=grab
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=definite fill=description sort=link sort_words=lin
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=n1 operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=n2 operator=eq phase=selector"
+just call the top connector to retry,"@f1 w.request.filler text=just
+@r1 w.request.request act=change mood=do predicate=call
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=definite fill=description sort=connector ordinal=top sort_words=""top connector""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.label value=retry operator=eq phase=result"
+please change the label of the arrow Warehouse to Onboarding to retry,"@f1 w.request.filler text=please
+@r1 w.request.request act=change mood=do predicate=change
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=definite fill=description sort=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Warehouse operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Onboarding operator=eq phase=selector
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.label value=retry operator=eq phase=result key_words=label"
+"that path is taken when the check fails, so label e2 owns","@r1 w.request.request act=change mood=do predicate=label words=""label e2 owns""
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=definite fill=written name=e2
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.ids value=e2 operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.label value=owns operator=eq phase=result
+@f1 w.request.filler text=""that path is taken when the check fails, so"""
+i want to colour da top connecting lane brown,"@f1 w.request.filler text=want
+@r1 w.request.request act=change mood=do predicate=colour
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=definite fill=description sort=line sort_words=""top connecting lane"" ordinal=top
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.colour value=brown operator=eq phase=result"
+please make connector e2 dotted,"@f1 w.request.filler text=please
+@r1 w.request.request act=change mood=do predicate=make
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=definite fill=written name=e2 sort=connector
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.ids value=e2 operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.style value=dotted operator=eq phase=result"
+"optional paths are dashed in our notation, so switch the arrow between Cache and n4 a dashed line please","@f2 w.request.filler text=please
+@r1 w.request.request act=change mood=do predicate=switch words=""switch the arrow between Cache and n4 a dashed line please""
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=definite fill=description sort=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Cache operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=n4 operator=eq phase=selector
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.style value=dashed words=""a dashed line"" operator=eq phase=result
+@f1 w.request.filler text=""optional paths are dashed in our notation, so"""
+"data flows both ways there, so change the Test to Paid? connection with one arrowhead pls","@f2 w.request.filler text=pls
+@r1 w.request.request act=change mood=do predicate=change words=""change the Test to Paid? connection with one arrowhead pls""
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=definite fill=description sort=connection
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Test operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=""Paid?"" operator=eq phase=selector
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.arrow value=forward words=""with one arrowhead"" operator=eq phase=result
+@f1 w.request.filler text=""data flows both ways there, so"""
+"data flows both ways there, so turn that link with one arrowhead, thank you","@f2 w.request.filler text=""thank you""
+@r1 w.request.request act=change mood=do predicate=turn words=""turn that link with one arrowhead, thank you""
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=definite fill=context sort=link
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.arrow value=forward words=""with one arrowhead"" operator=eq phase=result
+@f1 w.request.filler text=""data flows both ways there, so"""
+"daya flows both wahs there, so turn the edge I just drew tw-way","@f1 w.request.filler text=so
+@f2 w.request.filler text=just
+@r1 w.request.request act=change mood=do predicate=turn words=""so turn the edge I just drew tw-way""
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=definite fill=context sort=edge ordinal=newest
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.arrow value=both words=tw-way operator=eq phase=result
+@f3 w.request.filler text=""daya flows both wahs there"""
+just make the edge between n5 and Auth go to n2,"@f1 w.request.filler text=just
+@r1 w.request.request act=change mood=do predicate=make
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=definite fill=description sort=edge
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=n5 operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Auth operator=eq phase=selector
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.to value=n2 operator=eq phase=result key_words=""go to"""
+please point the connection from Cart at n3 instead if you can,"@f1 w.request.filler text=please
+@r1 w.request.request act=change mood=do predicate=point
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=definite fill=description sort=connection
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Cart operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=n3 operator=eq phase=result"
+ok erasee all connectors,"@f1 w.request.filler text=ok
+@r1 w.request.request act=remove mood=do predicate=erasee
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=definite fill=all sort=connector sort_words=connectors quantifier=all"
+ok so delete the lion that goes from n1 to Queue before I export it,"@f1 w.request.filler text=""ok so""
+@r1 w.request.request act=remove mood=do predicate=delete words=""ok so delete the lion that goes from n1 to Queue""
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=definite fill=description sort=line sort_words=lion
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=n1 operator=eq phase=selector key_words=""goes from""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Queue operator=eq phase=selector
+@f2 w.request.filler text=""before I export it"""
+n1 and connection e2 away,"@r1 w.request.request act=remove mood=do predicate=away
+@r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=sketch.nodes value=n1 operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=sketch.links value=""connection e2"" operator=eq phase=result"
+erase n4 and line e3,"@r1 w.request.request act=remove mood=do predicate=erase
+@r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=sketch.nodes value=n4 operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=sketch.links value=""line e3"" operator=eq phase=result"
+"both are obsolete, get rid of Cache and connecting line e1","@r1 w.request.request act=remove mood=do predicate=""get rid of"" words=""get rid of Cache and connecting line e1""
+@r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=sketch.nodes value=Cache operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=sketch.links value=""connecting line e1"" operator=eq phase=result
+@f1 w.request.filler text=""both are obsolete"""
+"bothare obsolete, take out n2 and the connector into Server","@r1 w.request.request act=remove mood=do predicate=""take out"" words=""take out n2 and the connector into Server""
+@r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=sketch.nodes value=n2 operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=sketch.links value=""the connector into Server"" operator=eq phase=result
+@f1 w.request.filler text=""bothare obsolete"""
+show IDs,"@r1 w.request.request act=change mood=do predicate=show
+@r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=show open_value=true key_words=IDs operator=eq phase=result","@r1 w.request.request act=change mood=do predicate=show
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context description=""IDs""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page","@r1 w.request.request act=change mood=do predicate=show
+@r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=visible operator=eq phase=result open_value=true words=IDs"
+show ids 20 seconds,"@r1 w.request.request act=change mood=do predicate=show
+@r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.duration value=""20"" words=""20 seconds"" operator=eq phase=result key_words=ids"
+show is three seconds,"@r1 w.request.request act=change mood=do predicate=show
+@r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.duration value=""3"" words=""three seconds"" operator=eq phase=result"
+"hey, go back the last change","@f1 w.request.filler text=hey
+@r1 w.request.request act=undo mood=do predicate=""go back"" words=""go back the last change""
+@r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step description=""last change""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@f2 w.request.filler text=hey"
+"oops, that was wrong, roll back it","@r1 w.request.request act=undo mood=do predicate=""roll back"" words=""roll back it""
+@r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@f1 w.request.filler text=""oops, that was wrong"""
+"never mind, revert","@r1 w.request.request act=undo mood=do predicate=revert words=revert
+@r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@f1 w.request.filler text=""never mind"""
+"you know, ok reverse um what I just did","@f2 w.request.filler text=""um what I just""
+@r1 w.request.request act=undo mood=do predicate=reverse words=""reverse um what I just did""
+@r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@f1 w.request.filler text=""you know, ok"""
+"okay, scratch that","@f1 w.request.filler text=okay
+@r1 w.request.request act=undo mood=do predicate=""scratch that"" words=""scratch that""
+@r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@f2 w.request.filler text=okay"
+"hey, repeat what I undid","@f1 w.request.filler text=hey
+@r1 w.request.request act=redo mood=do predicate=repeat words=""repeat what I undid""
+@r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@f2 w.request.filler text=hey"
+put together both of them and label it Data layer,"@r1 w.request.request act=group mood=do predicate=""put together""
+@r1.t w.request.target request=$r1 family=group mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.ids value=""both of them"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=group.label value=""Data layer"" operator=eq phase=result key_words=label"
+right recolour group g1 er purple,"@f1 w.request.filler text=er
+@r1 w.request.request act=change mood=do predicate=recolour words=""recolour group g1 er purple""
+@r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=written name=g1 family_words=group
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.id value=g1 operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=group.colour value=purple operator=eq phase=result
+@f2 w.request.filler text=right"

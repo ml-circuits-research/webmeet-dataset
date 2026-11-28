@@ -1,0 +1,445 @@
+text,sop,sop1
+same odd-pair pattern on the next row,"@f1 w.request.filler text=row
+@r1 w.request.request act=change mood=do words=""same odd-pair pattern"" predicate=same
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""same odd-pair pattern"" operator=eq phase=selector",
+swap each neighbour pair from left to right,"@r1 w.request.request act=change mood=do words=""swap each neighbour pair"" predicate=swap
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""swap each neighbour pair"" operator=eq phase=selector
+@r2 w.request.request act=change mood=do words=""left to right"" predicate=left
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.m1 w.request.constraint request=$r2 on=attribute attribute=node.ordinal value=""left to right"" operator=eq phase=selector",
+quick question: can u move Sort to the second slot please,"@f1 w.request.filler text=""quick question""
+@f2 w.request.filler text=please
+@r1 w.request.request act=change mood=do words=""can u move Sort to the second slot please"" predicate=move
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context name=Sort
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""second slot"" operator=eq phase=result",
+quick question: can u swap it with the one from step two please,"@f1 w.request.filler text=""quick question""
+@f2 w.request.filler text=please
+@r1 w.request.request act=change mood=do words=""can u swap it with the one from step two please"" predicate=swap
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=step.index value=2 words=two key_words=step operator=eq phase=selector",
+"add back the deleted box, and repeat the swap on the pair next to it","@r1 w.request.request act=undo mood=do words=""add back the deleted box"" predicate=""add back""
+@r1.t w.request.target request=$r1 family=node mode=new family_words=box fill=journal_step determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=""the deleted box"" operator=eq phase=selector
+@r2 w.request.request act=redo mood=do words=""and repeat the swap on the pair next to it"" predicate=repeat
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.t1 w.request.target request=$r2 family=step mode=existing determiner=definite fill=journal_step
+@r2.l2 w.request.lookup request=$r2 target=$r2.t1 key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=step.kind value=swap words=""repeat the swap"" operator=eq phase=selector",
+put the deleted figure back where it was and then repeat the operation on the figure sitting to its right,"@f1 w.request.filler text=then
+@r1 w.request.request act=undo mood=do words=""put the deleted figure back where it was"" predicate=put
+@r1.t w.request.target request=$r1 family=node mode=new fill=journal_step determiner=indefinite family_words=figure
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=""the deleted figure"" operator=eq phase=selector
+@r2 w.request.request act=redo mood=do words=""and then repeat the operation on the figure sitting to its right"" predicate=repeat
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context family_words=figure
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""repeat the operation"" note=diagram.step.repeat value=""the operation""",
+add back the figure you just deleted and repeat on the neighbour,"@r1 w.request.request act=undo mood=do words=""add back the figure you just deleted"" predicate=""add back""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=figure
+@r1.u1 w.request.unread request=$r1 text=""the figure you just deleted"" note=node.journal.restore value=""the figure you just deleted""
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=deleted operator=eq phase=selector
+@r2 w.request.request act=redo mood=do words=""and repeat on the neighbour"" predicate=repeat
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page",
+restore the figure from step 2 if you can,"@r1 w.request.request act=undo mood=do words=""restore the figure from step 2"" predicate=restore
+@r1.t w.request.target request=$r1 family=node mode=new family_words=figure fill=journal_step determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=2 words=""the figure from step 2"" operator=eq phase=selector",
+add back the removed figure,"@r1 w.request.request act=undo mood=do predicate=""add back""
+@r1.t w.request.target request=$r1 family=node mode=new family_words=figure fill=journal_step determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=""the removed figure"" operator=eq phase=selector",
+bring back the second deleted figure and put it back in the row where it belongs now,"@f1 w.request.filler text=now
+@r1 w.request.request act=undo mood=do predicate=""bring back""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=figure
+@r1.u1 w.request.unread request=$r1 text=""the second deleted figure"" note=node.journal.restore value=""the second deleted figure""
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l1 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=deleted operator=eq phase=selector",
+"go ahead and restore the figure from step 2, then redo the move on the feurth figure","@f1 w.request.filler text=""go ahead""
+@f2 w.request.filler text=then
+@r1 w.request.request act=undo mood=do words=""restore the figure from step 2, then redo the move on the feurth figure"" predicate=restore
+@r1.t w.request.target request=$r1 family=node mode=new fill=journal_step determiner=indefinite family_words=figure
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=2 words=""the figure from step 2"" operator=eq phase=selector",
+"add back the deleted box, and rapeat the swap on the pair next to it","@r1 w.request.request act=undo mood=do predicate=""add back""
+@r1.t w.request.target request=$r1 family=node mode=new family_words=box fill=journal_step determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=""the deleted box"" operator=eq phase=selector
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=next operator=eq phase=selector",
+restore the figure from step 1 and then repeat the swap on the pair immediately to its right,"@f1 w.request.filler text=then
+@r1 w.request.request act=undo mood=do words=""restore the figure from step 1"" predicate=restore
+@r1.t w.request.target request=$r1 family=node mode=new family_words=figure fill=journal_step determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=1 words=""the figure from step 1"" operator=eq phase=selector
+@r2 w.request.request act=redo mood=do words=""and then repeat the swap on the pair immediately to its right"" predicate=repeat
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.t1 w.request.target request=$r2 family=step mode=existing determiner=definite fill=journal_step
+@r2.l2 w.request.lookup request=$r2 target=$r2.t1 key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=step.kind value=swap words=""repeat the swap"" operator=eq phase=selector",
+would you put back the box deleted in step 2 and redo the last move on the box that now sits beside it,"@f1 w.request.filler text=now
+@r1 w.request.request act=undo mood=do words=""put back the box deleted in step 2"" predicate=""put back""
+@r1.t w.request.target request=$r1 family=node mode=new family_words=box fill=journal_step determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=deleted operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=step.index value=2 words=""the box deleted in step 2"" operator=eq phase=selector
+@r2 w.request.request act=redo mood=do words=""and redo the last move on the box that now sits beside it"" predicate=redo
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context family_words=box
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.t1 w.request.target request=$r2 family=step mode=existing determiner=definite fill=journal_step family_words=box
+@r2.l2 w.request.lookup request=$r2 target=$r2.t1 key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=step.which value=last words=""the last move"" operator=eq phase=selector
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=step.kind value=move operator=eq phase=selector",
+"can you restore the figure from step 2, one position from the end","@r1 w.request.request act=undo mood=do words=""restore the figure from step 2, one position from the end"" predicate=restore
+@r1.t w.request.target request=$r1 family=node mode=new family_words=figure fill=journal_step determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=2 words=""the figure from step 2"" operator=eq phase=selector",
+put the first removed figure back to the left of the last,"@r1 w.request.request act=undo mood=do predicate=put
+@r1.t w.request.target request=$r1 family=node mode=new family_words=figure fill=journal_step determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=first words=""the first removed figure"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=removed operator=eq phase=selector
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""the last"" operator=eq phase=selector",
+restore the box and put it beside the third figure,"@r1 w.request.request act=undo mood=do predicate=restore
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=figure
+@r1.u1 w.request.unread request=$r1 text=""restore the box"" note=node.journal.restore value=""the box""
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""the third figure"" operator=eq phase=selector",
+add it back one position from the end,"@r1 w.request.request act=undo mood=do predicate=add
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite",
+"we deleted a figure in step 1 and now the row has a gap in the middle, so put it back exactly there","@f1 w.request.filler text=now
+@f2 w.request.filler text=so
+@r1 w.request.request act=undo mood=do predicate=put
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=step family_words=figure
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l1 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""the middle"" operator=eq phase=selector",
+bring back the figure from step 1 and put it thrid,"@r1 w.request.request act=undo mood=do predicate=""bring back""
+@r1.t w.request.target request=$r1 family=node mode=new family_words=figure fill=journal_step determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=1 words=""the figure from step 1"" operator=eq phase=selector",
+add the deleted box back to the sacond slot,"@r1 w.request.request act=undo mood=do predicate=add
+@r1.t w.request.target request=$r1 family=node mode=new family_words=box fill=journal_step determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=""the deleted box"" operator=eq phase=selector",
+restore the figure from step 2 and place it to the right of the last box,"@r1 w.request.request act=undo mood=do words=""restore the figure from step 2"" predicate=restore
+@r1.t w.request.target request=$r1 family=node mode=new family_words=figure fill=journal_step determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=2 words=""the figure from step 2"" operator=eq phase=selector
+@r2 w.request.request act=place mood=do words=""and place it to the right of the last box"" predicate=place
+@r2.t w.request.target request=$r2 family=node mode=new determiner=indefinite family_words=box
+@r2.u1 w.request.unread request=$r2 text=""right of the last box"" note=node.selection value=""right of the last box""",
+bring back the deleted figure and drop it between the second and third boxes,"@r1 w.request.request act=undo mood=do words=""bring back the deleted figure"" predicate=""bring back""
+@r1.t w.request.target request=$r1 family=node mode=new family_words=figure fill=journal_step determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=""the deleted figure"" operator=eq phase=selector
+@r2 w.request.request act=place mood=do words=""and drop it between the second and third boxes"" predicate=drop
+@r2.t w.request.target request=$r2 family=node mode=new determiner=indefinite family_words=boxes
+@r2.u1 w.request.unread request=$r2 text=""between the second and third boxes"" note=node.selection value=""between the second and third boxes""
+@r2.m1 w.request.constraint request=$r2 on=attribute attribute=node.ordinal value=""third box"" operator=eq phase=selector",
+bring back the deleted box and swap it with its neighbour,"@r1 w.request.request act=undo mood=do words=""bring back the deleted box"" predicate=""bring back""
+@r1.t w.request.target request=$r1 family=node mode=new family_words=box fill=journal_step determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=""the deleted box"" operator=eq phase=selector
+@r2 w.request.request act=change mood=do words=""and swap it with its neighbour"" predicate=swap
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.m1 w.request.constraint request=$r2 on=attribute attribute=node.ordinal value=""it with its neighbour"" operator=eq phase=selector",
+"put the deleted figure back and then swap it with the box immediately to its right, and stop there please","@f1 w.request.filler text=then
+@f2 w.request.filler text=""stop there please""
+@r1 w.request.request act=undo mood=do words=""put the deleted figure back"" predicate=put
+@r1.t w.request.target request=$r1 family=node mode=new family_words=figure fill=journal_step determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=""the deleted figure"" operator=eq phase=selector
+@r2 w.request.request act=change mood=do words=""and then swap it with the box immediately to its right"" predicate=swap
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context family_words=box
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.m1 w.request.constraint request=$r2 on=attribute attribute=node.ordinal value=""it with the box immediately to its right"" operator=eq phase=selector",
+restore the middle figure and then swap it with its right-hand neighbour,"@f1 w.request.filler text=then
+@r1 w.request.request act=undo mood=do words=""restore the middle figure"" predicate=restore
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=figure
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""the middle figure"" operator=eq phase=selector
+@r2 w.request.request act=change mood=do words=""and then swap it with its right-hand neighbour"" predicate=swap
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.m1 w.request.constraint request=$r2 on=attribute attribute=node.ordinal value=""it with its right-hand neighbour"" operator=eq phase=selector",
+restore the second deleted figure at the start if you can,"@r1 w.request.request act=undo mood=do words=""restore the second deleted figure at the start"" predicate=restore
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=figure
+@r1.u1 w.request.unread request=$r1 text=""the second deleted figure"" note=node.journal.restore value=""the second deleted figure""
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=deleted operator=eq phase=selector",
+add the figure removed in step 1 to the frnt,"@r1 w.request.request act=undo mood=do predicate=add
+@r1.t w.request.target request=$r1 family=node mode=new family_words=figure fill=journal_step determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=removed operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=step.index value=1 words=""the figure removed in step 1"" operator=eq phase=selector",
+bring back the figure removed in step one and put it in its original position,"@r1 w.request.request act=undo mood=do predicate=""bring back""
+@r1.t w.request.target request=$r1 family=node mode=new family_words=figure fill=journal_step determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=removed operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=step.index value=1 words=""the figure removed in step one"" operator=eq phase=selector",
+restore the deleted figure where it belongs,"@r1 w.request.request act=undo mood=do predicate=restore
+@r1.t w.request.target request=$r1 family=node mode=new family_words=figure fill=journal_step determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=""the deleted figure"" operator=eq phase=selector",
+add back the missing piece in its old slot when you get a chance,"@f1 w.request.filler text=""get a chance""
+@r1 w.request.request act=undo mood=do words=""add back the missing piece in its old slot"" predicate=""add back""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite
+@r1.u1 w.request.unread request=$r1 text=""the missing piece"" note=node.journal.restore value=""the missing piece""",
+put the removed figure back into its original spot,"@r1 w.request.request act=undo mood=do predicate=put
+@r1.t w.request.target request=$r1 family=node mode=new family_words=figure fill=journal_step determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=""the removed figure"" operator=eq phase=selector",
+return the object deleted in step two to its old place,"@r1 w.request.request act=undo mood=do predicate=return
+@r1.t w.request.target request=$r1 family=node mode=new family_words=object fill=journal_step determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=deleted operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=step.index value=2 words=""the object deleted in step two"" operator=eq phase=selector",
+"reinsert the figure that was taken out, in its original position","@r1 w.request.request act=undo mood=do predicate=reinsert
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=figure
+@r1.u1 w.request.unread request=$r1 text=""the figure that was taken out"" note=node.journal.restore value=""the figure that was taken out""",
+the figure we removed belongs in the third spot again,"@r1 w.request.request act=undo mood=do predicate=belongs
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=figure
+@r1.u1 w.request.unread request=$r1 text=""the figure we removed"" note=node.journal.restore value=""the figure we removed""
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=removed operator=eq phase=selector
+@r1.m2 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""the third spot"" operator=eq phase=selector",
+"the row is one figure short and the gap is where the deleted piece used to be, so add that figure back into its old slot","@f1 w.request.filler text=so
+@r1 w.request.request act=undo mood=do predicate=add
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=figure
+@r1.u1 w.request.unread request=$r1 text=""the deleted piece"" note=node.journal.restore value=""the deleted piece""
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l1 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=deleted operator=eq phase=selector",
+put it back where it belongs,"@r1 w.request.request act=undo mood=do predicate=put
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite",
+i need you to restore it to its original slot,"@f1 w.request.filler text=need
+@r1 w.request.request act=undo mood=do words=""restore it to its original slot"" predicate=restore
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite",
+add the missing figure back in place,"@r1 w.request.request act=undo mood=do predicate=add
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=figure
+@r1.u1 w.request.unread request=$r1 text=""the missing figure"" note=node.journal.restore value=""the missing figure""",
+"i want the figure that was removed earlier to come back in exactly the position it occupied before it was deleted, not at the end of the row","@f1 w.request.filler text=want
+@r1 w.request.request act=undo mood=do predicate=come
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=figure
+@r1.u1 w.request.unread request=$r1 text=""the figure that was removed earlier"" note=node.journal.restore value=""the figure that was removed earlier""
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l1 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=removed operator=eq phase=selector",
+there is an empty space where a figure used to stand and i need that figure restored into the same space,"@f1 w.request.filler text=need
+@r1 w.request.request act=undo mood=do predicate=restored
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=figure
+@r1.u1 w.request.unread request=$r1 text=""need that figure"" note=node.journal.restore value=""that figure""",
+quick question: can u put it back where it belongs please,"@f1 w.request.filler text=""quick question""
+@f2 w.request.filler text=please
+@r1 w.request.request act=undo mood=do words=""can u put it back where it belongs please"" predicate=put
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite",
+put it back were it belongs,"@r1 w.request.request act=undo mood=do predicate=put
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite",
+reastore the deleted figure in its old slot,"@r1 w.request.request act=undo mood=do predicate=reastore
+@r1.t w.request.target request=$r1 family=node mode=new family_words=figure fill=journal_step determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=""the deleted figure"" operator=eq phase=selector",
+back in its place,"@r1 w.request.request act=undo mood=do predicate=back
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite
+@r1.u1 w.request.unread request=$r1 text=""back in its place"" note=node.journal.restore value=""its place""",
+go ahead and restore the deleted figure and check it landed in the right slot,"@f1 w.request.filler text=""go ahead""
+@r1 w.request.request act=undo mood=do words=""restore the deleted figure"" predicate=restore
+@r1.t w.request.target request=$r1 family=node mode=new family_words=figure fill=journal_step determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=""the deleted figure"" operator=eq phase=selector
+@r2 w.request.request act=ask mood=do words=""and check it landed in the right slot"" predicate=check question=where
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page",
+"bring the deleted figure back to its old slot, then swap it with its neighbour","@f1 w.request.filler text=then
+@r1 w.request.request act=undo mood=do words=""bring the deleted figure back to its old slot"" predicate=bring
+@r1.t w.request.target request=$r1 family=node mode=new family_words=figure fill=journal_step determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=""the deleted figure"" operator=eq phase=selector
+@r2 w.request.request act=change mood=do words=""then swap it with its neighbour"" predicate=swap
+@r2.t w.request.target request=$r2 family=node mode=new determiner=indefinite
+@r2.m1 w.request.constraint request=$r2 on=attribute attribute=node.ordinal value=""its neighbour"" operator=eq phase=selector",
+restore the removed figure where it belongs and leave the gap closed,"@r1 w.request.request act=undo mood=do words=""restore the removed figure where it belongs"" predicate=restore
+@r1.t w.request.target request=$r1 family=node mode=new family_words=figure fill=journal_step determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=""the removed figure"" operator=eq phase=selector
+@r2 w.request.request act=place mode=arrange mood=do words=""and leave the gap closed"" predicate=leave
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing",
+undo until the first box is back in its spot,"@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=box
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""first box"" operator=eq phase=selector",
+keep undoing until the last figure is at the end again,"@r1 w.request.request act=undo mood=do predicate=keep
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=figure
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""last figure"" operator=eq phase=selector",
+undo until the third box returns to position three when you get a chance,"@f1 w.request.filler text=""get a chance""
+@r1 w.request.request act=undo mood=do words=""undo until the third box returns to position three"" predicate=undo
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=box
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""third box"" operator=eq phase=selector",
+go back until the middle figure is in the middle,"@r1 w.request.request act=undo mood=do predicate=go
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=figure
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""middle figure"" operator=eq phase=selector",
+undo until the box that moved is back on the left,"@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=box
+@r1.u1 w.request.unread request=$r1 text=""box that moved"" note=node.journal.restore value=""the box that moved""",
+step back until the rightmost figure is on the right,"@r1 w.request.request act=undo mood=do predicate=step
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=figure
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""rightmost figure"" operator=eq phase=selector",
+could you undo until the second box sits second again,"@r1 w.request.request act=undo mood=do words=""undo until the second box sits second again"" predicate=undo
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=box
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""second box"" operator=eq phase=selector",
+roll back until the removed figure is at spot two,"@r1 w.request.request act=undo mood=do predicate=roll
+@r1.t w.request.target request=$r1 family=node mode=new family_words=figure fill=journal_step determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=""removed figure"" operator=eq phase=selector",
+undo until the figure is back where it started,"@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=figure
+@r1.u1 w.request.unread request=$r1 text=""undo until the figure"" note=node.journal.restore value=""the figure""",
+keep undoing until the first position holds the first figure,"@r1 w.request.request act=undo mood=do predicate=keep
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=figure
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""first figure"" operator=eq phase=selector
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""the first position"" operator=eq phase=selector",
+i need you to undo until the last box is last again,"@f1 w.request.filler text=need
+@r1 w.request.request act=undo mood=do words=""undo until the last box is last again"" predicate=undo
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=box
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""last box"" operator=eq phase=selector",
+keep undoing until the figure that was moved away from the left end is sitting in the first position again,"@r1 w.request.request act=undo mood=do predicate=keep
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=figure
+@r1.u1 w.request.unread request=$r1 text=""figure that was moved"" note=node.journal.restore value=""the figure that was moved""
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""the first position"" operator=eq phase=selector",
+undo the recent steps until the middle box is back between the second and fourth positions,"@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=steps
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""middle box"" operator=eq phase=selector
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""the second"" operator=eq phase=selector
+@r1.m2 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""fourth position"" operator=eq phase=selector",
+step backwards until the box removed from spot three is restored there,"@r1 w.request.request act=undo mood=do predicate=""step back""
+@r1.t w.request.target request=$r1 family=node mode=new family_words=box fill=journal_step determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=""box removed"" operator=eq phase=selector",
+now undo until the first box is back,"@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=box
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""first box"" operator=eq phase=selector",
+"undo until the first box is back, then swap the last two","@f1 w.request.filler text=then
+@r1 w.request.request act=undo mood=do words=""undo until the first box is back"" predicate=undo
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=box
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""first box"" operator=eq phase=selector
+@r2 w.request.request act=change mood=do words=""then swap the last two"" predicate=swap
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.ordinal value=""last two"" operator=eq phase=selector",
+go ahead and keep undoing until the middle figure is back and remove the first box,"@f1 w.request.filler text=""go ahead""
+@r1 w.request.request act=undo mood=do words=""keep undoing until the middle figure is back"" predicate=keep
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=figure
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""middle figure"" operator=eq phase=selector
+@r2 w.request.request act=remove mood=do words=""and remove the first box"" predicate=remove
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context family_words=box
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.ordinal value=""first box"" operator=eq phase=selector",
+undo until the first box is back in its spts,"@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=box
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""first box"" operator=eq phase=selector",
+keep undoing until the last fegure is at the end,"@r1 w.request.request act=undo mood=do predicate=keep
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite
+@r1.u1 w.request.unread request=$r1 text=""last fegure"" note=node.journal.restore value=""the last fegure""",
+back to its spot,"@r1 w.request.request act=undo mood=do predicate=back
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite",
+undo until the first box is back in its spot and leave every one of the other figures in the row exactly where it is so the arrangement stays clear and readable,"@f1 w.request.filler text=so
+@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=figures
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""first box"" operator=eq phase=selector
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l1 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.m2 w.request.constraint request=$r1 on=attribute attribute=node.position value=unchanged words=""exactly where it is"" operator=eq phase=result open_value=true",
+keep undoing until the last figure is at the end again while keeping every other box in the row in the same place so the whole arrangement remains easy to follow,"@f1 w.request.filler text=so
+@r1 w.request.request act=undo mood=do predicate=keep
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=box quantifier=whole description=""the same place""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""last figure"" operator=eq phase=selector
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l1 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page",
+put it back in exactly the same spot,"@r1 w.request.request act=undo mood=do predicate=put
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite description=""the same spot""",
+restore the figure to the exact position it had,"@r1 w.request.request act=undo mood=do predicate=restore
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=figure
+@r1.u1 w.request.unread request=$r1 text=""restore the figure"" note=node.journal.restore value=""the figure""",
+put the removed box back where it was when you get a chance,"@f1 w.request.filler text=""get a chance""
+@r1 w.request.request act=undo mood=do words=""put the removed box back where it was"" predicate=put
+@r1.t w.request.target request=$r1 family=node mode=new family_words=box fill=journal_step determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=""removed box"" operator=eq phase=selector",
+return it to precisely the same place,"@r1 w.request.request act=undo mood=do predicate=return
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite description=""the same place""",
+add the deleted figure back in its exact original spot,"@r1 w.request.request act=undo mood=do predicate=add
+@r1.t w.request.target request=$r1 family=node mode=new family_words=figure fill=journal_step determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=""deleted figure"" operator=eq phase=selector",
+put the missing box back at the identical position,"@r1 w.request.request act=undo mood=do predicate=put
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=box
+@r1.u1 w.request.unread request=$r1 text=""missing box"" note=node.journal.restore value=""the missing box""",
+could you restore it in the very same place it was removed from,"@f1 w.request.filler text=very
+@r1 w.request.request act=undo mood=do words=""restore it in the very same place it was removed from"" predicate=restore
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite",
+put that figure back exactly where it came from,"@r1 w.request.request act=undo mood=do predicate=put
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=figure
+@r1.u1 w.request.unread request=$r1 text=""put that figure"" note=node.journal.restore value=""that figure""",
+return the removed item to the original position,"@r1 w.request.request act=undo mood=do predicate=return
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=item
+@r1.u1 w.request.unread request=$r1 text=""removed item"" note=node.journal.restore value=""the removed item""
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=removed operator=eq phase=selector",
+place it back in the same slot,"@r1 w.request.request act=undo mood=do predicate=place
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite description=""the same slot""",
+i need you to put the box back in the position it occupied before,"@f1 w.request.filler text=need
+@r1 w.request.request act=undo mood=do words=""put the box back in the position it occupied before"" predicate=put
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=box
+@r1.u1 w.request.unread request=$r1 text=""put the box"" note=node.journal.restore value=""the box""",
+"put the box that was removed back into precisely the gap it left, with the same neighbours on both sides","@r1 w.request.request act=undo mood=do predicate=put
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=box
+@r1.u1 w.request.unread request=$r1 text=""box that was removed"" note=node.journal.restore value=""the box that was removed""
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=removed operator=eq phase=selector",
+"return the figure to the identical position in the row, not next to it and not at either end","@r1 w.request.request act=undo mood=do predicate=return
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=figure
+@r1.u1 w.request.unread request=$r1 text=""return the figure"" note=node.journal.restore value=""the figure""
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l1 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page",
+now put it back in the same spot,"@r1 w.request.request act=undo mood=do predicate=put
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite description=""the same spot""",
+restore it to exactly where it was,"@r1 w.request.request act=undo mood=do predicate=restore
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite",
+and return it to the same place,"@r1 w.request.request act=undo mood=do predicate=place
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite description=""the same place""",
+"put it back in the same spot, then swap the first two boxes","@f1 w.request.filler text=then
+@r1 w.request.request act=undo mood=do words=""put it back in the same spot"" predicate=put
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite description=""the same spot""
+@r2 w.request.request act=change mood=do words=""then swap the first two boxes"" predicate=swap
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context family_words=boxes
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.ordinal value=""first two"" operator=eq phase=selector",
+go ahead and restore the figure to the exact position it had and remove the last box,"@f1 w.request.filler text=""go ahead""
+@r1 w.request.request act=undo mood=do words=""restore the figure to the exact position it had"" predicate=restore
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=figure
+@r1.u1 w.request.unread request=$r1 text=""restore the figure"" note=node.journal.restore value=""the figure""
+@r2 w.request.request act=remove mood=do words=""and remove the last box"" predicate=remove
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context family_words=box
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.ordinal value=""last box"" operator=eq phase=selector",
+put it back in exactly the same spts,"@r1 w.request.request act=undo mood=do predicate=put
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite",
+restore the fegure to the exact position it had,"@r1 w.request.request act=undo mood=do predicate=restore
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite",
+same spot as before,"@r1 w.request.request act=undo mood=do predicate=same
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite
+@r1.u1 w.request.unread request=$r1 text=""same spot"" note=node.journal.restore value=""same spot""",
+i need you to add back exactly the removed set,"@f1 w.request.filler text=need
+@r1 w.request.request act=undo mood=do words=""add back exactly the removed set"" predicate=""add back""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=quantified
+@r1.u1 w.request.unread request=$r1 text=""removed set"" note=node.journal.restore value=""the removed set""
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=removed operator=eq phase=selector",
+the shape that disappeared in step 3 comes back in the same spot,"@r1 w.request.request act=undo mood=do predicate=the
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=shape description=""the same spot""
+@r1.u1 w.request.unread request=$r1 text=""disappeared in step 3"" note=node.journal.restore value=""disappeared in step 3""",
+"add back the one you deleted in step 1, in the same spot as before","@r1 w.request.request act=undo mood=do predicate=""add back""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite description=""the same spot""
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=deleted operator=eq phase=selector key_words=step
+@r1.m2 w.request.constraint request=$r1 on=attribute attribute=step.index value=1 operator=eq phase=selector key_words=step",
+restore the figure from step 4 where it was,"@r1 w.request.request act=undo mood=do predicate=restore
+@r1.t w.request.target request=$r1 family=node mode=new family_words=figure fill=journal_step determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=4 words=""the figure from step 4"" operator=eq phase=selector",
+bring back the disappeared figure to the same place,"@r1 w.request.request act=undo mood=do predicate=""bring back""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=figure description=""the same place""
+@r1.u1 w.request.unread request=$r1 text=""the disappeared figure"" note=node.journal.restore value=""the disappeared figure""",
+put the deleted one back in the same spot,"@r1 w.request.request act=undo mood=do predicate=put
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite description=""the same spot""
+@r1.u1 w.request.unread request=$r1 text=""put the deleted one"" note=node.journal.restore value=""the deleted one""
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=deleted operator=eq phase=selector",
+"we removed the middle figure two steps ago and the handout still needs it, so add back the one from step 2 in the same spot as before","@f1 w.request.filler text=so
+@r1 w.request.request act=undo mood=do predicate=""add back""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite family_words=figure family_words=step description=""the same spot""
+@r1.u1 w.request.unread request=$r1 text=""two steps ago"" note=node.journal.restore value=""the one from step 2""
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""the middle figure"" operator=eq phase=selector",
+restore the figure from step 2,"@r1 w.request.request act=undo mood=do predicate=restore
+@r1.t w.request.target request=$r1 family=node mode=new family_words=figure fill=journal_step determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=2 words=""the figure from step 2"" operator=eq phase=selector",
+i need you to add back the one deleted in step 1 and check the order,"@f1 w.request.filler text=need
+@r1 w.request.request act=undo mood=do words=""add back the one deleted in step 1"" predicate=""add back""
+@r1.t w.request.target request=$r1 family=node mode=new fill=journal_step determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=delete words=deleted operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=step.index value=1 words=""the one deleted in step 1"" operator=eq phase=selector
+@r2 w.request.request act=ask mood=check words=""check the order"" predicate=check question=list asked_words=order
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page",

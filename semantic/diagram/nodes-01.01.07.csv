@@ -1,0 +1,608 @@
+text,sop,sop1
+insert a 2x2 table and park it under the Refill? diamond,"@r1 w.request.request act=make mood=do predicate=insert
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=table
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=""2"" words=""2x2 table"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.position value=below words=under operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=""the Refill? diamond"" operator=relation phase=selector"
+"a table of two rows and two columns, narrow borders","@r1 w.request.request act=make mood=do predicate=narrow
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=table
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=""2"" words=""two rows"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""two columns"" note=table.columns value=""2""
+@r1.u2 w.request.unread request=$r1 text=""two rows"" value=2 note=table.rows"
+the sorting table grows: two fresh rows and two fresh columns,"@r1 w.request.request act=make mood=do predicate=sorting
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=table
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=""2"" words=""two fresh rows"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""two fresh columns"" note=table.columns value=""2""
+@r1.u2 w.request.unread request=$r1 text=""fresh rows"" value=null note=table.rows"
+"drop in a table, two rows and two colmns","@r1 w.request.request act=make mood=do predicate=drop
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=table
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=""2"" words=""two rows"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""two colmns"" note=table.columns value=""2"""
+"insert a talbe, two rows and two columns","@r1 w.request.request act=make mood=do predicate=insert
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=table sort_words=talbe
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=""2"" words=""two rows"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""two columns"" note=table.columns value=""2"""
+"insert a table, header row Rider, Tool, Miles, and a amber tint on the band","@r1 w.request.request act=make mood=do predicate=insert words=""insert a table, header row Rider, Tool, Miles""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=table
+@r1.u1 w.request.unread request=$r1 text=""header row Rider, Tool, Miles"" note=table.header value=""Rider, Tool, Miles""
+@r2 w.request.request act=change mood=do predicate=tint words=""table, header row Rider, Tool, Miles, and a amber tint on the band""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context description=""the band"" family_words=table
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.colour value=amber operator=eq phase=result
+@r2.u1 w.request.unread request=$r2 text=""Rider, Tool, Miles"" note=table.header"
+"add the four events Picked, Pressed, Barrelled and Bottled, each a box in the timeline, in order","@r1 w.request.request act=make mood=do predicate=add words=""add the four events Picked, Pressed, Barrelled and Bottled, each a box""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=quantified sort=box count=4 quantity=four count_words=four
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Picked operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Pressed operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.label value=Barrelled operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=node.label value=Bottled operator=eq phase=result
+@r2 w.request.request act=connect mood=do predicate=""in order"" words=""box in the timeline, in order""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context family_words=box
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.pattern value=chain words=""in order"" operator=eq phase=result"
+"hey, add the four events Picked, Pressed, Barrelled and Bottled, each a box in the timeline, in order","@f1 w.request.filler text=hey
+@r1 w.request.request act=make mood=do words=""add the four events Picked, Pressed, Barrelled and Bottled, each a box in the timeline, in order"" predicate=add
+@r1.t w.request.target request=$r1 family=node mode=new determiner=quantified sort=box count=4 quantity=four count_words=four
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Picked operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Pressed operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.label value=Barrelled operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=node.label value=Bottled operator=eq phase=result
+@r2 w.request.request act=connect mood=do words=""each a box in the timeline, in order"" predicate=""in order""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context family_words=box
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.pattern value=chain words=""in order"" operator=eq phase=result"
+"lay in the events Marked, Dug, Poured and Rolled as steps, then chain them in order","@f1 w.request.filler text=then
+@r1 w.request.request act=make mood=do predicate=""lay in"" words=""lay in the events Marked, Dug, Poured and Rolled as steps""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=quantified sort=box sort_words=steps count=4 quantity=four
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Marked operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Dug operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.label value=Poured operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=node.label value=Rolled operator=eq phase=result
+@r2 w.request.request act=connect mood=do predicate=chain words=""steps, then chain them in order""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context family_words=steps
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.pattern value=chain words=""in order"" operator=eq phase=result"
+"the timeline grows: Picked, Pressed, Barrelled, Bottled — string them along in order","@r1 w.request.request act=make mood=do predicate=timeline words=""timeline grows: Picked, Pressed, Barrelled, Bottled""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=quantified sort=box sort_words=""timeline grows"" count=4 quantity=four
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Picked operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Pressed operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.label value=Barrelled operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=node.label value=Bottled operator=eq phase=result
+@r2 w.request.request act=connect mood=do predicate=string words=""string them along in order""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.pattern value=chain words=""in order"" operator=eq phase=result"
+"let's add the events Marked, Dug, Poured and Rolled and wire them in order","@r1 w.request.request act=make mood=do predicate=add words=""let's add the events Marked, Dug, Poured and Rolled""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=quantified sort=box sort_words=events count=4 quantity=four
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Marked operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Dug operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.label value=Poured operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=node.label value=Rolled operator=eq phase=result
+@r2 w.request.request act=connect mood=do predicate=wire words=""wire them in order""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.pattern value=chain words=""in order"" operator=eq phase=result"
+"could you drop in the four events Picked, Pressed, Barrelled and Bottled, linked in order?","@r1 w.request.request act=make mood=do predicate=""drop in"" words=""could you drop in the four events Picked, Pressed, Barrelled and Bottled""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=quantified sort=box sort_words=events count=4 quantity=four count_words=four
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Picked operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Pressed operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.label value=Barrelled operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=node.label value=Bottled operator=eq phase=result
+@r2 w.request.request act=connect mood=do predicate=""linked in"" words=""linked in order""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.pattern value=chain words=""in order"" operator=eq phase=result"
+"one timeline line: Marked, then Dug, then Poured, then Rolled, arrows in order","@f1 w.request.filler text=then
+@f2 w.request.filler text=then
+@f3 w.request.filler text=then
+@r1 w.request.request act=make mood=do predicate=one words=""one timeline line: Marked, then Dug, then Poured, then Rolled""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=quantified sort=box sort_words=""timeline line"" count=4 quantity=four
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Marked operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Dug operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.label value=Poured operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=node.label value=Rolled operator=eq phase=result
+@r2 w.request.request act=connect mood=do predicate=arrows words=""arrows in order""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.pattern value=chain words=""in order"" operator=eq phase=result"
+"one timeline line: Marked, then Dug, then Poured, then Rolled, arrows in order, please","@f1 w.request.filler text=then
+@f2 w.request.filler text=then
+@f3 w.request.filler text=then
+@f4 w.request.filler text=please
+@r1 w.request.request act=make mood=do words=""one timeline line: Marked, then Dug, then Poured, then Rolled, arrows in order"" predicate=one
+@r1.t w.request.target request=$r1 family=node mode=new determiner=quantified sort=box sort_words=""timeline line"" count=4 quantity=four
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Marked operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Dug operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.label value=Poured operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=node.label value=Rolled operator=eq phase=result
+@r2 w.request.request act=connect mood=do words=""arrows in order"" predicate=arrows
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.pattern value=chain words=""in order"" operator=eq phase=result"
+"I'd add Picked, Pressed, Barrelled and Bottled as the four chapter steps, in order","@r1 w.request.request act=make mood=do predicate=add words=""I'd add Picked, Pressed, Barrelled and Bottled as the four chapter steps""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=quantified sort=box sort_words=""chapter steps"" count=4 quantity=four count_words=four
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Picked operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Pressed operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.label value=Barrelled operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=node.label value=Bottled operator=eq phase=result
+@r2 w.request.request act=connect mood=do predicate=""chapter steps"" words=""chapter steps, in order""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context sort=step sort_words=steps
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.pattern value=chain words=""in order"" operator=eq phase=result"
+"right: the story runs Marked, Dug, Poured, Rolled — join them up in order","@r1 w.request.request act=make mood=do predicate=right words=""right: the story runs Marked, Dug, Poured, Rolled""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=quantified sort=box sort_words=""story runs"" count=4 quantity=four
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Marked operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Dug operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.label value=Poured operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=node.label value=Rolled operator=eq phase=result
+@r2 w.request.request act=connect mood=do predicate=join words=""join them up in order""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.pattern value=chain words=""in order"" operator=eq phase=result
+@r2.u1 w.request.unread request=$r2 text=""join them up"" note=link.joinUp"
+"four events for the strip: Picked, Pressed, Barrelled and Bottled, one after another","@r1 w.request.request act=make mood=do predicate=four words=""four events for the strip: Picked, Pressed, Barrelled and Bottled""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=quantified sort=box sort_words=events count=4 quantity=four
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Picked operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Pressed operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.label value=Barrelled operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=node.label value=Bottled operator=eq phase=result
+@r2 w.request.request act=connect mood=do predicate=""one after"" words=""one after another""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.pattern value=chain words=""one after another"" operator=eq phase=result"
+"how about the events Marked, Dug, Poured and Rolled on the strip, connected in order?","@r1 w.request.request act=make mood=do predicate=how words=""how about the events Marked, Dug, Poured and Rolled""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=quantified sort=box sort_words=events count=4 quantity=four
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Marked operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Dug operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.label value=Poured operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=node.label value=Rolled operator=eq phase=result
+@r2 w.request.request act=connect mood=do predicate=""connected in"" words=""connected in order""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.pattern value=chain words=""in order"" operator=eq phase=result"
+"a second row home for Picked, Pressed, Barrelled and Bottled, in sequence","@r1 w.request.request act=make mood=do predicate=second words=""second row home for Picked, Pressed, Barrelled and Bottled""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=quantified sort=box sort_words=""row home"" count=4 quantity=four
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Picked operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Pressed operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.label value=Barrelled operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=node.label value=Bottled operator=eq phase=result
+@r2 w.request.request act=connect mood=do predicate=""in sequence"" words=""in sequence""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.pattern value=chain words=""in sequence"" operator=eq phase=result"
+"please to add the four events Marked, Dug, Poured and Rolled and run them in order","@r1 w.request.request act=make mood=do predicate=add words=""please to add the four events Marked, Dug, Poured and Rolled""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=quantified sort=box sort_words=events count=4 quantity=four count_words=four
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Marked operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Dug operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.label value=Poured operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=node.label value=Rolled operator=eq phase=result
+@r2 w.request.request act=connect mood=do predicate=run words=""run them in order""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.pattern value=chain words=""in order"" operator=eq phase=result"
+"the four events Picked, Pressed, Barrelled and Bottled, in order, and let the chain stand out in plum","@r1 w.request.request act=make mood=do predicate=the words=""the four events Picked, Pressed, Barrelled and Bottled""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=quantified sort=box sort_words=events count=4 quantity=four count_words=four
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Picked operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Pressed operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.label value=Barrelled operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=node.label value=Bottled operator=eq phase=result
+@r2 w.request.request act=connect mood=do predicate=chain words=""the chain stand out in plum""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.pattern value=chain words=""the chain"" operator=eq phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=link.colour value=plum operator=eq phase=result open_value=true"
+"add events Marked, Dug, Poured and Rolled as steps under the Mark flow, tied in order","@r1 w.request.request act=make mood=do predicate=add words=""add events Marked, Dug, Poured and Rolled as steps""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=quantified sort=box sort_words=steps count=4 quantity=four
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Marked operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Dug operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.label value=Poured operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=node.label value=Rolled operator=eq phase=result
+@r2 w.request.request act=connect mood=do predicate=tied words=""steps under the Mark flow, tied""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context family_words=steps
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.pattern value=chain words=tied operator=eq phase=result
+@r2.u1 w.request.unread request=$r2 text=""the Mark flow"" note=diagram.reference"
+"the story of Picked through Bottled: four steps, in order, no gaps","@r1 w.request.request act=make mood=do predicate=story
+@r1.t w.request.target request=$r1 family=node mode=new determiner=quantified sort=box sort_words=steps count=4 quantity=four
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Picked operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Pressed words=""story of Picked through Bottled: four steps, in order, no gaps"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.label value=Barrelled words=""story of Picked through Bottled: four steps, in order, no gaps"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=node.label value=Bottled operator=eq phase=result
+@r2 w.request.request act=connect mood=do predicate=in words=""steps, in order""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context family_words=steps
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.pattern value=chain words=""in order"" operator=eq phase=result"
+"events Marked, Dug, Poured and Rolled in a neat row, arrows one way, in order","@r1 w.request.request act=make mood=do predicate=events words=""events Marked, Dug, Poured and Rolled in a neat row""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=quantified sort=box sort_words=""neat row"" count=4 quantity=four
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Marked operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Dug operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.label value=Poured operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=node.label value=Rolled operator=eq phase=result
+@r2 w.request.request act=connect mood=do predicate=arrows words=""arrows one way""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.pattern value=chain words=""one way"" operator=eq phase=result"
+"append the four events Picked, Pressed, Barrelled and Bottled to the strip, in order, before the labels go bold","@r1 w.request.request act=make mood=do predicate=append words=""append the four events Picked, Pressed, Barrelled and Bottled to the strip, in order, before the labels""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=quantified sort=box sort_words=events count=4 quantity=four count_words=four
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Picked operator=eq phase=result key_words=labels
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Pressed operator=eq phase=result key_words=labels
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.label value=Barrelled operator=eq phase=result key_words=labels
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=node.label value=Bottled operator=eq phase=result key_words=labels
+@r2 w.request.request act=connect mood=do predicate=in words=""in order""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.pattern value=chain words=""in order"" operator=eq phase=result"
+"ad the four events Picked, Pressed, Barrelled and Bottled, each a box in the timeline, in order","@r1 w.request.request act=make mood=do predicate=ad words=""ad the four events Picked, Pressed, Barrelled and Bottled, each a box""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=quantified sort=box count=4 quantity=four count_words=four
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Picked operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Pressed operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.label value=Barrelled operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=node.label value=Bottled operator=eq phase=result
+@r2 w.request.request act=connect mood=do predicate=""in order"" words=""box in the timeline, in order""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context family_words=box
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.pattern value=chain words=""in order"" operator=eq phase=result"
+"lay in the events Marked, Dug, Poured nad Rolled as steps, then chain them in order","@f1 w.request.filler text=then
+@r1 w.request.request act=make mood=do predicate=""lay in"" words=""lay in the events Marked, Dug, Poured nad Rolled as steps""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=quantified sort=box sort_words=steps count=4 quantity=four
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Marked operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Dug operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.label value=Poured operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=node.label value=Rolled operator=eq phase=result
+@r2 w.request.request act=connect mood=do predicate=chain words=""steps, then chain them in order""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context family_words=steps
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.pattern value=chain words=""in order"" operator=eq phase=result"
+add a text box that says served by the morning crew,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=""text box""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""served by the morning crew"" operator=eq phase=result key_words=says"
+drop in a text box carrying notes by the on-call nurse,"@r1 w.request.request act=make mood=do predicate=drop
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=""text box""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""notes by the on-call nurse"" operator=eq phase=result"
+"hey, drop in a text box carrying notes by the on-call nurse","@f1 w.request.filler text=hey
+@r1 w.request.request act=make mood=do words=""drop in a text box carrying notes by the on-call nurse"" predicate=drop
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=""text box""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""notes by the on-call nurse"" operator=eq phase=result"
+"let's put a text box in, words: notes by the on-call nurse","@r1 w.request.request act=make mood=do predicate=put
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=""text box""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""notes by the on-call nurse"" operator=eq phase=result key_words=words"
+could you make a text box and write served by the morning crew in it?,"@r1 w.request.request act=make mood=do predicate=make
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=""text box""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""served by the morning crew"" operator=eq phase=result"
+one text box with the line notes by the on-call nurse inside,"@r1 w.request.request act=make mood=do predicate=one
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=""text box""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""notes by the on-call nurse"" operator=eq phase=result"
+"one text box with the line notes by the on-call nurse inside, please","@f1 w.request.filler text=please
+@r1 w.request.request act=make mood=do words=""one text box with the line notes by the on-call nurse inside"" predicate=one
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=""text box""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""notes by the on-call nurse"" operator=eq phase=result"
+I'd like a text box holding just served by the morning crew,"@f1 w.request.filler text=like
+@f2 w.request.filler text=just
+@r1 w.request.request act=make mood=do predicate=""I'd""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=""text box""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""served by the morning crew"" operator=eq phase=result"
+pop a text box on and fill it with notes by the on-call nurse,"@r1 w.request.request act=make mood=do predicate=pop
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=""text box""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""notes by the on-call nurse"" operator=eq phase=result"
+how about a text box that carries the line notes by the on-call nurse?,"@r1 w.request.request act=make mood=do predicate=how
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=""text box""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""notes by the on-call nurse"" operator=eq phase=result"
+"a little text box, inscribed served by the morning crew","@r1 w.request.request act=make mood=do predicate=inscribed
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=""text box""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""served by the morning crew"" operator=eq phase=result"
+please to add a text box and insert the text notes by the on-call nurse,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=""text box""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""notes by the on-call nurse"" operator=eq phase=result key_words=text"
+"add a text box with notes by the on-call nurse, and keep it clear of the Triage box","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=""text box""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""notes by the on-call nurse"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.position value=apart_from words=""clear of"" operator=relation phase=result open_value=true
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Triage operator=relation phase=selector words=""Triage box"""
+"one text box: served by the morning crew, in a teal tint so it reads first","@f1 w.request.filler text=""so it reads first""
+@r1 w.request.request words=""one text box: served by the morning crew, in a teal tint"" act=make mood=do predicate=tint
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=""text box""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""served by the morning crew"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.colour value=teal operator=eq phase=result"
+"a text box for the byline notes by the on-call nurse, tucked at the page foot","@r1 w.request.request act=make mood=do predicate=a
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=""text box""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""notes by the on-call nurse"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.position value=bottom words=""at the page foot"" operator=eq phase=result open_value=true"
+"drop the text box in with served by the morning crew, then leave its width as it lands","@f1 w.request.filler text=then
+@r1 w.request.request act=make mood=do predicate=drop
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=""text box""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""served by the morning crew"" operator=eq phase=result"
+"a text box, contents to taste","@r1 w.request.request act=make mood=do predicate=a
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=""text box""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""contents to taste"" operator=eq phase=result"
+"another text box, whatever line suits","@r1 w.request.request act=make mood=do predicate=another
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=""text box""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""whatever line suits"" operator=eq phase=result"
+ad a text box that says served by the morning crew,"@r1 w.request.request act=make mood=do predicate=ad
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=""text box""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""served by the morning crew"" operator=eq phase=result key_words=says"
+drop in a text box carying notes by the on-call nurse,"@r1 w.request.request act=make mood=do predicate=""drop in""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=""text box""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""notes by the on-call nurse"" operator=eq phase=result"
+"hey, make a bullet list with 5 items: Crush early, Press gently, Age cool, Rack twice and Cork dry","@f1 w.request.filler text=hey
+@r1 w.request.request act=make mood=do words=""make a bullet list with 5 items: Crush early, Press gently, Age cool, Rack twice and Cork dry"" predicate=make
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=list sort_words=""bullet list""
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=""5"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""Crush early, Press gently, Age cool, Rack twice and Cork dry"" note=list.items"
+"a bullet list of five: Check the pads, True the wheels, Oil the chain, Torque the stem and Wipe it down","@r1 w.request.request act=make mood=do predicate=a
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=list sort_words=""bullet list""
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=""5"" words=five operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""Check the pads, True the wheels, Oil the chain, Torque the stem and Wipe it down"" note=list.items"
+"draw up a 5-item list: Crush early, Press gently, Age cool, Rack twice and Cork dry","@r1 w.request.request act=make mood=do predicate=""draw up""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=list
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=""5"" words=""a 5"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""Crush early, Press gently, Age cool, Rack twice and Cork dry"" note=list.items"
+"let's have a bullet list reading Check the pads, True the wheels, Oil the chain, Torque the stem and Wipe it down","@r1 w.request.request act=make mood=do predicate=""let's""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=list sort_words=""bullet list""
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=""5"" words=bullet operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""Check the pads, True the wheels, Oil the chain, Torque the stem and Wipe it down"" note=list.items"
+"could you list out Crush early, Press gently, Age cool, Rack twice and Cork dry as five bullets?","@r1 w.request.request act=make mood=do predicate=""list out""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=quantified sort=list sort_words=""five bullets"" quantity=five
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=""5"" words=""five bullets"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""Crush early, Press gently, Age cool, Rack twice and Cork dry"" note=list.items"
+"one bullet list, the entries Check the pads, True the wheels, Oil the chain, Torque the stem and Wipe it down","@r1 w.request.request act=make mood=do predicate=one
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=list sort_words=""bullet list""
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=""5"" words=bullet operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""Check the pads, True the wheels, Oil the chain, Torque the stem and Wipe it down"" note=list.items"
+"I'd want a list of 5 items: Crush early, Press gently, Age cool, Rack twice and Cork dry","@f1 w.request.filler text=want
+@r1 w.request.request act=make mood=do predicate=""I'd""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=list
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=""5"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""Crush early, Press gently, Age cool, Rack twice and Cork dry"" note=list.items"
+"put up a bullet list: Check the pads, True the wheels, Oil the chain, Torque the stem and Wipe it down","@r1 w.request.request act=make mood=do predicate=""put up""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=list sort_words=""bullet list""
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=""5"" words=bullet operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""Check the pads, True the wheels, Oil the chain, Torque the stem and Wipe it down"" note=list.items"
+"right, five bullets for the box: Crush early, Press gently, Age cool, Rack twice and Cork dry","@r1 w.request.request act=make mood=do predicate=right
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite name=Crush sort=box
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=""5"" words=five operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""Crush early, Press gently, Age cool, Rack twice and Cork dry"" note=list.items"
+"right, five bullets for the box: Crush early, Press gently, Age cool, Rack twice and Cork dry, please","@f1 w.request.filler text=please
+@r1 w.request.request act=make mood=do words=""right, five bullets for the box: Crush early, Press gently, Age cool, Rack twice and Cork dry"" predicate=right
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite name=Crush sort=box
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=""5"" words=five operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""Crush early, Press gently, Age cool, Rack twice and Cork dry"" note=list.items"
+"how about a 5-item bullet list: Check the pads, True the wheels, Oil the chain, Torque the stem and Wipe it down?","@r1 w.request.request act=make mood=do predicate=how
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=list sort_words=""bullet list""
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=""5"" words=""about a 5"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""Check the pads, True the wheels, Oil the chain, Torque the stem and Wipe it down"" note=list.items"
+"bullets, five of them: Crush early, Press gently, Age cool, Rack twice and Cork dry","@r1 w.request.request act=make mood=do predicate=bullets
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite name=Crush
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=""5"" words=five operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""Crush early, Press gently, Age cool, Rack twice and Cork dry"" note=list.items"
+"a bullet list of 5 items — Crush early, Press gently, Age cool, Rack twice and Cork dry — with the entries tight to the left","@r1 w.request.request act=make mood=do predicate=a
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=list sort_words=""bullet list""
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=""5"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""Crush early, Press gently, Age cool, Rack twice and Cork dry"" note=list.items"
+"one list with the 5 items Check the pads, True the wheels, Oil the chain, Torque the stem and Wipe it down, double-spaced for the reader","@r1 w.request.request act=make mood=do predicate=list words=""one list with the 5 items Check the pads, True the wheels, Oil the chain, Torque the stem and Wipe it down""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=list
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=""5"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""Check the pads, True the wheels, Oil the chain, Torque the stem and Wipe it down"" note=list.items
+@r2 w.request.request act=place mode=arrange mood=do predicate=double-spaced words=""ith the 5 items Check the pads, True the wheels, Oil the chain, Torque the stem and Wipe it down, double-spaced""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context description=it family_words=items
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=diagram.spacing value=double operator=eq phase=result open_value=true
+@r2.u1 w.request.unread request=$r2 text=""Check the pads, True the wheels, Oil the chain, Torque the stem and Wipe it down"" note=list.items"
+"the bullet list: Crush early, Press gently, Age cool, Rack twice, Cork dry — five items, in just that order","@f1 w.request.filler text=just
+@r1 w.request.request act=make mood=do predicate=the
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=list sort_words=""bullet list""
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=""5"" words=""five items"" operator=eq phase=result key_words=order
+@r1.u1 w.request.unread request=$r1 text=""Crush early, Press gently, Age cool, Rack twice, Cork dry"" note=list.items value=""Crush early, Press gently, Age cool, Rack twice, Cork dry"""
+"a 5-item list Check the pads, True the wheels, Oil the chain, Torque the stem and Wipe it down in the middle of the page, bullets plain","@r1 w.request.request act=make mood=do predicate=list
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=list
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=""5"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.position value=middle words=""the middle"" operator=eq phase=result open_value=true
+@r1.u1 w.request.unread request=$r1 text=""Check the pads, True the wheels, Oil the chain, Torque the stem and Wipe it down"" note=list.items
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.at value=middle words=""in the middle of the page"" operator=eq phase=result"
+"build the bullet list from Crush early, Press gently, Age cool, Rack twice and Cork dry, then let each of the five ride its own line","@f1 w.request.filler text=then
+@r1 w.request.request act=make mood=do predicate=build
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=list sort_words=""bullet list""
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=""5"" words=""five ride"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""Crush early, Press gently, Age cool, Rack twice and Cork dry"" note=list.items"
+"make a bullet list with 5 items: Crush early, Press gently, Age cool, Rack twice adn Cork dry","@r1 w.request.request act=make mood=do predicate=make
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=list sort_words=""bullet list""
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=""5"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""make a bullet list with 5 items: Crush early, Press gently, Age cool, Rack twice adn Cork dry"" note=list.items"
+"a bulit list of five: Check the pads, True the wheels, Oil the chain, Torque the stem and Wipe it down","@r1 w.request.request act=make mood=do predicate=a
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=list
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=""5"" words=five operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""Check the pads, True the wheels, Oil the chain, Torque the stem and Wipe it down"" note=list.items"
+insert a heading Barrel Ledger and set it italic,"@r1 w.request.request act=make mood=do predicate=insert
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=box sort_words=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""Barrel Ledger"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.slant value=italic operator=eq phase=result"
+"drop the title Linen Count in, italic and all","@r1 w.request.request act=make mood=do predicate=drop
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=title
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""Linen Count"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.slant value=italic operator=eq phase=result"
+"hey, drop the title Linen Count in, italic and all","@f1 w.request.filler text=hey
+@r1 w.request.request act=make mood=do words=""drop the title Linen Count in, italic and all"" predicate=drop
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=title
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""Linen Count"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.slant value=italic operator=eq phase=result"
+"let's have the Linen Count heading up there, italic styling","@r1 w.request.request act=make mood=do predicate=""let's""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=box sort_words=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""Linen Count"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.slant value=italic operator=eq phase=result"
+"could you add the Barrel Ledger headline, slanting italic?","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""Barrel Ledger"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.slant value=italic operator=eq phase=result"
+"could you add the Barrel Ledger headline, slanting italic?, please","@f1 w.request.filler text=please
+@r1 w.request.request act=make mood=do words=""could you add the Barrel Ledger headline, slanting italic?"" predicate=add
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""Barrel Ledger"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.slant value=italic operator=eq phase=result"
+type the heading Linen Count and give it the italic run,"@r1 w.request.request act=make mood=do predicate=type
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=box sort_words=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""Linen Count"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.slant value=italic operator=eq phase=result"
+"right, the Barrel Ledger heading goes in, italics on","@r1 w.request.request act=make mood=do predicate=right
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""Barrel Ledger"" operator=eq phase=result words=""Barrel Ledger heading""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.slant value=italic words=italics operator=eq phase=result"
+"how about Linen Count as the heading, italicised?","@r1 w.request.request act=make mood=do predicate=how
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=box sort_words=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""Linen Count"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.slant value=italic operator=eq phase=result"
+"the Barrel Ledger headline, fresh from the pen and italic","@r1 w.request.request act=make mood=do predicate=the
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""Barrel Ledger"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.slant value=italic operator=eq phase=result"
+please to insert the title Linen Count with italic on it,"@r1 w.request.request act=make mood=do predicate=insert
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=title
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""Linen Count"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.slant value=italic operator=eq phase=result"
+"a heading Barrel Ledger in italics, sitting plum so the flow reads on","@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do predicate=a
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=box sort_words=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""Barrel Ledger"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.slant value=italic words=italics operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.colour value=plum operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""plum so the flow"" note=diagram.reference"
+"insert the Linen Count heading, italic, and park it over the Sort box","@r1 w.request.request act=make mood=do predicate=insert
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=box sort_words=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""Linen Count"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.slant value=italic operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.position value=above words=""over the"" operator=relation phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=node.anchor value=Sort operator=relation phase=selector words=""Sort box"""
+"the title Barrel Ledger, italic across the whole phrase, and nothing bold about it","@r1 w.request.request act=make mood=do predicate=the
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=box sort_words=title
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""Barrel Ledger"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.slant value=italic operator=eq phase=result"
+"heading number two: Linen Count, slanted italic to match the pull of the page","@r1 w.request.request act=make mood=do predicate=heading
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=box sort_words=""heading number""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""Linen Count"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.slant value=italic operator=eq phase=result"
+"the usual heading, italic touch to it","@r1 w.request.request act=make mood=do predicate=the
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=box sort_words=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.slant value=italic operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=""the usual heading"" operator=eq phase=result"
+"a title up top, italic however the house style runs it","@r1 w.request.request act=make mood=do predicate=a
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=box sort_words=title
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.slant value=italic operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=""however the house style runs it"" operator=eq phase=result"
+"one more italic headline, words to taste","@r1 w.request.request act=make mood=do predicate=one
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=box sort_words=headline count_words=""one more italic""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.slant value=italic operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=""words to taste"" operator=eq phase=result"
+insert a heding Barrel Ledger and set it italic,"@r1 w.request.request act=make mood=do predicate=insert
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""Barrel Ledger"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.slant value=italic operator=eq phase=result"
+draw a small circle in the lower right corner and paint it amber,"@r1 w.request.request act=make mood=do predicate=draw words=""draw a small circle in the lower right corner""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=circle
+@r1.c1 w.request.constraint request=$r1 on=size attribute=node.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.position value=""lower right corner"" words=""the lower right corner"" operator=eq phase=result open_value=true
+@r2 w.request.request act=change mood=do predicate=paint words=""paint it amber""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context description=it
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.colour value=amber operator=eq phase=result"
+"let's pop a small circle down in the corner, then set its colour amber","@f1 w.request.filler text=then
+@r1 w.request.request act=make mood=do predicate=""let's"" words=""let's pop a small circle down in the corner""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=circle
+@r1.c1 w.request.constraint request=$r1 on=size attribute=node.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.position words=""down in the corner"" operator=eq phase=result open_value=true
+@r2 w.request.request act=change mood=do predicate=set words=""set its colour amber""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context description=it
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.colour value=amber operator=eq phase=result key_words=colour"
+"hey, let's pop a small circle down in the corner, then set its colour amber","@f1 w.request.filler text=hey
+@f2 w.request.filler text=then
+@r1 w.request.request act=make mood=do words=""let's pop a small circle down in the corner, then set its colour amber"" predicate=""let's""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=circle
+@r1.c1 w.request.constraint request=$r1 on=size attribute=node.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.position words=""down in the corner"" operator=eq phase=result open_value=true
+@r2 w.request.request act=change mood=do words=""let's pop a small circle down in the corner, then set its colour amber"" predicate=pop
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context description=it sort=circle
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.colour value=amber operator=eq phase=result key_words=colour"
+could you drop a tiny circle into the lower right and give it a olive coat?,"@r1 w.request.request act=make mood=do predicate=drop words=""could you drop a tiny circle into the lower right""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=circle
+@r1.c1 w.request.constraint request=$r1 on=size attribute=node.size value=small words=""tiny circle"" operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.position value=""lower right"" words=""the lower right"" operator=eq phase=result open_value=true
+@r2 w.request.request act=change mood=do predicate=give words=""give it a olive""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context description=it
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.colour value=olive operator=eq phase=result"
+"one small circle, corner bottom right, orange-ish — amber in fact","@r1 w.request.request act=make mood=do predicate=one words=""one small circle, corner bottom right""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=circle
+@r1.c1 w.request.constraint request=$r1 on=size attribute=node.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.position words=""corner bottom right"" operator=eq phase=result open_value=true
+@r2 w.request.request act=change mood=do predicate=fact
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context description=one sort=circle
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.colour value=amber operator=eq phase=result"
+I'd sketch a small circle at the picture's corner and colour it olive,"@r1 w.request.request act=make mood=do predicate=sketch words=""I'd sketch a small circle at the picture's corner""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=circle
+@r1.c1 w.request.constraint request=$r1 on=size attribute=node.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.position words=""at the picture's corner"" operator=eq phase=result open_value=true
+@r2 w.request.request act=change mood=do predicate=colour words=""colour it olive""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context description=it
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.colour value=olive operator=eq phase=result"
+"a small circle goes lower right, and the tint on it is amber","@r1 w.request.request act=make mood=do predicate=a words=""a small circle goes lower right""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=circle
+@r1.c1 w.request.constraint request=$r1 on=size attribute=node.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.position words=""goes lower right"" operator=eq phase=result open_value=true
+@r2 w.request.request act=change mood=do predicate=tint words=""tint on it is amber""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context description=it
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.colour value=amber operator=eq phase=result"
+"right, sketch the small circle in the lower right corner and olive it, please","@f1 w.request.filler text=please
+@r1 w.request.request act=make mood=do words=""sketch the small circle in the lower right corner and olive it"" predicate=sketch
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=circle
+@r1.c1 w.request.constraint request=$r1 on=size attribute=node.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.position value=""lower right corner"" words=""the lower right corner"" operator=eq phase=result open_value=true
+@r2 w.request.request act=change mood=do words=""sketch the small circle in the lower right corner and olive it"" predicate=sketch
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context description=it sort=circle
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.colour value=olive operator=eq phase=result
+@f2 w.request.filler text=""right,"""
+"how about a small circle in the lower right corner, drawn amber?","@r1 w.request.request act=make mood=do predicate=how words=""how about a small circle in the lower right corner""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=circle
+@r1.c1 w.request.constraint request=$r1 on=size attribute=node.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.position value=""lower right corner"" words=""the lower right corner"" operator=eq phase=result open_value=true
+@r2 w.request.request act=change mood=do predicate=drawn words=""drawn amber""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.colour value=amber operator=eq phase=result"
+"circle time: a small one at the lower right, olive all over","@r1 w.request.request act=make mood=do predicate=circle words=""circle time: a small one at the lower right""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=circle
+@r1.c1 w.request.constraint request=$r1 on=size attribute=node.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.position words=""at the lower right"" operator=eq phase=result open_value=true
+@r2 w.request.request act=change mood=do predicate=over words=""one at the lower right, olive all over""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context description=one
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.colour value=olive operator=eq phase=result"
+"pen a small circle into the lower right corner, then amber","@r1 w.request.request act=make mood=do predicate=pen words=""pen a small circle into the lower right corner""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=circle
+@r1.c1 w.request.constraint request=$r1 on=size attribute=node.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.position value=""lower right corner"" words=""the lower right corner"" operator=eq phase=result open_value=true
+@r2 w.request.request act=change mood=do predicate=then words=""then amber""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.colour value=amber operator=eq phase=result"
+please to draw a small circle in the lower right corner and set its colour to olive,"@r1 w.request.request act=make mood=do predicate=draw words=""please to draw a small circle in the lower right corner""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=circle
+@r1.c1 w.request.constraint request=$r1 on=size attribute=node.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.position value=""lower right corner"" words=""the lower right corner"" operator=eq phase=result open_value=true
+@r2 w.request.request act=change mood=do predicate=set words=""set its colour to olive""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context description=it
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.colour value=olive operator=eq phase=result key_words=colour"
+"a small circle in the lower right corner, amber like a postmark","@f1 w.request.filler text=like
+@r1 w.request.request act=make mood=do predicate=a
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=circle
+@r1.c1 w.request.constraint request=$r1 on=size attribute=node.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.position value=""lower right corner"" words=""the lower right corner"" operator=eq phase=result open_value=true
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.colour value=amber operator=eq phase=result"
+"draw the small circle at the lower right, patch it olive, and leave it clear of the Log box","@r1 w.request.request act=make mood=do predicate=draw words=""draw the small circle at the lower right""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=circle
+@r1.c1 w.request.constraint request=$r1 on=size attribute=node.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.position value=""lower right"" words=""the lower right"" operator=eq phase=result open_value=true
+@r2 w.request.request act=change mood=do predicate=patch words=""patch it olive, and leave it clear of the Log box""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context description=it family_words=box
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.colour value=olive operator=eq phase=result
+@r3 w.request.request act=place mode=arrange mood=do predicate=leave words=""it olive, and leave it clear of the Log box""
+@r3.t w.request.target request=$r3 family=node mode=existing determiner=definite fill=context description=it family_words=box
+@r3.c1 w.request.constraint request=$r3 on=place attribute=node.position value=apart_from words=""clear of"" operator=relation phase=result open_value=true
+@r3.c2 w.request.constraint request=$r3 on=place attribute=node.anchor value=Log operator=relation phase=selector
+@r2.u1 w.request.unread request=$r2 text=""the Log box"" note=node.reference"
+"a small circle, lower-right, amber tint, and its outline already fine","@r1 w.request.request act=make mood=do predicate=a
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=circle
+@r1.c1 w.request.constraint request=$r1 on=size attribute=node.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.position value=lower-right operator=eq phase=result open_value=true
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.colour value=amber words=""amber tint"" operator=eq phase=result"

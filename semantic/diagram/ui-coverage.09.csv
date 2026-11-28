@@ -1,0 +1,74 @@
+text,sop,sop1
+IDs on for good,"@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=always words=""on for good"" operator=eq phase=result key_words=IDs"
+bring that change back,"@r1 w.request.request act=redo mood=do predicate=bring
+@r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=journal_step description=""that change back""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+the Leadership group should be a bit smaller,"@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=written name=Leadership family_words=group
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.id value=Leadership operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=size attribute=group.scale words=""a bit smaller"" operator=delta phase=result step=less"
+add Translate,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Translate operator=eq phase=result"
+set the Done circle to small,"@r1 w.request.request act=change mood=do predicate=set
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Done sort=circle
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Done operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=size attribute=node.size value=small operator=degree phase=result"
+"For the slide everything else stays, but Publish should be huge","@r1 w.request.request act=change mood=do words=""but Publish should be huge""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Publish
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Publish operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=size attribute=node.size value=huge operator=degree phase=result
+@f9 w.request.filler text=""For the slide everything else stays"""
+select Publish and all of its connections,"@r1 w.request.request act=pick mood=do predicate=select
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Publish
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Publish operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.edges value=""all of its connections"" operator=eq phase=result"
+delete Start and Done,"@r1 w.request.request act=remove mood=do predicate=delete
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Start
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Start operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Done operator=eq phase=selector"
+"I keep losing the Note off screen; put it back at 20, 30 would you","@r1 w.request.request act=place mood=do predicate=put
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Note
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Note operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.x value=""20"" operator=eq phase=result key_words=""back at""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.y value=""30"" operator=eq phase=result
+@r1.u9 w.request.unread request=$r1 text=""I keep losing the Note off screen"" note=node.reason"
+"put the text ""submit"" on the arrow from Start to Review","@r1 w.request.request act=change mood=do predicate=put
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=definite fill=description sort=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Start operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Review operator=eq phase=selector
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.label value=submit operator=eq phase=result key_words=text"
+"the arrow from Approved? should end at Done, not Publish","@r1 w.request.request act=change mood=do predicate=end
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=definite fill=description sort=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=""Approved?"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Done operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.to value=Publish words=""not Publish"" operator=eq phase=result want=no"
+count the groups,"@r1 w.request.request act=ask mood=ask predicate=count question=count
+@r1.t w.request.target request=$r1 family=sketch mode=existing determiner=definite fill=description sort=group sort_words=groups"
+combine the diamond and the circle into one group,"@r1 w.request.request act=group mood=do predicate=combine
+@r1.t w.request.target request=$r1 family=group mode=new determiner=indefinite sort=group
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.ids value=""the diamond"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=group.ids value=""the circle"" operator=eq phase=result"
+"Sales, Marketing and Support are all customer-facing. Group them.","@r1 w.request.request act=group mood=do predicate=Group words=""Group them""
+@r1.t w.request.target request=$r1 family=group mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.ids value=Sales words=""Sales, Marketing and Support"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=group.ids value=Marketing words=""Sales, Marketing and Support"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=group.ids value=Support words=""Sales, Marketing and Support"" operator=eq phase=result
+@f9 w.request.filler text=""Sales, Marketing and Support are all customer-facing"""
+"Review + Done, labelled Checks","@r1 w.request.request act=group mood=do
+@r1.t w.request.target request=$r1 family=group mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.ids value=Review operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=group.ids value=Done operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=group.label value=Checks operator=eq phase=result key_words=labelled"
+group North and South labled Totals,"@r1 w.request.request act=group mood=do predicate=group
+@r1.t w.request.target request=$r1 family=group mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.ids value=North operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=group.ids value=South operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=group.label value=Totals operator=eq phase=result key_words=labled"
+can you turn Monthly visitors into separate bars I can drag?,"@r1 w.request.request act=make mood=do predicate=turn
+@r1.t w.request.target request=$r1 family=group mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.id value=""Monthly visitors"" operator=eq phase=result
+@r1.u9 w.request.unread request=$r1 text=""separate bars I can drag"" note=group.editable"

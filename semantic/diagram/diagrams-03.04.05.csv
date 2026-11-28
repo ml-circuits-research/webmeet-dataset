@@ -1,0 +1,655 @@
+text,sop
+"Can you show revenue by segment, as paired panels for this year and last as a bar chart?","@r1 w.request.request act=make mood=do predicate=show
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.compare value=panels words=""as paired panels for this year and last"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=segment operator=eq phase=result key_words=""by segment"""
+"Display revenue by segment, in two panels, this year over last as a bar chart, with the values shown on the bars, with gridlines behind it","@r1 w.request.request act=make mood=do predicate=Display
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result key_words=values
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result key_words=gridlines
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.compare value=panels words=""in two panels, this year over last"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=segment operator=eq phase=result key_words=""by segment"""
+"Let's do a scatter plot of order value against delivery time — this year and last side by side, with the legend on the right, with gridlines behind it, use a colour-blind-safe palette","@r1 w.request.request act=make mood=do words=""Let's do a scatter plot of order value against delivery time — this year and last side by side, with the legend on the right, with gridlines behind it""
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=plot
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=scatter words=""scatter plot"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result key_words=gridlines
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result key_words=legend
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.compare value=side_by_side words=""this year and last side by side"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""order value"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""use a colour-blind-safe palette"" predicate=use
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.palette value=colour-blind-safe operator=eq phase=result key_words=palette"
+"excuse me, Try a bar chart of department totals, revenue and profit as a paired view — go on","@f1 w.request.filler text=excuse
+@f2 w.request.filler text=go
+@r1 w.request.request act=make mood=do words=""Try a bar chart of department totals, revenue and profit as a paired view"" predicate=Try
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.compare value=side_by_side words=""revenue and profit as a paired view"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""department totals"" operator=eq phase=result"
+What was the steepest monthly gain in revenue?,"@r1 w.request.request act=ask mood=ask words=""What was the steepest monthly gain in revenue"" predicate=What question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+"draw a line chart of revenue by month, sorted from high to low on a zero-based y axis, so it reads from the back row. Second ask: Which month saw the steepest rise in revenue?","@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do predicate=draw
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""sorted from high to low"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""zero-based y axis"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=""by month"" operator=eq phase=result key_words=""by month""
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r2 w.request.request act=ask mood=ask words=""Which month saw the steepest rise in revenue"" predicate=Which question=max
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page"
+"hey — Looking at the monthly bars, what's the average total, thanks?","@f1 w.request.filler text=hey
+@f2 w.request.filler text=thanks
+@r1 w.request.request act=ask mood=ask words=""Looking at the monthly bars, what's the average total"" question=average
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg operator=eq phase=result words=average"
+make the grid lines solid,"@r1 w.request.request act=change mood=do predicate=make
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.gridStyle value=solid operator=eq phase=result key_words=""grid lines"""
+grid lines solid again,"@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.gridStyle value=solid operator=eq phase=result key_words=""grid lines"""
+"when the board dials in tomorrow morning the first chart they open is Revenue trend, so for their sake make the grid lines plain solid grey before the meeting starts — while you're at it, put the y axis on the right","@f1 w.request.filler text=""board dials in tomorrow morning the first chart they open is Revenue trend, so for their sake""
+@f2 w.request.filler text=""meeting starts — while""
+@r1 w.request.request act=change mood=do words=""make the grid lines plain solid grey"" predicate=make
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.gridStyle value=""solid grey"" words=""plain solid grey"" operator=eq phase=result open_value=true key_words=""grid lines""
+@r2 w.request.request act=change mood=do words=""put the y axis on the right"" predicate=put
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.axisSide value=right words=""on the right"" operator=eq phase=result key_words=axis key_words=""y axis"""
+"have the spacing between the grid dots wider, could you also give it the title Orders per day","@f1 w.request.filler text=also
+@r1 w.request.request act=change mood=do words=""have the spacing between the grid dots wider"" predicate=have
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=change mood=do words=""give it the title Orders per day"" predicate=give
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.title value=""Orders per day"" operator=eq phase=result key_words=title"
+go for vertical grid red dotted vertical on the sensor contour,"@r1 w.request.request act=change mood=do predicate=go
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context description=""sensor contour""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.gridStyle value=""red dotted vertical"" operator=eq phase=result open_value=true key_words=grid"
+can you make the grid lines solidd purple vertical?,"@r1 w.request.request act=change mood=do predicate=make
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.gridStyle words=""solidd purple vertical"" operator=eq phase=result open_value=true key_words=""grid lines"""
+try the grid lines dashed grey,"@r1 w.request.request act=change mood=do predicate=try
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.gridStyle value=""dashed grey"" operator=eq phase=result open_value=true key_words=""grid lines"""
+"and Orders by weekday on the sales chart needs the same solid red in both directions, please","@f1 w.request.filler text=please
+@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context family_words=chart description=""Orders by weekday""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.gridStyle value=same words=""the same"" operator=eq phase=result open_value=true"
+"oops, undo that and make the grid line style dashes instead of dots","@r1 w.request.request act=change mood=do predicate=oops
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.gridStyle value=dashed words=""dashes instead of dots"" operator=eq phase=result key_words=style key_words=""grid line"""
+"and Sales by month on the department chart needs the same dashes instead of dots, please","@f1 w.request.filler text=please
+@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context family_words=chart description=""Sales by month""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.gridStyle value=same words=""the same"" operator=eq phase=result open_value=true"
+how about colour scale on the right-hand side?,"@r1 w.request.request act=change mood=do predicate=how
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=place attribute=chart.colourBarPosition value=right words=""on the right-hand side"" operator=eq phase=result"
+do the colour bar hidden on the sales heatmap,"@r1 w.request.request act=change mood=do predicate=do
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context description=""sales heatmap""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.colourBar value=hide words=""colour bar hidden"" operator=eq phase=result key_words=""colour bar"""
+"wait — the colour bar thickness needs to be max, not min","@r1 w.request.request act=change mood=do predicate=wait
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=size attribute=chart.colourBarWidth value=thick words=""max, not min"" operator=eq phase=result"
+have the colour bar horizontal at the bottom; also could you set the colour bar longer?,"@f1 w.request.filler text=also
+@r1 w.request.request act=change mood=do words=""have the colour bar horizontal at the bottom"" predicate=have
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=place attribute=chart.colourBarPosition value=bottom words=""horizontal at the bottom"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""could you set the colour bar longer?"" predicate=set
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=size attribute=chart.colourBarLength value=long words=""colour bar longer"" operator=delta phase=result step=more key_words=""colour bar"""
+"keep the colour bar horizontal at the bottom, and go for colour bar longer on the sensor contour","@r1 w.request.request act=change mood=do words=""keep the colour bar horizontal at the bottom"" predicate=keep
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=place attribute=chart.colourBarPosition value=bottom words=""horizontal at the bottom"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""go for colour bar longer on the sensor contour"" predicate=go
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context description=""sensor contour""
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=size attribute=chart.colourBarLength value=long words=""colour bar longer"" operator=delta phase=result step=more key_words=""colour bar"""
+make the line dashed and then do the grid lines dashed on the revenue trend and then make the font a bit bigger,"@f1 w.request.filler text=then
+@f2 w.request.filler text=then
+@r1 w.request.request act=change mood=do words=""make the line dashed"" predicate=make
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.lineStyle value=dashed operator=eq phase=result key_words=line
+@r2 w.request.request act=change mood=do words=""do the grid lines dashed on the revenue trend"" predicate=do
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context description=""revenue trend""
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.gridStyle value=dashed operator=eq phase=result key_words=""grid lines""
+@r3 w.request.request act=change mood=do words=""make the font a bit bigger"" predicate=make
+@r3.t w.request.target request=$r3 family=chart mode=existing determiner=definite fill=context
+@r3.l1 w.request.lookup request=$r3 target=$r3.t key=thing from=page
+@r3.c1 w.request.constraint request=$r3 on=attribute attribute=chart.fontSize words=""a bit bigger"" operator=delta phase=result step=more key_words=font"
+excuse me — go for line dashed on the revenue trend and have the grid lines dashed,"@f1 w.request.filler text=excuse
+@r1 w.request.request act=change mood=do words=""go for line dashed on the revenue trend"" predicate=go
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context description=""revenue trend""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.lineStyle value=dashed operator=eq phase=result key_words=line
+@r2 w.request.request act=change mood=do words=""have the grid lines dashed"" predicate=have
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.gridStyle value=dashed operator=eq phase=result key_words=""grid lines"""
+"keep the line a little thinner — while you're at it, go for grid lines thinner on the revenue trend","@f1 w.request.filler text=while
+@r1 w.request.request act=change mood=do words=""keep the line a little thinner"" predicate=keep
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.lineWidth words=""a little thinner"" operator=delta phase=result step=less key_words=line
+@r2 w.request.request act=change mood=do words=""go for grid lines thinner on the revenue trend"" predicate=go
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context description=""revenue trend""
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=size attribute=chart.gridWidth value=thin words=""grid lines thinner"" operator=delta phase=result step=less key_words=""grid lines"""
+the missing piece: arrows bright orange on the traffic flow chart and then do the grid lines solid blue vertical on the traffic flow chart. font bigger,"@f1 w.request.filler text=then
+@r1 w.request.request act=change mood=do words=""arrows bright orange on the traffic flow chart""
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context family_words=chart description=""traffic flow chart""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""arrows bright orange"" note=chart.flow.arrow.colour value=orange
+@r2 w.request.request act=change mood=do words=""do the grid lines solid blue vertical on the traffic flow chart"" predicate=do
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context family_words=chart description=""traffic flow chart""
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.gridStyle value=""solid blue vertical"" operator=eq phase=result open_value=true key_words=""grid lines""
+@r3 w.request.request act=change mood=do words=""font bigger""
+@r3.t w.request.target request=$r3 family=chart mode=existing determiner=definite fill=context
+@r3.l1 w.request.lookup request=$r3 target=$r3.t key=thing from=page
+@r3.c1 w.request.constraint request=$r3 on=attribute attribute=chart.fontSize words=bigger operator=delta phase=result step=more key_words=font
+@f2 w.request.filler text=""the missing piece"""
+have the contour lines solid black and then could you set the grid lines horizontal?,"@f1 w.request.filler text=then
+@r1 w.request.request act=change mood=do words=""have the contour lines solid black"" predicate=have
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""solid black"" note=chart.contour.style value=""solid black""
+@r2 w.request.request act=change mood=do words=""could you set the grid lines horizontal?"" predicate=set
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page"
+"I keep squinting at Sensor readings by depth every time I paste it into the weekly newsletter; this week, can you make the contour lines solid black? — while you're at it, I want the grid lines horizontal on the sensor contour as well, would you, also drop the legend on the right","@f1 w.request.filler text=""keep squinting at Sensor readings by depth every time I paste it into the weekly newsletter; this week""
+@f2 w.request.filler text=while
+@f3 w.request.filler text=""well, would you, also""
+@r1 w.request.request act=change mood=do words=""can you make the contour lines solid black?"" predicate=make
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""solid black"" note=chart.contour.style value=""solid black""
+@r2 w.request.request act=change mood=do words=""I want the grid lines horizontal on the sensor contour"" predicate=want
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context description=""sensor contour""
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r3 w.request.request act=change mood=do words=""drop the legend on the right"" predicate=drop
+@r3.t w.request.target request=$r3 family=chart mode=existing determiner=definite fill=context
+@r3.l1 w.request.lookup request=$r3 target=$r3.t key=thing from=page
+@r3.c1 w.request.constraint request=$r3 on=attribute attribute=chart.legend value=right words=""on the right"" operator=eq phase=result key_words=legend"
+the contour line density on Sensor readings by depth should be higher,"@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context description=""Sensor readings by depth""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+"set the contour levels lower, that's the tweak plus try the colour bar shorter","@f1 w.request.filler text=plus
+@r1 w.request.request act=change mood=do words=""set the contour levels lower"" predicate=set
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=change mood=do words=""try the colour bar shorter"" predicate=try
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@f2 w.request.filler text=""that's the tweak"""
+"and Sensor readings by depth on the sales heatmap needs the same lower, please","@f1 w.request.filler text=please
+@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context description=""Sensor readings by depth""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
+"go for histogram bars oni size smaller on the order histogram, and have the bar borders large and grey","@r1 w.request.request act=change mood=do words=""go for histogram bars oni size smaller on the order histogram"" predicate=go
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context description=""order histogram""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.constraint request=$r1 on=size attribute=chart.barWidth words=""oni size smaller"" operator=delta phase=result step=less key_words=bars
+@r2 w.request.request act=change mood=do words=""have the bar borders large and grey"" predicate=have
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.constraint request=$r2 on=size attribute=chart.barEdgeWidth value=thick words=""large and grey"" operator=eq phase=result key_words=border
+@r2.u1x w.request.constraint request=$r2 on=attribute attribute=chart.barEdgeColour value=grey words=""large and grey"" operator=eq phase=result key_words=border"
+"set the gap between the bars wider, that's the tweak plus try the font bigger","@f1 w.request.filler text=plus
+@r1 w.request.request act=change mood=do words=""set the gap between the bars wider"" predicate=set
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.barGap value=wider operator=eq phase=result key_words=bars key_words=gap
+@r2 w.request.request act=change mood=do words=""try the font bigger"" predicate=try
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.fontSize words=bigger operator=delta phase=result step=more key_words=font
+@f2 w.request.filler text=""that's the tweak"""
+make the grid lines dashed and then do the font smaller on the orders chart,"@f1 w.request.filler text=then
+@r1 w.request.request act=change mood=do words=""make the grid lines dashed"" predicate=make
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.gridStyle value=dashed operator=eq phase=result key_words=""grid lines""
+@r2 w.request.request act=change mood=do words=""do the font smaller on the orders chart"" predicate=do
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context family_words=chart description=""orders chart""
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.fontSize words=smaller operator=delta phase=result step=less key_words=font"
+"I keep squinting at Sales by month every time I paste it into the weekly newsletter; this week, set the error bar cap thickness thicker, that's the tweak and try the font bigger as well, would you, and show both grid lines","@f1 w.request.filler text=""keep squinting at Sales by month every time I paste it into the weekly newsletter; this week""
+@f2 w.request.filler text=well
+@r1 w.request.request act=change mood=do words=""set the error bar cap thickness thicker"" predicate=set
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=size attribute=chart.errorCap value=thick words=""error bar cap thickness thicker"" operator=delta phase=result step=more
+@r2 w.request.request act=change mood=do words=""try the font bigger"" predicate=try
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.fontSize words=bigger operator=delta phase=result step=more key_words=font
+@r3 w.request.request act=change mood=do words=""show both grid lines"" predicate=show
+@r3.t w.request.target request=$r3 family=chart mode=existing determiner=definite fill=context
+@r3.l1 w.request.lookup request=$r3 target=$r3.t key=thing from=page
+@r3.c1 w.request.constraint request=$r3 on=attribute attribute=chart.grid value=show operator=eq phase=result key_words=""grid lines""
+@f3 w.request.filler text=""that's the tweak"""
+"and also do the error bar cap thickness thicker on the sales chart, and can you make the font bigger?","@f1 w.request.filler text=also
+@r1 w.request.request act=change mood=do words=""do the error bar cap thickness thicker on the sales chart"" predicate=do
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context family_words=chart description=""sales chart""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=size attribute=chart.errorCap value=thick words=""error bar cap thickness thicker"" operator=delta phase=result step=more
+@r2 w.request.request act=change mood=do words=""can you make the font bigger?"" predicate=make
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.fontSize words=bigger operator=delta phase=result step=more key_words=font"
+"can you make the percentage precision higher? — while you're at it, I want the pie labels further out on the budget pie, could you also give it the title Where the money goes","@f1 w.request.filler text=while
+@f2 w.request.filler text=also
+@r1 w.request.request act=change mood=do words=""can you make the percentage precision higher?"" predicate=make
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=change mood=do words=""I want the pie labels further out on the budget pie"" predicate=want
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context description=""budget pie""
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=size attribute=chart.pieLabelDistance value=far words=""further out"" operator=eq phase=result
+@r3 w.request.request act=change mood=do words=""give it the title Where the money goes"" predicate=give
+@r3.t w.request.target request=$r3 family=chart mode=existing determiner=definite fill=context
+@r3.l1 w.request.lookup request=$r3 target=$r3.t key=thing from=page
+@r3.c1 w.request.constraint request=$r3 on=attribute attribute=chart.title value=""Where the money goes"" operator=eq phase=result key_words=title"
+and also how about percentage precision higher? and let's have the pie labels further out on the budget pie,"@f1 w.request.filler text=also
+@r1 w.request.request act=change mood=do words=""how about percentage precision higher?"" predicate=how
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r2 w.request.request act=change mood=do words=""let's have the pie labels further out on the budget pie""
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context description=""budget pie""
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing
+@r2.c1 w.request.constraint request=$r2 on=size attribute=chart.pieLabelDistance value=far words=""further out"" operator=eq phase=result"
+"I walked the team through Order value by quantity this morning; nobody argued with the data, only with how it reads at a glance, so as a first pass I want the markers bigger on the order scatter and I'd like the marker outlines bolder on the order scatter, then we revisit next week, and make the font a bit bigger","@f1 w.request.filler text=""walked the team through Order value by quantity this morning; nobody argued with the data, only with how it reads at a glance, so as a first pass""
+@f2 w.request.filler text=""then we revisit next week""
+@r1 w.request.request act=change mood=do words=""I want the markers bigger on the order scatter"" predicate=want
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context description=""order scatter""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.markerSize words=bigger operator=delta phase=result step=more key_words=markers key_words=marker
+@r2 w.request.request act=change mood=do words=""I'd like the marker outlines bolder on the order scatter"" predicate=like
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context description=""order scatter""
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=size attribute=chart.markerEdge words=""marker outlines bolder"" operator=delta phase=result step=more
+@r3 w.request.request act=change mood=do words=""make the font a bit bigger"" predicate=make
+@r3.t w.request.target request=$r3 family=chart mode=existing determiner=definite fill=context
+@r3.l1 w.request.lookup request=$r3 target=$r3.t key=thing from=page
+@r3.c1 w.request.constraint request=$r3 on=attribute attribute=chart.fontSize words=""a bit bigger"" operator=delta phase=result step=more key_words=font"
+the missing piece: markers bigger on the order scatter plus do the marker outlines bolder on the order scatter. show grid lines,"@f1 w.request.filler text=plus
+@r1 w.request.request act=change mood=do words=""markers bigger on the order scatter""
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context description=""order scatter""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.markerSize words=bigger operator=delta phase=result step=more key_words=markers key_words=marker
+@r2 w.request.request act=change mood=do words=""do the marker outlines bolder on the order scatter"" predicate=do
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context description=""order scatter""
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=size attribute=chart.markerEdge words=""marker outlines bolder"" operator=delta phase=result step=more
+@r3 w.request.request act=change mood=do words=""show grid lines""
+@r3.t w.request.target request=$r3 family=chart mode=existing determiner=definite fill=context
+@r3.l1 w.request.lookup request=$r3 target=$r3.t key=thing from=page
+@r3.c1 w.request.constraint request=$r3 on=attribute attribute=chart.grid value=show operator=eq phase=result key_words=""grid lines""
+@f2 w.request.filler text=""the missing piece"""
+"and Monthly profit on the revenue trend needs the same small, please","@f1 w.request.filler text=please
+@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context description=""Monthly profit""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.fontSize value=""the same"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+"while you're there, make the font quite small, and do the explosion small on the budget pie","@f1 w.request.filler text=while
+@r1 w.request.request act=change mood=do words=""make the font quite small"" predicate=make
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.fontSize value=""quite small"" operator=eq phase=result key_words=font
+@r2 w.request.request act=change mood=do words=""do the explosion small on the budget pie"" predicate=do
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context description=""budget pie""
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing"
+ok — Sensor surface by station and depth: surface colour solid green,"@f1 w.request.filler text=ok
+@r1 w.request.request act=change mood=do words=""Sensor surface by station and depth: surface colour solid green""
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.surfaceFill value=solid words=""solid green"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.colour value=green operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""Sensor surface"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=station operator=eq phase=result key_words=""by station"""
+try the surface colour black; also keep the font large,"@f1 w.request.filler text=also
+@r1 w.request.request act=change mood=do words=""try the surface colour black"" predicate=try
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=change mood=do words=""keep the font large"" predicate=keep
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.fontSize value=large operator=eq phase=result key_words=font"
+"Plot revenue, broken out by order-date month as a line chart, with gridlines behind it, with the y axis starting at zero, move the legend to the right","@r1 w.request.request act=make mood=do words=""Plot revenue, broken out by order-date month as a line chart, with gridlines behind it, with the y axis starting at zero"" predicate=Plot
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result key_words=gridlines
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=order-date operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=""order-date month"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""move the legend to the right"" predicate=move
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.legend value=right words=""the right"" operator=eq phase=result key_words=legend"
+"Draw a column chart of average salary per tenure band of five years, with the values shown on the bars, sorted from high to low, make the bars blue","@r1 w.request.request act=make mood=do words=""Draw a column chart of average salary per tenure band of five years, with the values shown on the bars, sorted from high to low"" predicate=Draw
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=column words=""column chart"" operator=eq phase=result open_value=true key_words=bars
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""sorted from high to low"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result key_words=values
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=tenure words=""tenure band"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""tenure band of five years"" note=chart.bin.width value=""5""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=salary operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg operator=eq phase=result words=average
+@r2 w.request.request act=change mood=do words=""make the bars blue"" predicate=make
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.colour value=blue operator=eq phase=result"
+Revenue divided by headcount by department,"@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.u1 w.request.unread request=$r1 text=""Revenue divided by headcount"" note=chart.metric.ratio
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department operator=eq phase=result key_words=""by department"""
+"Render a scatter plot, x axis sales, y axis profit and start the y axis at zero","@r1 w.request.request act=make mood=do words=""Render a scatter plot, x axis sales, y axis profit"" predicate=Render
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=plot
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=scatter words=""scatter plot"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.xLabel value=sales operator=eq phase=result key_words=""x axis""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.yLabel value=profit operator=eq phase=result key_words=""y axis""
+@r2 w.request.request act=change mood=do words=""start the y axis at zero"" predicate=start
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.min value=""0"" words=zero operator=eq phase=result"
+"Give me a scatter plot with marks distinguished by region, then make the bars blue","@f1 w.request.filler text=then
+@r1 w.request.request act=make mood=do words=""Give me a scatter plot with marks distinguished by region"" predicate=Give
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=plot
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=scatter words=""scatter plot"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.colourBy value=region operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=distinguished operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""make the bars blue"" predicate=make
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.colour value=blue operator=eq phase=result key_words=bars"
+Drop a note on the top three months,"@r1 w.request.request act=change mood=do predicate=Drop
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""top three months"" note=chart.annotation value=""top three"""
+Highlight the top three months,"@r1 w.request.request act=change mood=do predicate=Highlight
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""top three months"" note=chart.annotation value=""top three"""
+"same session, next ask: Annotate the top three months on the claims bars","@f1 w.request.filler text=""same session, next ask""
+@r1 w.request.request act=change mood=do words=""Annotate the top three months on the claims bars"" predicate=Annotate
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.u1 w.request.unread request=$r1 text=""top three months"" note=chart.annotation value=""top three"""
+"um, The order count, and what's the average order value, thanks?","@f1 w.request.filler text=um
+@f2 w.request.filler text=thanks
+@r1 w.request.request act=ask mood=ask words=""The order count"" question=count
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r2 w.request.request act=ask mood=ask words=""what's the average order value"" question=average
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.aggregate value=avg operator=eq phase=result words=average"
+"Read me the bottom store for profit, and how far short of target is it?","@r1 w.request.request act=ask mood=ask words=""Read me the bottom store for profit"" predicate=Read question=min
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how far short of target is it"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page"
+"Can you point at the customer with the highest orders, and what's its order tally?","@r1 w.request.request act=ask mood=ask words=""Can you point at the customer with the highest orders"" predicate=point question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""what's its order tally"" question=count
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page"
+"Give me the category with the largest profit, and what's the lead over second?","@r1 w.request.request act=ask mood=ask words=""Give me the category with the largest profit"" predicate=Give question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""what's the lead over second"" question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""lead over second"" note=chart.gap"
+"Which category tops the profit chart, and how far in front is it?","@r1 w.request.request act=ask mood=ask words=""Which category tops the profit chart"" predicate=Which question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context family_words=chart
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how far in front is it"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page"
+"Let's do a line chart of monthly revenue with a colour per segment, with the legend at the bottom, with the legend on the right, with the y axis starting at zero, use a colour-blind-safe palette","@r1 w.request.request act=make mood=do words=""Let's do a line chart of monthly revenue with a colour per segment, with the legend at the bottom, with the legend on the right, with the y axis starting at zero""
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result key_words=legend
+@r1.u1 w.request.constraint request=$r1 on=attribute attribute=chart.colourBy value=segment words=""a colour per segment"" operator=eq phase=result key_words=colour
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""monthly revenue"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""use a colour-blind-safe palette"" predicate=use
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.palette value=colour-blind-safe operator=eq phase=result key_words=palette"
+"same session, next ask: Draw a bar chart of two measures for each region: order count and average order value, both measures on the same frame, with the values shown on the bars, with the legend at the bottom","@f1 w.request.filler text=""same session, next ask""
+@r1 w.request.request act=make mood=do words=""Draw a bar chart of two measures for each region: order count and average order value, both measures on the same frame, with the values shown on the bars, with the legend at the bottom"" predicate=Draw
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result key_words=values
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=bottom words=""with the legend at the bottom"" operator=eq phase=result key_words=legend
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""two measures"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result key_words=""for each region""
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""order count"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""average order value"" operator=eq phase=result"
+"transitions, labelled fire","@r1 w.request.request act=make mood=do predicate=fire
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=fire operator=eq phase=result key_words=labelled"
+could the rows leave a small gap?,"@r1 w.request.request act=place mode=arrange mood=do predicate=gap
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t2 w.request.target request=$r1 family=group mode=existing determiner=definite fill=all family_words=""the rows""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.gap value=small words=""small gap"" operator=eq phase=result"
+what about the milestones diamond?,"@r1 w.request.request act=change mood=do predicate=diamond
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.shape value=diamond operator=eq phase=result"
+could the branches be 30 degrees between siblings?,"@r1 w.request.request act=place mode=arrange mood=do predicate=degrees
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""30 degrees"" note=diagram.siblingAngle value=""30"""
+please keep the photon lines wavy for the talk,"@f1 w.request.filler text=please
+@r1 w.request.request act=change mood=do predicate=keep
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=quantified fill=all
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.style value=wavy operator=eq phase=result open_value=true"
+"for the scattering diagram, keep one closed loop on the diagram, then put a dot at every vertex, with enough space between the parts","@f1 w.request.filler text=then
+@r1 w.request.request act=make mood=do predicate=keep
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context family_words=diagram
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""closed loop on the diagram"" note=diagram.loop value=closed
+@r2 w.request.request act=change mood=do predicate=keep
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=quantified fill=all
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.shape value=dot operator=eq phase=result"
+could the arrows be with heads at both ends?,"@r1 w.request.request act=change mood=do predicate=heads
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=quantified fill=all family_words=arrows
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.arrow value=both words=""both ends"" operator=eq phase=result key_words=arrows"
+could the node labels be with a line break after the first word?,"@r1 w.request.request act=change mood=do predicate=break
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=quantified fill=all family_words=node
+@r1.u1 w.request.unread request=$r1 text=""line break"" note=node.lineBreak"
+"for the intake flow, keep the node text centred, then wrap the labels at the box edge, with enough space between the parts","@f1 w.request.filler text=then
+@r1 w.request.request act=change mood=do predicate=keep
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=quantified fill=all family_words=box
+@r2 w.request.request act=change mood=do predicate=keep
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=quantified fill=all family_words=box"
+what I want is two panels side by side on the diagram,"@r1 w.request.request act=place mode=arrange mood=do predicate=want
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context family_words=diagram
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""two panels"" note=diagram.panels value=""2"""
+let's make the arrows labelled with an equals sign now,"@f1 w.request.filler text=now
+@r1 w.request.request act=change mood=do predicate=make
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=quantified fill=all family_words=arrows
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.label words=""equals sign"" operator=eq phase=result key_words=labelled"
+what about the arrows labelled with an equals sign?,"@r1 w.request.request act=change mood=do predicate=equals
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=quantified fill=all family_words=arrows
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.label words=""equals sign"" operator=eq phase=result key_words=labelled"
+please keep the terms circled for the talk,"@f1 w.request.filler text=please
+@r1 w.request.request act=change mood=do predicate=keep
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=quantified fill=all"
+"for the derivation, keep an overbrace across the terms on the diagram, then label the arrow with an equals sign, with enough space between the parts","@f1 w.request.filler text=then
+@r1 w.request.request act=change mood=do predicate=keep
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context family_words=diagram
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=change mood=do predicate=keep
+@r2.t w.request.target request=$r2 family=link mode=existing determiner=quantified fill=all family_words=arrow
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.label words=""equals sign"" operator=eq phase=result key_words=label"
+"here is the plan: a title line on top on the diagram, plus put a caption under the figure, so it still fits on a single slide without crowding","@f1 w.request.filler text=so
+@r1 w.request.request act=change mood=do predicate=put
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context family_words=diagram
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=change mood=do predicate=put
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context family_words=diagram
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page"
+could the diagram have a caption under the figure?,"@r1 w.request.request act=change mood=do predicate=caption
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context family_words=diagram
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+give teh diagram a caption under the figure before the talk,"@r1 w.request.request act=change mood=do predicate=give
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context family_words=diagram
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+"set the associations labelled 1..*, please","@f1 w.request.filler text=please
+@r1 w.request.request act=change mood=do predicate=set
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=quantified fill=all
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.label value=""1..*"" operator=eq phase=result key_words=labelled"
+"the usual emphasis box, gone","@r1 w.request.request act=remove mood=do predicate=box
+@r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+let's put an overbrace labelled n terms,"@r1 w.request.request act=change mood=do predicate=put
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""n terms"" note=diagram.braceLabel value=""n terms"""
+pleese put an overbrace over the first three terms,"@r1 w.request.request act=change mood=do predicate=put
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""first three terms"" note=diagram.braceSpan value=""first three terms"""
+remove the overbrace,"@r1 w.request.request act=remove mood=do predicate=remove
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+how do I remove the overbrace?,"@r1 w.request.request act=remove mood=do predicate=do
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+"here is the plan: the transition arrows labelled a, plus add a start arrow from nowhere, so it still fits on a single slide without crowding","@f1 w.request.filler text=so
+@r1 w.request.request act=change mood=do predicate=add
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=quantified fill=all family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.label value=a words=""labelled a"" operator=eq phase=result
+@r2 w.request.request act=change mood=do predicate=add
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""start arrow"" note=diagram.initialArrow value=on"
+could the tree levels be 3cm apart?,"@r1 w.request.request act=place mode=arrange mood=do predicate=levels
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+"tree only, grown left to right","@r1 w.request.request act=change mood=do predicate=tree
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.direction value=""left to right"" operator=eq phase=result open_value=true"
+"here is the plan: the tree grown left to right, plus space the siblings 1cm apart, so it still fits on a single slide without crowding","@f1 w.request.filler text=so
+@r1 w.request.request act=change mood=do predicate=tree
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.direction value=""left to right"" operator=eq phase=result open_value=true
+@r2 w.request.request act=change mood=do predicate=tree
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page"
+"no, not that, the arrow labels near the end of the line","@f1 w.request.filler text=no
+@r1 w.request.request act=change mood=do predicate=labels
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=quantified fill=all family_words=arrow
+@r1.u1 w.request.unread request=$r1 text=""arrow labels near the end of the line"" note=link.labelPosition"
+put a group inside a dashed frame with rounded corners,"@r1 w.request.request act=group mood=do predicate=put
+@r1.t w.request.target request=$r1 family=group mode=new determiner=indefinite family_words=group
+@r1.u1 w.request.unread request=$r1 text=""frame with rounded corners"" note=group.outline"
+"show how a request goes to the manager, is rejected, returns to the author, and is resubmitted until it is approved in a flowchart","@r1 w.request.request act=make mood=do predicate=show
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite family_words=flowchart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.kind value=flowchart operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""returns to the author"" note=diagram.loop"
+Give me a bar chart with sales as bars and profit as a line per region,"@r1 w.request.request act=make mood=do predicate=Give
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""sales as bars and profit as a line"" note=chart.combo
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result key_words=""per region"""
+I want a bar chart with both sales (bars) and profit (line) per region,"@r1 w.request.request act=make mood=do predicate=want
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""both sales (bars) and profit (line)"" note=chart.combo
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result key_words=""per region"""
+"Bar chart with both sales (bars) and profit (line) by region, with the values shown on the bars, with gridlines behind it","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""Bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result key_words=values
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result key_words=gridlines
+@r1.u1 w.request.unread request=$r1 text=""both sales (bars) and profit (line)"" note=chart.combo
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result key_words=""by region"""
+"Build a bar chart with sales as bars and profit as a line across the regions, again on the following page","@r1 w.request.request act=make mood=do predicate=Build
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""sales as bars and profit as a line"" note=chart.combo"
+"I nied to see a column chart with column marks for order count plus a line for average order value by month, with gridlines behind it, with the legend on the right","@r1 w.request.request act=make mood=do predicate=see
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=column words=""column chart"" operator=eq phase=result open_value=true
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result key_words=gridlines
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result key_words=legend
+@r1.u1 w.request.unread request=$r1 text=""column marks for order count plus a line for average order value"" note=chart.combo
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result key_words=""by month"""
+Plot a bar chart with a bar series for revenue and a line series for target by month,"@r1 w.request.request act=make mood=do predicate=Plot
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""a bar series for revenue and a line series for target"" note=chart.combo
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result key_words=""by month"""
+Try a bar chart with a bar series for claims and a line series for approval rate by channel,"@r1 w.request.request act=make mood=do predicate=Try
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""a bar series for claims and a line series for approval rate"" note=chart.combo
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=channel operator=eq phase=result key_words=""by channel"""
+How about a bar chart with bars for claims and a line for approval rate per channel?,"@r1 w.request.request act=make mood=do predicate=How
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""bars for claims and a line for approval rate"" note=chart.combo
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=channel operator=eq phase=result key_words=""per channel"""
+"Build a column chart with a column series for units sold and a line series for return rate per week too, for the second slide","@f1 w.request.filler text=too
+@r1 w.request.request act=make mood=do predicate=Build
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=column words=""column chart"" operator=eq phase=result open_value=true
+@r1.u1 w.request.unread request=$r1 text=""a column series for units sold and a line series for return rate"" note=chart.combo
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=week operator=eq phase=result key_words=""per week"""
+"one more thing: Show me a column chart with headcount as columns and attrition rate as a line per site, please","@f1 w.request.filler text=please
+@r1 w.request.request act=make mood=do predicate=Show
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=column words=""column chart"" operator=eq phase=result open_value=true
+@r1.u1 w.request.unread request=$r1 text=""headcount as columns and attrition rate as a line"" note=chart.combo
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=site operator=eq phase=result key_words=""per site"""
+a repeat for the board pack: Draw a bar chart with a bar series for spend and a line series for conversions per campaign,"@r1 w.request.request act=make mood=do predicate=Draw
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""a bar series for spend and a line series for conversions"" note=chart.combo
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=campaign operator=eq phase=result key_words=""per campaign"""

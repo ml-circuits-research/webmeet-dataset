@@ -1,0 +1,867 @@
+text,sop,sop1
+"add a bear behind the tree facing left, show a kid on the path facing right, and put an owl in the tree facing left","@r1 w.request.request act=make mood=do words=""add a bear behind the tree facing left"" predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bear
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=behind words=""behind the tree"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.facing value=left operator=eq phase=result key_words=facing words=""facing left""
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the tree"" operator=relation phase=selector
+@r2 w.request.request act=make mood=do words=""show a kid on the path facing right"" predicate=show
+@r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=kid
+@r2.c1 w.request.constraint request=$r2 on=place attribute=drawn.relation value=on words=""on the path"" operator=relation phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=drawn.facing value=right operator=eq phase=result key_words=facing words=""facing right""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=drawn.anchor value=""the path"" operator=relation phase=selector
+@r3 w.request.request act=make mood=do words=""put an owl in the tree facing left"" predicate=put
+@r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=owl
+@r3.c1 w.request.constraint request=$r3 on=place attribute=drawn.relation value=in words=""in the tree"" operator=relation phase=result
+@r3.c2 w.request.constraint request=$r3 on=attribute attribute=drawn.facing value=left operator=eq phase=result key_words=facing
+@r3.c3 w.request.constraint request=$r3 on=place attribute=drawn.anchor value=""the tree"" operator=relation phase=selector"
+"maybe you could stack two purple blocks on the green block, then remove the two bottom red blocks, then two purple blocks on them","@f1 w.request.filler text=maybe
+@f2 w.request.filler text=then
+@f3 w.request.filler text=then
+@r1 w.request.request act=make mood=do words=""stack two purple blocks on the green block"" predicate=stack
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=block sort_words=blocks
+@r1.c1 w.request.constraint request=$r1 on=count attribute=drawn.count words=two operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=green operator=eq phase=selector
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=purple operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the green block"" operator=relation phase=selector
+@r2 w.request.request act=remove mood=do words=""remove the two bottom red blocks"" predicate=remove
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=context sort=block description=""the two bottom red blocks""
+@r2.c1 w.request.constraint request=$r2 on=count attribute=drawn.count words=two operator=eq phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=drawn.colour value=red operator=eq phase=selector
+@r3 w.request.request act=make mood=do words=""two purple blocks on them""
+@r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=block sort_words=blocks
+@r3.c1 w.request.constraint request=$r3 on=count attribute=drawn.count words=two operator=eq phase=result
+@r3.c2 w.request.constraint request=$r3 on=attribute attribute=drawn.colour value=purple operator=eq phase=result
+@r3.c3 w.request.constraint request=$r3 on=place attribute=drawn.anchor value=them operator=relation phase=selector"
+"a little bird up in the top right, then put the woman in the orange dress back where it was, exactly, then send the woman in the orange dress to the left this time, opposite — exactly like it was before","@f1 w.request.filler text=then
+@f2 w.request.filler text=then
+@f3 w.request.filler text=""exactly like""
+@r1 w.request.request act=make mood=do words=""a little bird up in the top right""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bird
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=""top right"" operator=region phase=result open_value=true words=""up in the top right""
+@r2 w.request.request act=place mood=do words=""put the woman in the orange dress back where it was, exactly"" predicate=put
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=context sort=woman description=""the woman in the orange dress""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.colour value=orange operator=eq phase=selector
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=drawn.restore value=previous words=""back where it was"" operator=eq phase=result
+@r3 w.request.request act=change mood=do words=""send the woman in the orange dress to the left this time, opposite"" predicate=send
+@r3.t w.request.target request=$r3 family=drawn mode=existing determiner=definite fill=context sort=woman description=""the woman in the orange dress""
+@r3.c1 w.request.constraint request=$r3 on=attribute attribute=drawn.direction value=left operator=eq phase=result
+@r3.c2 w.request.constraint request=$r3 on=attribute attribute=drawn.colour value=orange operator=eq phase=selector
+@r3.c3 w.request.constraint request=$r3 on=place attribute=drawn.relation value=opposite operator=relation phase=result open_value=true
+@r1.c2 w.request.constraint request=$r1 on=size attribute=drawn.size value=little operator=degree phase=result"
+i want a huge tree taking up the left of the scene in the picture — that's how the picture goes,"@f1 w.request.filler text=""picture goes""
+@r1 w.request.request act=make mood=do words=""i want a huge tree taking up the left of the scene in the picture"" predicate=want
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=tree
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=huge operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=left words=""up the left of the scene"" operator=region phase=result"
+could you draw a big boy smiling over on the left of the scene? — right where the scene needs it,"@f1 w.request.filler text=""right where the scene needs""
+@r1 w.request.request act=make mood=do words=""could you draw a big boy smiling over on the left of the scene?"" predicate=draw
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=boy
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=big operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=left words=""the left of the scene"" operator=region phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.expression value=smiling operator=eq phase=result"
+"how about a small boat facing right on the left?, after that a bird above the lake — exactly there in the scene","@f1 w.request.filler text=""exactly there in the scene""
+@r1 w.request.request act=make mood=do words=""how about a small boat facing right on the left?"" predicate=how
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=boat
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.facing value=right operator=eq phase=result key_words=facing words=""facing right""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=left words=""the left"" operator=region phase=result
+@r2 w.request.request act=make mood=do words=""a bird above the lake""
+@r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=bird
+@r2.c1 w.request.constraint request=$r2 on=place attribute=drawn.relation value=above operator=relation phase=result
+@r2.c2 w.request.constraint request=$r2 on=place attribute=drawn.anchor value=""the lake"" operator=relation phase=selector"
+"there should be a kite facing right to the right of the sun, right where the picture needs it","@f1 w.request.filler text=""picture needs""
+@r1 w.request.request act=make mood=do words=""there should be a kite facing right to the right of the sun"" predicate=should
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=kite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.facing value=right operator=eq phase=result key_words=facing words=""facing right""
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.relation value=""right of"" operator=relation phase=result open_value=true
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the sun"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.direction value=right words=""to the right"" operator=eq phase=result"
+draw a cat facing left down at the bottom,"@r1 w.request.request act=make mood=do predicate=draw
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cat
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.facing value=left operator=eq phase=result key_words=facing words=""facing left""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=bottom words=""down at the bottom"" operator=region phase=result"
+"to start, a small cat at the bottom, then can you add a large girl about two hand-widths from the left edge facing right?","@f1 w.request.filler text=start
+@f2 w.request.filler text=then
+@r1 w.request.request act=make mood=do words=""a small cat at the bottom""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cat
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=bottom words=""the bottom"" operator=region phase=result
+@r2 w.request.request act=make mood=do words=""can you add a large girl about two hand-widths from the left edge facing right?"" predicate=add
+@r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=girl
+@r2.c1 w.request.constraint request=$r2 on=size attribute=drawn.size value=large operator=degree phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=drawn.facing value=right operator=eq phase=result key_words=facing words=""facing right""
+@r2.c3 w.request.constraint request=$r2 on=attribute attribute=drawn.offset value=2 words=""two hand-widths"" operator=eq phase=result
+@r2.c4 w.request.constraint request=$r2 on=attribute attribute=drawn.unit value=""hand-widths"" operator=eq phase=result
+@r2.c6 w.request.constraint request=$r2 on=attribute attribute=drawn.edge value=left words=""from the left edge"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result"
+"there is a large girl roughly two hand-widths in from the left looking right, thanks","@f1 w.request.filler text=thanks
+@r1 w.request.request act=make mood=do words=""there is a large girl roughly two hand-widths in from the left looking right""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=girl
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=large operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.facing value=right operator=eq phase=result words=""looking right""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.offset value=2 words=""two hand-widths"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.unit value=""hand-widths"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=drawn.edge value=left words=""from the left"" operator=eq phase=result"
+"make it so there is a large bird about a hand and a half from the top and from the left, after that a small cloud down at the bottom","@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do words=""make it so there is a large bird about a hand and a half from the top and from the left"" predicate=make
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bird
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=large operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.offset value=1.5 words=""a hand and a half"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.unit value=hand operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.edge value=top words=""from the top"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=drawn.edge value=left words=""from the left"" operator=eq phase=result
+@r2 w.request.request act=make mood=do words=""a small cloud down at the bottom""
+@r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=cloud
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.at value=bottom words=""down at the bottom"" operator=region phase=result
+@r2.c2 w.request.constraint request=$r2 on=size attribute=drawn.size value=small operator=degree phase=result"
+how about a boy a finger-width inside the right edge facing left under the sun? — and there we have it in the scene,"@f1 w.request.filler text=scene
+@r1 w.request.request act=make mood=do words=""how about a boy a finger-width inside the right edge facing left under the sun?"" predicate=how
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=boy
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.facing value=left operator=eq phase=result key_words=facing words=""facing left""
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.relation value=under operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the sun"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.offset value=1 words=""a finger-width"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=drawn.unit value=""finger-width"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=drawn.edge value=right words=""inside the right edge"" operator=eq phase=result"
+"i need a medium boy standing facing left against the right edge in the scene, after that a small bird in the top left","@r1 w.request.request act=make mood=do words=""i need a medium boy standing facing left against the right edge in the scene"" predicate=need
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=boy
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=medium operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.facing value=left operator=eq phase=result key_words=facing words=""facing left""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=right_edge words=""the right edge"" operator=region phase=result open_value=true
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.pose value=standing operator=eq phase=result
+@r2 w.request.request act=make mood=do words=""a small bird in the top left""
+@r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=bird
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.at value=top_left words=""the top left"" operator=region phase=result
+@r2.c2 w.request.constraint request=$r2 on=size attribute=drawn.size value=small operator=degree phase=result"
+make it so there is a man sitting cross legged right in the middle looking right — and there we have it in the scene,"@f1 w.request.filler text=so
+@f2 w.request.filler text=scene
+@r1 w.request.request act=make mood=do words=""make it so there is a man sitting cross legged right in the middle looking right"" predicate=make
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=man
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=middle words=""the middle"" operator=region phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.direction value=right operator=eq phase=result words=""looking right""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.pose value=""cross legged"" words=""sitting cross legged"" operator=eq phase=result"
+hey — how about a boy kicking in the middle facing left?,"@f1 w.request.filler text=hey
+@r1 w.request.request act=make mood=do words=""how about a boy kicking in the middle facing left?"" predicate=how
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=boy
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=middle words=""the middle"" operator=region phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.facing value=left operator=eq phase=result key_words=facing words=""facing left""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.pose value=kicking operator=eq phase=result"
+upt a medium boy sitting facing left about half an inch from the right edge,"@r1 w.request.request act=make mood=do predicate=upt
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=boy
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=medium operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.facing value=left operator=eq phase=result key_words=facing words=""facing left""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.distanceGrade value=""half an inch from the right edge"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.pose value=sitting operator=eq phase=result"
+could you draw a large girl sad facing right on the left?,"@r1 w.request.request act=make mood=do predicate=draw
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=girl
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=large operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.facing value=right operator=eq phase=result key_words=facing words=""facing right""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=left words=""the left"" operator=region phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.expression value=sad operator=eq phase=result"
+can you add a large girl smiling looking left in front of the tree? — and that's it for this bit of the picture,"@f1 w.request.filler text=""bit of the picture""
+@r1 w.request.request act=make mood=do words=""can you add a large girl smiling looking left in front of the tree?"" predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=girl
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=large operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.facing value=left operator=eq phase=result words=""looking left""
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.relation value=""in front of"" operator=relation phase=result open_value=true
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.expression value=smiling operator=eq phase=result key_words=looking
+@r1.c5 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the tree"" operator=relation phase=selector"
+give me a sun half cut off by the edge in the top right — exactly there in the scene,"@f1 w.request.filler text=""exactly there in the scene""
+@r1 w.request.request act=make mood=do words=""give me a sun half cut off by the edge in the top right"" predicate=give
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=sun
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=top_right words=""the top right"" operator=region phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.cover value=half words=""half cut off by the edge"" operator=degree phase=result"
+"draw a boy behind the girl mostly hidden by the girl, thanks","@f1 w.request.filler text=thanks
+@r1 w.request.request act=make mood=do words=""draw a boy behind the girl mostly hidden by the girl"" predicate=draw
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=boy
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=behind operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=girl operator=relation phase=selector
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.cover value=mostly words=""mostly hidden"" operator=degree phase=result"
+"make it so there is a bench with a leg cut off by the edge on the right middle, that's how the scene should look","@f1 w.request.filler text=so
+@f2 w.request.filler text=""scene should look""
+@r1 w.request.request act=make mood=do words=""make it so there is a bench with a leg cut off by the edge on the right middle"" predicate=make
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bench
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=right_middle words=""the right middle"" operator=region phase=result open_value=true
+@r1.u1 w.request.unread request=$r1 text=""with a leg cut off by the edge"" note=drawn.occlusion"
+how about a dog two paws off the left edge looking right on the left? — right where the scene needs it,"@f1 w.request.filler text=""scene needs""
+@r1 w.request.request act=make mood=do words=""how about a dog two paws off the left edge looking right on the left?"" predicate=how
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=dog
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.facing value=right operator=eq phase=result words=""looking right""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=left words=""the left"" operator=region phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.edge value=left words=""off the left edge"" operator=eq phase=result"
+"in the scene, one single cat, and a little bench at the bottom, just so, in our little drawing","@f1 w.request.filler text=""just so""
+@f2 w.request.filler text=drawing
+@r1 w.request.request act=make mood=do words=""in the scene, one single cat""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=quantified sort=cat
+@r1.c1 w.request.constraint request=$r1 on=count attribute=drawn.count words=""one single"" operator=eq phase=result
+@r2 w.request.request act=make mood=do words=""a little bench at the bottom""
+@r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=bench
+@r2.c1 w.request.constraint request=$r2 on=size attribute=drawn.size value=little operator=degree phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=drawn.at value=bottom words=""the bottom"" operator=region phase=result"
+hey — there's a dog facing right under the tree,"@f1 w.request.filler text=hey
+@r1 w.request.request act=make mood=do words=""there's a dog facing right under the tree""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=dog
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.facing value=right operator=eq phase=result key_words=facing words=""facing right""
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.relation value=under operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the tree"" operator=relation phase=selector"
+hey — i want a bird facing left up at the top of the tree in the picture,"@f1 w.request.filler text=hey
+@r1 w.request.request act=make mood=do words=""i want a bird facing left up at the top of the tree in the picture"" predicate=want
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bird
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.facing value=left operator=eq phase=result key_words=facing words=""facing left""
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.relation value=""at the top of"" operator=relation phase=result open_value=true
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the tree"" operator=relation phase=selector"
+make it so there is a bird further behind the boy and the girl looking left on the right side,"@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do predicate=make
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bird
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=behind operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.facing value=left operator=eq phase=result words=""looking left""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=right words=""the right side"" operator=region phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the boy and the girl"" operator=relation phase=selector"
+"to start, a small cat under the bench, then wait — the girl with the kite is over on the left","@f1 w.request.filler text=start
+@f2 w.request.filler text=then
+@r1 w.request.request act=make mood=do words=""a small cat under the bench""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cat
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=under operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the bench"" operator=relation phase=selector
+@r2 w.request.request act=change mood=do words=""wait \u2014 the girl with the kite is over on the left"" predicate=wait
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=description sort=girl description=""the girl with the kite""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.at value=left words=""the left"" operator=region phase=result
+@r1.c3 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result"
+"a small dog down at the bottom, then have the page show a bare sandy desert behind everything — nothing on the page stays as it was","@f1 w.request.filler text=then
+@f2 w.request.filler text=stays
+@r1 w.request.request act=make mood=do words=""a small dog down at the bottom""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=dog
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=bottom words=""down at the bottom"" operator=region phase=result
+@r2 w.request.request act=change mood=do words=""have the page show a bare sandy desert behind everything"" predicate=have
+@r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context family_words=page
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""a bare sandy desert"" note=drawn.background value=desert
+@r1.c2 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result"
+"a small dog down at the bottom, then light the whole page like late evening — nothing on the page stays as it was","@f1 w.request.filler text=then
+@f2 w.request.filler text=like
+@f3 w.request.filler text=stays
+@r1 w.request.request act=make mood=do words=""a small dog down at the bottom""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=dog
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=bottom words=""down at the bottom"" operator=region phase=result
+@r2 w.request.request act=change mood=do words=""light the whole page like late evening"" predicate=light
+@r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context family_words=page
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.time value=evening words=""late evening"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result"
+"a small dog down at the bottom, then call a proper rolling storm down over everything — nothing on the page stays as it was","@f1 w.request.filler text=then
+@f2 w.request.filler text=""page stays""
+@r1 w.request.request act=make mood=do words=""a small dog down at the bottom""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=dog
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=bottom words=""down at the bottom"" operator=region phase=result
+@r2 w.request.request act=change mood=do words=""call a proper rolling storm down over everything"" predicate=call
+@r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=page.weather value=storm words=""a proper rolling storm"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result"
+"a small dog down at the bottom, then recast the whole of the big tree as hard silver metal, right through — nothing but the surface changes","@f1 w.request.filler text=then
+@f2 w.request.filler text=""surface changes""
+@r1 w.request.request act=make mood=do words=""a small dog down at the bottom""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=dog
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=bottom words=""down at the bottom"" operator=region phase=result
+@r2 w.request.request act=change mood=do words=""recast the whole of the big tree as hard silver metal, right through"" predicate=recast
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=description sort=tree description=""the big tree""
+@r2.u1 w.request.unread request=$r2 text=""hard silver metal"" note=drawn.texture value=metal
+@r1.c2 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result"
+"a small cat in the bottom left corner, then close the curtains at the window, every window on the house front — just that part, nothing else","@f1 w.request.filler text=then
+@f2 w.request.filler text=""just that part, nothing else""
+@r1 w.request.request act=make mood=do words=""a small cat in the bottom left corner""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cat
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=""bottom left corner"" operator=region phase=result open_value=true
+@r2 w.request.request act=change mood=do words=""close the curtains at the window, every window on the house front"" predicate=close
+@r2.t w.request.target request=$r2 family=part mode=existing determiner=definite fill=description sort=curtains description=""the curtains at the window""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=part.owner value=house words=""the house"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result"
+"a small dog down at the bottom, then pull the hills right at the back right off the page — the front ones stay put — that is the only change","@f1 w.request.filler text=then
+@f2 w.request.filler text=""only change""
+@r1 w.request.request act=make mood=do words=""a small dog down at the bottom""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=dog
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=bottom words=""down at the bottom"" operator=region phase=result
+@r2 w.request.request act=remove mood=do words=""pull the hills right at the back right off the page \u2014 the front ones stay put"" predicate=pull
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=all sort=hill sort_words=hills
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.at value=back operator=region phase=selector open_value=true words=""right at the back""
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=drawn.at value=front want=no operator=region phase=selector open_value=true
+@r1.c2 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result"
+"a little bird up in the top right, then redo the little dog in a warm chocolate brown, every last stripe of it, all over it","@f1 w.request.filler text=then
+@r1 w.request.request act=make mood=do words=""a little bird up in the top right""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bird
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=""top right"" operator=region phase=result open_value=true words=""up in the top right""
+@r2 w.request.request act=change mood=do words=""redo the little dog in a warm chocolate brown, every last stripe of it"" predicate=redo
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=description sort=dog description=""the little dog""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.colour value=brown words=""a warm chocolate brown"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=size attribute=drawn.size value=little operator=degree phase=result"
+"a little bird up in the top right, then i want the bird moved exactly two hand-widths downward, so the spacing comes out even, so the spacing comes out even","@f1 w.request.filler text=then
+@f2 w.request.filler text=so
+@f3 w.request.filler text=""so the spacing comes out even""
+@r1 w.request.request act=make mood=do words=""a little bird up in the top right""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bird
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=""top right"" operator=region phase=result open_value=true words=""up in the top right""
+@r2 w.request.request act=change mood=do words=""i want the bird moved exactly two hand-widths downward, so the spacing comes out even"" predicate=want
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=description sort=bird description=""the bird""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.direction value=down words=downward operator=eq phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=drawn.distanceGrade value=""two hand-widths"" words=""exactly two hand-widths"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=size attribute=drawn.size value=little operator=degree phase=result"
+"a little cat near the bench, then send the bench right up against the lake as well, measured properly this time, mind","@f1 w.request.filler text=then
+@f2 w.request.filler text=well
+@f3 w.request.filler text=""measured properly this time, mind""
+@r1 w.request.request act=make mood=do words=""a little cat near the bench""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cat
+@r2 w.request.request act=change mood=do words=""send the bench right up against the lake as well"" predicate=send
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=description sort=bench description=""the bench""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.direction value=right operator=eq phase=result
+@r2.c2 w.request.constraint request=$r2 on=place attribute=drawn.relation value=""up against"" operator=relation phase=result open_value=true
+@r2.c3 w.request.constraint request=$r2 on=place attribute=drawn.anchor value=""the lake"" operator=relation phase=selector
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=little operator=degree phase=result"
+"a little cat near the bench, then send the cat on a diagonal between the house and the lake as well, measured properly this time, mind","@f1 w.request.filler text=then
+@f2 w.request.filler text=well
+@f3 w.request.filler text=""measured properly this time, mind""
+@r1 w.request.request act=make mood=do words=""a little cat near the bench""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cat
+@r2 w.request.request act=change mood=do words=""send the cat on a diagonal between the house and the lake as well"" predicate=send
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=description sort=cat description=""the cat""
+@r2.c1 w.request.constraint request=$r2 on=place attribute=drawn.relation value=between words=diagonal operator=relation phase=result
+@r2.c2 w.request.constraint request=$r2 on=place attribute=drawn.anchor value=""the house and the lake"" operator=relation phase=selector
+@r2.u1 w.request.unread request=$r2 text=""on a diagonal between the house and the lake"" note=drawn.diagonal
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=little operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.relation value=near operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the bench"" operator=relation phase=selector"
+"a small dog down at the bottom, then spread every one of the trees out a hand-width apart, a steady rhythm from one end to the other — keep it that way for the rest of the scene","@f1 w.request.filler text=then
+@f2 w.request.filler text=""keep it that way for the rest of the scene""
+@r1 w.request.request act=make mood=do words=""a small dog down at the bottom""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=dog
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=bottom words=""down at the bottom"" operator=region phase=result
+@r2 w.request.request act=place mode=arrange mood=do words=""spread every one of the trees out a hand-width apart, a steady rhythm from one end to the other"" predicate=spread
+@r2.t w.request.target request=$r2 family=group mode=existing determiner=definite fill=all sort=tree sort_words=trees count_words=""every one of the trees""
+@r2.u1 w.request.unread request=$r2 text=""a hand-width apart"" note=drawn.spacing value=""a hand-width apart""
+@r1.c2 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result"
+"a little bird up in the top right, then i want a cloud in each corner, so every one of them gets its own so the whole arrangement stays balanced","@f1 w.request.filler text=then
+@f2 w.request.filler text=so
+@f3 w.request.filler text=""so the whole arrangement stays balanced""
+@r1 w.request.request act=make mood=do words=""a little bird up in the top right""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bird
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=""top right"" operator=region phase=result open_value=true words=""up in the top right""
+@r2 w.request.request act=make mood=do words=""i want a cloud in each corner, so every one of them gets its own"" predicate=want
+@r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=cloud
+@r2.c1 w.request.constraint request=$r2 on=count attribute=drawn.count words=""each corner"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=size attribute=drawn.size value=little operator=degree phase=result"
+just add a bird on top of every house,"@f1 w.request.filler text=just
+@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bird
+@r1.c1 w.request.constraint request=$r1 on=count attribute=drawn.count words=every operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.relation value=""on top of"" operator=relation phase=result open_value=true
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""every house"" operator=relation phase=selector"
+"add two clouds at the top, then a kite just between them","@f1 w.request.filler text=just
+@r1 w.request.request act=make mood=do words=""add two clouds at the top"" predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=quantified sort=cloud sort_words=clouds
+@r1.c1 w.request.constraint request=$r1 on=count attribute=drawn.count words=two operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=top words=""the top"" operator=region phase=result
+@r2 w.request.request act=make mood=do words=""then a kite just between them"" predicate=then
+@r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=kite
+@r2.c1 w.request.constraint request=$r2 on=place attribute=drawn.relation value=between operator=relation phase=result
+@r2.c2 w.request.constraint request=$r2 on=place attribute=drawn.anchor value=them operator=relation phase=selector"
+"have a woman in a plain orange dress come in from the left, at the right hand of the man in the black shirt, thanks","@f1 w.request.filler text=thanks
+@r1 w.request.request act=make mood=do words=""have a woman in a plain orange dress come in from the left, at the right hand of the man in the black shirt"" predicate=have
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=woman description=""a woman in a plain orange dress""
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation words=""t the right "" operator=relation phase=result open_value=true
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""at the right hand of the man in the black shirt"" operator=relation phase=selector
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.edge value=left words=""in from the left"" operator=eq phase=result"
+"to start, a little cloud up at the top, then include a little bird looking right perched on the fence","@f1 w.request.filler text=start
+@f2 w.request.filler text=then
+@r1 w.request.request act=make mood=do words=""a little cloud up at the top""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cloud
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=top words=""up at the top"" operator=region phase=result
+@r2 w.request.request act=make mood=do words=""include a little bird looking right perched on the fence"" predicate=include
+@r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=bird
+@r2.c1 w.request.constraint request=$r2 on=size attribute=drawn.size value=little operator=degree phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=drawn.facing value=right operator=eq phase=result words=""looking right""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=drawn.relation value=on operator=relation phase=result
+@r2.c4 w.request.constraint request=$r2 on=place attribute=drawn.anchor value=""the fence"" operator=relation phase=selector"
+i want a large girl with a big smile facing right by the lake in the picture — that's how this drawing goes,"@f1 w.request.filler text=""drawing goes""
+@r1 w.request.request act=make mood=do words=""i want a large girl with a big smile facing right by the lake in the picture"" predicate=want
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=girl
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=large operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.facing value=right operator=eq phase=result key_words=facing words=""facing right""
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.relation value=by operator=relation phase=result open_value=true
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.expression value=smiling words=""with a big smile"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the lake"" operator=relation phase=selector"
+can you add a little blue boat over on the far right of the lake? — right where the scene needs it,"@f1 w.request.filler text=""right where the scene needs""
+@r1 w.request.request act=make mood=do words=""can you add a little blue boat over on the far right of the lake?"" predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=boat
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=little operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=blue operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=far_right words=""the far right of the lake"" operator=region phase=result open_value=true"
+"could you draw a little blue boat over on the far right of the lake?, thanks","@f1 w.request.filler text=thanks
+@r1 w.request.request act=make mood=do words=""could you draw a little blue boat over on the far right of the lake?"" predicate=draw
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=boat
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=little operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=blue operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=far_right words=""the far right of the lake"" operator=region phase=result open_value=true"
+sketch a small bird looking left just above the top of the tree,"@f1 w.request.filler text=just
+@r1 w.request.request act=make mood=do predicate=sketch
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bird
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.facing value=left operator=eq phase=result words=""looking left""
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.relation value=above operator=relation phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the top of the tree"" operator=relation phase=selector"
+"to start, a small cat way off on the left, then i need a large bench with the left side cut off behind the boy and the girl in the scene","@f1 w.request.filler text=start
+@f2 w.request.filler text=then
+@r1 w.request.request act=make mood=do words=""a small cat way off on the left""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cat
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=left words=""the left"" operator=region phase=result
+@r2 w.request.request act=make mood=do words=""i need a large bench with the left side cut off behind the boy and the girl in the scene"" predicate=need
+@r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=bench
+@r2.c1 w.request.constraint request=$r2 on=size attribute=drawn.size value=large operator=degree phase=result
+@r2.c2 w.request.constraint request=$r2 on=place attribute=drawn.relation value=behind operator=relation phase=result
+@r2.c3 w.request.constraint request=$r2 on=place attribute=drawn.anchor value=""the boy and the girl"" operator=relation phase=selector
+@r2.c4 w.request.constraint request=$r2 on=attribute attribute=drawn.edge value=left words=""the left side cut off"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.grade value=far words=""way off"" operator=degree phase=result"
+"could you draw a big bench with its left end off the page just behind the boy and the girl?, thanks","@f1 w.request.filler text=just
+@f2 w.request.filler text=thanks
+@r1 w.request.request act=make mood=do words=""could you draw a big bench with its left end off the page just behind the boy and the girl?"" predicate=draw
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bench
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=big operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.relation value=behind operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the boy and the girl"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.edge value=left words=""its left end off the page"" operator=eq phase=result"
+"to start, a little cloud up at the top, then sketch a big girl sat on the bench looking right","@f1 w.request.filler text=start
+@f2 w.request.filler text=then
+@r1 w.request.request act=make mood=do words=""a little cloud up at the top""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cloud
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=top words=""up at the top"" operator=region phase=result
+@r2 w.request.request act=make mood=do words=""sketch a big girl sat on the bench looking right"" predicate=sketch
+@r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=girl
+@r2.c1 w.request.constraint request=$r2 on=size attribute=drawn.size value=big operator=degree phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=drawn.facing value=right operator=eq phase=result words=""looking right""
+@r2.c3 w.request.constraint request=$r2 on=attribute attribute=drawn.pose value=sitting words=""sat on the bench"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=size attribute=drawn.size value=little operator=degree phase=result"
+"to start, a small cat on the bench, then i want the dog by the bench sitting down instead of standing","@f1 w.request.filler text=start
+@f2 w.request.filler text=then
+@r1 w.request.request act=make mood=do words=""a small cat on the bench""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cat
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=on operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the bench"" operator=relation phase=selector
+@r2 w.request.request act=change mood=do words=""i want the dog by the bench sitting down instead of standing"" predicate=want
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=description sort=dog description=""the dog by the bench""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.pose value=sitting words=""sitting down instead of standing"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result"
+"to start, a small cat under the bench, then keep the girl with the kite on the left side of the scene","@f1 w.request.filler text=start
+@f2 w.request.filler text=then
+@r1 w.request.request act=make mood=do words=""a small cat under the bench""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cat
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=under operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the bench"" operator=relation phase=selector
+@r2 w.request.request act=change mood=do words=""keep the girl with the kite on the left side of the scene"" predicate=keep
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=description sort=girl description=""the girl with the kite""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.at value=left words=""the left side of the scene"" operator=region phase=result
+@r1.c3 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result"
+"to start, a small bird on the fence, then i want the big kite red instead of blue — exactly there in our picture","@f1 w.request.filler text=start
+@f2 w.request.filler text=then
+@f3 w.request.filler text=""exactly there in our picture""
+@r1 w.request.request act=make mood=do words=""a small bird on the fence""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bird
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=on operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the fence"" operator=relation phase=selector
+@r2 w.request.request act=change mood=do words=""i want the big kite red instead of blue"" predicate=want
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=description sort=kite description=""the big kite""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.colour value=red operator=eq phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=drawn.colour value=blue want=no operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result"
+"fine — a small cat in the corner, but always, make sure everyone in the scene stays facing the viewer","@f1 w.request.filler text=fine
+@r1 w.request.request act=make mood=do words=""a small cat in the corner""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cat
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=corner words=""the corner"" operator=region phase=result
+@r2 w.request.request act=place mood=do words=""always, make sure everyone in the scene stays facing the viewer"" predicate=make
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=description sort=everyone description=""everyone in the scene""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.direction value=""the viewer"" operator=eq phase=result open_value=true words=""facing the viewer""
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=preference.scope value=always operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result"
+"how about a small dog in a red scarf on the left, with the dog sitting, the dog scared? — that's how this drawing goes","@f1 w.request.filler text=""drawing goes""
+@r1 w.request.request act=make mood=do words=""how about a small dog in a red scarf on the left"" predicate=how
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=dog
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=left words=""the left"" operator=region phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.wear value=""in a red scarf"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""with the dog sitting"" predicate=with
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=description sort=dog description=""the dog""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.pose value=sitting operator=eq phase=result
+@r3 w.request.request act=change mood=do words=""the dog scared""
+@r3.t w.request.target request=$r3 family=drawn mode=existing determiner=definite fill=description sort=dog description=""the dog""
+@r3.c1 w.request.constraint request=$r3 on=attribute attribute=drawn.expression value=scared operator=eq phase=result"
+"to start, a little cloud up at the top. Then i want 4 balloons lined up over the house in the scene","@f1 w.request.filler text=start
+@f2 w.request.filler text=Then
+@r1 w.request.request act=make mood=do words=""a little cloud up at the top""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cloud
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=top words=""up at the top"" operator=region phase=result
+@r2 w.request.request act=make mood=do words=""i want 4 balloons lined up over the house in the scene"" predicate=want
+@r2.t w.request.target request=$r2 family=drawn mode=new determiner=quantified sort=balloon sort_words=balloons
+@r2.c1 w.request.constraint request=$r2 on=count attribute=drawn.count words=4 operator=eq phase=result
+@r2.c2 w.request.constraint request=$r2 on=place attribute=drawn.relation value=over operator=relation phase=result open_value=true
+@r2.c3 w.request.constraint request=$r2 on=place attribute=drawn.anchor value=""the house"" operator=relation phase=selector
+@r2.c4 w.request.constraint request=$r2 on=attribute attribute=drawn.arrangement value=line words=""lined up"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=size attribute=drawn.size value=little operator=degree phase=result"
+"to start, a little cloud up at the top. Then give me 2 kites in a row up in the sky all facing right","@f1 w.request.filler text=start
+@f2 w.request.filler text=Then
+@r1 w.request.request act=make mood=do words=""a little cloud up at the top""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cloud
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=top words=""the top"" operator=region phase=result
+@r2 w.request.request act=make mood=do words=""give me 2 kites in a row up in the sky all facing right"" predicate=give
+@r2.t w.request.target request=$r2 family=drawn mode=new determiner=quantified sort=kite sort_words=kites
+@r2.c1 w.request.constraint request=$r2 on=count attribute=drawn.count words=2 operator=eq phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=drawn.direction value=right words=""all facing right"" operator=eq phase=result
+@r2.c3 w.request.constraint request=$r2 on=place attribute=drawn.relation value=in words=up operator=relation phase=result
+@r2.c4 w.request.constraint request=$r2 on=place attribute=drawn.anchor value=""the sky"" operator=relation phase=selector
+@r2.c5 w.request.constraint request=$r2 on=attribute attribute=drawn.arrangement value=row words=""in a row"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=size attribute=drawn.size value=little operator=degree phase=result"
+"include a few cats one after another on the bench all facing right, just so, in the little drawing","@f1 w.request.filler text=""just so, in the little drawing""
+@r1 w.request.request act=make mood=do words=""include a few cats one after another on the bench all facing right"" predicate=include
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=quantified sort=cat sort_words=cats
+@r1.c1 w.request.constraint request=$r1 on=count attribute=drawn.count words=""a few"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.direction value=right words=""all facing right"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.relation value=on operator=relation phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the bench"" operator=relation phase=selector
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=drawn.arrangement value=line words=""one after another"" operator=eq phase=result"
+"hey — draw a small house on the left, a big tree behind it, and a big sun above the tree","@f1 w.request.filler text=hey
+@r1 w.request.request act=make mood=do words=""draw a small house on the left"" predicate=draw
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=house
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=left words=""the left"" operator=region phase=result
+@r2 w.request.request act=make mood=do words=""a big tree behind it""
+@r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=tree
+@r2.c1 w.request.constraint request=$r2 on=size attribute=drawn.size value=big operator=degree phase=result
+@r2.c2 w.request.constraint request=$r2 on=place attribute=drawn.relation value=behind operator=relation phase=result
+@r2.c3 w.request.constraint request=$r2 on=place attribute=drawn.anchor value=it operator=relation phase=selector
+@r3 w.request.request act=make mood=do words=""and a big sun above the tree""
+@r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=sun
+@r3.c1 w.request.constraint request=$r3 on=size attribute=drawn.size value=big operator=degree phase=result
+@r3.c2 w.request.constraint request=$r3 on=place attribute=drawn.relation value=above operator=relation phase=result
+@r3.c3 w.request.constraint request=$r3 on=place attribute=drawn.anchor value=""the tree"" operator=relation phase=selector"
+"i'd like a big sun in the top left, a red kite under it — exactly there in our picture","@f1 w.request.filler text=""exactly there in our picture""
+@r1 w.request.request act=make mood=do words=""i'd like a big sun in the top left"" predicate=like
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=sun
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=big operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=top_left words=""the top left"" operator=region phase=result
+@r2 w.request.request act=make mood=do words=""a red kite under it""
+@r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=kite
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.colour value=red operator=eq phase=result
+@r2.c2 w.request.constraint request=$r2 on=place attribute=drawn.relation value=under operator=relation phase=result
+@r2.c3 w.request.constraint request=$r2 on=place attribute=drawn.anchor value=it operator=relation phase=selector"
+"draw a little boy right in the middle, a large tree behind the boy, and a little dog just in front of the tree looking at the boy","@f1 w.request.filler text=just
+@r1 w.request.request act=make mood=do words=""draw a little boy right in the middle"" predicate=draw
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=boy
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=little operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=middle words=""right in the middle"" operator=region phase=result
+@r2 w.request.request act=make mood=do words=""a large tree behind the boy""
+@r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=tree
+@r2.c1 w.request.constraint request=$r2 on=size attribute=drawn.size value=large operator=degree phase=result
+@r2.c2 w.request.constraint request=$r2 on=place attribute=drawn.relation value=behind operator=relation phase=result
+@r2.c3 w.request.constraint request=$r2 on=place attribute=drawn.anchor value=""the boy"" operator=relation phase=selector
+@r3 w.request.request act=make mood=do words=""and a little dog just in front of the tree looking at the boy""
+@r3.t w.request.target request=$r3 family=drawn mode=new determiner=indefinite sort=dog
+@r3.c1 w.request.constraint request=$r3 on=size attribute=drawn.size value=little operator=degree phase=result
+@r3.c2 w.request.constraint request=$r3 on=place attribute=drawn.relation value=""in front of"" operator=relation phase=result open_value=true
+@r3.c3 w.request.constraint request=$r3 on=attribute attribute=drawn.facing value=""the boy"" words=""looking at the boy"" operator=eq phase=result open_value=true
+@r3.c4 w.request.constraint request=$r3 on=place attribute=drawn.anchor value=""the tree"" operator=relation phase=selector"
+"draw a small boy on the left facing the girl, a small girl on the right facing the boy, just so, in the little drawing","@f1 w.request.filler text=""just so, in the little drawing""
+@r1 w.request.request act=make mood=do words=""draw a small boy on the left facing the girl"" predicate=draw
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=boy
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=left words=""the left"" operator=region phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.facing value=""the girl"" words=""facing the girl"" operator=eq phase=result open_value=true
+@r2 w.request.request act=make mood=do words=""a small girl on the right facing the boy""
+@r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=girl
+@r2.c1 w.request.constraint request=$r2 on=size attribute=drawn.size value=small operator=degree phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=drawn.at value=right words=""the right"" operator=region phase=result
+@r2.c3 w.request.constraint request=$r2 on=attribute attribute=drawn.facing value=""the boy"" words=""facing the boy"" operator=eq phase=result open_value=true"
+"to start, a small cat at the bottom. Then can you add the boy in front of the girl, the girl in front of the dog?","@f1 w.request.filler text=start
+@f2 w.request.filler text=Then
+@r1 w.request.request act=make mood=do words=""a small cat at the bottom""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cat
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=bottom words=""the bottom"" operator=region phase=result
+@r2 w.request.request act=change mood=do words=""can you add the boy in front of the girl"" predicate=add
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=description sort=boy description=""the boy""
+@r2.c1 w.request.constraint request=$r2 on=place attribute=drawn.relation value=""in front of"" operator=relation phase=result open_value=true
+@r2.c2 w.request.constraint request=$r2 on=place attribute=drawn.anchor value=""the girl"" operator=relation phase=selector
+@r3 w.request.request act=change mood=do words=""the girl in front of the dog""
+@r3.t w.request.target request=$r3 family=drawn mode=existing determiner=definite fill=description sort=girl description=""the girl""
+@r3.c1 w.request.constraint request=$r3 on=place attribute=drawn.relation value=""in front of"" operator=relation phase=result open_value=true
+@r3.c2 w.request.constraint request=$r3 on=place attribute=drawn.anchor value=""the dog"" operator=relation phase=selector
+@r1.c2 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result"
+"to start, a little cloud up top. Then show the sun half cut off by the top edge, the cloud half hidden behind the sun in the scene","@f1 w.request.filler text=start
+@f2 w.request.filler text=Then
+@f3 w.request.filler text=scene
+@r1 w.request.request act=make mood=do words=""a little cloud up top""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cloud
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=top words=""up top"" operator=region phase=result
+@r2 w.request.request act=change mood=do words=""show the sun half cut off by the top edge"" predicate=show
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=description sort=sun description=""the sun""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.cover value=half words=""half cut off by the top edge"" operator=degree phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=drawn.edge value=top words=""the top edge"" operator=eq phase=result
+@r3 w.request.request act=change mood=do words=""the cloud half hidden behind the sun""
+@r3.t w.request.target request=$r3 family=drawn mode=existing determiner=definite fill=description sort=cloud description=""the cloud""
+@r3.c1 w.request.constraint request=$r3 on=place attribute=drawn.behind value=""the sun"" operator=relation phase=selector
+@r3.c2 w.request.constraint request=$r3 on=attribute attribute=drawn.cover value=half operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=size attribute=drawn.size value=little operator=degree phase=result"
+"draw a small girl facing right beside the big bench, in the picture","@f1 w.request.filler text=picture
+@r1 w.request.request act=make mood=do words=""draw a small girl facing right beside the big bench"" predicate=draw
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=girl
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.facing value=right operator=eq phase=result key_words=facing words=""facing right""
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.relation value=next_to words=beside operator=relation phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the big bench"" operator=relation phase=selector"
+can you add a big dog facing left in front of the small tree,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=dog
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=big operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.facing value=left operator=eq phase=result key_words=facing words=""facing left""
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.relation value=in_front_of words=""in front of"" operator=relation phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the small tree"" operator=relation phase=selector"
+"give me a tall man facing left next to the small dog, and a tiny bird up near the top","@r1 w.request.request act=make mood=do words=""give me a tall man facing left next to the small dog"" predicate=give
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=man
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=tall operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.facing value=left operator=eq phase=result key_words=facing words=""facing left""
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.relation value=next_to words=""next to"" operator=relation phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the small dog"" operator=relation phase=selector
+@r2 w.request.request act=make mood=do words=""a tiny bird up near the top""
+@r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=bird
+@r2.c1 w.request.constraint request=$r2 on=size attribute=drawn.size value=tiny operator=degree phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=drawn.at value=top words=""up near the top"" operator=region phase=result"
+"add a big sun over the small house, facing forward, right there in the scene","@f1 w.request.filler text=""right there in the scene""
+@r1 w.request.request act=make mood=do words=""add a big sun over the small house, facing forward"" predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=sun
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=big operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.direction value=forward operator=eq phase=result words=""facing forward""
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.relation value=above words=over operator=relation phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the small house"" operator=relation phase=selector"
+"can you add a big tree facing forward underneath the small cloud, in our little scene","@f1 w.request.filler text=""little scene""
+@r1 w.request.request act=make mood=do words=""can you add a big tree facing forward underneath the small cloud"" predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=tree
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=big operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.direction value=forward operator=eq phase=result words=""facing forward""
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.relation value=under words=underneath operator=relation phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the small cloud"" operator=relation phase=selector"
+"a large tree facing forward, below the small cloud, over on the other side of the canvas","@f1 w.request.filler text=""side of the canvas""
+@r1 w.request.request act=make mood=do words=""a large tree facing forward, below the small cloud""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=tree
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=large operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.direction value=forward operator=eq phase=result words=""facing forward""
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.relation value=under words=below operator=relation phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the small cloud"" operator=relation phase=selector"
+"draw a small house facing forward behind the big bench, in the picture","@f1 w.request.filler text=picture
+@r1 w.request.request act=make mood=do words=""draw a small house facing forward behind the big bench"" predicate=draw
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=house
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.direction value=forward operator=eq phase=result words=""facing forward""
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.relation value=behind operator=relation phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the big bench"" operator=relation phase=selector"
+"draw a tall woman facing left beside the small lake, in the picture","@f1 w.request.filler text=picture
+@r1 w.request.request act=make mood=do words=""draw a tall woman facing left beside the small lake"" predicate=draw
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=woman
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=tall operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.facing value=left operator=eq phase=result key_words=facing words=""facing left""
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.relation value=next_to words=beside operator=relation phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the small lake"" operator=relation phase=selector"
+"add a tall woman next to the small lake, facing left, right there in the scene","@f1 w.request.filler text=""right there in the scene""
+@r1 w.request.request act=make mood=do words=""add a tall woman next to the small lake, facing left"" predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=woman
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=tall operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.facing value=left operator=eq phase=result key_words=facing words=""facing left""
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.relation value=next_to words=""next to"" operator=relation phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the small lake"" operator=relation phase=selector"
+draw a tall wmoan facing left beside the small lake,"@r1 w.request.request act=make mood=do predicate=draw
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=woman sort_words=wmoan
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=tall operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.facing value=left operator=eq phase=result key_words=facing words=""facing left""
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.relation value=next_to words=beside operator=relation phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the small lake"" operator=relation phase=selector"
+"a big bench down at the bottom, and there is a tall man facing right leaning against the tree on the left","@r1 w.request.request act=make mood=do words=""a big bench down at the bottom""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bench
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=big operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=bottom words=""down at the bottom"" operator=region phase=result
+@r2 w.request.request act=make mood=do words=""there is a tall man facing right leaning against the tree on the left""
+@r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=man
+@r2.c1 w.request.constraint request=$r2 on=size attribute=drawn.size value=tall operator=degree phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=drawn.facing value=right operator=eq phase=result key_words=facing words=""facing right""
+@r2.c3 w.request.constraint request=$r2 on=attribute attribute=drawn.at value=left words=""on the left"" operator=region phase=result
+@r2.c4 w.request.constraint request=$r2 on=attribute attribute=drawn.pose value=leaning words=""leaning against the tree"" operator=eq phase=result open_value=true"
+can you draw a small girl facing right holding a red kite in the middle — keeping the rest of the scene as it is,"@f1 w.request.filler text=""keeping the rest of the scene""
+@r1 w.request.request act=make mood=do words=""can you draw a small girl facing right holding a red kite in the middle"" predicate=draw
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=girl
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.facing value=right operator=eq phase=result key_words=facing words=""facing right""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=middle words=""in the middle"" operator=region phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.holds value=holding words=""holding a red kite"" operator=eq phase=result"
+"perched on the fence, add a small bird facing left in the middle — that is how the picture goes","@f1 w.request.filler text=""picture goes""
+@r1 w.request.request act=make mood=do words=""perched on the fence, add a small bird facing left in the middle"" predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bird
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.facing value=left operator=eq phase=result key_words=facing words=""facing left""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=middle words=""in the middle"" operator=region phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.pose value=perched words=""perched on the fence"" operator=eq phase=result open_value=true"
+"perched on the fence, i need a little bird facing left in the middle","@r1 w.request.request act=make mood=do predicate=need
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bird
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=little operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.facing value=left operator=eq phase=result key_words=facing words=""facing left""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=middle words=""in the middle"" operator=region phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.pose value=perched words=""perched on the fence"" operator=eq phase=result open_value=true"
+"add a row of three small kids around the bench, as drawn so far","@f1 w.request.filler text=""drawn so far""
+@r1 w.request.request act=make mood=do words=""add a row of three small kids around the bench"" predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=kid sort_words=kids
+@r1.c1 w.request.constraint request=$r1 on=count attribute=drawn.count words=three operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.relation value=next_to words=around operator=relation phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the bench"" operator=relation phase=selector"
+"show a small boy about two inches in from the right edge, on the canvas","@f1 w.request.filler text=canvas
+@r1 w.request.request act=make mood=do words=""show a small boy about two inches in from the right edge"" predicate=show
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=boy
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.offset value=2 words=""two inches"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.unit value=inches operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=drawn.edge value=right words=""from the right edge"" operator=eq phase=result"
+"a little cloud over on the right, then i want a small boy about two inches in from the right edge","@f1 w.request.filler text=then
+@r1 w.request.request act=make mood=do words=""a little cloud over on the right""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cloud
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=little operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=right words=""over on the right"" operator=region phase=result
+@r2 w.request.request act=make mood=do words=""i want a small boy about two inches in from the right edge"" predicate=want
+@r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=boy
+@r2.c1 w.request.constraint request=$r2 on=size attribute=drawn.size value=small operator=degree phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=drawn.offset value=2 words=""two inches"" operator=eq phase=result
+@r2.c3 w.request.constraint request=$r2 on=attribute attribute=drawn.unit value=inches operator=eq phase=result
+@r2.c5 w.request.constraint request=$r2 on=attribute attribute=drawn.edge value=right words=""from the right edge"" operator=eq phase=result"
+put a small boy about two inches in from the right edge,"@r1 w.request.request act=make mood=do predicate=put
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=boy
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.offset value=2 words=""two inches"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.unit value=inches operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=drawn.edge value=right words=""from the right edge"" operator=eq phase=result"
+hey — there is a small boy about two inches in from the right edge,"@f1 w.request.filler text=hey
+@r1 w.request.request act=make mood=do words=""there is a small boy about two inches in from the right edge""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=boy
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.offset value=2 words=""two inches"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.unit value=inches operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=drawn.edge value=right words=""from the right edge"" operator=eq phase=result"
+"i need a small boy about two inches in from the right edge, thanks","@f1 w.request.filler text=thanks
+@r1 w.request.request act=make mood=do words=""i need a small boy about two inches in from the right edge"" predicate=need
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=boy
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.offset value=2 words=""two inches"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.unit value=inches operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=drawn.edge value=right words=""from the right edge"" operator=eq phase=result"
+"draw a small dog half inch above the bottom edge, in the picture","@f1 w.request.filler text=picture
+@r1 w.request.request act=make mood=do words=""draw a small dog half inch above the bottom edge"" predicate=draw
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=dog
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.offset value=0.5 words=""half inch"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.unit value=inch operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=drawn.edge value=bottom words=""above the bottom edge"" operator=eq phase=result"
+i need a small dog half inch above the bottom edge — over on our little canvas — and that is the whole scene,"@f1 w.request.filler text=""little canvas — and that is the whole scene""
+@r1 w.request.request act=make mood=do words=""i need a small dog half inch above the bottom edge"" predicate=need
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=dog
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.offset value=0.5 words=""half inch"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.unit value=inch operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=drawn.edge value=bottom words=""above the bottom edge"" operator=eq phase=result"
+"i need a small dog half inch above the bottom edge, thanks","@f1 w.request.filler text=thanks
+@r1 w.request.request act=make mood=do words=""i need a small dog half inch above the bottom edge"" predicate=need
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=dog
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.offset value=0.5 words=""half inch"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.unit value=inch operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=drawn.edge value=bottom words=""above the bottom edge"" operator=eq phase=result"
+"i need a big cloud half behind the tree, thanks","@f1 w.request.filler text=thanks
+@r1 w.request.request act=make mood=do words=""i need a big cloud half behind the tree"" predicate=need
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cloud
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=big operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.behind value=""the tree"" operator=relation phase=selector
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.cover value=half operator=degree phase=result"
+"a small cat way off on the left, then there is a big dog covering the boy's left leg — that is how the picture goes","@f1 w.request.filler text=then
+@f2 w.request.filler text=""picture goes""
+@r1 w.request.request act=make mood=do words=""a small cat way off on the left""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cat
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=left words=""the left"" operator=region phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.grade value=far words=""way off"" operator=degree phase=result
+@r2 w.request.request act=make mood=do words=""there is a big dog covering the boy's left leg""
+@r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=dog
+@r2.c1 w.request.constraint request=$r2 on=size attribute=drawn.size value=big operator=degree phase=result
+@r2.u1 w.request.unread request=$r2 text=""covering the boy's left leg"" note=drawn.occlusion value=covering"
+hey — there is a big dog covering the boy's left leg,"@f1 w.request.filler text=hey
+@r1 w.request.request act=make mood=do words=""there is a big dog covering the boy's left leg""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=dog
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=big operator=degree phase=result
+@r1.u1 w.request.unread request=$r1 text=""covering the boy's left leg"" note=drawn.occlusion value=covering"
+"behind the bench, its hull hidden, add a small boat — over on our little canvas — and that is the whole scene","@f1 w.request.filler text=""little canvas — and that is the whole scene""
+@r1 w.request.request act=make mood=do words=""behind the bench, its hull hidden, add a small boat"" predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=boat
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.behind value=""the bench"" operator=relation phase=selector"
+"can you place a little boat behind the bench, its hull hidden, just like that","@f1 w.request.filler text=""just like""
+@r1 w.request.request act=make mood=do words=""can you place a little boat behind the bench, its hull hidden"" predicate=place
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=boat
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=little operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.behind value=""the bench"" operator=relation phase=selector"
+then a small bench next to the boat — that is how the picture goes — just like that in the scene,"@f1 w.request.filler text=""picture goes — just like that in the scene""
+@r1 w.request.request act=make mood=do words=""then a small bench next to the boat"" predicate=then
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bench
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.relation value=next_to words=""next to"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the boat"" operator=relation phase=selector"
+"a tiny bird up near the top, and after that, place a tiny cloud high above the house — so the scene reads the way it should","@f1 w.request.filler text=""so the scene reads the way""
+@r1 w.request.request act=make mood=do words=""a tiny bird up near the top""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bird
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=tiny operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=top words=""up near the top"" operator=region phase=result
+@r2 w.request.request act=make mood=do words=""after that, place a tiny cloud high above the house"" predicate=place
+@r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=cloud
+@r2.c1 w.request.constraint request=$r2 on=size attribute=drawn.size value=tiny operator=degree phase=result
+@r2.c2 w.request.constraint request=$r2 on=place attribute=drawn.relation value=above words=""high above"" operator=relation phase=result
+@r2.c3 w.request.constraint request=$r2 on=place attribute=drawn.anchor value=""the house"" operator=relation phase=selector"
+"also put a small cat beside the dog, keeping everything else where it is","@f1 w.request.filler text=""keeping everything else""
+@r1 w.request.request act=make mood=do words=""also put a small cat beside the dog"" predicate=also
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cat
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.relation value=next_to words=beside operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the dog"" operator=relation phase=selector"
+can you add a small cat beside the dog too — the way the drawing looks so far — exactly where the picture needs it,"@f1 w.request.filler text=too
+@f2 w.request.filler text=""way the drawing looks so far — exactly where the picture needs""
+@r1 w.request.request act=make mood=do words=""can you add a small cat beside the dog too"" predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cat
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.relation value=next_to words=beside operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the dog"" operator=relation phase=selector"
+"we also need a small cat next to the dog, on the canvas","@f1 w.request.filler text=also
+@f2 w.request.filler text=canvas
+@r1 w.request.request act=make mood=do words=""we also need a small cat next to the dog"" predicate=need
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cat
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.relation value=next_to words=""next to"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the dog"" operator=relation phase=selector"
+"i need three ducks on the lake from smallest to biggest, on the canvas","@f1 w.request.filler text=canvas
+@r1 w.request.request act=make mood=do words=""i need three ducks on the lake from smallest to biggest"" predicate=need
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=duck sort_words=ducks
+@r1.c1 w.request.constraint request=$r1 on=count attribute=drawn.count words=three operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.relation value=on words=""on the lake"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the lake"" operator=relation phase=selector
+@r1.u1 w.request.unread request=$r1 text=""from smallest to biggest"" note=drawn.size_order value=""smallest to biggest"""
+"i need four trees on the hill from shortest to tallest, on the canvas","@f1 w.request.filler text=canvas
+@r1 w.request.request act=make mood=do words=""i need four trees on the hill from shortest to tallest"" predicate=need
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=tree sort_words=trees
+@r1.c1 w.request.constraint request=$r1 on=count attribute=drawn.count words=four operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.relation value=on words=""on the hill"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the hill"" operator=relation phase=selector
+@r1.u1 w.request.unread request=$r1 text=""from shortest to tallest"" note=drawn.size_order value=""shortest to tallest"""
+"a tiny bird up near the top, then give me two clouds in the sky with the bigger one on the left","@f1 w.request.filler text=then
+@r1 w.request.request act=make mood=do words=""a tiny bird up near the top""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bird
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=tiny operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=top words=""up near the top"" operator=region phase=result
+@r2 w.request.request act=make mood=do words=""give me two clouds in the sky with the bigger one on the left"" predicate=give
+@r2.t w.request.target request=$r2 family=drawn mode=new determiner=indefinite sort=cloud sort_words=clouds
+@r2.c1 w.request.constraint request=$r2 on=count attribute=drawn.count words=two operator=eq phase=result
+@r2.c2 w.request.constraint request=$r2 on=place attribute=drawn.relation value=in words=""in the sky"" operator=relation phase=result
+@r2.c3 w.request.constraint request=$r2 on=place attribute=drawn.anchor value=""the sky"" operator=relation phase=selector
+@r2.u1 w.request.unread request=$r2 text=""with the bigger one on the left"" note=drawn.size_order value=""with the bigger one on the left"""

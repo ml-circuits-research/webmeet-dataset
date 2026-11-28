@@ -1,0 +1,990 @@
+text,sop
+"put up a clean bar chart of profit by category, with gridlines and a zero-based y axis. Give me the category with the largest profit, and what's the lead over second?","@r1 w.request.request act=make mood=do words=""put up a clean bar chart of profit by category, with gridlines and a zero-based y axis"" predicate=""put up""
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=gridlines operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""zero-based y axis"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category words=""by category"" operator=eq phase=result
+@r2 w.request.request act=ask mood=ask words=""Give me the category with the largest profit"" predicate=Give question=max
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r3 w.request.request act=ask mood=ask words=""what's the lead over second"" question=what
+@r3.t w.request.target request=$r3 family=chart mode=existing determiner=definite fill=context
+@r3.l1 w.request.lookup request=$r3 target=$r3.t key=thing from=page
+@r3.u1 w.request.unread request=$r3 text=""lead over second"" note=chart.gap
+@r1.u1 w.request.unread request=$r1 text=""clean bar chart"" note=chart.presentation
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.dimension value=category operator=eq phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=chart.aggregate value=max words=largest operator=eq phase=result"
+"make a big bar chart of profit by category, values printed on the bars and the legend at the bottom. Which category tops the profit chart, and how far in front is it?","@r1 w.request.request act=make mood=do words=""make a big bar chart of profit by category, values printed on the bars and the legend at the bottom"" predicate=make
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""values printed on the bars"" operator=eq phase=result key_words=""printed on the bars""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=bottom words=""legend at the bottom"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category words=""by category"" operator=eq phase=result
+@r2 w.request.request act=ask mood=ask words=""Which category tops the profit chart"" predicate=Which question=max
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context family_words=chart
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r3 w.request.request act=ask mood=ask words=""how far in front is it"" predicate=how question=what
+@r3.t w.request.target request=$r3 family=chart mode=existing determiner=definite fill=context
+@r3.l1 w.request.lookup request=$r3 target=$r3.t key=thing from=page
+@r3.u1 w.request.unread request=$r3 text=""far in front"" note=chart.gap
+@r1.u1 w.request.unread request=$r1 text=""big bar chart"" note=chart.presentation
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.dimension value=category operator=eq phase=result
+@r3.u2 w.request.unread request=$r3 text=""how far in front"" note=chart.gap"
+"Bar chart of monthly revenue by region, five biggest regions, with shared axes, with the y axis starting at zero, with gridlines behind it","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""Bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=""monthly revenue"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""five biggest regions"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.axesSync value=shared words=""shared axes"" operator=eq phase=result"
+"Give me a bar chart of revenue by month of order date, top five regions, sorted, with shared axes, with gridlines behind it, sorted from high to low","@r1 w.request.request act=make mood=do predicate=Give
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""sorted from high to low"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=""revenue by month of order date"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""top five regions"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.axesSync value=shared words=""shared axes"" operator=eq phase=result"
+"Plot a bar chart of revenue by month of the order date, top five regions only, all on one common scale, with the y axis starting at zero, with gridlines behind it","@r1 w.request.request act=make mood=do predicate=Plot
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=""month of the order date"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""top five regions only"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.axesSync value=shared words=""one common scale"" operator=eq phase=result"
+"Build a bar chart of monthly revenue by region, five biggest regions, all on one common scale, with gridlines behind it, sorted from high to low","@r1 w.request.request act=make mood=do predicate=Build
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""sorted from high to low"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=""monthly revenue"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""five biggest regions"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.axesSync value=shared words=""one common scale"" operator=eq phase=result"
+"I want a bar chart of revenue by month of order date, top five regions, sorted, all on one common scale, sorted from high to low, with the y axis starting at zero","@r1 w.request.request act=make mood=do predicate=want
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""sorted from high to low"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=""revenue by month of order date"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""top five regions"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.axesSync value=shared words=""one common scale"" operator=eq phase=result"
+"Let's do a bar chart of monthly revenue by region, only the top five, all on one common scale, with the y axis starting at zero, with gridlines behind it","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=""monthly revenue"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region words=""by region"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.only value=""the top five"" words=""only the top five"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.axesSync value=shared words=""one common scale"" operator=eq phase=result"
+"We need a bar chart of revenue by month of the order date, top five regions only, with shared axes, with gridlines behind it, sorted from high to low","@r1 w.request.request act=make mood=do predicate=need
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""sorted from high to low"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=""month of the order date"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""top five regions only"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.axesSync value=shared words=""shared axes"" operator=eq phase=result"
+"Show a bar chart of revenue by month of order date, top five regions, sorted, with shared axes, with the y axis starting at zero, with gridlines behind it","@r1 w.request.request act=make mood=do predicate=Show
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=""revenue by month of order date"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""top five regions"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.axesSync value=shared words=""shared axes"" operator=eq phase=result"
+"Try a bar chart of monthly revenue by region, only the top five, with shared axes, with gridlines behind it, sorted from high to low","@r1 w.request.request act=make mood=do predicate=Try
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""sorted from high to low"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=""monthly revenue"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region words=""by region"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.only value=""the top five"" words=""only the top five"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.axesSync value=shared words=""shared axes"" operator=eq phase=result"
+"Make a bar chart of revenue by month of order date, top five regions, sorted, all on one common scale and give it the title 'Monthly revenue, top regions'","@r1 w.request.request act=make mood=do words=""Make a bar chart of revenue by month of order date, top five regions, sorted, all on one common scale"" predicate=Make
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=""revenue by month of order date"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""give it the title 'Monthly revenue, top regions'"" predicate=give
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.title value=""Monthly revenue, top regions"" operator=eq phase=result key_words=title
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""top five regions"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.axesSync value=shared words=""one common scale"" operator=eq phase=result"
+"Give me a bar chart of revenue by month of the order date, top five regions only, with shared axes. Show the values on the bars","@r1 w.request.request act=make mood=do words=""Give me a bar chart of revenue by month of the order date, top five regions only, with shared axes"" predicate=Give
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=""month of the order date"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""Show the values on the bars"" predicate=Show
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.show_values value=show words=""the values on the bars"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""top five regions only"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.axesSync value=shared words=""shared axes"" operator=eq phase=result"
+"I want a bar chart of revenue by month of the order date, top five regions only, all on one common scale, with gridlines behind it, sorted from high to low and use a colour-blind-safe palette","@r1 w.request.request act=make mood=do words=""I want a bar chart of revenue by month of the order date, top five regions only, all on one common scale, with gridlines behind it, sorted from high to low"" predicate=want
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""sorted from high to low"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=""month of the order date"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""use a colour-blind-safe palette"" predicate=use
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.palette value=colour-blind-safe operator=eq phase=result key_words=palette
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""top five regions only"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.axesSync value=shared words=""one common scale"" operator=eq phase=result"
+"We need a bar chart of revenue by month of order date, top five regions, sorted, all on one common scale, with the y axis starting at zero, with gridlines behind it — and lay the bars horizontally","@r1 w.request.request act=make mood=do words=""We need a bar chart of revenue by month of order date, top five regions, sorted, all on one common scale, with the y axis starting at zero, with gridlines behind it"" predicate=need
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=""revenue by month of order date"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""lay the bars horizontally"" predicate=lay
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.horizontal value=on words=""the bars horizontally"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""top five regions"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.axesSync value=shared words=""one common scale"" operator=eq phase=result"
+"Give me a bar chart of revenue by month of order date, top five regions, sorted, all on one common scale, sorted from high to low, with the y axis starting at zero, with gridlines behind it","@r1 w.request.request act=make mood=do predicate=Give
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""sorted from high to low"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=""revenue by month of order date"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""top five regions"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.axesSync value=shared words=""one common scale"" operator=eq phase=result"
+"Let's do a bar chart of monthly revenue by region, only the top five, with shared axes, with gridlines behind it, sorted from high to low","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""sorted from high to low"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=""monthly revenue"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region words=""by region"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.only value=""the top five"" words=""only the top five"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.axesSync value=shared words=""shared axes"" operator=eq phase=result"
+"Render a bar chart of monthly revenue by region, five biggest regions, all on one common scale, with the y axis starting at zero, with gridlines behind it, again on a third page","@f1 w.request.filler text=""third page""
+@r1 w.request.request act=make mood=do words=""Render a bar chart of monthly revenue by region, five biggest regions, all on one common scale, with the y axis starting at zero, with gridlines behind it"" predicate=Render
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=""monthly revenue"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""five biggest regions"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.axesSync value=shared words=""one common scale"" operator=eq phase=result"
+"the same one for the second slide: Try a bar chart of monthly revenue by region, only the top five, all on one common scale, sorted from high to low, with the y axis starting at zero","@f1 w.request.filler text=""same one for the second slide""
+@r1 w.request.request act=make mood=do words=""Try a bar chart of monthly revenue by region, only the top five, all on one common scale, sorted from high to low, with the y axis starting at zero"" predicate=Try
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""sorted from high to low"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=""monthly revenue"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region words=""by region"" operator=eq phase=result
+@f2 w.request.filler text=""for the second slide""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.only value=""the top five"" words=""only the top five"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.axesSync value=shared words=""one common scale"" operator=eq phase=result"
+"I need to see a bar chart of monthly revenue by region, five biggest regions, with shared axes, with gridlines behind it, sorted from high to low, this time for the client deck","@f1 w.request.filler text=need
+@f2 w.request.filler text=""time for the client deck""
+@r1 w.request.request act=make mood=do words=""I need to see a bar chart of monthly revenue by region, five biggest regions, with shared axes, with gridlines behind it, sorted from high to low"" predicate=see
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""sorted from high to low"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=""monthly revenue"" operator=eq phase=result
+@f3 w.request.filler text=""this time for the client deck""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""five biggest regions"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.axesSync value=shared words=""shared axes"" operator=eq phase=result"
+"same again for the client: Bar chart of monthly revenue by region, only the top five, with shared axes, with the y axis starting at zero, with gridlines behind it","@f1 w.request.filler text=""same again for the client""
+@r1 w.request.request act=make mood=do words=""Bar chart of monthly revenue by region, only the top five, with shared axes, with the y axis starting at zero, with gridlines behind it""
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""Bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=""monthly revenue"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region words=""by region"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.only value=""the top five"" words=""only the top five"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.axesSync value=shared words=""shared axes"" operator=eq phase=result"
+"excuse me, Plot a bar chart of revenue by month of the order date, top five regions only, all on one common scale, sorted from high to low, with the y axis starting at zero, please","@f1 w.request.filler text=excuse
+@f2 w.request.filler text=please
+@r1 w.request.request act=make mood=do words=""Plot a bar chart of revenue by month of the order date, top five regions only, all on one common scale, sorted from high to low, with the y axis starting at zero"" predicate=Plot
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""sorted from high to low"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=""month of the order date"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""top five regions only"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.axesSync value=shared words=""one common scale"" operator=eq phase=result"
+"quick one: Build a bar chart of monthly revenue by region, five biggest regions, all on one common scale, with the y axis starting at zero, with gridlines behind it, thanks","@f1 w.request.filler text=quick
+@f2 w.request.filler text=thanks
+@r1 w.request.request act=make mood=do words=""Build a bar chart of monthly revenue by region, five biggest regions, all on one common scale, with the y axis starting at zero, with gridlines behind it"" predicate=Build
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=""monthly revenue"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""five biggest regions"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.axesSync value=shared words=""one common scale"" operator=eq phase=result"
+"Try a bar chart of monthly revenue by region, five bigggest regions, with shared axes, with the y axis starting at zero, with gridlines behind it","@r1 w.request.request act=make mood=do predicate=Try
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=""monthly revenue"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""five bigggest regions"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.axesSync value=shared words=""shared axes"" operator=eq phase=result"
+"Give me a bar chart of revenue by month of order date, top five regions, sorted, wuth shared axes, with gridlines behind it, sorted from high to low","@r1 w.request.request act=make mood=do predicate=Give
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""sorted from high to low"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=""revenue by month of order date"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""top five regions"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.axesSync value=shared words=""shared axes"" operator=eq phase=result"
+"Let's do a bar chart of revenue per employee by department, one bar per department, with headcount in the tooltip, with the values shown on the bars, with the legend on the right","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result key_words=""shown on the bars""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""revenue per employee"" note=chart.metric.ratio value=""revenue per employee""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department operator=eq phase=result key_words=""one bar per department""
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=headcount operator=eq phase=result"
+"We need a bar chart of departmental revenue per employee, sorted high to low, with headcount in the tooltip, with the legend on the right, with the values shown on the bars","@r1 w.request.request act=make mood=do predicate=need
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result key_words=""shown on the bars""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""revenue per employee"" note=chart.metric.ratio value=""revenue per employee""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department words=departmental operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""sorted high to low"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=headcount operator=eq phase=result"
+"Render a bar chart of revenue per head by department, with headcount in the tooltip, with the values shown on the bars, with the legend on the right","@r1 w.request.request act=make mood=do predicate=Render
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result key_words=""shown on the bars""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""revenue per head by department"" note=chart.metric.ratio
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=headcount operator=eq phase=result"
+"Show a bar chart of the revenue per employee across departments, with values shown, with headcount in the tooltip, with the legend on the right, with the values shown on the bars","@r1 w.request.request act=make mood=do predicate=show
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result key_words=""shown on the bars""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""revenue per employee"" note=chart.metric.ratio value=""revenue per employee""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department words=departments operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=headcount operator=eq phase=result"
+"Try a bar chart of revenue per employee by department, one bar per department, labelled department by department, with the values shown on the bars, with the legend on the right","@r1 w.request.request act=make mood=do predicate=Try
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result key_words=""shown on the bars""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""revenue per employee"" note=chart.metric.ratio value=""revenue per employee""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department operator=eq phase=result key_words=""one bar per department""
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""department by department"" key_words=labelled operator=eq phase=result"
+"How about a bar chart of departmental revenue per employee, sorted high to low, labelled department by department, with the legend on the right, with the values shown on the bars?","@r1 w.request.request act=make mood=do predicate=how
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result key_words=""shown on the bars""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""revenue per employee"" note=chart.metric.ratio value=""revenue per employee""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department words=departmental operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""sorted high to low"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""department by department"" key_words=labelled operator=eq phase=result"
+"I need to see a bar chart of revenue per head by department, labelled department by department, with the values shown on the bars, with the legend on the right","@f1 w.request.filler text=need
+@r1 w.request.request act=make mood=do predicate=see
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result key_words=""shown on the bars""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""revenue per head by department"" note=chart.metric.ratio
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""department by department"" key_words=labelled operator=eq phase=result"
+"Make a bar chart of the revenue per employee across departments, with values shown, labelled department by department, with the legend on the right, with the values shown on the bars","@r1 w.request.request act=make mood=do predicate=Make
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result key_words=""shown on the bars""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""revenue per employee"" note=chart.metric.ratio value=""revenue per employee""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department words=departments operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""department by department"" key_words=labelled operator=eq phase=result"
+"Bar chart of revenue per employee by department, one bar per department, with headcount in the tooltip, with the values shown on the bars, with the legend on the right","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""Bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result key_words=""shown on the bars""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""revenue per employee"" note=chart.metric.ratio value=""revenue per employee""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department operator=eq phase=result key_words=""one bar per department""
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=headcount operator=eq phase=result"
+"Give me a bar chart of departmental revenue per employee, sorted high to low, with headcount in the tooltip, with the legend on the right, with the values shown on the bars","@r1 w.request.request act=make mood=do predicate=Give
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result key_words=""shown on the bars""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""revenue per employee"" note=chart.metric.ratio value=""revenue per employee""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department words=departmental operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""sorted high to low"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=headcount operator=eq phase=result"
+"Draw a bar chart of revenue per head by department, with headcount in the tooltip, with the values shown on the bars, with the legend on the right","@r1 w.request.request act=make mood=do predicate=Draw
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result key_words=""shown on the bars""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""revenue per head by department"" note=chart.metric.ratio
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=headcount operator=eq phase=result"
+"Plot a bar chart of the revenue per employee across departments, with values shown, with headcount in the tooltip, with the legend on the right, with the values shown on the bars","@r1 w.request.request act=make mood=do predicate=Plot
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result key_words=""shown on the bars""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""revenue per employee"" note=chart.metric.ratio value=""revenue per employee""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department words=departments operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=headcount operator=eq phase=result"
+"Let's do a bar chart of revenue per head by department, labelled department by department and add gridlines behind the bars","@r1 w.request.request act=make mood=do words=""Let's do a bar chart of revenue per head by department, labelled department by department""
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""revenue per head by department"" note=chart.metric.ratio
+@r2 w.request.request act=change mood=do words=""add gridlines behind the bars"" predicate=add
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.grid value=show words=""gridlines behind the bars"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""department by department"" key_words=labelled operator=eq phase=result"
+"I need to see a bar chart of revenue per employee by department, one bar per department, labelled department by department, with the values shown on the bars, with the legend on the right and make the bars blue","@f1 w.request.filler text=need
+@r1 w.request.request act=make mood=do words=""I need to see a bar chart of revenue per employee by department, one bar per department, labelled department by department, with the values shown on the bars, with the legend on the right"" predicate=see
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result key_words=""shown on the bars""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""revenue per employee"" note=chart.metric.ratio value=""revenue per employee""
+@r2 w.request.request act=change mood=do words=""make the bars blue"" predicate=make
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.colour value=blue operator=eq phase=result words=""the bars blue""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department operator=eq phase=result key_words=""one bar per department""
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""department by department"" key_words=labelled operator=eq phase=result"
+"Make a bar chart of departmental revenue per employee, sorted high to low, labelled department by department, with the legend on the right, with the values shown on the bars, lay the bars horizontally","@r1 w.request.request act=make mood=do words=""Make a bar chart of departmental revenue per employee, sorted high to low, labelled department by department, with the legend on the right, with the values shown on the bars"" predicate=Make
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result key_words=""shown on the bars""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""revenue per employee"" note=chart.metric.ratio value=""revenue per employee""
+@r2 w.request.request act=change mood=do words=""lay the bars horizontally"" predicate=lay
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.horizontal value=on words=""the bars horizontally"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department words=departmental operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""sorted high to low"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""department by department"" key_words=labelled operator=eq phase=result"
+"Bar chart of revenue per head by department, labelled department by department, with the values shown on the bars, with the legend on the right — and give it the title 'Revenue per employee'","@r1 w.request.request act=make mood=do words=""Bar chart of revenue per head by department, labelled department by department, with the values shown on the bars, with the legend on the right""
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""Bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result key_words=""shown on the bars""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""revenue per head by department"" note=chart.metric.ratio
+@r2 w.request.request act=change mood=do words=""give it the title 'Revenue per employee'"" predicate=give
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.title value=""Revenue per employee"" operator=eq phase=result key_words=title
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""department by department"" key_words=labelled operator=eq phase=result"
+"Render a bar chart of revenue per head by department, labelled department by department, with the values shown on the bars, with the legend on the right","@r1 w.request.request act=make mood=do predicate=Render
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result key_words=""shown on the bars""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""revenue per head by department"" note=chart.metric.ratio
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""department by department"" key_words=labelled operator=eq phase=result"
+"Make a bar chart of the revenue per employee across departments, with values shown, with headcount in the tooltip, with the legend on the right, with the values shown on the bars","@r1 w.request.request act=make mood=do predicate=Make
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result key_words=""shown on the bars""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""revenue per employee"" note=chart.metric.ratio value=""revenue per employee""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department words=departments operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=headcount operator=eq phase=result"
+"Give me a bar chart of departmental revenue per employee, sorted high to low, labelled department by department, with the legend on the right, with the values shown on the bars, a repeat for the second section","@f1 w.request.filler text=""repeat for the second section""
+@r1 w.request.request act=make mood=do words=""Give me a bar chart of departmental revenue per employee, sorted high to low, labelled department by department, with the legend on the right, with the values shown on the bars"" predicate=Give
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result key_words=""shown on the bars""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""revenue per employee"" note=chart.metric.ratio value=""revenue per employee""
+@f2 w.request.filler text=""a repeat for the second section""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department words=departmental operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""sorted high to low"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""department by department"" key_words=labelled operator=eq phase=result"
+"one more copy: Plot a bar chart of the revenue per employee across departments, with values shown, labelled department by department, with the legend on the right, with the values shown on the bars","@f1 w.request.filler text=""more copy""
+@r1 w.request.request act=make mood=do words=""Plot a bar chart of the revenue per employee across departments, with values shown, labelled department by department, with the legend on the right, with the values shown on the bars"" predicate=Plot
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result key_words=""shown on the bars""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""revenue per employee"" note=chart.metric.ratio value=""revenue per employee""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department words=departments operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""department by department"" key_words=labelled operator=eq phase=result"
+"I want a bar chart of departmental revenue per employee, sorted high to low, with headcount in the tooltip, with the legend on the right, with the values shown on the bars, as a copy for the appendix","@f1 w.request.filler text=""copy for the appendix""
+@r1 w.request.request act=make mood=do words=""I want a bar chart of departmental revenue per employee, sorted high to low, with headcount in the tooltip, with the legend on the right, with the values shown on the bars"" predicate=want
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result key_words=""shown on the bars""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""revenue per employee"" note=chart.metric.ratio value=""revenue per employee""
+@f2 w.request.filler text=""for the appendix""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department words=departmental operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""sorted high to low"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=headcount operator=eq phase=result"
+"put the same on page two: We need a bar chart of the revenue per employee across departments, with values shown, with headcount in the tooltip, with the legend on the right, with the values shown on the bars","@f1 w.request.filler text=""put the same on page two""
+@r1 w.request.request act=make mood=do words=""We need a bar chart of the revenue per employee across departments, with values shown, with headcount in the tooltip, with the legend on the right, with the values shown on the bars"" predicate=need
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result key_words=""shown on the bars""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""revenue per employee"" note=chart.metric.ratio value=""revenue per employee""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department words=departments operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=headcount operator=eq phase=result"
+"one more thing: Build a bar chart of revenue per employee by department, one bar per department, labelled department by department, with the values shown on the bars, with the legend on the right, if you can","@f1 w.request.filler text=""more thing""
+@r1 w.request.request act=make mood=do words=""Build a bar chart of revenue per employee by department, one bar per department, labelled department by department, with the values shown on the bars, with the legend on the right"" predicate=Build
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result key_words=""shown on the bars""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""revenue per employee"" note=chart.metric.ratio value=""revenue per employee""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department operator=eq phase=result key_words=""one bar per department""
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""department by department"" key_words=labelled operator=eq phase=result"
+"um, I want a bar chart of departmental revenue per employee, sorted high to low, labelled department by department, with the legend on the right, with the values shown on the bars — go on","@f1 w.request.filler text=um
+@f2 w.request.filler text=go
+@r1 w.request.request act=make mood=do words=""I want a bar chart of departmental revenue per employee, sorted high to low, labelled department by department, with the legend on the right, with the values shown on the bars"" predicate=want
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result key_words=""shown on the bars""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""revenue per employee"" note=chart.metric.ratio value=""revenue per employee""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department words=departmental operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""sorted high to low"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""department by department"" key_words=labelled operator=eq phase=result"
+"How about a bar chart of the revenue per employee across departments, with vaalues shown, with headcount in the tooltip, with the legend on the right, with the values shown on the bars?","@r1 w.request.request act=make mood=do predicate=how
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result key_words=""shown on the bars""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""revenue per employee"" note=chart.metric.ratio value=""revenue per employee""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department words=departments operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=headcount operator=eq phase=result"
+"I want a bar chart of departmental revenue per employee, sroted high to low, labelled department by department, with the legend on the right, with the values shown on the bars","@r1 w.request.request act=make mood=do predicate=want
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result key_words=""shown on the bars""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""revenue per employee"" note=chart.metric.ratio value=""revenue per employee""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department words=departmental operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=department operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""department by department"" key_words=labelled operator=eq phase=result"
+"Make a line chart of revenue over time, one line per segment coloured by segment, legend on the right, with the legend on the right, with the y axis starting at zero","@r1 w.request.request act=make mood=do predicate=Make
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.c8 w.request.constraint request=$r1 on=attribute attribute=chart.colourBy value=""segment"" words=""segment coloured by segment"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=time operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=segment operator=eq phase=result key_words=""one line per segment coloured by segment""
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right operator=eq phase=result words=""legend on the right"""
+"Line chart of monthly revenue with a colour per segment, legend on the right, with the y axis starting at zero, with gridlines behind it","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""Line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""a colour per segment"" note=chart.colourby
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right operator=eq phase=result words=""legend on the right"""
+"Give me a line chart of revenue by month, colour-coded by segment, legend on the right, with gridlines behind it, with the legend on the right","@r1 w.request.request act=make mood=do predicate=Give
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.colourBy value=""segment"" words=""colour-coded by segment"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right operator=eq phase=result words=""legend on the right"""
+"Draw a line chart of segment-coloured revenue over time, legend on the right, with the legend on the right, with the y axis starting at zero","@r1 w.request.request act=make mood=do predicate=Draw
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""segment-coloured revenue over time"" note=chart.colourby
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right operator=eq phase=result words=""legend on the right"""
+"Plot a line chart of revenue over time, one line per segment coloured by segment, with the legend at the bottom, with the y axis starting at zero, with gridlines behind it","@r1 w.request.request act=make mood=do predicate=Plot
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c8 w.request.constraint request=$r1 on=attribute attribute=chart.colourBy value=""segment"" words=""segment coloured by segment"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=time operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=segment operator=eq phase=result key_words=""one line per segment coloured by segment""
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=bottom operator=eq phase=result words=""legend at the bottom"""
+"Build a line chart of monthly revenue with a colour per segment, with the legend at the bottom, with gridlines behind it, with the legend on the right","@r1 w.request.request act=make mood=do predicate=Build
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""a colour per segment"" note=chart.colourby
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=bottom operator=eq phase=result words=""legend at the bottom"""
+"I want a line chart of revenue by month, colour-coded by segment, with the legend at the bottom, with the legend on the right, with the y axis starting at zero","@r1 w.request.request act=make mood=do predicate=want
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.colourBy value=""segment"" words=""colour-coded by segment"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=bottom operator=eq phase=result words=""legend at the bottom"""
+"Let's do a line chart of segment-coloured revenue over time, with the legend at the bottom, with the y axis starting at zero, with gridlines behind it","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""segment-coloured revenue over time"" note=chart.colourby
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=bottom operator=eq phase=result words=""legend at the bottom"""
+"We need a line chart of revenue over time, one line per segment coloured by segment, legend on the right, with gridlines behind it, with the legend on the right","@r1 w.request.request act=make mood=do predicate=need
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.c8 w.request.constraint request=$r1 on=attribute attribute=chart.colourBy value=""segment"" words=""segment coloured by segment"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=time operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=segment operator=eq phase=result key_words=""one line per segment coloured by segment""
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right operator=eq phase=result words=""legend on the right"""
+"Render a line chart of monthly revenue with a colour per segment, legend on the right, with the legend on the right, with the y axis starting at zero","@r1 w.request.request act=make mood=do predicate=Render
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""a colour per segment"" note=chart.colourby
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right operator=eq phase=result words=""legend on the right"""
+"Show a line chart of revenue by month, colour-coded by segment, legend on the right, with the y axis starting at zero, with gridlines behind it","@r1 w.request.request act=make mood=do predicate=Show
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.colourBy value=""segment"" words=""colour-coded by segment"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right operator=eq phase=result words=""legend on the right"""
+"Try a line chart of segment-coloured revenue over time, legend on the right, with gridlines behind it, with the legend on the right","@r1 w.request.request act=make mood=do predicate=Try
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""segment-coloured revenue over time"" note=chart.colourby
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right operator=eq phase=result words=""legend on the right"""
+"Make a line chart of revenue by month, colour-coded by segment, with the legend at the bottom and use a colour-blind-safe palette","@r1 w.request.request act=make mood=do words=""Make a line chart of revenue by month, colour-coded by segment, with the legend at the bottom"" predicate=Make
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.colourBy value=""segment"" words=""colour-coded by segment"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""use a colour-blind-safe palette"" predicate=use
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.palette value=colour-blind-safe operator=eq phase=result key_words=palette
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=bottom operator=eq phase=result words=""legend at the bottom"""
+"Line chart of segment-coloured revenue over time, with the legend at the bottom, then make the line blue","@f1 w.request.filler text=then
+@r1 w.request.request act=make mood=do words=""Line chart of segment-coloured revenue over time, with the legend at the bottom""
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""Line chart"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""segment-coloured revenue over time"" note=chart.colourby
+@r2 w.request.request act=change mood=do words=""make the line blue"" predicate=make
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.colour value=blue operator=eq phase=result words=""the line blue""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=bottom operator=eq phase=result words=""legend at the bottom"""
+"Give me a line chart of revenue over time, one line per segment coloured by segment, legend on the right. Give it the title 'Revenue lines by segment'","@r1 w.request.request act=make mood=do words=""Give me a line chart of revenue over time, one line per segment coloured by segment, legend on the right"" predicate=Give
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.colourBy value=""segment"" words=""segment coloured by segment"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""Give it the title 'Revenue lines by segment'"" predicate=Give
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.title value=""Revenue lines by segment"" operator=eq phase=result key_words=title
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=time operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=segment operator=eq phase=result key_words=""one line per segment coloured by segment""
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right operator=eq phase=result words=""legend on the right"""
+"I want a line chart of revenue over time, one line per segment coloured by segment, with the legend at the bottom, with gridlines behind it, with the legend on the right and show the values at the points","@r1 w.request.request act=make mood=do words=""I want a line chart of revenue over time, one line per segment coloured by segment, with the legend at the bottom, with gridlines behind it, with the legend on the right"" predicate=want
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.c8 w.request.constraint request=$r1 on=attribute attribute=chart.colourBy value=""segment"" words=""segment coloured by segment"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""show the values at the points"" predicate=show
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.show_values value=show words=""the values at the points"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=time operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=segment operator=eq phase=result key_words=""one line per segment coloured by segment""
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=bottom operator=eq phase=result words=""legend at the bottom"""
+"We need a line chart of revenue by month, colour-coded by segment, with the legend at the bottom, with the y axis starting at zero, with gridlines behind it — and make the line blue","@r1 w.request.request act=make mood=do words=""We need a line chart of revenue by month, colour-coded by segment, with the legend at the bottom, with the y axis starting at zero, with gridlines behind it"" predicate=need
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.colourBy value=""segment"" words=""colour-coded by segment"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""make the line blue"" predicate=make
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.colour value=blue operator=eq phase=result words=""the line blue""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=bottom operator=eq phase=result words=""legend at the bottom"""
+"Give me a line chart of revenue by month, colour-coded by segment, with the legend at the bottom, with the legend on the right, with the y axis starting at zero, with gridlines behind it","@r1 w.request.request act=make mood=do predicate=Give
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.c8 w.request.constraint request=$r1 on=attribute attribute=chart.colourBy value=""segment"" words=""colour-coded by segment"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=bottom operator=eq phase=result words=""legend at the bottom"""
+"and meanwhile, We need a line chart of revenue by month, colour-coded by segment, legend on the right, with gridlines behind it, with the legend on the right","@f1 w.request.filler text=meanwhile
+@r1 w.request.request act=make mood=do words=""We need a line chart of revenue by month, colour-coded by segment, legend on the right, with gridlines behind it, with the legend on the right"" predicate=need
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.colourBy value=""segment"" words=""colour-coded by segment"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right operator=eq phase=result words=""legend on the right"""
+"Render a line chart of segment-coloured revenue over time, legend on the right, with the legend on the right, with the y axis starting at zero, one more for the appendix page","@f1 w.request.filler text=""more for the appendix page""
+@r1 w.request.request act=make mood=do words=""Render a line chart of segment-coloured revenue over time, legend on the right, with the legend on the right, with the y axis starting at zero"" predicate=Render
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""segment-coloured revenue over time"" note=chart.colourby
+@f2 w.request.filler text=""for the appendix page""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right operator=eq phase=result words=""legend on the right"""
+"and while you're at it, Show a line chart of revenue over time, one line per segment coloured by segment, with the legend at the bottom, with the y axis starting at zero, with gridlines behind it","@f1 w.request.filler text=while
+@r1 w.request.request act=make mood=do words=""Show a line chart of revenue over time, one line per segment coloured by segment, with the legend at the bottom, with the y axis starting at zero, with gridlines behind it"" predicate=Show
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c8 w.request.constraint request=$r1 on=attribute attribute=chart.colourBy value=""segment"" words=""segment coloured by segment"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=time operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=segment operator=eq phase=result key_words=""one line per segment coloured by segment""
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=bottom operator=eq phase=result words=""legend at the bottom"""
+"hey — Plot a line chart of revenue over time, one line per segment coloured by segment, with the legend at the bottom, with the legend on the right, with the y axis starting at zero, thanks","@f1 w.request.filler text=hey
+@f2 w.request.filler text=thanks
+@r1 w.request.request act=make mood=do words=""Plot a line chart of revenue over time, one line per segment coloured by segment, with the legend at the bottom, with the legend on the right, with the y axis starting at zero"" predicate=Plot
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""with the legend on the right"" operator=eq phase=result
+@r1.c8 w.request.constraint request=$r1 on=attribute attribute=chart.colourBy value=""segment"" words=""segment coloured by segment"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=time operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=segment operator=eq phase=result key_words=""one line per segment coloured by segment""
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=bottom operator=eq phase=result words=""legend at the bottom"""
+"excuse me, Build a line chart of monthly revenue with a colour per segment, with the legend at the bottom, with the y axis starting at zero, with gridlines behind it, please","@f1 w.request.filler text=excuse
+@f2 w.request.filler text=please
+@r1 w.request.request act=make mood=do words=""Build a line chart of monthly revenue with a colour per segment, with the legend at the bottom, with the y axis starting at zero, with gridlines behind it"" predicate=Build
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""a colour per segment"" note=chart.colourby
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=bottom operator=eq phase=result words=""legend at the bottom"""
+"I need to see a line chart of monthly revenue with a colour per segment, with the leegnd at the bottom, with the y axis starting at zero, with gridlines behind it","@f1 w.request.filler text=need
+@r1 w.request.request act=make mood=do predicate=see
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""a colour per segment"" note=chart.colourby
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+"Give me a line chart of revenue over time, one line per segment coloured by segment, legened on the right, with the y axis starting at zero, with gridlines behind it","@r1 w.request.request act=make mood=do predicate=Give
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=""with the y axis starting at zero"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.colourBy value=""segment"" words=""segment coloured by segment"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=time operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=segment operator=eq phase=result key_words=""one line per segment coloured by segment"""
+"Let's do a line chart of monthly revenue, peak annotated with its value, labelled at the month, with the values shown at the points, with gridlines behind it","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown at the points"" operator=eq phase=result key_words=""shown at the points""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""peak annotated with its value"" note=chart.annotation value=peak
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.u3 w.request.unread request=$r1 text=""annotated with its value"" note=chart.labels
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result"
+"We need a line chart of monthly revenue, peak marked and labelled, labelled at the month, with gridlines behind it, with the values shown at the points","@r1 w.request.request act=make mood=do predicate=need
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown at the points"" operator=eq phase=result key_words=""shown at the points""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""peak marked and labelled"" note=chart.annotation value=peak
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result"
+"Render a line chart of revenue by month with a callout on the peak, labelled at the month, with the values shown at the points, with gridlines behind it","@r1 w.request.request act=make mood=do predicate=Render
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown at the points"" operator=eq phase=result key_words=""shown at the points""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""a callout on the peak"" note=chart.annotation value=peak
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result"
+"Show a line chart of monthly revenue, peak flagged for the review, labelled at the month, with gridlines behind it, with the values shown at the points","@r1 w.request.request act=make mood=do predicate=show
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown at the points"" operator=eq phase=result key_words=""shown at the points""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""peak flagged for the review"" note=chart.annotation value=peak
+@r1.u2 w.request.unread request=$r1 text=""flagged for the review"" note=chart.brief
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result"
+"Try a line chart of monthly revenue, peak annotated with its value, with a callout box, with the values shown at the points, with gridlines behind it","@r1 w.request.request act=make mood=do predicate=Try
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown at the points"" operator=eq phase=result key_words=""shown at the points""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""peak annotated with its value"" note=chart.annotation value=peak
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.u3 w.request.unread request=$r1 text=""annotated with its value"" note=chart.labels"
+"How about a line chart of monthly revenue, peak marked and labelled, with a callout box, with gridlines behind it, with the values shown at the points?","@r1 w.request.request act=make mood=do predicate=how
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown at the points"" operator=eq phase=result key_words=""shown at the points""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""peak marked and labelled"" note=chart.annotation value=peak
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+"I need to see a line chart of revenue by month with a callout on the peak, with a callout box, with the values shown at the points, with gridlines behind it","@f1 w.request.filler text=need
+@r1 w.request.request act=make mood=do predicate=see
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown at the points"" operator=eq phase=result key_words=""shown at the points""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""a callout on the peak"" note=chart.annotation value=peak
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result"
+"Line chart of monthly revenue, peak annotated with its value, labelled at the month, with the values shown at the points, with gridlines behind it","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""Line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown at the points"" operator=eq phase=result key_words=""shown at the points""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""peak annotated with its value"" note=chart.annotation value=peak
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.u3 w.request.unread request=$r1 text=""annotated with its value"" note=chart.labels
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result"
+"Give me a line chart of monthly revenue, peak marked and labelled, labelled at the month, with gridlines behind it, with the values shown at the points","@r1 w.request.request act=make mood=do predicate=Give
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown at the points"" operator=eq phase=result key_words=""shown at the points""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""peak marked and labelled"" note=chart.annotation value=peak
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result"
+"Draw a line chart of revenue by month with a callout on the peak, labelled at the month, with the values shown at the points, with gridlines behind it","@r1 w.request.request act=make mood=do predicate=Draw
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown at the points"" operator=eq phase=result key_words=""shown at the points""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""a callout on the peak"" note=chart.annotation value=peak
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result"
+"Plot a line chart of monthly revenue, peak flagged for the review, labelled at the month, with gridlines behind it, with the values shown at the points","@r1 w.request.request act=make mood=do predicate=Plot
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown at the points"" operator=eq phase=result key_words=""shown at the points""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""peak flagged for the review"" note=chart.annotation value=peak
+@r1.u2 w.request.unread request=$r1 text=""flagged for the review"" note=chart.brief
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result"
+"Let's do a line chart of revenue by month with a callout on the peak, with a callout box and move the legend to the right","@r1 w.request.request act=make mood=do words=""Let's do a line chart of revenue by month with a callout on the peak, with a callout box""
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""a callout on the peak"" note=chart.annotation value=peak
+@r2 w.request.request act=change mood=do words=""move the legend to the right"" predicate=move
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.legend value=right words=""the right"" operator=eq phase=result key_words=legend
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result"
+"We need a line chart of monthly revenue, peak flagged for the review, with a callout box, then start the y axis at zero","@f1 w.request.filler text=then
+@r1 w.request.request act=make mood=do words=""We need a line chart of monthly revenue, peak flagged"" predicate=need
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""peak flagged for the review"" note=chart.annotation value=peak
+@r2 w.request.request act=change mood=do words=""start the y axis at zero"" predicate=start
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.min value=""0"" words=""the y axis at zero"" operator=eq phase=result
+@f2 w.request.filler text=""for the review""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r2.u1 w.request.unread request=$r2 text=""callout box, then"" note=chart.other"
+"Render a line chart of monthly revenue, peak annotated with its value, labelled at the month. Use a colour-blind-safe palette","@r1 w.request.request act=make mood=do words=""Render a line chart of monthly revenue, peak annotated with its value, labelled at the month"" predicate=Render
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""peak annotated with its value"" note=chart.annotation value=peak
+@r2 w.request.request act=change mood=do words=""Use a colour-blind-safe palette"" predicate=Use
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.palette value=colour-blind-safe operator=eq phase=result key_words=palette
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.u3 w.request.unread request=$r1 text=""annotated with its value"" note=chart.labels
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result"
+"I need to see a line chart of monthly revenue, peak annotated with its value, with a callout box, with the values shown at the points, with gridlines behind it and make the line blue","@f1 w.request.filler text=need
+@r1 w.request.request act=make mood=do words=""I need to see a line chart of monthly revenue, peak annotated with its value, with a callout box, with the values shown at the points, with gridlines behind it"" predicate=see
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown at the points"" operator=eq phase=result key_words=""shown at the points""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""peak annotated with its value"" note=chart.annotation value=peak
+@r2 w.request.request act=change mood=do words=""make the line blue"" predicate=make
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.colour value=blue operator=eq phase=result words=""the line blue""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.u3 w.request.unread request=$r1 text=""annotated with its value"" note=chart.labels"
+"Make a line chart of monthly revenue, peak marked and labelled, with a callout box, with gridlines behind it, with the values shown at the points, give it the title 'Monthly revenue with peak'","@r1 w.request.request act=make mood=do words=""Make a line chart of monthly revenue, peak marked and labelled, with a callout box, with gridlines behind it, with the values shown at the points"" predicate=Make
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown at the points"" operator=eq phase=result key_words=""shown at the points""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""peak marked and labelled"" note=chart.annotation value=peak
+@r2 w.request.request act=change mood=do words=""give it the title 'Monthly revenue with peak'"" predicate=give
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.title value=""Monthly revenue with peak"" operator=eq phase=result key_words=title
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+"Line chart of revenue by month with a callout on the peak, with a callout box, with the values shown at the points, with gridlines behind it — and move the legend to the right","@r1 w.request.request act=make mood=do words=""Line chart of revenue by month with a callout on the peak, with a callout box, with the values shown at the points, with gridlines behind it""
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""Line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown at the points"" operator=eq phase=result key_words=""shown at the points""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""a callout on the peak"" note=chart.annotation value=peak
+@r2 w.request.request act=change mood=do words=""move the legend to the right"" predicate=move
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.legend value=right words=""the right"" operator=eq phase=result key_words=legend
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result"
+"Render a line chart of revenue by month with a callout on the peak, with a callout box, with the values shown at the points, with gridlines behind it","@r1 w.request.request act=make mood=do predicate=Render
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown at the points"" operator=eq phase=result key_words=""shown at the points""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""a callout on the peak"" note=chart.annotation value=peak
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result"
+"same session, next ask: Line chart of revenue by month with a callout on the peak, labelled at the month, with the values shown at the points, with gridlines behind it","@f1 w.request.filler text=""same session, next ask""
+@r1 w.request.request act=make mood=do words=""Line chart of revenue by month with a callout on the peak, labelled at the month, with the values shown at the points, with gridlines behind it""
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""Line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown at the points"" operator=eq phase=result key_words=""shown at the points""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""a callout on the peak"" note=chart.annotation value=peak
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result"
+"Give me a line chart of monthly revenue, peak flagged for the review, labelled at the month, with gridlines behind it, with the values shown at the points as well","@f1 w.request.filler text=well
+@r1 w.request.request act=make mood=do words=""Give me a line chart of monthly revenue, peak flagged for the review, labelled at the month, with gridlines behind it, with the values shown at the points"" predicate=Give
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown at the points"" operator=eq phase=result key_words=""shown at the points""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""peak flagged for the review"" note=chart.annotation value=peak
+@r1.u2 w.request.unread request=$r1 text=""flagged for the review"" note=chart.brief
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result"
+"while you're there: Draw a line chart of monthly revenue, peak annotated with its value, with a callout box, with the values shown at the points, with gridlines behind it","@f1 w.request.filler text=while
+@r1 w.request.request act=make mood=do words=""Draw a line chart of monthly revenue, peak annotated with its value, with a callout box, with the values shown at the points, with gridlines behind it"" predicate=Draw
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown at the points"" operator=eq phase=result key_words=""shown at the points""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""peak annotated with its value"" note=chart.annotation value=peak
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.u3 w.request.unread request=$r1 text=""annotated with its value"" note=chart.labels"
+"quick one: Build a line chart of monthly revenue, peak annotated with its value, with a callout box, with the values shown at the points, with gridlines behind it — go on","@f1 w.request.filler text=quick
+@f2 w.request.filler text=go
+@r1 w.request.request act=make mood=do words=""Build a line chart of monthly revenue, peak annotated with its value, with a callout box, with the values shown at the points, with gridlines behind it"" predicate=Build
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown at the points"" operator=eq phase=result key_words=""shown at the points""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""peak annotated with its value"" note=chart.annotation value=peak
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.u3 w.request.unread request=$r1 text=""annotated with its value"" note=chart.labels"
+"one more thing: I want a line chart of monthly revenue, peak marked and labelled, with a callout box, with gridlines behind it, with the values shown at the points, if you can","@f1 w.request.filler text=""more thing""
+@r1 w.request.request act=make mood=do words=""I want a line chart of monthly revenue, peak marked and labelled, with a callout box, with gridlines behind it, with the values shown at the points"" predicate=want
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown at the points"" operator=eq phase=result key_words=""shown at the points""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""peak marked and labelled"" note=chart.annotation value=peak
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+"Build a line chart of monthly revenue, peak annotated with its value, with a calout box, with the values shown at the points, with gridlines behind it","@r1 w.request.request act=make mood=do predicate=Build
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown at the points"" operator=eq phase=result key_words=""shown at the points""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""peak annotated with its value"" note=chart.annotation value=peak
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.u3 w.request.unread request=$r1 text=""annotated with its value"" note=chart.labels"

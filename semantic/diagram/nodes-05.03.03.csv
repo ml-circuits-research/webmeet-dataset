@@ -1,0 +1,601 @@
+text,sop,sop1
+again please,"@f1 w.request.filler text=please
+@r1 w.request.request act=redo mood=do predicate=again
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing",
+"do that again, and keep the rest as it is","@r1 w.request.request act=redo mood=do words=""do that again"" predicate=do
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=place mode=arrange mood=do words=""and keep the rest as it is"" predicate=keep
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page",
+"repeat the last step, then check the order","@f1 w.request.filler text=then
+@r1 w.request.request act=redo mood=do words=""repeat the last step"" predicate=repeat
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=step determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=last words=""the last step"" operator=eq phase=selector
+@r2 w.request.request act=ask mood=do words=""then check the order"" predicate=check question=list asked_words=order
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page",
+"do the same as previous, but slower this time","@r1 w.request.request act=redo mood=do words=""do the same as previous"" predicate=""do the same"" mode=repeat
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""the same as previous"" note=diagram.step.repeat value=previous
+@r2 w.request.request act=redo mood=do words=""but slower this time"" predicate=slower
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page",
+redo the last step and then undo it,"@r1 w.request.request act=redo mood=do words=""redo the last step"" predicate=redo
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=step determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=last words=""redo the last step"" operator=eq phase=selector
+@r2 w.request.request act=undo mood=do words=""then undo it"" predicate=undo
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page",
+reapply step two and immediately take it back,"@r1 w.request.request act=redo mood=do words=""reapply step two"" predicate=reapply
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=step determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=2 words=""reapply step two"" operator=eq phase=selector
+@r2 w.request.request act=undo mood=do words=""immediately take it back"" predicate=immediately
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""immediately take it back"" note=diagram.step.index value=""step two""",
+"repeat that, then undo that when you get a chance","@f1 w.request.filler text=then
+@f2 w.request.filler text=""get a chance""
+@r1 w.request.request act=redo mood=do words=""repeat that"" predicate=repeat
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=undo mood=do words=""undo that"" predicate=undo
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page",
+redo the last swap and undo the same swap,"@r1 w.request.request act=redo mood=do words=""redo the last swap"" predicate=redo
+@r1.t w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=last words=""redo the last swap"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=step.kind value=swap operator=eq phase=selector
+@r2 w.request.request act=undo mood=do words=""undo the same swap"" predicate=undo
+@r2.t w.request.target request=$r2 family=step mode=existing determiner=definite fill=journal_step
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=step.which value=previous words=""undo the same swap"" operator=eq phase=selector
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=step.kind value=swap operator=eq phase=selector",
+do a redo and then an undo of the same step,"@f1 w.request.filler text=then
+@r1 w.request.request act=redo mood=do words=""do a redo"" predicate=redo
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=undo mood=do words=""an undo of the same step"" predicate=undo
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""an undo of the same step"" note=diagram.step.index value=""the same step""",
+"could you redo the previous action, then undo the previous action","@f1 w.request.filler text=then
+@r1 w.request.request act=redo mood=do words=""redo the previous action"" predicate=redo
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=action determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=previous words=""redo the previous action"" operator=eq phase=selector
+@r2 w.request.request act=undo mood=do words=""undo the previous action"" predicate=undo
+@r2.t w.request.target request=$r2 family=step mode=existing family_words=action determiner=definite fill=journal_step
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=step.which value=previous words=""undo the previous action"" operator=eq phase=selector",
+put the last step forward and then back again,"@f1 w.request.filler text=then
+@r1 w.request.request act=redo mood=do words=""put the last step forward"" predicate=put
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""put the last step forward"" note=diagram.step.repeat value=""the last step""
+@r2 w.request.request act=undo mood=do words=""back again"" predicate=back
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.m1 w.request.constraint request=$r2 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+redo and undo the same change in one go,"@r1 w.request.request act=redo mood=do words=redo predicate=redo
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=undo mood=do words=""undo the same change in one go"" predicate=undo
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""undo the same change in one go"" note=diagram.step.index value=""the same change""",
+go forward one step and then back one step,"@f1 w.request.filler text=then
+@r1 w.request.request act=redo mood=do words=""go forward one step"" predicate=go
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""go forward one step"" note=diagram.step.repeat value=""one step""
+@r2 w.request.request act=undo mood=do words=""back one step"" predicate=back
+@r2.t w.request.target request=$r2 family=step mode=existing count_words=one count=1 family_words=step determiner=definite fill=journal_step
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page",
+"i need you to redo the last move, then undo the last move","@f1 w.request.filler text=need
+@f2 w.request.filler text=then
+@r1 w.request.request act=redo mood=do words=""redo the last move"" predicate=redo
+@r1.t w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=last words=""redo the last move"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=step.kind value=move operator=eq phase=selector
+@r2 w.request.request act=undo mood=do words=""undo the last move"" predicate=undo
+@r2.t w.request.target request=$r2 family=step mode=existing determiner=definite fill=journal_step
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=step.which value=last words=""undo the last move"" operator=eq phase=selector
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=step.kind value=move operator=eq phase=selector",
+repeat the last step and then reverse it,"@f1 w.request.filler text=then
+@r1 w.request.request act=redo mood=do words=""repeat the last step"" predicate=repeat
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=step determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=last words=""repeat the last step"" operator=eq phase=selector
+@r2 w.request.request act=undo mood=do words=""reverse it"" predicate=reverse
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page",
+redo step four and undo step four,"@r1 w.request.request act=redo mood=do words=""redo step four"" predicate=redo
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=step determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=4 words=""redo step four"" operator=eq phase=selector
+@r2 w.request.request act=undo mood=do words=""undo step four"" predicate=undo
+@r2.t w.request.target request=$r2 family=step mode=existing family_words=step determiner=definite fill=journal_step
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=step.index value=4 words=""undo step four"" operator=eq phase=selector",
+roll the last change forward and then roll it back,"@f1 w.request.filler text=then
+@r1 w.request.request act=redo mood=do words=""roll the last change forward"" predicate=roll
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""roll the last change forward"" note=diagram.step.repeat value=""the last change""
+@r2 w.request.request act=undo mood=do words=""roll it back"" predicate=roll
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""roll it back"" note=diagram.step.index value=it
+@r2.m1 w.request.constraint request=$r2 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+i need you to redo the previous step and then undo exactly the same step so the row is unchanged,"@f1 w.request.filler text=need
+@f2 w.request.filler text=then
+@f3 w.request.filler text=""so the row is unchanged""
+@r1 w.request.request act=redo mood=do words=""redo the previous step"" predicate=redo
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=step determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=previous words=""redo the previous step"" operator=eq phase=selector
+@r2 w.request.request act=undo mood=do words=""undo exactly the same step"" predicate=undo
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""undo exactly the same step"" note=diagram.step.index value=""the same step""",
+"reapply the last swap and immediately take it back, leaving every figure where it was","@f1 w.request.filler text=""leaving every figure""
+@r1 w.request.request act=redo mood=do words=""reapply the last swap"" predicate=reapply
+@r1.t w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=last words=""reapply the last swap"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=step.kind value=swap operator=eq phase=selector
+@r2 w.request.request act=undo mood=do words=""immediately take it back"" predicate=immediately
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""immediately take it back"" note=diagram.step.index value=it",
+"do one redo followed by one undo of the same action, a cycle that cancels itself out","@f1 w.request.filler text=followed
+@f2 w.request.filler text=""cycle that cancels itself out""
+@r1 w.request.request act=redo mood=do words=""one redo"" predicate=redo
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=undo mood=do words=""one undo of the same action"" predicate=undo
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""one undo of the same action"" note=diagram.step.index value=""the same action""",
+now redo the last step and undo it,"@f1 w.request.filler text=now
+@r1 w.request.request act=redo mood=do words=""redo the last step"" predicate=redo
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=step determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=last words=""redo the last step"" operator=eq phase=selector
+@r2 w.request.request act=undo mood=do words=""undo it"" predicate=undo
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing",
+go ahead and put step two forward and take it back again,"@f1 w.request.filler text=""go ahead""
+@r1 w.request.request act=redo mood=do words=""put step two forward"" predicate=put
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.u1 w.request.unread request=$r1 text=""put step two forward"" note=diagram.step.repeat value=""step two""
+@r2 w.request.request act=undo mood=do words=""take it back again"" predicate=take
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing
+@r2.u1 w.request.unread request=$r2 text=""take it back again"" note=diagram.step.index value=it
+@r2.m1 w.request.constraint request=$r2 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+redo that and then undo it,"@r1 w.request.request act=redo mood=do words=""redo that"" predicate=redo
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r2 w.request.request act=undo mood=do words=""then undo it"" predicate=undo
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing",
+redo the last step and then undoo it,"@f1 w.request.filler text=then
+@r1 w.request.request act=redo mood=do words=""redo the last step"" predicate=redo
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=step determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=last words=""redo the last step"" operator=eq phase=selector
+@r2 w.request.request act=undo mood=do words=""undoo it"" predicate=undoo
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page",
+reaply step two and immediately take it back,"@r1 w.request.request act=redo mood=do words=""reaply step two"" predicate=reaply
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""reaply step two"" note=diagram.step.repeat value=""step two""
+@r2 w.request.request act=undo mood=do words=""immediately take it back"" predicate=immediately
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""immediately take it back"" note=diagram.step.index value=""step two""",
+would you redo then undo,"@f1 w.request.filler text=then
+@r1 w.request.request act=redo mood=do words=redo predicate=redo
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r2 w.request.request act=undo mood=do words=undo predicate=undo
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing",
+redo the last step and then undo it and leave every one of the other figures in the row exactly where it is so the arrangement stays clear and readable,"@f1 w.request.filler text=""leave every one of the other figures in the row exactly where it is so the arrangement stays clear and readable""
+@r1 w.request.request act=redo mood=do words=""redo the last step"" predicate=redo
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=step determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=last words=""redo the last step"" operator=eq phase=selector
+@r2 w.request.request act=undo mood=do words=""then undo it"" predicate=undo
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page",
+"repeat that, then undo that so the row ends up in exactly the order you expect without disturbing any of the other figures around it","@f1 w.request.filler text=then
+@f2 w.request.filler text=""so the row ends up in exactly the order you expect without disturbing any of the other figures""
+@r1 w.request.request act=redo mood=do words=""repeat that"" predicate=repeat
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=undo mood=do words=""undo that"" predicate=undo
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page",
+redo step two again,"@r1 w.request.request act=redo mood=do predicate=redo
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=step determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=2 words=""step two"" operator=eq phase=selector",
+repeat the step you already redid,"@r1 w.request.request act=redo mood=do predicate=repeat
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""step you already redid"" note=diagram.step.repeat value=""the step you already redid""",
+"apply step three once more, even though it is already applied","@r1 w.request.request act=redo mood=do predicate=apply
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=step determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=3 words=""step three"" operator=eq phase=selector",
+repeat the last action yet again,"@r1 w.request.request act=redo mood=do predicate=repeat
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=action determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=last words=""last action"" operator=eq phase=selector",
+could you run step four again for a second time,"@r1 w.request.request act=redo mood=do words=""run step four again for a second time"" predicate=run
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=step determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=4 words=""step four"" operator=eq phase=selector",
+do the same redo one more time,"@r1 w.request.request act=redo mood=do predicate=redo
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""same redo"" note=diagram.step.repeat value=""the same redo""",
+"repeat step one again, it has already been redone","@r1 w.request.request act=redo mood=do predicate=repeat
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=step determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=1 words=""repeat step one"" operator=eq phase=selector",
+redo that step once more,"@r1 w.request.request act=redo mood=do predicate=redo
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""redo that step"" note=diagram.step.repeat value=""that step""",
+do another redo of the same step that was just reapplied,"@f1 w.request.filler text=just
+@r1 w.request.request act=redo mood=do predicate=redo
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=step determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=previous words=""same step"" operator=eq phase=selector",
+now redo step two again,"@r1 w.request.request act=redo mood=do predicate=redo
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=step determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=2 words=""step two"" operator=eq phase=selector",
+repeat it once more,"@r1 w.request.request act=redo mood=do predicate=repeat
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing",
+and apply that step again,"@r1 w.request.request act=redo mood=do predicate=apply
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.u1 w.request.unread request=$r1 text=""apply that step"" note=diagram.step.repeat value=""that step""",
+"redo step two again, then undo it","@f1 w.request.filler text=then
+@r1 w.request.request act=redo mood=do words=""redo step two again"" predicate=redo
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=step determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=2 words=""step two"" operator=eq phase=selector
+@r2 w.request.request act=undo mood=do words=""then undo it"" predicate=undo
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page",
+go ahead and repeat the last step again and then swap the first two,"@f1 w.request.filler text=""go ahead""
+@f2 w.request.filler text=then
+@r1 w.request.request act=redo mood=do words=""repeat the last step again"" predicate=repeat
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=step determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=last words=""last step"" operator=eq phase=selector
+@r2 w.request.request act=change mood=do words=""and then swap the first two"" predicate=swap
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.ordinal value=""first two"" operator=eq phase=selector",
+redo step tow again,"@r1 w.request.request act=redo mood=do predicate=redo
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""step tow"" note=diagram.step.repeat value=""step tow""",
+repeat the step you already redid egain,"@r1 w.request.request act=redo mood=do predicate=repeat
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""step you already redid"" note=diagram.step.repeat value=""the step you already redid""",
+"again, it is already done","@r1 w.request.request act=redo mood=do predicate=again
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing",
+repeat the step you already redid while keeping every other box in the row in the same place so the whole arrangement remains easy to follow,"@f1 w.request.filler text=so
+@r1 w.request.request act=redo mood=do predicate=repeat
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context quantifier=whole description=""the same place""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""step you already redid"" note=diagram.step.repeat value=""the step you already redid""
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page",
+redo the last step a second time so the row ends up in exactly the order you expect without disturbing any of the other figures around it,"@f1 w.request.filler text=so
+@r1 w.request.request act=redo mood=do predicate=redo
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=step determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=last words=""last step"" operator=eq phase=selector
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page",
+apply the last two steps again,"@r1 w.request.request act=redo mood=do words=""apply the last two steps"" predicate=apply
+@r1.t w.request.target request=$r1 family=step mode=existing count_words=two count=2 family_words=steps determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=last words=""the last two steps"" operator=eq phase=selector
+@r2 w.request.request act=redo mood=do words=again predicate=again
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page",
+redo the previous swap again,"@r1 w.request.request act=redo mood=do predicate=redo
+@r1.t w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=previous words=""previous swap"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=step.kind value=swap operator=eq phase=selector",
+apply the last change again on top of itself,"@r1 w.request.request act=redo mood=do predicate=apply
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=change determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=last words=""last change"" operator=eq phase=selector",
+redo step two again and leave every one of the other figures in the row exactly where it is so the arrangement stays clear and readable,"@f1 w.request.filler text=so
+@r1 w.request.request act=redo mood=do predicate=redo
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=step determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=2 words=""step two"" operator=eq phase=selector
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.position value=unchanged words=""exactly where it is"" operator=eq phase=result open_value=true",
+"whatever you did on the last turn, do it once more without changing anything else, and keep the shapes exactly as they are","@r1 w.request.request act=redo mood=do predicate=turn
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""whatever you did on the last turn"" note=diagram.step.repeat value=""whatever you did on the last turn""
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.position value=unchanged words=""exactly as they are"" operator=eq phase=result open_value=true",
+reapply step three and then revert it right away,"@f1 w.request.filler text=then
+@r1 w.request.request act=redo mood=do words=""reapply step three"" predicate=reapply
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=step determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=3 words=""reapply step three"" operator=eq phase=selector
+@r2 w.request.request act=undo mood=do words=""revert it right away"" predicate=revert
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""revert it right away"" note=diagram.step.index value=it",
+reapply step two and immediately take it back while keeping every other box in the row in the same place so the whole arrangement remains easy to follow,"@f1 w.request.filler text=""while keeping every other box in the row in the same place so the whole arrangement remains easy to follow""
+@r1 w.request.request act=redo mood=do words=""reapply step two"" predicate=reapply
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=step determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=2 words=""reapply step two"" operator=eq phase=selector
+@r2 w.request.request act=undo mood=do words=""immediately take it back"" predicate=immediately
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""immediately take it back"" note=diagram.step.index value=""step two""",
+do that again,"@r1 w.request.request act=redo mood=do predicate=do
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing",
+redo the removal,"@r1 w.request.request act=redo mood=do predicate=redo
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.u1 w.request.unread request=$r1 text=""redo the removal"" note=diagram.step.repeat value=""the removal""",
+redo the last step and the one before it,"@r1 w.request.request act=redo mood=do words=""redo the last step"" predicate=redo
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=step determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=last words=""the last step"" operator=eq phase=selector
+@r2 w.request.request act=redo mood=do words=""and the one before it"" predicate=before
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page",
+"redo the step you just undid, because the removal was actually correct and i want the figure back off the row","@f1 w.request.filler text=actually
+@f2 w.request.filler text=want
+@r1 w.request.request act=redo mood=do predicate=redo
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""the step you just undid"" note=diagram.step.repeat value=""the step you just undid""
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+"do the same as step two, but with the rightmost object","@r1 w.request.request act=redo mood=do predicate=same
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context family_words=object
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t1 w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step family_words=step
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=2 words=""step two"" operator=eq phase=selector
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""the rightmost"" operator=eq phase=selector",
+"do the thing you just did, but this time on the leftmost and the second from the left, please, for me","@f1 w.request.filler text=please
+@r1 w.request.request act=redo mood=do predicate=thing
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""the leftmost"" operator=eq phase=selector
+@r1.m2 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""the second from the left"" operator=eq phase=selector",
+apply the same move to the rightmost pair and leave every other figure exactly where it is now,"@f1 w.request.filler text=now
+@r1 w.request.request act=redo mood=do predicate=apply
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context family_words=figure
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t1 w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step family_words=figure
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=previous words=""the same move"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=step.kind value=move operator=eq phase=selector
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""the rightmost pair"" operator=eq phase=selector
+@r1.m2 w.request.constraint request=$r1 on=attribute attribute=node.position value=unchanged words=""exactly where it is"" operator=eq phase=result open_value=true",
+do it again with the pair next to it,"@r1 w.request.request act=redo mood=do predicate=pair
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=next operator=eq phase=selector",
+"can you repeat with the one after it, and keep going until you reach the end of the row","@r1 w.request.request act=redo mood=do words=""repeat with the one after it, and keep going until you reach the end of the row"" predicate=repeat
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page",
+apply the last move to the neighbouring pair,"@r1 w.request.request act=redo mood=do predicate=apply
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t1 w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=last words=""the last move"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=step.kind value=move operator=eq phase=selector",
+now the adjacent two,"@r1 w.request.request act=redo mood=do predicate=now
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page",
+repeat the swap with the pair immediately after,"@r1 w.request.request act=redo mood=do predicate=repeat
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t1 w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=swap words=""repeat the swap"" operator=eq phase=selector",
+apply it to the two figures just right of that pair,"@f1 w.request.filler text=just
+@r1 w.request.request act=redo mood=do predicate=apply
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context family_words=figures
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page",
+do the same to the pair one step along,"@r1 w.request.request act=redo mood=do predicate=same
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context family_words=step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""the same to the pair"" note=diagram.step.repeat value=""the same""",
+do it again with the pair nextto it,"@r1 w.request.request act=redo mood=do predicate=pair
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=next operator=eq phase=selector",
+"do the same to the pair beside it, then to the pair beside that one, and then the one after that","@f1 w.request.filler text=then
+@f2 w.request.filler text=then
+@r1 w.request.request act=redo mood=do words=""do the same to the pair beside it"" predicate=same
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""the same to the pair"" note=diagram.step.repeat value=""the same""
+@r2 w.request.request act=redo mood=do words=""then to the pair beside that one"" predicate=""beside that""
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page",
+"carry the same move all the way along the row, one adjacent pair at a time","@r1 w.request.request act=redo mood=do words=""carry the same move all the way along the row"" predicate=carry
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t2 w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step
+@r1.l3 w.request.lookup request=$r1 target=$r1.t2 key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=previous words=""the same move"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=step.kind value=move operator=eq phase=selector
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r2 w.request.request act=redo mood=do words=""one adjacent pair at a time"" predicate=adjacent
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page",
+"repeat that on every neighbouring pair, and then check the row","@f1 w.request.filler text=then
+@r1 w.request.request act=redo mood=do words=""repeat that on every neighbouring pair"" predicate=repeat
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=do words=""and then check the row"" predicate=check question=list
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.t1 w.request.target request=$r2 family=group mode=existing fill=context family_words=row
+@r2.l2 w.request.lookup request=$r2 target=$r2.t1 key=thing from=page",
+keep applying the same swap to each neighbouring pair until you reach the end of the row,"@r1 w.request.request act=redo mood=do predicate=applying
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t2 w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step
+@r1.l3 w.request.lookup request=$r1 target=$r1.t2 key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=previous words=""the same swap"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=step.kind value=swap operator=eq phase=selector
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page",
+repeat both of the last two moves,"@r1 w.request.request act=redo mood=do predicate=repeat
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t1 w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step count=2 count_words=two
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=last words=""both of the last two moves"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=step.kind value=move words=moves operator=eq phase=selector",
+"take the two steps we just did and do them again on the same figures, in the same order, without changing anything else in the row","@r1 w.request.request act=redo mood=do predicate=take
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context family_words=figures description=""the same figure""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""the two steps we just did"" note=diagram.step.repeat value=""the two steps we just did""
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page",
+the last change was actually two moves and i want both of them applied again to the figures they touched the first time,"@f1 w.request.filler text=actually
+@f2 w.request.filler text=want
+@r1 w.request.request act=redo mood=do predicate=applied
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context family_words=figures
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page",
+go back two steps in the history and replay both of them on the current row exactly as they ran before,"@r1 w.request.request act=redo mood=do predicate=replay
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context family_words=steps
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page",
+repeat the action in step 3 with the figure from steps 1 and 2,"@r1 w.request.request act=redo mood=do predicate=repeat
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context family_words=steps family_words=figure
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t1 w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step family_words=step
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=3 words=""step 3"" operator=eq phase=selector",
+repeat the action in step 3 with the figrue from steps 1 and 2,"@r1 w.request.request act=redo mood=do predicate=repeat
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context family_words=steps
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t1 w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step family_words=step
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=3 words=""step 3"" operator=eq phase=selector",
+swap again except with the 2nd and 3rd figures,"@r1 w.request.request act=redo mood=do predicate=swap
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context family_words=figures
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""again except with the 2nd and 3rd figures"" note=diagram.step.repeat value=again",
+repeat the swap from step two with the 2nd and 3rd,"@r1 w.request.request act=redo mood=do predicate=repeat
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t1 w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step family_words=step
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=2 words=""step two"" operator=eq phase=selector",
+the action is repeated one last time on the remaining shape,"@r1 w.request.request act=redo mood=do predicate=the
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=quantified fill=all description=""the remaining shape"" family_words=shape",
+apply the same move to the only figure left,"@r1 w.request.request act=redo mood=do predicate=apply
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=quantified fill=all description=""the only figure left"" family_words=figure",
+the last figure left should get the same treatment,"@r1 w.request.request act=redo mood=do predicate=get
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=quantified fill=all description=""the last figure left"" family_words=figure",
+run the same change on whatever is still in the row,"@r1 w.request.request act=redo mood=do predicate=run
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=quantified fill=all description=""whatever is still in the row""",
+"we narrowed the row down to a single figure, so repeat the last action on the remaining shape and then stop","@f1 w.request.filler text=so
+@f2 w.request.filler text=then
+@r1 w.request.request act=redo mood=do predicate=repeat
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=quantified fill=all family_words=figure description=""the remaining shape""
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l1 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page",
+do the last move again on the one that is left,"@r1 w.request.request act=redo mood=do predicate=move
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=quantified fill=all description=""move again on the one that is left""
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.position value=left operator=eq phase=result open_value=true",
+repeat the last step on the remaining figure and check the order,"@r1 w.request.request act=redo mood=do words=""repeat the last step on the remaining figure"" predicate=repeat
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=quantified fill=all family_words=step description=""the remaining figure""
+@r2 w.request.request act=ask mood=check words=""check the order"" predicate=check question=list asked_words=order
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page",
+do the same to the last figure that remains,"@r1 w.request.request act=redo mood=do predicate=""do the same"" mode=repeat
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=quantified fill=all description=""the last figure that remains"" family_words=figure",
+"after all the deletions there is only one figure in the row, and the audit asks for the same swap one more time, so repeat the action on the remaining shape","@f1 w.request.filler text=so
+@r1 w.request.request act=redo mood=do predicate=swap
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=quantified fill=all family_words=figure description=""the remaining shape""
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l1 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page",
+the only shape left gets the same swap,"@r1 w.request.request act=redo mood=do predicate=swap
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=quantified fill=all description=""the only shape left"" family_words=shape",
+repeat the last step on the remains,"@r1 w.request.request act=redo mood=do predicate=repeat
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=quantified fill=all family_words=step description=""step on the remains""
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""the last step"" operator=eq phase=selector",
+the one left,"@r1 w.request.request act=redo mood=do predicate=the
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=quantified fill=all",
+same action on the survivor,"@r1 w.request.request act=redo mood=do predicate=same
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=quantified fill=all description=""action on the survivor""",
+repeat the last change on the remaining object,"@r1 w.request.request act=redo mood=do predicate=repeat
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=quantified fill=all description=""the remaining object"" family_words=object",
+repeat the action on the remaining shape and count what is there,"@r1 w.request.request act=redo mood=do words=""repeat the action on the remaining shape"" predicate=repeat
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=quantified fill=all description=""the remaining shape"" family_words=shape
+@r2 w.request.request act=ask mood=check words=""count what is there"" predicate=count question=count
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page",
+"there is no pair left to swap, just the single figure, so treat it as one last repeat and leave the row as it ends up","@f1 w.request.filler text=no
+@f2 w.request.filler text=so
+@r1 w.request.request act=redo mood=do predicate=pair
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=quantified fill=all description=""just the single figure"" family_words=figure
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l1 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page",
+the final figure should repeat the move,"@r1 w.request.request act=redo mood=do predicate=repeat
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=quantified fill=all description=""the final figure"" family_words=figure",
+the other two as well,"@r1 w.request.request act=redo mood=do predicate=the
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.u1 w.request.unread request=$r1 text=""two as well"" note=diagram.step.repeat value=""as well""",
+repeat the action on the only figure left and then tell me the order of the row,"@f1 w.request.filler text=then
+@r1 w.request.request act=redo mood=do words=""repeat the action on the only figure left"" predicate=repeat
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=quantified fill=all description=""the only figure left"" family_words=figure
+@r2 w.request.request act=ask mood=ask words=""tell me the order of the row"" predicate=tell question=list asked_words=order
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.t1 w.request.target request=$r2 family=group mode=existing fill=context family_words=row
+@r2.l2 w.request.lookup request=$r2 target=$r2.t1 key=thing from=page",

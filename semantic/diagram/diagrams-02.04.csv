@@ -1,0 +1,319 @@
+text,sop
+Test if there is a correlation between discount and margin,"@r1 w.request.request act=ask mood=ask predicate=Test question=exists
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=description
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""a correlation between discount and margin"" note=chart.correlation"
+"So, I want to know whether discount correlates with margin for the client call, please","@f1 w.request.filler text=So
+@f2 w.request.filler text=want
+@f3 w.request.filler text=please
+@r1 w.request.request act=ask mood=ask words=""I want to know whether discount correlates with margin"" predicate=know question=exists
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=description
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""whether discount correlates with margin"" note=chart.correlation
+@f4 w.request.filler text=""for the client call"""
+What is the typical profit for each segment and ship mode,"@r1 w.request.request act=ask mood=ask predicate=What question=average
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=description
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=segment value=""ship mode"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=typical operator=eq phase=result"
+What happened to order value over the quarter,"@r1 w.request.request act=ask mood=ask predicate=What question=describe
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=description
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""happened to order value over the quarter"" note=chart.trend"
+"Map the variation in order value by channel, looking only at the chart that is already open on the slide, and tell me how confident you are in that answer","@r1 w.request.request act=ask mood=ask predicate=Map question=describe words=""Map the variation in order value by channel, looking only at the chart that is already open on the slide""
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=description family_words=chart
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""the variation in order value by channel"" note=chart.dispersion
+@f1 w.request.filler text=""tell me how confident you are in that answer""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.only value=""the chart that is already open on the slide"" words=""looking only at the chart that is already open on the slide"" operator=eq phase=result"
+"give Home a self-referencing arrow, would you","@r1 w.request.request act=make mood=do predicate=give
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Home operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Home operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.route value=loop words=self-referencing operator=eq phase=result open_value=true"
+now loop the Verify box back on itself as well,"@f1 w.request.filler text=well
+@r1 w.request.request act=make mood=do predicate=loop
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Verify words=""the Verify box"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Verify operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.route value=loop words=""back on itself"" operator=eq phase=result open_value=true"
+loop Approve onto itself and colour the little circle teal,"@r1 w.request.request act=make mood=do predicate=loop
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Approve operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Approve operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.route value=loop words=""onto itself"" operator=eq phase=result open_value=true
+@r2 w.request.request act=change mood=do words=""and colour the little circle teal"" predicate=and
+@r2.t w.request.target request=$r2 family=link mode=new determiner=indefinite
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.colour value=teal operator=eq phase=result key_words=colour
+@r2.u1 w.request.unread request=$r2 text=""the little circle"" note=link.loopCircle"
+same pair treatment for Start and Scan,"@r1 w.request.request act=make mood=do predicate=same
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Start operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Scan operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""same pair treatment"" note=link.count value=""same pair"""
+just the pie chart,"@r1 w.request.request act=make mood=do predicate=just
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite sort=pie sort_words=""pie chart""
+@r1.c1 w.request.constraint request=$r1 on=place attribute=node.position value=above words=""just the pie chart"" operator=relation phase=result"
+"I want the legend out of the drawing area, parked in the top right corner where it does not cover any box","@r1 w.request.request act=place mode=arrange mood=do predicate=want
+@r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""parked in the top right corner"" note=diagram.legendPosition value=""top right""
+@r1.u3 w.request.unread request=$r1 text=""out of the drawing area"" note=diagram.legendPlacement
+@r1.u4 w.request.unread request=$r1 text=""cover any box"" note=diagram.legendClearance"
+move the legend to the top right,"@r1 w.request.request act=place mode=arrange mood=do predicate=move
+@r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""top right"" note=diagram.legendPosition value=""top right"""
+what I want is the legend sitting at the top right,"@r1 w.request.request act=place mode=arrange mood=do predicate=want
+@r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""the legend sitting at the top right"" note=diagram.legendPosition value=""top right"""
+I need Draft and Review merged into one,"@f1 w.request.filler text=""I need""
+@r1 w.request.request act=group mode=merge mood=do words=""Draft and Review merged into one"" predicate=merged
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Draft
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Draft operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Review operator=eq phase=selector"
+"I want Draft and Review collapsed into a single wider box, keeping the text of both and every arrow that used to touch them","@f1 w.request.filler text=""I want""
+@r1 w.request.request act=group mode=merge mood=do words=""Draft and Review collapsed into a single wider box, keeping the text of both and every arrow that used to touch them"" predicate=collapsed
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Draft family_words=box
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Draft operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Review operator=eq phase=selector
+@r1.u2 w.request.unread request=$r1 text=""a single wider box"" note=node.mergeShape
+@r1.u3 w.request.unread request=$r1 text=""keeping the text of both and every arrow that used to touch them"" note=request.preserve"
+go for marker interval 3 on the revenue trend plus have the series name Trajectory and then make the font a bit bigger,"@f1 w.request.filler text=plus
+@f2 w.request.filler text=then
+@r1 w.request.request act=change mood=do words=""go for marker interval 3 on the revenue trend"" predicate=go
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""revenue trend""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.markerInterval value=""3"" words=""marker interval 3"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""have the series name Trajectory"" predicate=have
+@r2.t w.request.target request=$r2 family=series mode=existing determiner=definite fill=context family_words=series
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=series.label value=Trajectory operator=eq phase=result key_words=name
+@r3 w.request.request act=change mood=do words=""make the font a bit bigger"" predicate=make
+@r3.t w.request.target request=$r3 family=chart mode=existing determiner=definite fill=context
+@r3.l1 w.request.lookup request=$r3 target=$r3.t key=thing from=page
+@r3.c1 w.request.constraint request=$r3 on=attribute attribute=chart.fontSize words=""a bit bigger"" operator=delta phase=result step=more key_words=font"
+"try the marker interval 3 — while you're at it, keep the series name Trajectory","@f1 w.request.filler text=while
+@r1 w.request.request act=change mood=do words=""try the marker interval 3"" predicate=try
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.markerInterval value=""3"" words=""marker interval 3"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""keep the series name Trajectory"" predicate=keep
+@r2.t w.request.target request=$r2 family=series mode=existing determiner=definite fill=context family_words=series
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=series.label value=Trajectory operator=eq phase=result key_words=name"
+"when the board dials in tomorrow morning the first chart they open is Sales by month, so for their sake set the x axis label on the right, that's the tweak; also try the data series named Data before the meeting starts; plus give it the title Q2 sales","@f1 w.request.filler text=""board dials in tomorrow morning the first chart they open is Sales by month, so for their sake""
+@f2 w.request.filler text=also
+@f3 w.request.filler text=""meeting starts; plus""
+@f4 w.request.filler text=""that's the tweak""
+@r1 w.request.request act=change mood=do words=""set the x axis label on the right"" predicate=set
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""x axis label on the right"" note=chart.xlabel.position value=right
+@r2 w.request.request act=change mood=do words=""try the data series named Data"" predicate=try
+@r2.t w.request.target request=$r2 family=series mode=existing determiner=definite fill=context family_words=""data series""
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=series.label value=Data words=""named Data"" operator=eq phase=result
+@r3 w.request.request act=change mood=do words=""give it the title Q2 sales"" predicate=give
+@r3.t w.request.target request=$r3 family=chart mode=existing determiner=definite fill=context
+@r3.l1 w.request.lookup request=$r3 target=$r3.t key=thing from=page
+@r3.c1 w.request.constraint request=$r3 on=attribute attribute=chart.title value=""Q2 sales"" operator=eq phase=result key_words=title"
+"how about marker interval 3? — while you're at it, let's have the series name Trajectory on the revenue trend","@f1 w.request.filler text=while
+@r1 w.request.request act=change mood=do words=""how about marker interval 3?"" predicate=how
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.markerInterval value=""3"" words=""marker interval 3"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""let's have the series name Trajectory on the revenue trend""
+@r2.t w.request.target request=$r2 family=series mode=existing determiner=definite fill=context family_words=series
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=series.label value=Trajectory operator=eq phase=result key_words=name
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=series.chart value=""revenue trend"" operator=eq phase=result"
+"for the monthly ops review on Friday I need the revenue trend legible from the back of the conference room, so go for marker interval 3 on the revenue trend, and have the series name Trajectory before we circulate it wider; plus show both grid lines","@f1 w.request.filler text=""monthly ops review on Friday I need the revenue trend legible from the back of the conference room, so""
+@f2 w.request.filler text=""circulate it wider; plus""
+@r1 w.request.request act=change mood=do words=""go for marker interval 3 on the revenue trend"" predicate=go
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""revenue trend""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.markerInterval value=""3"" words=""marker interval 3"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""have the series name Trajectory"" predicate=have
+@r2.t w.request.target request=$r2 family=series mode=existing determiner=definite fill=context family_words=series
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=series.label value=Trajectory operator=eq phase=result key_words=name
+@r3 w.request.request act=change mood=do words=""show both grid lines"" predicate=show
+@r3.t w.request.target request=$r3 family=chart mode=existing determiner=definite fill=context
+@r3.l1 w.request.lookup request=$r3 target=$r3.t key=thing from=page
+@r3.c1 w.request.constraint request=$r3 on=attribute attribute=chart.grid value=show operator=eq phase=result key_words=""grid lines"""
+how do I get the edge labels above the arrow?,"@r1 w.request.request act=make mood=do predicate=get
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=quantified fill=all family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.labelPosition value=above operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""edge labels"" note=link.labelText"
+please keep the group frame labelled Group A for the talk,"@f1 w.request.filler text=please
+@f2 w.request.filler text=""for the talk""
+@r1 w.request.request act=change mood=do predicate=keep words=""keep the group frame labelled Group A""
+@r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=context family_words=""group frame""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.label value=""Group A"" operator=eq phase=result key_words=labelled"
+"for the grouped steps, set up the dashed frame labelled Group B, then fill the frame light grey, with enough space between the parts","@f1 w.request.filler text=then
+@r1 w.request.request act=change mood=do words=""for the grouped steps, set up the dashed frame labelled Group B"" predicate=""set up""
+@r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.label value=""Group B"" operator=eq phase=result key_words=labelled
+@r1.u1 w.request.unread request=$r1 text=""grouped steps"" note=group.members
+@r1.u3 w.request.unread request=$r1 text=""dashed frame"" note=group.frameStyle
+@r2 w.request.request act=change mood=do words=""fill the frame light grey, with enough space between the parts"" predicate=fill
+@r2.t w.request.target request=$r2 family=group mode=existing determiner=definite fill=context family_words=frame
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=group.colour value=grey words=""light grey"" operator=eq phase=result open_value=true
+@r2.u1 w.request.unread request=$r2 text=""enough space between the parts"" note=group.spacing"
+what about the dashed frame labelled Group B?,"@r1 w.request.request act=change mood=do predicate=Group
+@r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.label value=""Group B"" operator=eq phase=result key_words=labelled
+@r1.u1 w.request.unread request=$r1 text=""dashed frame"" note=group.frameStyle"
+how do I get the group frame labelled Group A?,"@r1 w.request.request act=change mood=do predicate=get
+@r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=context family_words=""group frame""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.label value=""Group A"" operator=eq phase=result key_words=labelled"
+what about the group frame labelled Group A?,"@r1 w.request.request act=change mood=do predicate=group
+@r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=context family_words=""group frame""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.label value=""Group A"" operator=eq phase=result key_words=labelled"
+pleese remove the emphasis box,"@f1 w.request.filler text=pleese
+@r1 w.request.request act=remove mood=do words=""remove the emphasis box"" predicate=remove
+@r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""emphasis box"" note=diagram.emphasis value=box"
+delete the overbrace now,"@f1 w.request.filler text=now
+@r1 w.request.request act=remove mood=do predicate=delete
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+"for the toy machine, set up an accept state drawn as a double circle, then make the start arrow thicker, with enough space between the parts","@f1 w.request.filler text=then
+@r1 w.request.request act=change mood=do predicate=""set up""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""accept state drawn as a double circle"" note=diagram.acceptState value=""double circle""
+@r1.u2 w.request.unread request=$r1 text=""the toy machine"" note=diagram.topic
+@r2 w.request.request act=change mood=do predicate=make
+@r2.t w.request.target request=$r2 family=link mode=existing determiner=quantified fill=all
+@r2.c1 w.request.constraint request=$r2 on=size attribute=link.width words=thicker operator=delta phase=result step=more
+@r2.u1 w.request.unread request=$r2 text=""start arrow"" note=link.entry
+@r2.u2 w.request.unread request=$r2 text=""enough space between the parts"" note=group.spacing"
+"hey, advance to the next slide","@f1 w.request.filler text=hey
+@r1 w.request.request act=pick mood=do predicate=advance
+@r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=description description=""the next slide"""
+"hey, change the title of the closing slide to Times New Roman","@f1 w.request.filler text=hey
+@r1 w.request.request act=pick mood=do words=""change the title of the closing slide"" predicate=change
+@r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=description description=""the closing slide""
+@r1.u1 w.request.unread request=$r1 text=""the closing slide"" note=page.index value=last
+@r2 w.request.request act=change mood=do predicate=change
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description sort=title
+@r2.u1 w.request.unread request=$r2 text=""Times New Roman"" note=node.fontFamily value=""Times New Roman"""
+"move to slide 2, and give it a thin outline","@r1 w.request.request act=pick mood=do predicate=move
+@r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=description description=""slide 2""
+@r1.u1 w.request.unread request=$r1 text=""slide 2"" note=page.index value=2
+@r2 w.request.request act=change mood=do words=""and give it a thin outline"" predicate=give
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=it
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.outline value=thin words=""thin outline"" operator=eq phase=result"
+"copy this slide, and give it a thin outline","@r1 w.request.request act=copy mood=do predicate=copy
+@r1.t w.request.target request=$r1 family=page mode=new determiner=indefinite family_words=slide
+@r2 w.request.request act=change mood=do words=""and give it a thin outline"" predicate=give
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=it
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.outline value=thin words=""thin outline"" operator=eq phase=result"
+clear the personal information on slide 22,"@r1 w.request.request act=remove mood=do predicate=clear
+@r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=description description=""slide 22""
+@r1.u1 w.request.unread request=$r1 text=""the personal information"" note=page.delete value=""personal information"""
+erase the personal information on slide 22,"@r1 w.request.request act=remove mood=do predicate=erase
+@r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=description description=""slide 22""
+@r1.u1 w.request.unread request=$r1 text=""the personal information"" note=page.delete value=""personal information"""
+could you delete the personal information on slide 22?,"@r1 w.request.request act=remove mood=do predicate=delete
+@r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=description description=""slide 22""
+@r1.u1 w.request.unread request=$r1 text=""the personal information"" note=page.delete value=""personal information"""
+"duplicate the table onto another slide, and give it a thin outline","@r1 w.request.request act=copy mood=do predicate=duplicate
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=description sort=table description=""the table""
+@r2 w.request.request act=change mood=do words=""and give it a thin outline"" predicate=give
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=it
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.outline value=thin words=""thin outline"" operator=eq phase=result"
+"could you copy the picture?, and give it a thin outline","@r1 w.request.request act=copy mood=do predicate=copy
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=description sort=picture description=""the picture""
+@r2 w.request.request act=change mood=do words=""and give it a thin outline"" predicate=give
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=it
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.outline value=thin words=""thin outline"" operator=eq phase=result"
+I need another one just like it — the Shelve box,"@f1 w.request.filler text=""need another one just like""
+@r1 w.request.request act=copy mood=do predicate=I
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Shelve family_words=box
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Shelve operator=eq phase=selector"
+"how about the pie chart resting low, below the image?","@r1 w.request.request act=place mood=do predicate=resting
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=description sort=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.at value=bottom words=""how about the pie chart resting low, below the image?"" operator=eq phase=result"
+"the chart could sit lower than the image, where it reads best","@r1 w.request.request act=place mood=do predicate=sit
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=description sort=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.at value=bottom words=""lower than the image"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""where it reads best"" note=request.reason"
+"let's duplicate the pie chart, and keep the gap even","@r1 w.request.request act=copy mood=do predicate=duplicate
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=description sort=chart sort_words=""pie chart"" description=""the pie chart""
+@r2 w.request.request act=place mode=arrange mood=do words=""and keep the gap even"" predicate=keep
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""the gap even"" note=node.spacing value=even"
+"make a copy of the pie chart, then group it with the box","@f1 w.request.filler text=then
+@r1 w.request.request act=copy mood=do predicate=make
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=description sort=chart sort_words=""pie chart"" description=""the pie chart""
+@r2 w.request.request act=group mood=do words=""then group it with the box"" predicate=group
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=it family_words=box"
+copy the pie hcart,"@r1 w.request.request act=copy mood=do predicate=copy
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=description sort=chart sort_words=hcart description=""the pie hcart"""
+"put a copy of the pie chart on the next slide, please","@f1 w.request.filler text=please
+@r1 w.request.request act=copy mood=do predicate=put
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=description sort=chart sort_words=""pie chart"" description=""the pie chart"""
+"put the missing figure back, then number the row","@f1 w.request.filler text=then
+@r1 w.request.request act=undo mood=do words=""put the missing figure back"" predicate=put
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite
+@r1.u1 w.request.unread request=$r1 text=""the missing figure"" note=node.journal.restore value=""the missing figure""
+@r2 w.request.request act=place mode=arrange mood=do words=""then number the row"" predicate=number
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=diagram.steps value=numbered words=""number the row"" operator=eq phase=result open_value=true"
+move the series label to the right,"@r1 w.request.request act=change mood=do predicate=move
+@r1.t w.request.target request=$r1 family=series mode=existing determiner=definite fill=context family_words=series
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""series label to the right"" note=chart.series.label.position value=right"
+"when the board dials in tomorrow morning the first chart they open is Revenue trend, so for their sake put the series label to the right before the meeting starts, could you also give it the title Revenue by month","@f1 w.request.filler text=""board dials in tomorrow morning the first chart they open is Revenue trend, so for their sake""
+@f2 w.request.filler text=""meeting starts, could you also""
+@r1 w.request.request act=change mood=do words=""put the series label to the right"" predicate=put
+@r1.t w.request.target request=$r1 family=series mode=existing determiner=definite fill=context family_words=series
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""series label to the right"" note=chart.series.label.position value=right
+@r2 w.request.request act=change mood=do words=""give it the title Revenue by month"" predicate=give
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.title value=""Revenue by month"" operator=eq phase=result key_words=title"
+"half the stand-up was grumbling that the numbers were impossible to read from the corridor screen; to settle it, put the series label to the right going forward — while you're at it, make the markers a bit bigger","@f1 w.request.filler text=""half the stand-up was grumbling that the numbers were impossible to read from the corridor screen; to settle""
+@f2 w.request.filler text=""going forward — while""
+@r1 w.request.request act=change mood=do words=""put the series label to the right"" predicate=put
+@r1.t w.request.target request=$r1 family=series mode=existing determiner=definite fill=context family_words=series
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""series label to the right"" note=chart.series.label.position value=right
+@r2 w.request.request act=change mood=do words=""make the markers a bit bigger"" predicate=make
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.markerSize words=""a bit bigger"" operator=delta phase=result step=more key_words=markers"
+"here is the plan: a key term in a coloured box, plus make every arrow in the derivation grey, so it still fits on a single slide without crowding","@f3 w.request.filler text=""it still fits on a single slide without crowding""
+@f4 w.request.filler text=plus
+@f1 w.request.filler text=so
+@f2 w.request.filler text=""here is the plan:""
+@r1 w.request.request act=group mood=do words=""a key term in a coloured box""
+@r1.t w.request.target request=$r1 family=group mode=new determiner=indefinite
+@r1.u1 w.request.unread request=$r1 text=""a key term in a coloured box"" note=diagram.emphasis value=box
+@r2 w.request.request act=change mood=do predicate=make words=""make every arrow in the derivation grey""
+@r2.t w.request.target request=$r2 family=link mode=existing determiner=quantified fill=all family_words=arrow
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.colour value=grey operator=eq phase=result open_value=true"
+go ahead and remove the duplicate arrow and keep the label on the remaining one,"@f1 w.request.filler text=""go ahead""
+@r1 w.request.request act=remove mood=do words=""remove the duplicate arrow"" predicate=remove
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""duplicate arrow"" note=link.duplicate value=""the duplicate""
+@r2 w.request.request act=change mood=do words=""and keep the label on the remaining one"" predicate=keep
+@r2.t w.request.target request=$r2 family=link mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.label value=label operator=eq phase=result"

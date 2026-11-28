@@ -1,0 +1,473 @@
+text,sop
+"Subchapter before Chapter, contents retained","@f9 w.request.filler text=""contents retained""
+@r1 w.request.request act=place mood=do words=""Subchapter before Chapter""
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=written name=Subchapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.ids value=Subchapter operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.ids value=Chapter operator=eq phase=selector
+@r1.c3 w.request.constraint request=$r1 on=place attribute=section.order value=before operator=relation phase=result words=""Subchapter before Chapter""
+@r1.c4 w.request.constraint request=$r1 on=place attribute=section.order_anchor value=""Chapter"" operator=eq phase=result"
+wipe this document and its contents,"@f9 w.request.filler text=""and its contents""
+@r1 w.request.request act=remove mood=do predicate=wipe words=""wipe this document""
+@r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=context family_words=document
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+an empty document,"@r1 w.request.request act=remove mood=do
+@r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=context family_words=document description=empty
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+describe the document hierarchy,"@r1 w.request.request act=ask mood=ask predicate=describe question=describe asked_words=hierarchy
+@r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=context family_words=document
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+list the sections and content blocks,"@r1 w.request.request act=ask mood=ask predicate=list question=describe asked_words=""sections and content blocks""
+@r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+the document structure?,"@r1 w.request.request act=ask mood=ask question=describe asked_words=structure
+@r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=context family_words=document
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+reverse the most recent document edit,"@r1 w.request.request act=undo mood=do predicate=reverse
+@r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=journal_step family_words=document description=""most recent document edit""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
+repeat the document action that was undone,"@r1 w.request.request act=redo mood=do predicate=repeat
+@r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=journal_step family_words=document description=""document action that was undone""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
+go forward one document edit,"@r1 w.request.request act=redo mood=do predicate=""go forward""
+@r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=journal_step family_words=document description=edit
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
+"update the Chapter heading, with text Overview","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=written name=Chapter name_words=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.id value=Chapter operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.text value=Overview operator=eq phase=result key_words=text"
+"update the Chapter heading, with text Overview, with object name Outline","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=written name=Chapter name_words=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.id value=Chapter operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.text value=Overview operator=eq phase=result key_words=text
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=section.name value=Outline operator=eq phase=result key_words=""object name"""
+"update the Chapter heading, at level 1","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=written name=Chapter name_words=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.id value=Chapter operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.level value=""1"" operator=eq phase=result key_words=level"
+"update the Chapter heading, with text Overview, at level 1","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=written name=Chapter name_words=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.id value=Chapter operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.text value=Overview operator=eq phase=result key_words=text
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=section.level value=""1"" operator=eq phase=result key_words=level"
+"update the Chapter heading, with object name Outline, at level 1","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=written name=Chapter name_words=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.id value=Chapter operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.name value=Outline operator=eq phase=result key_words=""object name""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=section.level value=""1"" operator=eq phase=result key_words=level"
+"update the Chapter heading, with text Overview, with object name Outline, at level 1","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=written name=Chapter name_words=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.id value=Chapter operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.text value=Overview operator=eq phase=result key_words=text
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=section.name value=Outline operator=eq phase=result key_words=""object name""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=section.level value=""1"" operator=eq phase=result key_words=level"
+"update the Chapter heading, centred","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=written name=Chapter name_words=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.id value=Chapter operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.align value=centred operator=eq phase=result open_value=true"
+"update the Chapter heading, with text Overview, centred","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=written name=Chapter name_words=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.id value=Chapter operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.text value=Overview operator=eq phase=result key_words=text
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=section.align value=centred operator=eq phase=result open_value=true"
+"update the Chapter heading, with object name Outline, centred","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=written name=Chapter name_words=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.id value=Chapter operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.name value=Outline operator=eq phase=result key_words=""object name""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=section.align value=centred operator=eq phase=result open_value=true"
+"update the Chapter heading, with text Overview, with object name Outline, centred","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=written name=Chapter name_words=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.id value=Chapter operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.text value=Overview operator=eq phase=result key_words=text
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=section.name value=Outline operator=eq phase=result key_words=""object name""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=section.align value=centred operator=eq phase=result open_value=true"
+"update the Chapter heading, at level 1, centred","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=written name=Chapter name_words=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.id value=Chapter operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.level value=""1"" operator=eq phase=result key_words=level
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=section.align value=centred operator=eq phase=result open_value=true"
+"update the Chapter heading, with text Overview, at level 1, centred","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=written name=Chapter name_words=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.id value=Chapter operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.text value=Overview operator=eq phase=result key_words=text
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=section.level value=""1"" operator=eq phase=result key_words=level
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=section.align value=centred operator=eq phase=result open_value=true"
+"update the Chapter heading, with object name Outline, at level 1, centred","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=written name=Chapter name_words=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.id value=Chapter operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.name value=Outline operator=eq phase=result key_words=""object name""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=section.level value=""1"" operator=eq phase=result key_words=level
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=section.align value=centred operator=eq phase=result open_value=true"
+"update the Chapter heading, with text Overview, with object name Outline, at level 1, centred","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=written name=Chapter name_words=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.id value=Chapter operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.text value=Overview operator=eq phase=result key_words=text
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=section.name value=Outline operator=eq phase=result key_words=""object name""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=section.level value=""1"" operator=eq phase=result key_words=level
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=section.align value=centred operator=eq phase=result open_value=true"
+add a checklist containing Draft and Review,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.items value=Draft operator=eq phase=result key_words=containing
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.items value=Review operator=eq phase=result key_words=containing
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.style value=task words=checklist operator=eq phase=result"
+"add a checklist containing Draft and Review, called Tasks","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.items value=Draft operator=eq phase=result key_words=containing
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.items value=Review operator=eq phase=result key_words=containing
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.style value=task words=checklist operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=block.name value=Tasks operator=eq phase=result key_words=called"
+"update the Tasks list, with items Draft and Approve","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=Tasks family_words=list
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=Tasks operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.items value=Draft operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.items value=Approve operator=eq phase=result"
+"update the Tasks list, numbered","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=Tasks family_words=list
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=Tasks operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.style value=numbered operator=eq phase=result"
+"update the Tasks list, with items Draft and Approve, numbered","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=Tasks family_words=list
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=Tasks operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.items value=Draft operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.items value=Approve operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=block.style value=numbered operator=eq phase=result"
+"update the Tasks list, with only the first item checked","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=Tasks family_words=list
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=Tasks operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.checked value=""only the first item checked"" operator=eq phase=result"
+"update the Tasks list, with items Draft and Approve, with only the first item checked","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=Tasks family_words=list
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=Tasks operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.items value=Draft operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.items value=Approve operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=block.checked value=""only the first item checked"" operator=eq phase=result"
+"update the Tasks list, numbered, with only the first item checked","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=Tasks family_words=list
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=Tasks operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.style value=numbered operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.checked value=""only the first item checked"" operator=eq phase=result"
+"update the Tasks list, with items Draft and Approve, numbered, with only the first item checked","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=Tasks family_words=list
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=Tasks operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.items value=Draft operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.items value=Approve operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=block.style value=numbered operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=block.checked value=""only the first item checked"" operator=eq phase=result"
+"add a table with rows Item,Cost and Paper,12","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite family_words=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Item operator=eq phase=result key_words=rows
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Cost operator=eq phase=result key_words=rows
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Paper operator=eq phase=result key_words=rows
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=block.rows value=""12"" operator=eq phase=result key_words=rows"
+"add a table with rows Item,Cost and Paper,12, with a header row","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite family_words=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Item operator=eq phase=result key_words=rows
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Cost operator=eq phase=result key_words=rows
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Paper operator=eq phase=result key_words=rows
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=block.rows value=""12"" operator=eq phase=result key_words=rows
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=block.header value=""true"" words=""with a header row"" operator=eq phase=result"
+"update the Budget table, with rows Item,Cost and Paper,15","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=Budget family_words=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=Budget operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Item operator=eq phase=result key_words=rows
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Cost operator=eq phase=result key_words=rows
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Paper operator=eq phase=result key_words=rows
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=block.rows value=""15"" operator=eq phase=result key_words=rows"
+"update the Budget table, without a header row","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=Budget family_words=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=Budget operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.header value=""false"" words=""without a header row"" operator=eq phase=result"
+"update the Budget table, with rows Item,Cost and Paper,15, without a header row","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=Budget family_words=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=Budget operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Item operator=eq phase=result key_words=rows
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Cost operator=eq phase=result key_words=rows
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Paper operator=eq phase=result key_words=rows
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=block.rows value=""15"" operator=eq phase=result key_words=rows
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=block.header value=""false"" words=""without a header row"" operator=eq phase=result"
+add a level 3 heading,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.level value=""3"" operator=eq phase=result key_words=level"
+"add a level 3 heading, with text A new idea","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.level value=""3"" operator=eq phase=result key_words=level
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.text value=""A new idea"" operator=eq phase=result key_words=text"
+"add a level 3 heading, with object name Idea","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.level value=""3"" operator=eq phase=result key_words=level
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.name value=Idea operator=eq phase=result key_words=""object name"""
+"add a level 3 heading, with text A new idea, with object name Idea","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.level value=""3"" operator=eq phase=result key_words=level
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.text value=""A new idea"" operator=eq phase=result key_words=text
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.name value=Idea operator=eq phase=result key_words=""object name"""
+add a subchapter,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=subchapter"
+"add a subchapter, after Chapter","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=subchapter
+@r1.c1 w.request.constraint request=$r1 on=place attribute=section.order value=after operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=section.order_anchor value=Chapter operator=eq phase=result"
+"add a subchapter, with heading Results","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=subchapter description=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.text value=Results operator=eq phase=result key_words=heading"
+"add a subchapter, after Chapter, with heading Results","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=subchapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.text value=Results operator=eq phase=result key_words=heading
+@r1.c2 w.request.constraint request=$r1 on=place attribute=section.order value=after operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=section.order_anchor value=Chapter operator=eq phase=result"
+"add a subchapter, at level 2","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=subchapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.level value=""2"" operator=eq phase=result key_words=level"
+"add a subchapter, after Chapter, at level 2","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=subchapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.level value=""2"" operator=eq phase=result key_words=level
+@r1.c2 w.request.constraint request=$r1 on=place attribute=section.order value=after operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=section.order_anchor value=Chapter operator=eq phase=result"
+"add a subchapter, with heading Results, at level 2","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=subchapter description=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.text value=Results operator=eq phase=result key_words=heading
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.level value=""2"" operator=eq phase=result key_words=level"
+"add a subchapter, after Chapter, with heading Results, at level 2","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=subchapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.text value=Results operator=eq phase=result key_words=heading
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.level value=""2"" operator=eq phase=result key_words=level
+@r1.c3 w.request.constraint request=$r1 on=place attribute=section.order value=after operator=relation phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=section.order_anchor value=Chapter operator=eq phase=result"
+"add a subchapter, with object name Findings","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=subchapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.name value=Findings operator=eq phase=result key_words=""object name"""
+"add a subchapter, after Chapter, with object name Findings","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=subchapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.name value=Findings operator=eq phase=result key_words=""object name""
+@r1.c2 w.request.constraint request=$r1 on=place attribute=section.order value=after operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=section.order_anchor value=Chapter operator=eq phase=result"
+"add a subchapter, with heading Results, with object name Findings","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=subchapter description=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.text value=Results operator=eq phase=result key_words=heading
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.name value=Findings operator=eq phase=result key_words=""object name"""
+"add a subchapter, after Chapter, with heading Results, with object name Findings","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=subchapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.text value=Results operator=eq phase=result key_words=heading
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.name value=Findings operator=eq phase=result key_words=""object name""
+@r1.c3 w.request.constraint request=$r1 on=place attribute=section.order value=after operator=relation phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=section.order_anchor value=Chapter operator=eq phase=result"
+"add a subchapter, after Chapter, at level 2, with object name Findings","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=subchapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.level value=""2"" operator=eq phase=result key_words=level
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.name value=Findings operator=eq phase=result key_words=""object name""
+@r1.c3 w.request.constraint request=$r1 on=place attribute=section.order value=after operator=relation phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=section.order_anchor value=Chapter operator=eq phase=result"
+"add a subchapter, with heading Results, at level 2, with object name Findings","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=subchapter description=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.text value=Results operator=eq phase=result key_words=heading
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.level value=""2"" operator=eq phase=result key_words=level
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=section.name value=Findings operator=eq phase=result key_words=""object name"""
+"update the first paragraph, with object name Summary","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context family_words=paragraph ordinal=first
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.name value=Summary operator=eq phase=result key_words=""object name"""
+"update the first paragraph, with text Revised paragraph, with object name Summary","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context sort=paragraph ordinal=first
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text value=""Revised paragraph"" operator=eq phase=result key_words=text
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.name value=Summary operator=eq phase=result key_words=""object name"""
+"update the first paragraph, as a level 3 heading","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context sort=heading ordinal=first family_words=paragraph
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.level value=""3"" operator=eq phase=result key_words=level"
+"update the first paragraph, with text Revised paragraph, as a level 3 heading","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context sort=heading ordinal=first family_words=paragraph
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text value=""Revised paragraph"" operator=eq phase=result key_words=text
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.level value=""3"" operator=eq phase=result key_words=level"
+"update the first paragraph, with object name Summary, as a level 3 heading","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context sort=heading ordinal=first family_words=paragraph
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.name value=Summary operator=eq phase=result key_words=""object name""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.level value=""3"" operator=eq phase=result key_words=level"
+"update the first paragraph, with text Revised paragraph, with object name Summary, as a level 3 heading","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context sort=heading ordinal=first family_words=paragraph
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text value=""Revised paragraph"" operator=eq phase=result key_words=text
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.name value=Summary operator=eq phase=result key_words=""object name""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.level value=""3"" operator=eq phase=result key_words=level"
+"update the first paragraph, with text Revised paragraph, with justified alignment","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context sort=paragraph ordinal=first
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text value=""Revised paragraph"" operator=eq phase=result key_words=text
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.align value=justified operator=eq phase=result open_value=true key_words=alignment"
+"update the first paragraph, with object name Summary, with justified alignment","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context family_words=paragraph ordinal=first
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.name value=Summary operator=eq phase=result key_words=""object name""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.align value=justified operator=eq phase=result open_value=true key_words=alignment"
+"update the first paragraph, with text Revised paragraph, with object name Summary, with justified alignment","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context sort=paragraph ordinal=first
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text value=""Revised paragraph"" operator=eq phase=result key_words=text
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.name value=Summary operator=eq phase=result key_words=""object name""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.align value=justified operator=eq phase=result open_value=true key_words=alignment"
+"update the first paragraph, as a level 3 heading, with justified alignment","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context sort=heading ordinal=first family_words=paragraph
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.level value=""3"" operator=eq phase=result key_words=level
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.align value=justified operator=eq phase=result open_value=true key_words=alignment"
+"update the first paragraph, with text Revised paragraph, as a level 3 heading, with justified alignment","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context sort=heading ordinal=first family_words=paragraph
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text value=""Revised paragraph"" operator=eq phase=result key_words=text
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.level value=""3"" operator=eq phase=result key_words=level
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.align value=justified operator=eq phase=result open_value=true key_words=alignment"
+"update the first paragraph, with object name Summary, as a level 3 heading, with justified alignment","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context sort=heading ordinal=first family_words=paragraph
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.name value=Summary operator=eq phase=result key_words=""object name""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.level value=""3"" operator=eq phase=result key_words=level
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.align value=justified operator=eq phase=result open_value=true key_words=alignment"
+"update the first paragraph, with text Revised paragraph, with object name Summary, as a level 3 heading, with justified alignment","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context sort=heading ordinal=first family_words=paragraph
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text value=""Revised paragraph"" operator=eq phase=result key_words=text
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.name value=Summary operator=eq phase=result key_words=""object name""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.level value=""3"" operator=eq phase=result key_words=level
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=block.align value=justified operator=eq phase=result open_value=true key_words=alignment"
+retitle the chapter Overview and keep it at heading level 1,"@r1 w.request.request act=change mood=do predicate=retitle
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=description sort=chapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.text value=Overview operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.level value=""1"" operator=eq phase=result key_words=""heading level"""
+make the list numbered with Draft checked and Approve unchecked,"@r1 w.request.request act=change mood=do predicate=make
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context family_words=list
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.items value=Draft operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.items value=Approve operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.style value=numbered operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=block.checked value=""Draft checked and Approve unchecked"" operator=eq phase=result"
+reverse the heading order so Subchapter comes before Chapter,"@f1 w.request.filler text=so
+@r1 w.request.request act=place mood=do predicate=reverse
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=written name=Subchapter name_words=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.ids value=Subchapter operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.ids value=Chapter operator=eq phase=selector
+@r1.c3 w.request.constraint request=$r1 on=place attribute=section.order value=before operator=relation phase=result words=""Subchapter comes before Chapter"" key_words=order
+@r1.c4 w.request.constraint request=$r1 on=place attribute=section.order_anchor value=""Chapter"" operator=eq phase=result"
+go back one document action,"@r1 w.request.request act=undo mood=do predicate=""go back""
+@r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=journal_step family_words=document description=action
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
+"add a subchapter, at level 2, with object name Findings","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=subchapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.level value=""2"" operator=eq phase=result key_words=level
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.name value=Findings operator=eq phase=result key_words=""object name"""
+"update the first paragraph, with text Revised paragraph","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context sort=paragraph ordinal=first
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text value=""Revised paragraph"" operator=eq phase=result key_words=text"
+select the first seven characters of b1,"@r1 w.request.request act=pick mood=do predicate=select
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=written name=b1 ordinal=first
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.id value=b1 operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.to value=""7"" words=seven operator=eq phase=result key_words=characters"
+add a chapter about the results,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite sort=chapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.content value=results operator=eq phase=result"
+open a fresh empty document called Report,"@r1 w.request.request act=make mood=do predicate=open
+@r1.t w.request.target request=$r1 family=text mode=new determiner=indefinite family_words=document description=""fresh empty""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=text.title value=Report operator=eq phase=result key_words=called"
+paragraph named Idea: A new idea,"@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=paragraph
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text value=""A new idea"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.name value=Idea operator=eq phase=result key_words=named"
+"update the Chapter heading, with object name Outline","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=written name=Chapter name_words=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.id value=Chapter operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.name value=Outline operator=eq phase=result key_words=""object name"""
+add a paragraph saying A new idea and name it Idea,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=paragraph
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text value=""A new idea"" operator=eq phase=result key_words=saying
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.name value=Idea operator=eq phase=result key_words=name"
+"replace the first paragraph with Revised paragraph, name it Summary and justify it","@r1 w.request.request act=change mood=do predicate=replace
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context sort=paragraph ordinal=first
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text value=""Revised paragraph"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.name value=Summary operator=eq phase=result key_words=name
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.align value=justify operator=eq phase=result"
+empty the entire document,"@r1 w.request.request act=remove mood=do predicate=empty
+@r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=context family_words=document description=entire
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+one document edit back,"@r1 w.request.request act=undo mood=do
+@r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=journal_step family_words=document description=""edit back""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
+"add a table with rows Item,Cost and Paper,12, called Budget","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite family_words=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Item operator=eq phase=result key_words=rows
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Cost operator=eq phase=result key_words=rows
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Paper operator=eq phase=result key_words=rows
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=block.rows value=""12"" operator=eq phase=result key_words=rows
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=block.name value=Budget operator=eq phase=result key_words=called"
+"update the first paragraph, with justified alignment","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context family_words=paragraph ordinal=first
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.align value=justified operator=eq phase=result open_value=true key_words=alignment"
+"change the chapter heading to Overview, then centre the first paragraph","@f1 w.request.filler text=then
+@r1 w.request.request act=change mood=do words=""change the chapter heading to Overview"" predicate=change
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=description sort=chapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.text value=Overview operator=eq phase=result key_words=heading
+@r2 w.request.request act=change mood=do words=""centre the first paragraph"" predicate=centre
+@r2.t w.request.target request=$r2 family=block mode=existing determiner=definite fill=context family_words=paragraph ordinal=first
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=block.align value=center words=centre operator=eq phase=result"
+make Hello bold in the first paragraph,"@r1 w.request.request act=change mood=do predicate=make
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context family_words=paragraph ordinal=first
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.mark value=bold operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.text value=Hello operator=eq phase=selector"
+give the word Hello in the first paragraph bold formatting,"@r1 w.request.request act=change mood=do predicate=give
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context family_words=paragraph ordinal=first
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.mark value=bold operator=eq phase=result key_words=formatting
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.text value=Hello operator=eq phase=selector key_words=word"
+put the first paragraph in centred alignment,"@r1 w.request.request act=change mood=do predicate=put
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context family_words=paragraph ordinal=first
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.align value=center words=centred operator=eq phase=result key_words=alignment"
+align the first paragraph centrally,"@r1 w.request.request act=change mood=do predicate=align
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context family_words=paragraph ordinal=first
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.align value=center words=centrally operator=eq phase=result"
+begin a blank document with the title Report,"@r1 w.request.request act=make mood=do predicate=begin
+@r1.t w.request.target request=$r1 family=text mode=new determiner=indefinite family_words=document description=blank
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=text.title value=Report operator=eq phase=result key_words=title"
+the undone document edit again,"@r1 w.request.request act=redo mood=do
+@r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=journal_step family_words=document description=""undone document edit""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
+start a new Report document,"@r1 w.request.request act=make mood=do predicate=start
+@r1.t w.request.target request=$r1 family=text mode=new determiner=indefinite family_words=document
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=text.title value=Report operator=eq phase=result"
+"add a table called Budget: Item | Cost; Paper | 12, with a header row","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite family_words=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.name value=Budget operator=eq phase=result key_words=called
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Item operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Cost operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Paper operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=block.rows value=""12"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=block.header value=""true"" words=""with a header row"" operator=eq phase=result"
+give the chapter heading right alignment,"@r1 w.request.request act=change mood=do predicate=give
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=description sort=chapter description=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.align value=right operator=eq phase=result key_words=alignment"
+"Tasks checklist: Draft, Review","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.name value=Tasks operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.items value=Draft operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.items value=Review operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=block.style value=task words=checklist operator=eq phase=result"
+highlight the first five characters of paragraph b2,"@r1 w.request.request act=pick mood=do predicate=highlight
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=b2 family_words=paragraph ordinal=first
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=b2 operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.to value=""5"" words=five operator=eq phase=result key_words=characters"
+"add a table with rows Item,Cost and Paper,12, called Budget, with a header row","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite family_words=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Item operator=eq phase=result key_words=rows
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Cost operator=eq phase=result key_words=rows
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Paper operator=eq phase=result key_words=rows
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=block.rows value=""12"" operator=eq phase=result key_words=rows
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=block.name value=Budget operator=eq phase=result key_words=called
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=block.header value=""true"" words=""with a header row"" operator=eq phase=result"
+"add a subchapter, after Chapter, with heading Results, at level 2, with object name Findings","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=subchapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.text value=Results operator=eq phase=result key_words=heading
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.level value=""2"" operator=eq phase=result key_words=level
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=section.name value=Findings operator=eq phase=result key_words=""object name""
+@r1.c4 w.request.constraint request=$r1 on=place attribute=section.order value=after operator=relation phase=result
+@r1.c5 w.request.constraint request=$r1 on=place attribute=section.order_anchor value=Chapter operator=eq phase=result"
+"chapter heading, right aligned","@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=written name=chapter name_words=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.id value=chapter operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.align value=right operator=eq phase=result key_words=aligned"

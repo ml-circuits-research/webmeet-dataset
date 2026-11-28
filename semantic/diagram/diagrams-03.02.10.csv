@@ -1,0 +1,706 @@
+text,sop
+"Make a bar chart of orders by store. What number of stores went past 500 orders — finally, what share of total orders is involved?","@r1 w.request.request act=make mood=do words=""Make a bar chart of orders by store"" predicate=Make
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=store operator=eq phase=result key_words=""by store""
+@r2 w.request.request act=ask mood=ask words=""What number of stores went past 500 orders"" predicate=What question=count
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.measure value=stores operator=eq phase=result
+@r3 w.request.request act=ask mood=ask words=""finally, what share of total orders is involved"" predicate=""finally,"" question=what
+@r3.t w.request.target request=$r3 family=chart mode=existing determiner=definite fill=context
+@r3.l1 w.request.lookup request=$r3 target=$r3.t key=thing from=page
+@r3.u1 w.request.constraint request=$r3 on=attribute attribute=chart.stacking value=percent words=""share of total orders"" operator=eq phase=result key_words=share"
+Tell me the count of stores that reached 500 orders; now what proportion of orders is taht?,"@r1 w.request.request act=ask mood=ask words=""Tell me the count of stores that reached 500 orders"" predicate=Tell question=count
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=stores operator=eq phase=result
+@r2 w.request.request act=ask mood=ask words=""now what proportion of orders is taht"" predicate=now question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.constraint request=$r2 on=attribute attribute=chart.stacking value=percent words=""what proportion of orders"" operator=eq phase=result key_words=proportion"
+Make a line chart of revenue by month. Tell me which month tops the revenue chart; now how large was that month's revenue?,"@r1 w.request.request act=make mood=do words=""Make a line chart of revenue by month"" predicate=Make
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result key_words=""by month""
+@r2 w.request.request act=ask mood=ask words=""Tell me which month tops the revenue chart"" predicate=Tell question=max
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context family_words=chart
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r3 w.request.request act=ask mood=ask words=""now how large was that month's revenue"" predicate=now question=total
+@r3.t w.request.target request=$r3 family=chart mode=existing determiner=definite fill=context
+@r3.l1 w.request.lookup request=$r3 target=$r3.t key=thing from=page"
+Make a line chart of revenue by month. List the month that earned the most revenue — then what did that month earn?,"@r1 w.request.request act=make mood=do words=""Make a line chart of revenue by month"" predicate=Make
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result key_words=""by month""
+@r2 w.request.request act=ask mood=ask words=""List the month that earned the most revenue"" predicate=List question=max
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r3 w.request.request act=ask mood=ask words=""then what did that month earn"" predicate=then question=total
+@r3.t w.request.target request=$r3 family=chart mode=existing determiner=definite fill=context
+@r3.l1 w.request.lookup request=$r3 target=$r3.t key=thing from=page"
+What products take the first two places for revenue — then how much of the total do the pair make up?,"@r1 w.request.request act=ask mood=ask words=""What products take the first two places for revenue"" predicate=What question=list
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""first two places"" note=chart.top2
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r2 w.request.request act=ask mood=ask words=""then how much of the total do the pair make up"" predicate=then question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.aggregate value=sum operator=eq phase=result words=total"
+"List the two best products on revenue, and finally, what proportion of revenue is the pair?","@r1 w.request.request act=ask mood=ask words=""List the two best products on revenue"" predicate=List question=list
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""two best products"" note=chart.top2
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r2 w.request.request act=ask mood=ask words=""finally, what proportion of revenue is the pair"" predicate=""finally,"" question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+"just a chart, any kind","@r1 w.request.request act=make mood=do predicate=just
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.kind value=chart operator=eq phase=result open_value=true key_words=kind"
+"just the plantuml, no explanation","@f1 w.request.filler text=no
+@r1 w.request.request act=make mood=do predicate=just
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.kind value=plantuml operator=eq phase=result open_value=true"
+"activity diagram please, with a decision after the first step","@f1 w.request.filler text=please
+@r1 w.request.request act=make mood=do predicate=activity
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite family_words=diagram
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.kind value=""activity diagram"" operator=eq phase=result open_value=true
+@r1.u1 w.request.constraint request=$r1 on=about attribute=diagram.about value=""the first step"" operator=eq phase=result"
+i need an ER diagram of an online shop with five entities,"@r1 w.request.request act=make mood=do predicate=need
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite family_words=diagram
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.kind words=""ER diagram"" operator=eq phase=result open_value=true
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=diagram.steps value=five words=""five entities"" operator=eq phase=result open_value=true
+@r1.c3 w.request.constraint request=$r1 on=about attribute=diagram.about value=""an online shop"" operator=eq phase=result"
+"my mistake, the fourth box label is Intake","@r1 w.request.request act=change mood=do predicate=mistake
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context family_words=box
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.x value=fourth words=""fourth box"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Intake operator=eq phase=result key_words=label"
+add the arrowhead to the link between Approve and Publish,"@r1 w.request.request act=change mood=do predicate=add
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=definite fill=context family_words=link
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.arrow value=arrowhead operator=eq phase=result open_value=true
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.from value=Approve operator=eq phase=selector
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.to value=Publish operator=eq phase=selector"
+"professional look please, then keep the font consistent","@f1 w.request.filler text=please
+@f2 w.request.filler text=then
+@r1 w.request.request act=place mode=arrange mood=do words=""professional look please"" predicate=professional
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.theme value=professional words=""professional look"" operator=eq phase=result open_value=true
+@r2 w.request.request act=change mood=do words=""then keep the font consistent"" predicate=keep
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.fontSize value=consistent words=""font consistent"" operator=eq phase=result"
+print it on A4 and keep the labels readable at that size,"@r1 w.request.request act=make mood=do words=""print it on A4"" predicate=print
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=change mood=do words=""and keep the labels readable at that size"" predicate=keep
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.fontSize value=readable operator=eq phase=result key_words=size
+@r1.u1 w.request.unread request=$r1 text=""print it on A4"" note=page.paperSize"
+PDF please,"@f1 w.request.filler text=please
+@r1 w.request.request act=make mood=do predicate=PDF
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
+"our team needs the flowchart of the release checklist, and it has to fit on one slide","@r1 w.request.request act=make mood=do words=""our team needs the flowchart of the release checklist"" predicate=needs
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite family_words=flowchart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.kind value=flowchart operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""our team needs"" note=diagram.audience value=team
+@r2 w.request.request act=place mode=arrange mood=do words=""and it has to fit on one slide"" predicate=fit
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=diagram.layout value=""one slide"" operator=eq phase=result open_value=true"
+why does the third box point to the fourth?,"@r1 w.request.request act=ask mood=ask predicate=why question=what
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context family_words=box
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.x value=third words=""third box"" operator=eq phase=selector"
+why is the second box connected to the third?,"@r1 w.request.request act=ask mood=ask predicate=why question=what
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+"block diagram please, five boxes connected","@f1 w.request.filler text=please
+@r1 w.request.request act=make mood=do predicate=block
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite family_words=diagram
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.kind value=""block diagram"" operator=eq phase=result open_value=true
+@r1.u1 w.request.unread request=$r1 text=""five boxes"" note=diagram.components value=five"
+swap the second from the right with the fourth figure,"@r1 w.request.request act=change mood=do predicate=swap
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=description
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.x value=""second from the right"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.x value=fourth words=""fourth figure"" operator=eq phase=selector
+@r1.u1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=""the second"" words=""the second from the right with the fourth"" operator=eq phase=result"
+restore the second figure to its origional position,"@r1 w.request.request act=undo mood=do predicate=restore
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.x words=""its origional position"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""the second figure"" note=node.journal.restore value=""the second figure"""
+start again from the original layout,"@r1 w.request.request act=undo mood=do predicate=start
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.constraint request=$r1 on=attribute attribute=step.which value=start words=""the original layout"" operator=eq phase=result"
+redo that step,"@r1 w.request.request act=redo mood=do predicate=redo
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+redo the swap and then undo the result,"@f1 w.request.filler text=then
+@r1 w.request.request act=redo mood=do words=""redo the swap"" predicate=redo
+@r1.t w.request.target request=$r1 family=step mode=existing fill=journal_step description=""the swap""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=swap words=""redo the swap"" operator=eq phase=selector
+@r2 w.request.request act=undo mood=do words=""and then undo the result"" predicate=undo
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.constraint request=$r2 on=attribute attribute=step.index value=1 words=""undo the result"" operator=eq phase=result"
+repeat that but on the third box,"@r1 w.request.request act=redo mood=do predicate=repeat
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=description family_words=box
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.x value=third words=""third box"" operator=eq phase=selector"
+repeat with the 1st and 4th items,"@r1 w.request.request act=redo mood=do predicate=repeat
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=description
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.x value=""1st"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.x value=""4th"" words=""4th items"" operator=eq phase=selector"
+repeat step 3 with the 1st and 4th items,"@r1 w.request.request act=redo mood=do predicate=repeat
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=description family_words=step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.x value=""1st"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.x value=""4th"" words=""4th items"" operator=eq phase=selector
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=step.index value=3 words=""step 3"" operator=eq phase=selector"
+delete the object that is between them,"@r1 w.request.request act=remove mood=do predicate=delete
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context family_words=object
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.relation value=between words=""between them"" operator=eq phase=result"
+"swap the last two, then delete the first one","@f1 w.request.filler text=then
+@r1 w.request.request act=change mood=do words=""swap the last two"" predicate=swap
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=description
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.x value=last words=""last two"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.x value=last operator=eq phase=selector
+@r2 w.request.request act=remove mood=do words=""then delete the first one"" predicate=delete
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.x value=first words=""first one"" operator=eq phase=selector"
+"swap figures 1 and 3, then delete figure 2","@f1 w.request.filler text=then
+@r1 w.request.request act=change mood=do words=""swap figures 1 and 3"" predicate=swap
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=description
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.x value=""1"" words=""figures 1"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.x value=""3"" operator=eq phase=selector
+@r1.u1 w.request.unread request=$r1 text=""figures 1 and 3"" note=node.ordinal.swap value=""figures 1 and 3""
+@r2 w.request.request act=remove mood=do words=""then delete figure 2"" predicate=delete
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.x value=""2"" words=""figure 2"" operator=eq phase=selector"
+"put step 2 back, then put step 3 back","@f1 w.request.filler text=then
+@r1 w.request.request act=redo mood=do words=""put step 2 back"" predicate=put
+@r1.t w.request.target request=$r1 family=step mode=existing fill=journal_step description=""step 2""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=2 words=""step 2"" operator=eq phase=selector
+@r2 w.request.request act=redo mood=do words=""then put step 3 back"" predicate=put
+@r2.t w.request.target request=$r2 family=step mode=existing fill=journal_step description=""step 3""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=step.index value=3 words=""step 3"" operator=eq phase=selector"
+"redo the frist step, then the last step","@f1 w.request.filler text=then
+@r1 w.request.request act=redo mood=do words=""redo the frist step"" predicate=redo
+@r1.t w.request.target request=$r1 family=step mode=existing fill=journal_step description=""the frist step""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=first words=""the frist step"" operator=eq phase=selector
+@r2 w.request.request act=redo mood=do words=""then the last step"" predicate=last
+@r2.t w.request.target request=$r2 family=step mode=existing fill=journal_step description=""the last step""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=step.which value=last words=""the last step"" operator=eq phase=selector"
+"we need a diagram for the incident review process that the whole team can read in the standup, so keep the labels short and the number of boxes under ten","@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do predicate=need
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite family_words=diagram"
+Summarise the distribution of order value by channel,"@r1 w.request.request act=ask mood=ask predicate=Summarise question=describe
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=description
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""order value by channel"" note=chart.distribution value=""distribution of order value by channel"""
+"Quick one: Sketch the distribution of order value by channel for the channel report, thanks","@f1 w.request.filler text=Quick
+@f2 w.request.filler text=thanks
+@r1 w.request.request act=ask mood=ask words=""Sketch the distribution of order value by channel for the channel report"" predicate=Sketch question=describe
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=description
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""order value by channel"" note=chart.distribution value=""distribution of order value by channel""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=channel operator=eq phase=result key_words=""by channel"""
+Discover where the loss-making orders sit,"@r1 w.request.request act=ask mood=ask predicate=Discover question=where
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=description
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.only value=""loss-making orders"" operator=eq phase=result"
+How many orders are there per quantity bucket,"@r1 w.request.request act=ask mood=ask predicate=How question=count
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=description
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""quantity bucket"" note=chart.bins
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result"
+Find all orders above 5000,"@r1 w.request.request act=ask mood=ask predicate=Find question=list
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=description
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+What is the average profit for each segment and ship mode,"@r1 w.request.request act=ask mood=ask predicate=What question=average
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=description
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=segment operator=eq phase=result key_words=""for each segment""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg operator=eq phase=result words=average"
+"Follow how order value changed over the quarter, looking only at the chart that is already open on the slide, and tell me how confident you are in that answer","@r1 w.request.request act=ask mood=ask predicate=Follow question=describe
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=description family_words=chart
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""Follow how order value"" note=chart.trend"
+Return the total profit per region and category,"@r1 w.request.request act=ask mood=ask predicate=Return question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=description
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result key_words=""per region""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=sum operator=eq phase=result words=total"
+Break the total profit down by region and category,"@r1 w.request.request act=ask mood=ask predicate=Break question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=description
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result key_words=""by region""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=sum operator=eq phase=result words=total"
+"For January 2025 through June 2025, show revenue by order date, split by region as a line chart","@r1 w.request.request act=make mood=do predicate=For
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.xLabel value=""order date"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.yLabel value=revenue operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result key_words=""split by region""
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dateRange value=""January 2025 through June 2025"" operator=eq phase=result"
+"Plot revenue against order date for January 2025 through June 2025, coloured by region as a line chart","@r1 w.request.request act=make mood=do predicate=Plot
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.xLabel value=""order date"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.yLabel value=revenue operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result key_words=""by region""
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dateRange value=""January 2025 through June 2025"" operator=eq phase=result"
+"Make a line chart of revenue by order date for January 2025 through June 2025, split by region for the summary slide, then sort the marks from largest to smallest","@r1 w.request.request act=make mood=do words=""Make a line chart of revenue by order date for January 2025 through June 2025, split by region for the summary slide"" predicate=Make
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.xLabel value=""order date"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.yLabel value=revenue operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result key_words=""split by region""
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dateRange value=""January 2025 through June 2025"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""then sort the marks from largest to smallest"" predicate=then
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.sort value=desc words=""from largest to smallest"" operator=eq phase=result key_words=sort"
+"So, give me a line chart of revenue against order date for January 2025 through June 2025, split by region for the client call, please","@f1 w.request.filler text=So
+@f2 w.request.filler text=please
+@r1 w.request.request act=make mood=do words=""give me a line chart of revenue against order date for January 2025 through June 2025, split by region for the client call"" predicate=give
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.xLabel value=""order date"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.yLabel value=revenue operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result key_words=""split by region""
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dateRange value=""January 2025 through June 2025"" operator=eq phase=result"
+And show the values printed on the marks of the category revenue chart,"@r1 w.request.request act=change mood=do predicate=show
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context family_words=chart description=""category revenue chart""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=printed operator=eq phase=result key_words=values"
+"Give me a line chart of revenue over order date for 2020 to the present, one line per category for the calender quarter","@r1 w.request.request act=make mood=do predicate=Give
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.xLabel value=""order date"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.yLabel value=revenue operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result key_words=""per category""
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dateRange value=""2020 to the present"" operator=eq phase=result"
+Let's see average order value by order date for 2022 to 2024 in a line chart,"@r1 w.request.request act=make mood=do predicate=""Let's""
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.xLabel value=""order date"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.yLabel value=""average order value"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dateRange value=""2022 to 2024"" operator=eq phase=result"
+"Build a line chart for 2022 to 2024, average order value by order date, it is needed urgenty","@r1 w.request.request act=make mood=do predicate=Build
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.xLabel value=""order date"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.yLabel value=""average order value"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dateRange value=""2022 to 2024"" operator=eq phase=result"
+"We need a line chart of revenue for 2019 to 2024, one point per order date, split by category","@f1 w.request.filler text=need
+@r1 w.request.request act=make mood=do predicate=We
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.xLabel value=""order date"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.yLabel value=revenue operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result key_words=""split by category""
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dateRange value=""2019 to 2024"" operator=eq phase=result"
+"Make a line chart for 2019 to 2024, revenue by order date in monthly buckets, coloured by category for the summary slide, then sort the marks from largest to smallest","@r1 w.request.request act=make mood=do words=""Make a line chart for 2019 to 2024, revenue by order date in monthly buckets, coloured by category for the summary slide"" predicate=Make
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.xLabel value=""order date"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.yLabel value=revenue operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result key_words=""by category""
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dateRange value=""2019 to 2024"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""monthly buckets"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""then sort the marks from largest to smallest"" predicate=then
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.sort value=desc words=""from largest to smallest"" operator=eq phase=result key_words=sort"
+Now put the legend on the right of the category stack,"@r1 w.request.request act=change mood=do predicate=put
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right operator=eq phase=result key_words=legend"
+I want a grouped bar chart of average order value grouped by customer segment and channel,"@f1 w.request.filler text=want
+@r1 w.request.request act=make mood=do predicate=I
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""grouped bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=""customer segment"" operator=eq phase=result key_words=""by customer segment""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=channel operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""order value"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg operator=eq phase=result words=average
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=customer words=""grouped by customer"" operator=eq phase=result key_words=""grouped by customer"""
+"So, give me a grouped bar chart of average order value split by customer segment and channel for the client call, please","@f1 w.request.filler text=So
+@f2 w.request.filler text=please
+@r1 w.request.request act=make mood=do words=""give me a grouped bar chart of average order value split by customer segment and channel for the client call"" predicate=give
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""grouped bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=""customer segment"" operator=eq phase=result key_words=""split by customer""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=channel operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""order value"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg operator=eq phase=result words=average"
+"Plot a grouped bar chart of average claim split by policy type and region for Monday's review, title it 'Average claim by policy type' and show the values printed on the marks","@r1 w.request.request act=make mood=do words=""Plot a grouped bar chart of average claim split by policy type and region for Monday's review"" predicate=Plot
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite description=""Monday's review""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""grouped bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=""policy type"" operator=eq phase=result key_words=""split by policy""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=claim operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg operator=eq phase=result words=average
+@r2 w.request.request act=change mood=do words=""title it 'Average claim by policy type' and show the values printed on the marks"" predicate=title
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.title value=""Average claim by policy type"" operator=eq phase=result key_words=title
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=chart.show_values value=show words=printed operator=eq phase=result key_words=values
+@r2.c3 w.request.constraint request=$r2 on=attribute attribute=chart.measure value=claim operator=eq phase=result
+@r2.c4 w.request.constraint request=$r2 on=attribute attribute=chart.aggregate value=avg operator=eq phase=result words=Average"
+Then sort the marks from largest to smallest in the policy claim chart,"@r1 w.request.request act=change mood=do predicate=Then
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context family_words=chart
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""from largest to smallest"" operator=eq phase=result key_words=sort"
+"Quick one: make a grouped bar chart of average claim broken down by policy type and region for the morning huddle, thanks","@f1 w.request.filler text=Quick
+@f2 w.request.filler text=thanks
+@r1 w.request.request act=make mood=do words=""make a grouped bar chart of average claim broken down by policy type and region for the morning huddle"" predicate=make
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""grouped bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=""policy type"" operator=eq phase=result key_words=""broken down by""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=claim operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg operator=eq phase=result words=average"
+Now put the legend on the right of the rating scatter,"@r1 w.request.request act=change mood=do predicate=put
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context description=""rating scatter""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right operator=eq phase=result key_words=legend"
+"Render a stacked column chart for the board slide, revenue by category stacked by segment","@r1 w.request.request act=make mood=do predicate=Render
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=stacked words=""stacked column chart"" operator=eq phase=result open_value=true
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result key_words=""by category""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=segment operator=eq phase=result key_words=""by segment""
+@r1.u1 w.request.unread request=$r1 text=""chart for the board slide"" note=chart.brief
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+And show the values printed on the marks of the ship mode series,"@r1 w.request.request act=change mood=do predicate=show
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=printed operator=eq phase=result key_words=values"
+"Render a scatter plot of ad spend against revenue, with axis titles plus a legend by campaign","@r1 w.request.request act=make mood=do predicate=Render
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=plot
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=scatter words=""scatter plot"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.xLabel value=""ad spend"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.yLabel value=revenue operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""axis titles"" note=chart.brief
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=legend operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=campaign operator=eq phase=result key_words=""by campaign"""
+"So, give me a scatter plot of ad spend against revenue showing axis titles and a legend by campaign for the client call, please","@f1 w.request.filler text=So
+@f2 w.request.filler text=please
+@r1 w.request.request act=make mood=do words=""give me a scatter plot of ad spend against revenue showing axis titles and a legend by campaign for the client call"" predicate=give
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=plot
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=scatter words=""scatter plot"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.xLabel value=""ad spend"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.yLabel value=revenue operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""axis titles"" note=chart.brief value=""axis titles and a legend""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=legend operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=campaign operator=eq phase=result key_words=""showing axis titles and a legend by campaign"""
+"Produce a bar chart of average order value by channel, with titles on both axes and no legend","@f1 w.request.filler text=no
+@r1 w.request.request act=make mood=do predicate=Produce
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.xLabel value=channel operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.yLabel value=""average order value"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""titles on both axes and no legend"" note=chart.brief"
+"Plot a bar chart of the count of orders across order quantity, showing the relationship for Monday's review, title it 'Quarterly summary' and show the values printed on the marks","@r1 w.request.request act=make mood=do words=""Plot a bar chart of the count of orders across order quantity, showing the relationship for Monday's review"" predicate=Plot
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite description=""Monday's review""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""showing the relationship for Monday's"" note=chart.brief
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""title it 'Quarterly summary' and show the values printed on the marks"" predicate=title
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.title value=""Quarterly summary"" operator=eq phase=result key_words=title
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=chart.show_values value=show words=printed operator=eq phase=result key_words=values"
+"So, give me a bar chart of the count of orders across order quantity, showing the relationship for the client call, please","@f1 w.request.filler text=So
+@f2 w.request.filler text=please
+@r1 w.request.request act=make mood=do words=""give me a bar chart of the count of orders across order quantity, showing the relationship for the client call"" predicate=give
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""showing the relationship for the client"" note=chart.brief
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result"
+"Make a stacked bar chart of order count by product category stacked by channel, category on the x axis, order count on the y axis for the summary slide, then sort the marks from largest to smallest","@r1 w.request.request act=make mood=do words=""Make a stacked bar chart of order count by product category stacked by channel, category on the x axis, order count on the y axis for the summary slide"" predicate=Make
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=stacked words=""stacked bar chart"" operator=eq phase=result open_value=true
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=""product category"" operator=eq phase=result key_words=""by product category""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=channel operator=eq phase=result key_words=""by channel""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.xLabel value=category operator=eq phase=result key_words=""x axis""
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.yLabel value=""order count"" operator=eq phase=result key_words=""y axis""
+@r1.u1 w.request.unread request=$r1 text=""on the x axis"" note=chart.brief
+@r2 w.request.request act=change mood=do words=""then sort the marks from largest to smallest"" predicate=then
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.sort value=desc words=""from largest to smallest"" operator=eq phase=result key_words=sort"
+"Give me a histogram of order quantity bucketed into 2-unit bins for the board appendix, then sort the marks from largest to smallest and start the axis at zero","@r1 w.request.request act=make mood=do words=""Give me a histogram of order quantity bucketed into 2-unit bins for the board appendix"" predicate=Give
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=histogram operator=eq phase=result open_value=true
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.bins value=""2"" words=""2-unit bins"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""order quantity bucketed"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""then sort the marks from largest to smallest and start the axis at zero"" predicate=then
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.sort value=desc words=""from largest to smallest"" operator=eq phase=result key_words=sort
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=chart.min value=""0"" words=""at zero"" operator=eq phase=result"
+"Plot a histogram of order quantity with 2-unit bins for Monday's review, title it 'Order quantity overview' and show the values printed on the marks","@r1 w.request.request act=make mood=do words=""Plot a histogram of order quantity with 2-unit bins for Monday's review"" predicate=Plot
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite description=""Monday's review""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=histogram operator=eq phase=result open_value=true
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.bins value=""2"" words=""2-unit bins"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""order quantity"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""title it 'Order quantity overview' and show the values printed on the marks"" predicate=title
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.title value=""Order quantity overview"" operator=eq phase=result key_words=title
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=chart.show_values value=show words=printed operator=eq phase=result key_words=values"
+"Quick one: make a histogram of order value bucketed into 500 rounding for the morning huddle, thanks","@f1 w.request.filler text=Quick
+@f2 w.request.filler text=thanks
+@r1 w.request.request act=make mood=do words=""make a histogram of order value bucketed into 500 rounding for the morning huddle"" predicate=make
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=histogram operator=eq phase=result open_value=true
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.bins value=""500"" words=""500 rounding"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""order value bucketed"" operator=eq phase=result"
+"Produce a scatter plot of order value against profit, legend placed on the right","@r1 w.request.request act=make mood=do predicate=Produce
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=plot
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=scatter words=""scatter plot"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.xLabel value=""order value"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.yLabel value=profit operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right operator=eq phase=result key_words=legend"
+"So, give me a scatter plot of order value against margin in a small multiples grid by customer segment for the client call, please","@f1 w.request.filler text=So
+@f2 w.request.filler text=please
+@r1 w.request.request act=make mood=do words=""give me a scatter plot of order value against margin in a small multiples grid by customer segment for the client call"" predicate=give
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=plot
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=scatter words=""scatter plot"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.xLabel value=""order value"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.yLabel value=margin operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""small multiples"" note=chart.facet
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=grid operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=""customer segment"" operator=eq phase=result key_words=""by customer segment"""
+"slide the Lancome logo to the top edge of the slide, and keep the rest of the page as it is","@r1 w.request.request act=place mode=arrange mood=do predicate=slide words=""slide the Lancome logo to the top edge of the slide""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=description sort=logo description=""the Lancome logo""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.y value=top words=""the top edge of the slide"" operator=eq phase=result
+@r2 w.request.request act=place mode=arrange mood=do predicate=keep words=""and keep the rest of the page as it is""
+@r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context family_words=page
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""the rest of the page"" note=page.layout value=unchanged"
+"hey, set the bright star to yellow all over","@f1 w.request.filler text=hey
+@r1 w.request.request act=change mood=do predicate=set
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=description sort=star description=""the bright star""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.colour value=yellow operator=eq phase=result"
+"same again for the product photo, 6.5 cm","@r1 w.request.request act=change mood=do predicate=same
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.width value=""6.5 cm"" operator=eq phase=result"
+"hey, change the landing photo's width to 6.5 cm wide","@f1 w.request.filler text=hey
+@r1 w.request.request act=change mood=do predicate=change
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=description sort=picture sort_words=photo description=""the landing photo""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.width value=""6.5 cm"" operator=eq phase=result key_words=wide key_words=width"
+"set the product photo to 6.5 inches wide, double the width, and leave it where it is, and keep the gap even","@r1 w.request.request act=change mood=do predicate=set
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=description sort=picture sort_words=photo description=""the product photo""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.width value=""6.5 inches"" operator=eq phase=result key_words=wide
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.height words=""double the width"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""double the width"" note=node.heightRelation
+@r2 w.request.request act=place mode=arrange mood=do words=""and keep the gap even"" predicate=keep
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.constraint request=$r2 on=attribute attribute=node.gap value=equal words=""the gap even"" operator=eq phase=result key_words=gap"
+"same again for the landing photo, twice the width","@r1 w.request.request act=change mood=do predicate=same
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.height value=""twice the width"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""twice the width"" note=node.heightRelation value=""twice the width"""
+"the notes text box should be centre aligned, then group it with the box","@f1 w.request.filler text=then
+@r1 w.request.request act=change mood=do predicate=centre
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=description sort=textbox sort_words=""text box"" description=""the notes text box"" family_words=box
+@r1.u1 w.request.unread request=$r1 text=""centre aligned"" note=node.textAlign value=right
+@r2 w.request.request act=group mood=do words=""then group it with the box"" predicate=group
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=it family_words=box"
+go forward to the next slide and keep everything inside the page margins,"@r1 w.request.request act=pick mood=do predicate=forward
+@r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=description description=""the next slide"" family_words=page
+@r1.u1 w.request.unread request=$r1 text=""the next slide and keep"" note=page.navigate value=next
+@r2 w.request.request act=place mode=arrange mood=do words=""and keep everything inside the page margins"" predicate=keep
+@r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context family_words=page
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""the page margins"" note=node.margin value=""page margins"""
+"create a new slide after this one, and keep the rest of the page as it is","@r1 w.request.request act=make mood=do predicate=create
+@r1.t w.request.target request=$r1 family=page mode=new determiner=indefinite family_words=page
+@r2 w.request.request act=place mode=arrange mood=do predicate=create
+@r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context family_words=page
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""the rest of the page"" note=page.layout value=unchanged"
+once more: add a slide right after this one,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=page mode=new determiner=indefinite family_words=slide"
+"set slide 3 to yellow, slide 4 to green and slide 5 to red and keep everything inside the page margins so nothing gets cut off at the edge","@f1 w.request.filler text=so
+@r1 w.request.request act=change mood=do predicate=set
+@r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=description description=""slide 3"" family_words=page
+@r2 w.request.request act=place mode=arrange mood=do words=""and keep everything inside the page margins"" predicate=keep
+@r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=context family_words=page
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""the page margins"" note=node.margin value=""page margins"""
+"add a slide, the title Q3 Review, and Calibri at 36 points","@f1 w.request.filler text=""add a slide""
+@r1 w.request.request act=make mood=do words=""the title Q3 Review"" predicate=title
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=title
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""Q3 Review"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""and Calibri at 36 points"" predicate=and
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.fontSize value=36 words=""36 points"" operator=eq phase=result
+@r2.u1 w.request.unread request=$r2 text=""Calibri at 36 points"" note=node.fontFamily value=Calibri"
+"when you get a moment, create a new slide with the title Q3 Review, in Calibri at 36 points and make sure the slide is easy to read for everyone","@f1 w.request.filler text=""get a moment""
+@f2 w.request.filler text=""make sure the slide is easy to read for everyone""
+@r1 w.request.request act=make mood=do words=""create a new slide"" predicate=create
+@r1.t w.request.target request=$r1 family=page mode=new determiner=indefinite family_words=slide
+@r2 w.request.request act=make mood=do words=""the title Q3 Review"" predicate=title
+@r2.t w.request.target request=$r2 family=node mode=new determiner=indefinite sort=title
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.label value=""Q3 Review"" operator=eq phase=result
+@r3 w.request.request act=change mood=do words=""in Calibri at 36 points"" predicate=in
+@r3.t w.request.target request=$r3 family=node mode=existing determiner=definite fill=context
+@r3.l1 w.request.lookup request=$r3 target=$r3.t key=thing from=page
+@r3.c1 w.request.constraint request=$r3 on=attribute attribute=node.fontSize value=36 words=""36 points"" operator=eq phase=result
+@r3.u1 w.request.unread request=$r3 text=""Calibri at 36 points"" note=node.fontFamily value=Calibri"
+"start a new slide, put the title Q3 Review on it, and use Calibri at 36 points, then group it with the box","@f1 w.request.filler text=""start a new slide, put""
+@f2 w.request.filler text=then
+@r1 w.request.request act=make mood=do words=""the title Q3 Review"" predicate=title
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=title
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""Q3 Review"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""and use Calibri at 36 points"" predicate=use
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.fontSize value=36 words=""36 points"" operator=eq phase=result
+@r2.u1 w.request.unread request=$r2 text=""Calibri at 36 points"" note=node.fontFamily value=Calibri
+@r3 w.request.request act=group mood=do words=""then group it with the box"" predicate=group
+@r3.t w.request.target request=$r3 family=node mode=existing determiner=definite fill=description description=it family_words=box"
+"insert a picture and set its height to 6 cm, then move it to the right corner, and keep the rest of the page as it is","@f1 w.request.filler text=then
+@r1 w.request.request act=make mood=do predicate=insert
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=picture description=""a picture""
+@r2 w.request.request act=place mode=arrange mood=do words=""then move it to the right corner"" predicate=move
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.x value=right words=""the right corner"" operator=eq phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=node.y value=top words=""the right corner"" operator=eq phase=result
+@r3 w.request.request act=place mode=arrange mood=do predicate=insert
+@r3.t w.request.target request=$r3 family=page mode=existing determiner=definite fill=context family_words=picture
+@r3.l1 w.request.lookup request=$r3 target=$r3.t key=thing from=page
+@r3.u1 w.request.unread request=$r3 text=""the rest of the page"" note=page.layout value=unchanged"
+"could you insert a picture, set its height to 6 cm and move it to the right corner, please?","@f1 w.request.filler text=please
+@r1 w.request.request act=make mood=do predicate=insert
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=picture description=""a picture""
+@r2 w.request.request act=place mode=arrange mood=do predicate=insert
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.x value=right words=""the right corner"" operator=eq phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=node.y value=top words=""the right corner"" operator=eq phase=result"
+"bar chart time: 20, 30 and 25 for Q1, Q2 and Q3, left side, and keep the rest of the page as it is","@r1 w.request.request act=make mood=do predicate=keep
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite sort=""bar chart"" family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Q1 operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Q2 operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Q3 operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.values value=20 value=30 value=25 words=""20, 30 and 25"" operator=eq phase=result
+@r2 w.request.request act=place mode=arrange mood=do words=""left side"" predicate=left
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.x value=left operator=eq phase=result
+@r3 w.request.request act=place mode=arrange mood=do predicate=keep words=""and keep the rest of the page as it is""
+@r3.t w.request.target request=$r3 family=page mode=existing determiner=definite fill=context family_words=page
+@r3.l1 w.request.lookup request=$r3 target=$r3.t key=thing from=page
+@r3.u1 w.request.unread request=$r3 text=""the rest of the page"" note=page.layout value=unchanged"
+"do the same: make a bar chart with 20, 30 and 25 at Q1, Q2 and Q3, on the left side","@r1 w.request.request act=make mood=do predicate=make
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite sort=""bar chart"" family_words=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Q1 operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Q2 operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Q3 operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.values value=20 value=30 value=25 words=""20, 30 and 25"" operator=eq phase=result
+@r2 w.request.request act=place mode=arrange mood=do words=""on the left side"" predicate=on
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.x value=left words=""the left side"" operator=eq phase=result"
+"I want slide 4 bold and slide 5 underlined, and keep the gap even","@r1 w.request.request act=change mood=do predicate=want
+@r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=description description=""slide 4"" family_words=slide
+@r2 w.request.request act=change mood=do predicate=want
+@r2.t w.request.target request=$r2 family=page mode=existing determiner=definite fill=description description=""slide 5"" family_words=slide
+@r3 w.request.request act=place mode=arrange mood=do words=""and keep the gap even"" predicate=keep
+@r3.t w.request.target request=$r3 family=node mode=existing determiner=definite fill=context
+@r3.l1 w.request.lookup request=$r3 target=$r3.t key=thing from=page
+@r3.u1 w.request.constraint request=$r3 on=attribute attribute=node.gap value=equal words=""the gap even"" operator=eq phase=result key_words=gap"
+could you include a logic-gate circuit with two inputs on every gate?,"@r1 w.request.request act=change mood=do predicate=with
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""two inputs"" note=diagram.gateInputs value=two"
+I nede a logic-gate circuit with two inputs on every gate before the talk,"@r1 w.request.request act=change mood=do predicate=nede
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""two inputs"" note=diagram.gateInputs value=two"
+"make the wire route, orthogonal, with no diagonals, that's all","@f1 w.request.filler text=no
+@r1 w.request.request act=change mood=do predicate=make
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=quantified fill=all
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.route value=orthogonal operator=eq phase=result key_words=route"
+"start from a sequence diagram with three participants and one lifeline each, then put the actors in this order: Client, Server, Database, and keep the whole figure readable on one page","@f1 w.request.filler text=then
+@r1 w.request.request act=make mood=do predicate=start words=""start from a sequence diagram with three participants and one lifeline each""
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite family_words=diagram
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.kind value=sequence words=""sequence diagram"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""participants and one lifeline each"" note=diagram.lifelines value=""one lifeline each""
+@r2 w.request.request act=change mood=do predicate=put words=""put the actors in this order: Client, Server, Database""
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context ids=Client ids=Server ids=Database
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""actors in this order"" note=diagram.participantOrder value=order"
+"add an activation bar as a thin grey bar on each lifeline, then keep the bar inside the lifeline, so the figure still reads clearly at a glance","@f1 w.request.filler text=then
+@f2 w.request.filler text=so
+@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=""activation bar""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.colour value=grey operator=eq phase=result
+@r2 w.request.request act=change mood=do predicate=add
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context family_words=figure
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""bar inside the lifeline"" note=diagram.activationSpan value=inside"
+"add a faint grid behind the whole drawing, then keep the grid out of the printed version, so the figure still reads clearly at a glance","@f1 w.request.filler text=then
+@f2 w.request.filler text=so
+@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context family_words=figure
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.layout value=grid operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""faint grid"" note=diagram.grid value=faint
+@r2 w.request.request act=change mood=do predicate=add
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context family_words=figure
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""out of the printed version"" note=diagram.gridPrint value=""out of the printed version"""
+I nede a faint grid behind the whole drawing before the talk,"@r1 w.request.request act=make mood=do predicate=nede
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.layout value=grid operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""faint grid"" note=diagram.grid value=faint"
+set the nodes snapped to a five-millimetre grid,"@r1 w.request.request act=place mode=arrange mood=do predicate=set
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=quantified fill=all family_words=nodes
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.layout value=grid operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""five-millimetre grid"" note=diagram.snapGrid value=""five-millimetre grid"""
+"for the figure, add a numbered callout with a leader line to each part, then keep the numbers in reading order, with enough room around each part","@f1 w.request.filler text=then
+@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context family_words=figure
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.arrow value=none words=""leader line"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""numbered callout"" note=diagram.callout value=numbered
+@r2 w.request.request act=change mood=do predicate=add
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context family_words=figure
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""numbers in reading order"" note=diagram.calloutOrder value=reading"

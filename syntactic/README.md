@@ -2,7 +2,7 @@
 
 This folder holds the same messages as `../semantic/`, each with its circuit in the `syntax` schema of `soplang-nlu` (clauses, nominals, relations and coordinations; the schema and its rules are in `soplang-nlu/docs/syntax-schema.md`).
 
-A file here has the name and the place of its source file: `syntactic/drawing/style-01.csv` holds the messages of `semantic/drawing/style-01.csv`, in the same order, each message once. The two folders are mirrors: same paths, same messages, same order. `node tools/layers.mjs check` checks it, with no language model. A file holds at most 1,000 messages; a larger source is split into parts `<name>.01.csv`, `<name>.02.csv`, … in both folders.
+A file here has the name and the place of its source file: `syntactic/drawing/style-01.csv` holds the messages of `semantic/drawing/style-01.csv`, in the same order, each message once. The two folders are mirrors: same paths, same messages, same order. `node tools/layers.mjs check` checks it, with no language model. A file holds at most 100 messages (since 2026-11-28; 1,000 before); a larger source is split into parts `<name>.01.csv`, `<name>.02.csv`, … in both folders (`node tools/layers.mjs split --max 100`). The old-to-new row mapping of that split is `tools/migrations/2026-11-28-split-100.jsonl.gz`.
 
 | Column | Contents |
 | --- | --- |

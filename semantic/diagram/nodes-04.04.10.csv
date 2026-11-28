@@ -1,0 +1,558 @@
+text,sop,sop1
+tell me does this match the starting arrangement,"@f1 w.request.filler text=tell
+@r1 w.request.request act=ask mood=ask words=""does this match the starting arrangement"" predicate=does question=exists
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=start words=""match the starting arrangement"" operator=eq phase=result"
+did we get all the way back to the beginning,"@r1 w.request.request act=ask mood=ask predicate=the question=exists
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+what comes next in the pattern,"@r1 w.request.request act=ask mood=ask predicate=what question=what
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+"we made a few swaps since the first step, so compare the current row with the original order and tell me whether the sequence is still the same","@f1 w.request.filler text=so
+@r1 w.request.request act=ask mood=ask predicate=tell question=exists
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""original order"" note=diagram.compare value=""the original order"""
+please check the order is the same as step one,"@f1 w.request.filler text=please
+@r1 w.request.request act=ask mood=check predicate=check question=exists words=""check the order is the same as step one""
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""same as step one"" note=diagram.compare value=""the same as step one"""
+predict the remaining count and say whether the row gets shorter,"@r1 w.request.request act=ask mood=ask words=""predict the remaining count"" predicate=predict question=count
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.u1 w.request.unread request=$r1 text=""remaining count"" note=diagram.count value=""the remaining count""
+@r2 w.request.request act=ask mood=ask words=""and say whether the row gets shorter"" predicate=say question=exists
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing"
+what path does a claim take when the amount is too high,"@f1 w.request.filler text=too
+@r1 w.request.request act=ask mood=ask predicate=what question=which
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+"follow one order through the flow, name each box it enters, and say which box sends it back","@r1 w.request.request act=ask mood=ask words=""follow one order through the flow, name each box it enters"" predicate=follow question=list
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""name each box it enters"" note=diagram.step.index value=""each box""
+@r2 w.request.request act=ask mood=ask words=""and say which box sends it back"" predicate=say question=which
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page"
+tell me where this flow strats and how it ends,"@r1 w.request.request act=ask mood=ask predicate=tell question=where
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""where this flow strats"" note=diagram.origin value=""where this flow strats"""
+could you count the moves in the history,"@r1 w.request.request act=ask mood=ask words=""count the moves in the history"" predicate=count question=count
+@r1.t w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step sort=move sort_words=moves"
+count what is still pending,"@r1 w.request.request act=ask mood=ask predicate=count question=count
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""still pending"" note=diagram.step.count value=""still pending"""
+"you swapped a pair, so tell me which one, the ends or the first two, and whether the rest of the row moved","@f1 w.request.filler text=""swapped a pair, so""
+@r1 w.request.request act=ask mood=ask words=""tell me which one, the ends or the first two"" predicate=tell question=which
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ordinal value=ends value=""first two"" words=""ends or the first two"" operator=eq phase=selector
+@r2 w.request.request act=ask mood=ask words=""whether the rest of the row moved"" predicate=whether question=exists
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing
+@r2.u1 w.request.unread request=$r2 text=""whether the rest of the row moved"" note=node.selection value=""whether the rest of the row moved"""
+i need to know how many steps ago was the second figure removd?,"@f1 w.request.filler text=""need to know""
+@r1 w.request.request act=ask mood=ask words=""how many steps ago was the second figure removd"" predicate=how question=count
+@r1.t w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step sort=step sort_words=steps
+@r1.u1 w.request.unread request=$r1 text=""second figure removd"" note=diagram.step.index value=""the second figure"""
+i need you to find the step that removed the third figure and say how many steps have gone by,"@f1 w.request.filler text=need
+@r1 w.request.request act=ask mood=ask words=""find the step that removed the third figure"" predicate=find question=which
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""third figure"" note=diagram.step.index value=""the third figure""
+@r2 w.request.request act=ask mood=ask words=""say how many steps have gone by"" predicate=say question=count
+@r2.t w.request.target request=$r2 family=step mode=existing determiner=definite fill=journal_step sort=step sort_words=steps
+@f2 w.request.filler text=""i need you to"""
+"which step, how long ago?","@r1 w.request.request act=ask mood=ask predicate=which question=which
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
+tell me how many turns until the row is back in the original arrangement.,"@r1 w.request.request act=ask mood=ask predicate=tell question=count
+@r1.t w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step sort=turn sort_words=turns
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=original words=""back in the original arrangement"" operator=eq phase=result"
+is the row identical once the swap is done twice?,"@r1 w.request.request act=ask mood=check predicate=is question=exists
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.u1 w.request.unread request=$r1 text=""row identical once the swap is done twice"" note=diagram.step.exact value=""row identical once the swap is done twice"""
+chekc whether the row is unchanged by reversing it again,"@r1 w.request.request act=ask mood=check predicate=chekc question=exists
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""unchanged by reversing it again"" note=diagram.step.exact value=""unchanged by reversing it again"""
+tel me what moved compared with step two,"@r1 w.request.request act=ask mood=ask predicate=tel question=describe
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t1 w.request.target request=$r1 family=step mode=existing fill=journal_step sort=step
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=2 words=""step two"" operator=eq phase=selector"
+"the key says two colours, what are they","@r1 w.request.request act=ask mood=ask predicate=what question=what
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""key says two colours"" note=diagram.legend value=""key says two colours"""
+how do i draw a self-loop on one box,"@r1 w.request.request act=ask mood=ask predicate=how question=describe
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+does this arrangement match step 3,"@r1 w.request.request act=ask mood=ask predicate=does question=compare
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t1 w.request.target request=$r1 family=step mode=existing fill=journal_step sort=step
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=3 words=""step 3"" operator=eq phase=selector"
+tell me is the current order the same as step 4,"@f1 w.request.filler text=tell
+@r1 w.request.request act=ask mood=ask words=""is the current order the same as step 4"" predicate=is question=compare
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t1 w.request.target request=$r1 family=step mode=existing fill=journal_step sort=step
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=4 words=""step 4"" operator=eq phase=selector"
+check whether this is identical to step 3,"@r1 w.request.request act=ask mood=ask question=compare
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t1 w.request.target request=$r1 family=step mode=existing fill=journal_step sort=step
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=3 words=""step 3"" operator=eq phase=selector"
+compare the current row with step 2 and tell me if they match,"@r1 w.request.request act=ask mood=ask predicate=compare question=compare
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t1 w.request.target request=$r1 family=step mode=existing fill=journal_step sort=step
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=2 words=""step 2"" operator=eq phase=selector"
+check the row against step 2 for me,"@r1 w.request.request act=ask mood=ask predicate=the question=compare
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t1 w.request.target request=$r1 family=step mode=existing fill=journal_step sort=step
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=2 words=""step 2"" operator=eq phase=selector"
+"i need to know is the row the same as step 2, and if not which figures moved","@f1 w.request.filler text=""need to know""
+@r1 w.request.request act=ask mood=ask words=""is the row the same as step 2"" predicate=is question=compare
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t1 w.request.target request=$r1 family=step mode=existing fill=journal_step sort=step
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=2 words=""step 2"" operator=eq phase=selector
+@r2 w.request.request act=ask mood=ask words=""and if not which figures moved"" predicate=which question=which
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page"
+is this the original arrangement or not,"@r1 w.request.request act=ask mood=ask predicate=is question=exists
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=original words=""the original arrangement"" operator=eq phase=result"
+tell me if every figure is back where it started,"@r1 w.request.request act=ask mood=ask predicate=tell question=exists
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=start words=""back where it started"" operator=eq phase=result"
+"i need to know is it back to the original order, and if not how many slots are wrong","@f1 w.request.filler text=""need to know""
+@r1 w.request.request act=ask mood=ask words=""is it back to the original order"" predicate=is question=exists
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=original words=""the original order"" operator=eq phase=result
+@r2 w.request.request act=ask mood=ask words=""and if not how many slots are wrong"" predicate=how question=count
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page"
+verify the figures are in the same sequence as step one,"@r1 w.request.request act=ask mood=check predicate=verify question=exists
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=all sort=figure sort_words=figures
+@r1.u1 w.request.unread request=$r1 text=""same sequence as step one"" note=diagram.compare value=""the same sequence"""
+check the order and put back any figure that is out of place,"@r1 w.request.request act=ask mood=check words=""check the order"" predicate=check question=exists
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""check the order"" note=diagram.compare value=""the order""
+@r2 w.request.request act=undo mood=do words=""and put back any figure that is out of place"" predicate=""put back""
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""out of place"" note=node.journal.restore value=""out of place"""
+compare the row with the arrangement we started from and point at the one figure that changed place,"@r1 w.request.request act=ask mood=ask predicate=point question=which
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""changed place"" note=diagram.compare value=""changed place"""
+after all those swaps i need a list of the figures that ended up in a different slot from the one they started in,"@f1 w.request.filler text=need
+@r1 w.request.request act=ask mood=ask predicate=list question=list
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""list of the figures"" note=diagram.diff value=""a different slot"""
+which spots were touched,"@r1 w.request.request act=ask mood=ask predicate=which question=which
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+i'm wondering is it the same set of figures as the original,"@f1 w.request.filler text=wondering
+@r1 w.request.request act=ask mood=ask words=""is it the same set of figures as the original"" predicate=is question=exists
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""same set of figures"" note=diagram.compare value=""the same set"""
+is the row the exac reverse of the original,"@r1 w.request.request act=ask mood=ask predicate=is question=exists
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""exac reverse"" note=diagram.compare value=""exac reverse"""
+count the figures now and compare with the start,"@f1 w.request.filler text=now
+@r1 w.request.request act=ask mood=ask predicate=count question=count
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""count the figures"" note=diagram.count value=""the figures"""
+count the boxes against the number i gave,"@r1 w.request.request act=ask mood=ask predicate=count question=count
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""boxes against the number i gave"" note=diagram.count value=""boxes against the number i gave"""
+"read the flow on the page and explain what happens at each stage, naming the work that enters and leaves every box","@r1 w.request.request act=ask mood=ask predicate=explain question=describe
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+"walk me through the stages, then summarise the whole flow","@f1 w.request.filler text=then
+@r1 w.request.request act=ask mood=ask words=""walk me through the stages"" predicate=walk question=describe
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r2 w.request.request act=ask mood=ask words=""then summarise the whole flow"" predicate=summarise question=describe
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing"
+where does this flow branch,"@r1 w.request.request act=ask mood=ask predicate=where question=where
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""flow branch"" note=diagram.branches value=""flow branch"""
+show me where the flow branches and which branch is longer,"@r1 w.request.request act=ask mood=ask predicate=show question=which
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""where the flow branches"" note=diagram.branches value=""where the flow branches"""
+which of the two flows has more stages,"@r1 w.request.request act=ask mood=ask predicate=which question=which
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""more stages"" note=diagram.count value=""more stages"""
+wich of the two flows has more stages,"@r1 w.request.request act=ask mood=ask predicate=wich question=which
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""more stages"" note=diagram.count value=""more stages"""
+compare the counts and say how many extra boxes the longer flow has,"@r1 w.request.request act=ask mood=check words=""compare the counts"" predicate=compare question=count
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""and say how many extra boxes the longer flow has"" predicate=say question=count
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page"
+"name the differences, then count them","@f1 w.request.filler text=then
+@r1 w.request.request act=ask mood=ask words=""name the differences"" predicate=name question=list
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r2 w.request.request act=ask mood=ask words=""then count them"" predicate=count question=count
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing"
+"compare the two flows, name the step the second adds, and say which step the first leaves out","@r1 w.request.request act=ask mood=ask words=""compare the two flows, name the step the second adds"" predicate=compare question=which
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""name the step the second adds"" note=diagram.diff value=""name the step the second adds""
+@r2 w.request.request act=ask mood=ask words=""and say which step the first leaves out"" predicate=say question=which
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page"
+at what position do the two arrangements stop matching,"@r1 w.request.request act=ask mood=ask predicate=at question=where
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""two arrangements stop matching"" note=diagram.diff value=""two arrangements stop matching"""
+find the first difference and name the figure there,"@r1 w.request.request act=ask mood=ask words=""find the first difference"" predicate=find question=which
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""the first difference"" note=diagram.diff value=""the first difference""
+@r2 w.request.request act=ask mood=ask words=""and name the figure there"" predicate=name question=which
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page"
+can you put my workout plan into boxes from warm-up to main set,"@r1 w.request.request act=make mood=do words=""put my workout plan into boxes from warm-up to main set"" predicate=put
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.at value=warm-up operator=eq phase=result open_value=true
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.at value=""main set"" operator=eq phase=result open_value=true
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=diagram.about value=""my workout plan"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=node.shape value=box words=boxes operator=eq phase=result"
+"draw my workout plan as a flow, warm-up first if you can","@r1 w.request.request act=make mood=do words=""draw my workout plan as a flow, warm-up first"" predicate=draw
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.at value=warm-up operator=eq phase=result open_value=true
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=diagram.about value=""my workout plan"" operator=eq phase=result
+@f1 w.request.filler text=""if you can"""
+a box for each step,"@r1 w.request.request act=make mood=do predicate=box
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=count attribute=node.n value=""each step"" operator=eq phase=result"
+draw the login sequence and label the first message login request,"@r1 w.request.request act=make mood=do words=""draw the login sequence"" predicate=draw
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite
+@r1.u1 w.request.unread request=$r1 text=""the login sequence"" note=diagram.lifelines value=""the login sequence""
+@r2 w.request.request act=change mood=do words=""label the first message login request"" predicate=label
+@r2.t w.request.target request=$r2 family=link mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.position value=first words=""first message"" operator=eq phase=selector open_value=true
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=link.label value=""login request"" operator=eq phase=result"
+i want the checks as diamonds and yes/no on the arrows,"@f1 w.request.filler text=want
+@r1 w.request.request act=make mood=do predicate=i
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.shape value=diamond words=diamonds operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.label value=yes operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.label value=no operator=eq phase=result"
+"put these exact words in the boxes: Intake, Triage, Repair, Return","@r1 w.request.request act=make mood=do predicate=put
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Intake operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Triage operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.label value=Repair operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=node.label value=Return operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""these exact words"" note=diagram.wording value=""these exact words"""
+"use my wording, not yours: Open, Review, Close","@r1 w.request.request act=make mood=do predicate=use
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Open operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Review operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.label value=Close operator=eq phase=result"
+"the labels must be exactly Received, Checked, Filed","@r1 w.request.request act=make mood=do predicate=the
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Received operator=eq phase=result key_words=labels
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Checked operator=eq phase=result key_words=labels
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.label value=Filed operator=eq phase=result key_words=labels
+@r1.u1 w.request.unread request=$r1 text=""exactly Received, Checked, Filed"" note=diagram.wording value=""exactly Received, Checked, Filed"""
+"call the boxes Intake, Triage and Repair, word for word","@r1 w.request.request act=make mood=do predicate=call
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Intake operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Triage operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.label value=Repair operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""word for word"" note=diagram.wording value=""word for word"""
+"write Draft, Sign, Send in the three boxes, nothing else","@r1 w.request.request act=make mood=do words=""write Draft, Sign, Send in the three boxes"" predicate=write
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Draft operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Sign operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.label value=Send operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=diagram.steps value=three words=""three boxes"" operator=eq phase=result open_value=true
+@f1 w.request.filler text=""nothing else"""
+"could you use the exact words from the policy: submit, assess, settle","@r1 w.request.request act=make mood=do words=""use the exact words from the policy: submit, assess, settle"" predicate=use
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=submit operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=assess operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.label value=settle operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""the exact words from the policy"" note=diagram.wording value=""the exact words from the policy"""
+"no paraphrasing, the boxes say Pick, Pack, Post","@r1 w.request.request act=make mood=do predicate=no
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Pick operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Pack operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.label value=Post operator=eq phase=result"
+"the four boxes are Discovery, Design, Delivery and Support, exactly as written","@r1 w.request.request act=make mood=do predicate=the
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Discovery operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Design operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.label value=Delivery operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=node.label value=Support operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""exactly as written"" note=diagram.wording value=""exactly as written""
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=node.shape value=box words=boxes operator=eq phase=result"
+i need you to use RECEIVED and APPROVED as the labels and do not change the case,"@f1 w.request.filler text=need
+@r1 w.request.request act=make mood=do words=""use RECEIVED and APPROVED as the labels and do not change the case"" predicate=use
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=RECEIVED operator=eq phase=result key_words=labels
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=APPROVED operator=eq phase=result key_words=labels
+@r1.u1 w.request.unread request=$r1 text=""do not change the case"" note=diagram.wording value=""do not change the case"""
+"put the exact wrds in the boxes: Intake, Triage if you can","@r1 w.request.request act=make mood=do words=""put the exact wrds in the boxes: Intake, Triage"" predicate=put
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Intake operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Triage operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""the exact wrds"" note=diagram.wording value=""the exact wrds""
+@f1 w.request.filler text=""if you can"""
+"put Plan, Build, Test in the boxes and keep my spelling","@r1 w.request.request act=make mood=do words=""put Plan, Build, Test in the boxes"" predicate=put
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Plan operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Build operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.label value=Test operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""Plan, Build, Test"" note=diagram.wording value=""Plan, Build, Test""
+@r2 w.request.request act=change mood=do words=""keep my spelling"" predicate=keep
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page"
+"the boxes must carry the exact phrases from the email, so copy them across without shortening anything","@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do predicate=the
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""the exact phrases"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""must carry the exact phrases from the email"" note=diagram.wording value=""must carry the exact phrases from the email"""
+"write Step one, Step two, Step three as the labels, keep the capitals","@r1 w.request.request act=make mood=do predicate=write
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=""Step one"" operator=eq phase=result key_words=labels
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=""Step two"" operator=eq phase=result key_words=labels
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.label value=""Step three"" operator=eq phase=result key_words=labels
+@r1.u1 w.request.unread request=$r1 text=""keep the capitals"" note=diagram.wording value=""keep the capitals"""
+"use the exact words Draft and Sign, and make the first box wider so the phrase fits","@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do words=""use the exact words Draft and Sign"" predicate=use
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Draft operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Sign operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""the exact words"" note=diagram.wording value=""the exact words""
+@r2 w.request.request act=change mood=do words=""make the first box wider so the phrase fits"" predicate=make
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.position value=first words=""first box"" operator=eq phase=selector open_value=true
+@r2.c2 w.request.constraint request=$r2 on=size attribute=node.width words=wider operator=delta phase=result step=more"
+nothing but placeholders in the boxes,"@r1 w.request.request act=make mood=do predicate=nothing
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=placeholder words=placeholders operator=eq phase=result"
+show the services and label the arrows with the protocol,"@r1 w.request.request act=make mood=do words=""show the services"" predicate=show
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite
+@r2 w.request.request act=change mood=do words=""and label the arrows with the protocol"" predicate=label
+@r2.t w.request.target request=$r2 family=link mode=existing determiner=quantified fill=all family_words=arrows
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.label value=protocol operator=eq phase=result"
+show both curves and label the profit rectangle,"@r1 w.request.request act=make mood=do words=""show both curves"" predicate=show
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite
+@r2 w.request.request act=change mood=do words=""and label the profit rectangle"" predicate=label
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.label value=profit words=""profit rectangle"" operator=eq phase=result"
+restore the start and add a shape at the end,"@r1 w.request.request act=make mood=do words=""restore the start"" predicate=restore
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=make mood=do words=""and add a shape at the end"" predicate=add
+@r2.t w.request.target request=$r2 family=node mode=new determiner=indefinite family_words=shape
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.label value=""the end"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=start words=""the start"" operator=eq phase=result"
+"would you reset the row, add a figure, then count","@f1 w.request.filler text=""then count""
+@r1 w.request.request act=make mood=do words=""reset the row"" predicate=reset
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=make mood=do words=""add a figure"" predicate=add
+@r2.t w.request.target request=$r2 family=node mode=new determiner=indefinite
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.label value=""a figure"" operator=eq phase=result"
+reset it and add a circle at the front,"@r1 w.request.request act=make mood=do words=""reset it"" predicate=reset
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r2 w.request.request act=make mood=do words=""and add a circle at the front"" predicate=add
+@r2.t w.request.target request=$r2 family=node mode=new determiner=indefinite
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.label value=""a circle"" operator=eq phase=result"
+"go back to it, then add a figure last","@f1 w.request.filler text=then
+@r1 w.request.request act=make mood=do words=""go back to it"" predicate=go
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r2 w.request.request act=make mood=do words=""then add a figure last"" predicate=add
+@r2.t w.request.target request=$r2 family=node mode=new determiner=indefinite family_words=figure
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.label value=last operator=eq phase=result"
+put my list in order in the boxes: 1. Plan 2. Build 3. Test 4. Ship,"@r1 w.request.request act=make mood=do predicate=put
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.label value=Plan operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.label value=Build operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=node.label value=Test operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=node.label value=Ship operator=eq phase=result"
+put my workout plan into boxs from warm-up to main set,"@r1 w.request.request act=make mood=do predicate=put
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.at value=warm-up operator=eq phase=result open_value=true
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.at value=""main set"" operator=eq phase=result open_value=true
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=diagram.about value=""my workout plan"" operator=eq phase=result"
+how should my morning routine run? diagram it,"@r1 w.request.request act=ask mood=ask predicate=how question=describe
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.kind value=diagram operator=eq phase=result open_value=true
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=diagram.about value=""my morning routine"" operator=eq phase=result"
+how does our deploy pipeline run? diagram it,"@r1 w.request.request act=ask mood=ask predicate=how question=describe
+@r1.t w.request.target request=$r1 family=diagram mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.kind value=diagram operator=eq phase=result open_value=true
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=diagram.about value=""our deploy pipeline"" operator=eq phase=result"
+is this a chart or a diagram? i need the diagram version.,"@r1 w.request.request act=ask mood=ask words=""is this a chart or a diagram?"" predicate=is question=which
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context family_words=diagram
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=make mood=do words=""i need the diagram version"" predicate=need
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=diagram.kind value=diagram operator=eq phase=result open_value=true
+@r2.u1 w.request.unread request=$r2 text=""the diagram version"" note=diagram.representation value=diagram"
+should this be a bar chart or a diagram? make the diagram.,"@r1 w.request.request act=ask mood=ask words=""should this be a bar chart or a diagram?"" predicate=be question=which
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context family_words=diagram
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=make mood=do words=""make the diagram"" predicate=make
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=diagram.kind value=diagram operator=eq phase=result open_value=true"
+can you chart or diagram for an approval flow? go with the diagram.,"@r1 w.request.request act=ask mood=ask words=""chart or diagram for an approval flow?"" predicate=chart question=which
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context family_words=diagram
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=make mood=do words=""go with the diagram"" predicate=go
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=diagram.kind value=diagram operator=eq phase=result open_value=true"
+"which is better here, a chart or a diagram? diagram please.","@f1 w.request.filler text=please
+@r1 w.request.request act=ask mood=ask words=""which is better here, a chart or a diagram?"" predicate=which question=which
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context family_words=diagram
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=make mood=do words=""diagram please"" predicate=diagram
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=diagram.kind value=diagram operator=eq phase=result open_value=true"
+is a flowchart a chart? either way make the diagram.,"@r1 w.request.request act=ask mood=ask words=""is a flowchart a chart?"" predicate=is question=which
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context family_words=flowchart
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=make mood=do words=""either way make the diagram"" predicate=make
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=diagram.kind value=diagram words=""the diagram"" operator=eq phase=result open_value=true"
+do i want a chart or a diagram for this? i think diagram.,"@r1 w.request.request act=ask mood=ask words=""do i want a chart or a diagram for this?"" predicate=want question=which
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context family_words=diagram
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=make mood=do words=""i think diagram"" predicate=think
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=diagram.kind value=diagram operator=eq phase=result open_value=true"
+difference between a chart and a diagram? and then make the diagram for this flow.,"@f1 w.request.filler text=then
+@r1 w.request.request act=ask mood=ask words=""difference between a chart and a diagram?"" predicate=difference question=describe
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context family_words=diagram
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=make mood=do words=""make the diagram for this flow"" predicate=make
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=diagram.kind value=diagram words=""the diagram"" operator=eq phase=result open_value=true"
+"my manager asked whether this should be a chart or a diagram, and i said diagram because it shows the steps, so please make the diagram version","@f1 w.request.filler text=""manager asked""
+@f2 w.request.filler text=said
+@f3 w.request.filler text=""because it shows the steps, so please""
+@r1 w.request.request act=ask mood=ask words=""whether this should be a chart or a diagram"" predicate=whether question=which
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context family_words=diagram
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=make mood=do words=""make the diagram version"" predicate=make
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=diagram.kind value=diagram words=""the diagram version"" operator=eq phase=result open_value=true
+@r2.u1 w.request.unread request=$r2 text=""the diagram version"" note=diagram.representation value=diagram"
+"chart vs diagram, which one shows a process? make the diagram.","@r1 w.request.request act=ask mood=ask words=""chart vs diagram, which one shows a process?"" predicate=which question=which
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context family_words=diagram
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=make mood=do words=""make the diagram"" predicate=make
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=diagram.kind value=diagram words=""the diagram"" operator=eq phase=result open_value=true"
+"here is the sales table, is a chart or a diagram better for it? make the diagram.","@f1 w.request.filler text=""sales table""
+@r1 w.request.request act=ask mood=ask words=""is a chart or a diagram better for it?"" predicate=is question=which
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context family_words=diagram
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r2 w.request.request act=make mood=do words=""make the diagram"" predicate=make
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=diagram.kind value=diagram words=""the diagram"" operator=eq phase=result open_value=true"
+"is this a diagram or a chart, and can you make the diagram clearer","@r1 w.request.request act=ask mood=ask words=""is this a diagram or a chart"" predicate=is question=which
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context family_words=diagram
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=make mood=do words=""make the diagram clearer"" predicate=make
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=diagram.kind value=diagram words=""the diagram"" operator=eq phase=result open_value=true
+@r2.u1 w.request.unread request=$r2 text=""the diagram clearer"" note=diagram.representation value=diagram"
+how many turns until the row is in alphabetical order?,"@r1 w.request.request act=ask mood=ask predicate=how question=count
+@r1.t w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step sort=turn sort_words=turns
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.layout value=alphabetical words=""the row is in alphabetical order"" operator=eq phase=result open_value=true
+@r1.u1 w.request.unread request=$r1 text=""the row is in alphabetical order"" note=diagram.step.count value=""the row is in alphabetical order"""
+tell me how many turns until the whole row is alphabetical.,"@r1 w.request.request act=ask mood=ask predicate=tell question=count
+@r1.t w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step sort=turn sort_words=turns
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.layout value=alphabetical words=""the whole row is alphabetical"" operator=eq phase=result open_value=true
+@r1.u1 w.request.unread request=$r1 text=""the whole row is alphabetical"" note=diagram.step.count value=""the whole row is alphabetical"""
+how many swaps until the row is in alphabetical order?,"@r1 w.request.request act=ask mood=ask predicate=how question=count
+@r1.t w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step sort=swap sort_words=swaps
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.layout value=alphabetical words=""the row is in alphabetical order"" operator=eq phase=result open_value=true
+@r1.u1 w.request.unread request=$r1 text=""the row is in alphabetical order"" note=diagram.step.count value=""the row is in alphabetical order"""
+what number of swaps until the row is in alphabetical order?,"@r1 w.request.request act=ask mood=ask predicate=what question=count
+@r1.t w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step sort=swap sort_words=swaps
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.layout value=alphabetical words=""the row is in alphabetical order"" operator=eq phase=result open_value=true
+@r1.u1 w.request.unread request=$r1 text=""the row is in alphabetical order"" note=diagram.step.count value=""the row is in alphabetical order"""
+how many swaps until the whole row is alphabetical?,"@r1 w.request.request act=ask mood=ask predicate=how question=count
+@r1.t w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step sort=swap sort_words=swaps
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.layout value=alphabetical words=""the whole row is alphabetical"" operator=eq phase=result open_value=true
+@r1.u1 w.request.unread request=$r1 text=""the whole row is alphabetical"" note=diagram.step.count value=""the whole row is alphabetical"""
+tell me how many turns until the row is in alphabetical order.,"@r1 w.request.request act=ask mood=ask predicate=tell question=count
+@r1.t w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step sort=turn sort_words=turns
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.layout value=alphabetical words=""the row is in alphabetical order"" operator=eq phase=result open_value=true
+@r1.u1 w.request.unread request=$r1 text=""the row is in alphabetical order"" note=diagram.step.count value=""the row is in alphabetical order"""
+what number of swaps until the whole row is alphabetical?,"@r1 w.request.request act=ask mood=ask predicate=what question=count
+@r1.t w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step sort=swap sort_words=swaps
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.layout value=alphabetical words=""the whole row is alphabetical"" operator=eq phase=result open_value=true
+@r1.u1 w.request.unread request=$r1 text=""the whole row is alphabetical"" note=diagram.step.count value=""the whole row is alphabetical"""
+"how many turns until the row is in alphabetical order, and how many swaps until the boxes are sorted A to Z?","@r1 w.request.request act=ask mood=ask words=""how many turns until the row is in alphabetical order"" predicate=how question=count
+@r1.t w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step sort=turn sort_words=turns
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=diagram.layout value=alphabetical words=""the row is in alphabetical order"" operator=eq phase=result open_value=true
+@r1.u1 w.request.unread request=$r1 text=""the row is in alphabetical order"" note=diagram.step.count value=""the row is in alphabetical order""
+@r2 w.request.request act=ask mood=ask words=""how many swaps until the boxes are sorted A to Z?"" predicate=how question=count
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""the boxes are sorted A to Z"" note=diagram.step.count value=""the boxes are sorted A to Z"""
+"go ahead and tell me how many turns until the labels run from A to Z, and how many swaps until the whole row is alphabetical.","@f1 w.request.filler text=""go ahead""
+@r1 w.request.request act=ask mood=ask words=""tell me how many turns until the labels run from A to Z"" predicate=tell question=count
+@r1.t w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step sort=turn sort_words=turns
+@r1.u1 w.request.unread request=$r1 text=""the labels run from A to Z"" note=diagram.step.count value=""the labels run from A to Z""
+@r2 w.request.request act=ask mood=ask words=""how many swaps until the whole row is alphabetical."" predicate=how question=count
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=diagram.layout value=alphabetical words=""the whole row is alphabetical"" operator=eq phase=result open_value=true
+@r2.u1 w.request.unread request=$r2 text=""the whole row is alphabetical"" note=diagram.step.count value=""the whole row is alphabetical"""

@@ -1,7 +1,7 @@
 // The two layers of the dataset, `semantic/` and `syntactic/`, kept as mirrors: the same paths, the
 // same messages in the same order, different circuits. No language model is involved.
 //
-//   node tools/layers.mjs split [--max 1000] [--dry]
+//   node tools/layers.mjs split [--max 100] [--dry]
 //       Splits every file of semantic/ that holds more than --max messages into parts
 //       <name>.01.csv, <name>.02.csv, … of at most --max messages each, in the order of the file.
 //       Every part repeats the header. The bytes of every row are kept as they are: the header
@@ -102,8 +102,8 @@ function check() {
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const [command, ...rest] = process.argv.slice(2)
-  const max = rest.includes('--max') ? Number(rest[rest.indexOf('--max') + 1]) : 1000
+  const max = rest.includes('--max') ? Number(rest[rest.indexOf('--max') + 1]) : 100
   if (command === 'split' && max >= 1) split(max, rest.includes('--dry'))
   else if (command === 'check') check()
-  else { console.error('Usage: node tools/layers.mjs split [--max 1000] [--dry] | check'); process.exit(2) }
+  else { console.error('Usage: node tools/layers.mjs split [--max 100] [--dry] | check'); process.exit(2) }
 }

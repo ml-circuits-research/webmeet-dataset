@@ -1,0 +1,514 @@
+text,sop,sop1,sop2
+"ok, now change the paragraph to say Thank you for your patience. since customers are waiting","@f1 w.request.filler text=""ok, now""
+@r1 w.request.request act=change mood=do predicate=change words=""change the paragraph to say Thank you for your patience. since customers are waiting""
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context family_words=paragraph
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text value=""Thank you for your patience."" operator=eq phase=result"
+"we should sound friendlier here, I'd like the paragraph to say Thank you for your patience.","@f1 w.request.filler text=""we should sound friendlier here, I'd""
+@r1 w.request.request act=change mood=do predicate=like words=""like the paragraph to say Thank you for your patience.""
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context family_words=paragraph
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text value=""Thank you for your patience."" operator=eq phase=result"
+"hmm, instead of what's there, please make that paragraph read Thank you for your patience.","@f1 w.request.filler text=""hmm, instead of what's there, please""
+@r1 w.request.request act=change mood=do predicate=make words=""make that paragraph read Thank you for your patience.""
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context family_words=paragraph
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text value=""Thank you for your patience."" operator=eq phase=result"
+rewrite the paragraph,"@r1 w.request.request act=change mood=do predicate=rewrite
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context family_words=paragraph
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+reword the paragraph politely,"@r1 w.request.request act=change mood=do predicate=reword
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context family_words=paragraph
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text words=politely operator=eq phase=result"
+redo the paragraph more gently,"@r1 w.request.request act=change mood=do predicate=redo
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context family_words=paragraph
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text words=""more gently"" operator=eq phase=result"
+change the paragraph text,"@r1 w.request.request act=change mood=do predicate=change
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text words=""paragraph text"" phase=result key_words=text
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context family_words=paragraph
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+edit that paragraph,"@r1 w.request.request act=change mood=do predicate=edit
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context family_words=paragraph
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+rewrite it to sound thankful,"@r1 w.request.request act=change mood=do predicate=rewrite
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text words=""to sound thankful"" operator=eq phase=result"
+update the paragraph,"@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context family_words=paragraph
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+can you change the chapter heading to Overview and then centre the first paragraph?,"@f3 w.request.filler text=""can you""
+@f1 w.request.filler text=then
+@r1 w.request.request act=change mood=do words=""change the chapter heading to Overview"" predicate=change words_origin=hull
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=description sort=heading sort_words=""chapter heading""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.text value=Overview operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""centre the first paragraph?"" predicate=centre words_origin=hull
+@r2.t w.request.target request=$r2 family=block mode=existing determiner=definite fill=description ordinal=first description=""first paragraph"" sort=paragraph
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=block.align value=center words=centre operator=eq phase=result"
+"please rename the chapter heading to Overview, then center the first paragraph","@f1 w.request.filler text=please
+@f2 w.request.filler text=then
+@r1 w.request.request act=change mood=do words=""rename the chapter heading to Overview"" predicate=rename words_origin=hull
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=description sort=heading sort_words=""chapter heading""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.text value=Overview operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""center the first paragraph"" predicate=center words_origin=hull
+@r2.t w.request.target request=$r2 family=block mode=existing determiner=definite fill=description ordinal=first description=""first paragraph"" sort=paragraph
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=block.align value=center operator=eq phase=result"
+"change the chapter heading to Overview, and after that centre the first paragraph","@r1 w.request.request act=change mood=do words=""change the chapter heading to Overview"" predicate=change words_origin=hull
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=description sort=heading sort_words=""chapter heading""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.text value=Overview operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""centre the first paragraph"" predicate=centre words_origin=hull
+@r2.t w.request.target request=$r2 family=block mode=existing determiner=definite fill=description ordinal=first description=""first paragraph"" sort=paragraph
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=block.align value=center words=centre operator=eq phase=result"
+"first set the chapter heading to Overview, next center the first paragraph","@r1 w.request.request act=change mood=do words=""set the chapter heading to Overview"" predicate=set words_origin=hull
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=description sort=heading sort_words=""chapter heading""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.text value=Overview operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""center the first paragraph"" predicate=center words_origin=hull
+@r2.t w.request.target request=$r2 family=block mode=existing determiner=definite fill=description ordinal=first description=""first paragraph"" sort=paragraph
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=block.align value=center operator=eq phase=result"
+I want the chapter heading changed to Overview and the first paragraph centred,"@f3 w.request.filler text=""I want the""
+@r1 w.request.request act=change mood=do words=""chapter heading changed to Overview and the"" predicate=changed words_origin=hull
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=written name=chapter name_words=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.id value=chapter operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.text value=Overview operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""first paragraph centred"" predicate=centred words_origin=hull
+@r2.t w.request.target request=$r2 family=block mode=existing determiner=definite fill=description ordinal=first description=""first paragraph"" sort=paragraph
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=block.align value=center words=centred operator=eq phase=result"
+"make the chapter heading Overview, then centre the first paragraph","@f1 w.request.filler text=then
+@r1 w.request.request act=change mood=do words=""make the chapter heading Overview"" predicate=make words_origin=hull
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=description sort=heading sort_words=""chapter heading""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.text value=Overview operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""centre the first paragraph"" predicate=centre words_origin=hull
+@r2.t w.request.target request=$r2 family=block mode=existing determiner=definite fill=description ordinal=first description=""first paragraph"" sort=paragraph
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=block.align value=center words=centre operator=eq phase=result"
+could you retitle the chapter heading as Overview and then center the first paragraph?,"@f3 w.request.filler text=""could you""
+@f1 w.request.filler text=then
+@r1 w.request.request act=change mood=do words=""retitle the chapter heading as Overview"" predicate=retitle words_origin=hull
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=description sort=heading sort_words=""chapter heading""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.text value=Overview operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""center the first paragraph?"" predicate=center words_origin=hull
+@r2.t w.request.target request=$r2 family=block mode=existing determiner=definite fill=description ordinal=first description=""first paragraph"" sort=paragraph
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=block.align value=center operator=eq phase=result"
+"let's change the chapter heading to Overview, then align the first paragraph to the centre","@f2 w.request.filler text=""let's""
+@f1 w.request.filler text=then
+@r1 w.request.request act=change mood=do words=""change the chapter heading to Overview"" predicate=change words_origin=hull
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=description sort=heading sort_words=""chapter heading""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.text value=Overview operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""align the first paragraph to the centre"" predicate=align words_origin=hull
+@r2.t w.request.target request=$r2 family=block mode=existing determiner=definite fill=description family_words=paragraph ordinal=first description=""first paragraph"" sort=paragraph
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=block.align value=center words=centre operator=eq phase=result"
+"change the chapter heading to Overview, then the first paragraph should be centred","@r1 w.request.request act=change mood=do words=""change the chapter heading to Overview, then the"" predicate=change words_origin=hull
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=description sort=heading sort_words=""chapter heading""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.text value=Overview operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""first paragraph should be centred"" predicate=be words_origin=hull
+@r2.t w.request.target request=$r2 family=block mode=existing determiner=definite fill=description ordinal=first description=""first paragraph"" sort=paragraph
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=block.align value=center words=centred operator=eq phase=result"
+"ok, the title is too long, so change the chapter heading to Overview, then centre the first paragraph","@f1 w.request.filler text=""ok, the title is too long, so""
+@f2 w.request.filler text=then
+@r1 w.request.request act=change mood=do words=""change the chapter heading to Overview"" predicate=change words_origin=hull
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=description sort=heading sort_words=""chapter heading""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.text value=Overview operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""centre the first paragraph"" predicate=centre words_origin=hull
+@r2.t w.request.target request=$r2 family=block mode=existing determiner=definite fill=description ordinal=first description=""first paragraph"" sort=paragraph
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=block.align value=center words=centre operator=eq phase=result"
+"actually, let's polish the top: change the chapter heading to Overview and then center the first paragraph","@f4 w.request.filler text=""actually, let's polish the top:""
+@f2 w.request.filler text=then
+@r1 w.request.request act=change mood=do words=""change the chapter heading to Overview"" predicate=change words_origin=hull
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=description sort=heading sort_words=""chapter heading""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.text value=Overview operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""center the first paragraph"" predicate=center words_origin=hull
+@r2.t w.request.target request=$r2 family=block mode=existing determiner=definite fill=description ordinal=first description=""first paragraph"" sort=paragraph
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=block.align value=center operator=eq phase=result"
+"hmm, first I'd like the chapter heading renamed to Overview, then please centre the first paragraph","@f4 w.request.filler text=""hmm, first I'd like the""
+@r1 w.request.request act=change mood=do words=""chapter heading renamed to Overview, then"" predicate=renamed words_origin=hull
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=written name=chapter name_words=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.id value=chapter operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.text value=Overview operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""centre the first paragraph"" predicate=centre words_origin=hull
+@r2.t w.request.target request=$r2 family=block mode=existing determiner=definite fill=description ordinal=first description=""first paragraph"" sort=paragraph
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=block.align value=center words=centre operator=eq phase=result"
+"so the page looks like a cover, rename the chapter heading to Overview and centre the first paragraph","@f1 w.request.filler text=""so the page looks like a cover""
+@r1 w.request.request act=change mood=do words=""rename the chapter heading to Overview and"" predicate=rename words_origin=hull
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=description sort=heading sort_words=""chapter heading""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.text value=Overview operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""centre the first paragraph"" predicate=centre words_origin=hull
+@r2.t w.request.target request=$r2 family=block mode=existing determiner=definite fill=description ordinal=first description=""first paragraph"" sort=paragraph
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=block.align value=center words=centre operator=eq phase=result"
+"before I forget, change the chapter heading to Overview, then centre the first paragraph, it looks lopsided","@f4 w.request.filler text=""before I forget""
+@f2 w.request.filler text=then
+@r1 w.request.request act=change mood=do words=""change the chapter heading to Overview"" predicate=change words_origin=hull
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=description sort=heading sort_words=""chapter heading""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.text value=Overview operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""centre the first paragraph, it looks lopsided"" predicate=centre words_origin=hull
+@r2.t w.request.target request=$r2 family=block mode=existing determiner=definite fill=description ordinal=first description=""first paragraph"" sort=paragraph
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=block.align value=center words=centre operator=eq phase=result"
+"change the chapter heading, then centre the first paragraph","@r1 w.request.request act=change mood=do words=""change the chapter heading"" predicate=change words_origin=hull
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=description sort=heading sort_words=""chapter heading""
+@r2 w.request.request act=change mood=do words=""centre the first paragraph"" predicate=centre words_origin=hull
+@r2.t w.request.target request=$r2 family=block mode=existing determiner=definite fill=description ordinal=first description=""first paragraph"" sort=paragraph
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=block.align value=center words=centre operator=eq phase=result"
+"change the chapter heading to Overview, then align the first paragraph","@f1 w.request.filler text=then
+@r1 w.request.request act=change mood=do words=""change the chapter heading to Overview"" predicate=change words_origin=hull
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=description sort=heading sort_words=""chapter heading""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.text value=Overview operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""align the first paragraph"" predicate=align words_origin=hull
+@r2.t w.request.target request=$r2 family=block mode=existing determiner=definite fill=description ordinal=first description=""first paragraph"" sort=paragraph
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page"
+"retitle the chapter heading, centre the first paragraph","@r1 w.request.request act=change mood=do words=""retitle the chapter heading"" predicate=retitle words_origin=hull
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=description sort=heading sort_words=""chapter heading""
+@r2 w.request.request act=change mood=do words=""centre the first paragraph"" predicate=centre words_origin=hull
+@r2.t w.request.target request=$r2 family=block mode=existing determiner=definite fill=description ordinal=first description=""first paragraph"" sort=paragraph
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=block.align value=center words=centre operator=eq phase=result"
+change the chapter heading to Overview and tidy the first paragraph,"@r1 w.request.request act=change mood=do words=""change the chapter heading to Overview and"" predicate=change words_origin=hull
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=description sort=heading sort_words=""chapter heading""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.text value=Overview operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""tidy the first paragraph"" predicate=tidy words_origin=hull
+@r2.t w.request.target request=$r2 family=block mode=existing determiner=definite fill=description ordinal=first description=""first paragraph"" sort=paragraph
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page"
+"change the chapter heading, then line up the first paragraph in the middle","@r1 w.request.request act=change mood=do words=""change the chapter heading"" predicate=change words_origin=hull
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=description sort=heading sort_words=""chapter heading""
+@r2 w.request.request act=change mood=do words=""line up the first paragraph in the middle"" predicate=""line up"" words_origin=hull
+@r2.t w.request.target request=$r2 family=block mode=existing determiner=definite fill=description family_words=paragraph ordinal=first description=""first paragraph"" sort=paragraph
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=block.align words=""in the middle"" operator=eq phase=result"
+rename the chapter heading to Overview and format the first paragraph,"@r1 w.request.request act=change mood=do words=""rename the chapter heading to Overview and"" predicate=rename words_origin=hull
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=description sort=heading sort_words=""chapter heading""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.text value=Overview operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""format the first paragraph"" predicate=format words_origin=hull
+@r2.t w.request.target request=$r2 family=block mode=existing determiner=definite fill=description ordinal=first description=""first paragraph"" sort=paragraph
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page"
+"update the chapter heading, centre the first paragraph","@r1 w.request.request act=change mood=do words=""update the chapter heading"" predicate=update words_origin=hull
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=description sort=heading sort_words=""chapter heading""
+@r2 w.request.request act=change mood=do words=""centre the first paragraph"" predicate=centre words_origin=hull
+@r2.t w.request.target request=$r2 family=block mode=existing determiner=definite fill=description ordinal=first description=""first paragraph"" sort=paragraph
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=block.align value=center words=centre operator=eq phase=result"
+can you put a chapter about the results in?,"@f1 w.request.filler text=""can you""
+@r1 w.request.request act=make mood=do predicate=put words=""put a chapter about the results in?""
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=chapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.content value=results operator=eq phase=result"
+I need a chapter on the results,"@r1 w.request.request act=make mood=do predicate=need words=""need a chapter on the results""
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=chapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.content value=results operator=eq phase=result"
+please create a chapter about the results,"@f1 w.request.filler text=please
+@r1 w.request.request act=make mood=do predicate=create words=""create a chapter about the results""
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=chapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.content value=results operator=eq phase=result"
+let's write a chapter about the results,"@f1 w.request.filler text=""let's""
+@r1 w.request.request act=make mood=do predicate=write words=""write a chapter about the results""
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=chapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.content value=results operator=eq phase=result"
+"um, make a chapter about the results","@f1 w.request.filler text=um
+@r1 w.request.request act=make mood=do predicate=make words=""make a chapter about the results""
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=chapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.content value=results operator=eq phase=result"
+a chapter about the results would be nice to have,"@r1 w.request.request act=make mood=do predicate=""would be nice to have"" words=""chapter about the results would be nice to have""
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=chapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.content value=results operator=eq phase=result"
+could you insert a chapter about the results?,"@f1 w.request.filler text=""could you""
+@r1 w.request.request act=make mood=do predicate=insert words=""insert a chapter about the results?""
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=chapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.content value=results operator=eq phase=result"
+give me a chapter about the results,"@r1 w.request.request act=make mood=do predicate=give
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=chapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.content value=results operator=eq phase=result"
+start a chapter about the results,"@r1 w.request.request act=make mood=do predicate=start
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=chapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.content value=results operator=eq phase=result"
+"ok, the Notes document is missing something, so add a chapter about the results","@f3 w.request.filler text=""ok, the Notes document is missing something, so""
+@r1 w.request.request act=make mood=do predicate=add words=""add a chapter about the results""
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=chapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.content value=results operator=eq phase=result"
+"actually, I'd like to put in a chapter about the results, because that is what the reader cares about","@f2 w.request.filler text=""actually, I'd like to""
+@r1 w.request.request act=make mood=do predicate=""put in"" words=""put in a chapter about the results""
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=chapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.content value=results operator=eq phase=result
+@f3 w.request.filler text=""because that is what the reader cares about"""
+"now that the intro is done, could you create a chapter about the results?","@f2 w.request.filler text=""now that the intro is done, could you""
+@r1 w.request.request act=make mood=do predicate=create words=""create a chapter about the results?""
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=chapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.content value=results operator=eq phase=result"
+"before I forget, I need a chapter about the results, nothing long, just a heading to begin with","@f1 w.request.filler text=""before I forget, I""
+@r1 w.request.request act=make mood=do predicate=need words=""need a chapter about the results, nothing long, just a heading to begin with""
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=chapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.content value=results operator=eq phase=result"
+"hey, let's add a chapter about the results so the document has a proper ending","@f3 w.request.filler text=""hey, let's""
+@r1 w.request.request act=make mood=do predicate=add words=""add a chapter about the results""
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=chapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.content value=results operator=eq phase=result
+@f4 w.request.filler text=""so the document has a proper ending"""
+add a chapter,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=chapter"
+make a new chapter please,"@f1 w.request.filler text=please
+@r1 w.request.request act=make mood=do predicate=make
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=chapter"
+put in a chapter on the findings,"@r1 w.request.request act=make mood=do predicate=put
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=chapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.content words=""the findings"" operator=eq phase=result"
+I need one more chapter,"@r1 w.request.request act=make mood=do predicate=need words=""need one more chapter""
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=chapter"
+"chapter about the numbers, add it","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=chapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.content words=""the numbers"" operator=eq phase=result"
+insert a chapter,"@r1 w.request.request act=make mood=do predicate=insert
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=chapter"
+create a chapter for wrapping up,"@r1 w.request.request act=make mood=do predicate=create
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite family_words=chapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.content words=""wrapping up"" operator=eq phase=result"
+can you move the subchapter before the chapter?,"@f1 w.request.filler text=""can you""
+@r1 w.request.request act=place mood=do predicate=move words=""move the subchapter before the chapter?""
+@r1.c2 w.request.constraint request=$r1 on=place attribute=section.order_anchor value=chapter operator=eq phase=result
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=place attribute=section.order value=before operator=relation phase=result"
+please place the subchapter before the chapter,"@f1 w.request.filler text=please
+@r1 w.request.request act=place mood=do predicate=place words=""place the subchapter before the chapter""
+@r1.c2 w.request.constraint request=$r1 on=place attribute=section.order_anchor value=chapter operator=eq phase=result
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=place attribute=section.order value=before operator=relation phase=result"
+I want the subchapter before the chapter,"@r1 w.request.request act=place mood=do predicate=want words=""want the subchapter before the chapter""
+@r1.c2 w.request.constraint request=$r1 on=place attribute=section.order_anchor value=chapter operator=eq phase=result
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=place attribute=section.order value=before operator=relation phase=result"
+"the subchapter should go before the chapter, put it there","@r1 w.request.request act=place mood=do predicate=put words=""subchapter should go before the chapter, put it there""
+@r1.c2 w.request.constraint request=$r1 on=place attribute=section.order_anchor value=chapter operator=eq phase=result
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=place attribute=section.order value=before operator=relation phase=result"
+"um, bring the subchapter before the chapter","@f1 w.request.filler text=um
+@r1 w.request.request act=place mood=do predicate=bring words=""bring the subchapter before the chapter""
+@r1.c2 w.request.constraint request=$r1 on=place attribute=section.order_anchor value=chapter operator=eq phase=result
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=place attribute=section.order value=before operator=relation phase=result"
+let's move the subchapter to before the chapter,"@f1 w.request.filler text=""let's""
+@r1 w.request.request act=place mood=do predicate=move words=""move the subchapter to before the chapter""
+@r1.c2 w.request.constraint request=$r1 on=place attribute=section.order_anchor value=chapter operator=eq phase=result
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=place attribute=section.order value=before operator=relation phase=result"
+could you drag the subchapter before the chapter?,"@f1 w.request.filler text=""could you""
+@r1 w.request.request act=place mood=do predicate=drag words=""drag the subchapter before the chapter?""
+@r1.c2 w.request.constraint request=$r1 on=place attribute=section.order_anchor value=chapter operator=eq phase=result
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=place attribute=section.order value=before operator=relation phase=result"
+I need the subchapter before the chapter,"@r1 w.request.request act=place mood=do predicate=need words=""need the subchapter before the chapter""
+@r1.c2 w.request.constraint request=$r1 on=place attribute=section.order_anchor value=chapter operator=eq phase=result
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=place attribute=section.order value=before operator=relation phase=result"
+"shift the subchapter before the chapter, please","@f1 w.request.filler text=please
+@r1 w.request.request act=place mood=do predicate=shift
+@r1.c2 w.request.constraint request=$r1 on=place attribute=section.order_anchor value=chapter operator=eq phase=result
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=place attribute=section.order value=before operator=relation phase=result"
+"actually, can you move the subchapter before the chapter, since it introduces the topic?","@f2 w.request.filler text=""actually, can you""
+@r1 w.request.request act=place mood=do predicate=move words=""move the subchapter before the chapter""
+@r1.c2 w.request.constraint request=$r1 on=place attribute=section.order_anchor value=chapter operator=eq phase=result
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=place attribute=section.order value=before operator=relation phase=result
+@f3 w.request.filler text=""since it introduces the topic?"""
+"hmm, in the Notes document I'd like the subchapter placed before the chapter","@f3 w.request.filler text=""hmm, in the Notes document I'd like the""
+@r1 w.request.request act=place mood=do predicate=placed words=""subchapter placed before the chapter""
+@r1.c2 w.request.constraint request=$r1 on=place attribute=section.order_anchor value=chapter operator=eq phase=result
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=place attribute=section.order value=before operator=relation phase=result"
+"before we continue, put the subchapter before the chapter so the reader gets the background first","@f2 w.request.filler text=""before we continue""
+@r1 w.request.request act=place mood=do predicate=put words=""put the subchapter before the chapter""
+@r1.c2 w.request.constraint request=$r1 on=place attribute=section.order_anchor value=chapter operator=eq phase=result
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=place attribute=section.order value=before operator=relation phase=result
+@f3 w.request.filler text=""so the reader gets the background first"""
+"I think the flow is off, let's move the subchapter before the chapter","@f1 w.request.filler text=""I think the flow is off, let's""
+@r1 w.request.request act=place mood=do predicate=move words=""move the subchapter before the chapter""
+@r1.c2 w.request.constraint request=$r1 on=place attribute=section.order_anchor value=chapter operator=eq phase=result
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=place attribute=section.order value=before operator=relation phase=result"
+move the subchapter up,"@r1 w.request.request act=place mood=do predicate=move
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=place attribute=section.order words=up operator=relation phase=result"
+move the subchapter,"@r1 w.request.request act=place mood=do predicate=move
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+put the subchapter earlier,"@r1 w.request.request act=place mood=do predicate=put
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=place attribute=section.order words=earlier operator=relation phase=result"
+put the subchapter above the chapter,"@r1 w.request.request act=place mood=do predicate=put
+@r1.c2 w.request.constraint request=$r1 on=place attribute=section.order_anchor value=chapter operator=eq phase=result
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=place attribute=section.order words=above operator=relation phase=result"
+place the subchapter first,"@r1 w.request.request act=place mood=do predicate=place
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=place attribute=section.order words=first operator=relation phase=result"
+bring the subchapter forward,"@r1 w.request.request act=place mood=do predicate=bring
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=place attribute=section.order words=forward operator=relation phase=result"
+can you turn the subchapter into a chapter?,"@f1 w.request.filler text=""can you""
+@r1 w.request.request act=change mood=do predicate=turn words=""turn the subchapter into a chapter?""
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.role value=chapter words=""a chapter"" operator=eq phase=result"
+I want the subchapter to be a chapter,"@r1 w.request.request act=change mood=do predicate=want words=""want the subchapter to be a chapter""
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.role value=chapter words=""a chapter"" operator=eq phase=result"
+upgrade the subchapter to a chapter,"@r1 w.request.request act=change mood=do predicate=upgrade
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.role value=chapter words=""a chapter"" operator=eq phase=result"
+"um, change the subchapter into a chapter","@f1 w.request.filler text=um
+@r1 w.request.request act=change mood=do predicate=change words=""change the subchapter into a chapter""
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.role value=chapter words=""a chapter"" operator=eq phase=result"
+"let's promote the subchapter, it should be a chapter","@f1 w.request.filler text=""let's""
+@r1 w.request.request act=change mood=do predicate=promote words=""promote the subchapter, it should be a chapter""
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.role value=chapter words=""a chapter"" operator=eq phase=result"
+could you raise the subchapter to a chapter level?,"@f1 w.request.filler text=""could you""
+@r1 w.request.request act=change mood=do predicate=raise words=""raise the subchapter to a chapter level?""
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.role value=chapter words=""a chapter"" operator=eq phase=result"
+I need the subchapter as a chapter,"@r1 w.request.request act=change mood=do predicate=need words=""need the subchapter as a chapter""
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.role value=chapter words=""a chapter"" operator=eq phase=result"
+would be nice to have the subchapter as a chapter,"@r1 w.request.request act=change mood=do predicate=""would be nice to have""
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.role value=chapter words=""a chapter"" operator=eq phase=result"
+convert the subchapter to a chapter,"@r1 w.request.request act=change mood=do predicate=convert
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.role value=chapter words=""a chapter"" operator=eq phase=result"
+"actually, I think the subchapter deserves to be a chapter, can you make it one?","@f2 w.request.filler text=""actually, I think the""
+@r1 w.request.request act=change mood=do predicate=make words=""subchapter deserves to be a chapter, can you make it one?""
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.role value=chapter words=""a chapter"" operator=eq phase=result"
+"before I forget, promote the subchapter to a chapter, it's really a main topic","@f1 w.request.filler text=""before I forget""
+@r1 w.request.request act=change mood=do predicate=promote words=""promote the subchapter to a chapter, it's really a main topic""
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.role value=chapter words=""a chapter"" operator=eq phase=result"
+"hey, could you convert the subchapter to a chapter so it shows up in the contents?","@f3 w.request.filler text=""hey, could you""
+@r1 w.request.request act=change mood=do predicate=convert words=""convert the subchapter to a chapter""
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.role value=chapter words=""a chapter"" operator=eq phase=result
+@f4 w.request.filler text=""so it shows up in the contents?"""
+move the subchapter up a level,"@r1 w.request.request act=change mood=do predicate=move
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.role words=""up a level"" operator=eq phase=result"
+make the subchapter more important,"@r1 w.request.request act=change mood=do predicate=make
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.role words=""more important"" operator=eq phase=result"
+raise the subchapter,"@r1 w.request.request act=change mood=do predicate=raise
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+promote the subchapter one level,"@r1 w.request.request act=change mood=do predicate=promote
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.role words=""one level"" operator=eq phase=result"
+"the subchapter should be top level, promote it","@r1 w.request.request act=change mood=do predicate=promote words=""subchapter should be top level, promote it""
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.role words=""top level"" operator=eq phase=result"
+elevate the subchapter,"@r1 w.request.request act=change mood=do predicate=elevate
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+"promote it, the subchapter, a step up","@r1 w.request.request act=change mood=do predicate=promote
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context family_words=subchapter
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.role words=""a step up"" operator=eq phase=result"
+can you highlight characters 0 to 5 in the first paragraph?,"@f1 w.request.filler text=""can you""
+@r1 w.request.request act=pick mood=do predicate=highlight words=""highlight characters 0 to 5 in the first paragraph?""
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=description family_words=paragraph ordinal=first description=""the first paragraph""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.from value=""0"" operator=eq phase=selector key_words=""characters 0 to 5""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.to value=""5"" operator=eq phase=selector
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.at value=""0"" operator=eq phase=result"
+please select characters 0 through 5 of the first paragraph,"@f1 w.request.filler text=please
+@r1 w.request.request act=pick mood=do predicate=select words=""select characters 0 through 5 of the first paragraph""
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=description family_words=paragraph ordinal=first description=""the first paragraph""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.from value=""0"" operator=eq phase=selector key_words=""characters 0 through 5""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.to value=""5"" operator=eq phase=selector
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.at value=""0"" operator=eq phase=result"
+I want characters 0 through 5 highlighted in the first paragraph,"@f2 w.request.filler text=""I want""
+@r1 w.request.request act=pick mood=do predicate=highlighted words=""characters 0 through 5 highlighted in the first paragraph""
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=description family_words=paragraph ordinal=first description=""the first paragraph""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.from value=""0"" operator=eq phase=selector key_words=""characters 0 through 5""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.to value=""5"" operator=eq phase=selector
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.at value=""0"" operator=eq phase=result"
+mark characters 0-5 in the first paragraph,"@r1 w.request.request act=pick mood=do predicate=mark
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=description family_words=paragraph ordinal=first description=""the first paragraph""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.from value=""0"" operator=eq phase=selector key_words=""characters 0-5""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.to value=""5"" operator=eq phase=selector
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.at value=""0"" operator=eq phase=result"
+"um, highlight characters 0 through 5 of the first paragraph","@f1 w.request.filler text=um
+@r1 w.request.request act=pick mood=do predicate=highlight words=""highlight characters 0 through 5 of the first paragraph""
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=description family_words=paragraph ordinal=first description=""the first paragraph""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.from value=""0"" operator=eq phase=selector key_words=""characters 0 through 5""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.to value=""5"" operator=eq phase=selector
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.at value=""0"" operator=eq phase=result"
+let's highlight the first paragraph's characters 0 through 5,"@f1 w.request.filler text=""let's""
+@r1 w.request.request act=pick mood=do predicate=highlight words=""highlight the first paragraph's characters 0 through 5""
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=description family_words=paragraph ordinal=first description=""the first paragraph""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.from value=""0"" operator=eq phase=selector key_words=""characters 0 through 5""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.to value=""5"" operator=eq phase=selector
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.at value=""0"" operator=eq phase=result"
+could you shade characters 0 to 5 in the first paragraph?,"@f1 w.request.filler text=""could you""
+@r1 w.request.request act=pick mood=do predicate=shade words=""shade characters 0 to 5 in the first paragraph?""
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=description family_words=paragraph ordinal=first description=""the first paragraph""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.from value=""0"" operator=eq phase=selector key_words=""characters 0 to 5""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.to value=""5"" operator=eq phase=selector
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.at value=""0"" operator=eq phase=result"
+I need characters 0 through 5 selected in the first paragraph,"@f2 w.request.filler text=""I need""
+@r1 w.request.request act=pick mood=do predicate=selected words=""characters 0 through 5 selected in the first paragraph""
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=description family_words=paragraph ordinal=first description=""the first paragraph""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.from value=""0"" operator=eq phase=selector key_words=""characters 0 through 5""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.to value=""5"" operator=eq phase=selector
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.at value=""0"" operator=eq phase=result"
+would be nice to have characters 0 through 5 in the first paragraph marked,"@r1 w.request.request act=pick mood=do predicate=""would be nice to have""
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=description family_words=paragraph ordinal=first description=""the first paragraph""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.from value=""0"" operator=eq phase=selector key_words=""characters 0 through 5""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.to value=""5"" operator=eq phase=selector
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.at value=""0"" operator=eq phase=result"
+"in the first paragraph, highlight characters 0 through 5","@r1 w.request.request act=pick mood=do predicate=highlight words=""the first paragraph, highlight characters 0 through 5""
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=description family_words=paragraph ordinal=first description=""the first paragraph""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.from value=""0"" operator=eq phase=selector key_words=""characters 0 through 5""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.to value=""5"" operator=eq phase=selector
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.at value=""0"" operator=eq phase=result"

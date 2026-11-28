@@ -1,0 +1,431 @@
+text,sop,sop1
+switch the Shopping list back to bullet points,"@r1 w.request.request act=change mood=do predicate=switch
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=""Shopping list""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=""Shopping list"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.style value=bullet words=""bullet points"" operator=eq phase=result"
+"the order of the To-do list matters now, so could you change it to a numbered list?","@f1 w.request.filler text=""now, so""
+@r1 w.request.request act=change mood=do predicate=change
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=""To-do list"" sort=list
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=""To-do list"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.style value=numbered operator=eq phase=result"
+I want checkboxes I can tick on the Shopping list instead of plain bullets,"@f1 w.request.filler text=want
+@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=""Shopping list""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=""Shopping list"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.style value=task words=checkboxes operator=eq phase=result key_words=bullets"
+bullets for this list,"@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context family_words=list
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.style value=bullet words=bullets operator=eq phase=result"
+number the list,"@r1 w.request.request act=change mood=do predicate=number
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=description sort=list
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.style value=numbered words=number operator=eq phase=result"
+make it a task list,"@r1 w.request.request act=change mood=do predicate=make
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context family_words=list
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.style value=task operator=eq phase=result"
+tick off Buy milk on the Shopping list,"@r1 w.request.request act=change mood=do predicate=""tick off""
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=""Shopping list""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=""Shopping list"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.checked value=""Buy milk"" operator=eq phase=result"
+"Mark ""send invoice"" as done in the To-do list.","@r1 w.request.request act=change mood=do predicate=Mark
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=""To-do list""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=""To-do list"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.checked value=""send invoice"" operator=eq phase=result key_words=done"
+uncheck eggs on the Shopping list,"@r1 w.request.request act=change mood=do predicate=uncheck
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=""Shopping list""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=""Shopping list"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.checked value=eggs want=no operator=eq phase=result"
+"I already called the bank this morning, so check that item off on the To-do list","@f1 w.request.filler text=so
+@r1 w.request.request act=change mood=do predicate=check
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=""To-do list""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=""To-do list"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.checked value=""called the bank"" operator=eq phase=result key_words=item"
+"oops, ""book dentist"" isn't actually done yet - can you untick it on the To-do list?","@f1 w.request.filler text=oops
+@f2 w.request.filler text=actually
+@r1 w.request.request act=change mood=do predicate=untick
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=""To-do list""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=""To-do list"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.checked value=""book dentist"" want=no operator=eq phase=result key_words=done"
+check off the first two items on the to-do list,"@r1 w.request.request act=change mood=do predicate=""check off""
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=""to-do list""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=""to-do list"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.checked words=""the first two items"" operator=eq phase=result"
+"done with ""pay rent"", tick it","@r1 w.request.request act=change mood=do predicate=tick
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.checked value=""pay rent"" operator=eq phase=result key_words=done"
+"add a table with the columns Item and Cost and one row: Rent, 800","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Item operator=eq phase=result key_words=columns
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Cost operator=eq phase=result key_words=columns
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Rent operator=eq phase=result key_words=row
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=block.rows value=""800"" operator=eq phase=result key_words=row"
+"Insert a table: Name / Role, then Ana / Designer, then Sam / Developer.","@f1 w.request.filler text=then
+@f2 w.request.filler text=then
+@r1 w.request.request act=make mood=do predicate=Insert
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Name operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Role operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Ana operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Designer operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Sam operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Developer operator=eq phase=result"
+create a two-column table listing Monday - gym and Wednesday - swim,"@r1 w.request.request act=make mood=do predicate=create
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Monday operator=eq phase=result key_words=column
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.rows value=gym operator=eq phase=result key_words=column
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Wednesday operator=eq phase=result key_words=column
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=block.rows value=swim operator=eq phase=result key_words=column"
+"to compare the quotes, could you put in a table with Vendor and Price as columns, and rows for Acme at 1200 and Globex at 950?","@r1 w.request.request act=make mood=do predicate=""put in""
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Vendor operator=eq phase=result key_words=columns
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Price operator=eq phase=result key_words=columns
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Acme operator=eq phase=result key_words=rows
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=block.rows value=""1200"" operator=eq phase=result key_words=rows
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Globex operator=eq phase=result key_words=rows
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=block.rows value=""950"" operator=eq phase=result key_words=rows"
+"after the Timeline subchapter I need a small table: Phase, Start; Design, March; Build, May","@r1 w.request.request act=make mood=do predicate=need
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Phase operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Start operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Design operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=block.rows value=March operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Build operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=block.rows value=May operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=place attribute=section.order value=after operator=relation phase=result
+@r1.c8 w.request.constraint request=$r1 on=place attribute=section.order_anchor value=Timeline operator=eq phase=result"
+add a table here,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=table"
+table of Task and Owner please,"@f1 w.request.filler text=please
+@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Task operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Owner operator=eq phase=result"
+make a 3x2 table,"@r1 w.request.request act=make mood=do predicate=make
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.rows words=""3x2"" operator=eq phase=result"
+"add a table with a header row Date, Amount and the row 1 May, 40","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.header value=""true"" words=""with a header row"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Date operator=eq phase=result key_words=""header row""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Amount operator=eq phase=result key_words=""header row""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=block.rows value=""1 May"" operator=eq phase=result key_words=row
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=block.rows value=""40"" operator=eq phase=result key_words=row"
+"Insert a table without a header: red, 3; blue, 5.","@r1 w.request.request act=make mood=do predicate=Insert
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.header value=""false"" words=""without a header"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.rows value=red operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.rows value=""3"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=block.rows value=blue operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=block.rows value=""5"" operator=eq phase=result"
+"create a table whose first row is a heading row: City, Population","@r1 w.request.request act=make mood=do predicate=create
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.header value=""true"" words=""first row is a heading row"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.rows value=City operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Population operator=eq phase=result"
+"these are just raw numbers, so make a table with no header: 12, 15, 18 in one row","@f1 w.request.filler text=""just raw numbers, so""
+@r1 w.request.request act=make mood=do words=""make a table with no header: 12, 15, 18 in one row"" predicate=make
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.header value=""false"" words=""no header"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.rows value=""12"" operator=eq phase=result key_words=row
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.rows value=""15"" operator=eq phase=result key_words=row
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=block.rows value=""18"" operator=eq phase=result key_words=row"
+"could you add a table for the guest list, with Guest and Meal as column headers and Lena with Vegan as the first entry?","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=table ordinal=first description=first
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.header value=""true"" words=""column headers"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Guest operator=eq phase=result key_words=entry
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Meal operator=eq phase=result key_words=entry
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Lena operator=eq phase=result key_words=entry
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Vegan operator=eq phase=result key_words=entry"
+"new table, header row on","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=table description=""new table""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.header value=""true"" words=""header row on"" operator=eq phase=result"
+add a headerless table,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.header value=""false"" words=headerless operator=eq phase=result"
+table with headings Size and Price,"@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.header value=""true"" words=""with headings"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Size operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Price operator=eq phase=result"
+add a table called Expenses with Item and Cost columns,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=table name=Expenses name_words=called
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.name value=Expenses operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Item operator=eq phase=result key_words=columns
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Cost operator=eq phase=result key_words=columns"
+Create a table named Team roster.,"@r1 w.request.request act=make mood=do predicate=Create
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=table name=""Team roster"" name_words=named
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.name value=""Team roster"" operator=eq phase=result"
+insert a new table and label it Sprint schedule,"@r1 w.request.request act=make mood=do predicate=insert
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=table description=""a new table""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.name value=""Sprint schedule"" operator=eq phase=result key_words=label"
+"so we can refer to it later, add a table labelled Room prices with Single, 90 and Double, 120","@f1 w.request.filler text=""so we can refer to it later""
+@r1 w.request.request act=make mood=do words=""add a table labelled Room prices with Single, 90 and Double, 120"" predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=table name=""Room prices"" name_words=labelled
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.name value=""Room prices"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Single operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.rows value=""90"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Double operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=block.rows value=""120"" operator=eq phase=result"
+I'd like a table in the Plan chapter called Milestones; leave the cells empty for now,"@fy w.request.filler text=""leave the cells empty for now""
+@f1 w.request.filler text=now
+@r1 w.request.request act=make mood=do predicate=like words=""I'd like a table in the Plan chapter called Milestones""
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=table name=Milestones name_words=called
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.name value=Milestones operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.parent value=Plan operator=eq phase=selector words=""in the Plan chapter"""
+table named Scores,"@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=table name=Scores name_words=named
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.name value=Scores operator=eq phase=result"
+add an Inventory table,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.name value=Inventory operator=eq phase=result"
+"new table, call it Contacts","@r1 w.request.request act=make mood=do predicate=call
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=table description=""new table""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.name value=Contacts operator=eq phase=result"
+"add a row Travel, 300 to the Budget table","@r1 w.request.request act=change mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=Budget family_words=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=Budget operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Travel operator=eq phase=result key_words=row
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.rows value=""300"" operator=eq phase=result key_words=row"
+"In the Budget table, change the cells to Item, Cost / Venue, 1500 / Catering, 900.","@r1 w.request.request act=change mood=do predicate=change
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=Budget family_words=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=Budget operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Item operator=eq phase=result key_words=cells
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Cost operator=eq phase=result key_words=cells
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Venue operator=eq phase=result key_words=cells
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=block.rows value=""1500"" operator=eq phase=result key_words=cells
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Catering operator=eq phase=result key_words=cells
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=block.rows value=""900"" operator=eq phase=result key_words=cells"
+put a new column Notes in the Budget table,"@r1 w.request.request act=change mood=do predicate=put
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=Budget family_words=table description=""a new""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=Budget operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Notes operator=eq phase=result key_words=column"
+"we forgot software licences, so could you add Licences with 450 as a new row in the Budget?","@f1 w.request.filler text=so
+@r1 w.request.request act=change mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=Budget description=""a new row""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=Budget operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Licences operator=eq phase=result key_words=row
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.rows value=""450"" operator=eq phase=result key_words=row"
+"the Budget table is out of date - remove the Printing row and add Marketing, 2000 instead","@r1 w.request.request act=change mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=Budget family_words=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=Budget operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Printing want=no operator=eq phase=result key_words=row
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Marketing operator=eq phase=result key_words=row
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=block.rows value=""2000"" operator=eq phase=result key_words=row"
+"Budget: new row Food, 250","@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=Budget description=""new row""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=Budget operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.rows value=Food operator=eq phase=result key_words=row
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.rows value=""250"" operator=eq phase=result key_words=row"
+delete the last row of the table,"@r1 w.request.request act=remove mood=do predicate=delete
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=description sort=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.rows words=""the last row"" want=no operator=eq phase=result"
+turn on the header row for the Budget table,"@r1 w.request.request act=change mood=do predicate=""turn on""
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=Budget family_words=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=Budget operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.header value=""true"" words=""header row"" operator=eq phase=result"
+The Budget table shouldn't have a header.,"@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=Budget family_words=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=Budget operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.header value=""false"" words=""shouldn't have a header"" operator=eq phase=result"
+make the first row of the Budget table a header,"@r1 w.request.request act=change mood=do predicate=make
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=Budget family_words=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=Budget operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.header value=""true"" words=""first row"" operator=eq phase=result key_words=header"
+"the first row of the Budget is real data, not titles, so please switch the header off","@f1 w.request.filler text=""so please""
+@r1 w.request.request act=change mood=do predicate=switch
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=Budget name_words=titles ordinal=first description=first
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=Budget operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.header value=""false"" words=""header off"" operator=eq phase=result"
+could you treat the top row of the Budget table as column headings? It's confusing otherwise.,"@r1 w.request.request act=change mood=do predicate=treat
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=Budget family_words=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=Budget operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.header value=""true"" words=""as column headings"" operator=eq phase=result"
+no header on this table,"@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context family_words=table
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.header value=""false"" words=""no header"" operator=eq phase=result"
+give the table a header row,"@r1 w.request.request act=change mood=do predicate=give
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=description sort=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.header value=""true"" words=""a header row"" operator=eq phase=result"
+Budget table: header on,"@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=Budget family_words=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=Budget operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.header value=""true"" words=""header on"" operator=eq phase=result"
+"change the Intro paragraph's text to ""This document tracks the move to the new office.""","@r1 w.request.request act=change mood=do predicate=change
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=Intro family_words=paragraph
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=Intro operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.text value=""This document tracks the move to the new office."" operator=eq phase=result key_words=text"
+Edit the second item of the Shopping list so it says oat milk.,"@f1 w.request.filler text=so
+@r1 w.request.request act=change mood=do predicate=Edit
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=description sort=item ordinal=second description=second
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text value=""oat milk"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.parent value=""Shopping list"" operator=eq phase=selector"
+"in the Budget table, replace the cell ""800"" with 850","@r1 w.request.request act=change mood=do predicate=replace
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=""800"" family_words=table
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=""800"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.text value=""850"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.parent value=Budget operator=eq phase=selector words=""in the Budget"""
+"the price went up, so the Rent cell in the Budget should now read 950","@f1 w.request.filler text=so
+@f2 w.request.filler text=now
+@r1 w.request.request act=change mood=do predicate=read
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=""Rent cell""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=""Rent cell"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.text value=""950"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.parent value=Budget operator=eq phase=selector words=""in the Budget"""
+"could you fix the Summary text? It should say ""We finished two weeks early."" instead of the old sentence","@r1 w.request.request act=change mood=do predicate=fix
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=Summary
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=Summary operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.text value=""We finished two weeks early."" operator=eq phase=result key_words=text"
+first to-do item -> water the plants,"@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=description sort=item ordinal=first description=first
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text value=""water the plants"" operator=eq phase=result"
+edit that cell to say TBD,"@r1 w.request.request act=change mood=do predicate=edit
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text value=TBD operator=eq phase=result"
+add a paragraph at the end,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=paragraph
+@r1.c1 w.request.constraint request=$r1 on=place attribute=section.order value=last operator=relation phase=result words=""at the end"""
+Insert a new quote block after the Background paragraph.,"@r1 w.request.request act=make mood=do predicate=Insert
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=quote description=""a new quote block""
+@r1.c1 w.request.constraint request=$r1 on=place attribute=section.order value=after operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=section.order_anchor value=""Background paragraph"" operator=eq phase=result"
+put a heading under the Timeline subchapter,"@r1 w.request.request act=make mood=do predicate=put
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.parent value=Timeline operator=eq phase=selector words=""under the Timeline subchapter"""
+"there's no room to explain the budget, so could you add an empty paragraph below the Budget table?","@f1 w.request.filler text=no
+@f2 w.request.filler text=so
+@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=paragraph description=empty
+@r1.c1 w.request.constraint request=$r1 on=place attribute=section.order value=after operator=relation phase=result words=below
+@r1.c2 w.request.constraint request=$r1 on=place attribute=section.order_anchor value=""Budget table"" operator=eq phase=result"
+I want to cite our client here; insert a quote and I'll type the words myself,"@f1 w.request.filler text=""want to cite our client""
+@r1 w.request.request act=make mood=do words=""insert a quote and I'll type the words myself"" predicate=insert
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=quote"
+new paragraph,"@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=paragraph description=""new paragraph"""
+add a quote here please,"@f1 w.request.filler text=please
+@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=quote"
+one more heading,"@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=heading count=1 count_words=""one more"""
+"add a paragraph that says ""The office move is scheduled for June.""","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=paragraph
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text value=""The office move is scheduled for June."" operator=eq phase=result"
+"Insert a quote: ""Best service we have ever had.""","@r1 w.request.request act=make mood=do predicate=Insert
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=quote
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text value=""Best service we have ever had."" operator=eq phase=result"
+add a heading reading Open Issues below the Summary,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text value=""Open Issues"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=section.order value=after operator=relation phase=result words=below
+@r1.c3 w.request.constraint request=$r1 on=place attribute=section.order_anchor value=Summary operator=eq phase=result"
+"Ana said ""This saves me an hour a day"" in the interview - add that as a quote, it's a great line","@f1 w.request.filler text=""great line""
+@r1 w.request.request act=make mood=do words=""Ana said \""This saves me an hour a day\"" in the interview - add that as a quote"" predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=quote
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text value=""This saves me an hour a day"" operator=eq phase=result key_words=said"
+paragraph: Thanks to everyone who helped.,"@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=paragraph
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text value=""Thanks to everyone who helped."" operator=eq phase=result"
+add a short paragraph about the venue,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=paragraph description=""a short paragraph""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text words=""about the venue"" operator=eq phase=result"
+new heading Next Steps,"@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=heading description=""new heading""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text value=""Next Steps"" operator=eq phase=result"
+add a level 3 heading called Dependencies,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=heading name=Dependencies name_words=called
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.level value=""3"" words=""level 3"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.text value=Dependencies operator=eq phase=result"
+Insert a heading at level 4 that reads Edge cases.,"@r1 w.request.request act=make mood=do predicate=Insert
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.level value=""4"" words=""level 4"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.text value=""Edge cases"" operator=eq phase=result"
+"create a heading, level 5, with the text Footnotes","@r1 w.request.request act=make mood=do predicate=create
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.level value=""5"" words=""level 5"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.text value=Footnotes operator=eq phase=result key_words=text"
+"Risks is a level 3 heading, so add a smaller level 4 heading under it saying Mitigation","@f1 w.request.filler text=""Risks is a level 3""
+@f2 w.request.filler text=so
+@r1 w.request.request act=make mood=do words=""add a smaller level 4 heading under it saying Mitigation"" predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.level value=""4"" words=""level 4"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.text value=Mitigation operator=eq phase=result"
+add a level-3 heading,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.level value=""3"" words=level-3 operator=eq phase=result"
+"small heading here, level 5","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=heading description=""small heading""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.level value=""5"" words=""level 5"" operator=eq phase=result"
+a level 4 heading Costs,"@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.level value=""4"" words=""level 4"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.text value=Costs operator=eq phase=result"
+add a paragraph labelled Next steps,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=paragraph name=""Next steps"" name_words=labelled
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.name value=""Next steps"" operator=eq phase=result"
+create a heading with the label risks-header,"@r1 w.request.request act=make mood=do predicate=create
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.name value=risks-header operator=eq phase=result key_words=label"
+"so I can find it in the outline later, add a paragraph and give it the label Legal note","@f1 w.request.filler text=""so I can find it in the outline later""
+@r1 w.request.request act=make mood=do words=""add a paragraph and give it the label Legal note"" predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=paragraph
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.name value=""Legal note"" operator=eq phase=result key_words=label"
+"could you add a quote block labelled Investor quote with the text ""A clear market leader.""?","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=quote name=""Investor quote"" name_words=labelled
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.name value=""Investor quote"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.text value=""A clear market leader."" operator=eq phase=result key_words=text"
+new paragraph called Disclaimer,"@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=paragraph description=""new paragraph"" name=Disclaimer name_words=called
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.name value=Disclaimer operator=eq phase=result"
+"add a quote, label it Testimonial","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=quote
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.name value=Testimonial operator=eq phase=result key_words=label"
+paragraph named Recap at the bottom,"@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=paragraph name=Recap name_words=named
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.name value=Recap operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=section.order value=bottom operator=relation phase=result words=""at the bottom"""
+add a new chapter at the end of the document,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite sort=chapter description=""a new chapter at the end of the document""
+@r1.c1 w.request.constraint request=$r1 on=place attribute=section.order value=last operator=relation phase=result words=""at the end of the document"""
+Insert a subchapter into the Plan chapter.,"@r1 w.request.request act=make mood=do predicate=Insert
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite sort=subchapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.parent value=Plan operator=eq phase=selector words=""into the Plan chapter"""
+create another section after this one,"@r1 w.request.request act=make mood=do predicate=create
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite sort=section
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.order value=after operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.order_anchor value=""this one"" operator=eq phase=result"
+"the Conclusion is getting long, so please split it up by adding a subchapter at its end","@f1 w.request.filler text=""Conclusion is getting long, so""
+@f2 w.request.filler text=please
+@r1 w.request.request act=make mood=do words=""please split it up by adding a subchapter at its end"" predicate=adding
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite sort=subchapter
+@r1.c1 w.request.constraint request=$r1 on=place attribute=section.order value=last operator=relation phase=result words=""at its end"""
+we'll need a place for the appendix material - could you add a chapter for it?,"@f1 w.request.filler text=need
+@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite sort=chapter"
+just add a chapter,"@f1 w.request.filler text=just
+@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite sort=chapter"
+new subchapter please,"@f1 w.request.filler text=please
+@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite sort=subchapter description=""new subchapter"""
+one more chapter at the bottom,"@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite sort=chapter
+@r1.c1 w.request.constraint request=$r1 on=place attribute=section.order value=bottom operator=relation phase=result words=""at the bottom"""
+add a chapter titled Results,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite sort=chapter name=Results name_words=titled
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.text value=Results operator=eq phase=result"
+"Create a subchapter with the heading ""Hiring plan"" in the Plan chapter.","@r1 w.request.request act=make mood=do predicate=Create
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite sort=subchapter description=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.text value=""Hiring plan"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.parent value=Plan operator=eq phase=selector words=""in the Plan chapter"""
+insert a new section headed Open Questions,"@r1 w.request.request act=make mood=do predicate=insert
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite sort=section
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.text value=""Open Questions"" operator=eq phase=result"
+"we still need to talk about money, so add a chapter called Budget and Costs at the end","@f1 w.request.filler text=""still need to talk about money, so""
+@r1 w.request.request act=make mood=do words=""add a chapter called Budget and Costs at the end"" predicate=add
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite sort=chapter name=""Budget and Costs"" name_words=called
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.text value=""Budget and Costs"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=section.order value=last operator=relation phase=result words=""at the end"""

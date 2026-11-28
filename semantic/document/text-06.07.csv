@@ -1,0 +1,191 @@
+text,sop,sop1
+"the To-do list should now be: email Sam, book flights, update CV - replace whatever is there","@f1 w.request.filler text=now
+@r1 w.request.request act=change mood=do predicate=replace
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=""To-do list""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=""To-do list"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.items value=""email Sam"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.items value=""book flights"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=block.items value=""update CV"" operator=eq phase=result"
+add a row to this table,"@r1 w.request.request act=change mood=do predicate=add
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context family_words=table
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.rows words=""a row"" operator=eq phase=result"
+"replace the text of the Summary paragraph with ""We shipped on time and under budget.""","@r1 w.request.request act=change mood=do predicate=replace
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=Summary family_words=paragraph
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=Summary operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.text value=""We shipped on time and under budget."" operator=eq phase=result key_words=text"
+make this heading smaller,"@r1 w.request.request act=change mood=do predicate=make
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context family_words=heading
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.level words=smaller operator=delta phase=result"
+could you discard the document altogether? I don't need these notes any more.,"@f1 w.request.filler text=""need these notes any more""
+@r1 w.request.request act=remove mood=do words=""could you discard the document altogether?"" predicate=discard
+@r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=context family_words=document
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+"colder and more distant, please","@f1 w.request.filler text=please
+@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=text mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=text.tone value=cold words=colder operator=delta phase=result"
+the hotel overcharged us twice - please write a complaint about the extra fees on our bill,"@f1 w.request.filler text=""hotel overcharged us twice""
+@f2 w.request.filler text=please
+@r1 w.request.request act=make mood=do words=""please write a complaint about the extra fees on our bill"" predicate=write
+@r1.t w.request.target request=$r1 family=text mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=text.genre value=complaint operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=text.about value=""about the extra fees on our bill"" operator=eq phase=result"
+"the link in the Conclusion heading points nowhere now, so remove it but keep the text","@f1 w.request.filler text=""now, so""
+@f2 w.request.filler text=""keep the text""
+@r1 w.request.request act=remove mood=do words=""the link in the Conclusion heading points nowhere now, so remove it"" predicate=remove
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=written name=Conclusion name_words=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.id value=Conclusion operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.mark value=link want=no operator=eq phase=result"
+go back one step in the doc,"@r1 w.request.request act=undo mood=do predicate=""go back""
+@r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=journal_step family_words=doc
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+"could you select the part that says ""no further action"" in the Intro? I want to check it before the review","@f1 w.request.filler text=""want to check it before the review""
+@r1 w.request.request act=pick mood=do words=""could you select the part that says \""no further action\"" in the Intro?"" predicate=select
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=Intro
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=Intro operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.text value=""no further action"" operator=eq phase=selector"
+"select ""part 2"" in that heading","@r1 w.request.request act=pick mood=do predicate=select
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=context sort=heading
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.text value=""part 2"" operator=eq phase=selector"
+drop the code formatting from this word,"@r1 w.request.request act=change mood=do predicate=drop
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context description=""this word""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.mark value=code want=no operator=eq phase=result"
+move this paragraph up,"@r1 w.request.request act=place mood=do predicate=move
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context family_words=paragraph
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=place attribute=section.order value=before operator=relation phase=result words=""up"""
+tick bread,"@r1 w.request.request act=change mood=do predicate=tick
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.checked value=bread operator=eq phase=result"
+"there are two quotes now, so give the Customer quote the label Quote from Lena to tell them apart","@f1 w.request.filler text=""two quotes now, so""
+@f2 w.request.filler text=""tell them apart""
+@r1 w.request.request act=change mood=do words=""give the Customer quote the label Quote from Lena"" predicate=give
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=""Customer quote""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=""Customer quote"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.name value=""Quote from Lena"" operator=eq phase=result key_words=label"
+delete the selected block,"@r1 w.request.request act=remove mood=do predicate=delete
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context family_words=block description=""the selected block""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+"this is going to our biggest client, so please rewrite the whole thing in a formal register","@f1 w.request.filler text=""going to our biggest client, so""
+@f2 w.request.filler text=please
+@r1 w.request.request act=change mood=do words=""please rewrite the whole thing in a formal register"" predicate=rewrite
+@r1.t w.request.target request=$r1 family=text mode=existing determiner=definite fill=context description=whole
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=text.tone value=formal operator=eq phase=result"
+"I'm applying to the museum next week, so could you write a cover letter for the curator job?","@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do predicate=write
+@r1.t w.request.target request=$r1 family=text mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=text.genre value=cover_letter words=""cover letter"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=text.about value=""for the curator job"" operator=eq phase=result"
+"before I send it, give me a quick overview of what the Plan chapter covers","@f1 w.request.filler text=send
+@r1 w.request.request act=ask mood=ask words=""give me a quick overview of what the Plan chapter covers"" predicate=give question=describe
+@r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=written name=Plan sort=chapter"
+"the new heading looks worse than before, so take back that last step","@f1 w.request.filler text=""new heading looks worse than before, so""
+@r1 w.request.request act=undo mood=do words=""take back that last step"" predicate=""take back""
+@r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=journal_step ordinal=last description=last
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+"selct the word ""intro"" in the Introduction heading","@r1 w.request.request act=pick mood=do predicate=selct
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=written name=Introduction name_words=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.id value=Introduction operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.text value=intro operator=eq phase=selector key_words=word"
+Put the whole Customer quote in italics.,"@r1 w.request.request act=change mood=do predicate=Put
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=""Customer quote"" description=whole
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=""Customer quote"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.mark value=italic words=italics operator=eq phase=result"
+"Un-underline ""next quarter"" in the Intro paragraph.","@r1 w.request.request act=change mood=do predicate=Un-underline
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=Intro family_words=paragraph
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=Intro operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.mark value=underline words=Un-underline want=no operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.text value=""next quarter"" operator=eq phase=selector"
+Create a numbered list named Onboarding steps.,"@r1 w.request.request act=make mood=do predicate=Create
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=list name=""Onboarding steps"" name_words=named
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.style value=numbered operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.name value=""Onboarding steps"" operator=eq phase=result"
+Insert a quote named Board feedback.,"@r1 w.request.request act=make mood=do predicate=Insert
+@r1.t w.request.target request=$r1 family=block mode=new determiner=indefinite sort=quote name=""Board feedback"" name_words=named
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.name value=""Board feedback"" operator=eq phase=result"
+Create a subchapter named Vendor review.,"@r1 w.request.request act=make mood=do predicate=Create
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite sort=subchapter name=""Vendor review"" name_words=named
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.name value=""Vendor review"" operator=eq phase=result"
+put a subchapter before the Timeline subchapter,"@r1 w.request.request act=make mood=do predicate=put
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite sort=subchapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.order value=before operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.order_anchor value=""the Timeline subchapter"" operator=eq phase=result"
+delete all paragraphs and headings,"@r1 w.request.request act=remove mood=do predicate=delete
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=all description=""all paragraphs and headings"""
+how many items are on the Shopping list?,"@r1 w.request.request act=ask mood=ask predicate=""how many"" question=count
+@r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=description sort=item sort_words=items
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.parent value=""Shopping list"" operator=eq phase=selector"
+rename the Plan chapter heading to Roadmap,"@r1 w.request.request act=change mood=do predicate=rename
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=written name=Plan name_words=heading sort=chapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.id value=Plan operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.text value=Roadmap operator=eq phase=result"
+write a letter of recommendation for my former intern Jonas,"@r1 w.request.request act=make mood=do predicate=write
+@r1.t w.request.target request=$r1 family=text mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=text.genre value=letter operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=text.about value=""of recommendation for my former intern Jonas"" operator=eq phase=result"
+make it sound friendlier,"@r1 w.request.request act=change mood=do predicate=make
+@r1.t w.request.target request=$r1 family=text mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=text.tone value=friendly words=friendlier operator=delta phase=result"
+"readers should see the plan first, so move the Plan chapter to the top of the document","@f1 w.request.filler text=""readers should see""
+@f2 w.request.filler text=""first, so""
+@r1 w.request.request act=place mood=do words=""move the Plan chapter to the top of the document"" predicate=move
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=written name=Plan sort=chapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.ids value=Plan operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.order value=top words=""to the top"" operator=eq phase=result"
+change this item to call the landlord,"@r1 w.request.request act=change mood=do predicate=change
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.text value=""call the landlord"" operator=eq phase=result"
+I promised the editor five chapters at most - how many chapters do we have right now?,"@f1 w.request.filler text=""promised the editor five""
+@f2 w.request.filler text=most
+@f3 w.request.filler text=now
+@r1 w.request.request act=ask mood=ask words=""how many chapters do we have right now?"" predicate=""how many"" question=count
+@r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=description sort=chapter sort_words=chapters"
+"It has to fit on one slide, so cut the Summary down to a very short paragraph.","@f1 w.request.filler text=""fit on one slide, so""
+@r1 w.request.request act=change mood=do words=""cut the Summary down to a very short paragraph"" predicate=cut
+@r1.t w.request.target request=$r1 family=text mode=existing determiner=definite fill=written name=Summary sort=paragraph
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=text.length value=very_short words=""very short"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=text.length value=very_short operator=eq phase=result words=""down to a very short paragraph"""
+make this reply cold and businesslike,"@r1 w.request.request act=change mood=do predicate=make
+@r1.t w.request.target request=$r1 family=text mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=text.tone value=cold operator=eq phase=result"
+"I'm keeping notes for the garden project separately, so please make a new document with the title Garden Plans 2027","@f1 w.request.filler text=""keeping notes for the garden project separately, so""
+@f2 w.request.filler text=please
+@r1 w.request.request act=make mood=do words=""please make a new document with the title Garden Plans 2027"" predicate=make
+@r1.t w.request.target request=$r1 family=text mode=new determiner=indefinite family_words=document
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=text.title value=""Garden Plans 2027"" operator=eq phase=result key_words=title"
+"can you select ""2027"" in the Timeline subchapter title?","@r1 w.request.request act=pick mood=do predicate=select
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=written name=Timeline family_words=subchapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.id value=Timeline operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.text value=""2027"" operator=eq phase=selector key_words=title"
+"Italicise the word ""draft"" in the Timeline heading.","@r1 w.request.request act=change mood=do predicate=Italicise
+@r1.t w.request.target request=$r1 family=section mode=existing determiner=definite fill=written name=Timeline name_words=heading
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.id value=Timeline operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.mark value=italic words=Italicise operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=section.text value=draft operator=eq phase=selector key_words=word"
+"make ""deadline"" bold in the Background paragraph","@r1 w.request.request act=change mood=do predicate=make
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=written name=Background family_words=paragraph
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=block.id value=Background operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=block.mark value=bold operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=block.text value=deadline operator=eq phase=selector"
+Add a chapter at the bottom of the document titled Appendix B.,"@r1 w.request.request act=make mood=do predicate=Add
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite sort=chapter description=""the document"" name=""Appendix B"" name_words=titled
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.order value=bottom words=""at the bottom"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.text value=""Appendix B"" operator=eq phase=result"
+add a subchapter before this one,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=section mode=new determiner=indefinite sort=subchapter
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=section.order value=before operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=section.order_anchor value=""this one"" operator=eq phase=result"
+how many headings does the document contain,"@r1 w.request.request act=ask mood=ask predicate=""how many"" question=count
+@r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=description sort=heading sort_words=headings family_words=document"
+count the quotes,"@r1 w.request.request act=ask mood=ask predicate=count question=count
+@r1.t w.request.target request=$r1 family=document mode=existing determiner=definite fill=description sort=quote sort_words=quotes"

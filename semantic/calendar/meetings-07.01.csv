@@ -1,0 +1,429 @@
+text,sop,sop1
+schedule a meeting with Ana tomorrow,"@r1 w.request.request act=make mood=do predicate=schedule
+@r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Ana operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=tomorrow operator=eq phase=result"
+push the budget sync back by an hour,"@r1 w.request.request act=place mood=do predicate=push
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""budget sync""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=""budget sync"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.shift value=""1"" words=""back by an hour"" operator=delta phase=result"
+when is my dentist appointment?,"@r1 w.request.request act=ask mood=ask predicate=when question=when
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""dentist appointment"""
+what's on my calendar tomorrow?,"@r1 w.request.request act=ask mood=ask predicate=""what's on"" question=describe
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context family_words=calendar
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=tomorrow operator=eq phase=selector"
+do I have anything with Lee this week?,"@r1 w.request.request act=ask mood=ask predicate=""do I have"" question=exists
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Lee
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=Lee operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.day words=""this week"" operator=eq phase=selector"
+I'd like a separate calendar for Side project,"@r1 w.request.request act=make mood=do predicate=""I'd like""
+@r1.t w.request.target request=$r1 family=calendar mode=new determiner=indefinite sort=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=""Side project"" operator=eq phase=result"
+can you set up a calendar named Kids school?,"@r1 w.request.request act=make mood=do predicate=""set up""
+@r1.t w.request.target request=$r1 family=calendar mode=new determiner=indefinite sort=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=""Kids school"" operator=eq phase=result key_words=named"
+"my volunteering shifts keep getting mixed up with work stuff, so please add a calendar called Volunteering just for them","@f1 w.request.filler text=""so please""
+@f2 w.request.filler text=just
+@r1 w.request.request act=make mood=do predicate=add words=""so please add a calendar called Volunteering just for them""
+@r1.t w.request.target request=$r1 family=calendar mode=new determiner=indefinite sort=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=Volunteering operator=eq phase=result key_words=called
+@f3 w.request.filler text=""my volunteering shifts keep getting mixed up with work stuff"""
+"ok so before we plan the trip, make me a Travel calendar and then put a Packing reminder on it Friday","@f1 w.request.filler text=""ok so before we plan the trip""
+@f2 w.request.filler text=then
+@r1 w.request.request act=make mood=do words=""make me a Travel calendar"" predicate=make
+@r1.t w.request.target request=$r1 family=calendar mode=new determiner=indefinite sort=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=Travel operator=eq phase=result
+@r2 w.request.request act=make mood=do words=""put a Packing reminder on it Friday"" predicate=put
+@r2.t w.request.target request=$r2 family=meeting mode=new determiner=indefinite sort=reminder
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=meeting.title value=Packing operator=eq phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=meeting.day value=Friday operator=eq phase=result"
+new calendar: Freelance,"@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=calendar mode=new determiner=indefinite sort=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=Freelance operator=eq phase=result"
+add one more calendar for me,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=calendar mode=new determiner=indefinite sort=calendar count=1 count_words=""one more"""
+I need a calendar for running,"@r1 w.request.request act=make mood=do predicate=""I need""
+@r1.t w.request.target request=$r1 family=calendar mode=new determiner=indefinite sort=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=running operator=eq phase=result"
+add a teal calendar called Book club,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=calendar mode=new determiner=indefinite sort=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=teal operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=""Book club"" operator=eq phase=result key_words=called"
+create a calendar named Holidays and make it orange,"@r1 w.request.request act=make mood=do predicate=create
+@r1.t w.request.target request=$r1 family=calendar mode=new determiner=indefinite sort=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=Holidays operator=eq phase=result key_words=named
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=orange operator=eq phase=result words=""make it orange"""
+please make a purple calendar for Choir,"@f1 w.request.filler text=please
+@r1 w.request.request act=make mood=do predicate=make
+@r1.t w.request.target request=$r1 family=calendar mode=new determiner=indefinite sort=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=purple operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=Choir operator=eq phase=result"
+set up a Birthdays calendar in pink,"@r1 w.request.request act=make mood=do predicate=""set up""
+@r1.t w.request.target request=$r1 family=calendar mode=new determiner=indefinite sort=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=Birthdays operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=pink operator=eq phase=result"
+could you add a calendar called Garden with a lime green colour?,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=calendar mode=new determiner=indefinite sort=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=Garden operator=eq phase=result key_words=called
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=""lime green"" operator=eq phase=result key_words=colour"
+"new calendar named Study, colour it grey","@r1 w.request.request act=make mood=do predicate=colour
+@r1.t w.request.target request=$r1 family=calendar mode=new determiner=indefinite sort=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=Study operator=eq phase=result key_words=named
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=grey operator=eq phase=result"
+make a calendar for Doctor visits and give it a red colour,"@r1 w.request.request act=make mood=do predicate=make
+@r1.t w.request.target request=$r1 family=calendar mode=new determiner=indefinite sort=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=""Doctor visits"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=red operator=eq phase=result key_words=colour words=""give it a red colour"""
+"since Family is already blue, can you create a Kids calendar in yellow so I can tell them apart?","@r1 w.request.request act=make mood=do predicate=create words=""can you create a Kids calendar in yellow""
+@r1.t w.request.target request=$r1 family=calendar mode=new determiner=indefinite sort=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=Kids operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=yellow operator=eq phase=result
+@f2 w.request.filler text=""so I can tell them apart?""
+@f3 w.request.filler text=""since Family is already blue"""
+"would it be possible to get a calendar for the house move? Call it Moving and colour it brown, please","@f1 w.request.filler text=please
+@r1 w.request.request act=make mood=do predicate=get
+@r1.t w.request.target request=$r1 family=calendar mode=new determiner=indefinite sort=calendar description=""a calendar for the house move""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=Moving operator=eq phase=result words=""Call it Moving""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=brown operator=eq phase=result key_words=colour"
+"I keep missing bin days, so let's have a Chores calendar, bright magenta so it stands out","@f1 w.request.filler text=so
+@f2 w.request.filler text=so
+@r1 w.request.request act=make mood=do predicate=have words=""so let's have a Chores calendar, bright magenta""
+@r1.t w.request.target request=$r1 family=calendar mode=new determiner=indefinite sort=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=Chores operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=""bright magenta"" operator=eq phase=result
+@f3 w.request.filler text=""I keep missing bin days""
+@f4 w.request.filler text=""so it stands out"""
+Mihai asked for a shared Team lunches calendar; please add it and make it gold,"@f1 w.request.filler text=please
+@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=calendar mode=new determiner=indefinite sort=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=""Team lunches"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=gold operator=eq phase=result words=""make it gold"""
+a lavender calendar for yoga retreats,"@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=calendar mode=new determiner=indefinite sort=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=lavender operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=""yoga retreats"" operator=eq phase=result"
+add a coral calendar,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=calendar mode=new determiner=indefinite sort=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=coral operator=eq phase=result"
+new calendar in sky blue please,"@f1 w.request.filler text=please
+@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=calendar mode=new determiner=indefinite sort=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=""sky blue"" operator=eq phase=result"
+"make a calendar for Podcast, something warm-coloured","@r1 w.request.request act=make mood=do predicate=make
+@r1.t w.request.target request=$r1 family=calendar mode=new determiner=indefinite sort=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=Podcast operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour words=""something warm-coloured"" operator=eq phase=result"
+"add a Reading calendar, any colour that isn't used yet","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=calendar mode=new determiner=indefinite sort=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=Reading operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour words=""any colour that isn't used yet"" operator=eq phase=result"
+"one more calendar, mint colour","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=calendar mode=new determiner=indefinite sort=calendar count=1 count_words=""one more""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=mint operator=eq phase=result key_words=colour"
+give me a reddish calendar for Concerts,"@r1 w.request.request act=make mood=do predicate=give
+@r1.t w.request.target request=$r1 family=calendar mode=new determiner=indefinite sort=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.colour words=reddish operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=Concerts operator=eq phase=result"
+rename the Gym calendar to Fitness,"@r1 w.request.request act=change mood=do predicate=rename
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Gym family_words=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Gym operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=Fitness operator=eq phase=result"
+change the name of Work to Office,"@r1 w.request.request act=change mood=do predicate=change
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Work
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Work operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=Office operator=eq phase=result key_words=name"
+call the Family calendar Home from now on,"@f1 w.request.filler text=now
+@r1 w.request.request act=change mood=do predicate=call
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Family family_words=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Family operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=Home operator=eq phase=result"
+can you rename Family to Family and friends?,"@r1 w.request.request act=change mood=do predicate=rename
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Family
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Family operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=""Family and friends"" operator=eq phase=result"
+please retitle Gym as Training,"@f1 w.request.filler text=please
+@r1 w.request.request act=change mood=do predicate=retitle
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Gym
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Gym operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=Training operator=eq phase=result"
+switch the Work calendar's name to Acme,"@r1 w.request.request act=change mood=do predicate=switch
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Work family_words=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Work operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=Acme operator=eq phase=result key_words=name"
+"I changed jobs last week, so could you rename Work to Northwind?","@f1 w.request.filler text=so
+@r1 w.request.request act=change mood=do predicate=rename words=""so could you rename Work to Northwind?""
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Work
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Work operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=Northwind operator=eq phase=result
+@f2 w.request.filler text=""I changed jobs last week"""
+"if nobody minds, rename Family to Household and make it green","@f1 w.request.filler text=minds
+@r1 w.request.request act=change mood=do words=""rename Family to Household"" predicate=rename
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Family
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Family operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=Household operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""make it green"" predicate=make
+@r2.t w.request.target request=$r2 family=calendar mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=calendar.colour value=green operator=eq phase=result words=""make it green"""
+the kids keep asking which calendar is theirs - could you rename Kids stuff to School and clubs?,"@r1 w.request.request act=change mood=do predicate=rename words=""could you rename Kids stuff to School and clubs?""
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=""Kids stuff""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=""Kids stuff"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=""School and clubs"" operator=eq phase=result
+@f1 w.request.filler text=""the kids keep asking which calendar is theirs"""
+"hmm, the name Work is confusing now that I freelance too; change it to Agency work, thanks","@f1 w.request.filler text=hmm
+@f2 w.request.filler text=now
+@f3 w.request.filler text=too
+@f4 w.request.filler text=thanks
+@r1 w.request.request act=change mood=do predicate=change
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Work
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Work operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=""Agency work"" operator=eq phase=result key_words=name"
+"before I share it with Ana, please give the Family calendar a friendlier name, Our home","@f1 w.request.filler text=please
+@r1 w.request.request act=change mood=do predicate=give words=""please give the Family calendar a friendlier name, Our home""
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Family family_words=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Family operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=""Our home"" operator=eq phase=result key_words=name words=""give the Family calendar a friendlier name, Our home""
+@f2 w.request.filler text=""before I share it with Ana"""
+rename this calendar to Personal,"@r1 w.request.request act=change mood=do predicate=rename
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context family_words=calendar
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=Personal operator=eq phase=result"
+call it Errands,"@r1 w.request.request act=change mood=do predicate=call
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=Errands operator=eq phase=result"
+give the gym calendar a better name,"@r1 w.request.request act=change mood=do predicate=give
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=gym family_words=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=gym operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.name operator=eq phase=result words=""give the gym calendar a better name"""
+Work should be Studio now,"@f1 w.request.filler text=now
+@r1 w.request.request act=change mood=do predicate=""should be""
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Work
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Work operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=Studio operator=eq phase=result"
+new name for Family: Clan,"@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Family
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Family operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=Clan operator=eq phase=result key_words=name"
+rename that one Hobbies,"@r1 w.request.request act=change mood=do predicate=rename
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=Hobbies operator=eq phase=result"
+make the Gym calendar green,"@r1 w.request.request act=change mood=do predicate=make
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Gym family_words=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Gym operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=green operator=eq phase=result"
+change the colour of Work to dark blue,"@r1 w.request.request act=change mood=do predicate=change
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Work
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Work operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=""dark blue"" operator=eq phase=result key_words=colour"
+can you colour the Family calendar orange?,"@r1 w.request.request act=change mood=do predicate=colour
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Family family_words=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Family operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=orange operator=eq phase=result"
+I'd like Work shown in purple,"@r1 w.request.request act=change mood=do predicate=""I'd like""
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Work
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Work operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=purple operator=eq phase=result words=""shown in purple"""
+switch the Family calendar to a pink color,"@r1 w.request.request act=change mood=do predicate=switch
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Family family_words=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Family operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=pink operator=eq phase=result key_words=color"
+recolour the Work calendar teal,"@r1 w.request.request act=change mood=do predicate=recolour
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Work family_words=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Work operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=teal operator=eq phase=result"
+the Family calendar should be yellow,"@r1 w.request.request act=change mood=do predicate=""should be""
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Family family_words=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Family operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=yellow operator=eq phase=result"
+"I can barely see the Gym entries. Change that calendar to a bright orange, please","@f1 w.request.filler text=please
+@r1 w.request.request act=change mood=do predicate=Change
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Gym family_words=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Gym operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=""bright orange"" operator=eq phase=result"
+"if it's not too much trouble, I'd prefer Work in grey; it's less distracting","@r1 w.request.request act=change mood=do predicate=prefer words=""I'd prefer Work in grey""
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Work
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Work operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=grey operator=eq phase=result character=preference
+@f2 w.request.filler text=""if it's not too much trouble""
+@f3 w.request.filler text=""it's less distracting"""
+ok so paint the Gym calendar black and move yoga onto it,"@f1 w.request.filler text=""ok so""
+@r1 w.request.request act=change mood=do words=""paint the Gym calendar black"" predicate=paint
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Gym family_words=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Gym operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=black operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""move yoga onto it"" predicate=move
+@r2.t w.request.target request=$r2 family=meeting mode=existing determiner=definite fill=written name=yoga
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=meeting.id value=yoga operator=eq phase=selector
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=meeting.calendar value=Gym words=it operator=eq phase=result"
+my daughter picked the colours: she wants Family in violet. Can you do that?,"@r1 w.request.request act=change mood=do predicate=wants
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Family
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Family operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=violet operator=eq phase=result key_words=colours"
+the red on the Work calendar feels alarming - could we go with a calm navy?,"@r1 w.request.request act=change mood=do predicate=""go with""
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Work family_words=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Work operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=""calm navy"" operator=eq phase=result"
+Family a bit darker,"@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Family
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Family operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour words=""a bit darker"" operator=delta phase=result"
+different colour for Work please,"@f1 w.request.filler text=please
+@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Work
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Work operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour words=""different colour"" operator=eq phase=result"
+colour it gold,"@r1 w.request.request act=change mood=do predicate=colour
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=gold operator=eq phase=result"
+gym calendar: something brighter,"@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=gym family_words=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=gym operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour words=""something brighter"" operator=delta phase=result"
+turn Work to silver,"@r1 w.request.request act=change mood=do predicate=turn
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Work
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Work operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.colour value=silver operator=eq phase=result"
+remove Family from my calendars,"@r1 w.request.request act=remove mood=do predicate=remove
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Family family_words=calendars
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Family operator=eq phase=selector"
+please get rid of the Work calendar,"@f1 w.request.filler text=please
+@r1 w.request.request act=remove mood=do predicate=""get rid of""
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Work family_words=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Work operator=eq phase=selector"
+can you delete Book club?,"@r1 w.request.request act=remove mood=do predicate=delete
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=""Book club""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=""Book club"" operator=eq phase=selector"
+I want the Gym calendar gone,"@f1 w.request.filler text=want
+@r1 w.request.request act=remove mood=do predicate=gone
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Gym family_words=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Gym operator=eq phase=selector"
+drop the Holidays calendar,"@r1 w.request.request act=remove mood=do predicate=drop
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Holidays family_words=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Holidays operator=eq phase=selector"
+take the Side project calendar out,"@r1 w.request.request act=remove mood=do predicate=take
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=""Side project"" family_words=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=""Side project"" operator=eq phase=selector"
+erase my Family calendar,"@r1 w.request.request act=remove mood=do predicate=erase
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Family family_words=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Family operator=eq phase=selector"
+"I cancelled my membership, so the Gym calendar can go","@f1 w.request.filler text=so
+@r1 w.request.request act=remove mood=do predicate=""can go"" words=""so the Gym calendar can go""
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Gym family_words=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Gym operator=eq phase=selector
+@f2 w.request.filler text=""I cancelled my membership"""
+the course finished in June. Could you remove the Evening classes calendar now?,"@f1 w.request.filler text=now
+@r1 w.request.request act=remove mood=do predicate=remove words=""Could you remove the Evening classes calendar now?""
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=""Evening classes"" family_words=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=""Evening classes"" operator=eq phase=selector
+@f2 w.request.filler text=""the course finished in June."""
+"we merged everything into Family, so please delete the old Kids calendar","@f1 w.request.filler text=""so please""
+@r1 w.request.request act=remove mood=do predicate=delete words=""please delete the old Kids calendar""
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Kids family_words=calendar description=""the old Kids calendar""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Kids operator=eq phase=selector
+@f3 w.request.filler text=""we merged everything into Family, so"""
+rename Work to Office and then delete Gym altogether,"@f1 w.request.filler text=then
+@r1 w.request.request act=remove mood=do words=""delete Gym altogether"" predicate=delete
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Gym
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Gym operator=eq phase=selector
+@r2 w.request.request act=change mood=do words=""rename Work to Office"" predicate=rename
+@r2.t w.request.target request=$r2 family=calendar mode=existing determiner=definite fill=written name=Work
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=calendar.id value=Work operator=eq phase=selector
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=calendar.name value=Office operator=eq phase=result"
+"if the Moving calendar is empty now, just remove it, thanks","@f1 w.request.filler text=""now, just""
+@f2 w.request.filler text=thanks
+@r1 w.request.request act=remove mood=do predicate=remove
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Moving family_words=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Moving operator=eq phase=selector"
+honestly I never look at Travel anymore; would you mind deleting that calendar?,"@r1 w.request.request act=remove mood=do predicate=deleting
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Travel family_words=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Travel operator=eq phase=selector"
+no more Gym calendar,"@f1 w.request.filler text=no
+@r1 w.request.request act=remove mood=do
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Gym family_words=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Gym operator=eq phase=selector"
+bin the Choir calendar,"@r1 w.request.request act=remove mood=do predicate=bin
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Choir family_words=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Choir operator=eq phase=selector"
+remove that calendar please,"@f1 w.request.filler text=please
+@r1 w.request.request act=remove mood=do predicate=remove
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context family_words=calendar
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+lose the gym one,"@r1 w.request.request act=remove mood=do predicate=lose
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=gym
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=gym operator=eq phase=selector"
+scrap Freelance,"@r1 w.request.request act=remove mood=do predicate=scrap
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Freelance
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Freelance operator=eq phase=selector"
+"get rid of it, the calendar I just picked","@f1 w.request.filler text=just
+@r1 w.request.request act=remove mood=do predicate=""get rid of""
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context family_words=calendar description=""the calendar I just picked""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+add Tom to my contacts,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=person mode=new determiner=indefinite sort=person sort_words=contacts
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.name value=Tom operator=eq phase=result"
+create a person called Elena Popescu,"@r1 w.request.request act=make mood=do predicate=create
+@r1.t w.request.target request=$r1 family=person mode=new determiner=indefinite sort=person
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.name value=""Elena Popescu"" operator=eq phase=result key_words=called"
+"please add a new person, Jamal","@f1 w.request.filler text=please
+@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=person mode=new determiner=indefinite sort=person
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.name value=Jamal operator=eq phase=result"
+register Olga as a person in the calendar,"@r1 w.request.request act=make mood=do predicate=register
+@r1.t w.request.target request=$r1 family=person mode=new determiner=indefinite sort=person
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.name value=Olga operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=meeting.calendar operator=eq phase=result key_words=calendar"
+put Dr. Hughes on the list of people,"@r1 w.request.request act=make mood=do predicate=put
+@r1.t w.request.target request=$r1 family=person mode=new determiner=indefinite sort=person sort_words=people family_words=""list of people""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.name value=""Dr. Hughes"" operator=eq phase=result"
+add someone new: Marta Silva,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=person mode=new determiner=indefinite sort=person sort_words=someone
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.name value=""Marta Silva"" operator=eq phase=result"
+we've got a new designer starting Monday - please add Noor so I can invite her to things,"@f1 w.request.filler text=please
+@r1 w.request.request act=make mood=do predicate=add words=""we've got a new designer starting Monday - please add Noor""
+@r1.t w.request.target request=$r1 family=person mode=new determiner=indefinite sort=person sort_words=designer description=""we've got a new designer starting Monday""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.name value=Noor operator=eq phase=result
+@f3 w.request.filler text=""so I can invite her to things"""
+add Ben as a person and then book him into the budget sync,"@f1 w.request.filler text=then
+@r1 w.request.request act=make mood=do words=""add Ben as a person"" predicate=add
+@r1.t w.request.target request=$r1 family=person mode=new determiner=indefinite sort=person
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.name value=Ben operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""book him into the budget sync"" predicate=book
+@r2.t w.request.target request=$r2 family=meeting mode=existing determiner=definite fill=written name=""budget sync""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=meeting.id value=""budget sync"" operator=eq phase=selector
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=meeting.people value=Ben words=him operator=eq phase=result"
+I keep typing Carla's name and it doesn't find her. Could you add Carla Mendes as a contact?,"@r1 w.request.request act=make mood=do predicate=add words=""Could you add Carla Mendes as a contact?""
+@r1.t w.request.target request=$r1 family=person mode=new determiner=indefinite sort=person sort_words=contact
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.name value=""Carla Mendes"" operator=eq phase=result
+@f1 w.request.filler text=""I keep typing Carla's name and it doesn't find her"""
+so my brother is visiting next month; can you add him as Radu so I can put him on family events?,"@f1 w.request.filler text=so
+@f2 w.request.filler text=so
+@r1 w.request.request act=make mood=do predicate=add words=""so my brother is visiting next month; can you add him as Radu""
+@r1.t w.request.target request=$r1 family=person mode=new determiner=indefinite sort=person sort_words=brother
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.name value=Radu operator=eq phase=result
+@f3 w.request.filler text=""so I can put him on family events?"""
+"if Grace isn't in the people list yet, add her please","@f1 w.request.filler text=please
+@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=person mode=new determiner=indefinite sort=person sort_words=people family_words=""people list""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.name value=Grace operator=eq phase=result"
+our new intern is called Felix Wong; would you create him as a person?,"@r1 w.request.request act=make mood=do predicate=create
+@r1.t w.request.target request=$r1 family=person mode=new determiner=indefinite sort=person
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.name value=""Felix Wong"" operator=eq phase=result key_words=called"
+new person: Dana,"@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=person mode=new determiner=indefinite sort=person
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.name value=Dana operator=eq phase=result"
+add Leo,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=person mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.name value=Leo operator=eq phase=result"
+add a person,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=person mode=new determiner=indefinite sort=person","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=person"
+Hannah needs adding,"@r1 w.request.request act=make mood=do predicate=adding
+@r1.t w.request.target request=$r1 family=person mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.name value=Hannah operator=eq phase=result"
+"one more person, Viktor","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=person mode=new determiner=indefinite sort=person count=1 count_words=""one more""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.name value=Viktor operator=eq phase=result"

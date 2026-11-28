@@ -1,0 +1,902 @@
+text,sop
+"the avg profit, in ascending order","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=""in ascending order"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result"
+"we want the average profit by segment, ascending as a column chart and then title it 'Profit low to high'","@f1 w.request.filler text=then
+@r1 w.request.request act=make mood=do words=""we want the average profit by segment, ascending as a column chart"" predicate=want
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=column words=""column chart"" operator=eq phase=result open_value=true
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=ascending operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=segment words=""by segment"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""then title it 'Profit low to high'"" predicate=title
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.title value=""Profit low to high"" operator=eq phase=result"
+column chart of from low to high it — the avg profit for each segment; and drop the legend at the bottom,"@r1 w.request.request act=make mood=do words=""column chart of from low to high it — the avg profit for each segment""
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=column words=""column chart"" operator=eq phase=result open_value=true
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=""from low to high"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=segment words=""for each segment"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""and drop the legend at the bottom"" predicate=drop
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.legend value=bottom words=""the bottom"" operator=eq phase=result key_words=legend"
+"render ascending it — the avg profit for each segment as a column chart, with a zero-based y axis, with gridlines behind it and and show the values on it","@r1 w.request.request act=make mood=do words=""render ascending it — the avg profit for each segment as a column chart, with a zero-based y axis, with gridlines behind it"" predicate=render
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=column words=""column chart"" operator=eq phase=result open_value=true
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=ascending operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=zero-based key_words=""y axis"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=segment words=""for each segment"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""and show the values on it"" predicate=show
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.show_values value=show words=""the values"" operator=eq phase=result"
+"I need to see the mean profit across the segments, smallest first as a column chart, with a zero-based y axis, with gridlines behind it, and make the bars blue","@f1 w.request.filler text=need
+@r1 w.request.request act=make mood=do words=""I need to see the mean profit across the segments, smallest first as a column chart, with a zero-based y axis, with gridlines behind it"" predicate=see
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=column words=""column chart"" operator=eq phase=result open_value=true
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=""smallest first"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=zero-based key_words=""y axis"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=mean operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=segments words=""across the segments"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""and make the bars blue"" predicate=make
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context family_words=bars
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.colour value=blue operator=eq phase=result"
+"we want from low to high: the average profit over the segments as a column chart, with a zero-based y axis, with gridlines behind it — and and use a colour-blind-safe palette","@r1 w.request.request act=make mood=do words=""we want from low to high: the average profit over the segments as a column chart, with a zero-based y axis, with gridlines behind it"" predicate=want
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=column words=""column chart"" operator=eq phase=result open_value=true
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=""from low to high"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=zero-based key_words=""y axis"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=segments words=""over the segments"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""and use a colour-blind-safe palette"" predicate=use
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.palette value=colour-blind-safe operator=eq phase=result key_words=palette"
+"can you show the mean profit across the segments, from low to high in a column chart?, with a zero-based y axis, with gridlines behind it","@r1 w.request.request act=make mood=do predicate=show
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=column words=""column chart"" operator=eq phase=result open_value=true
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=""from low to high"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=zero-based key_words=""y axis"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=mean operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=segments words=""across the segments"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result"
+while you're there: plot from low to high it — AVG(profit) by segment as a column chart,"@f1 w.request.filler text=while
+@r1 w.request.request act=make mood=do words=""plot from low to high it — AVG(profit) by segment as a column chart"" predicate=plot
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=column words=""column chart"" operator=eq phase=result open_value=true
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=""from low to high"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=AVG operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=segment operator=eq phase=result"
+"hey — try a column chart of the average profit as a function of the segment, ascending, if you can","@f1 w.request.filler text=hey
+@r1 w.request.request act=make mood=do words=""try a column chart of the average profit as a function of the segment, ascending"" predicate=try
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=column words=""column chart"" operator=eq phase=result open_value=true
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=ascending operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=segment words=""as a function of the segment"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result"
+"excuse me, how about smallest first: the avg profit versus segment as a column chart? — go on","@f1 w.request.filler text=excuse
+@f2 w.request.filler text=go
+@r1 w.request.request act=make mood=do words=""how about smallest first: the avg profit versus segment as a column chart?""
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=column words=""column chart"" operator=eq phase=result open_value=true
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=""smallest first"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=segment operator=eq phase=result
+@r1.u1 w.request.constraint request=$r1 on=attribute attribute=chart.compare value=versus operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result"
+build a column chrat of smallest first: the average profit over the segments,"@r1 w.request.request act=make mood=do predicate=build
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=column words=""column chrat"" operator=eq phase=result open_value=true
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=""smallest first"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=segments words=""over the segments"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result"
+"draw a line chart of the average handling time by month, in ascending month order","@r1 w.request.request act=make mood=do predicate=draw
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=""in ascending month order"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=""by month"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""handling time"" operator=eq phase=result"
+I want with the months in order it — the avg handling time for each month as a line chart,"@r1 w.request.request act=make mood=do predicate=want
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=""with the months in order"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=""for each month"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""handling time"" operator=eq phase=result"
+"let's do a line chart of the mean handling time across the months, chronologically","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=chronologically operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=mean operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""handling time"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=months operator=eq phase=result"
+visualise in ascending month order: the average handling time over the months on a line chart,"@r1 w.request.request act=make mood=do predicate=visualise
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=""in ascending month order"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=months words=""over the months"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""handling time"" operator=eq phase=result"
+display from January onward it — AVG(handling time) by month in a line chart,"@r1 w.request.request act=make mood=do predicate=display
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=""from January onward"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=AVG operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=""by month"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""handling time"" operator=eq phase=result"
+"build a line chart of the average handling time as a function of the month, with the months in order","@r1 w.request.request act=make mood=do predicate=build
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=""with the months in order"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=""as a function of the month"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""handling time"" operator=eq phase=result"
+put up a line chart of chronologically: the avg handling time versus month,"@r1 w.request.request act=make mood=do predicate=""put up""
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=chronologically operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=month operator=eq phase=result
+@r1.u1 w.request.constraint request=$r1 on=attribute attribute=chart.compare value=versus operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""handling time"" operator=eq phase=result"
+I'd like to see in ascending month order it — how the mean handling time varies by month on a line chart,"@r1 w.request.request act=make mood=do predicate=like
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=""in ascending month order"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=mean operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=see operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""handling time varies"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=month operator=eq phase=result"
+"try a line chart of the average handling time by month, from January onward","@r1 w.request.request act=make mood=do predicate=try
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=""from January onward"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=""by month"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""handling time"" operator=eq phase=result"
+how about with the months in order: the average handling time per month as a line chart?,"@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=""with the months in order"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=""per month"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""handling time"" operator=eq phase=result"
+graph chronologically it — the avg handling time for each month,"@r1 w.request.request act=make mood=do predicate=graph
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=chronologically operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=""for each month"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""handling time"" operator=eq phase=result"
+"the average handling time, with the months in order","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=""with the months in order"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""handling time"" operator=eq phase=result"
+"the avg handling time, chronologically","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=chronologically operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""handling time"" operator=eq phase=result"
+"draw a line chart of the average handling time by month, in ascending month order and and move the legend to the right","@r1 w.request.request act=make mood=do words=""draw a line chart of the average handling time by month, in ascending month order"" predicate=draw
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=""in ascending month order"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=""by month"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""handling time"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""and move the legend to the right"" predicate=move
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.legend value=right words=""the right"" operator=eq phase=result key_words=legend"
+"can you show from January onward: the average handling time per month in a line chart?, and drop the legend at the bottom","@r1 w.request.request act=make mood=do words=""can you show from January onward: the average handling time per month in a line chart?"" predicate=show
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=""from January onward"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=""per month"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""handling time"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""and drop the legend at the bottom"" predicate=drop
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.legend value=bottom words=""the bottom"" operator=eq phase=result key_words=legend"
+"chart in ascending month order it — the avg handling time for each month, with a zero-based y axis, with the values shown at the points and and lose the gridlines","@r1 w.request.request act=make mood=do words=""chart in ascending month order it — the avg handling time for each month, with a zero-based y axis, with the values shown at the points"" predicate=chart
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=""in ascending month order"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=zero-based key_words=""y axis"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown at the points"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=""for each month"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""handling time"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""and lose the gridlines"" predicate=lose
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.grid value=hide words=gridlines operator=eq phase=result"
+"plot the mean handling time across the months, from January onward as a line chart, with a zero-based y axis, with the values shown at the points, and make the bars blue","@r1 w.request.request act=make mood=do words=""plot the mean handling time across the months, from January onward as a line chart, with a zero-based y axis, with the values shown at the points"" predicate=plot
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=""from January onward"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=zero-based key_words=""y axis"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown at the points"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=mean operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=months words=""across the months"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""handling time"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""and make the bars blue"" predicate=make
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context family_words=bars
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.colour value=blue operator=eq phase=result"
+"draw a line chart of with the months in order: the average handling time over the months, with a zero-based y axis, with the values shown at the points — and and use a colour-blind-safe palette","@r1 w.request.request act=make mood=do words=""draw a line chart of with the months in order: the average handling time over the months, with a zero-based y axis, with the values shown at the points"" predicate=draw
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=""with the months in order"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=zero-based key_words=""y axis"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown at the points"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=months words=""over the months"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""handling time"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""and use a colour-blind-safe palette"" predicate=use
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.palette value=colour-blind-safe operator=eq phase=result key_words=palette"
+"I'd like to see the mean handling time across the months, with the months in order on a line chart, with a zero-based y axis, with the values shown at the points","@r1 w.request.request act=make mood=do predicate=like
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=""with the months in order"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.min value=""0"" words=zero-based key_words=""y axis"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown at the points"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=mean operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=see operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""handling time"" operator=eq phase=result
+@r1.c8 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=months operator=eq phase=result"
+"and meanwhile, build a line chart of with the months in order it — AVG(handling time) by month","@f1 w.request.filler text=meanwhile
+@r1 w.request.request act=make mood=do words=""build a line chart of with the months in order it — AVG(handling time) by month"" predicate=build
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=""with the months in order"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=AVG operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=""by month"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""handling time"" operator=eq phase=result"
+"put up a line chart of the average handling time as a function of the month, chronologically, one more for the appendix page","@f1 w.request.filler text=""more for the appendix page""
+@r1 w.request.request act=make mood=do words=""put up a line chart of the average handling time as a function of the month, chronologically"" predicate=""put up""
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=chronologically operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=""as a function of the month"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""handling time"" operator=eq phase=result"
+"and while you're at it, I'd like to see in ascending month order: the avg handling time versus month on a line chart","@f1 w.request.filler text=while
+@r1 w.request.request act=make mood=do words=""I'd like to see in ascending month order: the avg handling time versus month on a line chart"" predicate=like
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=""in ascending month order"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=month operator=eq phase=result
+@r1.u1 w.request.constraint request=$r1 on=attribute attribute=chart.compare value=versus operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=see operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""handling time"" operator=eq phase=result"
+"quick one: make a line chart of the average handling time as a function of the month, in ascending month order, thanks","@f1 w.request.filler text=quick
+@f2 w.request.filler text=thanks
+@r1 w.request.request act=make mood=do words=""make a line chart of the average handling time as a function of the month, in ascending month order"" predicate=make
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=""in ascending month order"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=""as a function of the month"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""handling time"" operator=eq phase=result"
+"I want the average handling time as a function of the month, in ascending month order as a lne chart","@r1 w.request.request act=make mood=do predicate=want
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""lne chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=""in ascending month order"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=""as a function of the month"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""handling time"" operator=eq phase=result"
+I want with the mnths in order it — the avg handling time for each month as a line chart,"@r1 w.request.request act=make mood=do predicate=want
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=asc words=""with the mnths in order"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=""for each month"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""handling time"" operator=eq phase=result"
+put up a bar chart of the top five products by order count,"@r1 w.request.request act=make mood=do predicate=""put up""
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=top operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=order words=""by order"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result"
+I'd like to see the five products by the highest order counts on a bar chart,"@r1 w.request.request act=make mood=do predicate=like
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=highest operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count words=counts operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=see operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""the five"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=order operator=eq phase=result"
+try a bar chart of just the 5 products ranked by best-selling order count,"@f1 w.request.filler text=just
+@r1 w.request.request act=make mood=do predicate=try
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=best-selling operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=""best-selling order"" words=""by best-selling order"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""the 5"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""products ranked"" operator=eq phase=result"
+"how about five of the products, the strongest ones as a bar chart?","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=strongest operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=five operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result"
+graph the biggest five products by order count,"@r1 w.request.request act=make mood=do predicate=graph
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=biggest operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=order words=""by order"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""biggest five"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result"
+render the five products by the best-selling order counts as a bar chart,"@r1 w.request.request act=make mood=do predicate=render
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=best-selling operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=""best-selling order counts"" words=""by the best-selling order counts"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""the five"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result"
+I need to see just the five products ranked by strongest order count as a bar chart,"@f1 w.request.filler text=need
+@f2 w.request.filler text=just
+@r1 w.request.request act=make mood=do predicate=see
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=strongest operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=order words=""by stron"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""products ranked"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""the five"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=order operator=eq phase=result"
+"we want five of the products, the biggest ones as a bar chart","@r1 w.request.request act=make mood=do predicate=want
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=biggest operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=five operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result"
+make a bar chart of the highest five products by order count,"@r1 w.request.request act=make mood=do predicate=make
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=highest operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=order words=""by order"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""highest five"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result"
+bar chart of the top five products by order count,"@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=top operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=order words=""by order"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""the top five"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result"
+give me a bar chart of the 5 products by the strongest order counts,"@r1 w.request.request act=make mood=do predicate=give
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=strongest operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=""order counts"" words=""by the strongest or"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count words=counts operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""the 5"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=order operator=eq phase=result"
+the top five products,"@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""the top"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""the top five"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result"
+the top 5 products,"@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""the top"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""the top 5"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result"
+put up a bar chart of the top five products by order count and and drop the legend at the bottom,"@r1 w.request.request act=make mood=do words=""put up a bar chart of the top five products by order count"" predicate=""put up""
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=top operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=order words=""by order"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""the top five"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""and drop the legend at the bottom"" predicate=drop
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.legend value=bottom words=""the bottom"" operator=eq phase=result key_words=legend"
+"I'd like to see the five products by the highest order counts on a bar chart, and make the bars blue","@r1 w.request.request act=make mood=do words=""I'd like to see the five products by the highest order counts on a bar chart"" predicate=like
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=highest operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count words=counts operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=see operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=order operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""the five"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""and make the bars blue"" predicate=make
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context family_words=bars
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.colour value=blue operator=eq phase=result"
+try a bar chart of just the 5 products ranked by best-selling order count; and use a colour-blind-safe palette,"@f1 w.request.filler text=just
+@r1 w.request.request act=make mood=do words=""try a bar chart of just the 5 products ranked by best-selling order count"" predicate=try
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=best-selling operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=""best-selling order"" words=""by best-selling order"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""products ranked"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""the 5"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""and use a colour-blind-safe palette"" predicate=use
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.palette value=colour-blind-safe operator=eq phase=result key_words=palette"
+"display the top 5 products by order count in a bar chart, with the values shown on the bars, with gridlines behind it and and lay the bars horizontal","@r1 w.request.request act=make mood=do words=""display the top 5 products by order count in a bar chart, with the values shown on the bars, with gridlines behind it"" predicate=display
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=top operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=order words=""by order"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result
+@r1.c8 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""the top 5"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""and lay the bars horizontal"" predicate=lay
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context family_words=bars
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.horizontal value=on words=horizontal operator=eq phase=result"
+"build a bar chart of the five products by the highest order counts, with the values shown on the bars, with gridlines behind it, and start the y axis at zero","@r1 w.request.request act=make mood=do words=""build a bar chart of the five products by the highest order counts, with the values shown on the bars, with gridlines behind it"" predicate=build
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=highest operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=""order counts"" words=""by the highest orde"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count words=counts operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result
+@r1.c8 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=order operator=eq phase=result
+@r1.c9 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""the five"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""and start the y axis at zero"" predicate=start
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.min value=""0"" words=zero operator=eq phase=result key_words=""y axis"""
+"put up a bar chart of just the five products ranked by best-selling order count, with the values shown on the bars, with gridlines behind it — and and give it the title 'Top five products'","@f1 w.request.filler text=just
+@r1 w.request.request act=make mood=do words=""put up a bar chart of just the five products ranked by best-selling order count, with the values shown on the bars, with gridlines behind it"" predicate=""put up""
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=best-selling operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=""best-selling order"" words=""by best-selling order"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""products ranked"" operator=eq phase=result
+@r1.c8 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""the five"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""and give it the title 'Top five products'"" predicate=give
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.title value=""Top five products"" operator=eq phase=result key_words=title"
+"we want the top five products by order count as a bar chart, with the values shown on the bars, with gridlines behind it","@r1 w.request.request act=make mood=do predicate=want
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=top operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""with gridlines behind it"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=order words=""by order"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c8 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""the top five"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result"
+"same session, next ask: render the top 5 products by order count as a bar chart","@f1 w.request.filler text=""same session, next ask""
+@r1 w.request.request act=make mood=do words=""render the top 5 products by order count as a bar chart"" predicate=render
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=top operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=order words=""by order"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""the top 5"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result"
+while you're there: we want just the five products ranked by biggest order count as a bar chart,"@f1 w.request.filler text=while
+@f2 w.request.filler text=just
+@r1 w.request.request act=make mood=do words=""we want just the five products ranked by biggest order count as a bar chart"" predicate=want
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=biggest operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""products ranked"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""the five"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=order operator=eq phase=result"
+"um, can you show the top five products by order count in a bar chart? — go on","@f1 w.request.filler text=um
+@f2 w.request.filler text=go
+@r1 w.request.request act=make mood=do words=""can you show the top five products by order count in a bar chart?"" predicate=show
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=top operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=order words=""by order"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""the top five"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result"
+"hey — I want the five products by the highest order counts as a bar chart, if you can","@f1 w.request.filler text=hey
+@r1 w.request.request act=make mood=do words=""I want the five products by the highest order counts as a bar chart"" predicate=want
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=highest operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=""order counts"" words=""by the highest orde"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count words=counts operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.top value=5 words=""the five"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=order operator=eq phase=result"
+make a bar chart of the highest fiive products by order count,"@r1 w.request.request act=make mood=do predicate=make
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=highest operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=order words=""by order"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result"
+draw a bar chart of the top fove products by order count,"@r1 w.request.request act=make mood=do predicate=draw
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=top operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=order words=""by order"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result"
+I need to see the top three departments by order count as a bar chart,"@f1 w.request.filler text=need
+@r1 w.request.request act=make mood=do predicate=see
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=top operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=order words=""by order"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.top value=3 words=""the top three"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=departments operator=eq phase=result"
+we want the three departments by the biggest order counts as a bar chart,"@r1 w.request.request act=make mood=do predicate=want
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=biggest operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=""order counts"" words=""by the biggest orde"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count words=counts operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=departments operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.top value=3 words=""the three"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=order operator=eq phase=result"
+make a bar chart of just the 3 departments ranked by leading order count,"@f1 w.request.filler text=just
+@r1 w.request.request act=make mood=do predicate=make
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=leading operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=""leading order"" words=""by leading order"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.top value=3 words=""the 3"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""departments ranked"" operator=eq phase=result"
+"bar chart of three of the departments, the top ones","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=top operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.top value=3 words=three operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=departments operator=eq phase=result"
+give me a bar chart of the best three departments by order count,"@r1 w.request.request act=make mood=do predicate=give
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=best operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=order words=""by order"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.top value=3 words=""best three"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=departments operator=eq phase=result"
+chart the three departments by the leading order counts,"@r1 w.request.request act=make mood=do predicate=chart
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=leading operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=""leading order counts"" words=""by the leading order counts"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.top value=3 words=""the three"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=departments operator=eq phase=result"
+plot just the three departments ranked by top order count as a bar chart,"@f1 w.request.filler text=just
+@r1 w.request.request act=make mood=do predicate=plot
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=top operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=order words=""by top o"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""departments ranked"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.top value=3 words=""the three"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=order operator=eq phase=result"
+"draw a bar chart of three of the departments, the best ones","@r1 w.request.request act=make mood=do predicate=draw
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=best operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.top value=3 words=three operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=departments operator=eq phase=result"
+can you show the biggest three departments by order count in a bar chart?,"@r1 w.request.request act=make mood=do predicate=show
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=biggest operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=order words=""by order"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.top value=3 words=""biggest three"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=departments operator=eq phase=result"
+I want the top three departments by order count as a bar chart,"@r1 w.request.request act=make mood=do predicate=want
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=top operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=order words=""by order"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.top value=3 words=""the top three"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=departments operator=eq phase=result"
+the top three departments,"@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""the top"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.top value=3 words=""the top three"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=departments operator=eq phase=result"
+"we want the three departments by the biggest order counts as a bar chart, and use a colour-blind-safe palette","@r1 w.request.request act=make mood=do words=""we want the three departments by the biggest order counts as a bar chart"" predicate=want
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=biggest operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=""order counts"" words=""by the biggest orde"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count words=counts operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=departments operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=order operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.top value=3 words=""the three"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""and use a colour-blind-safe palette"" predicate=use
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.palette value=colour-blind-safe operator=eq phase=result key_words=palette"
+make a bar chart of just the 3 departments ranked by leading order count; and lay the bars horizontal,"@f1 w.request.filler text=just
+@r1 w.request.request act=make mood=do words=""make a bar chart of just the 3 departments ranked by leading order count"" predicate=make
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=leading operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=""leading order"" words=""by leading order"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""departments ranked"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.top value=3 words=""the 3"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""and lay the bars horizontal"" predicate=lay
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context family_words=bars
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.horizontal value=on words=horizontal operator=eq phase=result"
+"render the three departments by the biggest order counts as a bar chart, with the values shown on the bars, legend at the bottom, and give it the title 'Top three departments'","@r1 w.request.request act=make mood=do words=""render the three departments by the biggest order counts as a bar chart, with the values shown on the bars, legend at the bottom"" predicate=render
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=biggest operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=bottom words=""at the bottom"" key_words=legend operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=""order counts"" words=""by the biggest orde"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count words=counts operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=departments operator=eq phase=result
+@r1.c8 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=order operator=eq phase=result
+@r1.c9 w.request.constraint request=$r1 on=attribute attribute=chart.top value=3 words=""the three"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""and give it the title 'Top three departments'"" predicate=give
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.title value=""Top three departments"" operator=eq phase=result key_words=title"
+"I need to see just the three departments ranked by leading order count as a bar chart, with the values shown on the bars, legend at the bottom — and then title it 'Top three departments'","@f1 w.request.filler text=need
+@f2 w.request.filler text=just
+@f3 w.request.filler text=then
+@r1 w.request.request act=make mood=do words=""I need to see just the three departments ranked by leading order count as a bar chart, with the values shown on the bars, legend at the bottom"" predicate=see
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=leading operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=bottom words=""at the bottom"" key_words=legend operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=""leading order"" words=""by leading order"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""departments ranked"" operator=eq phase=result
+@r1.c8 w.request.constraint request=$r1 on=attribute attribute=chart.top value=3 words=""the three"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""then title it 'Top three departments'"" predicate=title
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.title value=""Top three departments"" operator=eq phase=result"
+"draw a bar chart of the top three departments by order count, with the values shown on the bars, legend at the bottom","@r1 w.request.request act=make mood=do predicate=draw
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=top operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=bottom words=""at the bottom"" key_words=legend operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=order words=""by order"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c8 w.request.constraint request=$r1 on=attribute attribute=chart.top value=3 words=""the top three"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=departments operator=eq phase=result"
+"plot the three departments by the top order counts as a bar chart too, for the second slide","@f1 w.request.filler text=""too, for the second slide""
+@r1 w.request.request act=make mood=do words=""plot the three departments by the top order counts as a bar chart"" predicate=plot
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=top operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=""order counts"" words=""by the top order co"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count words=counts operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=departments operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.top value=3 words=""the three"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=order operator=eq phase=result"
+"excuse me, I'd like to see the top three departments by order count on a bar chart, please","@f1 w.request.filler text=excuse
+@f2 w.request.filler text=please
+@r1 w.request.request act=make mood=do words=""I'd like to see the top three departments by order count on a bar chart"" predicate=like
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=top operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=see operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=departments operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.top value=3 words=""the top three"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=order operator=eq phase=result"
+"quick one: try a bar chart of the three departments by the biggest order counts, thanks","@f1 w.request.filler text=quick
+@f2 w.request.filler text=thanks
+@r1 w.request.request act=make mood=do words=""try a bar chart of the three departments by the biggest order counts"" predicate=try
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=biggest operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=""order counts"" words=""by the biggest orde"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count words=counts operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=departments operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.top value=3 words=""the three"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=order operator=eq phase=result"
+make a bar chart of the best three departments by orrder count,"@r1 w.request.request act=make mood=do predicate=make
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=best operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=orrder words=""by orrder"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.top value=3 words=""best three"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=departments operator=eq phase=result"
+chart the three departments by the leading order coounts,"@r1 w.request.request act=make mood=do predicate=chart
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=leading operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=""leading order coounts"" words=""by the leading order coounts"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.top value=3 words=""the three"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=departments operator=eq phase=result"
+"draw a bar chart of three of the departments, the best onnes","@r1 w.request.request act=make mood=do predicate=draw
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=best operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=departments operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.top value=3 words=three operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=onnes operator=eq phase=result"
+"plot the number of products by sub-category, highest to lowest as a bar chart","@r1 w.request.request act=make mood=do predicate=plot
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""highest to lowest"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count words=""number of"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=sub-category words=""by sub-category"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result"
+can you show tallest bars on the left it — the count of products for each sub-category in a bar chart?,"@r1 w.request.request act=make mood=do predicate=show
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""tallest bars on the left"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count words=""count of"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=sub-category words=""for each sub-category"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result"
+let's do a bar chart of highest to lowest: the number of products over the sub-categories,"@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""highest to lowest"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count words=""number of"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=sub-categories words=""over the sub-categories"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sub operator=eq phase=result"
+visualise counted from the top down it — COUNT(products) by sub-category on a bar chart,"@r1 w.request.request act=make mood=do predicate=visualise
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""counted from the top down"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count words=COUNT operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=sub-category words=""by sub-category"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result"
+"display the count of products as a function of the sub-category, tallest bars on the left in a bar chart","@r1 w.request.request act=make mood=do predicate=display
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""tallest bars on the left"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count words=""count of"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=sub-category words=""as a function of the sub-category"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result"
+build a bar chart of heaviest first: the count products versus sub-category,"@r1 w.request.request act=make mood=do predicate=build
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""heaviest first"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sub-category operator=eq phase=result
+@r1.u1 w.request.constraint request=$r1 on=attribute attribute=chart.compare value=versus operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result"
+"I'd like to see the count of products by sub-category, counted from the top down on a bar chart","@r1 w.request.request act=make mood=do predicate=like
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""counted from the top down"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count words=""count of"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=see operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sub-category operator=eq phase=result"
+try a bar chart of tallest bars on the left: the number of products per sub-category,"@r1 w.request.request act=make mood=do predicate=try
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""tallest bars on the left"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count words=""number of"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=sub-category words=""per sub-category"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result"
+how about heaviest first it — the number of products for each sub-category as a bar chart?,"@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""heaviest first"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count words=""number of"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=sub-category words=""for each sub-category"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result"
+"the count of products, tallest bars on the left","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""tallest bars on the left"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count words=""count of"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result"
+"the count products, heaviest first","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""heaviest first"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result"
+"plot the number of products by sub-category, highest to lowest as a bar chart and and use a colour-blind-safe palette","@r1 w.request.request act=make mood=do words=""plot the number of products by sub-category, highest to lowest as a bar chart"" predicate=plot
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""highest to lowest"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count words=""number of"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=sub-category words=""by sub-category"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""and use a colour-blind-safe palette"" predicate=use
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.palette value=colour-blind-safe operator=eq phase=result key_words=palette"
+can you show tallest bars on the left it — the count of products for each sub-category in a bar chart?; and start the y axis at zero,"@r1 w.request.request act=make mood=do words=""can you show tallest bars on the left it — the count of products for each sub-category in a bar chart?"" predicate=show
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""tallest bars on the left"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count words=""count of"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=sub-category words=""for each sub-category"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""and start the y axis at zero"" predicate=start
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.min value=""0"" words=zero operator=eq phase=result key_words=""y axis"""
+"show highest to lowest it — the count of products for each sub-category in a bar chart, with the values shown on the bars, legend on the right and and give it the title 'Sub-categories ranked'","@r1 w.request.request act=make mood=do words=""show highest to lowest it — the count of products for each sub-category in a bar chart, with the values shown on the bars, legend on the right"" predicate=show
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""highest to lowest"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""on the right"" key_words=legend operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count words=""count of"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=sub-category words=""for each sub-category"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""and give it the title 'Sub-categories ranked'"" predicate=give
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.title value=""Sub-categories ranked"" operator=eq phase=result key_words=title"
+"chart the number of products across the sub-categories, counted from the top down, with the values shown on the bars, legend on the right, then title it 'Sub-categories ranked'","@f1 w.request.filler text=then
+@r1 w.request.request act=make mood=do words=""chart the number of products across the sub-categories, counted from the top down, with the values shown on the bars, legend on the right"" predicate=chart
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""counted from the top down"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""on the right"" key_words=legend operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count words=""number of"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=sub-categories words=""across the sub-categories"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""then title it 'Sub-categories ranked'"" predicate=title
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.title value=""Sub-categories ranked"" operator=eq phase=result"
+"plot tallest bars on the left: the number of products over the sub-categories as a bar chart, with the values shown on the bars, legend on the right — and and add gridlines behind the bars","@r1 w.request.request act=make mood=do words=""plot tallest bars on the left: the number of products over the sub-categories as a bar chart, with the values shown on the bars, legend on the right"" predicate=plot
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""tallest bars on the left"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.show_values value=show words=""with the values shown on the bars"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.legend value=right words=""on the right"" key_words=legend operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count words=""number of"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=sub-categories words=""over the sub-categories"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=products operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""and add gridlines behind the bars"" predicate=add
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context family_words=bars
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.grid value=show words=gridlines operator=eq phase=result"

@@ -1,0 +1,58 @@
+text,sop,sop1
+i need you to put the row back to its initial state,"@f1 w.request.filler text=need
+@r1 w.request.request act=undo mood=do words=""put the row back to its initial state"" predicate=put
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""its initial state"" note=diagram.step.exact value=""its initial state""
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+return to the earlier state,"@r1 w.request.request act=undo mood=do predicate=return
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=earlier operator=eq phase=result",
+three moves back,"@r1 w.request.request act=undo mood=do predicate=three
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+"cancel the add-back, that figure should stay deleted","@r1 w.request.request act=undo mood=do predicate=cancel
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+"leave the add-back alone and undo the swap that followed it, so the restored figure stays in the row but returns to its earlier position","@f1 w.request.filler text=so
+@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=swap operator=eq phase=selector
+@r1.m2 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+cancel the second application of the same swap,"@r1 w.request.request act=undo mood=do predicate=cancel
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""the second application"" note=diagram.step.repeat value=""the second application""",
+undo the repeat but leave the first mve,"@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=repeat words=""undo the repeat"" operator=eq phase=selector",
+"would you undo the repeated swap, then swap the ends","@f1 w.request.filler text=then
+@r1 w.request.request act=undo mood=do words=""undo the repeated swap"" predicate=undo
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""the repeated swap"" note=diagram.step.repeat value=""the repeated swap""
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=swap operator=eq phase=selector
+@r2 w.request.request act=change mood=do words=""then swap the ends"" predicate=swap
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.ordinal value=""the ends"" operator=eq phase=selector",
+go back before the rebuild and replay the edits after it,"@r1 w.request.request act=undo mood=do predicate=go
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=rebuild operator=eq phase=selector
+@r1.m2 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+undo it and say which edits remain,"@r1 w.request.request act=undo mood=do words=""undo it"" predicate=undo
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r2 w.request.request act=ask mood=ask words=""and say which edits remain"" predicate=say question=which
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing",

@@ -1,0 +1,184 @@
+text,sop,sop1
+Nudge the Intro meeting up to 2.,"@r1 w.request.request act=place mood=do predicate=Nudge
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Intro family_words=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Intro operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.start value=""2"" operator=eq phase=result"
+"Following all the reshuffling, a quick read of the calendar would set my mind at ease.","@f2 w.request.filler text=""would set my mind at ease""
+@f1 w.request.filler text=""Following all the reshuffling,""
+@r1 w.request.request act=ask mood=ask predicate=read words=""read of the calendar""
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context family_words=calendar
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+calendar check,"@r1 w.request.request act=ask mood=ask predicate=check
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context family_words=calendar
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+calendar view,"@r1 w.request.request act=ask mood=ask predicate=view
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context family_words=calendar
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+"I've got a call with the new client in about ten minutes and I'm frantically double-checking every single panel, so before the panic fully sets in — is there a calendar in the app at all?","@f1 w.request.filler text=""I've got a call with the new client in about ten minutes and I'm frantically double-checking every single panel, so before the panic fully sets in —""
+@r1 w.request.request act=ask mood=check predicate=""is there"" question=exists words=""is there a calendar""
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=all sort=calendar"
+"show me the calendar, then select the Intro meeting","@f1 w.request.filler text=then
+@r1 w.request.request act=ask mood=ask words=""show me the calendar,"" predicate=show
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context family_words=calendar
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=pick mood=do words=""then select the Intro meeting"" predicate=select
+@r2.t w.request.target request=$r2 family=meeting mode=existing determiner=definite fill=written name=Intro family_words=meeting
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=meeting.id value=Intro operator=eq phase=selector"
+drop the Intro session onto the Main calendar and give it a length of 3,"@r1 w.request.request act=change mood=do predicate=drop
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Intro family_words=session
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Intro operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""3"" operator=eq phase=result key_words=length
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.calendar value=Main operator=eq phase=result key_words=calendar"
+2 is the start the Intro meeting should move to,"@r1 w.request.request act=place mood=do predicate=move
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Intro family_words=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Intro operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.start value=""2"" operator=eq phase=result key_words=start"
+"tune up the Intro appointment: title Second, notes Main","@r1 w.request.request act=change mood=do predicate=""tune up""
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Intro family_words=appointment
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Intro operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=Main operator=eq phase=result key_words=notes
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=Second operator=eq phase=result key_words=title"
+"and one more: an Intro meeting at 3 for 1, call it Main, notes too","@f2 w.request.filler text=""and one more:""
+@f1 w.request.filler text=too
+@r1 w.request.request act=make mood=do predicate=call words=""an Intro meeting at 3 for 1, call it Main, notes too""
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Intro family_words=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.ids value=Intro operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=Main operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.start value=""3"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""1"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=Main operator=eq phase=result key_words=notes"
+"Retune the Intro meeting: 2 to start, 3 long, group in as participants.","@r1 w.request.request act=change mood=do predicate=Retune
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Intro family_words=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Intro operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.start value=""2"" operator=eq phase=result key_words=start
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""3"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=group operator=eq phase=result words=""group in as participants"" key_words=participants"
+Rename the Intro meeting to Second while you shorten it to 2.,"@r1 w.request.request act=change mood=do predicate=Rename
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Intro family_words=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Intro operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""2"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=Second operator=eq phase=result"
+"Post-scramble, the Intro meeting should carry Main in its notes and Second as its title.","@f1 w.request.filler text=""Post-scramble,""
+@r1 w.request.request act=change mood=do words=""the Intro meeting should carry Main in its notes and Second as its title.""
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Intro family_words=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Intro operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=Main operator=eq phase=result key_words=notes
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=Second operator=eq phase=result key_words=title"
+"Half the details went stale, which is why the Intro meeting needs a full pass of edits.","@r1 w.request.request act=change mood=do predicate=needs
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Intro family_words=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Intro operator=eq phase=selector"
+revision time for the Intro meeting,"@r1 w.request.request act=change mood=do words=""the Intro meeting""
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Intro family_words=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Intro operator=eq phase=selector"
+Shift the Intro meeting to begin at 2.,"@r1 w.request.request act=place mood=do predicate=Shift
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Intro family_words=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Intro operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.start value=""2"" operator=eq phase=result"
+"Moving on without it, we should scrub the Intro meeting from the lineup before anyone misses it.","@f1 w.request.filler text=""Moving on without it, we should""
+@r1 w.request.request act=remove mood=do predicate=scrub words=""scrub the Intro meeting""
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Intro family_words=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.ids value=Intro operator=eq phase=selector"
+can you select a meeting Take 2?,"@r1 w.request.request act=pick mood=do predicate=select
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""Take 2"" family_words=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=""Take 2"" operator=eq phase=selector"
+ask a callendar,"@r1 w.request.request act=ask mood=ask predicate=ask
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context family_words=callendar
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+get rid of a meeting Kickoff,"@r1 w.request.request act=remove mood=do predicate=""get rid of""
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Kickoff family_words=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.ids value=Kickoff operator=eq phase=selector"
+place a meeting Core Hub about two,"@r1 w.request.request act=place mood=do predicate=place
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""Core Hub"" family_words=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Core operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""2"" words=two operator=eq phase=result"
+make one meeting Intro Main 3,"@r1 w.request.request act=change mood=do predicate=make
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""Intro Main"" family_words=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Intro operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""3"" operator=eq phase=result"
+make one meeting Backup Core Hub,"@r1 w.request.request act=change mood=do predicate=make
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""Backup Core Hub"" family_words=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Backup operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=Hub operator=eq phase=result"
+"I'll take the Intro gathering, select it","@r1 w.request.request act=pick mood=do predicate=select
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Intro family_words=gathering
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Intro operator=eq phase=selector"
+count the Intro meeing as history and remove it,"@r1 w.request.request act=remove mood=do predicate=remove words=""the Intro meeing as history and remove it""
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Intro family_words=meeing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Intro operator=eq phase=selector"
+I want to rework the Intro meeting.,"@f1 w.request.filler text=""I want to""
+@r1 w.request.request act=change mood=do predicate=rework words=""rework the Intro meeting""
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Intro family_words=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Intro operator=eq phase=selector"
+Roughly how many calenders did we register in total?,"@f1 w.request.filler text=Roughly
+@r1 w.request.request act=ask mood=ask predicate=""how many"" question=count words=""how many calenders""
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=all sort=calenders"
+change a meeeting Backup Core Hub,"@r1 w.request.request act=change mood=do predicate=change
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""Backup Core Hub"" family_words=meeeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Backup operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=Hub operator=eq phase=result"
+change a meting Hub Main Track Second Pass,"@r1 w.request.request act=change mood=do predicate=change
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Hub family_words=meting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Hub operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=""Main Track"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=""Second Pass"" operator=eq phase=result"
+Count the persons for me.,"@r1 w.request.request act=ask mood=ask predicate=Count question=count
+@r1.t w.request.target request=$r1 family=person mode=existing determiner=definite fill=all sort=persons"
+"Of the things on display, how many are persons?","@r1 w.request.request act=ask mood=ask predicate=""how many"" question=count words=""how many are persons""
+@r1.t w.request.target request=$r1 family=person mode=existing determiner=definite fill=all sort=persons"
+Any person at all?,"@r1 w.request.request act=ask mood=check predicate=Any question=exists
+@r1.t w.request.target request=$r1 family=person mode=existing determiner=definite fill=all sort=person"
+Show me every person.,"@r1 w.request.request act=ask mood=ask predicate=Show question=list
+@r1.t w.request.target request=$r1 family=person mode=existing determiner=definite fill=all sort=person"
+get rid of a meeting Intro,"@r1 w.request.request act=remove mood=do predicate=""get rid of""
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Intro family_words=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.ids value=Intro operator=eq phase=selector"
+"rework the Intro meeing: Second for the title, duration down to 2","@r1 w.request.request act=change mood=do predicate=rework
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Intro family_words=meeing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Intro operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""2"" operator=eq phase=result key_words=duration
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=Second operator=eq phase=result key_words=title"
+rework Intro meeting,"@r1 w.request.request act=change mood=do predicate=rework
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Intro family_words=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Intro operator=eq phase=selector"
+redo Intro meeting,"@r1 w.request.request act=change mood=do predicate=redo
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Intro family_words=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Intro operator=eq phase=selector"
+Do you mind selecting the Intro meeting?,"@f1 w.request.filler text=""Do you mind""
+@r1 w.request.request act=pick mood=do predicate=selecting words=""selecting the Intro meeting""
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Intro family_words=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Intro operator=eq phase=selector"
+delete Intro meeting,"@r1 w.request.request act=remove mood=do predicate=delete
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Intro family_words=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.ids value=Intro operator=eq phase=selector"
+"Open Items Goal 3 1 Backup — add a meeting, please","@f1 w.request.filler text=please
+@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""Open Items"" family_words=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.ids value=""Open Items"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=Goal operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.start value=""3"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""1"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=Backup operator=eq phase=result"
+"Goal — change a meeting, please","@f1 w.request.filler text=please
+@r1 w.request.request act=change mood=do predicate=change
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Goal family_words=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Goal operator=eq phase=selector"
+"a meeting for me, Second Pass 1","@r1 w.request.request act=place mood=do
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""Second Pass"" family_words=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=""Second Pass"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.start value=""1"" operator=eq phase=result"
+update a meeting Backup Core Hub,"@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""Backup Core Hub"" family_words=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Backup operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=Hub operator=eq phase=result"
+just give me a meeting Plan,"@f1 w.request.filler text=just
+@r1 w.request.request act=change mood=do predicate=give
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Plan family_words=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=Plan operator=eq phase=selector"
+"Since the audit team is apparently breathing down everyone's necks this quarter and my notes have become a hopeless jumble, could you just settle it for me: how many persons do we have on record?","@f1 w.request.filler text=""Since the audit team is apparently breathing down everyone's necks this quarter and my notes have become a hopeless jumble, could you just settle it for me:""
+@r1 w.request.request act=ask mood=ask predicate=""how many"" question=count words=""how many persons""
+@r1.t w.request.target request=$r1 family=person mode=existing determiner=definite fill=all sort=persons"
+What rooms are there?,"@r1 w.request.request act=ask mood=ask predicate=What question=list
+@r1.t w.request.target request=$r1 family=room mode=existing determiner=definite fill=all sort=rooms"
+remove a meteing Kickoff,"@r1 w.request.request act=remove mood=do predicate=remove
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=Kickoff family_words=meteing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.ids value=Kickoff operator=eq phase=selector"

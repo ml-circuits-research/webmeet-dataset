@@ -1,0 +1,961 @@
+text,sop
+"The customer with the highest orders, and what's the order count for it?","@r1 w.request.request act=ask mood=ask words=""The customer with the highest orders"" question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""what's the order count for it"" question=count
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=customer operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=highest operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.measure value=""order count"" operator=eq phase=result"
+"The customer with the highest orders, and how many orders did that customer place, for the printed handout, as the closing chart for the review?","@f1 w.request.filler text=""printed handout, as the closing chart for the review""
+@r1 w.request.request act=ask mood=ask words=""The customer with the highest orders"" question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how many orders did that customer place"" predicate=how question=count
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@f2 w.request.filler text=""for the printed handout""
+@f3 w.request.filler text=""as the closing chart""
+@f4 w.request.filler text=""for the review""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=customer operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=highest operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result"
+"and while you're at it, Who leads on orders, and how many orders went through it?","@f1 w.request.filler text=while
+@r1 w.request.request act=ask mood=ask words=""Who leads on orders"" predicate=Who question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r2 w.request.request act=ask mood=ask words=""how many orders went through it"" predicate=how question=count
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result"
+"What's the biggest customer on the chart, and how many orders did it take too, for the second slide?","@f1 w.request.filler text=""too, for the second slide""
+@r1 w.request.request act=ask mood=ask words=""What's the biggest customer on the chart"" question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context family_words=chart
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r2 w.request.request act=ask mood=ask words=""how many orders did it take"" predicate=how question=count
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing
+@f2 w.request.filler text=""for the second slide""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=biggest operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=customer operator=eq phase=result
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.measure value=orders operator=eq phase=result"
+"and meanwhile, Where is the orders highest, and what's its order tally?","@f1 w.request.filler text=meanwhile
+@r1 w.request.request act=ask mood=ask words=""Where is the orders highest"" predicate=Where question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r2 w.request.request act=ask mood=ask words=""what's its order tally"" question=count
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=highest operator=eq phase=result
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.measure value=order operator=eq phase=result"
+"one more thing: Which customer stands out on orders, and how many orders did that customer place, please?","@f1 w.request.filler text=""more thing""
+@f2 w.request.filler text=please
+@r1 w.request.request act=ask mood=ask words=""Which customer stands out on orders"" predicate=Which question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how many orders did that customer place"" predicate=how question=count
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=customer operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result"
+"um, Tell me the leading customer on orders, and what's the order count for it, thanks?","@f1 w.request.filler text=um
+@f2 w.request.filler text=thanks
+@r1 w.request.request act=ask mood=ask words=""Tell me the leading customer on orders"" predicate=Tell question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""what's the order count for it"" question=count
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=customer operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.measure value=""order count"" operator=eq phase=result"
+"Tell me the leading customer on orders, and how many orders cmae from it?","@r1 w.request.request act=ask mood=ask words=""Tell me the leading customer on orders"" predicate=Tell question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how many orders cmae from it"" predicate=how question=count
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=customer operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result"
+"What's the sales total, and how does it compare with Q3?","@r1 w.request.request act=ask mood=ask words=""What's the sales total"" question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how does it compare with Q3"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.compare value=versus words=""compare with Q3"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=sum words=total operator=eq phase=result"
+"How much sales is there in all, and how does that stack up against the previous quarter?","@r1 w.request.request act=ask mood=ask words=""How much sales is there in all"" predicate=How question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how does that stack up against the previous quarter"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.compare value=versus words=""stack up against the previous quarter"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""How much sales"" note=chart.gap
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+"Give me the overall sales, and what's the change from the quarter before?","@r1 w.request.request act=ask mood=ask words=""Give me the overall sales"" predicate=Give question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""what's the change from the quarter before"" question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""change from the quarter before"" note=chart.compare
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result words=""overall sales"""
+"What do the quarters add up to, and how far off is it from the prior quarter?","@r1 w.request.request act=ask mood=ask words=""What do the quarters add up to"" predicate=What question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how far off is it from the prior quarter"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""from the prior quarter"" note=chart.compare
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=quarter words=quarters operator=eq phase=result
+@r2.u2 w.request.unread request=$r2 text=""how far off is it from the prior"" note=chart.gap"
+"Tell me the grand total for sales, and how does it look next to Q3?","@r1 w.request.request act=ask mood=ask words=""Tell me the grand total for sales"" predicate=Tell question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how does it look next to Q3"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.compare value=versus words=""look next to Q3"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=sum words=total operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+"What's the sum of sales, and how does that compare with last quarter?","@r1 w.request.request act=ask mood=ask words=""What's the sum of sales"" question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how does that compare with last quarter"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.compare value=versus words=""compare with last quarter"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=sum operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+"What does sales come to overall, and how does it line up against Q3?","@r1 w.request.request act=ask mood=ask words=""What does sales come to overall"" predicate=""come to"" question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how does it line up against Q3"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.compare value=versus words=""line up against Q3"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+"Sum up the sales for me, and what's the gap to the previous quarter?","@r1 w.request.request act=ask mood=ask words=""Sum up the sales for me"" predicate=Sum question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""what's the gap to the previous quarter"" question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""gap to the previous quarter"" note=chart.compare
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+"What's the whole sales figure, and how much did it move from Q3?","@r1 w.request.request act=ask mood=ask words=""What's the whole sales figure"" question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how much did it move from Q3"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""move from Q3"" note=chart.compare
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result
+@r2.u2 w.request.unread request=$r2 text=""how much did it move"" note=chart.gap"
+"Add up sales and tell me, and how does the total compare with the prior quarter?","@r1 w.request.request act=ask mood=ask words=""Add up sales and tell me"" predicate=Add question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how does the total compare with the prior quarter"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=chart.compare value=versus words=""compare with the prior quarter"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.aggregate value=sum words=total operator=eq phase=result"
+"How much is the sales altogether, and how does it compare with Q3?","@r1 w.request.request act=ask mood=ask words=""How much is the sales altogether"" predicate=How question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how does it compare with Q3"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.compare value=versus words=""compare with Q3"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""How much is the sales"" note=chart.gap
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+"What does the overall sales amount to, and how does that stack up against the previous quarter?","@r1 w.request.request act=ask mood=ask words=""What does the overall sales amount to"" predicate=What question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how does that stack up against the previous quarter"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.compare value=versus words=""stack up against the previous quarter"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result words=""overall sales amount to"""
+"What does the overall sales amount to, and how does it compare with Q3, so the region heads can argue about it?","@f1 w.request.filler text=""so the region heads can argue""
+@r1 w.request.request act=ask mood=ask words=""What does the overall sales amount to"" predicate=What question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how does it compare with Q3"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.compare value=versus words=""compare with Q3"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result words=""overall sales amount to"""
+"What do the quarters add up to, and how does that compare with last quarter?","@r1 w.request.request act=ask mood=ask words=""What do the quarters add up to"" predicate=What question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how does that compare with last quarter"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.compare value=versus words=""compare with last quarter"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=quarter words=quarters operator=eq phase=result"
+"What's the sum of sales, and is it ahead of the quarter before, a repeat for the second section?","@f1 w.request.filler text=""repeat for the second section""
+@r1 w.request.request act=ask mood=ask words=""What's the sum of sales"" question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r2 w.request.request act=ask mood=ask words=""is it ahead of the quarter before"" predicate=is question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing
+@r2.u1 w.request.unread request=$r2 text=""ahead of the quarter before"" note=chart.compare
+@f2 w.request.filler text=""a repeat for the second section""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=sum operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+"same again for the client: The total sales, and what's the gap to the previous quarter?","@f1 w.request.filler text=""same again for the client""
+@r1 w.request.request act=ask mood=ask words=""The total sales"" question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r2 w.request.request act=ask mood=ask words=""what's the gap to the previous quarter"" question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing
+@r2.u1 w.request.unread request=$r2 text=""gap to the previous quarter"" note=chart.compare
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=sum words=total operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+"Sum up the sales for me, and how does the total compare with the prior quarter, as a copy for the appendix?","@f1 w.request.filler text=""copy for the appendix""
+@r1 w.request.request act=ask mood=ask words=""Sum up the sales for me"" predicate=Sum question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r2 w.request.request act=ask mood=ask words=""how does the total compare with the prior quarter"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=chart.compare value=versus words=""compare with the prior quarter"" operator=eq phase=result
+@f2 w.request.filler text=""for the appendix""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.aggregate value=sum words=total operator=eq phase=result"
+"a repeat for the appendix: Add up sales and tell me, and how does it differ from the previous quarter?","@f1 w.request.filler text=""repeat for the appendix""
+@r1 w.request.request act=ask mood=ask words=""Add up sales and tell me"" predicate=Add question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r2 w.request.request act=ask mood=ask words=""how does it differ from the previous quarter"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing
+@r2.u1 w.request.unread request=$r2 text=""differ from the previous quarter"" note=chart.compare
+@f2 w.request.filler text=""a repeat for the appendix""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+"hey — What's the sales in total, and how does it compare with Q3, if you can?","@f1 w.request.filler text=hey
+@r1 w.request.request act=ask mood=ask words=""What's the sales in total"" question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how does it compare with Q3"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.compare value=versus words=""compare with Q3"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=sum words=total operator=eq phase=result"
+"excuse me, How much is the sales altogether, and how does that stack up against the previous quarter — go on?","@f1 w.request.filler text=excuse
+@f2 w.request.filler text=go
+@r1 w.request.request act=ask mood=ask words=""How much is the sales altogether"" predicate=How question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how does that stack up against the previous quarter"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.compare value=versus words=""stack up against the previous quarter"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""How much is the sales"" note=chart.gap
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+"What's the whole sales figure, and how does the totla compare with the prior quarter?","@r1 w.request.request act=ask mood=ask words=""What's the whole sales figure"" question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how does the totla compare with the prior quarter"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=chart.compare value=versus words=""compare with the prior quarter"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.aggregate value=sum words=totla operator=eq phase=result"
+"What's the sales total, and how dooes that stack up against the previous quarter?","@r1 w.request.request act=ask mood=ask words=""What's the sales total"" question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how dooes that stack up against the previous quarter"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.compare value=versus words=""stack up against the previous quarter"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=sum words=total operator=eq phase=result"
+"Where is the peak on the chart, and what's the value there?","@r1 w.request.request act=ask mood=ask words=""Where is the peak on the chart"" predicate=Where question=where
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context family_words=chart
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""what's the value there"" question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page"
+"Which point sits highest, and how much is it?","@r1 w.request.request act=ask mood=ask words=""Which point sits highest"" predicate=Which question=where
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how much is it"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=highest operator=eq phase=result"
+"Where does the line top out, and what number does it hit?","@r1 w.request.request act=ask mood=ask words=""Where does the line top out"" predicate=Where question=where
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""what number does it hit"" predicate=what question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""line top out"" note=chart.limit
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.aggregate value=count words=number operator=eq phase=result"
+"Which week marks the peak, and how big is that value?","@r1 w.request.request act=ask mood=ask words=""Which week marks the peak"" predicate=Which question=where
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how big is that value"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=week operator=eq phase=result"
+"Where's the top of the curve, and what's the figure at that point?","@r1 w.request.request act=ask mood=ask words=""Where's the top of the curve"" question=where
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""what's the figure at that point"" question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""the top of the curve"" note=chart.limit"
+"What week holds the maximum, and how much does it total?","@r1 w.request.request act=ask mood=ask words=""What week holds the maximum"" predicate=What question=where
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how much does it total"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=week operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=maximum operator=eq phase=result
+@r2.u1 w.request.unread request=$r2 text=""how much does it total"" note=chart.gap
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.aggregate value=sum words=total operator=eq phase=result"
+"Where is orders at its maximum, and what number is shown there?","@r1 w.request.request act=ask mood=ask words=""Where is orders at its maximum"" predicate=Where question=where
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""what number is shown there"" predicate=what question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=maximum operator=eq phase=result
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.aggregate value=count words=number operator=eq phase=result"
+"Which week carries the peak orders, and what's the amount?","@r1 w.request.request act=ask mood=ask words=""Which week carries the peak orders"" predicate=Which question=where
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""what's the amount"" question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=week operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result"
+"Where does orders reach its high, and how much is the value at that point?","@r1 w.request.request act=ask mood=ask words=""Where does orders reach its high"" predicate=Where question=where
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how much is the value at that point"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result
+@r2.u1 w.request.unread request=$r2 text=""how much is the value"" note=chart.gap"
+"At which week does orders peak, and what's the value there?","@r1 w.request.request act=ask mood=ask words=""At which week does orders peak"" predicate=At question=where
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""what's the value there"" question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=week operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result"
+"and meanwhile, Where does the line top out, and what's the figure at that point?","@f1 w.request.filler text=meanwhile
+@r1 w.request.request act=ask mood=ask words=""Where does the line top out"" predicate=Where question=where
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r2 w.request.request act=ask mood=ask words=""what's the figure at that point"" question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing
+@r1.u1 w.request.unread request=$r1 text=""line top out"" note=chart.limit"
+"At what week is orders highest, and what value sits there, one more for the appendix page?","@f1 w.request.filler text=""more for the appendix page""
+@r1 w.request.request act=ask mood=ask words=""At what week is orders highest"" predicate=at question=where
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r2 w.request.request act=ask mood=ask words=""what value sits there"" predicate=what question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing
+@f2 w.request.filler text=""for the appendix page""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=week operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=highest operator=eq phase=result"
+"and while you're at it, Which week marks the peak, and how much does it total?","@f1 w.request.filler text=while
+@r1 w.request.request act=ask mood=ask words=""Which week marks the peak"" predicate=Which question=where
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r2 w.request.request act=ask mood=ask words=""how much does it total"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=week operator=eq phase=result
+@r2.u1 w.request.unread request=$r2 text=""how much does it total"" note=chart.gap
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.aggregate value=sum words=total operator=eq phase=result"
+"one more thing: At which week does orders peak, and how much is it, please?","@f1 w.request.filler text=""more thing""
+@f2 w.request.filler text=please
+@r1 w.request.request act=ask mood=ask words=""At which week does orders peak"" predicate=At question=where
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how much is it"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=week operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result"
+"At what week is orders highest, and how big is taht value?","@r1 w.request.request act=ask mood=ask words=""At what week is orders highest"" predicate=at question=where
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how big is taht value"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=week operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=highest operator=eq phase=result"
+"Which category earned the most profit, and how big is the gap to second place?","@r1 w.request.request act=ask mood=ask words=""Which category earned the most profit"" predicate=Which question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how big is the gap to second place"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""gap to second place"" note=chart.gap value=""gap to second place""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=most operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result"
+"Who leads on profit, and what's the margin over the next one?","@r1 w.request.request act=ask mood=ask words=""Who leads on profit"" predicate=Who question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""what's the margin over the next one"" question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result"
+"What's the biggest category on the chart, and how much does it lead by?","@r1 w.request.request act=ask mood=ask words=""What's the biggest category on the chart"" question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context family_words=chart
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how much does it lead by"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""much does it lead by"" note=chart.gap
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=biggest operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result
+@r2.u2 w.request.unread request=$r2 text=""how much does it lead"" note=chart.gap"
+"Where is the profit highest, and what's the distance to number two?","@r1 w.request.request act=ask mood=ask words=""Where is the profit highest"" predicate=Where question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""what's the distance to number two"" question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""distance to number two"" note=chart.gap
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=highest operator=eq phase=result"
+"Which of the categories is ahead on profit, and what's the gap between first and second?","@r1 w.request.request act=ask mood=ask words=""Which of the categories is ahead on profit"" predicate=Which question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""what's the gap between first and second"" question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""between first and second"" note=chart.gap
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category words=categories operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result"
+"Can you point at the category with the highest profit, and how much separates it from the runner-up?","@r1 w.request.request act=ask mood=ask words=""Can you point at the category with the highest profit"" predicate=Can question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how much separates it from the runner-up"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""separates it from the runner-up"" note=chart.gap
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=highest operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r2.u2 w.request.unread request=$r2 text=""how much separates"" note=chart.gap"
+"Read off the best category for profit, and what's the margin to the next category?","@r1 w.request.request act=ask mood=ask words=""Read off the best category for profit"" predicate=Read question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""what's the margin to the next category"" question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""what's the margin to the next category"" note=chart.gap
+@r1.u1 w.request.unread request=$r1 text=""the best category"" note=chart.limit
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result"
+"Tell me the leading category on profit, and how big is the gap to second place?","@r1 w.request.request act=ask mood=ask words=""Tell me the leading category on profit"" predicate=Tell question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how big is the gap to second place"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""gap to second place"" note=chart.gap value=""gap to second place""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result"
+"The category with the highest profit, and how far ahead of the runner-up is it?","@r1 w.request.request act=ask mood=ask words=""The category with the highest profit"" question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how far ahead of the runner-up is it"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""ahead of the runner-up"" note=chart.gap
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=highest operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r2.u2 w.request.unread request=$r2 text=""how far ahead"" note=chart.gap"
+"same session, next ask: Who leads on profit, and how far clear is it?","@f1 w.request.filler text=""same session, next ask""
+@r1 w.request.request act=ask mood=ask words=""Who leads on profit"" predicate=Who question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r2 w.request.request act=ask mood=ask words=""how far clear is it"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing
+@r2.u1 w.request.unread request=$r2 text=""how far clear"" note=chart.gap
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result"
+"What's the biggest category on the chart, and what's the gap between first and second as well?","@f1 w.request.filler text=well
+@r1 w.request.request act=ask mood=ask words=""What's the biggest category on the chart"" question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context family_words=chart
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r2 w.request.request act=ask mood=ask words=""what's the gap between first and second"" question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing
+@r2.u1 w.request.unread request=$r2 text=""between first and second"" note=chart.gap
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=biggest operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result"
+"while you're there: Where is the profit highest, and how much separates it from the runner-up?","@f1 w.request.filler text=while
+@r1 w.request.request act=ask mood=ask words=""Where is the profit highest"" predicate=Where question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r2 w.request.request act=ask mood=ask words=""how much separates it from the runner-up"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing
+@r2.u1 w.request.unread request=$r2 text=""separates it from the runner-up"" note=chart.gap
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=highest operator=eq phase=result
+@r2.u2 w.request.unread request=$r2 text=""how much separates"" note=chart.gap"
+"um, Which category stands out on profit, and how big is the gap to second place — go on?","@f1 w.request.filler text=um
+@f2 w.request.filler text=go
+@r1 w.request.request act=ask mood=ask words=""Which category stands out on profit"" predicate=Which question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how big is the gap to second place"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""gap to second place"" note=chart.gap value=""gap to second place""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result"
+"hey — Tell me the leading category on profit, and how far ahead of the runner-up is it, if you can?","@f1 w.request.filler text=hey
+@r1 w.request.request act=ask mood=ask words=""Tell me the leading category on profit"" predicate=Tell question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how far ahead of the runner-up is it"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""ahead of the runner-up"" note=chart.gap
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r2.u2 w.request.unread request=$r2 text=""how far ahead"" note=chart.gap"
+"Can you point at the catgeory with the highest profit, and what's the lead over second?","@r1 w.request.request act=ask mood=ask words=""Can you point at the catgeory with the highest profit"" predicate=Can question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""what's the lead over second"" question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""lead over second"" note=chart.gap
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category words=catgeory operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=highest operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result"
+"Which category earned the most profit, and how far aheead of the runner-up is it?","@r1 w.request.request act=ask mood=ask words=""Which category earned the most profit"" predicate=Which question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""how far aheead of the runner-up is it"" predicate=how question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""aheead of the runner-up"" note=chart.gap
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=most operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r2.u2 w.request.unread request=$r2 text=""how far aheead"" note=chart.gap"
+"Which region has the second highest profit; next, how much profit do all the regions add up to?","@r1 w.request.request act=ask mood=ask words=""Which region has the second highest profit"" predicate=Which question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""second highest profit"" note=chart.second value=""second highest""
+@r2 w.request.request act=ask mood=ask words=""next, how much profit do all the regions add up to"" predicate=""next,"" question=total
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result
+@r2.u1 w.request.unread request=$r2 text=""how much profit"" note=chart.gap
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=chart.dimension value=region words=regions operator=eq phase=result"
+"List the regions and point out the second best on profit, and finally, how much is the overall profit total?","@r1 w.request.request act=ask mood=ask words=""List the regions and point out the second best on profit"" predicate=List question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""second best"" note=chart.second
+@r2 w.request.request act=ask mood=ask words=""finally, how much is the overall profit total"" predicate=""finally,"" question=total
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region words=regions operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r2.u1 w.request.unread request=$r2 text=""how much is the overall"" note=chart.gap
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.aggregate value=sum words=total operator=eq phase=result"
+Give me the region ranked second by profit; now what does the total profit come to?,"@r1 w.request.request act=ask mood=ask words=""Give me the region ranked second by profit"" predicate=Give question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""ranked second"" note=chart.second
+@r2 w.request.request act=ask mood=ask words=""now what does the total profit come to"" predicate=now question=total
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.aggregate value=sum words=total operator=eq phase=result"
+Tell me which region comes second on profit — then what's the grand total profit?,"@r1 w.request.request act=ask mood=ask words=""Tell me which region comes second on profit"" predicate=Tell question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""comes second"" note=chart.second
+@r2 w.request.request act=ask mood=ask words=""then what's the grand total profit"" predicate=then question=total
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.aggregate value=sum words=total operator=eq phase=result"
+"Tell me which region comes second on profit, and then what's the grand total profit?","@r1 w.request.request act=ask mood=ask words=""Tell me which region comes second on profit"" predicate=Tell question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""comes second"" note=chart.second
+@r2 w.request.request act=ask mood=ask words=""then what's the grand total profit"" predicate=then question=total
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.aggregate value=sum words=total operator=eq phase=result"
+"Name the region in second place on profit, and finally, how much is the overall profit total?","@r1 w.request.request act=ask mood=ask words=""Name the region in second place on profit"" predicate=Name question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""second place"" note=chart.second
+@r2 w.request.request act=ask mood=ask words=""finally, how much is the overall profit total"" predicate=""finally,"" question=total
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r2.u1 w.request.unread request=$r2 text=""how much is the overall"" note=chart.gap
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.aggregate value=sum words=total operator=eq phase=result"
+"List the regions and point out the second best on profit, and so what is the profit total for every region combined?","@r1 w.request.request act=ask mood=ask words=""List the regions and point out the second best on profit"" predicate=List question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""second best"" note=chart.second
+@r2 w.request.request act=ask mood=ask words=""so what is the profit total for every region combined"" predicate=so question=total
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region words=regions operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.aggregate value=sum words=total operator=eq phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=chart.dimension value=region operator=eq phase=result"
+"Which region has the second highest profit; now what does the total profit come to, ready for the big screen?","@f1 w.request.filler text=""ready for the big screen""
+@r1 w.request.request act=ask mood=ask words=""Which region has the second highest profit"" predicate=Which question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""second highest profit"" note=chart.second value=""second highest""
+@r2 w.request.request act=ask mood=ask words=""now what does the total profit come to"" predicate=now question=total
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.aggregate value=sum words=total operator=eq phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=chart.measure value=profit operator=eq phase=result"
+"Tell me which region comes second on profit — finally, how much is the overall profit total?","@r1 w.request.request act=ask mood=ask words=""Tell me which region comes second on profit"" predicate=Tell question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""comes second"" note=chart.second
+@r2 w.request.request act=ask mood=ask words=""finally, how much is the overall profit total"" predicate=""finally,"" question=total
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r2.u1 w.request.unread request=$r2 text=""how much is the overall"" note=chart.gap
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.aggregate value=sum words=total operator=eq phase=result"
+"What is the runner-up region by profit; now what does the total profit come to, again on the following page?","@f1 w.request.filler text=""following page""
+@r1 w.request.request act=ask mood=ask words=""What is the runner-up region by profit"" predicate=What question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.u1 w.request.unread request=$r1 text=""runner-up region"" note=chart.second
+@r2 w.request.request act=ask mood=ask words=""now what does the total profit come to"" predicate=now question=total
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.aggregate value=sum words=total operator=eq phase=result"
+"the same question for the second slide: List the regions and point out the second best on profit, next, how much profit do all the regions add up to?","@f1 w.request.filler text=""same question for the second slide""
+@r1 w.request.request act=ask mood=ask words=""List the regions and point out the second best on profit"" predicate=List question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.u1 w.request.unread request=$r1 text=""second best"" note=chart.second
+@r2 w.request.request act=ask mood=ask words=""next, how much profit do all the regions add up to"" predicate=""next,"" question=total
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing
+@f2 w.request.filler text=""for the second slide""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region words=regions operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r2.u1 w.request.unread request=$r2 text=""how much profit"" note=chart.gap"
+"Tell me which region comes second on profit; so what is the profit total for every region combined, this time for the client deck?","@f1 w.request.filler text=""time for the client deck""
+@r1 w.request.request act=ask mood=ask words=""Tell me which region comes second on profit"" predicate=Tell question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.u1 w.request.unread request=$r1 text=""comes second"" note=chart.second
+@r2 w.request.request act=ask mood=ask words=""so what is the profit total for every region combined"" predicate=so question=total
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing
+@f2 w.request.filler text=""this time for the client deck""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.aggregate value=sum words=total operator=eq phase=result"
+"same again for the client: What is the runner-up region by profit, now what does the total profit come to?","@f1 w.request.filler text=""same again for the client""
+@r1 w.request.request act=ask mood=ask words=""What is the runner-up region by profit"" predicate=What question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.u1 w.request.unread request=$r1 text=""runner-up region"" note=chart.second
+@r2 w.request.request act=ask mood=ask words=""now what does the total profit come to"" predicate=now question=total
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.aggregate value=sum words=total operator=eq phase=result"
+"excuse me, Which region has the second highest profit — also, what is the total profit across all regions, please?","@f1 w.request.filler text=excuse
+@f2 w.request.filler text=please
+@r1 w.request.request act=ask mood=ask words=""Which region has the second highest profit"" predicate=Which question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""second highest profit"" note=chart.second value=""second highest""
+@r2 w.request.request act=ask mood=ask words=""also, what is the total profit across all regions"" predicate=""also,"" question=total
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.aggregate value=sum words=total operator=eq phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r2.c3 w.request.constraint request=$r2 on=attribute attribute=chart.dimension value=region words=regions operator=eq phase=result"
+"quick one: What is the runner-up region by profit, so what is the profit total for every region combined, thanks?","@f1 w.request.filler text=quick
+@f2 w.request.filler text=thanks
+@r1 w.request.request act=ask mood=ask words=""What is the runner-up region by profit"" predicate=What question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""runner-up region"" note=chart.second
+@r2 w.request.request act=ask mood=ask words=""so what is the profit total for every region combined"" predicate=so question=total
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.aggregate value=sum words=total operator=eq phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=chart.dimension value=region operator=eq phase=result"
+"Which ragion has the second highest profit, now what does the total profit come to?","@r1 w.request.request act=ask mood=ask words=""Which ragion has the second highest profit"" predicate=Which question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""second highest profit"" note=chart.second value=""second highest""
+@r2 w.request.request act=ask mood=ask words=""now what does the total profit come to"" predicate=now question=total
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region words=ragion operator=eq phase=result
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.aggregate value=sum words=total operator=eq phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=chart.measure value=profit operator=eq phase=result"
+Tell me which regino comes second on profit; now what does the total profit come to?,"@r1 w.request.request act=ask mood=ask words=""Tell me which regino comes second on profit"" predicate=Tell question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""comes second"" note=chart.second
+@r2 w.request.request act=ask mood=ask words=""now what does the total profit come to"" predicate=now question=total
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region words=regino operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=profit operator=eq phase=result
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.aggregate value=sum words=total operator=eq phase=result"
+"Which category leads on sales; next, what's its margin over second place?","@r1 w.request.request act=ask mood=ask words=""Which category leads on sales"" predicate=Which question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""next, what's its margin over second place"" predicate=""next,"" question=max
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""margin over second place"" note=chart.margin
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+"What is the best-selling category — also, how far ahead of the runner-up is it?","@r1 w.request.request act=ask mood=ask words=""What is the best-selling category"" predicate=What question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""also, how far ahead of the runner-up is it"" predicate=""also,"" question=max
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""how far ahead of the runner-up"" note=chart.margin
+@r1.u1 w.request.unread request=$r1 text=""the best-selling category"" note=chart.limit"
+"Give me the category with the highest sales, and finally, how far is second place behind?","@r1 w.request.request act=ask mood=ask words=""Give me the category with the highest sales"" predicate=Give question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""finally, how far is second place behind"" predicate=""finally,"" question=max
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""how far is second place behind"" note=chart.margin
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=highest operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+Tell me which category comes first for sales; now what gap separates it from second?,"@r1 w.request.request act=ask mood=ask words=""Tell me which category comes first for sales"" predicate=""comes first"" question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""now what gap separates it from second"" predicate=now question=max
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""gap separates it from second"" note=chart.margin
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+List the top category by sales — then how much more than the second category?,"@r1 w.request.request act=ask mood=ask words=""List the top category by sales"" predicate=List question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""then how much more than the second category"" predicate=then question=max
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""how much more than the second category"" note=chart.margin
+@r1.u1 w.request.unread request=$r1 text=""the top category"" note=chart.limit
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+"What is the best-selling category, and also, how far ahead of the runner-up is it?","@r1 w.request.request act=ask mood=ask words=""What is the best-selling category"" predicate=What question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""also, how far ahead of the runner-up is it"" predicate=""also,"" question=max
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""how far ahead of the runner-up"" note=chart.margin
+@r1.u1 w.request.unread request=$r1 text=""the best-selling category"" note=chart.limit"
+"Give me the category with the highest sales — finally, how far is second place behind?","@r1 w.request.request act=ask mood=ask words=""Give me the category with the highest sales"" predicate=Give question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""finally, how far is second place behind"" predicate=""finally,"" question=max
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""how far is second place behind"" note=chart.margin
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=highest operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+"List the top category by sales, and then how much more than the second category?","@r1 w.request.request act=ask mood=ask words=""List the top category by sales"" predicate=List question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""then how much more than the second category"" predicate=then question=max
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""how much more than the second category"" note=chart.margin
+@r1.u1 w.request.unread request=$r1 text=""the top category"" note=chart.limit
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+"Give me the category with the highest sales, and so what is the lead over the next category?","@r1 w.request.request act=ask mood=ask words=""Give me the category with the highest sales"" predicate=Give question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""so what is the lead over the next category"" predicate=so question=max
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""lead over the next category"" note=chart.margin
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=highest operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+"Which category leads on sales; now what gap separates it from second, for the wall chart in the sales room?","@f1 w.request.filler text=""wall chart in the sales room""
+@r1 w.request.request act=ask mood=ask words=""Which category leads on sales"" predicate=Which question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""now what gap separates it from second"" predicate=now question=max
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""gap separates it from second"" note=chart.margin
+@f2 w.request.filler text=""for the wall chart""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+"while you're there: Name the top category by sales, now what gap separates it from second?","@f1 w.request.filler text=while
+@r1 w.request.request act=ask mood=ask words=""Name the top category by sales"" predicate=Name question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r2 w.request.request act=ask mood=ask words=""now what gap separates it from second"" predicate=now question=max
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing
+@r2.u1 w.request.unread request=$r2 text=""gap separates it from second"" note=chart.margin
+@r1.u1 w.request.unread request=$r1 text=""the top category"" note=chart.limit
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+"Give me the category with the highest sales, and then how much more than the second category — same thing once more?","@f1 w.request.filler text=""same thing once more""
+@r1 w.request.request act=ask mood=ask words=""Give me the category with the highest sales"" predicate=Give question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r2 w.request.request act=ask mood=ask words=""then how much more than the second category"" predicate=then question=max
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing
+@r2.u1 w.request.unread request=$r2 text=""how much more than the second category"" note=chart.margin
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=highest operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+"same session, next ask: Tell me which category comes first for sales; next, what's its margin over second place?","@f1 w.request.filler text=""same session, next ask""
+@r1 w.request.request act=ask mood=ask words=""Tell me which category comes first for sales"" predicate=""comes first"" question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r2 w.request.request act=ask mood=ask words=""next, what's its margin over second place"" predicate=""next,"" question=max
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing
+@r2.u1 w.request.unread request=$r2 text=""margin over second place"" note=chart.margin
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+"and while you're at it, List the top category by sales — also, how far ahead of the runner-up is it?","@f1 w.request.filler text=while
+@r1 w.request.request act=ask mood=ask words=""List the top category by sales"" predicate=List question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r2 w.request.request act=ask mood=ask words=""also, how far ahead of the runner-up is it"" predicate=""also,"" question=max
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing
+@r2.u1 w.request.unread request=$r2 text=""how far ahead of the runner-up"" note=chart.margin
+@r1.u1 w.request.unread request=$r1 text=""the top category"" note=chart.limit
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+"one more thing: Which category leads on sales — also, how far ahead of the runner-up is it, if you can?","@f1 w.request.filler text=""more thing""
+@r1 w.request.request act=ask mood=ask words=""Which category leads on sales"" predicate=Which question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""also, how far ahead of the runner-up is it"" predicate=""also,"" question=max
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""how far ahead of the runner-up"" note=chart.margin
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+"um, What is the best-selling category, so what is the lead over the next category — go on?","@f1 w.request.filler text=um
+@f2 w.request.filler text=go
+@r1 w.request.request act=ask mood=ask words=""What is the best-selling category"" predicate=What question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""so what is the lead over the next category"" predicate=so question=max
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""lead over the next category"" note=chart.margin
+@r1.u1 w.request.unread request=$r1 text=""the best-selling category"" note=chart.limit"
+"Which category leeads on sales, next, what's its margin over second place?","@r1 w.request.request act=ask mood=ask words=""Which category leeads on sales"" predicate=Which question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""next, what's its margin over second place"" predicate=""next,"" question=max
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""margin over second place"" note=chart.margin
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+"Tell me which category comes farst for sales — finally, how far is second place behind?","@r1 w.request.request act=ask mood=ask words=""Tell me which category comes farst for sales"" predicate=Tell question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""finally, how far is second place behind"" predicate=""finally,"" question=max
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""how far is second place behind"" note=chart.margin
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+"What is the bset-selling category, next, what's its margin over second place?","@r1 w.request.request act=ask mood=ask words=""What is the bset-selling category"" predicate=What question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""next, what's its margin over second place"" predicate=""next,"" question=max
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""margin over second place"" note=chart.margin
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=category operator=eq phase=result"
+"How many stores took more than 500 orders; next, what percentage of orders comes from those stores?","@r1 w.request.request act=ask mood=ask words=""How many stores took more than 500 orders"" predicate=How question=count
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""next, what percentage of orders comes from those stores"" predicate=""comes from"" question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""what percentage of orders"" note=chart.share
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=store words=stores operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.only value=""500 orders"" words=""than 500 orders"" operator=eq phase=result"
+"Count the stores with over 500 orders — also, what share of all orders do they represent?","@r1 w.request.request act=ask mood=ask words=""Count the stores with over 500 orders"" predicate=Count question=count
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""also, what share of all orders do they represent"" predicate=""also,"" question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""what share of all orders"" note=chart.share
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=store words=stores operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.only value=""over 500 orders"" operator=eq phase=result"
+"Name the number of stores past 500 orders, so what fraction of all orders do they make up?","@r1 w.request.request act=ask mood=ask words=""Name the number of stores past 500 orders"" predicate=Name question=count
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r2 w.request.request act=ask mood=ask words=""so what fraction of all orders do they make up"" predicate=""make up"" question=what
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.u1 w.request.unread request=$r2 text=""what fraction of all orders"" note=chart.share
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count words=number operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=store words=stores operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.only value=""500 orders"" operator=eq phase=result"

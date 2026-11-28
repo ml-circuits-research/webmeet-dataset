@@ -1,0 +1,287 @@
+text,sop,sop1,sop2,sop3,sop4,sop5,sop6,sop7,sop8,sop9,sop10,sop11,sop12,sop13
+delete all the meetings,"@r1 w.request.request act=remove mood=do predicate=delete
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=all sort=meeting sort_words=meetings description=""all the meetings""",,,
+describe the calendar,"@r1 w.request.request act=ask mood=ask predicate=describe question=describe
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=context family_words=calendar
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page",,,
+"add a calendar with label Review, then set the label of Ana to Review","@f1 w.request.filler text=then
+@r1 w.request.request act=make mood=do words=""add a calendar with label Review"" predicate=add
+@r1.t w.request.target request=$r1 family=calendar mode=new determiner=indefinite sort=calendar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=Review operator=eq phase=result key_words=label
+@r2 w.request.request act=change mood=do words=""set the label of Ana to Review"" predicate=set
+@r2.t w.request.target request=$r2 family=person mode=existing determiner=definite fill=written name=Ana
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=person.id value=Ana operator=eq phase=selector
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=person.name value=Review operator=eq phase=result key_words=label",,,
+"set the label of Work to Review, then add a calendar with label Review","@f1 w.request.filler text=then
+@r1 w.request.request act=change mood=do words=""set the label of Work to Review"" predicate=set
+@r1.t w.request.target request=$r1 family=calendar mode=existing determiner=definite fill=written name=Work
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=calendar.id value=Work operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=calendar.name value=Review operator=eq phase=result key_words=label
+@r2 w.request.request act=make mood=do words=""add a calendar with label Review"" predicate=add
+@r2.t w.request.target request=$r2 family=calendar mode=new determiner=indefinite sort=calendar
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=calendar.name value=Review operator=eq phase=result key_words=label",,,
+"add a person with label Review, then add a meeting on Monday at 10:00 for 30 minutes with title Quarterly plan","@f1 w.request.filler text=then
+@r1 w.request.request act=make mood=do words=""add a person with label Review"" predicate=add
+@r1.t w.request.target request=$r1 family=person mode=new determiner=indefinite sort=person
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.name value=Review operator=eq phase=result key_words=label
+@r2 w.request.request act=make mood=do words=""add a meeting on Monday at 10:00 for 30 minutes with title Quarterly plan"" predicate=add
+@r2.t w.request.target request=$r2 family=meeting mode=new determiner=indefinite sort=meeting
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=meeting.title value=""Quarterly plan"" operator=eq phase=result key_words=title
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=meeting.day value=Monday operator=eq phase=result
+@r2.c3 w.request.constraint request=$r2 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result
+@r2.c4 w.request.constraint request=$r2 on=attribute attribute=meeting.length value=""30"" operator=eq phase=result key_words=minutes",,,
+"set the label of Ana to Review, then add a room with label Review","@f1 w.request.filler text=then
+@r1 w.request.request act=change mood=do words=""set the label of Ana to Review"" predicate=set
+@r1.t w.request.target request=$r1 family=person mode=existing determiner=definite fill=written name=Ana
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=person.id value=Ana operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=person.name value=Review operator=eq phase=result key_words=label
+@r2 w.request.request act=make mood=do words=""add a room with label Review"" predicate=add
+@r2.t w.request.target request=$r2 family=room mode=new determiner=indefinite sort=room
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=room.name value=Review operator=eq phase=result key_words=label",,,
+"set the label of Cedar room to Review, then set the title of Weekly review to Quarterly plan","@f1 w.request.filler text=then
+@r1 w.request.request act=change mood=do words=""set the label of Cedar room to Review"" predicate=set
+@r1.t w.request.target request=$r1 family=room mode=existing determiner=definite fill=written name=""Cedar room""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.id value=""Cedar room"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=room.name value=Review operator=eq phase=result key_words=label
+@r2 w.request.request act=change mood=do words=""set the title of Weekly review to Quarterly plan"" predicate=set
+@r2.t w.request.target request=$r2 family=meeting mode=existing determiner=definite fill=written name=""Weekly review""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=meeting.id value=""Weekly review"" operator=eq phase=selector
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=meeting.title value=""Quarterly plan"" operator=eq phase=result key_words=title",,,
+"add a meeting on Monday at 10:00 for 30 minutes with title Quarterly plan, then add a person with label Review","@f1 w.request.filler text=then
+@r1 w.request.request act=make mood=do words=""add a meeting on Monday at 10:00 for 30 minutes with title Quarterly plan"" predicate=add
+@r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=""Quarterly plan"" operator=eq phase=result key_words=title
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Monday operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""30"" operator=eq phase=result key_words=minutes
+@r2 w.request.request act=make mood=do words=""add a person with label Review"" predicate=add
+@r2.t w.request.target request=$r2 family=person mode=new determiner=indefinite sort=person
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=person.name value=Review operator=eq phase=result key_words=label",,,
+"set the title of Weekly review to Quarterly plan, then move Weekly review on Monday at 10:00","@f1 w.request.filler text=then
+@r1 w.request.request act=change mood=do words=""set the title of Weekly review to Quarterly plan"" predicate=set
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""Weekly review""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=""Weekly review"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=""Quarterly plan"" operator=eq phase=result key_words=title
+@r2 w.request.request act=place mood=do words=""move Weekly review on Monday at 10:00"" predicate=move
+@r2.t w.request.target request=$r2 family=meeting mode=existing determiner=definite fill=written name=""Weekly review""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=meeting.id value=""Weekly review"" operator=eq phase=selector
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=meeting.day value=Monday operator=eq phase=result
+@r2.c3 w.request.constraint request=$r2 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result",,,
+"move Weekly review on Monday at 10:00, then add a meeting on Monday at 10:00 for 30 minutes with title Quarterly plan and participants Ana and Lee and room Cedar room","@f1 w.request.filler text=then
+@r1 w.request.request act=place mood=do words=""move Weekly review on Monday at 10:00"" predicate=move
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""Weekly review""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=""Weekly review"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Monday operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result
+@r2 w.request.request act=make mood=do words=""add a meeting on Monday at 10:00 for 30 minutes with title Quarterly plan and participants Ana and Lee and room Cedar room"" predicate=add
+@r2.t w.request.target request=$r2 family=meeting mode=new determiner=indefinite sort=meeting
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=meeting.title value=""Quarterly plan"" operator=eq phase=result key_words=title
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=meeting.day value=Monday operator=eq phase=result
+@r2.c3 w.request.constraint request=$r2 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result
+@r2.c4 w.request.constraint request=$r2 on=attribute attribute=meeting.length value=""30"" operator=eq phase=result key_words=minutes
+@r2.c5 w.request.constraint request=$r2 on=attribute attribute=meeting.people value=""Ana and Lee"" operator=eq phase=result key_words=participants
+@r2.c6 w.request.constraint request=$r2 on=attribute attribute=meeting.room value=""Cedar room"" operator=eq phase=result key_words=room",,,
+move the selection on Monday at 10:00,"@r1 w.request.request act=place mood=do predicate=move
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context description=""the selection""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Monday operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result",,,
+add a meeting on Monday at 10:00 with title Quarterly plan and duration 30 and notes bring the slides,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=""Quarterly plan"" operator=eq phase=result key_words=title
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Monday operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""30"" operator=eq phase=result key_words=duration
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=""bring the slides"" operator=eq phase=result key_words=notes",,,
+add a meeting,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=meeting",,,
+change the selection,"@r1 w.request.request act=change mood=do predicate=change
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context description=""the selection""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing","@r1 w.request.request act=change mood=do predicate=change
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context family_words=selection
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing","@r1 w.request.request act=change mood=do predicate=change
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context description=""the selection""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing","@r1 w.request.request act=change mood=do predicate=change
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context family_words=selection
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
+move the selection,"@r1 w.request.request act=place mood=do predicate=move
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context description=""the selection""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing","@r1 w.request.request act=place mood=do predicate=move
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context description=""the selection""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing","@r1 w.request.request act=place mood=do predicate=move
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context family_words=selection
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing",
+add a room with label Review and capacity 8,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=room mode=new determiner=indefinite sort=room
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.name value=Review operator=eq phase=result key_words=label
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=room.seats value=""8"" operator=eq phase=result key_words=capacity",,,
+add a meeting for 30 minutes on Monday at 10:00 with title Quarterly plan,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""30"" operator=eq phase=result key_words=minutes
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=""Quarterly plan"" operator=eq phase=result key_words=title
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Monday operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result",,,
+change Weekly review,"@r1 w.request.request act=change mood=do predicate=change
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""Weekly review""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=""Weekly review"" operator=eq phase=selector",,,
+set the room of Weekly review to Cedar room and the notes to bring the slides,"@r1 w.request.request act=change mood=do predicate=set
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""Weekly review""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=""Weekly review"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.room value=""Cedar room"" operator=eq phase=result key_words=room
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=""bring the slides"" operator=eq phase=result key_words=notes",,,
+"add a meeting on Monday at 10:00 for 30 minutes with title Quarterly plan and participants Ana and Lee and room Cedar room, then set the label of Cedar room to Review","@f1 w.request.filler text=then
+@r1 w.request.request act=make mood=do words=""add a meeting on Monday at 10:00 for 30 minutes with title Quarterly plan and participants Ana and Lee and room Cedar room"" predicate=add
+@r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=""Quarterly plan"" operator=eq phase=result key_words=title
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Monday operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""30"" operator=eq phase=result key_words=minutes
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=""Ana and Lee"" operator=eq phase=result key_words=participants
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=meeting.room value=""Cedar room"" operator=eq phase=result key_words=room
+@r2 w.request.request act=change mood=do words=""set the label of Cedar room to Review"" predicate=set
+@r2.t w.request.target request=$r2 family=room mode=existing determiner=definite fill=written name=""Cedar room""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=room.id value=""Cedar room"" operator=eq phase=selector
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=room.name value=Review operator=eq phase=result key_words=label",,,
+add a room with capacity 20 and label Review,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=room mode=new determiner=indefinite sort=room
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.seats value=""20"" operator=eq phase=result key_words=capacity
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=room.name value=Review operator=eq phase=result key_words=label",,,
+set the label of Cedar room to Review and the capacity to 8,"@r1 w.request.request act=change mood=do predicate=set
+@r1.t w.request.target request=$r1 family=room mode=existing determiner=definite fill=written name=""Cedar room""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.id value=""Cedar room"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=room.name value=Review operator=eq phase=result key_words=label
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=room.seats value=""8"" operator=eq phase=result key_words=capacity",,,
+change Weekly review on Monday at 10:00 and the participants to Ana and Lee,"@r1 w.request.request act=change mood=do predicate=change
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""Weekly review""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=""Weekly review"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Monday operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=""Ana and Lee"" operator=eq phase=result key_words=participants",,,
+delete Weekly review,"@r1 w.request.request act=remove mood=do predicate=delete
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""Weekly review""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.ids value=""Weekly review"" operator=eq phase=selector",,,
+delete the selection,"@r1 w.request.request act=remove mood=do predicate=delete
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=context description=""the selection""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing","@r1 w.request.request act=remove mood=do predicate=delete
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context family_words=selection
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing","@r1 w.request.request act=remove mood=do predicate=delete
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context family_words=selection
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing","@r1 w.request.request act=remove mood=do predicate=delete
+@r1.t w.request.target request=$r1 family=group mode=existing determiner=definite fill=context family_words=selection
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing","@r1 w.request.request act=remove mood=do predicate=delete
+@r1.t w.request.target request=$r1 family=block mode=existing determiner=definite fill=context description=""the selection""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing","@r1 w.request.request act=remove mood=do predicate=delete
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=context description=selection
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing","@r1 w.request.request act=remove mood=do predicate=delete
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context family_words=selection
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
+add a meeting on Monday at 10:00 for 30 minutes with title Quarterly plan,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=""Quarterly plan"" operator=eq phase=result key_words=title
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Monday operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""30"" operator=eq phase=result key_words=minutes",,,
+add a meeting on Monday at 10:00 for 30 minutes with title Quarterly plan and notes bring the slides,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=""Quarterly plan"" operator=eq phase=result key_words=title
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=""bring the slides"" operator=eq phase=result key_words=notes
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Monday operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""30"" operator=eq phase=result key_words=minutes",,,
+add a meeting for 30 minutes on Monday at 10:00 with title Quarterly plan and notes bring the slides,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=""Quarterly plan"" operator=eq phase=result key_words=title
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""30"" operator=eq phase=result key_words=minutes
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=""bring the slides"" operator=eq phase=result key_words=notes
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Monday operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result",,,
+add a meeting on Monday at 10:00 for 30 minutes with room Cedar room and notes bring the slides and title Quarterly plan and participants Ana and Lee,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.room value=""Cedar room"" operator=eq phase=result key_words=room
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=""bring the slides"" operator=eq phase=result key_words=notes
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=""Quarterly plan"" operator=eq phase=result key_words=title
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Monday operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""30"" operator=eq phase=result key_words=minutes
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=""Ana and Lee"" operator=eq phase=result key_words=participants",,,
+set the calendar of Weekly review to Work,"@r1 w.request.request act=change mood=do predicate=set
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""Weekly review""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=""Weekly review"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.calendar value=Work operator=eq phase=result key_words=calendar",,,
+set the participants of Weekly review to Ana and Lee and the notes to bring the slides,"@r1 w.request.request act=change mood=do predicate=set
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""Weekly review""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=""Weekly review"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=""Ana and Lee"" operator=eq phase=result key_words=participants
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=""bring the slides"" operator=eq phase=result key_words=notes",,,
+change Weekly review on Monday at 10:00 and for 30 minutes and the calendar to Work,"@r1 w.request.request act=change mood=do predicate=change
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""Weekly review""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=""Weekly review"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Monday operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""30"" operator=eq phase=result key_words=minutes
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=meeting.calendar value=Work operator=eq phase=result key_words=calendar",,,
+"add a room with label Review, then set the label of Work to Review","@f1 w.request.filler text=then
+@r1 w.request.request act=make mood=do words=""add a room with label Review"" predicate=add
+@r1.t w.request.target request=$r1 family=room mode=new determiner=indefinite sort=room
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.name value=Review operator=eq phase=result key_words=label
+@r2 w.request.request act=change mood=do words=""set the label of Work to Review"" predicate=set
+@r2.t w.request.target request=$r2 family=calendar mode=existing determiner=definite fill=written name=Work
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=calendar.id value=Work operator=eq phase=selector
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=calendar.name value=Review operator=eq phase=result key_words=label",,,
+set the label of Cedar room to Review and the capacity to 8 and the location to second floor,"@r1 w.request.request act=change mood=do predicate=set
+@r1.t w.request.target request=$r1 family=room mode=existing determiner=definite fill=written name=""Cedar room""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.id value=""Cedar room"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=room.name value=Review operator=eq phase=result key_words=label
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=room.seats value=""8"" operator=eq phase=result key_words=capacity
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=room.location value=""second floor"" operator=eq phase=result key_words=location",,,
+add a meeting on Monday at 10:00 for 30 minutes with title Team lunch and participants Ana and Lee and room Cedar room,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=""Team lunch"" operator=eq phase=result key_words=title
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Monday operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""30"" operator=eq phase=result key_words=minutes
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=""Ana and Lee"" operator=eq phase=result key_words=participants
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=meeting.room value=""Cedar room"" operator=eq phase=result key_words=room",,,
+add a meeting for 45 minutes on Monday at 10:00 with title Quarterly plan and participants Ana and Lee and room Cedar room,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""45"" operator=eq phase=result key_words=minutes
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=""Quarterly plan"" operator=eq phase=result key_words=title
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Monday operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=""Ana and Lee"" operator=eq phase=result key_words=participants
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=meeting.room value=""Cedar room"" operator=eq phase=result key_words=room",,,
+add a meeting for 30 minutes on Monday at 10:00 with notes bring the slides and title Quarterly plan and participants Ana and Lee and room Cedar room,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""30"" operator=eq phase=result key_words=minutes
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=""bring the slides"" operator=eq phase=result key_words=notes
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=""Quarterly plan"" operator=eq phase=result key_words=title
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Monday operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=""Ana and Lee"" operator=eq phase=result key_words=participants
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=meeting.room value=""Cedar room"" operator=eq phase=result key_words=room",,,
+change Weekly review on Monday at 10:00 and the calendar to Work,"@r1 w.request.request act=change mood=do predicate=change
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""Weekly review""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=""Weekly review"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Monday operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.calendar value=Work operator=eq phase=result key_words=calendar",,,
+add a meeting for 30 minutes on Monday at 10:00 with calendar Work and notes bring the slides and title Quarterly plan and participants Ana and Lee and room Cedar room,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=meeting mode=new determiner=indefinite sort=meeting
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.length value=""30"" operator=eq phase=result key_words=minutes
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.calendar value=Work operator=eq phase=result key_words=calendar
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.notes value=""bring the slides"" operator=eq phase=result key_words=notes
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=meeting.title value=""Quarterly plan"" operator=eq phase=result key_words=title
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Monday operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=meeting.people value=""Ana and Lee"" operator=eq phase=result key_words=participants
+@r1.c8 w.request.constraint request=$r1 on=attribute attribute=meeting.room value=""Cedar room"" operator=eq phase=result key_words=room",,,
+move Weekly review on Monday at 10:00,"@r1 w.request.request act=place mood=do predicate=move
+@r1.t w.request.target request=$r1 family=meeting mode=existing determiner=definite fill=written name=""Weekly review""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=meeting.id value=""Weekly review"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=meeting.day value=Monday operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=meeting.time value=""10:00"" operator=eq phase=result",,,
+add a room with capacity 8 and location second floor and label Review,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=room mode=new determiner=indefinite sort=room
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=room.seats value=""8"" operator=eq phase=result key_words=capacity
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=room.location value=""second floor"" operator=eq phase=result key_words=location
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=room.name value=Review operator=eq phase=result key_words=label",,,

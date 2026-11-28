@@ -1,0 +1,603 @@
+text,sop
+"same session, next ask: Are the sales numbers going up or coming down?","@f1 w.request.filler text=""same session, next ask""
+@r1 w.request.request act=ask mood=ask words=""Are the sales numbers going up or coming down"" predicate=Are question=exists
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+What direction is the sales trend taking as well?,"@f1 w.request.filler text=well
+@r1 w.request.request act=ask mood=ask words=""What direction is the sales trend taking"" predicate=What question=exists
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+while you're there: Can you tell me whether sales is trending up?,"@f1 w.request.filler text=while
+@r1 w.request.request act=ask mood=ask words=""Can you tell me whether sales is trending up"" predicate=tell question=exists
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+"um, So is sales trending upward or not — go on?","@f1 w.request.filler text=um
+@f2 w.request.filler text=go
+@r1 w.request.request act=ask mood=ask words=""So is sales trending upward or not"" predicate=So question=exists
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+So is sales trendding upward or not?,"@r1 w.request.request act=ask mood=ask predicate=So question=exists
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+Has the sales been climbing or filling?,"@r1 w.request.request act=ask mood=ask predicate=Has question=exists
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+Tell me how much the weekly orders total moved,"@r1 w.request.request act=ask mood=ask predicate=Tell question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""how much the weekly"" note=chart.gap
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.period value=week words=weekly operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=sum words=total operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result"
+Give me the change in the weekly orders total,"@r1 w.request.request act=ask mood=ask predicate=Give question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.period value=week words=weekly operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=sum words=total operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result"
+How big was the jump in weekly orders?,"@r1 w.request.request act=ask mood=ask words=""How big was the jump in weekly orders"" predicate=How question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.period value=week words=weekly operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result"
+What did the weekly orders total gain over the period?,"@r1 w.request.request act=ask mood=ask words=""What did the weekly orders total gain over the period"" predicate=What question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.period value=week words=weekly operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=sum words=total operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result"
+Can you quantify the weekly growth in orders?,"@r1 w.request.request act=ask mood=ask words=""Can you quantify the weekly growth in orders"" predicate=quantify question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""weekly growth"" note=chart.resample
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result"
+Does the weekly orders total keep growing?,"@r1 w.request.request act=ask mood=ask words=""Does the weekly orders total keep growing"" predicate=Does question=exists
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.period value=week words=weekly operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=sum words=total operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result
+@r1.u2 w.request.unread request=$r1 text=""keep growing"" note=chart.trend"
+Read me the week-on-week change in orders,"@r1 w.request.request act=ask mood=ask predicate=Read question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=week operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result"
+I want the weekly growth figure for orders,"@f1 w.request.filler text=want
+@r1 w.request.request act=ask mood=ask predicate=I question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""weekly growth figure"" note=chart.resample
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result"
+"The weekly orders growth, in numbers","@r1 w.request.request act=ask mood=ask question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""weekly orders growth"" note=chart.resample"
+So how much did weekly orders grow overall?,"@r1 w.request.request act=ask mood=ask words=""So how much did weekly orders grow overall"" predicate=So question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""how much did weekly"" note=chart.gap
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.period value=week words=weekly operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result"
+How much did weekly orders grow?,"@r1 w.request.request act=ask mood=ask question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""How much did weekly"" note=chart.gap
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.period value=week words=weekly operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result"
+"and while you're at it, Does the weekly orders total keep growing?","@f1 w.request.filler text=while
+@r1 w.request.request act=ask mood=ask words=""Does the weekly orders total keep growing"" predicate=Does question=exists
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.period value=week words=weekly operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=sum words=total operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result
+@r1.u2 w.request.unread request=$r1 text=""keep growing"" note=chart.trend"
+"Read me the week-on-week change in orders too, for the second slide","@f1 w.request.filler text=""too, for the second slide""
+@r1 w.request.request act=ask mood=ask words=""Read me the week-on-week change in orders"" predicate=Read question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@f2 w.request.filler text=""for the second slide""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=week operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result"
+"excuse me, How much did the weekly total of orders grow, please?","@f1 w.request.filler text=excuse
+@f2 w.request.filler text=please
+@r1 w.request.request act=ask mood=ask words=""How much did the weekly total of orders grow"" predicate=How question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""How much did the weekly"" note=chart.gap
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.period value=week words=weekly operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=sum words=total operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result"
+"quick one: How much did orders grow week over week, thanks?","@f1 w.request.filler text=quick
+@f2 w.request.filler text=thanks
+@r1 w.request.request act=ask mood=ask words=""How much did orders grow week over week"" predicate=How question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""How much did orders"" note=chart.gap
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=week operator=eq phase=result"
+How much did orders grow wuek over week?,"@r1 w.request.request act=ask mood=ask predicate=How question=total
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""How much did orders"" note=chart.gap
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=orders operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=week operator=eq phase=result"
+Read me the month with the fastest revenue growth,"@r1 w.request.request act=ask mood=ask predicate=Read question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=growth operator=eq phase=result"
+Can you spot the steepest revenue climb for me?,"@r1 w.request.request act=ask mood=ask words=""Can you spot the steepest revenue climb for me"" predicate=Can question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+Where does revenue rise fastest?,"@r1 w.request.request act=ask mood=ask words=""Where does revenue rise fastest"" predicate=Where question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+"What was the sharpest revenue increase, and when?","@r1 w.request.request act=ask mood=ask words=""What was the sharpest revenue increase, and when"" predicate=What question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+I want the steepest month in the revenue chart,"@f1 w.request.filler text=want
+@r1 w.request.request act=ask mood=ask predicate=I question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context family_words=chart
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+So which month climbed fastest on revenue?,"@r1 w.request.request act=ask mood=ask words=""So which month climbed fastest on revenue"" predicate=So question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+Look at the revenue line: which month rises most?,"@r1 w.request.request act=ask mood=ask words=""Look at the revenue line: which month rises most"" predicate=Look question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=most operator=eq phase=result"
+Which month climbed the fastest in revenue?,"@r1 w.request.request act=ask mood=ask words=""Which month climbed the fastest in revenue"" predicate=Which question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+The steepest rise in revenue?,"@r1 w.request.request act=ask mood=ask question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+while you're there: So which month climbed fastest on revenue?,"@f1 w.request.filler text=while
+@r1 w.request.request act=ask mood=ask words=""So which month climbed fastest on revenue"" predicate=So question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+Look at the revenue line: which month rises most — same thing once more?,"@f1 w.request.filler text=""same thing once more""
+@r1 w.request.request act=ask mood=ask words=""Look at the revenue line: which month rises most"" predicate=Look question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=most operator=eq phase=result"
+"same session, next ask: Pick out the fastest-rising month in revenue","@f1 w.request.filler text=""same session, next ask""
+@r1 w.request.request act=ask mood=ask words=""Pick out the fastest-rising month in revenue"" predicate=""Pick out"" question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+"one more thing: Tell me the month with the steepest revenue increase, if you can","@f1 w.request.filler text=""more thing""
+@r1 w.request.request act=ask mood=ask words=""Tell me the month with the steepest revenue increase"" predicate=Tell question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+"um, What's the biggest month-on-month jump in revenue — go on?","@f1 w.request.filler text=um
+@f2 w.request.filler text=go
+@r1 w.request.request act=ask mood=ask words=""What's the biggest month-on-month jump in revenue"" question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=biggest operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+Can you spot the steeepest revenue climb for me?,"@r1 w.request.request act=ask mood=ask predicate=Can question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+Which month had the sharpest jmup in revenue?,"@r1 w.request.request act=ask mood=ask predicate=Which question=max
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+(quick check) the average monthly revenue total?,"@r1 w.request.request act=ask mood=ask words=""(quick check) the average monthly revenue total"" predicate=check question=average
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+What's the average of all the monthly revenue figures?,"@r1 w.request.request act=ask mood=ask words=""What's the average of all the monthly revenue figures"" question=average
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+What's the average of the monthly totals?,"@r1 w.request.request act=ask mood=ask words=""What's the average of the monthly totals"" question=average
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result"
+What does the average monthly total come to?,"@r1 w.request.request act=ask mood=ask words=""What does the average monthly total come to"" predicate=""come to"" question=average
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result"
+Give me the average of the monthly revenue totals,"@r1 w.request.request act=ask mood=ask predicate=Give question=average
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+Tell me the average monthly revenue total,"@r1 w.request.request act=ask mood=ask predicate=Tell question=average
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+What's the mean of the monthly revenue totals?,"@r1 w.request.request act=ask mood=ask words=""What's the mean of the monthly revenue totals"" question=average
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=mean operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+"On average, how much revenue per month?","@r1 w.request.request act=ask mood=ask words=""On average, how much revenue per month"" predicate=how question=average
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""how much revenue"" note=chart.gap
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result key_words=""per month"""
+What does the typical monthly total look like?,"@f1 w.request.filler text=like
+@r1 w.request.request act=ask mood=ask words=""What does the typical monthly total look like"" predicate=""look like"" question=average
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""the typical monthly"" note=chart.aggregation value=typical
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=sum words=total operator=eq phase=result"
+Can you work out the average monthly revenue?,"@r1 w.request.request act=ask mood=ask words=""Can you work out the average monthly revenue"" predicate=""work out"" question=average
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+What's the monthly average for revenue?,"@r1 w.request.request act=ask mood=ask words=""What's the monthly average for revenue"" question=average
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+The average monthly revenue total?,"@r1 w.request.request act=ask mood=ask question=average
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+"On average, how much revenue per month, for the client deck, for the printed handout, since the leadership meeting asks for it?","@r1 w.request.request act=ask mood=ask words=""On average, how much revenue per month"" predicate=how question=average
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@f1 w.request.filler text=""for the client deck""
+@f2 w.request.filler text=""for the printed handout""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""how much revenue"" note=chart.gap
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result key_words=""per month""
+@r1.u2 w.request.unread request=$r1 text=""leadership meeting asks for it"" note=chart.other"
+"and meanwhile, Tell me the average monthly revenue total","@f1 w.request.filler text=meanwhile
+@r1 w.request.request act=ask mood=ask words=""Tell me the average monthly revenue total"" predicate=Tell question=average
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+"What's the mean of the monthly revenue totals, one more for the appendix page?","@f1 w.request.filler text=""more for the appendix page""
+@r1 w.request.request act=ask mood=ask words=""What's the mean of the monthly revenue totals"" question=average
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@f2 w.request.filler text=""for the appendix page""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=mean operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+"and while you're at it, On average, how much revenue per month?","@f1 w.request.filler text=while
+@r1 w.request.request act=ask mood=ask words=""On average, how much revenue per month"" predicate=how question=average
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""how much revenue"" note=chart.gap
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result key_words=""per month"""
+"excuse me, What's the mean monthly revenue across the months, please?","@f1 w.request.filler text=excuse
+@f2 w.request.filler text=please
+@r1 w.request.request act=ask mood=ask words=""What's the mean monthly revenue across the months"" question=average
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=mean operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=months operator=eq phase=result"
+(quick check) the average monthly renenue total?,"@r1 w.request.request act=ask mood=ask predicate=check question=average
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.period value=month words=monthly operator=eq phase=result"
+How many months overshot the target for sales?,"@r1 w.request.request act=ask mood=ask words=""How many months overshot the target for sales"" predicate=How question=count
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.only value=""overshot the target"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=months operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales operator=eq phase=result"
+Can you count the months that landed above target?,"@r1 w.request.request act=ask mood=ask words=""Can you count the months that landed above target"" predicate=Can question=count
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.only value=""landed above target"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=months operator=eq phase=result"
+"Which months came in above target, and how many?","@r1 w.request.request act=ask mood=ask words=""Which months came in above target, and how many"" predicate=Which question=count
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.only value=""came in above target"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=months operator=eq phase=result"
+How many months are over target in the chart?,"@r1 w.request.request act=ask mood=ask words=""How many months are over target in the chart"" predicate=How question=count
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context family_words=chart
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.only value=""months are over target"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=months operator=eq phase=result"
+Count off the months above target for me,"@r1 w.request.request act=ask mood=ask predicate=Count question=count
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.only value=""months above target"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=months operator=eq phase=result"
+What count of months sits above target?,"@r1 w.request.request act=ask mood=ask words=""What count of months sits above target"" predicate=What question=count
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.only value=""sits above target"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=months operator=eq phase=result"
+I need the number of months above target,"@f1 w.request.filler text=need
+@r1 w.request.request act=ask mood=ask predicate=I question=count
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.only value=""months above target"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count words=number operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=months operator=eq phase=result"
+So how many months finished above target?,"@r1 w.request.request act=ask mood=ask words=""So how many months finished above target"" predicate=So question=count
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.only value=""finished above target"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=months operator=eq phase=result"
+How many of the months went past target?,"@r1 w.request.request act=ask mood=ask words=""How many of the months went past target"" predicate=How question=count
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.only value=""past target"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=months operator=eq phase=result"
+Give me the tally of months above target,"@r1 w.request.request act=ask mood=ask predicate=Give question=count
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.only value=""months above target"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=months operator=eq phase=result"
+How many month above target?,"@r1 w.request.request act=ask mood=ask question=count
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.only value=""month above target"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month operator=eq phase=result"
+"So how many months finished above target, to go on the summary slide of the deck, for the board appendix?","@r1 w.request.request act=ask mood=ask words=""So how many months finished above target"" predicate=So question=count
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.only value=""finished above target"" operator=eq phase=result
+@f1 w.request.filler text=""to go on the summary slide of the deck""
+@f2 w.request.filler text=""for the board appendix""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=months operator=eq phase=result"
+"same session, next ask: What count of months sits above target?","@f1 w.request.filler text=""same session, next ask""
+@r1 w.request.request act=ask mood=ask words=""What count of months sits above target"" predicate=What question=count
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.only value=""sits above target"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=months operator=eq phase=result"
+while you're there: So how many months finished above target?,"@f1 w.request.filler text=while
+@r1 w.request.request act=ask mood=ask words=""So how many months finished above target"" predicate=So question=count
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.only value=""finished above target"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=months operator=eq phase=result"
+quick one: Tally the months above target for me — go on,"@f1 w.request.filler text=quick
+@f2 w.request.filler text=go
+@r1 w.request.request act=ask mood=ask words=""Tally the months above target for me"" predicate=Tally question=count
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.only value=""months above target"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=months operator=eq phase=result"
+"one more thing: How many months came in above target, if you can?","@f1 w.request.filler text=""more thing""
+@r1 w.request.request act=ask mood=ask words=""How many months came in above target"" predicate=How question=count
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.only value=""came in above target"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=months operator=eq phase=result"
+Give me the tlly of months above target,"@r1 w.request.request act=ask mood=ask predicate=Give question=count
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.only value=""months above target"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=months operator=eq phase=result"
+How many months overshot the target for slaes?,"@r1 w.request.request act=ask mood=ask predicate=How question=count
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.only value=""overshot the target"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=month words=months operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=sales words=slaes operator=eq phase=result"
+Scan the regions for the biggest improvement,"@r1 w.request.request act=ask mood=ask predicate=Scan question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region words=regions operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=biggest operator=eq phase=result"
+Can you tell me which region improved most?,"@r1 w.request.request act=ask mood=ask words=""Can you tell me which region improved most"" predicate=tell question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=most operator=eq phase=result"
+Which region moved up the most since last year?,"@r1 w.request.request act=ask mood=ask words=""Which region moved up the most since last year"" predicate=Which question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=most operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=year operator=eq phase=result"
+I want the most improved region on revenue,"@f1 w.request.filler text=want
+@r1 w.request.request act=ask mood=ask predicate=I question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=most operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+So which region improved most over the year?,"@r1 w.request.request act=ask mood=ask words=""So which region improved most over the year"" predicate=So question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=most operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=year operator=eq phase=result"
+"Looking at the change, which region gained most?","@r1 w.request.request act=ask mood=ask words=""Looking at the change, which region gained most"" question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=most operator=eq phase=result"
+Pick out the region with the best year-on-year gain,"@r1 w.request.request act=ask mood=ask predicate=""Pick out"" question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""the best year-on"" note=chart.limit
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=year operator=eq phase=result"
+Which region advanced the most in revenue?,"@r1 w.request.request act=ask mood=ask words=""Which region advanced the most in revenue"" predicate=Which question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=most operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+Which region gained the most revenue over last year?,"@r1 w.request.request act=ask mood=ask words=""Which region gained the most revenue over last year"" predicate=Which question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=most operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=year operator=eq phase=result"
+The most improved region?,"@r1 w.request.request act=ask mood=ask question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=most operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result"
+"Pick out the region with the best year-on-year gain, for the Monday standup slide, for the board appendix, to go with the monthly readout","@r1 w.request.request act=ask mood=ask predicate=""Pick out"" question=which words=""Pick out the region with the best year-on-year gain, for the Monday standup slide""
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@f1 w.request.filler text=""for the board appendix""
+@f2 w.request.filler text=""to go with the monthly readout""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""the best year-on"" note=chart.limit
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=year operator=eq phase=result
+@r1.u2 w.request.unread request=$r1 text=""for the Monday standup"" note=chart.datefilter"
+"Looking at the change, which region gained most too, for the second slide?","@f1 w.request.filler text=""too, for the second slide""
+@r1 w.request.request act=ask mood=ask words=""Looking at the change, which region gained most"" question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@f2 w.request.filler text=""for the second slide""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=most operator=eq phase=result"
+"and meanwhile, Pick out the region with the best year-on-year gain","@f1 w.request.filler text=meanwhile
+@r1 w.request.request act=ask mood=ask words=""Pick out the region with the best year-on-year gain"" predicate=""Pick out"" question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""the best year-on"" note=chart.limit
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=year operator=eq phase=result"
+"um, Which region made the biggest leap in revenue, please?","@f1 w.request.filler text=um
+@f2 w.request.filler text=please
+@r1 w.request.request act=ask mood=ask words=""Which region made the biggest leap in revenue"" predicate=Which question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=biggest operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=revenue operator=eq phase=result"
+"hey — Tell me which region is most improved, thanks","@f1 w.request.filler text=hey
+@f2 w.request.filler text=thanks
+@r1 w.request.request act=ask mood=ask words=""Tell me which region is most improved"" predicate=Tell question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=most operator=eq phase=result"
+What's the biggest year-on-year improvemeent by region?,"@r1 w.request.request act=ask mood=ask question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=max words=biggest operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=year operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region operator=eq phase=result"
+Which of the regions caame out best year on year?,"@r1 w.request.request act=ask mood=ask predicate=Which question=which
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=region words=regions operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""out best year"" note=chart.limit
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.dimension value=year operator=eq phase=result"
+Does the median claim cost top the mean on the chart?,"@r1 w.request.request act=ask mood=ask words=""Does the median claim cost top the mean on the chart"" predicate=Does question=exists
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context family_words=chart
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=median words=""the median"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""claim cost"" operator=eq phase=result
+@r1.u2 w.request.unread request=$r1 text=""top the mean"" note=chart.aggregate.compare"
+Is the median claim cost the larger of the two averages?,"@r1 w.request.request act=ask mood=ask words=""Is the median claim cost the larger of the two averages"" predicate=Is question=exists
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=median words=""the median"" operator=eq phase=result
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""claim cost"" operator=eq phase=result
+@r1.u3 w.request.unread request=$r1 text=""the larger of the two averages"" note=chart.aggregate.compare"
+Compare the median with the mean claim cost,"@r1 w.request.request act=ask mood=ask predicate=Compare question=exists
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""Compare the median"" note=chart.aggregation value=median
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=mean operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""claim cost"" operator=eq phase=result"
+Is the median claim cost above the mean?,"@r1 w.request.request act=ask mood=ask words=""Is the median claim cost above the mean"" predicate=Is question=exists
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""the median claim"" note=chart.aggregation value=median
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""claim cost"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=mean operator=eq phase=result"
+Does the median sit above the mean for claim cost?,"@r1 w.request.request act=ask mood=ask words=""Does the median sit above the mean for claim cost"" predicate=Does question=exists
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""the median sit"" note=chart.aggregation value=median
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=mean operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""claim cost"" operator=eq phase=result"
+"Which is bigger, the median or the mean claim cost?","@r1 w.request.request act=ask mood=ask words=""Which is bigger, the median or the mean claim cost"" predicate=Which question=exists
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""the median or the mean"" note=chart.aggregation value=median
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=mean operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""claim cost"" operator=eq phase=result"
+How do the median and the mean claim cost compare?,"@r1 w.request.request act=ask mood=ask words=""How do the median and the mean claim cost compare"" predicate=How question=exists
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""the median and the mean"" note=chart.aggregation value=median
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=mean operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""claim cost"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.compare value=versus words=""claim cost compare"" operator=eq phase=result"
+Is the typical claim cost above the average?,"@r1 w.request.request act=ask mood=ask words=""Is the typical claim cost above the average"" predicate=Is question=exists
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""the typical claim"" note=chart.aggregation value=typical
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""claim cost"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=average operator=eq phase=result"
+Does the middle value run above the mean claim cost?,"@r1 w.request.request act=ask mood=ask words=""Does the middle value run above the mean claim cost"" predicate=Does question=exists
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""the middle value"" note=chart.aggregation value=median
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=avg words=mean operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""claim cost"" operator=eq phase=result"

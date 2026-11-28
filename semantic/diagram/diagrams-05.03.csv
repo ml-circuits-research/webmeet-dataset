@@ -1,0 +1,576 @@
+text,sop,sop1,sop2,sop3
+connect boxes with the lines drawn from the centre,"@f1 w.request.filler text=""lines drawn from the centre""
+@r1 w.request.request act=connect mood=do words=""connect boxes"" predicate=connect
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=all sort=box sort_words=boxes"
+Drawing an undirected graph,"@r1 w.request.request act=make mood=do predicate=Drawing
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=network sort_words=""undirected graph"""
+Network diagram with flow,"@f1 w.request.filler text=flow
+@r1 w.request.request act=make mood=do words=""Network diagram""
+@r1.t w.request.target request=$r1 family=node mode=new determiner=indefinite sort=network sort_words=""Network diagram"""
+connect Publish to Done,"@r1 w.request.request act=connect mood=do predicate=connect
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Publish operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Done operator=eq phase=result"
+conect the diamond to Publish,"@r1 w.request.request act=connect mood=do predicate=conect
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=""the diamond"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Publish operator=eq phase=result"
+link Review and Done,"@r1 w.request.request act=connect mood=do predicate=link
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Review
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Review operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Done operator=eq phase=selector"
+draw an arrow from Approved? to Publish labelled yes,"@r1 w.request.request act=connect mood=do predicate=draw
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite sort=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=""Approved?"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Publish operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.label value=yes operator=eq phase=result key_words=labelled"
+label the arrow from Approved? to Review no,"@r1 w.request.request act=change mood=do predicate=label
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=definite fill=description sort=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=""Approved?"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Review operator=eq phase=selector
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.label value=no operator=eq phase=result"
+add a dashed line from Review to Start,"@r1 w.request.request act=connect mood=do predicate=add
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite sort=line
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.style value=dashed operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.from value=Review operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.to value=Start operator=eq phase=result"
+flip the arrow between Start and Review,"@r1 w.request.request act=change mode=reverse mood=do predicate=flip
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=definite fill=description sort=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Start operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Review operator=eq phase=selector"
+remove the line from Start to Review,"@r1 w.request.request act=remove mood=do predicate=remove
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=definite fill=description sort=line
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Start operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Review operator=eq phase=selector"
+connect everything to CEO like a star,"@r1 w.request.request act=connect mood=do predicate=connect
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=all description=everything quantifier=all
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.pattern value=star words=""like a star"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.anchor value=CEO operator=relation phase=selector"
+make the arrow two-way,"@r1 w.request.request act=change mood=do predicate=make
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=definite fill=description sort=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.arrow value=both words=two-way operator=eq phase=result"
+use right-angle lines,"@r1 w.request.request act=change mood=do predicate=use
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=definite fill=all sort=line sort_words=lines
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.route value=orthogonal words=right-angle operator=eq phase=result"
+make the lines thicker,"@r1 w.request.request act=change mood=do predicate=make
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=definite fill=all description=""the lines""
+@r1.c1 w.request.constraint request=$r1 on=size attribute=link.width words=thicker operator=delta phase=result step=more"
+point the arrow from Start to Publish instead,"@r1 w.request.request act=change mood=do predicate=point
+@r1.t w.request.target request=$r1 family=link mode=existing determiner=definite fill=description sort=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Start operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Publish operator=eq phase=result"
+connect it to Review,"@r1 w.request.request act=connect mood=do predicate=connect
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=it operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Review operator=eq phase=result"
+conect the cirles with arraws,"@f1 w.request.filler text=arraws
+@r1 w.request.request act=connect mood=do words=""conect the cirles"" predicate=conect
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=all sort=circle sort_words=cirles"
+Insert a pie chart using the following data:Brand A: 30%;Brand B: 25%;Brand C: 20%;Brand D: 15%;Other Brands: 10%,"@r1 w.request.request act=make mood=do predicate=Insert
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=pie words=""pie chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""Brand A"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""30"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""Brand B"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""25"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""Brand C"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""20"" operator=eq phase=result
+@r1.c8 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""Brand D"" operator=eq phase=result
+@r1.c9 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""15"" operator=eq phase=result
+@r1.c10 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""Other Brands"" operator=eq phase=result
+@r1.c11 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""10"" operator=eq phase=result
+@r1.c12 w.request.constraint on=attribute request=$r1 attribute=chart.source words=""the following data"" operator=eq phase=result"
+"Insert a new chart and choose the line chart type with the following data, Fujian, Shanghai, Beijing in the X and 120, 140, 110 in the Y","@r1 w.request.request act=make mood=do predicate=Insert
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result key_words=type
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""Fujian, Shanghai, Beijing"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""120, 140, 110"" operator=eq phase=result"
+"Create a line chart,using the following data, 2016, 2017,2018 as data in X, 120,140,160 as data in Y","@r1 w.request.request act=make mood=do predicate=Create
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""2016, 2017,2018"" operator=eq phase=result key_words=""as data in X""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""120,140,160"" operator=eq phase=result key_words=""as data in Y""
+@r1.c4 w.request.constraint on=attribute request=$r1 attribute=chart.source words=""using the following data"" operator=eq phase=result"
+"Insert a pie chart, the following are data, Chinese Restaurants,40%; Chinese Retail Shops,30%;Cultural Festivals and Events	30%","@r1 w.request.request act=make mood=do predicate=Insert
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=pie words=""pie chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""Chinese Restaurants"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""40"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""Chinese Retail Shops"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""30"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""Cultural Festivals and Events"" operator=eq phase=result
+@r1.c7 w.request.constraint on=attribute request=$r1 attribute=chart.source words=""the following are data"" operator=eq phase=result"
+"Insert a pie chart based on the following data, Vanilla: 30%,Chocolate: 25%,Strawberry: 15%,Mint Chocolate Chip: 10%,Cookies and Cream: 10%,Butter Pecan: 10%","@r1 w.request.request act=make mood=do predicate=Insert
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=pie words=""pie chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Vanilla operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""30"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Chocolate operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""25"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Strawberry operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""15"" operator=eq phase=result
+@r1.c8 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""Mint Chocolate Chip"" operator=eq phase=result
+@r1.c9 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""10"" operator=eq phase=result
+@r1.c10 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""Cookies and Cream"" operator=eq phase=result
+@r1.c12 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""Butter Pecan"" operator=eq phase=result
+@r1.c13 w.request.constraint on=attribute request=$r1 attribute=chart.source words=""based on the following data"" operator=eq phase=result"
+"Insert a pie chart, and the data are marathon 30%, book 25% and volunteer 45%","@r1 w.request.request act=make mood=do predicate=Insert
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=pie words=""pie chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=marathon operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""30"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=book operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""25"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=volunteer operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""45"" operator=eq phase=result
+@r1.c8 w.request.constraint on=attribute request=$r1 attribute=chart.source words=""the data are"" operator=eq phase=result"
+"Create a bar chart according to the following data, Product A 25%, Product B 50%, Product C 25%","@r1 w.request.request act=make mood=do predicate=Create
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""Product A"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""25"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""Product B"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""50"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""Product C"" operator=eq phase=result
+@r1.c7 w.request.constraint on=attribute request=$r1 attribute=chart.source words=""according to the following data"" operator=eq phase=result"
+"Insert a bar chart with the following data, Q1 2022, Q2 2022, Q3 2022, Q4 2022 in X, 50, 60,55, 70 in Y","@r1 w.request.request act=make mood=do predicate=Insert
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""Q1 2022, Q2 2022, Q3 2022, Q4 2022"" operator=eq phase=result key_words=""in X""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""50, 60,55, 70"" operator=eq phase=result key_words=""in Y""
+@r1.c4 w.request.constraint on=attribute request=$r1 attribute=chart.source words=""with the following data"" operator=eq phase=result"
+"insert a bar chart based on the data, Indo-European, Niger-Congo,Austronesian, Sino-Tibetan as data in X, 445, 1526,1290, 452 as data in Y","@r1 w.request.request act=make mood=do predicate=insert
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""Indo-European, Niger-Congo,Austronesian, Sino-Tibetan"" operator=eq phase=result key_words=""as data in X""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""445, 1526,1290, 452"" operator=eq phase=result key_words=""as data in Y""
+@r1.c4 w.request.constraint on=attribute request=$r1 attribute=chart.source words=""based on the data"" operator=eq phase=result"
+"Insert a line chart. Data are: Q1: 15%,Q2: 12%,Q3: 18%,Q4: 20%, and Q1,Q2,Q3,Q4 are in X","@r1 w.request.request act=make mood=do predicate=Insert
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Q1 operator=eq phase=result key_words=""are in X""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""15"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Q2 operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""12"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Q3 operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""18"" operator=eq phase=result
+@r1.c8 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Q4 operator=eq phase=result
+@r1.c9 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""20"" operator=eq phase=result
+@r1.c10 w.request.constraint on=attribute request=$r1 attribute=chart.source words=""Data are"" operator=eq phase=result"
+"Create a pie chart illustrating the distribution of quality ratings. Include data categories such as ""Excellent"", ""Good"", ""Fair"", and ""Poor"" , and the proportion is 40%,15%,25%,20%","@r1 w.request.request act=make mood=do predicate=Create
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=pie words=""pie chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Excellent operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Good operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Fair operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Poor operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""40%,15%,25%,20%"" operator=eq phase=result"
+"Create a line chart showcasing the growth of renewable energy consumption over time. Include 2013, 2014 ,2015, 2016 in X, and the corresponding data in Y are 1.6 , 2.4,4.8 and 11 million","@r1 w.request.request act=make mood=do predicate=Create
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""2013, 2014 ,2015, 2016"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""1.6 , 2.4,4.8 and 11"" operator=eq phase=result"
+"Create a pie chart illustrating the market share of different power bank brands. The data are Brand A, 40%; Brand B 30%, Brand C 20% and Others 10%","@r1 w.request.request act=make mood=do predicate=Create
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=pie words=""pie chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""Brand A"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""40"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""Brand B"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""30"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""Brand C"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""20"" operator=eq phase=result
+@r1.c8 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Others operator=eq phase=result
+@r1.c9 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""10"" operator=eq phase=result"
+"Create a bar chart according to the data in the table, the X data are Lakers, Celtics and Bulls, the Y data are 17, 17 and 6","@r1 w.request.request act=make mood=do predicate=Create
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.source words=""according to the data in the table"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""Lakers, Celtics and Bulls"" operator=eq phase=result key_words=""the X data are""
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""17, 17 and 6"" operator=eq phase=result key_words=""the Y data are"""
+"Create a pie chart according to the data, Environment 40%,Health 30% and Community 30%","@r1 w.request.request act=make mood=do predicate=Create
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=pie words=""pie chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Environment operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""40"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Health operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""30"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Community operator=eq phase=result
+@r1.c7 w.request.constraint on=attribute request=$r1 attribute=chart.source words=""according to the data"" operator=eq phase=result"
+"Create a bar chart comparing the market share of Google Chrome and Microsoft Edge. Google Chrome is 50%, Microsoft Edge is25% and Others is 25%","@r1 w.request.request act=make mood=do predicate=Create
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""Google Chrome"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""50"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""Microsoft Edge"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""25"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Others operator=eq phase=result"
+"Create a pie chart based on the following data, Stovetop 40%;Electric Cooker 25%;Induction Cooktop 20%; Slow Cooker 10%; Air Fryer 5%","@r1 w.request.request act=make mood=do predicate=Create
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=pie words=""pie chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Stovetop operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""40"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""Electric Cooker"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""25"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""Induction Cooktop"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""20"" operator=eq phase=result
+@r1.c8 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""Slow Cooker"" operator=eq phase=result
+@r1.c9 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""10"" operator=eq phase=result
+@r1.c10 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""Air Fryer"" operator=eq phase=result
+@r1.c11 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""5"" operator=eq phase=result
+@r1.c12 w.request.constraint on=attribute request=$r1 attribute=chart.source words=""based on the following data"" operator=eq phase=result"
+"Create a bar chart, including data categories fiction, non-fiction, biographies, self-help, and fantasy in X, publication amount 1400,992,400,661, 234 in Y correspondently","@r1 w.request.request act=make mood=do predicate=Create
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""fiction, non-fiction, biographies, self-help, and fantasy"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""1400,992,400,661, 234"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""publication amount"" operator=eq phase=result"
+"In the third page, insert a bar chart. The data horizontally are October,November,December and 160,170,130 vertically","@f1 w.request.filler text=""third page""
+@r1 w.request.request act=make mood=do words=""insert a bar chart. The data horizontally are October,November,December and 160,170,130 vertically"" predicate=insert
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""October,November,December"" operator=eq phase=result key_words=horizontally
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""160,170,130"" operator=eq phase=result key_words=vertically
+@r1.c4 w.request.constraint on=attribute request=$r1 attribute=chart.source words=""The data"" operator=eq phase=result"
+"Insert a pie chart with the following data: Product A: 120, Product B: 220, Product C: 180","@r1 w.request.request act=make mood=do predicate=Insert
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=pie words=""pie chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""Product A"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""120"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""Product B"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""220"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""Product C"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""180"" operator=eq phase=result
+@r1.c8 w.request.constraint on=attribute request=$r1 attribute=chart.source words=""the following data"" operator=eq phase=result"
+"insert a line chart with Huawei, Apple, Xiaomi in the X, 120,140and 150 in the Y","@r1 w.request.request act=make mood=do predicate=insert
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""Huawei, Apple, Xiaomi"" operator=eq phase=result key_words=""in the X""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""120,140and 150"" operator=eq phase=result key_words=""in the Y"""
+"Insert a pie chart with the following data: US (40%), Russia (30%), France (30%)","@r1 w.request.request act=make mood=do predicate=Insert
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=pie words=""pie chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=US operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""40"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Russia operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""30"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=France operator=eq phase=result
+@r1.c7 w.request.constraint on=attribute request=$r1 attribute=chart.source words=""the following data"" operator=eq phase=result"
+"Insert a line chart with following data, 2016 6.7%, 2017 6.9%, 2018 6.6%, 2019 6.1%, 2020 2.3%, 2021 8.1%","@r1 w.request.request act=make mood=do predicate=Insert
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""2016"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""6.7"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""2017"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""6.9"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""2018"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""6.6"" operator=eq phase=result
+@r1.c8 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""2019"" operator=eq phase=result
+@r1.c9 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""6.1"" operator=eq phase=result
+@r1.c10 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""2020"" operator=eq phase=result
+@r1.c11 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""2.3"" operator=eq phase=result
+@r1.c12 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""2021"" operator=eq phase=result
+@r1.c13 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""8.1"" operator=eq phase=result
+@r1.c14 w.request.constraint on=attribute request=$r1 attribute=chart.source words=""with following data"" operator=eq phase=result"
+"Insert a line chart based on the following data, Concert 40%, Album 30%, Book 30%","@r1 w.request.request act=make mood=do predicate=Insert
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Concert operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""40"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Album operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""30"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Book operator=eq phase=result
+@r1.c7 w.request.constraint on=attribute request=$r1 attribute=chart.source words=""based on the following data"" operator=eq phase=result"
+"Insert a pie chart with data:1,2,3,4,5. And move it to the right side of the content.","@f1 w.request.filler text=""move it to the right side of the content""
+@r1 w.request.request act=make mood=do words=""Insert a pie chart with data:1,2,3,4,5"" predicate=Insert
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=pie words=""pie chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.values value=""1,2,3,4,5"" operator=eq phase=result
+@r1.c3 w.request.constraint on=attribute request=$r1 attribute=chart.source words=""with data"" operator=eq phase=result"
+Insert a bar chart with same data,"@r1 w.request.request act=make mood=do predicate=Insert
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint on=attribute request=$r1 attribute=chart.datasets value=""same data"" operator=eq phase=result"
+also a bar chart for this,"@f1 w.request.filler text=also
+@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result"
+show me the average production budget by release year in a line chart,"@r1 w.request.request act=make mood=do predicate=show
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint on=attribute request=$r1 attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.c3 w.request.constraint on=attribute request=$r1 attribute=chart.measure value=""production budget"" operator=eq phase=result
+@r1.c4 w.request.constraint on=attribute request=$r1 attribute=chart.dimension value=""release year"" words=""by release year"" operator=eq phase=result"
+scatter plot of IMDB rating vs Rotten tomatoes rating,"@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=scatter words=""scatter plot"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.xLabel value=""IMDB rating"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.yLabel value=""Rotten tomatoes rating"" operator=eq phase=result
+@r1.c4 w.request.constraint on=attribute request=$r1 attribute=chart.compare value=versus words=vs operator=eq phase=result"
+"Bar chart, x axis cylinders, y axis mean MPG","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""Bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint on=attribute request=$r1 attribute=chart.dimension value=cylinders key_words=""x axis"" operator=eq phase=result
+@r1.c3 w.request.constraint on=attribute request=$r1 attribute=chart.measure value=MPG key_words=""y axis"" operator=eq phase=result
+@r1.c4 w.request.constraint on=attribute request=$r1 attribute=chart.aggregate value=avg words=mean operator=eq phase=result"
+Plot the average worldwide gross for each major genre. Sort alphabetically,"@r1 w.request.request act=make mood=do words=""Plot the average worldwide gross for each major genre"" predicate=Plot
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r2 w.request.request act=place mode=arrange mood=do words=""Sort alphabetically"" predicate=Sort
+@r2.t w.request.target request=$r2 family=chart mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.sort value=alpha words=alphabetically operator=eq phase=result
+@r1.c1 w.request.constraint on=attribute request=$r1 attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.c2 w.request.constraint on=attribute request=$r1 attribute=chart.measure value=""worldwide gross"" operator=eq phase=result
+@r1.c3 w.request.constraint on=attribute request=$r1 attribute=chart.dimension value=""major genre"" words=""each major genre"" operator=eq phase=result"
+create a bar chart showing the average MPG grouped by cylinders,"@r1 w.request.request act=make mood=do predicate=create
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result"
+show me the average weight in a line chart,"@r1 w.request.request act=make mood=do predicate=show
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint on=attribute request=$r1 attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.c3 w.request.constraint on=attribute request=$r1 attribute=chart.measure value=weight operator=eq phase=result"
+"stacked bar of count of models by cylinders, colored by origin","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.stacked value=on words=stacked operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar operator=eq phase=result
+@r1.c3 w.request.constraint on=attribute request=$r1 attribute=chart.aggregate value=count operator=eq phase=result
+@r1.c4 w.request.constraint on=attribute request=$r1 attribute=chart.measure value=models operator=eq phase=result
+@r1.c5 w.request.constraint on=attribute request=$r1 attribute=chart.dimension value=cylinders operator=eq phase=result
+@r1.c6 w.request.constraint on=attribute request=$r1 attribute=chart.colourBy value=origin words=""colored by origin"" operator=eq phase=result"
+Plot the total worldwide gross for each major genre using a stacked bar chart. Break down within each genre by content rating.,"@f1 w.request.filler text=""Break down within each genre by content rating""
+@r1 w.request.request act=make mood=do words=""Plot the total worldwide gross for each major genre using a stacked bar chart"" predicate=Plot
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.stacked value=on words=stacked operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c3 w.request.constraint on=attribute request=$r1 attribute=chart.aggregate value=sum words=total operator=eq phase=result
+@r1.c4 w.request.constraint on=attribute request=$r1 attribute=chart.measure value=""worldwide gross"" operator=eq phase=result
+@r1.c5 w.request.constraint on=attribute request=$r1 attribute=chart.dimension value=""major genre"" words=""each major genre"" operator=eq phase=result"
+Show a scatter plot of imdb rating vs rotten tomatoes rating,"@r1 w.request.request act=make mood=do predicate=Show
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=scatter words=""scatter plot"" operator=eq phase=result
+@r1.c2 w.request.constraint on=attribute request=$r1 attribute=chart.xLabel value=""imdb rating"" operator=eq phase=result
+@r1.c3 w.request.constraint on=attribute request=$r1 attribute=chart.yLabel value=""rotten tomatoes rating"" operator=eq phase=result
+@r1.c4 w.request.constraint on=attribute request=$r1 attribute=chart.compare value=versus words=vs operator=eq phase=result"
+create a line graph of average horsepower by year grouped by origin,"@r1 w.request.request act=make mood=do predicate=create
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line graph"" operator=eq phase=result
+@r1.c2 w.request.constraint on=attribute request=$r1 attribute=chart.aggregate value=avg words=average operator=eq phase=result
+@r1.c3 w.request.constraint on=attribute request=$r1 attribute=chart.measure value=horsepower operator=eq phase=result
+@r1.c4 w.request.constraint on=attribute request=$r1 attribute=chart.dimension value=year operator=eq phase=result
+@r1.c5 w.request.constraint on=attribute request=$r1 attribute=chart.dimension value=origin words=""grouped by origin"" operator=eq phase=result"
+Line Graph of SUM (Sales Forecast) vs Order Date,"@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""Line Graph"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.aggregate value=sum words=SUM operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.xLabel value=""Order Date"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.yLabel value=""Sales Forecast"" operator=eq phase=result
+@r1.c5 w.request.constraint on=attribute request=$r1 attribute=chart.compare value=versus words=vs operator=eq phase=result"
+"Create a bar chart that shows count of each sub-category, sorted high to low by count","@r1 w.request.request act=make mood=do predicate=Create
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.sort value=desc words=""high to low"" operator=eq phase=result key_words=sorted"
+draw a bar chart showing Thailand's GDP from 2010 to now,"@f1 w.request.filler text=now
+@r1 w.request.request act=make mood=do predicate=draw
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.measure value=""Thailand's GDP"" operator=eq phase=result"
+plot graph of apple stocks for 10 years,"@r1 w.request.request act=make mood=do predicate=plot
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=graph
+@r1.c1 w.request.constraint on=attribute request=$r1 attribute=chart.period value=year words=""10 years"" operator=eq phase=result
+@r1.c2 w.request.constraint on=attribute request=$r1 attribute=chart.source words=""apple stocks"" operator=eq phase=result"
+Draw a graph of the number of eggs a hen lays over the years,"@r1 w.request.request act=make mood=do predicate=Draw
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite family_words=graph
+@r1.c1 w.request.constraint on=attribute request=$r1 attribute=chart.aggregate value=count words=""the number of"" operator=eq phase=result
+@r1.c2 w.request.constraint on=attribute request=$r1 attribute=chart.measure value=""eggs a hen lays"" operator=eq phase=result
+@r1.c3 w.request.constraint on=attribute request=$r1 attribute=chart.period value=year words=""over the years"" operator=eq phase=result"
+Plot the series using a line chart. Briefly describe what you see: Is it a positive or negative / trend? Is the trend increasing? What kind of short term fluctuations do you observe?,"@f1 w.request.filler text=""Briefly describe what you see: Is it a positive or negative / trend? Is the trend increasing? What kind of short term fluctuations do you observe""
+@r1 w.request.request act=make mood=do words=""Plot the series using a line chart"" predicate=Plot
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint on=attribute request=$r1 attribute=chart.datasets value=series operator=eq phase=result"
+"Hello, we've got a pie chart","@f1 w.request.filler text=Hello
+@r1 w.request.request act=make mood=do words=""we've got a pie chart"" predicate=got
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=pie words=""pie chart"" operator=eq phase=result"
+It is a bar graph with blue bars,"@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar graph"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.colour value=blue operator=eq phase=result key_words=bars"
+"Hi, green bar plot with yellow border called Data Size","@f1 w.request.filler text=Hi
+@r1 w.request.request act=make mood=do words=""green bar plot with yellow border called Data Size""
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.colour value=green operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar plot"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.effect value=outline words=border operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.title value=""Data Size"" operator=eq phase=result key_words=called"
+"hello! pie chart, explode","@f1 w.request.filler text=hello
+@f2 w.request.filler text=explode
+@r1 w.request.request act=make mood=do words=""pie chart""
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=pie words=""pie chart"" operator=eq phase=result"
+Hello!. This is a Pie Chart labelled Physics,"@f1 w.request.filler text=Hello
+@r1 w.request.request act=make mood=do words=""This is a Pie Chart labelled Physics""
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=pie words=""Pie Chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.title value=Physics operator=eq phase=result key_words=labelled"
+"Hi, please start with a line chart that has a dashed green line","@f1 w.request.filler text=Hi
+@f2 w.request.filler text=please
+@r1 w.request.request act=make mood=do words=""please start with a line chart that has a dashed green line"" predicate=start
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.colour value=green operator=eq phase=result
+@r1.c3 w.request.constraint on=attribute request=$r1 attribute=chart.lineStyle value=dashed operator=eq phase=result key_words=line"
+Bar plot with black bars and dotted blue horizontal and vertical grid lines,"@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""Bar plot"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.colour value=black operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.grid value=show words=""grid lines"" operator=eq phase=result"
+"bar graph, orange horizontal .6; name Power; x on top; invert y","@f1 w.request.filler text=x
+@f2 w.request.filler text=""top; invert y""
+@r1 w.request.request act=make mood=do words=""bar graph, orange horizontal .6; name Power""
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar graph"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.colour value=orange operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.horizontal value=on words=horizontal operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=chart.title value=Power operator=eq phase=result key_words=name
+@r1.c5 w.request.constraint on=attribute request=$r1 attribute=chart.barWidth value=""0.6"" words="".6"" operator=eq phase=result"
+This is a small pie chart with a lot of space between the wedges.,"@f1 w.request.filler text=""lot of space between the wedges""
+@r1 w.request.request act=make mood=do words=""This is a small pie chart""
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=pie words=""pie chart"" operator=eq phase=result"
+"Hey there, line graph, dotted, green with error caps, named Power","@f1 w.request.filler text=Hey
+@r1 w.request.request act=make mood=do words=""line graph, dotted, green with error caps, named Power""
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line graph"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.colour value=green operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.title value=Power operator=eq phase=result key_words=named
+@r1.c4 w.request.constraint on=attribute request=$r1 attribute=chart.lineStyle value=dotted operator=eq phase=result
+@r1.c5 w.request.constraint on=attribute request=$r1 attribute=chart.errorBars value=show words=""error caps"" operator=eq phase=result"
+"Bar chart, red face, black outline, green error bars, y axis log","@f1 w.request.filler text=""green error bars, y axis log""
+@r1 w.request.request act=make mood=do words=""Bar chart, red face, black outline""
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""Bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.colour value=red operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=chart.effect value=outline operator=eq phase=result"
+turn the org boxes into a doughnut chart,"@r1 w.request.request act=make mood=do predicate=turn
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.source words=""the org boxes"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.type value=doughnut words=""doughnut chart"" operator=eq phase=result"
+"good. make data name as ""User Ratings""","@f1 w.request.filler text=good
+@r1 w.request.request act=change mood=do words=""make data name as \""User Ratings\"""" predicate=make
+@r1.t w.request.target request=$r1 family=series mode=existing determiner=definite fill=context family_words=data
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=series.label value=""User Ratings"" operator=eq phase=result key_words=name"
+Data series name is Power,"@r1 w.request.request act=change mood=do predicate=is
+@r1.t w.request.target request=$r1 family=series mode=existing determiner=definite fill=context family_words=""Data series""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=series.label value=Power operator=eq phase=result key_words=name"
+"The data series is called ""Power""","@r1 w.request.request act=change mood=do predicate=""is called""
+@r1.t w.request.target request=$r1 family=series mode=existing determiner=definite fill=context family_words=""data series""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=series.label value=Power operator=eq phase=result"
+data name Data Size,"@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=series mode=existing determiner=definite fill=context family_words=data
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=series.label value=""Data Size"" operator=eq phase=result key_words=name"
+Can you redo the chore chart to add in laundry and dishes as well. And I'm a bit confused on how the chart is laid out can you try to make it show clearly what day each chore is assigned to who?,"@f1 w.request.filler text=well
+@f2 w.request.filler text=""bit confused on how the chart is laid out can you try to make it show clearly what day each chore is assigned""
+@r1 w.request.request act=make mood=do words=""Can you redo the chore chart to add in laundry"" predicate=""add in""
+@r1.t w.request.target request=$r1 family=point mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=laundry operator=eq phase=result
+@r2 w.request.request act=make mood=do words=""dishes as well""
+@r2.t w.request.target request=$r2 family=point mode=new determiner=indefinite
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=chart.labels value=dishes operator=eq phase=result"
+Can you make sure the percentage and statusCode fields are removed from the bar graph,"@r1 w.request.request act=remove mood=do predicate=removed
+@r1.t w.request.target request=$r1 family=series mode=existing determiner=definite fill=written name=percentage
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=series.label value=percentage operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=series.label value=statusCode operator=eq phase=selector"
+"Show cylinders by COUNT(Model) in a bar chart', 'Add origin to legend","@f1 w.request.filler text=""Add origin to legend""
+@r1 w.request.request act=make mood=do words=""Show cylinders by COUNT(Model) in a bar chart"" predicate=Show
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=bar words=""bar chart"" operator=eq phase=result
+@r1.c2 w.request.constraint on=attribute request=$r1 attribute=chart.dimension value=cylinders operator=eq phase=result
+@r1.c3 w.request.constraint on=attribute request=$r1 attribute=chart.aggregate value=count words=COUNT operator=eq phase=result
+@r1.c4 w.request.constraint on=attribute request=$r1 attribute=chart.measure value=Model operator=eq phase=result"
+Show year and AVG(Horsepower) in line chart | Add origin to legend,"@f1 w.request.filler text=""Add origin to legend""
+@r1 w.request.request act=make mood=do words=""Show year and AVG(Horsepower) in line chart"" predicate=Show
+@r1.t w.request.target request=$r1 family=chart mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.type value=line words=""line chart"" operator=eq phase=result
+@r1.c2 w.request.constraint on=attribute request=$r1 attribute=chart.dimension value=year operator=eq phase=result
+@r1.c3 w.request.constraint on=attribute request=$r1 attribute=chart.aggregate value=avg words=AVG operator=eq phase=result
+@r1.c4 w.request.constraint on=attribute request=$r1 attribute=chart.measure value=Horsepower operator=eq phase=result"
+Feb should be 22,"@r1 w.request.request act=change mood=do predicate=""should be""
+@r1.t w.request.target request=$r1 family=point mode=existing determiner=definite fill=written name=Feb
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Feb operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=point.value value=""22"" operator=eq phase=result"
+bump Jan up by 5,"@r1 w.request.request act=change mood=do predicate=bump
+@r1.t w.request.target request=$r1 family=point mode=existing determiner=definite fill=written name=Jan
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Jan operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=point.value words=""up by 5"" operator=delta phase=result step=more"
+West a bit lower,"@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=point mode=existing determiner=definite fill=written name=West
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=West operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=point.value words=""a bit lower"" operator=delta phase=result step=less"
+add May with 18,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=point mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=May operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=point.value value=""18"" operator=eq phase=result"
+add a bar Jun at 30 to Sales by month,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=point mode=new determiner=indefinite family_words=bar
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Jun operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=point.value value=""30"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=point.chart value=""Sales by month"" operator=eq phase=selector"
+drop Apr,"@r1 w.request.request act=remove mood=do predicate=drop
+@r1.t w.request.target request=$r1 family=point mode=existing determiner=definite fill=written name=Apr
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Apr operator=eq phase=selector"
+remove the Others slice,"@r1 w.request.request act=remove mood=do predicate=remove
+@r1.t w.request.target request=$r1 family=point mode=existing determiner=definite fill=written name=Others family_words=slice
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Others operator=eq phase=selector"
+"add a series Costs with 6, 8, 5 and 9","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=series mode=new determiner=indefinite family_words=series
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=series.label value=Costs operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=series.values value=""6"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=series.values value=""8"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=series.values value=""5"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=series.values value=""9"" operator=eq phase=result"
+add 2025 as a new series to Sales by region,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=series mode=new determiner=indefinite family_words=series
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=series.label value=""2025"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=point.chart value=""Sales by region"" operator=eq phase=selector"
+"change the labels to Q1, Q2, Q3, Q4","@r1 w.request.request act=change mood=do predicate=change
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=""Q1, Q2, Q3, Q4"" operator=eq phase=result key_words=labels"
+make South 12 for Target,"@r1 w.request.request act=change mood=do predicate=make
+@r1.t w.request.target request=$r1 family=point mode=existing determiner=definite fill=written name=South
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=South operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=point.value value=""12"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=series.label value=Target operator=eq phase=selector"
+update Team sizes from the org chart,"@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=written name=""Team sizes""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.id value=""Team sizes"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.source words=""the org chart"" operator=eq phase=result"
+and Jun 21,"@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=point mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.labels value=Jun operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=point.value value=""21"" operator=eq phase=result"
+"Name the pie chart ""Air Condition Brands""","@r1 w.request.request act=change mood=do predicate=Name
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=description sort=chart sort_words=""pie chart""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.title value=""Air Condition Brands"" operator=eq phase=result"
+"Name the chart title to ""ID Card Operation""","@r1 w.request.request act=change mood=do predicate=Name
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=context family_words=chart
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.title value=""ID Card Operation"" operator=eq phase=result key_words=title"
+"Make sure the chart has a title ""Regional Sales""","@r1 w.request.request act=change mood=do predicate=""Make sure""
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=description sort=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.title value=""Regional Sales"" operator=eq phase=result key_words=title"
+"Add a title ""Sales by Region"" to the chart","@r1 w.request.request act=change mood=do predicate=Add
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=description sort=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.title value=""Sales by Region"" operator=eq phase=result key_words=title"
+"Add a title to the line chart as ""Sales by Month""","@r1 w.request.request act=change mood=do predicate=Add
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=description sort=chart sort_words=""line chart""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.title value=""Sales by Month"" operator=eq phase=result key_words=title"
+Resize the chart to be 4 inches by 4 inches,"@r1 w.request.request act=change mood=do predicate=Resize
+@r1.t w.request.target request=$r1 family=chart mode=existing determiner=definite fill=description sort=chart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=chart.width value=""4"" words=""4 inches"" operator=eq phase=result unit=inch
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=chart.height value=""4"" words=""4 inches"" operator=eq phase=result unit=inch"

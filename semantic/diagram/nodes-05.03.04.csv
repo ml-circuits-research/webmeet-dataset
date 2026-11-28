@@ -1,0 +1,543 @@
+text,sop,sop1
+"there is one shape left after the two deletions and the training script repeats the last swap once more, so apply it to that remaining shape","@f1 w.request.filler text=so
+@r1 w.request.request act=redo mood=do predicate=swap
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=quantified fill=all family_words=shape description=""that remaining shape""",
+run the previous two actions again on the same figures and leave the rest,"@r1 w.request.request act=redo mood=do words=""run the previous two actions again on the same figures"" predicate=run
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context family_words=figures description=""the same figure""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.t1 w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step family_words=actions count=2 count_words=two
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=previous words=""the previous two actions"" operator=eq phase=selector
+@r2 w.request.request act=place mode=arrange mood=do words=""and leave the rest"" predicate=leave
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing",
+repeat it on the remaining one,"@r1 w.request.request act=redo mood=do predicate=repeat
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=quantified fill=all description=""repeat it on the remaining one""",
+do the last action once more on the figure that survived the cleanup,"@r1 w.request.request act=redo mood=do predicate=do
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=quantified fill=all family_words=figure description=""survived the cleanup""",
+and redo it there,"@r1 w.request.request act=redo mood=do predicate=redo
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing",
+aplly the last move to the neighbouring pair,"@r1 w.request.request act=redo mood=do predicate=aplly
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t1 w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=last words=""the last move"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=step.kind value=move operator=eq phase=selector",
+undo the last step and put the row back to the state it was in before that move,"@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=step determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=last words=""the last step"" operator=eq phase=selector
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+take back the last move and leave every earlier change exactly as it was before that point,"@r1 w.request.request act=undo mood=do predicate=""take back""
+@r1.t w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=last words=""the last move"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=step.kind value=move operator=eq phase=selector
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.position value=unchanged words=""exactly as it was"" operator=eq phase=result open_value=true",
+undo step 2 when you get a chance,"@f1 w.request.filler text=""get a chance""
+@r1 w.request.request act=undo mood=do words=""undo step 2"" predicate=undo
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=step determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=2 words=""step 2"" operator=eq phase=selector",
+go bak to before that swap,"@r1 w.request.request act=undo mood=do predicate=bak
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=swap operator=eq phase=selector
+@r1.m2 w.request.constraint request=$r1 on=attribute attribute=step.which value=previous words=before operator=eq phase=selector",
+undo previous step,"@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=step determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=previous words=""previous step"" operator=eq phase=selector",
+revert the change from step 3,"@r1 w.request.request act=undo mood=do predicate=revert
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=step determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=3 words=""step 3"" operator=eq phase=selector",
+could you take the row back one move,"@r1 w.request.request act=undo mood=do words=""take the row back one move"" predicate=take
+@r1.t w.request.target request=$r1 family=step mode=existing count_words=one count=1 determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=move words=""back one move"" operator=eq phase=selector
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+undo the swap,"@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=swap words=""undo the swap"" operator=eq phase=selector","@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=swap words=""undo the swap"" operator=eq phase=selector"
+go back a single step,"@r1 w.request.request act=undo mood=do predicate=back
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""a single step"" note=diagram.step.index value=""a single step""",
+i need you to undo the step numbered three,"@f1 w.request.filler text=need
+@r1 w.request.request act=undo mood=do words=""undo the step numbered three"" predicate=undo
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""the step numbered three"" note=diagram.step.index value=""the step numbered three""",
+put the row back to before the last swap,"@r1 w.request.request act=undo mood=do predicate=put
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=swap operator=eq phase=selector
+@r1.m2 w.request.constraint request=$r1 on=attribute attribute=step.which value=last operator=eq phase=selector
+@r1.m3 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+"that last move was a mistake, so roll it back and leave everything before it alone for now, please, thanks","@f1 w.request.filler text=so
+@f2 w.request.filler text=""now, please, thanks""
+@r1 w.request.request act=undo mood=do predicate=roll
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+undo the second step,"@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=step determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=2 words=""second step"" operator=eq phase=selector",
+take back step 4 if you can,"@r1 w.request.request act=undo mood=do words=""take back step 4"" predicate=""take back""
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=step determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=4 words=""step 4"" operator=eq phase=selector",
+return to the state before the swap,"@r1 w.request.request act=undo mood=do predicate=return
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=swap operator=eq phase=selector
+@r1.m2 w.request.constraint request=$r1 on=attribute attribute=step.which value=previous words=before operator=eq phase=selector",
+undo the last stap,"@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=step.which value=last operator=eq phase=selector",
+go beck to before the swap,"@r1 w.request.request act=undo mood=do predicate=beck
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=swap operator=eq phase=selector
+@r1.m2 w.request.constraint request=$r1 on=attribute attribute=step.which value=previous words=before operator=eq phase=selector",
+one step back,"@r1 w.request.request act=undo mood=do predicate=back
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.u1 w.request.unread request=$r1 text=""one step back"" note=diagram.step.index value=""one step""
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+undo the swap and then check the order,"@f1 w.request.filler text=then
+@r1 w.request.request act=undo mood=do words=""undo the swap"" predicate=undo
+@r1.t w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.kind value=swap words=""undo the swap"" operator=eq phase=selector
+@r2 w.request.request act=ask mood=do words=""and then check the order"" predicate=check question=list asked_words=order
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page",
+take back the last move and then undo the one before it as well,"@f1 w.request.filler text=then
+@f2 w.request.filler text=well
+@r1 w.request.request act=undo mood=do words=""take back the last move"" predicate=""take back""
+@r1.t w.request.target request=$r1 family=step mode=existing determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.which value=last words=""the last move"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=step.kind value=move operator=eq phase=selector
+@r2 w.request.request act=undo mood=do words=""and then undo the one before it"" predicate=undo
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page",
+"roll the row back to before the third step, but keep the earlier edits in place exactly as they are","@f1 w.request.filler text=exactly
+@r1 w.request.request act=undo mood=do words=""roll the row back to before the third step"" predicate=roll
+@r1.t w.request.target request=$r1 family=step mode=existing family_words=step determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=step.index value=3 words=""the third step"" operator=eq phase=selector
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result
+@r2 w.request.request act=place mode=arrange mood=do words=""but keep the earlier edits in place"" predicate=keep
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page",
+put them back where they were,"@r1 w.request.request act=undo mood=do predicate=put
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+move every figure back to its original spot,"@r1 w.request.request act=undo mood=do predicate=move
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=original operator=eq phase=result",
+restore the starting arrangement when you get a chance,"@f1 w.request.filler text=""get a chance""
+@r1 w.request.request act=undo mood=do words=""restore the starting arrangement"" predicate=restore
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=start words=starting operator=eq phase=result",
+undo the whole row,"@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context quantifier=whole
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""the whole row"" note=diagram.reset value=""whole row""",
+return the figures to the positions they started in,"@r1 w.request.request act=undo mood=do predicate=return
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=start words=started operator=eq phase=result",
+reset the row to how it looked at the beginning,"@r1 w.request.request act=undo mood=do predicate=reset
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=start words=beginning operator=eq phase=result",
+could you put the whole row back in its original layout,"@r1 w.request.request act=undo mood=do words=""put the whole row back in its original layout"" predicate=put
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context quantifier=whole
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=original operator=eq phase=result",
+every figure goes back to its first place,"@r1 w.request.request act=undo mood=do predicate=goes
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""first place"" note=diagram.reset value=""first place""
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+"i have moved things around enough and the row is a mess, so put every figure back where it was at the start and forget all the intermediate moves","@f1 w.request.filler text=so
+@r1 w.request.request act=undo mood=do predicate=put
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=start operator=eq phase=result",
+i need you to restore the original layout,"@f1 w.request.filler text=need
+@r1 w.request.request act=undo mood=do words=""restore the original layout"" predicate=restore
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=original operator=eq phase=result",
+put the row back the way it was,"@r1 w.request.request act=undo mood=do predicate=put
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+undo every move and leave the figures exactly where they were before we started this conversation,"@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=start words=started operator=eq phase=result
+@r1.m2 w.request.constraint request=$r1 on=attribute attribute=node.position value=unchanged words=""exactly where they were"" operator=eq phase=result open_value=true",
+quick question: can u put them back where they were please,"@f1 w.request.filler text=""quick question""
+@f2 w.request.filler text=please
+@r1 w.request.request act=undo mood=do words=""can u put them back where they were please"" predicate=put
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+put them back were they were,"@r1 w.request.request act=undo mood=do predicate=put
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+restore the startng arrangement,"@r1 w.request.request act=undo mood=do predicate=restore
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""startng arrangement"" note=diagram.reset value=""startng arrangement""",
+all the way back,"@r1 w.request.request act=undo mood=do predicate=back
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+go ahead and put the whole row back and check the order,"@f1 w.request.filler text=""go ahead""
+@r1 w.request.request act=undo mood=do words=""put the whole row back"" predicate=put
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context quantifier=whole
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""the whole row"" note=diagram.reset value=""whole row""
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result
+@r2 w.request.request act=ask mood=do words=""and check the order"" predicate=check question=list asked_words=order
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page",
+restore the original layout and leave it there,"@r1 w.request.request act=undo mood=do words=""restore the original layout"" predicate=restore
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=original operator=eq phase=result
+@r2 w.request.request act=place mode=arrange mood=do words=""and leave it there"" predicate=leave
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing",
+put the figures back in the original order,"@r1 w.request.request act=undo mood=do predicate=put
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=original operator=eq phase=result",
+rebuild the row in the order it started,"@r1 w.request.request act=undo mood=do predicate=rebuild
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=start words=started operator=eq phase=result",
+restore the starting sequence,"@r1 w.request.request act=undo mood=do predicate=restore
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=start words=starting operator=eq phase=result",
+put them back in the first order,"@r1 w.request.request act=undo mood=do predicate=put
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""first order"" note=diagram.reset value=""first order""
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+reorder the row to the original sequence,"@r1 w.request.request act=undo mood=do predicate=reorder
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=original operator=eq phase=result",
+"the original order, from left to right","@r1 w.request.request act=undo mood=do predicate=order
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=original operator=eq phase=result",
+undo the reordering and restore the sequence,"@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""restore the sequence"" note=diagram.reset value=""restore the sequence""",
+"the figures are all still there but their sequence is scrambled, so put them back in the order they had when the row started","@f1 w.request.filler text=so
+@r1 w.request.request act=undo mood=do predicate=put
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""order they had"" note=diagram.reset value=""order they had""
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+original order please,"@f1 w.request.filler text=please
+@r1 w.request.request act=undo mood=do predicate=original
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=original operator=eq phase=result",
+rebuild the starting sequence,"@r1 w.request.request act=undo mood=do predicate=rebuild
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=start words=starting operator=eq phase=result",
+return the row to the sequence it began with,"@r1 w.request.request act=undo mood=do predicate=return
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""sequence it began with"" note=diagram.reset value=""sequence it began with""
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page",
+"i do not care about the spaces for a moment, i only want the figures in their original left-to-right order again","@r1 w.request.request act=undo mood=do predicate=want
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=original operator=eq phase=result",
+quick question: can u put them back in the original order please,"@f1 w.request.filler text=""quick question""
+@f2 w.request.filler text=please
+@r1 w.request.request act=undo mood=do words=""can u put them back in the original order please"" predicate=put
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=original operator=eq phase=result",
+put them back in the origianl order,"@r1 w.request.request act=undo mood=do predicate=put
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""origianl order"" note=diagram.reset value=""origianl order""
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+rebuild the row in the oder it started,"@r1 w.request.request act=undo mood=do predicate=rebuild
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=start words=started operator=eq phase=result",
+the original order,"@r1 w.request.request act=undo mood=do predicate=original
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=original operator=eq phase=result",
+go ahead and put the figures back in the original order and check the sequence,"@f1 w.request.filler text=""go ahead""
+@r1 w.request.request act=undo mood=do words=""put the figures back in the original order"" predicate=put
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=original operator=eq phase=result
+@r2 w.request.request act=ask mood=do words=""and check the sequence"" predicate=check question=list
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page",
+undo the swaps and the deletions and rebuild the starting row,"@r1 w.request.request act=undo mood=do predicate=rebuild
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=start words=starting operator=eq phase=result",
+return the row to its original state,"@r1 w.request.request act=undo mood=do predicate=return
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=original operator=eq phase=result",
+reset everything to the start,"@r1 w.request.request act=undo mood=do predicate=reset
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=start operator=eq phase=result",
+could you restore the row to the state it had before i started editing,"@r1 w.request.request act=undo mood=do words=""restore the row to the state it had before i started editing"" predicate=restore
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=start words=started operator=eq phase=result",
+clear all the changes and rebuild the first version,"@r1 w.request.request act=undo mood=do predicate=rebuild
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""first version"" note=diagram.reset value=""first version""",
+back to the original state,"@r1 w.request.request act=undo mood=do predicate=back
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=original operator=eq phase=result",
+i need you to undo all the edits,"@f1 w.request.filler text=need
+@r1 w.request.request act=undo mood=do words=""undo all the edits"" predicate=undo
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""undo all the edits"" note=diagram.reset value=""all the edits""",
+rebuild it from the start,"@r1 w.request.request act=undo mood=do predicate=rebuild
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=start operator=eq phase=result",
+"i have been experimenting with this row for too long and i need the starting arrangement back, including the figures i deleted","@f1 w.request.filler text=too
+@r1 w.request.request act=undo mood=do predicate=need
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=start words=starting operator=eq phase=result",
+quick question: can u put everything back the way it was please,"@f1 w.request.filler text=""quick question""
+@f2 w.request.filler text=please
+@r1 w.request.request act=undo mood=do words=""can u put everything back the way it was please"" predicate=put
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+put evrything back the way it was,"@r1 w.request.request act=undo mood=do predicate=put
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+rebuild the row after all the editss,"@r1 w.request.request act=undo mood=do predicate=rebuild
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""row after all the editss"" note=diagram.reset value=""after all the edits""
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page",
+all of it back,"@r1 w.request.request act=undo mood=do predicate=all
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+rebuild from the start and leave the result there,"@r1 w.request.request act=undo mood=do words=""rebuild from the start"" predicate=rebuild
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=start operator=eq phase=result
+@r2 w.request.request act=place mode=arrange mood=do words=""and leave the result there"" predicate=leave
+@r2.t w.request.target request=$r2 family=diagram mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing",
+undo until there are five figures again,"@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""five figures"" note=diagram.step.count value=five",
+keep undoing until the row has five boxes,"@r1 w.request.request act=undo mood=do predicate=keep
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""five boxes"" note=diagram.step.count value=five
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page",
+go back until five figures are in the row,"@r1 w.request.request act=undo mood=do predicate=go
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""five figures"" note=diagram.step.count value=five
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+undo steps until all six boxes are back,"@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""six boxes"" note=diagram.step.count value=six
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+keep stepping back until there are four figures,"@r1 w.request.request act=undo mood=do predicate=keep
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""four figures"" note=diagram.step.count value=four
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+could you undo until the row holds five objects again,"@r1 w.request.request act=undo mood=do words=""undo until the row holds five objects again"" predicate=undo
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""five objects"" note=diagram.step.count value=five
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page",
+roll back until you have six figures,"@r1 w.request.request act=undo mood=do predicate=roll
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""six figures"" note=diagram.step.count value=six
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+undo until we are back to five boxes,"@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""back to five boxes"" note=diagram.step.count value=five
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+step back until the original count is restored,"@r1 w.request.request act=undo mood=do predicate=""step back""
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""original count"" note=diagram.step.count value=""the original count""
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+i need you to undo until the row is five figures long,"@f1 w.request.filler text=need
+@r1 w.request.request act=undo mood=do words=""undo until the row is five figures long"" predicate=undo
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""five figures long"" note=diagram.step.count value=five
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page",
+keep undoing until the row contains the same six boxes it had before the removals started,"@r1 w.request.request act=undo mood=do predicate=keep
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""six boxes"" note=diagram.step.count value=six
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page",
+undo the removal chain until the count climbs back to five figures,"@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""five figures"" note=diagram.step.count value=five
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+go backwards through the history until there are four boxes in the row again,"@r1 w.request.request act=undo mood=do predicate=go
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""four boxes"" note=diagram.step.count value=four
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page",
+now undo until there are five figures,"@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.u1 w.request.unread request=$r1 text=""five figures"" note=diagram.step.count value=five",
+keep undoing until the row has six again,"@r1 w.request.request act=undo mood=do predicate=keep
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.u1 w.request.unread request=$r1 text=""row has six again"" note=diagram.step.count value=six
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page",
+and back until the count is five,"@r1 w.request.request act=undo mood=do predicate=count
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.u1 w.request.unread request=$r1 text=""the count is five"" note=diagram.step.count value=five
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+"undo until the count is five, then swap the first two figures","@f1 w.request.filler text=then
+@r1 w.request.request act=undo mood=do words=""undo until the count is five"" predicate=undo
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""count is five"" note=diagram.step.count value=five
+@r2 w.request.request act=change mood=do words=""then swap the first two figures"" predicate=swap
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context family_words=figures
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.ordinal value=""first two"" operator=eq phase=selector",
+undo until there are five figurs again,"@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""five figurs"" note=diagram.step.count value=five",
+keep undoing until the row has five bexes,"@r1 w.request.request act=undo mood=do predicate=keep
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""five bexes"" note=diagram.step.count value=five
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page",
+back to five,"@r1 w.request.request act=undo mood=do predicate=back
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.u1 w.request.unread request=$r1 text=""back to five"" note=diagram.step.count value=five
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+keep undoing until the row has five boxes while keeping every other box in the row in the same place so the whole arrangement remains easy to follow,"@f1 w.request.filler text=so
+@r1 w.request.request act=undo mood=do predicate=keep
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context quantifier=whole description=""the same place""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""five boxes"" note=diagram.step.count value=five
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page",
+undo until the count is back to five so the row ends up in exactly the order you expect without disturbing any of the other figures around it,"@f1 w.request.filler text=so
+@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""back to five"" note=diagram.step.count value=five
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+undo until the row is back in order,"@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""back in order"" note=diagram.step.index value=order
+@r1.t1 w.request.target request=$r1 family=group mode=existing fill=context family_words=row
+@r1.l2 w.request.lookup request=$r1 target=$r1.t1 key=thing from=page
+@r1.m1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=previous words=back operator=eq phase=result",
+keep undoing until the original order returns,"@r1 w.request.request act=undo mood=do predicate=keep
+@r1.t w.request.target request=$r1 family=diagram mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.restore value=original words=""original order"" operator=eq phase=result",

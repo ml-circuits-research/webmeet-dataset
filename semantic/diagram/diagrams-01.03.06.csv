@@ -1,0 +1,995 @@
+text,sop,sop1
+"move Tree right next to Fence only, leave House on the Hill","@r1 w.request.request act=place mood=do predicate=only words=""Tree right next to Fence only""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Tree
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Tree operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=""right next to"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Fence operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""leave House on the Hill"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=written name=House
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""leave House on the Hill""
+@r2.c2 w.request.constraint request=$r2 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=node.anchor value=Hill operator=relation phase=selector"
+Tree next to Path and keep House where it is on the Hill,"@r1 w.request.request act=place mood=do predicate=and words=""Tree next to Path and""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Tree
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Tree operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=""next to"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Path operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""keep House where it is on the Hill"" predicate=keep
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=written name=House
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""keep House where it is on the Hill""
+@r2.c2 w.request.constraint request=$r2 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=node.anchor value=Hill operator=relation phase=selector"
+"move Tree beside Pond, House has to remain on the Hill","@r1 w.request.request act=place mood=do predicate=move words=""move Tree beside Pond""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Tree
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Tree operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=beside operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Pond operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""House has to remain on the Hill"" predicate=remain
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=written name=House
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""House has to remain on the Hill""
+@r2.c2 w.request.constraint request=$r2 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=node.anchor value=Hill operator=relation phase=selector"
+"Fence alongside Barn; nothing else, House stays on the Hill whatever else moves","@r1 w.request.request act=place mood=do words=""Fence alongside Barn; nothing else""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Fence
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Fence operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=alongside operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Barn operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""House stays on the Hill whatever else moves"" predicate=stays
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=written name=House
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""House stays on the Hill whatever else moves""
+@r2.c2 w.request.constraint request=$r2 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=node.anchor value=Hill operator=relation phase=selector"
+"now move it next to Barn, but House has to remain on the Hill","@f1 w.request.filler text=now
+@r1 w.request.request act=place mood=do predicate=move words=""move it next to Barn""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=""next to"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.anchor value=Barn operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""House has to remain on the Hill"" predicate=remain
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=written name=House
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""House has to remain on the Hill""
+@r2.c2 w.request.constraint request=$r2 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=node.anchor value=Hill operator=relation phase=selector"
+"next slide it alongside Tree, but leave House up there on the Hill","@r1 w.request.request act=place mood=do predicate=slide words=""slide it alongside Tree""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=alongside operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.anchor value=Tree operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""leave House up there on the Hill"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=written name=House
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""leave House up there on the Hill""
+@r2.c2 w.request.constraint request=$r2 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=node.anchor value=Hill operator=relation phase=selector"
+"and now move it right next to Gate, and House must stay on the Hill","@f1 w.request.filler text=now
+@r1 w.request.request act=place mood=do predicate=move words=""move it right next to Gate""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=""right next to"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.anchor value=Gate operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""House must stay on the Hill"" predicate=stay
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=written name=House
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""House must stay on the Hill""
+@r2.c2 w.request.constraint request=$r2 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=node.anchor value=Hill operator=relation phase=selector"
+"after that drag it close beside Path, and leave House on the Hill","@r1 w.request.request act=place mood=do predicate=drag words=""drag it close beside Path""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=""close beside"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.anchor value=Path operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""leave House on the Hill"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=written name=House
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""leave House on the Hill""
+@r2.c2 w.request.constraint request=$r2 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=node.anchor value=Hill operator=relation phase=selector"
+"so now move it beside Barn so the pair reads together, but keep House where it is on the Hill","@f1 w.request.filler text=""so now""
+@f2 w.request.filler text=""so the pair reads together""
+@r1 w.request.request act=place mood=do predicate=move words=""so now move it beside Barn""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=beside operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.anchor value=Barn operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""keep House where it is on the Hill"" predicate=keep
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=written name=House
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""keep House where it is on the Hill""
+@r2.c2 w.request.constraint request=$r2 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=node.anchor value=Hill operator=relation phase=selector"
+at this point place it alongside Barn for the final layout and House has to remain on the Hill,"@r1 w.request.request words=""place it alongside Barn"" act=place mood=do predicate=place
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=alongside operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.anchor value=Barn operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""House has to remain on the Hill"" predicate=remain
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=written name=House
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""House has to remain on the Hill""
+@r2.c2 w.request.constraint request=$r2 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=node.anchor value=Hill operator=relation phase=selector
+@f6 w.request.filler text=""at this point""
+@f1 w.request.filler text=""for the final layout"""
+"one more move: reposition it close beside Tree before the review, and leave House up there on the Hill","@r1 w.request.request words=""reposition it close beside Tree"" act=place mood=do predicate=reposition
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=""close beside"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.anchor value=Tree operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""leave House up there on the Hill"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=written name=House
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""leave House up there on the Hill""
+@r2.c2 w.request.constraint request=$r2 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=node.anchor value=Hill operator=relation phase=selector
+@f6 w.request.filler text=""one more move:""
+@f1 w.request.filler text=""before the review, and leave House up there on the Hill"""
+"the Gate box should go next to Fence, but House must stay on the Hill, and connect Gate to Fence so the move is visible in the flow","@f1 w.request.filler text=""so the move is visible in the flow""
+@r1 w.request.request act=place mood=do predicate=go words=""Gate box should go next to Fence""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Gate family_words=box
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Gate operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=""next to"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Fence operator=relation phase=selector
+@r3 w.request.request act=place mood=do words=""House must stay on the Hill"" predicate=stay
+@r3.t w.request.target request=$r3 family=node mode=existing determiner=definite fill=written name=House
+@r3.c1 w.request.constraint request=$r3 on=attribute attribute=node.keep value=place operator=eq phase=result words=""House must stay on the Hill""
+@r3.c2 w.request.constraint request=$r3 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r3.c3 w.request.constraint request=$r3 on=place attribute=node.anchor value=Hill operator=relation phase=selector
+@r2 w.request.request act=connect mood=do words=""connect Gate to Fence"" predicate=connect
+@r2.t w.request.target request=$r2 family=link mode=new determiner=indefinite
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.from value=Gate operator=eq phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=link.to value=Fence operator=eq phase=result"
+"the diagram looks right only if Gate sits beside Path and leave House on the Hill, and align their tops so the pair still reads together","@f1 w.request.filler text=""so the pair still reads together""
+@r1 w.request.request act=place mood=do predicate=sits words=""Gate sits beside Path""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Gate
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Gate operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=beside operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Path operator=relation phase=selector
+@r3 w.request.request act=place mood=do words=""leave House on the Hill"" predicate=leave
+@r3.t w.request.target request=$r3 family=node mode=existing determiner=definite fill=written name=House
+@r3.c1 w.request.constraint request=$r3 on=attribute attribute=node.keep value=place operator=eq phase=result words=""leave House on the Hill""
+@r3.c2 w.request.constraint request=$r3 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r3.c3 w.request.constraint request=$r3 on=place attribute=node.anchor value=Hill operator=relation phase=selector
+@r2 w.request.request act=place mode=arrange mood=do words=""align their tops"" predicate=align
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=possessive fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.edge value=top words=tops operator=eq phase=result"
+"this works if Gate goes alongside Pond, but House should stay up on the Hill, and put them on the same row so the diagram stays tidy","@f1 w.request.filler text=""so the diagram stays tidy""
+@r1 w.request.request act=place mood=do predicate=works words=""works if Gate goes alongside Pond""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Gate
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Gate operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=alongside operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Pond operator=relation phase=selector
+@r3 w.request.request act=place mood=do words=""House should stay up on the Hill"" predicate=stay
+@r3.t w.request.target request=$r3 family=node mode=existing determiner=definite fill=written name=House
+@r3.c1 w.request.constraint request=$r3 on=attribute attribute=node.keep value=place operator=eq phase=result words=""House should stay up on the Hill""
+@r3.c2 w.request.constraint request=$r3 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r3.c3 w.request.constraint request=$r3 on=place attribute=node.anchor value=Hill operator=relation phase=selector
+@r2 w.request.request act=place mode=arrange mood=do words=""put them on the same row"" predicate=put
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.layout value=row words=""same row"" operator=eq phase=result"
+"maybe move Path right next to Barn so the pair reads together, but keep House where it is on the Hill, and leave a small even gap between them so the labels do not touch","@f1 w.request.filler text=maybe
+@f2 w.request.filler text=""so the labels do not touch""
+@f3 w.request.filler text=""so the pair reads together""
+@r1 w.request.request act=place mood=do words=""maybe move Path right next to Barn"" predicate=move
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Path
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Path operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=""right next to"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Barn operator=relation phase=selector
+@r3 w.request.request act=place mood=do words=""keep House where it is on the Hill"" predicate=keep
+@r3.t w.request.target request=$r3 family=node mode=existing determiner=definite fill=written name=House
+@r3.c1 w.request.constraint request=$r3 on=attribute attribute=node.keep value=place operator=eq phase=result words=""keep House where it is on the Hill""
+@r3.c2 w.request.constraint request=$r3 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r3.c3 w.request.constraint request=$r3 on=place attribute=node.anchor value=Hill operator=relation phase=selector
+@r2 w.request.request act=place mode=arrange mood=do words=""leave a small even gap between them"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.gap value=small value=equal words=""small even gap"" operator=eq phase=result"
+"can you slide Path next to Tree so the label is visible, but House stays on the Hill whatever else moves, and keep the gaps equal so the row still looks measured","@f1 w.request.filler text=""so the row still looks measured""
+@f2 w.request.filler text=""so the label is visible""
+@r1 w.request.request act=place mood=do words=""can you slide Path next to Tree"" predicate=slide
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Path
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Path operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=""next to"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Tree operator=relation phase=selector
+@r3 w.request.request act=place mood=do words=""House stays on the Hill whatever else moves"" predicate=stays
+@r3.t w.request.target request=$r3 family=node mode=existing determiner=definite fill=written name=House
+@r3.c1 w.request.constraint request=$r3 on=attribute attribute=node.keep value=place operator=eq phase=result words=""House stays on the Hill whatever else moves""
+@r3.c2 w.request.constraint request=$r3 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r3.c3 w.request.constraint request=$r3 on=place attribute=node.anchor value=Hill operator=relation phase=selector
+@r2 w.request.request act=place mode=arrange mood=do words=""keep the gaps equal"" predicate=keep
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.gap value=equal words=""gaps equal"" operator=eq phase=result"
+"then reposition Path beside Tree before the review, and leave House up there on the Hill, and connect Path to Tree so the move is visible in the flow","@f1 w.request.filler text=then
+@f2 w.request.filler text=""so the move is visible in the flow""
+@r1 w.request.request act=place mood=do words=""then reposition Path beside Tree"" predicate=reposition
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Path
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Path operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=beside operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Tree operator=relation phase=selector
+@r3 w.request.request act=place mood=do words=""leave House up there on the Hill"" predicate=leave
+@r3.t w.request.target request=$r3 family=node mode=existing determiner=definite fill=written name=House
+@r3.c1 w.request.constraint request=$r3 on=attribute attribute=node.keep value=place operator=eq phase=result words=""leave House up there on the Hill""
+@r3.c2 w.request.constraint request=$r3 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r3.c3 w.request.constraint request=$r3 on=place attribute=node.anchor value=Hill operator=relation phase=selector
+@r2 w.request.request act=connect mood=do words=""connect Path to Tree"" predicate=connect
+@r2.t w.request.target request=$r2 family=link mode=new determiner=indefinite
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.from value=Path operator=eq phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=link.to value=Tree operator=eq phase=result
+@f3 w.request.filler text=""before the review"""
+"could you move Path next to Fence, but leave House up there on the Hill","@r1 w.request.request act=place mood=do predicate=move words=""move Path next to Fence""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Path
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Path operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=""next to"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Fence operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""leave House up there on the Hill"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=written name=House
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""leave House up there on the Hill""
+@r2.c2 w.request.constraint request=$r2 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=node.anchor value=Hill operator=relation phase=selector"
+put Path beside Gate and House must stay on the Hill,"@r1 w.request.request act=place mood=do predicate=put words=""put Path beside Gate""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Path
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Path operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=beside operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Gate operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""House must stay on the Hill"" predicate=stay
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=written name=House
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""House must stay on the Hill""
+@r2.c2 w.request.constraint request=$r2 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=node.anchor value=Hill operator=relation phase=selector"
+"can you slide Path alongside Pond, but leave House on the Hill","@r1 w.request.request act=place mood=do predicate=slide words=""slide Path alongside Pond""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Path
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Path operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=alongside operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Pond operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""leave House on the Hill"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=written name=House
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""leave House on the Hill""
+@r2.c2 w.request.constraint request=$r2 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=node.anchor value=Hill operator=relation phase=selector"
+"maybe move Pond right next to Barn, and House should stay up on the Hill","@f1 w.request.filler text=maybe
+@r1 w.request.request act=place mood=do predicate=move words=""move Pond right next to Barn""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Pond
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Pond operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=""right next to"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Barn operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""House should stay up on the Hill"" predicate=stay
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=written name=House
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""House should stay up on the Hill""
+@r2.c2 w.request.constraint request=$r2 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=node.anchor value=Hill operator=relation phase=selector"
+I'd like you to place Pond next to Tree; House has to remain on the Hill,"@f1 w.request.filler text=like
+@r1 w.request.request act=place mood=do predicate=place words=""place Pond next to Tree""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Pond
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Pond operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=""next to"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Tree operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""House has to remain on the Hill"" predicate=remain
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=written name=House
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""House has to remain on the Hill""
+@r2.c2 w.request.constraint request=$r2 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=node.anchor value=Hill operator=relation phase=selector"
+nudge Pond alongside Fence and leave House up there on the Hill,"@r1 w.request.request act=place mood=do predicate=nudge words=""nudge Pond alongside Fence""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Pond
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Pond operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=alongside operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Fence operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""leave House up there on the Hill"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=written name=House
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""leave House up there on the Hill""
+@r2.c2 w.request.constraint request=$r2 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=node.anchor value=Hill operator=relation phase=selector"
+"would you set Pond right next to Gate, but House must stay on the Hill","@r1 w.request.request act=place mood=do predicate=set words=""set Pond right next to Gate""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Pond
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Pond operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=""right next to"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Gate operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""House must stay on the Hill"" predicate=stay
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=written name=House
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""House must stay on the Hill""
+@r2.c2 w.request.constraint request=$r2 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=node.anchor value=Hill operator=relation phase=selector"
+"perhaps reposition Pond close beside Path, and leave House on the Hill","@r1 w.request.request act=place mood=do predicate=reposition words=""reposition Pond close beside Path""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Pond
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Pond operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=""close beside"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Path operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""leave House on the Hill"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=written name=House
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""leave House on the Hill""
+@r2.c2 w.request.constraint request=$r2 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=node.anchor value=Hill operator=relation phase=selector"
+"is it possible to bring Barn next to Tree, and House should stay up on the Hill","@r1 w.request.request act=place mood=do predicate=bring words=""bring Barn next to Tree""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Barn
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Barn operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=""next to"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Tree operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""House should stay up on the Hill"" predicate=stay
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=written name=House
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""House should stay up on the Hill""
+@r2.c2 w.request.constraint request=$r2 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=node.anchor value=Hill operator=relation phase=selector
+@f8 w.request.filler text=""is it possible to"""
+"I think you should keep Barn beside Tree, but keep House where it is on the Hill","@r1 w.request.request act=place mood=do predicate=keep words=""keep Barn beside Tree""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Barn
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Barn operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=beside operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Tree operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""keep House where it is on the Hill"" predicate=keep
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=written name=House
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""keep House where it is on the Hill""
+@r2.c2 w.request.constraint request=$r2 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=node.anchor value=Hill operator=relation phase=selector
+@f8 w.request.filler text=""I think you should"""
+"move Barn alongside Tree so the pair reads together, but House has to remain on the Hill","@f1 w.request.filler text=""so the pair reads together""
+@r1 w.request.request act=place mood=do predicate=move words=""move Barn alongside Tree""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Barn
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Barn operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=alongside operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Tree operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""House has to remain on the Hill"" predicate=remain
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=written name=House
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""House has to remain on the Hill""
+@r2.c2 w.request.constraint request=$r2 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=node.anchor value=Hill operator=relation phase=selector"
+then plxce Barn right next to Tree for the final layout and House stays on the Hill whatever else moves,"@f1 w.request.filler text=then
+@r1 w.request.request act=place mood=do predicate=plxce words=""then plxce Barn right next to Tree""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Barn
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Barn operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=""right next to"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Tree operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""House stays on the Hill whatever else moves"" predicate=stays
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=written name=House
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""House stays on the Hill whatever else moves""
+@r2.c2 w.request.constraint request=$r2 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=node.anchor value=Hill operator=relation phase=selector
+@f2 w.request.filler text=""for the final layout"""
+"then sllide Barn close beside Tree so the label is visible, but leave House up there on the Hill","@f1 w.request.filler text=then
+@f2 w.request.filler text=""so the label is visible""
+@r1 w.request.request act=place mood=do predicate=sllide words=""then sllide Barn close beside Tree""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Barn
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Barn operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=""close beside"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Tree operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""leave House up there on the Hill"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=written name=House
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""leave House up there on the Hill""
+@r2.c2 w.request.constraint request=$r2 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=node.anchor value=Hill operator=relation phase=selector"
+"let's rexposition Barn next to Tree before the review, and House must stay on the Hill","@r1 w.request.request act=place mood=do predicate=rexposition words=""let's rexposition Barn next to Tree""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Barn
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Barn operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=""next to"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Tree operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""House must stay on the Hill"" predicate=stay
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=written name=House
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""House must stay on the Hill""
+@r2.c2 w.request.constraint request=$r2 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=node.anchor value=Hill operator=relation phase=selector
+@f1 w.request.filler text=""before the review"""
+"dag Barn beside Tree so the flow makes sense, but leave House on the Hill","@f1 w.request.filler text=""so the flow makes sense""
+@r1 w.request.request act=place mood=do predicate=dag words=""dag Barn beside Tree""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Barn
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Barn operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=beside operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Tree operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""leave House on the Hill"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=written name=House
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""leave House on the Hill""
+@r2.c2 w.request.constraint request=$r2 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=node.anchor value=Hill operator=relation phase=selector"
+"I also need you to nduge Barn alongside Tree until the arrow is clear, and House should stay up on the Hill","@f1 w.request.filler text=""also need""
+@r1 w.request.request act=place mood=do predicate=nduge words=""I also need you to nduge Barn alongside Tree""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Barn
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Barn operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=next_to words=alongside operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Tree operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""House should stay up on the Hill"" predicate=stay
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=written name=House
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""House should stay up on the Hill""
+@r2.c2 w.request.constraint request=$r2 on=place attribute=node.position value=on operator=relation phase=result words=""on the Hill""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=node.anchor value=Hill operator=relation phase=selector
+@f2 w.request.filler text=""until the arrow is clear"""
+"I'd like you to move Cart just above Label, but leave the rest of the diagram alone","@f1 w.request.filler text=like
+@r1 w.request.request act=place mood=do predicate=move
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Cart
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Cart operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""just above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Label operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""leave the rest of the diagram alone"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""the rest of the diagram""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=all operator=eq phase=result words=""leave the rest of the diagram alone"""
+let's put Payment right above Cart and leave all the other boxes where they are,"@r1 w.request.request act=place mood=do predicate=put
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Payment
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Payment operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""right above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Cart operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""leave all the other boxes where they are"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""all the other boxes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""leave all the other boxes where they are"""
+"slide Payment directly above Confirm, but the rest of the boxes stay put","@r1 w.request.request act=place mood=do predicate=slide
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Payment
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Payment operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""directly above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Confirm operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""the rest of the boxes stay put"" predicate=stay
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""the rest of the boxes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""the rest of the boxes stay put"""
+"do not move any of the other boxes, so move Payment up above Pack","@f1 w.request.filler text=so
+@r1 w.request.request act=place mood=do predicate=move
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Payment
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Payment operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""up above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Pack operator=relation phase=selector
+@r2 w.request.request act=change mood=do words=""do not move any of the other boxes"" predicate=move
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""any of the other boxes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""do not move any of the other boxes"""
+"perhaps move Payment above Return, and keep every other box exactly where it is","@r1 w.request.request act=place mood=do predicate=move
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Payment
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Payment operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Return operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""keep every other box exactly where it is"" predicate=keep
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""every other box""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""keep every other box exactly where it is"""
+"is it possible to drag Payment just above Refund, and nothing else should move","@r1 w.request.request words=""drag Payment just above Refund, and nothing else should move"" act=place mood=do predicate=drag
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Payment
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Payment operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""just above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Refund operator=relation phase=selector
+@r2 w.request.request act=change mood=do words=""nothing else should move"" predicate=move
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""nothing else""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""nothing else should move""
+@f8 w.request.filler text=""is it possible to"""
+place Payment right above Track; the other shapes stay where they are,"@r1 w.request.request act=place mood=do predicate=place
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Payment
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Payment operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""right above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Track operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""the other shapes stay where they are"" predicate=stay
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""the other shapes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""the other shapes stay where they are"""
+"I think you should shift Payment directly above Label, but leave the rest of the diagram alone","@r1 w.request.request words=""shift Payment directly above Label, but leave the rest of the diagram alone"" act=place mood=do predicate=shift
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Payment
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Payment operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""directly above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Label operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""leave the rest of the diagram alone"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""the rest of the diagram""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=all operator=eq phase=result words=""leave the rest of the diagram alone""
+@f8 w.request.filler text=""I think you should"""
+what if we nudge Confirm up above Cart and leave all the other boxes where they are,"@r1 w.request.request act=place mood=do predicate=nudge
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Confirm
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Confirm operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""up above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Cart operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""leave all the other boxes where they are"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""all the other boxes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""leave all the other boxes where they are"""
+"then set Confirm above Payment, but the rest of the boxes stay put","@f1 w.request.filler text=then
+@r1 w.request.request act=place mood=do predicate=set
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Confirm
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Confirm operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Payment operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""the rest of the boxes stay put"" predicate=stay
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""the rest of the boxes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""the rest of the boxes stay put"""
+"now reposition Confirm just above Pack, and do not move any of the other boxes","@f1 w.request.filler text=now
+@r1 w.request.request act=place mood=do predicate=reposition
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Confirm
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Confirm operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""just above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Pack operator=relation phase=selector
+@r2 w.request.request act=change mood=do words=""do not move any of the other boxes"" predicate=move
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""any of the other boxes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""do not move any of the other boxes"""
+"the Confirm box should go right above Return, but keep every other box exactly where it is","@r1 w.request.request act=place mood=do predicate=go
+@r1.t w.request.target request=$r1 family=node family_words=box mode=existing determiner=definite fill=written name=Confirm
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Confirm operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""right above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Return operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""keep every other box exactly where it is"" predicate=keep
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""every other box""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""keep every other box exactly where it is"""
+the diagram looks right only if Confirm sits directly above Refund and nothing else should move,"@r1 w.request.request act=place mood=do predicate=sits
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Confirm
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Confirm operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""directly above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Refund operator=relation phase=selector
+@r2 w.request.request act=change mood=do words=""nothing else should move"" predicate=move
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""nothing else""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""nothing else should move"""
+"this works if Confirm goes up above Track, but the other shapes stay where they are","@r1 w.request.request act=place mood=do predicate=works
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Confirm
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Confirm operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""up above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Track operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""the other shapes stay where they are"" predicate=stay
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""the other shapes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""the other shapes stay where they are"""
+"bring Confirm above Label, and leave the rest of the diagram alone","@r1 w.request.request act=place mood=do predicate=bring
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Confirm
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Confirm operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Label operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""leave the rest of the diagram alone"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""the rest of the diagram""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=all operator=eq phase=result words=""leave the rest of the diagram alone"""
+"can you keep Pack just above Cart, but leave all the other boxes where they are","@r1 w.request.request act=place mood=do predicate=keep
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Pack
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Pack operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""just above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Cart operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""leave all the other boxes where they are"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""all the other boxes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""leave all the other boxes where they are"""
+"move Pack just above Payment so the pair reads together, but leave the rest of the diagram alone","@f1 w.request.filler text=""so the pair reads together""
+@r1 w.request.request act=place mood=do predicate=move words=""move Pack just above Payment""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Pack
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Pack operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""just above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Payment operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""leave the rest of the diagram alone"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""the rest of the diagram""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=all operator=eq phase=result words=""leave the rest of the diagram alone"""
+place Pack right above Confirm for the final layout and leave all the other boxes where they are,"@r1 w.request.request act=place mood=do predicate=place words=""place Pack right above Confirm""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Pack
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Pack operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""right above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Confirm operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""leave all the other boxes where they are"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""all the other boxes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""leave all the other boxes where they are""
+@f1 w.request.filler text=""for the final layout"""
+"could you slide Pack directly above Return so the label is visible, but the rest of the boxes stay put","@f1 w.request.filler text=""so the label is visible""
+@r1 w.request.request act=place mood=do predicate=slide words=""could you slide Pack directly above Return""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Pack
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Pack operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""directly above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Return operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""the rest of the boxes stay put"" predicate=stay
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""the rest of the boxes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""the rest of the boxes stay put"""
+"also reposition Pack up above Refund before the review, and do not move any of the other boxes","@f1 w.request.filler text=also
+@r1 w.request.request act=place mood=do predicate=reposition words=""also reposition Pack up above Refund""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Pack
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Pack operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""up above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Refund operator=relation phase=selector
+@r2 w.request.request act=change mood=do words=""do not move any of the other boxes"" predicate=move
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""any of the other boxes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""do not move any of the other boxes""
+@f2 w.request.filler text=""before the review"""
+"maybe drag Pack above Track so the flow makes sense, but keep every other box exactly where it is","@f1 w.request.filler text=maybe
+@f2 w.request.filler text=""so the flow makes sense""
+@r1 w.request.request act=place mood=do predicate=drag words=""maybe drag Pack above Track""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Pack
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Pack operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Track operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""keep every other box exactly where it is"" predicate=keep
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""every other box""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""keep every other box exactly where it is"""
+"nudge Pack just above Label until the arrow is clear, and nothing else should move","@r1 w.request.request act=place mood=do predicate=nudge words=""nudge Pack just above Label""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Pack
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Pack operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""just above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Label operator=relation phase=selector
+@r2 w.request.request act=change mood=do words=""nothing else should move"" predicate=move
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""nothing else""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""nothing else should move""
+@f1 w.request.filler text=""until the arrow is clear"""
+"can you put Return right above Cart in the next draft of the diagram, but the other shapes stay where they are","@r1 w.request.request act=place mood=do predicate=put words=""can you put Return right above Cart""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Return
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Return operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""right above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Cart operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""the other shapes stay where they are"" predicate=stay
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""the other shapes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""the other shapes stay where they are""
+@f1 w.request.filler text=""in the next draft of the diagram"""
+"then set Return directly above Payment so the two stages line up, and leave the rest of the diagram alone","@f1 w.request.filler text=then
+@f2 w.request.filler text=""so the two stages line up""
+@r1 w.request.request act=place mood=do predicate=set words=""then set Return directly above Payment""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Return
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Return operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""directly above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Payment operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""leave the rest of the diagram alone"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""the rest of the diagram""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=all operator=eq phase=result words=""leave the rest of the diagram alone"""
+"let's move Return up above Confirm this time, but leave all the other boxes where they are","@r1 w.request.request act=place mood=do predicate=move
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Return
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Return operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""up above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Confirm operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""leave all the other boxes where they are"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""all the other boxes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""leave all the other boxes where they are"""
+shift Return above Pack for now and the rest of the boxes stay put,"@f1 w.request.filler text=now
+@r1 w.request.request act=place mood=do predicate=shift
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Return
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Return operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Pack operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""the rest of the boxes stay put"" predicate=stay
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""the rest of the boxes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""the rest of the boxes stay put"""
+"move Return just above Refund, leave the rest of the diagram alone","@r1 w.request.request act=place mood=do predicate=move
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Return
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Return operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""just above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Refund operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""leave the rest of the diagram alone"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""the rest of the diagram""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=all operator=eq phase=result words=""leave the rest of the diagram alone"""
+"put Return right above Track, leave all the other boxes where they are","@r1 w.request.request act=place mood=do predicate=put
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Return
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Return operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""right above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Track operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""leave all the other boxes where they are"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""all the other boxes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""leave all the other boxes where they are"""
+"Return directly above Label, but the rest of the boxes stay put","@r1 w.request.request act=place mood=do predicate=but
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Return
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Return operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""directly above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Label operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""the rest of the boxes stay put"" predicate=stay
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""the rest of the boxes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""the rest of the boxes stay put"""
+"move Refund up above Cart only, do not move any of the other boxes","@r1 w.request.request act=place mood=do predicate=only
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Refund
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Refund operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""up above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Cart operator=relation phase=selector
+@r2 w.request.request act=change mood=do words=""do not move any of the other boxes"" predicate=move
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""any of the other boxes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""do not move any of the other boxes"""
+Refund above Payment; keep every other box exactly where it is,"@r1 w.request.request act=place mood=do
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Refund
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Refund operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Payment operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""keep every other box exactly where it is"" predicate=keep
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""every other box""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""keep every other box exactly where it is"""
+Refund just above Confirm and nothing else should move,"@r1 w.request.request act=place mood=do predicate=and
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Refund
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Refund operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""just above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Confirm operator=relation phase=selector
+@r2 w.request.request act=change mood=do words=""nothing else should move"" predicate=move
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""nothing else""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""nothing else should move"""
+"move Refund right above Pack, the other shapes stay where they are","@r1 w.request.request act=place mood=do predicate=move
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Refund
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Refund operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""right above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Pack operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""the other shapes stay where they are"" predicate=stay
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""the other shapes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""the other shapes stay where they are"""
+"Refund directly above Return; nothing else, leave the rest of the diagram alone","@r1 w.request.request act=place mood=do
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Refund
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Refund operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""directly above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Return operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""leave the rest of the diagram alone"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""the rest of the diagram""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=all operator=eq phase=result words=""leave the rest of the diagram alone"""
+"then move it just above Track, but the other shapes stay where they are","@f1 w.request.filler text=then
+@r1 w.request.request act=place mood=do predicate=move
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""just above"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.anchor value=Track operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""the other shapes stay where they are"" predicate=stay
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""the other shapes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""the other shapes stay where they are"""
+next put it right above Label and leave the rest of the diagram alone,"@r1 w.request.request act=place mood=do predicate=put
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""right above"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.anchor value=Label operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""leave the rest of the diagram alone"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""the rest of the diagram""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=all operator=eq phase=result words=""leave the rest of the diagram alone"""
+"and now slide it directly above Cart, but leave all the other boxes where they are","@f1 w.request.filler text=now
+@r1 w.request.request act=place mood=do predicate=slide
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""directly above"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.anchor value=Cart operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""leave all the other boxes where they are"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""all the other boxes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""leave all the other boxes where they are"""
+"right after that drag it above Confirm, and do not move any of the other boxes","@r1 w.request.request act=place mood=do predicate=drag words=""drag it above Confirm, and do not move any of the other boxes""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=place attribute=node.relation value=above operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.anchor value=Confirm operator=relation phase=selector
+@r2 w.request.request act=change mood=do words=""do not move any of the other boxes"" predicate=move
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""any of the other boxes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""do not move any of the other boxes""
+@f1 w.request.filler text=""right after that"""
+so now place it just above Pack; keep every other box exactly where it is,"@f1 w.request.filler text=""so now""
+@r1 w.request.request act=place mood=do predicate=place
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""just above"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.anchor value=Pack operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""keep every other box exactly where it is"" predicate=keep
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""every other box""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""keep every other box exactly where it is"""
+"at this point move it right above Return so the pair reads together, but nothing else should move","@f1 w.request.filler text=""so the pair reads together, but nothing else should move""
+@r1 w.request.request words=""move it right above Return"" act=place mood=do predicate=move
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""right above"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.anchor value=Return operator=relation phase=selector
+@r2 w.request.request act=change mood=do words=""nothing else should move"" predicate=move
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""nothing else""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""nothing else should move""
+@f6 w.request.filler text=""at this point"""
+from there place it directly above Refund for the final layout and the other shapes stay where they are,"@r1 w.request.request act=place mood=do predicate=place words=""from there place it directly above Refund""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""directly above"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.anchor value=Refund operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""the other shapes stay where they are"" predicate=stay
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""the other shapes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""the other shapes stay where they are""
+@f1 w.request.filler text=""for the final layout"""
+"one more move: slide it up above Label so the label is visible, but leave the rest of the diagram alone","@f1 w.request.filler text=""so the label is visible, but leave the rest of the diagram alone""
+@r1 w.request.request words=""slide it up above Label"" act=place mood=do predicate=slide
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""up above"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.anchor value=Label operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""leave the rest of the diagram alone"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""the rest of the diagram""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=all operator=eq phase=result words=""leave the rest of the diagram alone""
+@f6 w.request.filler text=""one more move:"""
+"actually reposition it above Cart before the review, and leave all the other boxes where they are","@f1 w.request.filler text=actually
+@r1 w.request.request act=place mood=do predicate=reposition words=""actually reposition it above Cart""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing
+@r1.c1 w.request.constraint request=$r1 on=place attribute=node.relation value=above operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.anchor value=Cart operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""leave all the other boxes where they are"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""all the other boxes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""leave all the other boxes where they are""
+@f2 w.request.filler text=""before the review"""
+"the Label box should go just above Payment, but the rest of the boxes stay put, and connect Label to Payment so the move is visible in the flow","@f1 w.request.filler text=""so the move is visible in the flow""
+@r1 w.request.request act=place mood=do words=""the Label box should go just above Payment, but the rest of the boxes stay put"" predicate=go
+@r1.t w.request.target request=$r1 family=node family_words=box mode=existing determiner=definite fill=written name=Label
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Label operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""just above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Payment operator=relation phase=selector
+@r3 w.request.request act=place mood=do words=""the rest of the boxes stay put"" predicate=stay
+@r3.t w.request.target request=$r3 family=node mode=existing determiner=definite fill=description description=""the rest of the boxes""
+@r3.c1 w.request.constraint request=$r3 on=attribute attribute=node.keep value=place operator=eq phase=result words=""the rest of the boxes stay put""
+@r2 w.request.request act=connect mood=do words=""connect Label to Payment"" predicate=connect
+@r2.t w.request.target request=$r2 family=link mode=new determiner=indefinite
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.from value=Label operator=eq phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=link.to value=Payment operator=eq phase=result"
+"the diagram looks right only if Label sits right above Confirm and do not move any of the other boxes, and align their tops so the pair still reads together","@f1 w.request.filler text=""so the pair still reads together""
+@r1 w.request.request act=place mood=do words=""the diagram looks right only if Label sits right above Confirm and do not move any of the other boxes"" predicate=sits
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Label
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Label operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""right above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Confirm operator=relation phase=selector
+@r3 w.request.request act=change mood=do words=""do not move any of the other boxes"" predicate=move
+@r3.t w.request.target request=$r3 family=node mode=existing determiner=definite fill=description description=""any of the other boxes""
+@r3.c1 w.request.constraint request=$r3 on=attribute attribute=node.keep value=place operator=eq phase=result words=""do not move any of the other boxes""
+@r2 w.request.request act=place mode=arrange mood=do words=""align their tops"" predicate=align
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=possessive fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.edge value=top words=tops operator=eq phase=result"
+"can you move Label up above Return so the pair reads together, but nothing else should move, and leave a small even gap between them so the labels do not touch","@f1 w.request.filler text=""so the labels do not touch""
+@f2 w.request.filler text=""so the pair reads together""
+@r1 w.request.request act=place mood=do words=""can you move Label up above Return"" predicate=move
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Label
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Label operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""up above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Return operator=relation phase=selector
+@r3 w.request.request act=change mood=do words=""nothing else should move"" predicate=move
+@r3.t w.request.target request=$r3 family=node mode=existing determiner=definite fill=description description=""nothing else""
+@r3.c1 w.request.constraint request=$r3 on=attribute attribute=node.keep value=place operator=eq phase=result words=""nothing else should move""
+@r2 w.request.request act=place mode=arrange mood=do words=""leave a small even gap between them"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.gap value=small value=equal words=""small even gap"" operator=eq phase=result"
+"can you place Label above Refund for the final layout and the other shapes stay where they are, and align their left edges so nothing looks pushed aside","@f1 w.request.filler text=""so nothing looks pushed aside""
+@r1 w.request.request act=place mood=do words=""can you place Label above Refund"" predicate=place
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Label
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Label operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Refund operator=relation phase=selector
+@r3 w.request.request act=place mood=do words=""the other shapes stay where they are"" predicate=stay
+@r3.t w.request.target request=$r3 family=node mode=existing determiner=definite fill=description description=""the other shapes""
+@r3.c1 w.request.constraint request=$r3 on=attribute attribute=node.keep value=place operator=eq phase=result words=""the other shapes stay where they are""
+@r2 w.request.request act=place mode=arrange mood=do words=""align their left edges"" predicate=align
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=possessive fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.edge value=left words=""left edges"" operator=eq phase=result
+@f2 w.request.filler text=""for the final layout"""
+"move Sample just above Scope, but leave all the other boxes where they are","@r1 w.request.request act=place mood=do predicate=move
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Sample
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Sample operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""just above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Scope operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""leave all the other boxes where they are"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""all the other boxes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""leave all the other boxes where they are"""
+can you put Sample right above Bench and the rest of the boxes stay put,"@r1 w.request.request act=place mood=do predicate=put
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Sample
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Sample operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""right above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Bench operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""the rest of the boxes stay put"" predicate=stay
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""the rest of the boxes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""the rest of the boxes stay put"""
+"move Sample up above Vial, and keep every other box exactly where it is","@r1 w.request.request act=place mood=do predicate=move
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Sample
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Sample operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""up above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Vial operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""keep every other box exactly where it is"" predicate=keep
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""every other box""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""keep every other box exactly where it is"""
+let's place Sample just above Chart; the other shapes stay where they are,"@r1 w.request.request act=place mood=do predicate=place
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Sample
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Sample operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""just above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Chart operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""the other shapes stay where they are"" predicate=stay
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""the other shapes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""the other shapes stay where they are"""
+"shift Slide right above Sample, but leave the rest of the diagram alone","@r1 w.request.request act=place mood=do predicate=shift
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Slide
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Slide operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""right above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Sample operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""leave the rest of the diagram alone"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""the rest of the diagram""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=all operator=eq phase=result words=""leave the rest of the diagram alone"""
+would you nudge Slide directly above Scope and leave all the other boxes where they are,"@r1 w.request.request act=place mood=do predicate=nudge
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Slide
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Slide operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""directly above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Scope operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""leave all the other boxes where they are"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""all the other boxes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""leave all the other boxes where they are"""
+"perhaps set Slide up above Bench, but the rest of the boxes stay put","@r1 w.request.request act=place mood=do predicate=set
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Slide
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Slide operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""up above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Bench operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""the rest of the boxes stay put"" predicate=stay
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""the rest of the boxes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""the rest of the boxes stay put"""
+"is it possible to reposition Slide above Rack, and do not move any of the other boxes","@r1 w.request.request words=""reposition Slide above Rack, and do not move any of the other boxes"" act=place mood=do predicate=reposition
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Slide
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Slide operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Rack operator=relation phase=selector
+@r2 w.request.request act=change mood=do words=""do not move any of the other boxes"" predicate=move
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""any of the other boxes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""do not move any of the other boxes""
+@f8 w.request.filler text=""is it possible to"""
+"I think you should bring Slide just above Vial, and keep every other box exactly where it is","@r1 w.request.request words=""bring Slide just above Vial, and keep every other box exactly where it is"" act=place mood=do predicate=bring
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Slide
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Slide operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""just above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Vial operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""keep every other box exactly where it is"" predicate=keep
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""every other box""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""keep every other box exactly where it is""
+@f8 w.request.filler text=""I think you should"""
+"I think you should keep Slide right above Flask, but nothing else should move","@r1 w.request.request words=""keep Slide right above Flask, but nothing else should move"" act=place mood=do predicate=keep
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Slide
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Slide operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""right above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Flask operator=relation phase=selector
+@r2 w.request.request act=change mood=do words=""nothing else should move"" predicate=move
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""nothing else""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""nothing else should move""
+@f8 w.request.filler text=""I think you should"""
+"then move Slide directly above Chart so the pair reads together, but the other shapes stay where they are","@f1 w.request.filler text=then
+@f2 w.request.filler text=""so the pair reads together""
+@r1 w.request.request act=place mood=do predicate=move words=""then move Slide directly above Chart""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Slide
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Slide operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""directly above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Chart operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""the other shapes stay where they are"" predicate=stay
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""the other shapes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""the other shapes stay where they are"""
+then palce Scope up above Sample for the final layout and leave the rest of the diagram alone,"@f1 w.request.filler text=then
+@r1 w.request.request act=place mood=do predicate=palce words=""then palce Scope up above Sample""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Scope
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Scope operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""up above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Sample operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""leave the rest of the diagram alone"" predicate=leave
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""the rest of the diagram""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=all operator=eq phase=result words=""leave the rest of the diagram alone""
+@f2 w.request.filler text=""for the final layout"""
+"reeposition Scope just above Bench before the review, and the rest of the boxes stay put","@r1 w.request.request act=place mood=do predicate=reeposition words=""reeposition Scope just above Bench""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Scope
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Scope operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""just above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Bench operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""the rest of the boxes stay put"" predicate=stay
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""the rest of the boxes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""the rest of the boxes stay put""
+@f1 w.request.filler text=""before the review"""
+"I also need you to drxag Scope right above Rack so the flow makes sense, but do not move any of the other boxes","@f1 w.request.filler text=""also need""
+@f2 w.request.filler text=""so the flow makes sense""
+@r1 w.request.request act=place mood=do predicate=drxag words=""I also need you to drxag Scope right above Rack""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Scope
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Scope operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""right above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Rack operator=relation phase=selector
+@r2 w.request.request act=change mood=do words=""do not move any of the other boxes"" predicate=move
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""any of the other boxes""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""do not move any of the other boxes"""
+"after that ndge Scope directly above Vial until the arrow is clear, and keep every other box exactly where it is","@r1 w.request.request act=place mood=do predicate=ndge words=""after that ndge Scope directly above Vial""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Scope
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Scope operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""directly above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Vial operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""keep every other box exactly where it is"" predicate=keep
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""every other box""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""keep every other box exactly where it is""
+@f1 w.request.filler text=""until the arrow is clear"""
+"would you put Scope up above Flask in the next draft of the diagram, but nothing else should move","@r1 w.request.request act=place mood=do predicate=put words=""would you put Scope up above Flask""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Scope
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Scope operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=above words=""up above"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Flask operator=relation phase=selector
+@r2 w.request.request act=change mood=do words=""nothing else should move"" predicate=move
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=description description=""nothing else""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""nothing else should move""
+@f1 w.request.filler text=""in the next draft of the diagram"""
+"let's move Hill below Fence, but keep Gate to the left of Pond","@r1 w.request.request act=place mood=do predicate=move words=""move Hill below Fence""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Hill
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Hill operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=below operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Fence operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""keep Gate to the left of Pond"" predicate=keep
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=written name=Gate
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""keep Gate to the left of Pond""
+@r2.c2 w.request.constraint request=$r2 on=place attribute=node.position value=left_of operator=relation phase=result words=""to the left of Pond""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=node.anchor value=Pond operator=relation phase=selector"
+put Hill under Gate and Tree must stay to the left of Path,"@r1 w.request.request act=place mood=do predicate=put words=""put Hill under Gate""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Hill
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Hill operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=below words=under operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Gate operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""Tree must stay to the left of Path"" predicate=stay
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=written name=Tree
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""Tree must stay to the left of Path""
+@r2.c2 w.request.constraint request=$r2 on=place attribute=node.position value=left_of operator=relation phase=result words=""to the left of Path""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=node.anchor value=Path operator=relation phase=selector"
+"would you slide Hill underneath Path, but keep Fence on the left side of Tree","@r1 w.request.request act=place mood=do predicate=slide words=""slide Hill underneath Path""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Hill
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Hill operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=below words=underneath operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Path operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""keep Fence on the left side of Tree"" predicate=keep
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=written name=Fence
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""keep Fence on the left side of Tree""
+@r2.c2 w.request.constraint request=$r2 on=place attribute=node.position value=left_of operator=relation phase=result words=""on the left side of Tree""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=node.anchor value=Tree operator=relation phase=selector"
+"Tree should remain left of House, so move Hill just below Pond","@f1 w.request.filler text=so
+@r1 w.request.request act=place mood=do predicate=move words=""move Hill just below Pond""
+@r1.t w.request.target request=$r1 family=node mode=existing determiner=definite fill=written name=Hill
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=node.ids value=Hill operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=place attribute=node.relation value=below words=""just below"" operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=node.anchor value=Pond operator=relation phase=selector
+@r2 w.request.request act=place mood=do words=""Tree should remain left of House"" predicate=remain
+@r2.t w.request.target request=$r2 family=node mode=existing determiner=definite fill=written name=Tree
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=node.keep value=place operator=eq phase=result words=""Tree should remain left of House""
+@r2.c2 w.request.constraint request=$r2 on=place attribute=node.position value=left_of operator=relation phase=result words=""left of House""
+@r2.c3 w.request.constraint request=$r2 on=place attribute=node.anchor value=House operator=relation phase=selector"

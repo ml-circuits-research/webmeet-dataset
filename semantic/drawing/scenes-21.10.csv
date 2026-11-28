@@ -1,0 +1,319 @@
+text,sop
+"let's place a red house labeled Home at 120,90 with size 80","@r1 w.request.request act=make mood=do predicate=place
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=house
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.x value=""120"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.y value=""90"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.size value=""80"" operator=eq phase=result key_words=size
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=red operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=drawn.label value=Home operator=eq phase=result key_words=labeled"
+I need to undo my last change on the canvas,"@f1 w.request.filler text=need
+@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=journal_step family_words=canvas description=""last change on the canvas""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
+"ok, I want to edit one piece, so show the parts of the house first","@f1 w.request.filler text=""ok, I want""
+@f2 w.request.filler text=so
+@r1 w.request.request act=ask mood=ask predicate=show question=describe words=""show the parts of the house""
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=house family_words=parts
+@f3 w.request.filler text=""ok, I want to edit one piece, so""
+@f4 w.request.filler text=first"
+please pick the first part of o1,"@f1 w.request.filler text=please
+@r1 w.request.request act=pick mood=do predicate=pick
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=o1 ordinal=first family_words=part description=""first part""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=o1 operator=eq phase=selector"
+"hmm, the proportions look wrong, could you make part 0 of o1 red, 90 wide and 45 high?","@f1 w.request.filler text=hmm
+@r1 w.request.request act=change mood=do predicate=make
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=o1
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=o1 operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.index value=""0"" words=""part 0"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=part.colour value=red operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=part.width value=""90"" operator=eq phase=result key_words=wide
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=part.height value=""45"" operator=eq phase=result key_words=high
+@r1.u1 w.request.unread request=$r1 text=""the proportions look wrong"" note=request.reason"
+get rid of the first part of o1,"@r1 w.request.request act=remove mood=do predicate=""get rid of""
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=o1 ordinal=first family_words=part description=""first part""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=o1 operator=eq phase=selector"
+"place the house at 260,180, then paint the house blue","@f1 w.request.filler text=then
+@r1 w.request.request act=place mood=do words=""place the house at 260,180"" predicate=place words_origin=hull
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=house
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.x value=""260"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.y value=""180"" operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""the house at 260,180, then paint the house blue"" predicate=paint words_origin=hull
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=written name=""the house""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.ids value=""the house"" operator=eq phase=selector
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=drawn.colour value=blue operator=eq phase=result"
+"actually, can you paint the house a darker blue? it should stand out more","@f1 w.request.filler text=actually
+@r1 w.request.request act=change mood=do predicate=paint
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context sort=house
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=blue words=""darker blue"" operator=delta phase=result step=less
+@r1.u1 w.request.unread request=$r1 text=""it should stand out more"" note=request.reason"
+"sketch a house with the label Home at 120,90, 160 wide, 100 high, size 80, coloured red","@r1 w.request.request act=make mood=do predicate=sketch
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=house
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.x value=""120"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.y value=""90"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.width value=""160"" operator=eq phase=result key_words=wide
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.height value=""100"" operator=eq phase=result key_words=high
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=drawn.size value=""80"" operator=eq phase=result key_words=size
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=red words=""coloured red"" operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=drawn.label value=Home operator=eq phase=result key_words=label"
+"hey, can you turn the house blue? I think it would look better against the rest","@f1 w.request.filler text=hey
+@r1 w.request.request act=change mood=do predicate=turn
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=house
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=blue operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""I think it would look better against the rest"" note=request.reason"
+"hey, I'd like the house and the circle chosen, please, I'm going to change both","@f1 w.request.filler text=""hey, I'd like""
+@f2 w.request.filler text=please
+@r1 w.request.request act=pick mood=do predicate=chosen
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=written name=house
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.ids value=house operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.ids value=circle operator=eq phase=selector
+@r1.u1 w.request.unread request=$r1 text=""I'm going to change both"" note=request.reason"
+"hey, can you put the house at 260,180? the circle is in its way right now","@f1 w.request.filler text=hey
+@f2 w.request.filler text=now
+@r1 w.request.request act=place mood=do predicate=put
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=house
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.x value=""260"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.y value=""180"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""the circle is in its way right now"" note=request.reason"
+"actually, I'd like to start fresh, can you wipe the drawing?","@f1 w.request.filler text=""actually, I'd like""
+@r1 w.request.request act=remove mood=do predicate=wipe words=""wipe the drawing""
+@r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context family_words=drawing
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@f2 w.request.filler text=""actually, I'd like to start fresh, can you"""
+"ok, I can't tell which shape is which, so show the object IDs for 4 seconds","@f1 w.request.filler text=ok
+@f2 w.request.filler text=so
+@r1 w.request.request act=change mood=do predicate=show
+@r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.duration value=""4"" words=""4 seconds"" operator=eq phase=result unit=second measure=4 measure_words=""4""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=page.mode value=visible operator=eq phase=result open_value=true words=""object IDs"" key_words=object
+@r1.u1 w.request.unread request=$r1 text=""I can't tell which shape is which"" note=request.reason"
+"ok, I lost track of what I made, so what's in my drawing?","@f1 w.request.filler text=ok
+@f2 w.request.filler text=so
+@r1 w.request.request act=ask mood=ask predicate=""what's"" question=describe words=""what's in my drawing""
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context family_words=drawing
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@f3 w.request.filler text=""ok, I lost track of what I made, so"""
+what's there?,"@r1 w.request.request act=ask mood=ask predicate=""what's"" question=describe
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+I need part 0 of the house to be selected,"@f1 w.request.filler text=need
+@r1 w.request.request act=pick mood=do predicate=selected
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=house family_words=part
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.index value=""0"" operator=eq phase=result"
+pick o1 first part,"@r1 w.request.request act=pick mood=do predicate=pick
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=o1 ordinal=first family_words=part description=""first part""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=o1 operator=eq phase=selector"
+make the first house part red-ish and bigger,"@r1 w.request.request act=change mood=do predicate=make
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=house ordinal=first family_words=part description=""first house part""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=house operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.colour words=red-ish operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=size attribute=part.width words=bigger operator=delta phase=result step=more
+@r1.c4 w.request.constraint request=$r1 on=size attribute=part.height words=bigger operator=delta phase=result step=more"
+"please move part 0 of o1 to 140,120","@f1 w.request.filler text=please
+@r1 w.request.request act=place mood=do predicate=move
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=o1
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=o1 operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.index value=""0"" words=""part 0"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=part.x value=""140"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=part.y value=""120"" operator=eq phase=result"
+I want the first house component separated so I can move it independently,"@f1 w.request.filler text=want
+@f2 w.request.filler text=so
+@r1 w.request.request act=""take apart"" mode=ungroup mood=do predicate=separated
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=house ordinal=first family_words=component description=""first house component""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=house operator=eq phase=selector
+@r1.u1 w.request.unread request=$r1 text=""move it independently"" note=request.reason"
+"ok, the group is too rigid, so let me edit the members separately","@f1 w.request.filler text=ok
+@f2 w.request.filler text=too
+@f3 w.request.filler text=so
+@r1 w.request.request act=""take apart"" mode=ungroup mood=do predicate=edit
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context sort=group
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u1 w.request.unread request=$r1 text=""the group is too rigid"" note=request.reason
+@r1.u3 w.request.unread request=$r1 text=""the members separately"" note=ungroup.manner
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.members words=""edit the members"" operator=eq phase=result"
+could you move the house to x 260 y 180 and then turn the house blue?,"@f1 w.request.filler text=then
+@r1 w.request.request act=place mood=do words=""move the house to x 260 y 180"" predicate=move words_origin=hull
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=house
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.x value=""260"" operator=eq phase=result key_words=x
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.y value=""180"" operator=eq phase=result key_words=y
+@r2 w.request.request act=change mood=do words=""the house to x 260 y 180 and then turn the house blue"" predicate=turn words_origin=hull
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=written name=""the house""
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.ids value=""the house"" operator=eq phase=selector
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=drawn.colour value=blue operator=eq phase=result"
+change the house to a darker blue,"@r1 w.request.request act=change mood=do predicate=change
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context sort=house
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=blue words=""darker blue"" operator=delta phase=result step=less"
+"ok, the pond area is empty, so add three little fish beside the house","@f1 w.request.filler text=ok
+@f2 w.request.filler text=so
+@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=fish count_words=three count=3
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=small words=little operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.relation value=next_to words=beside operator=relation phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the house"" operator=relation phase=selector
+@r1.u1 w.request.unread request=$r1 text=""the pond area is empty"" note=request.reason"
+move the red shapes right a bit,"@r1 w.request.request act=place mood=do predicate=move
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context family_words=shapes
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=red operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.direction value=right operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.distanceGrade words=""a bit"" operator=degree phase=result"
+"um, add a house called Home, red, at 120 and 90, 160 wide, 100 high, size 80","@f1 w.request.filler text=um
+@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=house
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.x value=""120"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.y value=""90"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.width value=""160"" operator=eq phase=result key_words=wide
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.height value=""100"" operator=eq phase=result key_words=high
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=drawn.size value=""80"" operator=eq phase=result key_words=size
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=red operator=eq phase=result
+@r1.c7 w.request.constraint request=$r1 on=attribute attribute=drawn.label value=Home operator=eq phase=result key_words=called"
+"make a man of size 80 at 120,90","@r1 w.request.request act=make mood=do predicate=make
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=man
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.x value=""120"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.y value=""90"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.size value=""80"" operator=eq phase=result key_words=size"
+let's make a man,"@r1 w.request.request act=make mood=do predicate=make
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=man"
+"new man, create","@r1 w.request.request act=make mood=do predicate=create
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=man
+@r1.u1 w.request.unread request=$r1 text=""new man"" note=request.newness"
+"set o1 up near the top left, 150 wide","@r1 w.request.request act=change mood=do predicate=set
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=written name=o1
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.ids value=o1 operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.width value=""150"" operator=eq phase=result key_words=wide
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.x words=""up near the top left"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.y words=""up near the top left"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""o1 up"" note=request.region"
+"shift the house to 260,180","@r1 w.request.request act=place mood=do predicate=shift
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=house
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.x value=""260"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.y value=""180"" operator=eq phase=result"
+"squeeze o1 and o2 into a 240 by 160 box, top-left corner at 300,200","@r1 w.request.request act=change mood=do predicate=squeeze
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=written name=o1 sort=box
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.ids value=o1 operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.ids value=o2 operator=eq phase=selector
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.x value=""300"" operator=eq phase=result key_words=top-left
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.y value=""200"" operator=eq phase=result key_words=top-left
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=drawn.width value=""240"" operator=eq phase=result key_words=box
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=drawn.height value=""160"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""top-left corner"" note=request.region"
+"squeeze o1 o2 into 240 by 160 at 300,200","@r1 w.request.request act=change mood=do predicate=squeeze
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=written name=o1
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.ids value=o1 operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.ids value=o2 operator=eq phase=selector
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.x value=""300"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.y value=""200"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=drawn.width value=""240"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=drawn.height value=""160"" operator=eq phase=result"
+detach part 0 from the house,"@r1 w.request.request act=""take apart"" mode=ungroup mood=do predicate=detach
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=house family_words=part
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.index value=""0"" operator=eq phase=result"
+unlink the first house component,"@r1 w.request.request act=""take apart"" mode=ungroup mood=do predicate=unlink
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=house ordinal=first family_words=component description=""first house component""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=house operator=eq phase=selector"
+paint the house a darker blue,"@r1 w.request.request act=change mood=do predicate=paint
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context sort=house
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=blue words=""darker blue"" operator=delta phase=result step=less"
+three little fish,"@r1 w.request.request act=make mood=do predicate=fish
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=fish count_words=three count=3
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=small words=little operator=degree phase=result"
+leave IDs on,"@r1 w.request.request act=change mood=do predicate=leave
+@r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=visible operator=eq phase=result open_value=true words=IDs"
+"update o1: height 120, label Home","@r1 w.request.request act=change mood=do predicate=update
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=written name=o1
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.ids value=o1 operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.label value=Home operator=eq phase=result key_words=label
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.height value=""120"" operator=eq phase=result key_words=height"
+"um, move the house over to 260 180","@f1 w.request.filler text=um
+@r1 w.request.request act=place mood=do predicate=move
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=house
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.x value=""260"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.y value=""180"" operator=eq phase=result"
+it would be nice to have the object IDs shown for 4 seconds,"@r1 w.request.request act=change mood=do predicate=""would be nice to have""
+@r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.duration value=""4"" words=""4 seconds"" operator=eq phase=result unit=second measure=4 measure_words=""4""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=page.mode value=visible operator=eq phase=result open_value=true words=""object IDs"" key_words=object key_words=""object IDs shown"""
+"hey, I only want a quick look, so briefly label the objects for 4 seconds","@f1 w.request.filler text=hey
+@f2 w.request.filler text=want
+@f3 w.request.filler text=so
+@r1 w.request.request act=change mood=do predicate=label
+@r1.t w.request.target request=$r1 family=page mode=existing determiner=definite fill=context family_words=objects
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=page.mode value=briefly operator=eq phase=result open_value=true key_words=objects
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=page.duration value=""4"" words=""4 seconds"" operator=eq phase=result unit=second measure=4 measure_words=""4""
+@r1.u1 w.request.unread request=$r1 text=""I only want a quick look"" note=request.reason"
+"actually, I didn't like what I just did, could you undo the last change to the picture?","@f1 w.request.filler text=""actually, I didn't like what I just""
+@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=journal_step family_words=picture description=""last change to the picture""
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
+"oops, undo","@f1 w.request.filler text=oops
+@r1 w.request.request act=undo mood=do predicate=undo
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=journal_step
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing"
+"I need the first component of o1 gone, remove it","@f1 w.request.filler text=need
+@r1 w.request.request act=remove mood=do predicate=remove
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=o1 ordinal=first family_words=component description=""first component""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=o1 operator=eq phase=selector
+@r1.u1 w.request.unread request=$r1 text=""o1 gone"" note=request.outcome"
+"delete the first part of o1, please","@f1 w.request.filler text=please
+@r1 w.request.request act=remove mood=do predicate=delete
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=o1 ordinal=first family_words=part description=""first part""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=o1 operator=eq phase=selector"
+let's edit the members separately,"@r1 w.request.request act=""take apart"" mode=ungroup mood=do predicate=edit
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@r1.u2 w.request.unread request=$r1 text=""the members separately"" note=ungroup.manner
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.members words=""edit the members"" operator=eq phase=result
+@r1.u3 w.request.unread request=$r1 text=""let's edit"" note=request.detail"
+"a man would be nice to have, at 120,90, size 80","@r1 w.request.request act=make mood=do predicate=""would be nice to have""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=man
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.x value=""120"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.y value=""90"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.size value=""80"" operator=eq phase=result key_words=size"
+"actually, I'd rather have the house blue, can you change it?","@f1 w.request.filler text=actually
+@r1 w.request.request act=change mood=do predicate=have
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=house
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=blue operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""change it"" note=request.step"
+"ok, that piece isn't needed, so remove the first component from o1","@f1 w.request.filler text=ok
+@f2 w.request.filler text=so
+@r1 w.request.request act=remove mood=do predicate=remove
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=o1 ordinal=first family_words=component family_words=piece description=""first component""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=o1 operator=eq phase=selector
+@r1.u1 w.request.unread request=$r1 text=""that piece isn't needed"" note=request.reason"
+"put the house at 260,180","@r1 w.request.request act=place mood=do predicate=put
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=house
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.x value=""260"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.y value=""180"" operator=eq phase=result"
+take away the circle,"@r1 w.request.request act=remove mood=do predicate=""take away""
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=circle"
+"select part 0 please, the house","@f1 w.request.filler text=please
+@r1 w.request.request act=pick mood=do predicate=select
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=house family_words=part
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.index value=""0"" operator=eq phase=result"
+make part 0 of o1 wide and flat,"@r1 w.request.request act=change mood=do predicate=make
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=o1
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=o1 operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.index value=""0"" words=""part 0"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=part.width words=wide operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=part.height words=flat operator=eq phase=result"
+"first component of o1, delete","@r1 w.request.request act=remove mood=do predicate=delete
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=o1 ordinal=first family_words=component description=""first component""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=o1 operator=eq phase=selector"
+put a little house in a corner,"@r1 w.request.request act=make mood=do predicate=put
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=house
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size words=little operator=degree phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.at words=""in a corner"" operator=region phase=result"
+can you add a tree beside the house?,"@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=tree
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=next_to words=beside operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the house"" operator=relation phase=selector"
+put three fish close by,"@r1 w.request.request act=make mood=do predicate=put
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=fish count_words=three count=3
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation words=""close by"" operator=relation phase=result"

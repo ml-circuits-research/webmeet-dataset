@@ -1,0 +1,695 @@
+text,sop,sop1
+"put a small house across the road, with the lane and the verge between it and us, and turn it half a turn.","@r1 w.request.request act=make mood=do words=""put a small house across the road, with the lane and the verge between it and us"" predicate=put
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=house
+@r2 w.request.request act=change mood=do words=""turn it half a turn"" predicate=turn
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.turn value=""half a turn"" operator=eq phase=result open_value=true
+@r1.c1 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result"
+"put a red barn across the road, with the lane and the verge between it and us, and keep it the same size.","@r1 w.request.request act=make mood=do words=""put a red barn across the road, with the lane and the verge between it and us"" predicate=put
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=barn
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=red operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""keep it the same size"" predicate=keep
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.keep value=size words=""the same size"" operator=eq phase=result"
+"the same for a red barn over on the far side of the road, and keep the milestone on the near side visible.","@r1 w.request.request act=make mood=do predicate=keep
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=barn
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=red operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""over on the far side of the road"" note=drawn.across_from value=""over on the far side of the road""
+@r2 w.request.request act=change mood=do predicate=keep words=""keep the milestone on the near side visible""
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=context sort=milestone description=""the milestone"""
+"add a wooden bench between the house and the tree, where the shadow falls between the two.","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bench
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the tree"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the house and the tree"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.material value=wooden operator=eq phase=result"
+"I would like an old well halfway between the house and the tree, with the same gap on either side.","@f1 w.request.filler text=like
+@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=well
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""halfway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the tree"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the house and the tree"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result"
+"would you add a yellow flower in between the house and the tree, with its edges just clear of both of them.","@f1 w.request.filler text=just
+@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=flower
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""in between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the tree"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=yellow operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the house and the tree"" operator=relation phase=selector"
+"what if we put a flat rock directly between the barn and the well, and do not let it touch either one.","@r1 w.request.request act=make mood=do predicate=put
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=rock
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""directly between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the well"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the barn and the well"" operator=relation phase=selector"
+"could you add an old bush midway between the barn and the well, where the ground is flat and the space is even.","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bush
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""midway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the well"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the barn and the well"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result"
+"we need a friendly dog between the barn and the well, lined up so the three make one row.","@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do predicate=need
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=dog
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the well"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the barn and the well"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.arrangement value=row words=""make one row"" operator=eq phase=result"
+"there should be a small cat halfway between the bench and the rock, with room to walk on both sides.","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cat
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""halfway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the rock"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the bench and the rock"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result"
+"let there be a small table in between the bench and the rock, with an equal strip of grass around it.","@r1 w.request.request act=make mood=do predicate=let
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=table
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""in between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the rock"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the bench and the rock"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result"
+"can you place a little bench directly between the gate and the fence, where the space is widest and the ground is dry.","@r1 w.request.request act=make mood=do predicate=place
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bench
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""directly between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the fence"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the gate and the fence"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=size attribute=drawn.size value=little operator=degree phase=result"
+"is there room for a little well midway between the gate and the fence, so neither neighbour has to move?","@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do predicate=move
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=well
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""midway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the fence"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the gate and the fence"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=size attribute=drawn.size value=little operator=degree phase=result"
+"could you put a round rock halfway between the gate and the fence, lined up so the three make one row.","@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do predicate=put
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=rock
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""halfway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the fence"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the gate and the fence"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.arrangement value=row words=""make one row"" operator=eq phase=result"
+"is there room for a green bush in between the tree and the bush, with room to walk on both sides?","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bush
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""in between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the bush"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=green operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the tree and the bush"" operator=relation phase=selector"
+"how about a brown dog directly between the tree and the bush, with an equal strip of grass around it.","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=dog
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""directly between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the bush"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=brown operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the tree and the bush"" operator=relation phase=selector"
+"could you add a white cat midway between the tree and the bush, so neither neighbour has to move.","@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cat
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""midway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the bush"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=white operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the tree and the bush"" operator=relation phase=selector"
+"maybe an old table could go between the well and the house, lined up so the three make one row.","@f1 w.request.filler text=maybe
+@f2 w.request.filler text=so
+@r1 w.request.request act=make mood=do predicate=go
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=table
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the house"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the well and the house"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=drawn.arrangement value=row words=""make one row"" operator=eq phase=result"
+"draw a green bench halfway between the well and the house, so the line from left to right stays straight.","@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do predicate=draw
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bench
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""halfway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the house"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=green operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the well and the house"" operator=relation phase=selector"
+"can you place a deep well in between the house and the tree, with the same gap on either side.","@r1 w.request.request act=make mood=do predicate=place
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=well
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""in between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the tree"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the house and the tree"" operator=relation phase=selector"
+"directly between the house and the tree, put a single flower, and keep the middle of the gap open.","@r1 w.request.request act=make mood=do predicate=put
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=flower
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""directly between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the tree"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the house and the tree"" operator=relation phase=selector
+@r2 w.request.request act=change mood=do predicate=keep words=""keep the middle of the gap open""
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=context sort=gap description=""the middle of the gap"""
+"could you put a small rock midway between the house and the tree, and leave a clear path through the middle.","@r1 w.request.request act=make mood=do predicate=put
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=rock
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""midway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the tree"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the house and the tree"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result"
+"could you put an old dog halfway between the barn and the well, and do not let it touch either one.","@r1 w.request.request act=make mood=do predicate=put
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=dog
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""halfway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the well"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the barn and the well"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result"
+"we could use an old cat in between the barn and the well, lined up so the three make one row.","@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do predicate=use
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cat
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""in between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the well"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the barn and the well"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=drawn.arrangement value=row words=""make one row"" operator=eq phase=result"
+"I want a round table directly between the barn and the well, and keep the middle of the gap open.","@r1 w.request.request act=make mood=do predicate=want
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=table
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""directly between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the well"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the barn and the well"" operator=relation phase=selector
+@r2 w.request.request act=change mood=do predicate=keep words=""keep the middle of the gap open""
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=context sort=gap description=""the middle of the gap"""
+"maybe a wooden bench could go midway between the gate and the fence, and leave a clear path through the middle.","@f1 w.request.filler text=maybe
+@r1 w.request.request act=make mood=do predicate=go
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bench
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""midway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the fence"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the gate and the fence"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.material value=wooden operator=eq phase=result"
+"add an old well between the bench and the rock, where the ground is flat and the space is even.","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=well
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the rock"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the bench and the rock"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result"
+"I would like a friendly dog midway between the gate and the fence, lined up so the three make one row.","@f1 w.request.filler text=like
+@f2 w.request.filler text=so
+@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=dog
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""midway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the fence"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the gate and the fence"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.arrangement value=row words=""make one row"" operator=eq phase=result"
+"let there be a small cat between the tree and the bush, and leave a clear path through the middle.","@r1 w.request.request act=make mood=do predicate=let
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cat
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the bush"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the tree and the bush"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result"
+"add a small table halfway between the tree and the bush, so neither neighbour has to move.","@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=table
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""halfway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the bush"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the tree and the bush"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=size attribute=drawn.size value=small operator=degree phase=result"
+"I would like a little bench in between the tree and the bush, where the shadow falls between the two.","@f1 w.request.filler text=like
+@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bench
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""in between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the bush"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the tree and the bush"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=size attribute=drawn.size value=little operator=degree phase=result"
+"would you add a little well directly between the house and the tree, with the same gap on either side.","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=well
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""directly between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the tree"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the house and the tree"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=size attribute=drawn.size value=little operator=degree phase=result"
+"what if we put a white flower midway between the well and the house, with its edges just clear of both of them.","@f1 w.request.filler text=just
+@r1 w.request.request act=make mood=do predicate=put
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=flower
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""midway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the house"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=white operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the well and the house"" operator=relation phase=selector"
+"how about a round rock between the well and the house, and leave a clear path through the middle.","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=rock
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the house"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the well and the house"" operator=relation phase=selector"
+"there should be a green bush halfway between the house and the tree, so it reads as belonging to both sides.","@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bush
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""halfway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the tree"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=green operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the house and the tree"" operator=relation phase=selector"
+"could you add a brown dog in between the house and the tree, with room to walk on both sides.","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=dog
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""in between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the tree"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=brown operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the house and the tree"" operator=relation phase=selector"
+"can you place a white cat directly between the house and the tree, with an equal strip of grass around it.","@r1 w.request.request act=make mood=do predicate=place
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cat
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""directly between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the tree"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=white operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the house and the tree"" operator=relation phase=selector"
+"let there be an old table midway between the barn and the well, where the ground is flat and the space is even.","@r1 w.request.request act=make mood=do predicate=let
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=table
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""midway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the well"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the barn and the well"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result"
+"put a green bench between the barn and the well, with the same gap on either side.","@r1 w.request.request act=make mood=do predicate=put
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bench
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the well"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=green operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the barn and the well"" operator=relation phase=selector"
+"put a wooden bench between the gate and the fence, with the same gap on either side, and make it a little bigger.","@r1 w.request.request act=make mood=do words=""put a wooden bench between the gate and the fence, with the same gap on either side"" predicate=put
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bench
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the fence"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the gate and the fence"" operator=relation phase=selector
+@r2 w.request.request act=change mood=do words=""make it a little bigger"" predicate=make
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=size attribute=drawn.size words=""a little bigger"" operator=delta phase=result step=more
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.material value=wooden operator=eq phase=result"
+"put a wooden bench between the house and the tree, with the same gap on either side, and turn it slightly to the left.","@r1 w.request.request act=make mood=do words=""put a wooden bench between the house and the tree, with the same gap on either side"" predicate=put
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bench
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the tree"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the house and the tree"" operator=relation phase=selector
+@r2 w.request.request act=change mood=do words=""turn it slightly to the left""
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.turn value=""to the left"" operator=eq phase=result open_value=true key_words=turn
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.material value=wooden operator=eq phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=drawn.grade value=slightly operator=degree phase=result"
+"add an old well halfway between the tree and the bush, lined up so the three make one row, and make it a little smaller.","@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do words=""add an old well halfway between the tree and the bush, lined up so the three make one row"" predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=well
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""halfway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the bush"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the tree and the bush"" operator=relation phase=selector
+@r2 w.request.request act=change mood=do words=""make it a little smaller"" predicate=make
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=size attribute=drawn.size words=""a little smaller"" operator=delta phase=result step=less
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=drawn.arrangement value=row words=""make one row"" operator=eq phase=result"
+"put a wooden bench between the gate and the fence, with the same gap on either side, and turn it half a turn.","@r1 w.request.request act=make mood=do words=""put a wooden bench between the gate and the fence, with the same gap on either side"" predicate=put
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bench
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the fence"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the gate and the fence"" operator=relation phase=selector
+@r2 w.request.request act=change mood=do words=""turn it half a turn"" predicate=turn
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.turn value=""half a turn"" operator=eq phase=result open_value=true
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.material value=wooden operator=eq phase=result"
+"put a wooden bench between the house and the tree, with the same gap on either side, and keep it the same size.","@r1 w.request.request act=make mood=do words=""put a wooden bench between the house and the tree, with the same gap on either side"" predicate=put
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bench
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the tree"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the house and the tree"" operator=relation phase=selector
+@r2 w.request.request act=change mood=do words=""keep it the same size"" predicate=keep
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.keep value=size words=""the same size"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.material value=wooden operator=eq phase=result"
+"there should be a yellow flower in between the tree and the bush, and leave a clear path through the middle, and make it red.","@r1 w.request.request act=make mood=do words=""there should be a yellow flower in between the tree and the bush, and leave a clear path through the middle""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=flower
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""in between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the bush"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=yellow operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the tree and the bush"" operator=relation phase=selector
+@r2 w.request.request act=change mood=do words=""make it red"" predicate=make
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.colour value=red operator=eq phase=result"
+"there should be a yellow flower in between the bench and the rock, and leave a clear path through the middle, and make it a little bigger.","@r1 w.request.request act=make mood=do words=""there should be a yellow flower in between the bench and the rock, and leave a clear path through the middle""
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=flower
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""in between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the rock"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=yellow operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the bench and the rock"" operator=relation phase=selector
+@r2 w.request.request act=change mood=do words=""make it a little bigger"" predicate=make
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=size attribute=drawn.size words=""a little bigger"" operator=delta phase=result step=more"
+"add an old well halfway between the house and the tree, lined up so the three make one row, and turn it slightly to the left.","@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do words=""add an old well halfway between the house and the tree, lined up so the three make one row"" predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=well
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""halfway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the tree"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the house and the tree"" operator=relation phase=selector
+@r2 w.request.request act=change mood=do words=""turn it slightly to the left""
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.turn value=""to the left"" operator=eq phase=result open_value=true key_words=turn
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=drawn.grade value=slightly operator=degree phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=drawn.arrangement value=row words=""make one row"" operator=eq phase=result"
+"could you put a flat rock directly between the well and the house, where the ground is flat and the space is even, and make it a little smaller.","@r1 w.request.request act=make mood=do words=""could you put a flat rock directly between the well and the house, where the ground is flat and the space is even"" predicate=put
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=rock
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""directly between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the house"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the well and the house"" operator=relation phase=selector
+@r2 w.request.request act=change mood=do words=""make it a little smaller"" predicate=make
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=size attribute=drawn.size words=""a little smaller"" operator=delta phase=result step=less"
+"add an old well halfway between the bench and the rock, lined up so the three make one row, and turn it half a turn.","@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do words=""add an old well halfway between the bench and the rock, lined up so the three make one row"" predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=well
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""halfway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the rock"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the bench and the rock"" operator=relation phase=selector
+@r2 w.request.request act=change mood=do words=""turn it half a turn"" predicate=turn
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.turn value=""half a turn"" operator=eq phase=result open_value=true
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=drawn.arrangement value=row words=""make one row"" operator=eq phase=result"
+"add an old well halfway between the house and the tree, lined up so the three make one row, and keep it the same size.","@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do words=""add an old well halfway between the house and the tree, lined up so the three make one row"" predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=well
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""halfway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the tree"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the house and the tree"" operator=relation phase=selector
+@r2 w.request.request act=change mood=do words=""keep it the same size"" predicate=keep
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.keep value=size words=""the same size"" operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=drawn.arrangement value=row words=""make one row"" operator=eq phase=result"
+"and one more little well midway between the house and the tree, and keep the middle of the gap open.","@r1 w.request.request act=make mood=do predicate=keep
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=well
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""midway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the tree"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the house and the tree"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=size attribute=drawn.size value=little operator=degree phase=result
+@r2 w.request.request act=change mood=do predicate=keep words=""keep the middle of the gap open""
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=context sort=gap description=""the middle of the gap"""
+"how about another round rock in between the barn and the well, and leave a clear path through the middle.","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=rock
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""in between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the well"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the barn and the well"" operator=relation phase=selector"
+"the same for a green bush halfway between the bench and the rock, so it reads as belonging to both sides.","@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bush
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""halfway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the rock"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=green operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the bench and the rock"" operator=relation phase=selector"
+"add another brown dog as well between the gate and the fence, with room to walk on both sides.","@f1 w.request.filler text=well
+@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=dog
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the fence"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=brown operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the gate and the fence"" operator=relation phase=selector"
+"now put a white cat there too midway between the tree and the bush, where the ground is flat and the space is even.","@f1 w.request.filler text=now
+@f2 w.request.filler text=too
+@r1 w.request.request act=make mood=do predicate=put
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cat
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""midway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the bush"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=white operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the tree and the bush"" operator=relation phase=selector"
+"could you add one more old table directly between the well and the house, with an equal strip of grass around it.","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=table
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""directly between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the house"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the well and the house"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result"
+"another green bench please in between the house and the tree, where the space is widest and the ground is dry.","@f1 w.request.filler text=please
+@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bench
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""in between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the tree"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=green operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the house and the tree"" operator=relation phase=selector"
+"and a matching deep well halfway between the barn and the well, so neither neighbour has to move.","@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do predicate=move
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=well
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""halfway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the well"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the barn and the well"" operator=relation phase=selector"
+a green bush in between the bench and the rock.,"@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bush
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""in between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the rock"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=green operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the bench and the rock"" operator=relation phase=selector"
+"brown dog directly between the gate and the fence, please.","@f1 w.request.filler text=please
+@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=dog
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""directly between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the fence"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=brown operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the gate and the fence"" operator=relation phase=selector"
+"one white cat midway between the tree and the bush, over there.","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cat
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""midway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the bush"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=white operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the tree and the bush"" operator=relation phase=selector"
+"another old table between the well and the house, on the left.","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=table
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the house"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the well and the house"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=left words=""on the left"" operator=eq phase=result"
+"a bench halfway between the house and the tree, for now.","@f1 w.request.filler text=now
+@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bench
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""halfway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the tree"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the house and the tree"" operator=relation phase=selector"
+"what if we put a little bush between the tree and the bush, with the same gap on either sade.","@r1 w.request.request act=make mood=do predicate=put
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bush
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the bush"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the tree and the bush"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=size attribute=drawn.size value=little operator=degree phase=result"
+"let there be an old well between the house and the tree, so it reads as beolnging to both sides.","@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do predicate=let
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=well
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the tree"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the house and the tree"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result"
+"we could use a flat rock in between the barn and the well, so it reads as belonging to both sies.","@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do predicate=use
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=rock
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""in between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the well"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the barn and the well"" operator=relation phase=selector"
+"directly between the barn and the well, there should be an old bush, with the same gap on eiher side.","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bush
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""directly between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the well"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the barn and the well"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result"
+"we need a friendly dog midway between the barn and the well, so it reads as beonging to both sides.","@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do predicate=need
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=dog
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""midway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the well"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the barn and the well"" operator=relation phase=selector"
+"could you put a green bench midway between the house and the tree, where the ground is flat and the space is even.","@r1 w.request.request act=make mood=do predicate=put
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bench
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""midway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the tree"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=green operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the house and the tree"" operator=relation phase=selector"
+"the best spot for a deep well is in between the barn and the well, where the space is widest and the ground is dry.","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=well
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""in between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the well"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the barn and the well"" operator=relation phase=selector"
+"let there be an old well halfway between the left tree and the right tree, exactly halfway along the line between them.","@r1 w.request.request act=make mood=do predicate=let
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=well
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""halfway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the right tree"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the left tree and the right tree"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result"
+"the best spot for a yellow flower is in between the left tree and the right tree, so the three sit in one row.","@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=flower
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""in between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the right tree"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=yellow operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the left tree and the right tree"" operator=relation phase=selector"
+"how about an old dog directly between the first house and the second house, so the gap on the left matches the gap on the right.","@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=dog
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""directly between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the second house"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the first house and the second house"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=left words=""on the left"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=right words=""on the right"" operator=eq phase=result"
+"is there room for an old cat midway between the first house and the second house, so the row looks deliberate rather than crowded?","@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cat
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""midway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the second house"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the first house and the second house"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result"
+"maybe a round table could go between the first house and the second house, with a measured gap on both sides.","@f1 w.request.filler text=maybe
+@r1 w.request.request act=make mood=do predicate=go
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=table
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the second house"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the first house and the second house"" operator=relation phase=selector"
+"could you add a wooden bench halfway between the big rock and the small rock, where the ground is level and the line is straight.","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bench
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""halfway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the small rock"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the big rock and the small rock"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.material value=wooden operator=eq phase=result"
+"put an old well in between the big rock and the small rock, with just enough space to walk between.","@f1 w.request.filler text=just
+@r1 w.request.request act=make mood=do predicate=put
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=well
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""in between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the small rock"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the big rock and the small rock"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result"
+"directly between the big rock and the small rock, draw a yellow flower, and keep the same distance from each.","@r1 w.request.request act=make mood=do predicate=draw
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=flower
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""directly between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the small rock"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=yellow operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the big rock and the small rock"" operator=relation phase=selector"
+"the best spot for an old dog is midway between the tall tree and the low bush, where the ground is level and the line is straight.","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=dog
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""midway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the low bush"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the tall tree and the low bush"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result"
+"could you put an old cat between the tall tree and the low bush, exactly halfway along the line between them.","@r1 w.request.request act=make mood=do predicate=put
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cat
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the low bush"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the tall tree and the low bush"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result"
+"we could use a round table halfway between the tall tree and the low bush, and do not let it overlap either neighbour.","@r1 w.request.request act=make mood=do predicate=let
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=table
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""halfway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the low bush"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the tall tree and the low bush"" operator=relation phase=selector"
+"I would like an old dog between the first house and the second house, where the space between them is widest.","@f1 w.request.filler text=like
+@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=dog
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the second house"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the first house and the second house"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result"
+"there should be an old cat halfway between the first house and the second house, so the row looks deliberate rather than crowded.","@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cat
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""halfway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the second house"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the first house and the second house"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result"
+"could you add a round table in between the first house and the second house, and leave the spacing even from left to right.","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=table
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""in between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the second house"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the first house and the second house"" operator=relation phase=selector"
+"directly between the big rock and the small rock, we need a wooden bench, with a measured gap on both sides.","@r1 w.request.request act=make mood=do predicate=need
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bench
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""directly between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the small rock"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the big rock and the small rock"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.material value=wooden operator=eq phase=result"
+"let there be an old well midway between the big rock and the small rock, so the gap on the left matches the gap on the right.","@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do predicate=let
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=well
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""midway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the small rock"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the big rock and the small rock"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=left words=""on the left"" operator=eq phase=result
+@r1.c6 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=right words=""on the right"" operator=eq phase=result"
+"can you place a yellow flower between the big rock and the small rock, with the grass clear on both sides.","@r1 w.request.request act=make mood=do predicate=place
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=flower
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the small rock"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=yellow operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the big rock and the small rock"" operator=relation phase=selector"
+"the best spot for an old dog is halfway between the tall tree and the low bush, with the grass clear on both sides.","@r1 w.request.request act=make mood=do
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=dog
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""halfway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the low bush"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the tall tree and the low bush"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result"
+"directly between the tall tree and the low bush, we need a round table, and leave the spacing even from left to right.","@r1 w.request.request act=make mood=do predicate=need
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=table
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""directly between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the low bush"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the tall tree and the low bush"" operator=relation phase=selector"
+"put a wooden bench midway between the left tree and the right tree, with a measured gap on both sides.","@r1 w.request.request act=make mood=do predicate=put
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bench
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""midway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the right tree"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the left tree and the right tree"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.material value=wooden operator=eq phase=result"
+"add an old well between the left tree and the right tree, where the ground is level and the line is straight.","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=well
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the right tree"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the left tree and the right tree"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result"
+"what if we put an old cat directly between the first house and the second house, so the three sit in one row.","@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do predicate=put
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=cat
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""directly between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the second house"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the first house and the second house"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result"
+"can you place a round table midway between the first house and the second house, so the gap on the left matches the gap on the right.","@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do predicate=place
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=table
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""midway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the second house"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the first house and the second house"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=left words=""on the left"" operator=eq phase=result
+@r1.c5 w.request.constraint request=$r1 on=attribute attribute=drawn.at value=right words=""on the right"" operator=eq phase=result"
+"there should be a wooden bench between the big rock and the small rock, and do not let it overlap either neighbour.","@r1 w.request.request act=make mood=do predicate=let
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bench
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the small rock"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the big rock and the small rock"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.material value=wooden operator=eq phase=result"
+"could you add an old well halfway between the big rock and the small rock, so the row looks deliberate rather than crowded.","@f1 w.request.filler text=so
+@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=well
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""halfway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the small rock"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the big rock and the small rock"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result"
+"we could use a yellow flower in between the big rock and the small rock, with a measured gap on both sides.","@r1 w.request.request act=make mood=do predicate=use
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=flower
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""in between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the small rock"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=drawn.colour value=yellow operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the big rock and the small rock"" operator=relation phase=selector"
+"I want a round table between the tall tree and the low bush, with just enough space to walk between.","@f1 w.request.filler text=just
+@r1 w.request.request act=make mood=do predicate=want
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=table
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the low bush"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the tall tree and the low bush"" operator=relation phase=selector"
+"could you put a wooden bench halfway between the left tree and the right tree, where the two ends line up with the path.","@r1 w.request.request act=make mood=do predicate=put
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=bench
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""halfway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the right tree"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the left tree and the right tree"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.material value=wooden operator=eq phase=result"
+"would you add an old well in between the left tree and the right tree, with the grass clear on both sides.","@r1 w.request.request act=make mood=do predicate=add
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=well
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""in between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the right tree"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the left tree and the right tree"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result"
+"maybe an old dog could go midway between the first house and the second house, exactly halfway along the line between them.","@f1 w.request.filler text=maybe
+@r1 w.request.request act=make mood=do predicate=go
+@r1.t w.request.target request=$r1 family=drawn mode=new determiner=indefinite sort=dog
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=between words=""midway between"" operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.anchor value=""the second house"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the first house and the second house"" operator=relation phase=selector
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=drawn.age value=old operator=eq phase=result"

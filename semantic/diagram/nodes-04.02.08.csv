@@ -1,0 +1,553 @@
+text,sop,sop1
+the retry path loops from Retry back to Check,"@r1 w.request.request act=connect mood=do predicate=the
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Retry operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Check operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""path loops from Retry back to Check"" note=diagram.loop value=""back to Check"""
+draw the feedback arrow from Publish back to Request,"@r1 w.request.request act=connect mood=do predicate=draw
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Publish operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Request operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""the feedback arrow from Publish back to Request"" note=diagram.loop value=""back to Request"""
+there should be a return path from the last step back to the first step,"@r1 w.request.request act=connect mood=do predicate=there
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Archive words=""the last step"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Request words=""the first step"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""a return path"" note=diagram.loop value=""a return path"""
+"the check sends failures back to the start, draw that","@r1 w.request.request act=connect mood=do predicate=the
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Check words=""the check"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Start words=""the start"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""sends failures back to the start"" note=diagram.loop value=""sends failures back to the start"""
+show the negative feedback path as an arrow back into the input,"@r1 w.request.request act=connect mood=do predicate=show
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.route value=""back into the input"" words=""an arrow back into the input"" operator=eq phase=result open_value=true
+@r1.u1 w.request.unread request=$r1 text=""the negative feedback path"" note=diagram.loop value=""into the input"""
+"the approval can go back to Review if it is rejected, draw the arrow","@r1 w.request.request act=connect mood=do predicate=the
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Approve words=""the approval"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Review operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""go back to Review if it is rejected"" note=diagram.loop value=""back to Review"""
+add a second loop for the escalation path back to Approve,"@r1 w.request.request act=connect mood=do predicate=add
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Publish words=""the escalation path"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Approve operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""a second loop for the escalation path back"" note=diagram.loop value=""the escalation path"""
+add a loop errow from Archive to Review,"@r1 w.request.request act=connect mood=do predicate=add
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Archive operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Review operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""a loop errow"" note=diagram.loop value=""a loop errow"""
+"the feedbak path is missing, draw it","@r1 w.request.request act=connect mood=do predicate=the
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.route value=loop words=""the feedbak path"" operator=eq phase=result open_value=true
+@r1.u1 w.request.unread request=$r1 text=""the feedbak path"" note=diagram.loop value=""the feedbak path"""
+back to the start from the last step,"@r1 w.request.request act=connect mood=do predicate=back
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Archive words=""the last step"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Request words=""the start"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""back to the start"" note=diagram.loop value=""back to the start"""
+go ahead and add the loop from Archive to Review and make it dashed,"@f1 w.request.filler text=""go ahead""
+@r1 w.request.request act=connect mood=do words=""add the loop from Archive to Review"" predicate=add
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Archive operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Review operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""make it dashed"" predicate=make
+@r2.t w.request.target request=$r2 family=link mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.style value=dashed operator=eq phase=result"
+draw the retry loop from Retry to Check and label it try again,"@r1 w.request.request act=connect mood=do words=""draw the retry loop from Retry to Check"" predicate=draw
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Retry operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Check operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""the retry loop"" note=diagram.loop value=retry
+@r2 w.request.request act=change mood=do words=""label it try again"" predicate=label
+@r2.t w.request.target request=$r2 family=link mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.label value=""try again"" operator=eq phase=result"
+merge them at Triage and Invoice,"@r1 w.request.request act=connect mood=do predicate=merge
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Triage operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Invoice operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""at Triage and Invoice"" note=diagram.merge value=""at Triage and Invoice"""
+"join the two flows after Repair, taking Return into Invoice","@r1 w.request.request act=connect mood=do predicate=join
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Repair operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Invoice operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""two flows after Repair"" note=diagram.merge value=""two flows after Repair""
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.from value=Return operator=eq phase=result"
+"the first diagram ends at Return and the second starts at Invoice, connect them","@r1 w.request.request act=connect mood=do predicate=the
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Return operator=eq phase=result key_words=starts
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Invoice operator=eq phase=result key_words=ends"
+"there are two diagrams on the page, join Return to Invoice with one arrow","@r1 w.request.request act=connect mood=do predicate=there
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Return operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Invoice operator=eq phase=result"
+and join the payment end to the archive box too,"@f1 w.request.filler text=too
+@r1 w.request.request act=connect mood=do predicate=join
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Payment words=""the payment end"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Return words=""the archive box"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""join the payment end to the archive box"" note=diagram.merge value=""join the payment end to the archive box"""
+join the tow flows at Return and Invoice,"@r1 w.request.request act=connect mood=do predicate=join
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Return operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Invoice operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""the tow flows"" note=diagram.merge value=""the tow flows"""
+"take the billing flow and attach it to the end of the intake flow, keeping every existing box where it is and only adding the one connector between Return and Invoice","@r1 w.request.request act=connect mood=do predicate=take
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Return operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Invoice operator=eq phase=result key_words=end"
+add the loop from Archive back to Review and label it rejected because that is when it happens,"@f1 w.request.filler text=""because that is when it happens""
+@r1 w.request.request act=connect mood=do words=""add the loop from Archive back to Review"" predicate=add
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Archive operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Review operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""loop from Archive back to Review"" note=diagram.loop value=""back to Review""
+@r2 w.request.request act=change mood=do words=""label it rejected"" predicate=label
+@r2.t w.request.target request=$r2 family=link mode=existing determiner=definite fill=context
+@r2.l1 w.request.lookup request=$r2 target=$r2.t key=thing from=page
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.label value=rejected operator=eq phase=result"
+"the negative feedback path has to rejoin the input before the check, otherwise the diagram tells the wrong story about where the correction happens","@r1 w.request.request act=connect mood=do predicate=the
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.route words=""rejoin the input"" operator=eq phase=result open_value=true"
+"two teams own one half each and the handover is the only thing that matters in the review, so join Return to Invoice at the seam and label the connector handover","@f1 w.request.filler text=so
+@r1 w.request.request act=connect mood=do predicate=two
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Return operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Invoice operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.label value=handover words=""label the connector handover"" operator=eq phase=result"
+draw an arrow from each model to what it builds,"@r1 w.request.request act=connect mood=do predicate=draw
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Ingest words=""each model"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Queue words=""what it builds"" operator=eq phase=result"
+add a leader line from each label to its part,"@r1 w.request.request act=connect mood=do predicate=add
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.route value=straight words=""leader line"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""leader line"" note=diagram.label value=""each label"""
+add the missing arrow between Review and Approve,"@r1 w.request.request act=connect mood=do predicate=add
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Review operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Approve operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""missing arrow"" note=link.repair value=""the missing arrow"""
+"the chain is broken, connect Start to Read","@r1 w.request.request act=connect mood=do predicate=connect
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Start operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Read operator=eq phase=result"
+join Publish and Archive so the path is complete,"@f1 w.request.filler text=so
+@r1 w.request.request act=connect mood=do predicate=join
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Publish operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Archive operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""path is complete"" note=link.repair value=""path is complete"""
+"there is no arrow out of Read, add one to Compute","@r1 w.request.request act=connect mood=do predicate=add
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Read operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Compute operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""no arrow out"" note=link.repair value=""no arrow out"""
+"the flow stops at API because the next arrow was never drawn, so connect it through to Auth","@f1 w.request.filler text=so
+@r1 w.request.request act=connect mood=do predicate=connect
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=API operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Auth operator=eq phase=result"
+bridge the gap in the chain at Auth,"@r1 w.request.request act=connect mood=do predicate=bridge
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=API words=""ap i"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Auth operator=eq phase=result"
+quick question: can u connect Read to Compute please,"@f1 w.request.filler text=""quick question""
+@f2 w.request.filler text=please
+@r1 w.request.request act=connect mood=do words=""can u connect Read to Compute please"" predicate=connect
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Read operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Compute operator=eq phase=result
+@f3 w.request.filler text=""quick question:"""
+add the missing errow between Review and Approve,"@r1 w.request.request act=connect mood=do predicate=add
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Review operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Approve operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""missing errow"" note=link.repair value=""missing errow"""
+"conect Start to Read, the chain is broken","@r1 w.request.request act=connect mood=do predicate=conect
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Start operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Read operator=eq phase=result"
+put the arrow back from API to Auth if you can,"@r1 w.request.request act=connect mood=do words=""put the arrow back from API to Auth"" predicate=put
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=API operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Auth operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""arrow back"" note=link.repair value=""the arrow"""
+wire Read into the next step,"@r1 w.request.request act=connect mood=do predicate=wire
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Read operator=eq phase=result"
+go ahead and add the missing arrow and keep the direction forward,"@f1 w.request.filler text=""go ahead""
+@r1 w.request.request act=connect mood=do words=""add the missing arrow"" predicate=add
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.u1 w.request.unread request=$r1 text=""add the missing arrow"" note=link.repair value=""the missing arrow""
+@r2 w.request.request act=place mode=arrange mood=do words=""and keep the direction forward"" predicate=keep
+@r2.t w.request.target request=$r2 family=link mode=existing determiner=quantified fill=all
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.arrow value=forward operator=eq phase=result"
+connect Read to Compute and make the new arrow solid,"@r1 w.request.request act=connect mood=do words=""connect Read to Compute"" predicate=connect
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Read operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Compute operator=eq phase=result
+@r2 w.request.request act=change mood=do words=""and make the new arrow solid"" predicate=make
+@r2.t w.request.target request=$r2 family=link mode=new determiner=indefinite family_words=arrow
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.style value=solid operator=eq phase=result"
+could you draw a straight arrow from Cart to Ship,"@r1 w.request.request act=connect mood=do predicate=draw words=""draw a straight arrow from Cart to Ship""
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Cart operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Ship operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.route value=straight operator=eq phase=result
+@f1 w.request.filler text=""could you"""
+can you add an arrow from Email to Invite that runs straight across,"@r1 w.request.request act=connect mood=do predicate=add words=""add an arrow from Email to Invite that runs straight across""
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Email operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Invite operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.route value=straight operator=eq phase=result
+@f1 w.request.filler text=""can you"""
+can you link Publish and Draft with a straight connector,"@r1 w.request.request act=connect mood=do predicate=link words=""link Publish and Draft with a straight connector""
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=connector
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Publish operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Draft operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.route value=straight operator=eq phase=result
+@f1 w.request.filler text=""can you"""
+make a curved arrow from Profile to Invite,"@r1 w.request.request act=connect mood=do predicate=make
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Profile operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Invite operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.route value=curved operator=eq phase=result"
+I'd like you to I need a straight arrow drawn from Review to Draft,"@f1 w.request.filler text=like
+@r1 w.request.request act=connect mood=do predicate=need words=""I need a straight arrow drawn from Review to Draft""
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Review operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Draft operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.route value=straight operator=eq phase=result
+@f2 w.request.filler text=""I'd like you to"""
+let's connect Ship to Payment with an orthogonal route,"@r1 w.request.request act=connect mood=do predicate=connect
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Ship operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Payment operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.route value=orthogonal operator=eq phase=result key_words=route"
+"give me an arrow from Inbox to Verify, curved rather than straight","@r1 w.request.request act=connect mood=do predicate=give
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Inbox operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Verify operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.route value=curved operator=eq phase=result key_words=straight"
+connect Start to Archive with an arrow that runs straight and keeps clear of the Publish box,"@r1 w.request.request act=connect mood=do predicate=connect
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Start operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Archive operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.route value=straight operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""keeps clear of the Publish box"" note=link.routeAround value=""keeps clear of the Publish box"""
+maybe draw a straight arrow from Cart to Ship and a curved one from Payment to Return,"@f1 w.request.filler text=maybe
+@r1 w.request.request act=connect mood=do words=""maybe draw a straight arrow from Cart to Ship"" predicate=draw
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Cart operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Ship operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.route value=straight operator=eq phase=result
+@r2 w.request.request act=connect mood=do words=""a curved one from Payment to Return"" predicate=curved
+@r2.t w.request.target request=$r2 family=link mode=new determiner=indefinite
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.from value=Payment operator=eq phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=link.to value=Return operator=eq phase=result
+@r2.c3 w.request.constraint request=$r2 on=attribute attribute=link.route value=curved operator=eq phase=result"
+"since the Start and Archive boxes sit far apart, draw a curved arrow between them and keep the curve shallow","@r1 w.request.request act=connect mood=do predicate=draw
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Start operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Archive operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.route value=curved operator=eq phase=result key_words=curve
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=node.shape value=box words=boxes operator=eq phase=result"
+perhaps connect Payment and Return,"@r1 w.request.request act=connect mood=do predicate=connect
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Payment operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Return operator=eq phase=result"
+is it possible to conect Inbox to Verify with a striaght arow?,"@r1 w.request.request act=connect mood=do words=""conect Inbox to Verify with a striaght arow"" predicate=conect
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Inbox operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Verify operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.route value=straight words=striaght operator=eq phase=result
+@f1 w.request.filler text=""is it possible to"""
+I think you should draw an arrow from Inbox to Verify with a head at both ends,"@r1 w.request.request act=connect mood=do predicate=draw words=""you should draw an arrow from Inbox to Verify with a head at both ends""
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Inbox operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Verify operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.arrow value=both words=""head at both ends"" operator=eq phase=result key_words=arrow
+@fx1 w.request.filler text=""I think"""
+could you add a double-headed arrow between Publish and Draft,"@r1 w.request.request act=connect mood=do predicate=add
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Publish operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Draft operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.arrow value=both words=double-headed operator=eq phase=result key_words=arrow"
+"sketch a plain line from Ship to Payment, no head at either end","@r1 w.request.request act=connect mood=do predicate=sketch
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=""plain line""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Ship operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Payment operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.arrow value=none words=""no head at either end"" operator=eq phase=result"
+can you put an arrow from Inbox to Verify that points only at Verify,"@r1 w.request.request act=connect mood=do predicate=put
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Inbox operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Verify operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.arrow value=forward words=""points only at Verify"" operator=eq phase=result key_words=arrow"
+join Email to Invite with an arrowhead on both sides,"@r1 w.request.request act=connect mood=do predicate=join
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Email operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Invite operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.arrow value=both words=""arrowhead on both sides"" operator=eq phase=result"
+make a two-headed arrow from Publish to Draft,"@r1 w.request.request act=connect mood=do predicate=make
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Publish operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Draft operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.arrow value=both words=two-headed operator=eq phase=result key_words=arrow"
+would you give me an arrow from Ship to Payment with just one head at the Payment end,"@r1 w.request.request act=connect mood=do predicate=give
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Ship operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Payment operator=eq phase=result key_words=end
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.arrow value=forward words=""just one head"" operator=eq phase=result key_words=arrow"
+I'd like you to add an undirected line between Inbox and Verify,"@f1 w.request.filler text=like
+@r1 w.request.request act=connect mood=do predicate=add words=""add an undirected line between Inbox and Verify""
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=line
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Inbox operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Verify operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.arrow value=none words=undirected operator=eq phase=result
+@f2 w.request.filler text=""I'd like you to"""
+"trace an arrow from Email to Invite with heads on both sides, the same as the e5 line","@r1 w.request.request act=connect mood=do predicate=trace
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=line
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Email operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Invite operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.arrow value=both words=""heads on both sides"" operator=eq phase=result key_words=arrow"
+draw an arrow from Start to Archive with a head at both ends and colour it blue,"@r1 w.request.request act=connect mood=do predicate=draw
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Start operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Archive operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.arrow value=both words=""head at both ends"" operator=eq phase=result key_words=arrow
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=link.colour value=blue operator=eq phase=result key_words=colour"
+"connect Confirm and Return with a double-headed arrow, but keep the heads small","@r1 w.request.request act=connect mood=do predicate=connect
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Confirm operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Return operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.arrow value=both words=double-headed operator=eq phase=result key_words=arrow
+@r1.u1 w.request.unread request=$r1 text=""heads small"" note=link.tipSize value=""heads small"""
+insert an arrow between Start and Archive whose heads sit on both ends and stay open,"@r1 w.request.request act=connect mood=do predicate=insert
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Start operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Archive operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.arrow value=both words=""both ends"" operator=eq phase=result key_words=arrow
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=link.head value=open words=""stay open"" operator=eq phase=result"
+let's connect Triage and Closed with an arrow,"@r1 w.request.request act=connect mood=do predicate=connect
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Triage operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Closed operator=eq phase=result"
+maybe draw a duble-heded arow between Signup and Team,"@f1 w.request.filler text=maybe
+@r1 w.request.request act=connect mood=do predicate=draw words=""draw a duble-heded arow between Signup and Team""
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Signup operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Team operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.arrow value=both words=duble-heded operator=eq phase=result"
+perhaps draw a thin dashed arrow from Signup to Team,"@r1 w.request.request act=connect mood=do predicate=draw
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Signup operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Team operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.style value=dashed operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=link.width value=thin operator=eq phase=result"
+wire Review and Draft with a thin dotted line,"@r1 w.request.request act=connect mood=do predicate=wire
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=line
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Review operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Draft operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.style value=dotted operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=link.width value=thin operator=eq phase=result"
+make a thin dashed arrow from Verify to Triage,"@r1 w.request.request act=connect mood=do predicate=make
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Verify operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Triage operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.style value=dashed operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=link.width value=thin operator=eq phase=result"
+I think you should draw a red arrow from Signup to Team,"@r1 w.request.request act=connect mood=do predicate=draw words=""you should draw a red arrow from Signup to Team""
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Signup operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Team operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.colour value=red operator=eq phase=result
+@fx1 w.request.filler text=""I think"""
+join Review to Draft with a thick blue line,"@r1 w.request.request act=connect mood=do predicate=join
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=line
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Review operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Draft operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.colour value=blue operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=link.width value=thick operator=eq phase=result"
+insert a dotted green arrow between Confirm and Return,"@r1 w.request.request act=connect mood=do predicate=insert
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Confirm operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Return operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.style value=dotted operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=link.colour value=green operator=eq phase=result"
+could you draw a wide dashed arrow from Verify to Triage,"@r1 w.request.request act=connect mood=do predicate=draw words=""draw a wide dashed arrow from Verify to Triage""
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Verify operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Triage operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.style value=dashed operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=link.width value=wide operator=eq phase=result
+@f1 w.request.filler text=""could you"""
+can you make a solid purple arrow from Signup to Team,"@r1 w.request.request act=connect mood=do predicate=make words=""make a solid purple arrow from Signup to Team""
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Signup operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Team operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.style value=solid operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=link.colour value=purple operator=eq phase=result
+@f1 w.request.filler text=""can you"""
+"connect Publish and Draft with a thin dotted line, like the one into Review","@f1 w.request.filler text=like
+@r1 w.request.request act=connect mood=do predicate=connect
+@r1.u1 w.request.unread request=$r1 text=""a thin dotted line, like the one into Review"" note=link.match
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=line
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Publish operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Draft operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.style value=dotted operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=link.width value=thin operator=eq phase=result"
+sketch a dashed arrow from Cart to Ship and make it orange,"@r1 w.request.request act=connect mood=do predicate=sketch
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Cart operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Ship operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.style value=dashed operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=link.colour value=orange operator=eq phase=result"
+connect Triage and Closed with a dashed line about twice as thick as the others,"@r1 w.request.request act=connect mood=do predicate=connect
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=line
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Triage operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Closed operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.style value=dashed operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=size attribute=link.width value=twice words=""twice as thick"" operator=degree phase=result"
+would you draw an arrow from Signup to Team and dash it and colour it green,"@r1 w.request.request act=connect mood=do predicate=draw words=""draw an arrow from Signup to Team and dash it and colour it green""
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Signup operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Team operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.style value=dashed words=dash operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=link.colour value=green operator=eq phase=result key_words=colour
+@f1 w.request.filler text=""would you"""
+add a dotted arrow from Publish to Draft that stays thin so it does not hide the boxes,"@f1 w.request.filler text=so
+@r1 w.request.request act=connect mood=do predicate=add
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Publish operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Draft operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.style value=dotted operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=link.width value=thin operator=eq phase=result"
+trace the Cart to Ship arrow as a dashed red line rather than the plain one you used before,"@r1 w.request.request act=connect mood=do predicate=trace
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Cart operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Ship operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.style value=dashed operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=link.colour value=red operator=eq phase=result"
+connect Verify to Triage with a solid line of the same width as the box outline,"@r1 w.request.request act=connect mood=do predicate=connect
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=line
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Verify operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Triage operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.style value=solid operator=eq phase=result
+@r1.c4 w.request.constraint request=$r1 on=attribute attribute=link.width value=same words=""same width as the box outline"" operator=eq phase=result"
+I'd like you to connect Email and Invite with an arrow,"@f1 w.request.filler text=like
+@r1 w.request.request act=connect mood=do predicate=connect words=""connect Email and Invite with an arrow""
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Email operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Invite operator=eq phase=result
+@f2 w.request.filler text=""I'd like you to"""
+let's draw a dashd arow from Start to Archive,"@r1 w.request.request act=connect mood=do predicate=draw
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Start operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Archive operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.style value=dashed words=dashd operator=eq phase=result"
+maybe draw an arrow from Review back to itself,"@f1 w.request.filler text=maybe
+@r1 w.request.request act=connect mood=do predicate=draw words=""draw an arrow from Review back to itself""
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Review operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Review operator=eq phase=result"
+insert a loop on Confirm,"@r1 w.request.request act=connect mood=do predicate=insert
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Confirm operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Confirm operator=eq phase=result"
+perhaps connect Triage to itself with a small curve,"@r1 w.request.request act=connect mood=do predicate=connect
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Triage operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Triage operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.route value=curved words=""small curve"" operator=eq phase=result"
+place a self-loop on the Team box,"@r1 w.request.request act=connect mood=do predicate=place
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Team operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Team operator=eq phase=result"
+add a loop to Confirm that comes back over the top,"@r1 w.request.request act=connect mood=do predicate=add
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Confirm operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Confirm operator=eq phase=result"
+have the Closed box point at itself with a loop,"@r1 w.request.request act=connect mood=do predicate=have
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Closed operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Closed operator=eq phase=result"
+I think you should draw a loop that leaves Profile and comes back to it,"@r1 w.request.request act=connect mood=do predicate=draw words=""you should draw a loop that leaves Profile and comes back to it""
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Profile operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Profile operator=eq phase=result
+@fx1 w.request.filler text=""I think"""
+could you add an arrow from Archive to Archive,"@r1 w.request.request act=connect mood=do predicate=add words=""add an arrow from Archive to Archive""
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Archive operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Archive operator=eq phase=result
+@f1 w.request.filler text=""could you"""
+"give Cart a loop of its own, off to the side","@r1 w.request.request act=connect mood=do predicate=give
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Cart operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Cart operator=eq phase=result"
+sketch two arrows from Inbox to Verify and curve them apart so both show,"@f1 w.request.filler text=so
+@r1 w.request.request act=connect mood=do predicate=sketch
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=arrows
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Inbox operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Verify operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""curve them apart"" note=link.offset value=""curve them apart"""
+add a self-loop on Email and a second arrow from Signup to Team,"@r1 w.request.request act=connect mood=do words=""add a self-loop on Email"" predicate=add
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Email operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Email operator=eq phase=result
+@r2 w.request.request act=connect mood=do words=""a second arrow from Signup to Team"" predicate=second
+@r2.t w.request.target request=$r2 family=link mode=new determiner=indefinite
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=link.from value=Signup operator=eq phase=result
+@r2.c2 w.request.constraint request=$r2 on=attribute attribute=link.to value=Team operator=eq phase=result
+@r2.u1 w.request.unread request=$r2 text=""second arrow"" note=link.count value=""second arrow"""
+"draw an arrow from Confirm back to Confirm, with the loop sitting above the box","@r1 w.request.request act=connect mood=do predicate=draw
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Confirm operator=eq phase=result words=""back to Confirm""
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Confirm operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""loop sitting above the box"" note=link.over value=""loop sitting above the box"""
+add a loop to Email but keep it tight against the box,"@r1 w.request.request act=connect mood=do predicate=add
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Email operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Email operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""tight against"" note=link.amplitude value=""tight against"""
+would you draw an arow from Payment back to itslef,"@r1 w.request.request act=connect mood=do predicate=draw words=""draw an arow from Payment back to itslef""
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Payment operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Payment operator=eq phase=result
+@f1 w.request.filler text=""would you"""
+connect Start to Check with a dashed arrow,"@r1 w.request.request act=connect mood=do predicate=connect
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Start operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Check operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.style value=dashed operator=eq phase=result"
+please connect Start to Check with a dashed arrow,"@f1 w.request.filler text=please
+@r1 w.request.request act=connect mood=do words=""connect Start to Check with a dashed arrow"" predicate=connect
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Start operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Check operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.style value=dashed operator=eq phase=result"
+"connect Start to Check with a dashed arrow, thanks","@f1 w.request.filler text=thanks
+@r1 w.request.request act=connect mood=do words=""connect Start to Check with a dashed arrow"" predicate=connect
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Start operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Check operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.style value=dashed operator=eq phase=result"
+connect Start to Check with a dashed arrow — go on,"@f1 w.request.filler text=go
+@r1 w.request.request act=connect mood=do words=""connect Start to Check with a dashed arrow"" predicate=connect
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite family_words=arrow
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Start operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Check operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=link.style value=dashed operator=eq phase=result"
+link the Review box to Publish,"@r1 w.request.request act=connect mood=do predicate=link
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Review operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Publish operator=eq phase=result"
+please link the Review box to Publish,"@f1 w.request.filler text=please
+@r1 w.request.request act=connect mood=do words=""link the Review box to Publish"" predicate=link
+@r1.t w.request.target request=$r1 family=link mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=link.from value=Review operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=link.to value=Publish operator=eq phase=result"

@@ -1,0 +1,373 @@
+text,sop,sop1
+can you describe the lake?,"@r1 w.request.request act=ask mood=ask predicate=describe question=describe
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=lake"
+I can't see the screen well; could you describe what I've drawn so far?,"@f1 w.request.filler text=well
+@f2 w.request.filler text=so
+@r1 w.request.request act=ask mood=ask predicate=describe question=describe words=""could you describe what I've drawn""
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context family_words=drawn
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@f3 w.request.filler text=""I can't see the screen well;""
+@f4 w.request.filler text=""so far"""
+"before I add more, give me a quick summary of the scene","@r1 w.request.request act=ask mood=ask predicate=give question=describe words=""give me a quick summary"" asked_words=""quick summary""
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@f1 w.request.filler text=""before I add more,""
+@f2 w.request.filler text=""of the scene"""
+what do we have?,"@r1 w.request.request act=ask mood=ask predicate=""what do we have"" question=describe
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page"
+describe the house,"@r1 w.request.request act=ask mood=ask predicate=describe question=describe
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=house"
+what's on the canvas,"@r1 w.request.request act=ask mood=ask predicate=""what's on"" question=describe words=""what's on""
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=context
+@r1.l1 w.request.lookup request=$r1 target=$r1.t key=thing from=page
+@f1 w.request.filler text=""the canvas"""
+is there a boat in the picture?,"@r1 w.request.request act=ask mood=ask predicate=""is there"" question=exists
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=boat family_words=picture"
+does the drawing have a tree?,"@r1 w.request.request act=ask mood=ask predicate=does question=exists
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=tree family_words=drawing"
+is there any car on the road?,"@r1 w.request.request act=ask mood=ask predicate=""is there"" question=exists
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=car
+@r1.c1 w.request.constraint request=$r1 on=place attribute=drawn.relation value=on operator=relation phase=result
+@r1.c2 w.request.constraint request=$r1 on=place attribute=drawn.anchor value=""the road"" operator=relation phase=selector"
+"before I draw another peak, check whether there's already a mountain","@r1 w.request.request act=ask mood=ask predicate=check question=exists words=""check whether there's already a mountain""
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=mountain
+@f1 w.request.filler text=""before I draw another peak""
+@r1.u1 w.request.unread request=$r1 text=""whether there's already"" note=request.exists"
+any dog?,"@r1 w.request.request act=ask mood=ask question=exists
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=dog"
+got a lake?,"@r1 w.request.request act=ask mood=ask predicate=got question=exists
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=lake"
+is there a star,"@r1 w.request.request act=ask mood=ask predicate=""is there"" question=exists
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=star"
+what parts does the house have?,"@r1 w.request.request act=ask mood=ask predicate=""what parts"" question=describe
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=house"
+list the parts of the red car,"@r1 w.request.request act=ask mood=ask asked=part.ids asked_words=parts predicate=list question=describe
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=written name=""red car""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.id value=""red car"" operator=eq phase=selector"
+describe the parts of the old oak,"@r1 w.request.request act=ask mood=ask asked=part.ids asked_words=parts predicate=describe question=describe
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=written name=""old oak""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.id value=""old oak"" operator=eq phase=selector"
+what is the house made of?,"@r1 w.request.request act=ask mood=ask predicate=""made of"" question=describe
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=house"
+I want to recolour some pieces of the car; which parts does it have?,"@f1 w.request.filler text=want
+@r1 w.request.request act=ask mood=ask predicate=""which parts"" question=describe asked_words=""which parts"" words=""which parts does it have?""
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=car
+@f2 w.request.filler text=""I want to recolour some pieces of the car;"""
+"before I edit the tree, tell me what parts it's made up of","@r1 w.request.request act=ask mood=ask predicate=""tell me"" question=describe asked_words=""what parts"" asked_words=""made up of"" words=""tell me what parts it's made up of""
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=tree
+@f1 w.request.filler text=""before I edit the tree,"""
+parts of the house?,"@r1 w.request.request act=ask mood=ask asked=part.ids asked_words=parts question=describe
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=house"
+car parts,"@r1 w.request.request act=ask mood=ask asked=part.ids asked_words=parts question=describe
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=description sort=car"
+what's the oak built from,"@r1 w.request.request act=ask mood=ask predicate=""built from"" question=describe
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=written name=oak
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.id value=oak operator=eq phase=selector"
+select the roof of the house,"@r1 w.request.request act=pick mood=do predicate=select
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=roof
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the house"" operator=eq phase=selector"
+select the chimney on the house,"@r1 w.request.request act=pick mood=do predicate=select
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=chimney
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the house"" operator=eq phase=selector"
+pick the door of the house,"@r1 w.request.request act=pick mood=do predicate=pick
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=door
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the house"" operator=eq phase=selector"
+choose the front wheel of the red car,"@r1 w.request.request act=pick mood=do predicate=choose
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=""front wheel""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the red car"" operator=eq phase=selector"
+select the trunk of the old oak,"@r1 w.request.request act=pick mood=do predicate=select
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=trunk
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the old oak"" operator=eq phase=selector"
+highlight the leaves of the tree,"@r1 w.request.request act=pick mood=do predicate=highlight
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=leaves
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the tree"" operator=eq phase=selector"
+click on the sail of the boat,"@r1 w.request.request act=pick mood=do predicate=click
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=sail
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the boat"" operator=eq phase=selector"
+I want to recolour just one piece: select the door of the house first,"@f1 w.request.filler text=want
+@f2 w.request.filler text=just
+@r1 w.request.request act=pick mood=do predicate=select
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=door family_words=piece
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the house"" operator=eq phase=selector
+@r1.u1 w.request.unread request=$r1 text=""I want to recolour just one piece"" note=request.reason"
+"on the red car, please select the front wheel","@f1 w.request.filler text=please
+@r1 w.request.request act=pick mood=do predicate=select
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=""front wheel""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the red car"" operator=eq phase=selector"
+"select the mast of the sailboat, the tall pole in the middle","@r1 w.request.request act=pick mood=do predicate=select
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=mast description=""the tall pole in the middle""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the sailboat"" operator=eq phase=selector"
+"in the person I drew, select the left arm","@r1 w.request.request act=pick mood=do predicate=select
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=""left arm""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the person"" words=""the person I drew"" operator=eq phase=selector"
+"house roof, select","@r1 w.request.request act=pick mood=do predicate=select
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=roof
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=house operator=eq phase=selector"
+the door on the house,"@r1 w.request.request act=pick mood=do
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=door
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the house"" operator=eq phase=selector"
+car wheel,"@r1 w.request.request act=pick mood=do
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=wheel
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=car operator=eq phase=selector"
+select the leaves,"@r1 w.request.request act=pick mood=do predicate=select
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=leaves"
+pick the chimney,"@r1 w.request.request act=pick mood=do predicate=pick
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=chimney"
+"the tree trunk, please","@f1 w.request.filler text=please
+@r1 w.request.request act=pick mood=do
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=trunk
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=tree operator=eq phase=selector"
+sail of the boat,"@r1 w.request.request act=pick mood=do
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=sail
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the boat"" operator=eq phase=selector"
+select the head,"@r1 w.request.request act=pick mood=do predicate=select
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=head"
+choose part 4 of the old oak,"@r1 w.request.request act=pick mood=do predicate=choose
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=""the old oak""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.index value=""4"" words=""part 4"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the old oak"" operator=eq phase=selector"
+the house has several parts; select part 2 for me,"@r1 w.request.request act=pick mood=do predicate=select
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=house
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.index value=""2"" words=""part 2"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""has several parts"" note=part.count value=several"
+"I counted the pieces of the car, please select part 5","@f1 w.request.filler text=please
+@r1 w.request.request act=pick mood=do predicate=select
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=car
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.index value=""5"" words=""part 5"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""I counted the pieces of the car"" note=request.reason"
+"house, part 3","@r1 w.request.request act=pick mood=do
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=house
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=house operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.index value=""3"" words=""part 3"" operator=eq phase=result"
+part 1 of the tree,"@r1 w.request.request act=pick mood=do
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=tree
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.index value=""1"" words=""part 1"" operator=eq phase=result"
+select part two of the car,"@r1 w.request.request act=pick mood=do predicate=select
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=car
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.index value=""2"" words=""part two"" operator=eq phase=result"
+select part number 2 of the flower,"@r1 w.request.request act=pick mood=do predicate=select
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=flower
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.index value=""2"" words=""part number 2"" operator=eq phase=result"
+make the roof of the house red,"@r1 w.request.request act=change mood=do predicate=make
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=roof
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the house"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.colour value=red operator=eq phase=result"
+colour the door of the house brown,"@r1 w.request.request act=change mood=do predicate=colour
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=door
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the house"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.colour value=brown operator=eq phase=result"
+paint the front wheel of the red car black,"@r1 w.request.request act=change mood=do predicate=paint
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=""front wheel""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the red car"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.colour value=black operator=eq phase=result"
+"the house looks plain, so paint the chimney grey","@f1 w.request.filler text=so
+@r1 w.request.request act=change mood=do predicate=paint
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=chimney
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the house"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.colour value=grey operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""the house looks plain"" note=request.reason"
+first part of the car blue,"@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=car ordinal=first description=""first part of the car""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.colour value=blue operator=eq phase=result"
+trunk darker brown,"@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=trunk
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.colour words=""darker brown"" operator=eq phase=result"
+part 2 of the house yellow,"@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=house
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.index value=""2"" words=""part 2"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.colour value=yellow operator=eq phase=result"
+change the petals of the flower to pink,"@r1 w.request.request act=change mood=do predicate=change
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=petals
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the flower"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.colour value=pink operator=eq phase=result"
+make the door of the house 30 wide and 50 tall,"@r1 w.request.request act=change mood=do predicate=make
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=door
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the house"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.width value=""30"" words=""30 wide"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=part.height value=""50"" words=""50 tall"" operator=eq phase=result"
+"resize the chimney on the house to width 20, height 45","@r1 w.request.request act=change mood=do predicate=resize
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=chimney
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the house"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.width value=""20"" words=""width 20"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=part.height value=""45"" words=""height 45"" operator=eq phase=result"
+set the trunk of the old oak to 25 by 90,"@r1 w.request.request act=change mood=do predicate=set
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=trunk
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the old oak"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.width value=""25"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=part.height value=""90"" operator=eq phase=result"
+second part of the tree: 80 by 120,"@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=tree ordinal=second description=""second part of the tree""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.width value=""80"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.height value=""120"" operator=eq phase=result"
+"part 3 of the car, height 25","@r1 w.request.request act=change mood=do
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=car
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.index value=""3"" words=""part 3"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.height value=""25"" words=""height 25"" operator=eq phase=result"
+change the sail of the boat to 60 wide and 85 tall,"@r1 w.request.request act=change mood=do predicate=change
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=sail
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the boat"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.width value=""60"" words=""60 wide"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=part.height value=""85"" words=""85 tall"" operator=eq phase=result"
+"move the chimney of the house to 210, 95","@r1 w.request.request act=place mood=do predicate=move
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=chimney
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the house"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.x value=""210"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=part.y value=""95"" operator=eq phase=result"
+"put the door of the house at x 180, y 260","@r1 w.request.request act=place mood=do predicate=put
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=door
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the house"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.x value=""180"" words=""x 180"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=part.y value=""260"" words=""y 260"" operator=eq phase=result"
+"shift the window of the house to 150, 220","@r1 w.request.request act=place mood=do predicate=shift
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=window
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the house"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.x value=""150"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=part.y value=""220"" operator=eq phase=result"
+"the front wheel of the red car slipped; move it back to x 320, y 430","@r1 w.request.request act=place mood=do predicate=move
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=""front wheel""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the red car"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.x value=""320"" words=""x 320"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=part.y value=""430"" words=""y 430"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""the front wheel of the red car slipped"" note=request.reason"
+"the leaves of the old oak float too high, please place them at 90, 240","@f1 w.request.filler text=too
+@f2 w.request.filler text=please
+@r1 w.request.request act=place mood=do predicate=place
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=leaves
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the old oak"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.x value=""90"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=part.y value=""240"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""float too high"" note=request.reason"
+"chimney to 230, 90","@r1 w.request.request act=place mood=do
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=chimney
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.x value=""230"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.y value=""90"" operator=eq phase=result"
+"part 2 of the house at 160, 210","@r1 w.request.request act=place mood=do
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=house
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.index value=""2"" words=""part 2"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.x value=""160"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=part.y value=""210"" operator=eq phase=result"
+first part of the car to x 300 y 440,"@r1 w.request.request act=place mood=do
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=car ordinal=first description=""first part of the car""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.x value=""300"" words=""x 300"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.y value=""440"" words=""y 440"" operator=eq phase=result"
+"drag the head of the person to 410, 170","@r1 w.request.request act=place mood=do predicate=drag
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=head
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the person"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=part.x value=""410"" operator=eq phase=result
+@r1.c3 w.request.constraint request=$r1 on=attribute attribute=part.y value=""170"" operator=eq phase=result"
+remove the chimney from the house,"@r1 w.request.request act=remove mood=do predicate=remove
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=chimney
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the house"" operator=eq phase=selector"
+delete the front wheel of the red car,"@r1 w.request.request act=remove mood=do predicate=delete
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=""front wheel""
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the red car"" operator=eq phase=selector"
+take the door off the house,"@r1 w.request.request act=remove mood=do predicate=take
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=door
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the house"" operator=eq phase=selector"
+the window of the house looks wrong; please get rid of it,"@f1 w.request.filler text=please
+@r1 w.request.request act=remove mood=do predicate=""get rid of""
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=window
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the house"" operator=eq phase=selector
+@r1.u1 w.request.unread request=$r1 text=""looks wrong"" note=request.reason"
+"I want a winter look, so delete the leaves of the old oak","@f1 w.request.filler text=want
+@f2 w.request.filler text=so
+@r1 w.request.request act=remove mood=do predicate=delete
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=leaves
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the old oak"" operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=page.filter value=winter words=""a winter look"" operator=eq phase=result open_value=true"
+no chimney on the house,"@f1 w.request.filler text=no
+@r1 w.request.request act=remove mood=do
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=chimney
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the house"" operator=eq phase=selector"
+remove part 3 of the car,"@r1 w.request.request act=remove mood=do predicate=remove
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=car
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.index value=""3"" words=""part 3"" operator=eq phase=result"
+delete the last part of the house,"@r1 w.request.request act=remove mood=do predicate=delete
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=house ordinal=last description=""last part of the house"""
+erase the mast from the sailboat,"@r1 w.request.request act=remove mood=do predicate=erase
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=mast
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the sailboat"" operator=eq phase=selector"
+take the roof off the house and make it a separate object,"@r1 w.request.request act=""take apart"" mode=ungroup mood=do predicate=take
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=roof
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the house"" operator=eq phase=selector
+@r1.u1 w.request.unread request=$r1 text=""make it a separate object"" note=part.separate"
+pull the chimney out of the house as its own shape,"@r1 w.request.request act=""take apart"" mode=ungroup mood=do predicate=pull
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=chimney family_words=shape
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the house"" words=""out of the house"" operator=eq phase=selector
+@r1.u1 w.request.unread request=$r1 text=""its own shape"" note=part.separate"
+"I want to move the door independently, so split it out of the house","@f1 w.request.filler text=want
+@f2 w.request.filler text=so
+@r1 w.request.request act=""take apart"" mode=ungroup mood=do predicate=split
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=door
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the house"" words=""out of the house"" operator=eq phase=selector
+@r1.u1 w.request.unread request=$r1 text=""I want to move the door independently"" note=request.reason"
+could you extract the leaves of the old oak into their own object?,"@r1 w.request.request act=""take apart"" mode=ungroup mood=do predicate=extract
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=leaves
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the old oak"" operator=eq phase=selector
+@r1.u1 w.request.unread request=$r1 text=""into their own object"" note=part.separate"
+detach part 2 of the house,"@r1 w.request.request act=""take apart"" mode=ungroup mood=do predicate=detach
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=house
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.index value=""2"" words=""part 2"" operator=eq phase=result"
+split off the first part of the car,"@r1 w.request.request act=""take apart"" mode=ungroup mood=do predicate=""split off""
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=description sort=car ordinal=first description=""first part of the car"""
+sail of the boat as its own object,"@r1 w.request.request act=""take apart"" mode=ungroup mood=do
+@r1.t w.request.target request=$r1 family=part mode=existing determiner=definite fill=written name=sail
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=part.id value=""the boat"" operator=eq phase=selector
+@r1.u1 w.request.unread request=$r1 text=""as its own object"" note=part.separate"
+group the house and the old oak,"@r1 w.request.request act=group mood=do predicate=group
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=written name=house
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.ids value=house operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.ids value=""old oak"" operator=eq phase=selector"
+"group together the farmhouse, the barn and the apple tree","@r1 w.request.request act=group mood=do predicate=""group together""
+@r1.t w.request.target request=$r1 family=group mode=new determiner=indefinite family_words=group
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.members value=""the farmhouse, the barn and the apple tree"" operator=eq phase=result"
+combine the red car and the road into one group,"@r1 w.request.request act=group mood=do predicate=combine
+@r1.t w.request.target request=$r1 family=group mode=new determiner=indefinite family_words=group
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.members value=""the red car and the road"" operator=eq phase=result"
+can you group the lake and the sailboat?,"@r1 w.request.request act=group mood=do predicate=group
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=written name=lake
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.ids value=lake operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.ids value=sailboat operator=eq phase=selector"
+join the triangle and the heart into a group,"@r1 w.request.request act=group mood=do predicate=join
+@r1.t w.request.target request=$r1 family=group mode=new determiner=indefinite family_words=group
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.members value=""the triangle and the heart"" operator=eq phase=result"
+bundle the mountain and the cloud together,"@r1 w.request.request act=group mood=do words=""bundle the mountain and the cloud"" predicate=bundle
+@r1.t w.request.target request=$r1 family=group mode=new determiner=indefinite
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.members value=""the mountain and the cloud"" operator=eq phase=result
+@f1 w.request.filler text=together"
+group the dog with the barn,"@r1 w.request.request act=group mood=do predicate=group
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=written name=dog
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.ids value=dog operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.ids value=barn operator=eq phase=selector"
+"I want to move them as one, so group the house and the red car together","@r1 w.request.request act=group mood=do words=""group the house and the red car"" predicate=group
+@r1.t w.request.target request=$r1 family=group mode=new determiner=indefinite family_words=group
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.members value=""the house and the red car"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""move them as one"" note=request.reason
+@f1 w.request.filler text=want
+@f2 w.request.filler text=so
+@f3 w.request.filler text=together"
+the boat and the lake belong together; could you group them?,"@r1 w.request.request act=group mood=do predicate=group
+@r1.t w.request.target request=$r1 family=group mode=new determiner=indefinite family_words=group
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.members value=""the boat and the lake"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""belong together"" note=request.reason"
+group the circle and the triangle so I can move them at once,"@r1 w.request.request act=group mood=do predicate=group
+@r1.t w.request.target request=$r1 family=group mode=new determiner=indefinite family_words=group
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.members value=""the circle and the triangle"" operator=eq phase=result
+@r1.u1 w.request.unread request=$r1 text=""move them at once"" note=request.reason"
+"the wheat field, the barn and the dog make up the farmyard, so put them in one group","@r1 w.request.request act=group mood=do predicate=put
+@r1.t w.request.target request=$r1 family=group mode=new determiner=indefinite family_words=group
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.members value=""the wheat field, the barn and the dog"" operator=eq phase=result
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=group.name value=farmyard operator=eq phase=result key_words=""make up"""
+"group the sun and the cloud, and then make the cloud grey","@f1 w.request.filler text=then
+@r1 w.request.request act=group mood=do words=""group the sun and the cloud"" predicate=group
+@r1.t w.request.target request=$r1 family=drawn mode=existing determiner=definite fill=written name=sun
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=drawn.ids value=sun operator=eq phase=selector
+@r1.c2 w.request.constraint request=$r1 on=attribute attribute=drawn.ids value=cloud operator=eq phase=selector
+@r2 w.request.request act=change mood=do words=""make the cloud grey"" predicate=make
+@r2.t w.request.target request=$r2 family=drawn mode=existing determiner=definite fill=description sort=cloud
+@r2.c1 w.request.constraint request=$r2 on=attribute attribute=drawn.colour value=grey operator=eq phase=result"
+"if it's not too much bother, group the gold star with the heart","@r1 w.request.request act=group mood=do predicate=group words=""group the gold star with the heart""
+@r1.t w.request.target request=$r1 family=group mode=new determiner=indefinite family_words=group
+@r1.c1 w.request.constraint request=$r1 on=attribute attribute=group.members value=""the gold star with the heart"" operator=eq phase=result
+@f1 w.request.filler text=""if it's not too much bother"""
