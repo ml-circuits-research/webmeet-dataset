@@ -1,5 +1,7 @@
 # generated-glm-2026-11-28: generated messages (not real user data)
 
+Spelling: the prompt asked for typos in some messages; on 2026-11-28 the owner decided that spelling is a separate pipeline step, so the 267 messages with typos were corrected here (by Mistral Large 4) and the pairs moved to symbolic-spell/dataset/train/generated-sop-typos.csv.
+
 2,400 messages written on 2026-11-28 by GLM 5.3 (`zai-glm-5-3`, through the Mistral `vibe` CLI) from
 `PROMPT-generate.txt`: 600 per area (calendar, diagram, document, drawing), aimed at constructions the syntax
 formalizers get wrong (long lists, measures and pairings, order words, embedded questions, commands inside longer
