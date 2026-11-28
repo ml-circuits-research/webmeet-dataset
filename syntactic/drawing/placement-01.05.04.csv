@@ -1,7 +1,7 @@
 text,sop,source,accepted_by
 "draw a bench at the bottom left, then raise a tree directly to the right of it","@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""bench""
-@r1 syntax.relation marker=""at"" from=$n1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""at"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""bottom"" head=""left""
 @k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c2
 @c2 syntax.clause form=imperative verb=""raise"" modifier=""directly"" complement=$n3
@@ -9,16 +9,16 @@ text,sop,source,accepted_by
 @r2 syntax.relation marker=""to"" from=$c2 to=$n4
 @n4 syntax.nominal dependent=""the"" head=""right""
 @r3 syntax.relation marker=""of"" from=$n4 to=$n5
-@n5 syntax.nominal head=""it""",spacy-direct+hmm-rules,agreement
+@n5 syntax.nominal head=""it""",spacy,judge
 "stand a bench down in the bottom left, then suspend a tree just right of it","@c1 syntax.clause form=imperative verb=""stand"" modifier=""down"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""bench""
 @r1 syntax.relation marker=""in"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""bottom"" head=""left""
 @k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c2
-@c2 syntax.clause form=imperative verb=""suspend"" modifier=""just"" complement=$n3
+@c2 syntax.clause form=imperative verb=""suspend"" modifier=""just"" modifier=""right"" complement=$n3
 @n3 syntax.nominal dependent=""a"" head=""tree""
-@r2 syntax.relation marker=""right of"" from=$n3 to=$n4
-@n4 syntax.nominal head=""it""",hmm-rules,agreement
+@r2 syntax.relation marker=""of"" from=$c2 to=$n4
+@n4 syntax.nominal head=""it""",spacy,judge
 "position a bench near the bottom left corner, and mount a tree right next to it on the right","@c1 syntax.clause form=imperative verb=""position"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""bench""
 @r1 syntax.relation marker=""near"" from=$c1 to=$n2
@@ -30,17 +30,79 @@ text,sop,source,accepted_by
 @n4 syntax.nominal head=""it""
 @r3 syntax.relation marker=""on"" from=$c2 to=$n5
 @n5 syntax.nominal dependent=""the"" head=""right""",spacy+spacy-direct+hmm-rules,agreement
-"a small cat in the bottom left corner, then place a bench at the bottom left, then hang a tree directly to the right of it — the exact distance matters here",,,
-"a little bird up in the top right, then put a bench down in the bottom left, then park a tree just right of it, so the spacing comes out even",,,
+"a small cat in the bottom left corner, then place a bench at the bottom left, then hang a tree directly to the right of it — the exact distance matters here","@n1 syntax.nominal dependent=""a"" dependent=""small"" head=""cat""
+@r1 syntax.relation marker=""in"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""bottom"" dependent=""left"" head=""corner""
+@c1 syntax.clause form=imperative modifier=""then"" verb=""place"" complement=$n3
+@n3 syntax.nominal dependent=""a"" head=""bench""
+@r2 syntax.relation marker=""at"" from=$c1 to=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""bottom"" head=""left""
+@k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c2 conjunct=$c3
+@c2 syntax.clause form=imperative verb=""hang"" modifier=""directly"" complement=$n5
+@n5 syntax.nominal dependent=""a"" head=""tree""
+@r3 syntax.relation attachment=ambiguous marker=""to"" from=$c2 to=$n6
+@n6 syntax.nominal dependent=""the"" head=""right""
+@r4 syntax.relation marker=""of"" from=$n6 to=$n7
+@n7 syntax.nominal head=""it""
+@n8 syntax.nominal dependent=""the"" dependent=""exact"" head=""distance""
+@c3 syntax.clause form=declarative verb=""matters"" modifier=""here"" subject=$n8
+@c4 syntax.clause form=fragment complement=$n1",spacy,judge
+"a little bird up in the top right, then put a bench down in the bottom left, then park a tree just right of it, so the spacing comes out even","@n1 syntax.nominal dependent=""a"" dependent=""little"" head=""bird""
+@r1 syntax.relation marker=""up in"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""top"" head=""right""
+@k1 syntax.coordination conjunction=""then"" conjunction=""then"" conjunct=$c4 conjunct=$c1 conjunct=$c2
+@c1 syntax.clause form=imperative verb=""put"" modifier=""down"" complement=$n3
+@n3 syntax.nominal dependent=""a"" head=""bench""
+@r2 syntax.relation marker=""in"" from=$c1 to=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""bottom"" head=""left""
+@c2 syntax.clause form=imperative verb=""park"" modifier=""just"" modifier=""right"" complement=$n5
+@n5 syntax.nominal dependent=""a"" head=""tree""
+@r3 syntax.relation marker=""of"" from=$c2 to=$n6
+@n6 syntax.nominal head=""it""
+@r4 syntax.relation marker=""so"" from=$c2 to=$c3
+@n7 syntax.nominal dependent=""the"" head=""spacing""
+@c3 syntax.clause form=declarative verb=""comes"" modifier=""out"" modifier=""even"" subject=$n7
+@c4 syntax.clause form=fragment complement=$n1",spacy,judge
 "a small dog down at the bottom, then set a bench near the bottom left corner, and add a tree right next to it on the right — same measure i gave you before",,,
 "a little cat near the bench, then draw a bench at the bottom left, then raise a tree directly to the right of it, measured properly this time, mind",,,
-"a bench down in the bottom left, a tree directly to the right of it",,,
-"one bench at the bottom left, a tree just right of it",,,
-"bench near the bottom left corner, one tree directly to the right of it",,,
-"just a bench down in the bottom left, a tree right next to it on the right",,,
+"a bench down in the bottom left, a tree directly to the right of it","@n1 syntax.nominal dependent=""a"" head=""bench""
+@c1 syntax.clause form=fragment modifier=""down"" modifier=""directly"" complement=$n1 complement=$n3
+@r1 syntax.relation marker=""in"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""bottom"" head=""left""
+@n3 syntax.nominal dependent=""a"" head=""tree""
+@r2 syntax.relation marker=""to"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""right""
+@r3 syntax.relation marker=""of"" from=$n4 to=$n5
+@n5 syntax.nominal head=""it""",spacy,judge
+"one bench at the bottom left, a tree just right of it","@n1 syntax.nominal dependent=""one"" head=""bench""
+@r1 syntax.relation marker=""at"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""bottom"" head=""left""
+@n3 syntax.nominal dependent=""a"" head=""tree""
+@c1 syntax.clause form=fragment modifier=""just"" modifier=""right"" complement=$n1 complement=$n3
+@r2 syntax.relation marker=""of"" from=$c1 to=$n4
+@n4 syntax.nominal head=""it""",spacy,judge
+"bench near the bottom left corner, one tree directly to the right of it","@n1 syntax.nominal head=""bench""
+@r1 syntax.relation marker=""near"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""bottom"" dependent=""left"" head=""corner""
+@n3 syntax.nominal dependent=""one"" head=""tree""
+@c1 syntax.clause form=fragment modifier=""directly"" complement=$n1
+@r2 syntax.relation marker=""to"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""right""
+@r3 syntax.relation marker=""of"" from=$n4 to=$n5
+@n5 syntax.nominal head=""it""
+@r4 syntax.relation from=$n1 to=$n3",spacy,judge
+"just a bench down in the bottom left, a tree right next to it on the right","@n1 syntax.nominal dependent=""just"" dependent=""a"" head=""bench""
+@c1 syntax.clause form=fragment modifier=""down"" modifier=""right"" complement=$n1 complement=$n3
+@r1 syntax.relation marker=""in"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""bottom"" head=""left""
+@n3 syntax.nominal dependent=""a"" head=""tree""
+@r2 syntax.relation marker=""next to"" from=$n3 to=$n4
+@n4 syntax.nominal head=""it""
+@r3 syntax.relation marker=""on"" from=$n3 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""right""",spacy,judge
 "lpace a bench at the bottom left, and add a tree directly to the right of it","@c1 syntax.clause form=imperative verb=""lpace"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""bench""
-@r1 syntax.relation marker=""at"" from=$n1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""at"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""bottom"" head=""left""
 @k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
 @c2 syntax.clause form=imperative verb=""add"" modifier=""directly"" complement=$n3
@@ -48,19 +110,19 @@ text,sop,source,accepted_by
 @r2 syntax.relation marker=""to"" from=$c2 to=$n4
 @n4 syntax.nominal dependent=""the"" head=""right""
 @r3 syntax.relation marker=""of"" from=$n4 to=$n5
-@n5 syntax.nominal head=""it""",spacy-direct+hmm-rules,agreement
+@n5 syntax.nominal head=""it""",spacy,judge
 "put a bench down in the bottom left, then raise a rtee just right of it","@c1 syntax.clause form=imperative verb=""put"" modifier=""down"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""bench""
 @r1 syntax.relation marker=""in"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""bottom"" head=""left""
 @k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c2
-@c2 syntax.clause form=imperative verb=""raise"" modifier=""just"" complement=$n3
+@c2 syntax.clause form=imperative verb=""raise"" modifier=""just"" modifier=""right"" complement=$n3
 @n3 syntax.nominal dependent=""a"" head=""rtee""
-@r2 syntax.relation marker=""right of"" from=$n3 to=$n4
-@n4 syntax.nominal head=""it""",hmm-rules,agreement
+@r2 syntax.relation marker=""of"" from=$c2 to=$n4
+@n4 syntax.nominal head=""it""",spacy,judge
 "hey — set a bench near the bottom left corner, then suspend a tree right next to it on the right","@c1 syntax.clause form=imperative discourse=""hey"" verb=""set"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""bench""
-@r1 syntax.relation marker=""near"" from=$n1 to=$n2
+@r1 syntax.relation marker=""near"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""bottom"" dependent=""left"" head=""corner""
 @k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c2
 @c2 syntax.clause form=imperative verb=""suspend"" modifier=""right"" complement=$n3
@@ -68,103 +130,633 @@ text,sop,source,accepted_by
 @r2 syntax.relation marker=""next to"" from=$c2 to=$n4
 @n4 syntax.nominal head=""it""
 @r3 syntax.relation marker=""on"" from=$c2 to=$n5
-@n5 syntax.nominal dependent=""the"" head=""right""",spacy-direct+hmm-rules,agreement
-"draw a bench at the bottom left, and mount a tree directly to the right of it, thanks","@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
+@n5 syntax.nominal dependent=""the"" head=""right""",spacy,judge
+"draw a bench at the bottom left, and mount a tree directly to the right of it, thanks","@c1 syntax.clause form=imperative verb=""draw"" discourse=""thanks"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""bench""
-@r1 syntax.relation marker=""at"" from=$n1 to=$n2
+@r1 syntax.relation marker=""at"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""bottom"" head=""left""
 @k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
-@c2 syntax.clause form=imperative verb=""mount"" modifier=""directly"" discourse=""thanks"" complement=$n3
+@c2 syntax.clause form=imperative verb=""mount"" modifier=""directly"" complement=$n3
 @n3 syntax.nominal dependent=""a"" head=""tree""
 @r2 syntax.relation marker=""to"" from=$c2 to=$n4
 @n4 syntax.nominal dependent=""the"" head=""right""
 @r3 syntax.relation marker=""of"" from=$n4 to=$n5
-@n5 syntax.nominal head=""it""",hmm-rules,agreement
-put two more clouds on top of the cloud,,,
-add a pair of clouds on top of the cloud,,,
-set two more clouds on top of the cloud,,,
-stand two extra clouds on top of the cloud,,,
-stack a pair of clouds on top of the cloud,,,
-draw two more clouds on top of the cloud,,,
-i want a pair of clouds on top of the cloud,,,
-i need two more clouds on top of the cloud,,,
-get two extra clouds on top of the cloud,,,
-drop a pair of clouds on top of the cloud,,,
-"a small cat in the bottom left corner, then put two more clouds on top of the cloud, and make it neat — the result should look like one tidy spread",,,
+@n5 syntax.nominal head=""it""",spacy,judge
+put two more clouds on top of the cloud,"@c1 syntax.clause form=imperative verb=""put"" complement=$n1
+@n1 syntax.nominal dependent=""two"" dependent=""more"" head=""clouds""
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""cloud""",spacy,judge
+add a pair of clouds on top of the cloud,"@c1 syntax.clause form=imperative verb=""add"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""pair""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal head=""clouds""
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""cloud""",spacy,judge
+set two more clouds on top of the cloud,"@c1 syntax.clause form=imperative verb=""set"" complement=$n1
+@n1 syntax.nominal dependent=""two"" dependent=""more"" head=""clouds""
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""cloud""",spacy,judge
+stand two extra clouds on top of the cloud,"@c1 syntax.clause form=imperative verb=""stand"" complement=$n1
+@n1 syntax.nominal dependent=""two"" dependent=""extra"" head=""clouds""
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""cloud""",spacy,judge
+stack a pair of clouds on top of the cloud,"@c1 syntax.clause form=imperative verb=""stack"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""pair""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal head=""clouds""
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""cloud""",spacy,judge
+draw two more clouds on top of the cloud,"@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
+@n1 syntax.nominal dependent=""two"" dependent=""more"" head=""clouds""
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""cloud""",spacy,judge
+i want a pair of clouds on top of the cloud,"@n1 syntax.nominal head=""i""
+@c1 syntax.clause form=declarative verb=""want"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""a"" head=""pair""
+@r1 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal head=""clouds""
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n4
+@n4 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n4 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""cloud""",spacy,judge
+i need two more clouds on top of the cloud,"@n1 syntax.nominal head=""i""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""two"" dependent=""more"" head=""clouds""
+@r1 syntax.relation marker=""on"" from=$n2 to=$n3
+@n3 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""cloud""",spacy,judge
+get two extra clouds on top of the cloud,"@c1 syntax.clause form=imperative verb=""get"" complement=$n1
+@n1 syntax.nominal dependent=""two"" dependent=""extra"" head=""clouds""
+@r1 syntax.relation marker=""on"" from=$n1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""cloud""",spacy,judge
+drop a pair of clouds on top of the cloud,"@c1 syntax.clause form=imperative verb=""drop"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""pair""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal head=""clouds""
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""cloud""",spacy,judge
+"a small cat in the bottom left corner, then put two more clouds on top of the cloud, and make it neat — the result should look like one tidy spread","@n1 syntax.nominal dependent=""a"" dependent=""small"" head=""cat""
+@r1 syntax.relation marker=""in"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""bottom"" dependent=""left"" head=""corner""
+@k1 syntax.coordination conjunction=""then"" conjunction=""and"" conjunct=$c4 conjunct=$c1 conjunct=$c2 conjunct=$c3
+@c1 syntax.clause form=imperative verb=""put"" complement=$n3
+@n3 syntax.nominal dependent=""two"" dependent=""more"" head=""clouds""
+@r2 syntax.relation marker=""on"" from=$c1 to=$n4
+@n4 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n4 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""cloud""
+@c2 syntax.clause form=imperative verb=""make"" modifier=""neat"" complement=$n6
+@n6 syntax.nominal head=""it""
+@n7 syntax.nominal dependent=""the"" head=""result""
+@c3 syntax.clause form=declarative auxiliary=""should"" verb=""look"" subject=$n7
+@r4 syntax.relation marker=""like"" from=$c3 to=$n8
+@n8 syntax.nominal dependent=""one"" dependent=""tidy"" head=""spread""
+@c4 syntax.clause form=fragment complement=$n1",spacy,judge
 "a little bird up in the top right, then i want two extra clouds on top of the cloud, everything tidy and square so the whole arrangement stays balanced",,,
 "a small dog down at the bottom, then place a pair of clouds on top of the cloud, no more than that — keep it that way for the rest of the scene",,,
-"a little cat near the bench, then add two more clouds on top of the cloud as well, the layout has to come out clean",,,
-just add two extra clouds on top of the cloud,,,
-stick two more clouds on top of the cloud,,,
-just two extra clouds on top of the cloud,,,
-upt a pair of clouds on top of the cloud,,,
-place two more lcouds on top of the cloud,,,
-"set a pair of clouds on top of the cloud, thanks",,,
-put three more trees on top of the tree,,,
-place three extra trees on top of the tree,,,
-add a stack of three trees on top of the tree,,,
-set three more trees on top of the tree,,,
-stand three extra trees on top of the tree,,,
-stack a stack of three trees on top of the tree,,,
-draw three more trees on top of the tree,,,
-give me three extra trees on top of the tree,,,
-i want a stack of three trees on top of the tree,,,
-i need three more trees on top of the tree,,,
-get three extra trees on top of the tree,,,
-drop a stack of three trees on top of the tree,,,
-"a small cat in the bottom left corner, then put three more trees on top of the tree, and make it neat — the result should look like one tidy spread",,,
+"a little cat near the bench, then add two more clouds on top of the cloud as well, the layout has to come out clean","@n1 syntax.nominal dependent=""a"" dependent=""little"" head=""cat""
+@r1 syntax.relation marker=""near"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""bench""
+@c1 syntax.clause form=imperative modifier=""then"" verb=""add"" modifier=""as"" modifier=""well"" complement=$n3
+@n3 syntax.nominal dependent=""two"" dependent=""more"" head=""clouds""
+@r2 syntax.relation marker=""on"" from=$c1 to=$n4
+@n4 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n4 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""cloud""
+@n6 syntax.nominal dependent=""the"" head=""layout""
+@c2 syntax.clause form=declarative verb=""has"" subject=$n6
+@r4 syntax.relation marker=""to"" from=$c2 to=$c3
+@c3 syntax.clause form=nonfinite verb=""come"" modifier=""out"" modifier=""clean""
+@c4 syntax.clause form=fragment complement=$n1
+@k1 syntax.coordination conjunct=$c4 conjunct=$c1 conjunct=$c2",spacy,judge
+just add two extra clouds on top of the cloud,"@c1 syntax.clause form=imperative modifier=""just"" verb=""add"" complement=$n1
+@n1 syntax.nominal dependent=""two"" dependent=""extra"" head=""clouds""
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""cloud""",spacy,judge
+stick two more clouds on top of the cloud,"@c1 syntax.clause form=imperative verb=""stick"" complement=$n1
+@n1 syntax.nominal dependent=""two"" dependent=""more"" head=""clouds""
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""cloud""",spacy,judge
+just two extra clouds on top of the cloud,"@n1 syntax.nominal dependent=""just"" dependent=""two"" dependent=""extra"" head=""clouds""
+@r1 syntax.relation marker=""on"" from=$n1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""cloud""
+@c1 syntax.clause form=fragment complement=$n1",spacy,judge
+upt a pair of clouds on top of the cloud,"@c1 syntax.clause form=imperative verb=""upt"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""pair""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal head=""clouds""
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""cloud""",spacy,judge
+place two more lcouds on top of the cloud,"@c1 syntax.clause form=imperative verb=""place"" complement=$n1
+@n1 syntax.nominal dependent=""two"" dependent=""more"" head=""lcouds""
+@r1 syntax.relation marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""cloud""",spacy,judge
+"set a pair of clouds on top of the cloud, thanks","@c1 syntax.clause form=imperative verb=""set"" discourse=""thanks"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""pair""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal head=""clouds""
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""cloud""",spacy,judge
+put three more trees on top of the tree,"@c1 syntax.clause form=imperative verb=""put"" complement=$n1
+@n1 syntax.nominal dependent=""three"" dependent=""more"" head=""trees""
+@r1 syntax.relation marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""tree""",spacy,judge
+place three extra trees on top of the tree,"@c1 syntax.clause form=imperative verb=""place"" complement=$n1
+@n1 syntax.nominal dependent=""three"" dependent=""extra"" head=""trees""
+@r1 syntax.relation marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""tree""",spacy,judge
+add a stack of three trees on top of the tree,"@c1 syntax.clause form=imperative verb=""add"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""stack""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""three"" head=""trees""
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""tree""",spacy,judge
+set three more trees on top of the tree,"@c1 syntax.clause form=imperative verb=""set"" complement=$n1
+@n1 syntax.nominal dependent=""three"" dependent=""more"" head=""trees""
+@r1 syntax.relation marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""tree""",spacy,judge
+stand three extra trees on top of the tree,"@c1 syntax.clause form=imperative verb=""stand"" complement=$n1
+@n1 syntax.nominal dependent=""three"" dependent=""extra"" head=""trees""
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""tree""",spacy,judge
+stack a stack of three trees on top of the tree,"@c1 syntax.clause form=imperative verb=""stack"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""stack""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""three"" head=""trees""
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""tree""",spacy,judge
+draw three more trees on top of the tree,"@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
+@n1 syntax.nominal dependent=""three"" dependent=""more"" head=""trees""
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""tree""",spacy,judge
+give me three extra trees on top of the tree,"@c1 syntax.clause form=imperative verb=""give"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""me""
+@n2 syntax.nominal dependent=""three"" dependent=""extra"" head=""trees""
+@r1 syntax.relation marker=""on"" from=$n2 to=$n3
+@n3 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""tree""",spacy,judge
+i want a stack of three trees on top of the tree,"@n1 syntax.nominal head=""i""
+@c1 syntax.clause form=declarative verb=""want"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""a"" head=""stack""
+@r1 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""three"" head=""trees""
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n4
+@n4 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n4 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""tree""",spacy,judge
+i need three more trees on top of the tree,"@n1 syntax.nominal head=""i""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""three"" dependent=""more"" head=""trees""
+@r1 syntax.relation marker=""on"" from=$n2 to=$n3
+@n3 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""tree""",spacy,judge
+get three extra trees on top of the tree,"@c1 syntax.clause form=imperative verb=""get"" complement=$n1
+@n1 syntax.nominal dependent=""three"" dependent=""extra"" head=""trees""
+@r1 syntax.relation marker=""on"" from=$n1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""tree""",spacy,judge
+drop a stack of three trees on top of the tree,"@c1 syntax.clause form=imperative verb=""drop"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""stack""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""three"" head=""trees""
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""tree""",spacy,judge
+"a small cat in the bottom left corner, then put three more trees on top of the tree, and make it neat — the result should look like one tidy spread","@n1 syntax.nominal dependent=""a"" dependent=""small"" head=""cat""
+@r1 syntax.relation marker=""in"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""bottom"" dependent=""left"" head=""corner""
+@k1 syntax.coordination conjunction=""then"" conjunction=""and"" conjunct=$c4 conjunct=$c1 conjunct=$c2 conjunct=$c3
+@c1 syntax.clause form=imperative verb=""put"" complement=$n3
+@n3 syntax.nominal dependent=""three"" dependent=""more"" head=""trees""
+@r2 syntax.relation marker=""on"" from=$c1 to=$n4
+@n4 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n4 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""tree""
+@c2 syntax.clause form=imperative verb=""make"" modifier=""neat"" complement=$n6
+@n6 syntax.nominal head=""it""
+@n7 syntax.nominal dependent=""the"" head=""result""
+@c3 syntax.clause form=declarative auxiliary=""should"" verb=""look"" subject=$n7
+@r4 syntax.relation marker=""like"" from=$c3 to=$n8
+@n8 syntax.nominal dependent=""one"" dependent=""tidy"" head=""spread""
+@c4 syntax.clause form=fragment complement=$n1",spacy,judge
 "a little bird up in the top right, then i want three extra trees on top of the tree, everything tidy and square so the whole arrangement stays balanced",,,
 "a small dog down at the bottom, then place a stack of three trees on top of the tree, no more than that — keep it that way for the rest of the scene",,,
-"a little cat near the bench, then add three more trees on top of the tree as well, the layout has to come out clean",,,
-just add three extra trees on top of the tree,,,
-"a stack of three trees on top of the tree, that's all",,,
-stick three more trees on top of the tree,,,
-just three extra trees on top of the tree,,,
-upt a stack of three trees on top of the tree,,,
-place three more rtees on top of the tree,,,
-hey — add three extra trees on top of the tree,,,
-"set a stack of three trees on top of the tree, thanks",,,
-put two more benches on top of the bench,,,
-add a pair of benches on top of the bench,,,
-set two more benches on top of the bench,,,
-stand two extra benches on top of the bench,,,
-stack a pair of benches on top of the bench,,,
-draw two more benches on top of the bench,,,
-give me two extra benches on top of the bench,,,
-i want a pair of benches on top of the bench,,,
-i need two more benches on top of the bench,,,
-drop a pair of benches on top of the bench,,,
-"a small cat in the bottom left corner, then put two more benches on top of the bench, and make it neat — the result should look like one tidy spread",,,
+"a little cat near the bench, then add three more trees on top of the tree as well, the layout has to come out clean","@n1 syntax.nominal dependent=""a"" dependent=""little"" head=""cat""
+@r1 syntax.relation marker=""near"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""bench""
+@c1 syntax.clause form=imperative modifier=""then"" verb=""add"" modifier=""as"" modifier=""well"" complement=$n3
+@n3 syntax.nominal dependent=""three"" dependent=""more"" head=""trees""
+@r2 syntax.relation marker=""on"" from=$c1 to=$n4
+@n4 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n4 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""tree""
+@n6 syntax.nominal dependent=""the"" head=""layout""
+@c2 syntax.clause form=declarative verb=""has"" subject=$n6
+@r4 syntax.relation marker=""to"" from=$c2 to=$c3
+@c3 syntax.clause form=nonfinite verb=""come"" modifier=""out"" modifier=""clean""
+@c4 syntax.clause form=fragment complement=$n1
+@k1 syntax.coordination conjunct=$c4 conjunct=$c1 conjunct=$c2",spacy,judge
+just add three extra trees on top of the tree,"@c1 syntax.clause form=imperative modifier=""just"" verb=""add"" complement=$n1
+@n1 syntax.nominal dependent=""three"" dependent=""extra"" head=""trees""
+@r1 syntax.relation marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""tree""",spacy,judge
+"a stack of three trees on top of the tree, that's all","@n1 syntax.nominal dependent=""a"" head=""stack""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""three"" head=""trees""
+@r2 syntax.relation marker=""on"" from=$n1 to=$n3
+@n3 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""tree""
+@n5 syntax.nominal head=""that""
+@c1 syntax.clause form=declarative verb=""'s"" subject=$n5 complement=$n6
+@n6 syntax.nominal head=""all""
+@c2 syntax.clause form=fragment complement=$n1
+@k1 syntax.coordination conjunct=$c2 conjunct=$c1",spacy,judge
+stick three more trees on top of the tree,"@c1 syntax.clause form=imperative verb=""stick"" complement=$n1
+@n1 syntax.nominal dependent=""three"" dependent=""more"" head=""trees""
+@r1 syntax.relation marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""tree""",spacy,judge
+just three extra trees on top of the tree,"@n1 syntax.nominal dependent=""just"" dependent=""three"" dependent=""extra"" head=""trees""
+@r1 syntax.relation marker=""on"" from=$n1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""tree""
+@c1 syntax.clause form=fragment complement=$n1",spacy,judge
+upt a stack of three trees on top of the tree,"@c1 syntax.clause form=imperative verb=""upt"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""stack""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""three"" head=""trees""
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""tree""",spacy,judge
+place three more rtees on top of the tree,"@c1 syntax.clause form=imperative verb=""place"" complement=$n1
+@n1 syntax.nominal dependent=""three"" dependent=""more"" head=""rtees""
+@r1 syntax.relation marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""tree""",spacy,judge
+hey — add three extra trees on top of the tree,"@c1 syntax.clause form=imperative discourse=""hey"" verb=""add"" complement=$n1
+@n1 syntax.nominal dependent=""three"" dependent=""extra"" head=""trees""
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""tree""",spacy,judge
+"set a stack of three trees on top of the tree, thanks","@c1 syntax.clause form=imperative verb=""set"" discourse=""thanks"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""stack""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""three"" head=""trees""
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""tree""",spacy,judge
+put two more benches on top of the bench,"@c1 syntax.clause form=imperative verb=""put"" complement=$n1
+@n1 syntax.nominal dependent=""two"" dependent=""more"" head=""benches""
+@r1 syntax.relation marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""bench""",spacy,judge
+add a pair of benches on top of the bench,"@c1 syntax.clause form=imperative verb=""add"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""pair""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal head=""benches""
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""bench""",spacy,judge
+set two more benches on top of the bench,"@c1 syntax.clause form=imperative verb=""set"" complement=$n1
+@n1 syntax.nominal dependent=""two"" dependent=""more"" head=""benches""
+@r1 syntax.relation marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""bench""",spacy,judge
+stand two extra benches on top of the bench,"@c1 syntax.clause form=imperative verb=""stand"" complement=$n1
+@n1 syntax.nominal dependent=""two"" dependent=""extra"" head=""benches""
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""bench""",spacy,judge
+stack a pair of benches on top of the bench,"@c1 syntax.clause form=imperative verb=""stack"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""pair""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal head=""benches""
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""bench""",spacy,judge
+draw two more benches on top of the bench,"@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
+@n1 syntax.nominal dependent=""two"" dependent=""more"" head=""benches""
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""bench""",spacy,judge
+give me two extra benches on top of the bench,"@c1 syntax.clause form=imperative verb=""give"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""me""
+@n2 syntax.nominal dependent=""two"" dependent=""extra"" head=""benches""
+@r1 syntax.relation marker=""on"" from=$n2 to=$n3
+@n3 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""bench""",spacy,judge
+i want a pair of benches on top of the bench,"@n1 syntax.nominal head=""i""
+@c1 syntax.clause form=declarative verb=""want"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""a"" head=""pair""
+@r1 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal head=""benches""
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n4
+@n4 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n4 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""bench""",spacy,judge
+i need two more benches on top of the bench,"@n1 syntax.nominal head=""i""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""two"" dependent=""more"" head=""benches""
+@r1 syntax.relation marker=""on"" from=$n2 to=$n3
+@n3 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""bench""",spacy,judge
+drop a pair of benches on top of the bench,"@c1 syntax.clause form=imperative verb=""drop"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""pair""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal head=""benches""
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""bench""",spacy,judge
+"a small cat in the bottom left corner, then put two more benches on top of the bench, and make it neat — the result should look like one tidy spread","@n1 syntax.nominal dependent=""a"" dependent=""small"" head=""cat""
+@r1 syntax.relation marker=""in"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""bottom"" dependent=""left"" head=""corner""
+@k1 syntax.coordination conjunction=""then"" conjunction=""and"" conjunct=$c4 conjunct=$c1 conjunct=$c2 conjunct=$c3
+@c1 syntax.clause form=imperative verb=""put"" complement=$n3
+@n3 syntax.nominal dependent=""two"" dependent=""more"" head=""benches""
+@r2 syntax.relation marker=""on"" from=$c1 to=$n4
+@n4 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n4 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""bench""
+@c2 syntax.clause form=imperative verb=""make"" modifier=""neat"" complement=$n6
+@n6 syntax.nominal head=""it""
+@n7 syntax.nominal dependent=""the"" head=""result""
+@c3 syntax.clause form=declarative auxiliary=""should"" verb=""look"" subject=$n7
+@r4 syntax.relation marker=""like"" from=$c3 to=$n8
+@n8 syntax.nominal dependent=""one"" dependent=""tidy"" head=""spread""
+@c4 syntax.clause form=fragment complement=$n1",spacy,judge
 "a small dog down at the bottom, then place a pair of benches on top of the bench, no more than that — keep it that way for the rest of the scene",,,
-"a little cat near the bench, then add two more benches on top of the bench as well, the layout has to come out clean",,,
-just add two extra benches on top of the bench,,,
+"a little cat near the bench, then add two more benches on top of the bench as well, the layout has to come out clean","@n1 syntax.nominal dependent=""a"" dependent=""little"" head=""cat""
+@r1 syntax.relation marker=""near"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""bench""
+@c1 syntax.clause form=imperative modifier=""then"" verb=""add"" modifier=""as"" modifier=""well"" complement=$n3
+@n3 syntax.nominal dependent=""two"" dependent=""more"" head=""benches""
+@r2 syntax.relation marker=""on"" from=$c1 to=$n4
+@n4 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n4 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""bench""
+@n6 syntax.nominal dependent=""the"" head=""layout""
+@c2 syntax.clause form=declarative verb=""has"" subject=$n6
+@r4 syntax.relation marker=""to"" from=$c2 to=$c3
+@c3 syntax.clause form=nonfinite verb=""come"" modifier=""out"" modifier=""clean""
+@c4 syntax.clause form=fragment complement=$n1
+@k1 syntax.coordination conjunct=$c4 conjunct=$c1 conjunct=$c2",spacy,judge
+just add two extra benches on top of the bench,"@c1 syntax.clause form=imperative modifier=""just"" verb=""add"" complement=$n1
+@n1 syntax.nominal dependent=""two"" dependent=""extra"" head=""benches""
+@r1 syntax.relation marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""bench""",spacy,judge
 stick two more benches on top of the bench,"@c1 syntax.clause form=imperative verb=""stick"" complement=$n1
 @n1 syntax.nominal dependent=""two"" dependent=""more"" head=""benches""
-@r1 syntax.relation marker=""on top of"" from=$n1 to=$n2
-@n2 syntax.nominal dependent=""the"" head=""bench""",hmm-rules,judge
-just two extra benches on top of the bench,,,
-upt a pair of benches on top of the bench,,,
-place two more ebnches on top of the bench,,,
-hey — add two extra benches on top of the bench,,,
-"set a pair of benches on top of the bench, thanks",,,
-place two extra boats on top of the boat,,,
-add a pair of boats on top of the boat,,,
-set two more boats on top of the boat,,,
-stand two extra boats on top of the boat,,,
-stack a pair of boats on top of the boat,,,
-draw two more boats on top of the boat,,,
-give me two extra boats on top of the boat,,,
-i want a pair of boats on top of the boat,,,
-i need two more boats on top of the boat,,,
-get two extra boats on top of the boat,,,
-drop a pair of boats on top of the boat,,,
-"a small cat in the bottom left corner, then put two more boats on top of the boat, and make it neat — the result should look like one tidy spread",,,
+@r1 syntax.relation marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""bench""",spacy,judge
+just two extra benches on top of the bench,"@n1 syntax.nominal dependent=""just"" dependent=""two"" dependent=""extra"" head=""benches""
+@r1 syntax.relation marker=""on"" from=$n1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""bench""
+@c1 syntax.clause form=fragment complement=$n1",spacy,judge
+upt a pair of benches on top of the bench,"@c1 syntax.clause form=imperative verb=""upt"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""pair""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal head=""benches""
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""bench""",spacy,judge
+place two more ebnches on top of the bench,"@c1 syntax.clause form=imperative verb=""place"" complement=$n1
+@n1 syntax.nominal dependent=""two"" dependent=""more"" head=""ebnches""
+@r1 syntax.relation marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""bench""",spacy,judge
+hey — add two extra benches on top of the bench,"@c1 syntax.clause form=imperative discourse=""hey"" verb=""add"" complement=$n1
+@n1 syntax.nominal dependent=""two"" dependent=""extra"" head=""benches""
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""bench""",spacy,judge
+"set a pair of benches on top of the bench, thanks","@c1 syntax.clause form=imperative verb=""set"" discourse=""thanks"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""pair""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal head=""benches""
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""bench""",spacy,judge
+place two extra boats on top of the boat,"@c1 syntax.clause form=imperative verb=""place"" complement=$n1
+@n1 syntax.nominal dependent=""two"" dependent=""extra"" head=""boats""
+@r1 syntax.relation marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""boat""",spacy,judge
+add a pair of boats on top of the boat,"@c1 syntax.clause form=imperative verb=""add"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""pair""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal head=""boats""
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""boat""",spacy,judge
+set two more boats on top of the boat,"@c1 syntax.clause form=imperative verb=""set"" complement=$n1
+@n1 syntax.nominal dependent=""two"" dependent=""more"" head=""boats""
+@r1 syntax.relation marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""boat""",spacy,judge
+stand two extra boats on top of the boat,"@c1 syntax.clause form=imperative verb=""stand"" complement=$n1
+@n1 syntax.nominal dependent=""two"" dependent=""extra"" head=""boats""
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""boat""",spacy,judge
+stack a pair of boats on top of the boat,"@c1 syntax.clause form=imperative verb=""stack"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""pair""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal head=""boats""
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""boat""",spacy,judge
+draw two more boats on top of the boat,"@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
+@n1 syntax.nominal dependent=""two"" dependent=""more"" head=""boats""
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""boat""",spacy,judge
+give me two extra boats on top of the boat,"@c1 syntax.clause form=imperative verb=""give"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""me""
+@n2 syntax.nominal dependent=""two"" dependent=""extra"" head=""boats""
+@r1 syntax.relation marker=""on"" from=$n2 to=$n3
+@n3 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""boat""",spacy,judge
+i want a pair of boats on top of the boat,"@n1 syntax.nominal head=""i""
+@c1 syntax.clause form=declarative verb=""want"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""a"" head=""pair""
+@r1 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal head=""boats""
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n4
+@n4 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n4 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""boat""",spacy,judge
+i need two more boats on top of the boat,"@n1 syntax.nominal head=""i""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""two"" dependent=""more"" head=""boats""
+@r1 syntax.relation marker=""on"" from=$n2 to=$n3
+@n3 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""boat""",spacy,judge
+get two extra boats on top of the boat,"@c1 syntax.clause form=imperative verb=""get"" complement=$n1
+@n1 syntax.nominal dependent=""two"" dependent=""extra"" head=""boats""
+@r1 syntax.relation marker=""on"" from=$n1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""boat""",spacy,judge
+drop a pair of boats on top of the boat,"@c1 syntax.clause form=imperative verb=""drop"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""pair""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal head=""boats""
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""boat""",spacy,judge
+"a small cat in the bottom left corner, then put two more boats on top of the boat, and make it neat — the result should look like one tidy spread","@n1 syntax.nominal dependent=""a"" dependent=""small"" head=""cat""
+@r1 syntax.relation marker=""in"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""bottom"" dependent=""left"" head=""corner""
+@k1 syntax.coordination conjunction=""then"" conjunction=""and"" conjunct=$c4 conjunct=$c1 conjunct=$c2 conjunct=$c3
+@c1 syntax.clause form=imperative verb=""put"" complement=$n3
+@n3 syntax.nominal dependent=""two"" dependent=""more"" head=""boats""
+@r2 syntax.relation marker=""on"" from=$c1 to=$n4
+@n4 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n4 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""boat""
+@c2 syntax.clause form=imperative verb=""make"" modifier=""neat"" complement=$n6
+@n6 syntax.nominal head=""it""
+@n7 syntax.nominal dependent=""the"" head=""result""
+@c3 syntax.clause form=declarative auxiliary=""should"" verb=""look"" subject=$n7
+@r4 syntax.relation marker=""like"" from=$c3 to=$n8
+@n8 syntax.nominal dependent=""one"" dependent=""tidy"" head=""spread""
+@c4 syntax.clause form=fragment complement=$n1",spacy,judge
 "a little bird up in the top right, then i want two extra boats on top of the boat, everything tidy and square so the whole arrangement stays balanced",,,
 "a small dog down at the bottom, then place a pair of boats on top of the boat, no more than that — keep it that way for the rest of the scene",,,
-"a little cat near the bench, then add two more boats on top of the boat as well, the layout has to come out clean",,,
-just add two extra boats on top of the boat,,,
-stick two more boats on top of the boat,,,
-just two extra boats on top of the boat,,,
-place two more obats on top of the boat,,,
-hey — add two extra boats on top of the boat,,,
-"set a pair of boats on top of the boat, thanks",,,
+"a little cat near the bench, then add two more boats on top of the boat as well, the layout has to come out clean","@n1 syntax.nominal dependent=""a"" dependent=""little"" head=""cat""
+@r1 syntax.relation marker=""near"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""bench""
+@c1 syntax.clause form=imperative modifier=""then"" verb=""add"" modifier=""as"" modifier=""well"" complement=$n3
+@n3 syntax.nominal dependent=""two"" dependent=""more"" head=""boats""
+@r2 syntax.relation marker=""on"" from=$c1 to=$n4
+@n4 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n4 to=$n5
+@n5 syntax.nominal dependent=""the"" head=""boat""
+@n6 syntax.nominal dependent=""the"" head=""layout""
+@c2 syntax.clause form=declarative verb=""has"" subject=$n6
+@r4 syntax.relation marker=""to"" from=$c2 to=$c3
+@c3 syntax.clause form=nonfinite verb=""come"" modifier=""out"" modifier=""clean""
+@c4 syntax.clause form=fragment complement=$n1
+@k1 syntax.coordination conjunct=$c4 conjunct=$c1 conjunct=$c2",spacy,judge
+just add two extra boats on top of the boat,"@c1 syntax.clause form=imperative modifier=""just"" verb=""add"" complement=$n1
+@n1 syntax.nominal dependent=""two"" dependent=""extra"" head=""boats""
+@r1 syntax.relation marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""boat""",spacy,judge
+stick two more boats on top of the boat,"@c1 syntax.clause form=imperative verb=""stick"" complement=$n1
+@n1 syntax.nominal dependent=""two"" dependent=""more"" head=""boats""
+@r1 syntax.relation marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""boat""",spacy,judge
+just two extra boats on top of the boat,"@n1 syntax.nominal dependent=""just"" dependent=""two"" dependent=""extra"" head=""boats""
+@r1 syntax.relation marker=""on"" from=$n1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""boat""
+@c1 syntax.clause form=fragment complement=$n1",spacy,judge
+place two more obats on top of the boat,"@c1 syntax.clause form=imperative verb=""place"" complement=$n1
+@n1 syntax.nominal dependent=""two"" dependent=""more"" head=""obats""
+@r1 syntax.relation marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""boat""",spacy,judge
+hey — add two extra boats on top of the boat,"@c1 syntax.clause form=imperative discourse=""hey"" verb=""add"" complement=$n1
+@n1 syntax.nominal dependent=""two"" dependent=""extra"" head=""boats""
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""boat""",spacy,judge
+"set a pair of boats on top of the boat, thanks","@c1 syntax.clause form=imperative verb=""set"" discourse=""thanks"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""pair""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal head=""boats""
+@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal head=""top""
+@r3 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""boat""",spacy,judge

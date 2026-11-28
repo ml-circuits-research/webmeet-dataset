@@ -12,13 +12,26 @@ I need to know what's on my calendar,"@n1 syntax.nominal head=""I""
 @n1 syntax.nominal head=""Review""
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2
 @n2 syntax.nominal head=""2026-11-18""
-@r2 syntax.relation marker=""at"" from=$n2 to=$n3
-@n3 syntax.nominal head=""10:00"" dependent=""UTC""
+@r2 syntax.relation attachment=ambiguous marker=""at"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""10:00"" head=""UTC""
 @k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c2
 @n4 syntax.nominal dependent=""the"" head=""review""
 @c2 syntax.clause form=declarative auxiliary=""should"" auxiliary=""be"" verb=""titled"" subject=$n4 complement=$n5
-@n5 syntax.nominal head=""Weekly review""",hmm-rules,agreement
-"ok, the team can't make it, so move Review to 2026-11-18 at 10:00 UTC, then change the event title to Weekly review",,,
+@n5 syntax.nominal dependent=""Weekly"" head=""review""",spacy,judge
+"ok, the team can't make it, so move Review to 2026-11-18 at 10:00 UTC, then change the event title to Weekly review","@c1 syntax.clause form=declarative discourse=""ok"" auxiliary=""ca"" negation=""n't"" verb=""make"" subject=$n1 complement=$n2
+@n1 syntax.nominal dependent=""the"" head=""team""
+@n2 syntax.nominal head=""it""
+@k1 syntax.coordination conjunction=""so"" conjunction=""then"" conjunct=$c1 conjunct=$c2 conjunct=$c3
+@c2 syntax.clause form=imperative verb=""move"" complement=$n3
+@n3 syntax.nominal head=""Review""
+@r1 syntax.relation marker=""to"" from=$c2 to=$n4
+@n4 syntax.nominal head=""2026-11-18""
+@r2 syntax.relation attachment=ambiguous marker=""at"" from=$c2 to=$n5
+@n5 syntax.nominal dependent=""10:00"" head=""UTC""
+@c3 syntax.clause form=imperative verb=""change"" complement=$n6
+@n6 syntax.nominal dependent=""the"" dependent=""event"" head=""title""
+@r3 syntax.relation marker=""to"" from=$c3 to=$n7
+@n7 syntax.nominal dependent=""Weekly"" head=""review""",spacy,judge
 "move Review to 2026-11-18, then rename the review","@c1 syntax.clause form=imperative verb=""move"" complement=$n1
 @n1 syntax.nominal head=""Review""
 @r1 syntax.relation marker=""to"" from=$c1 to=$n2
@@ -29,18 +42,80 @@ I need to know what's on my calendar,"@n1 syntax.nominal head=""I""
 "update event review, Team review, notes Bring draft",,,
 select Review,"@c1 syntax.clause form=imperative verb=""select"" complement=$n1
 @n1 syntax.nominal head=""Review""",spacy-direct+hmm-rules,agreement
-"schedule Planning, 2026-11-18 10:00 UTC, 30 minutes, ID planning",,,
-"create an event Planning, ID planning, on 2026-11-18 from 10:00 until 10:30 UTC, note Draft budget",,,
+"schedule Planning, 2026-11-18 10:00 UTC, 30 minutes, ID planning","@c1 syntax.clause form=imperative verb=""schedule"" complement=$n1
+@n1 syntax.nominal head=""Planning""
+@n2 syntax.nominal dependent=""2026-11-18"" dependent=""10:00"" head=""UTC""
+@n3 syntax.nominal dependent=""30"" head=""minutes""
+@n4 syntax.nominal dependent=""ID"" head=""planning""
+@r1 syntax.relation from=$n1 to=$n2
+@r2 syntax.relation from=$n1 to=$n3
+@r3 syntax.relation from=$n1 to=$n4",spacy,judge
+"create an event Planning, ID planning, on 2026-11-18 from 10:00 until 10:30 UTC, note Draft budget","@c1 syntax.clause form=imperative verb=""create"" complement=$n1
+@n1 syntax.nominal dependent=""an"" head=""event""
+@n2 syntax.nominal head=""Planning""
+@n3 syntax.nominal dependent=""ID"" head=""planning""
+@r1 syntax.relation marker=""on"" from=$c1 to=$n4
+@n4 syntax.nominal head=""2026-11-18""
+@r2 syntax.relation attachment=ambiguous marker=""from"" from=$c1 to=$n5
+@n5 syntax.nominal head=""10:00""
+@r3 syntax.relation attachment=ambiguous marker=""until"" from=$c1 to=$n6
+@n6 syntax.nominal dependent=""10:30"" head=""UTC""
+@c2 syntax.clause form=imperative verb=""note"" complement=$n7
+@n7 syntax.nominal dependent=""Draft"" head=""budget""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2
+@r4 syntax.relation from=$n1 to=$n2
+@r5 syntax.relation from=$n2 to=$n3",spacy,judge
 the review event should be called Weekly review,"@n1 syntax.nominal dependent=""the"" dependent=""review"" head=""event""
 @c1 syntax.clause form=declarative auxiliary=""should"" auxiliary=""be"" verb=""called"" subject=$n1 complement=$n2
-@n2 syntax.nominal head=""Weekly review""",hmm-rules,agreement
-"put Review at 10:00 UTC on 2026-11-18, then call the event Weekly review",,,
+@n2 syntax.nominal dependent=""Weekly"" head=""review""",spacy,judge
+"put Review at 10:00 UTC on 2026-11-18, then call the event Weekly review","@c1 syntax.clause form=imperative verb=""put"" complement=$n1
+@n1 syntax.nominal head=""Review""
+@r1 syntax.relation marker=""at"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""10:00"" head=""UTC""
+@r2 syntax.relation marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal head=""2026-11-18""
+@k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""call"" complement=$n4 complement=$n5
+@n4 syntax.nominal dependent=""the"" head=""event""
+@n5 syntax.nominal dependent=""Weekly"" head=""review""",spacy,judge
 "the calendar looks empty tomorrow, so let's put a planning meeting in tomorrow morning, nothing long, just short",,,
-I want Review moved a bit later and the same duration kept,,,
-"Review, move it a touch later",,,
-please stretch the event to be twice as long,,,
+I want Review moved a bit later and the same duration kept,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""want"" subject=$n1
+@n2 syntax.nominal head=""Review""
+@c2 syntax.clause form=nonfinite verb=""moved"" modifier=""later"" subject=$n2 complement=$n3
+@n3 syntax.nominal dependent=""a"" head=""bit""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c2 conjunct=$c3
+@n4 syntax.nominal dependent=""the"" dependent=""same"" head=""duration""
+@c3 syntax.clause form=nonfinite verb=""kept"" subject=$n4
+@r1 syntax.relation from=$c1 to=$k1",spacy,judge
+"Review, move it a touch later","@c1 syntax.clause form=imperative verb=""Review""
+@c2 syntax.clause form=imperative verb=""move"" modifier=""later"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""it""
+@n2 syntax.nominal dependent=""a"" head=""touch""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2",spacy,judge
+please stretch the event to be twice as long,"@c1 syntax.clause form=imperative discourse=""please"" verb=""stretch"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""event""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""be"" modifier=""twice"" modifier=""as"" modifier=""long""",spacy,judge
 click Review,"@c1 syntax.clause form=imperative verb=""click"" complement=$n1
 @n1 syntax.nominal head=""Review""",spacy+hmm-rules,agreement
-"set up Planning on 2026-11-18 at 10:00 UTC for 30 minutes, ID planning",,,
+"set up Planning on 2026-11-18 at 10:00 UTC for 30 minutes, ID planning","@c1 syntax.clause form=imperative verb=""set"" modifier=""up"" complement=$n1
+@n1 syntax.nominal head=""Planning""
+@r1 syntax.relation marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal head=""2026-11-18""
+@r2 syntax.relation marker=""at"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""10:00"" head=""UTC""
+@r3 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n4
+@n4 syntax.nominal dependent=""30"" head=""minutes""
+@n5 syntax.nominal dependent=""ID"" head=""planning""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=fragment complement=$n5",spacy,judge
 "can you rename review as Team review, move it to 2026-11-18, 10:00 UTC, one hour long, notes Bring draft?",,,
-"actually, I need the event twice as long, because we always run out of time",,,
+"actually, I need the event twice as long, because we always run out of time","@c1 syntax.clause form=declarative modifier=""actually"" verb=""need"" modifier=""twice"" modifier=""as"" modifier=""long"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""I""
+@n2 syntax.nominal dependent=""the"" head=""event""
+@r1 syntax.relation marker=""because"" from=$c1 to=$c2
+@n3 syntax.nominal head=""we""
+@c2 syntax.clause form=declarative modifier=""always"" verb=""run"" subject=$n3
+@r2 syntax.relation marker=""out of"" from=$c2 to=$n4
+@n4 syntax.nominal head=""time""",spacy,judge
