@@ -418,3 +418,12 @@ rewrite first.
 ## Licence
 
 MIT (see `LICENSE`).
+
+## The syntactic layer is general
+
+Since 2026-11-28 the syntactic layer is meant to be general, not only webmeet's: `syntactic/general/<name>/` holds
+messages of public corpora and generated messages, in files of at most 100 messages, with no semantic file
+(`node tools/import-general.mjs <name> <messages.txt> --source <tag>` adds them, leaving out any text already in
+`syntactic/`; each folder's `SOURCE.md` says where the messages come from and under which licence). The semantic
+layer stays specific to webmeet. `node tools/layers.mjs check` checks both: the mirror outside `general/`, files of
+at most 100 messages in `general/`, and every text of `syntactic/` unique.

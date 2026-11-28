@@ -1,3 +1,17 @@
+# generated-glm-2026-11-28: generated messages (not real user data)
+
+2,400 messages written on 2026-11-28 by GLM 5.3 (`zai-glm-5-3`, through the Mistral `vibe` CLI) from
+`PROMPT-generate.txt`: 600 per area (calendar, diagram, document, drawing), aimed at constructions the syntax
+formalizers get wrong (long lists, measures and pairings, order words, embedded questions, commands inside longer
+sentences, nouns that look like verbs, typos, names and values after a noun).
+
+They live in the syntactic layer only (no semantic file), as the owner decided on 2026-11-28: the syntactic layer is general. Use: a
+check that repairs of the formalizers are general, and extra variety for training rvss. Treat them as placeholders
+until real messages of the same kinds are found.
+
+## The prompt
+
+```text
 You write test messages for a syntactic analyser. Work only in the current folder. Write ./generated-<area>.txt files, one message per line, plain English as a real user would type to an assistant that edits drawings, charts/diagrams, calendars and documents.
 
 Write 600 messages per area (drawing, diagram, calendar, document) = 2,400 in total, deliberately covering constructions that analysers get wrong, spread evenly:
@@ -10,3 +24,4 @@ Write 600 messages per area (drawing, diagram, calendar, document) = 2,400 in to
 - typos and missing words as people really type ("pleese make the cloumns wider", "hvae the dog look at the cat");
 - names and values after a noun ("set node Backup brown large", "heading Intro level 3 bold").
 Vary length (3 to 45 words), tone and wording; no numbering, no quotes around lines, no explanations, no duplicates. Write the files in a few large writes, then count the lines with wc -l and fix the counts if needed.
+```

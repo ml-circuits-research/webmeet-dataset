@@ -8,7 +8,7 @@
 //       followed by the rows of all parts is the original file, and this is checked before the
 //       original is removed. A file of syntactic/ with the same path is split at the same rows.
 //   node tools/layers.mjs check
-//       Checks the mirror: every file of syntactic/ has a file of semantic/ with the same path,
+//       Checks the mirror: every file of syntactic/ outside syntactic/general/ has a file of semantic/ with the same path,
 //       and both hold the same messages in the same order. Prints what differs and exits with 1.
 import {existsSync, readFileSync, readdirSync, statSync, unlinkSync, writeFileSync} from 'node:fs'
 import {dirname, join, relative} from 'node:path'
@@ -85,18 +85,31 @@ function split(max, dry) {
   console.log(`${files} files over ${max} messages ${dry ? 'would be' : 'were'} split into ${made} parts. semantic/ ${dry ? 'would hold' : 'holds'} ${csvFiles(LAYERS.semantic).length + (dry ? made - files : 0)} files.`)
 }
 
+// syntactic/general/ holds messages of the syntactic layer only (public corpora, generated messages): it has no
+// semantic file. The check keeps its files at most 100 messages and every text of syntactic/ unique.
+const GENERAL = join(LAYERS.syntactic, 'general')
 function check() {
-  const problems = []
-  for (const file of csvFiles(LAYERS.syntactic)) {
+  const problems = [], seen = new Map()
+  for (const file of csvFiles(LAYERS.syntactic)) for (const [k, text] of rawRows(readFileSync(file, 'utf8')).slice(1).map(firstCell).entries()) {
+    if (seen.has(text)) problems.push(`${relative(root, file)}: message ${k + 1} repeats a message of ${seen.get(text)}`)
+    else seen.set(text, relative(root, file))
+  }
+  const general = existsSync(GENERAL) ? csvFiles(GENERAL) : []
+  for (const file of general) {
+    const n = rawRows(readFileSync(file, 'utf8')).length - 1
+    if (n > 100) problems.push(`${relative(root, file)}: ${n} messages, more than 100`)
+  }
+  for (const file of csvFiles(LAYERS.syntactic).filter(file => !file.startsWith(GENERAL + '/'))) {
     const source = join(LAYERS.semantic, relative(LAYERS.syntactic, file))
     if (!existsSync(source)) { problems.push(relative(root, file) + ': no semantic file with this path'); continue }
     const here = rawRows(readFileSync(file, 'utf8')).slice(1).map(firstCell), there = rawRows(readFileSync(source, 'utf8')).slice(1).map(firstCell)
     if (here.length !== there.length) problems.push(`${relative(root, file)}: ${here.length} messages, its semantic file has ${there.length}`)
     else { const at = here.findIndex((message, k) => message !== there[k]); if (at >= 0) problems.push(`${relative(root, file)}: message ${at + 1} differs from its semantic file`) }
   }
-  const done = csvFiles(LAYERS.syntactic).length, all = csvFiles(LAYERS.semantic).length
+  const done = csvFiles(LAYERS.syntactic).length - general.length, all = csvFiles(LAYERS.semantic).length
   for (const problem of problems) console.log(problem)
-  console.log(`${done} of ${all} semantic files have their syntactic file. ${problems.length ? problems.length + ' do not mirror their source.' : 'Every one mirrors its source: same path, same messages, same order.'}`)
+  console.log(`${done} of ${all} semantic files have their syntactic file. ${problems.length ? problems.length + ' problems.' : 'Every one mirrors its source: same path, same messages, same order.'}` +
+    ` syntactic/general/: ${general.length} files of the syntactic layer only. ${seen.size} distinct messages in syntactic/.`)
   if (problems.length) process.exit(1)
 }
 
