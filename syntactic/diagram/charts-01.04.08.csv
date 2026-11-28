@@ -48,12 +48,12 @@ I want a scatter plot of with the colour showing the region scatter: sales versu
 @n1 syntax.nominal dependent=""a"" dependent=""scatter"" head=""plot""
 @r1 syntax.relation marker=""of"" from=$n1 to=$n2
 @n2 syntax.nominal head=""profit""
-@r2 syntax.relation marker=""against"" from=$n1 to=$n3
+@r2 syntax.relation attachment=ambiguous marker=""against"" from=$c1 to=$n3
 @n3 syntax.nominal head=""sales""
 @c2 syntax.clause form=nonfinite verb=""colour-coded""
 @r3 syntax.relation marker=""by"" from=$c2 to=$n4
 @n4 syntax.nominal head=""region""
-@r4 syntax.relation from=$n1 to=$c2",spacy,judge
+@r4 syntax.relation from=$n1 to=$c2",rvss,judge
 how about a scatter plot of the profit-sales relationship — with the colour showing the region?,,,
 "scatter plot of profit against sales, region as the colour",,,
 give me a scatter plot of colour-coded by region scatter: sales versus profit,,,
@@ -229,15 +229,16 @@ give me a line chart of split into category lines scatter: sales over the months
 show monthly sales — with a line split by category in a line chart,,,
 "plot sales by month, lines split out by category as a line chart","@c1 syntax.clause form=imperative verb=""plot"" complement=$n1
 @n1 syntax.nominal head=""sales""
-@r1 syntax.relation attachment=ambiguous marker=""by"" from=$c1 to=$n2
+@r1 syntax.relation marker=""by"" from=$n1 to=$n2
 @n2 syntax.nominal head=""month""
 @n3 syntax.nominal head=""lines""
-@c2 syntax.clause form=declarative verb=""split"" modifier=""out"" subject=$n3
+@c2 syntax.clause form=nonfinite verb=""split"" modifier=""out""
 @r2 syntax.relation marker=""by"" from=$c2 to=$n4
 @n4 syntax.nominal head=""category""
-@r3 syntax.relation attachment=ambiguous marker=""as"" from=$c2 to=$n5
+@r3 syntax.relation marker=""as"" from=$c2 to=$n5
 @n5 syntax.nominal dependent=""a"" dependent=""line"" head=""chart""
-@k1 syntax.coordination conjunct=$c1 conjunct=$c2",prolog,judge
+@r4 syntax.relation from=$n1 to=$n3
+@r5 syntax.relation from=$n3 to=$c2",rvss+spacy,judge
 can you show monthly sales — split into category lines in a line chart?,,,
 "I want sold units by month, with with a line split by category as a line chart",,,
 "let's do a line chart of sales by month, each category on its own line",,,

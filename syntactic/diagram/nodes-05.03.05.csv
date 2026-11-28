@@ -57,20 +57,19 @@ keep undoing until the original order returns while keeping every other box in t
 @r1 syntax.relation marker=""until"" from=$c2 to=$c3
 @n1 syntax.nominal dependent=""the"" dependent=""original"" head=""order""
 @c3 syntax.clause form=declarative verb=""returns"" subject=$n1
-@r2 syntax.relation marker=""while"" from=$c3 to=$c4
+@r2 syntax.relation marker=""while"" from=$c2 to=$c4
 @c4 syntax.clause form=nonfinite verb=""keeping"" complement=$n2
 @n2 syntax.nominal dependent=""every"" dependent=""other"" head=""box""
 @r3 syntax.relation attachment=ambiguous marker=""in"" from=$c4 to=$n3
 @n3 syntax.nominal dependent=""the"" head=""row""
-@r4 syntax.relation attachment=ambiguous marker=""in"" from=$c4 to=$n4
+@r4 syntax.relation marker=""in"" from=$c4 to=$n4
 @n4 syntax.nominal dependent=""the"" dependent=""same"" head=""place""
-@k1 syntax.coordination conjunction=""so"" conjunct=$c1 conjunct=$c5
+@r5 syntax.relation marker=""so"" from=$c4 to=$c5
 @n5 syntax.nominal dependent=""the"" dependent=""whole"" head=""arrangement""
-@c5 syntax.clause form=declarative verb=""remains"" subject=$n5 complement=$n6
-@n6 syntax.nominal head=""easy""
-@r5 syntax.relation marker=""to"" from=$c5 to=$c6
+@c5 syntax.clause form=declarative verb=""remains"" modifier=""easy"" subject=$n5
+@r6 syntax.relation marker=""to"" from=$c5 to=$c6
 @c6 syntax.clause form=nonfinite verb=""follow""
-@r6 syntax.relation from=$c1 to=$c2",prolog,judge
+@r7 syntax.relation from=$c1 to=$c2",spacy,judge
 undo until the figures are in the starting order so the row ends up in exactly the order you expect without disturbing any of the other figures around it,,,
 undo the last change and then redo it,,,
 take back step two and immediately redo step two,,,
@@ -230,11 +229,11 @@ return every box to its original sequence,"@c1 syntax.clause form=imperative ver
 @n2 syntax.nominal dependent=""its"" dependent=""original"" head=""sequence""",spacy-direct+hmm-rules,agreement
 "put them back where they were, in the same order","@c1 syntax.clause form=imperative verb=""put"" modifier=""back"" complement=$n1
 @n1 syntax.nominal head=""them""
-@r1 syntax.relation marker=""where"" from=$c1 to=$c2
+@c2 syntax.clause form=declarative modifier=""where"" verb=""were"" subject=$n2
 @n2 syntax.nominal head=""they""
-@c2 syntax.clause form=declarative verb=""were"" subject=$n2
-@r2 syntax.relation marker=""in"" from=$c2 to=$n3
-@n3 syntax.nominal dependent=""the"" dependent=""same"" head=""order""",distilbert+hmm-rules,judge
+@r1 syntax.relation marker=""in"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""same"" head=""order""
+@r2 syntax.relation from=$c1 to=$c2",spacy,judge
 restore the starting arrangement exactly,"@c1 syntax.clause form=imperative verb=""restore"" modifier=""exactly"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""starting"" head=""arrangement""",spacy-direct+hmm-rules,agreement
 bring the figures back to the exact positions they began in,"@c1 syntax.clause form=imperative verb=""bring"" modifier=""back"" complement=$n1
