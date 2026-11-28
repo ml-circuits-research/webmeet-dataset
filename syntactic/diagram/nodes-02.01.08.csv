@@ -3,78 +3,142 @@ text,sop,source,accepted_by
 @n1 syntax.nominal dependent=""the"" dependent=""process"" head=""diagram""
 @c1 syntax.clause form=imperative verb=""add"" complement=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""task"" head=""box""
-@r2 syntax.relation marker=""with"" from=$c1 to=$n3
-@n3 syntax.nominal dependent=""rounded"" head=""corners""",spacy-direct+hmm-rules,agreement
-add a task box with rounded corners only,,,
-"add a task box with rounded corners, nothing else",,,
-"add a task box with rounded corners, then keep the subprocess box sharp, so the figure still reads clearly at a glance",,,
-"i need you to start with a task box with rounded corners; after that keep the subprocess box sharp, and keep the labels from touching each other",,,
+@r2 syntax.relation marker=""with"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""rounded"" head=""corners""",spacy,judge
+add a task box with rounded corners only,"@c1 syntax.clause form=imperative verb=""add"" modifier=""only"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""task"" head=""box""
+@r1 syntax.relation marker=""with"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""rounded"" head=""corners""",spacy,judge
+"add a task box with rounded corners, nothing else","@c1 syntax.clause form=imperative verb=""add"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""task"" head=""box""
+@r1 syntax.relation marker=""with"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""rounded"" head=""corners""
+@n3 syntax.nominal head=""nothing"" dependent=""else""
+@r2 syntax.relation from=$n1 to=$n3",spacy,judge
+"add a task box with rounded corners, then keep the subprocess box sharp, so the figure still reads clearly at a glance","@c1 syntax.clause form=imperative verb=""add"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""task"" head=""box""
+@r1 syntax.relation marker=""with"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""rounded"" head=""corners""
+@k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""keep"" modifier=""sharp"" complement=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""subprocess"" head=""box""
+@r2 syntax.relation marker=""so"" from=$c2 to=$c3
+@n4 syntax.nominal dependent=""the"" head=""figure""
+@c3 syntax.clause form=declarative modifier=""still"" verb=""reads"" modifier=""clearly"" subject=$n4
+@r3 syntax.relation marker=""at"" from=$c3 to=$n5
+@n5 syntax.nominal dependent=""a"" head=""glance""",spacy,judge
+"i need you to start with a task box with rounded corners; after that keep the subprocess box sharp, and keep the labels from touching each other","@n1 syntax.nominal head=""i""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""start"" subject=$n2
+@r2 syntax.relation marker=""with"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""a"" dependent=""task"" head=""box""
+@r3 syntax.relation marker=""with"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""rounded"" head=""corners""
+@r4 syntax.relation marker=""after"" from=$c3 to=$n5
+@n5 syntax.nominal head=""that""
+@c3 syntax.clause form=imperative verb=""keep"" modifier=""sharp"" complement=$n6
+@n6 syntax.nominal dependent=""the"" dependent=""subprocess"" head=""box""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c3 conjunct=$c4
+@c4 syntax.clause form=imperative verb=""keep"" complement=$n7
+@n7 syntax.nominal dependent=""the"" head=""labels""
+@r5 syntax.relation marker=""from"" from=$c4 to=$c5
+@c5 syntax.clause form=nonfinite verb=""touching"" complement=$n8
+@n8 syntax.nominal dependent=""each"" head=""other""",spacy,judge
 "for the process diagram, add a task box with rounded corners, then keep the subprocess box sharp, with enough room around each part","@r1 syntax.relation marker=""for"" from=$c1 to=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""process"" head=""diagram""
 @c1 syntax.clause form=imperative verb=""add"" complement=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""task"" head=""box""
-@r2 syntax.relation marker=""with"" from=$c1 to=$n3
+@r2 syntax.relation marker=""with"" from=$n2 to=$n3
 @n3 syntax.nominal dependent=""rounded"" head=""corners""
 @k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c2
 @c2 syntax.clause form=imperative verb=""keep"" modifier=""sharp"" complement=$n4
 @n4 syntax.nominal dependent=""the"" dependent=""subprocess"" head=""box""
-@r3 syntax.relation marker=""with"" from=$n4 to=$n5
+@r3 syntax.relation marker=""with"" from=$c2 to=$n5
 @n5 syntax.nominal dependent=""enough"" head=""room""
 @r4 syntax.relation marker=""around"" from=$n5 to=$n6
-@n6 syntax.nominal dependent=""each"" head=""part""",spacy-direct+hmm-rules,agreement
+@n6 syntax.nominal dependent=""each"" head=""part""",spacy,judge
 should I add a task box with rounded corners?,"@c1 syntax.clause form=interrogative auxiliary=""should"" verb=""add"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""I""
 @n2 syntax.nominal dependent=""a"" dependent=""task"" head=""box""
-@r1 syntax.relation marker=""with"" from=$c1 to=$n3
-@n3 syntax.nominal dependent=""rounded"" head=""corners""",hmm-rules,judge
-what about adding a task box with rounded corners?,,,
-pleese add a task box with rounded corners,"@n1 syntax.nominal head=""pleese""
-@c1 syntax.clause form=declarative verb=""add"" subject=$n1 complement=$n2
+@r1 syntax.relation marker=""with"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""rounded"" head=""corners""",spacy,judge
+what about adding a task box with rounded corners?,"@n1 syntax.nominal head=""what""
+@r1 syntax.relation marker=""about"" from=$c2 to=$c1
+@c1 syntax.clause form=nonfinite verb=""adding"" complement=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""task"" head=""box""
-@r1 syntax.relation marker=""with"" from=$c1 to=$n3
-@n3 syntax.nominal dependent=""rounded"" head=""corners""",spacy-direct+hmm-rules,agreement
+@r2 syntax.relation marker=""with"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""rounded"" head=""corners""
+@c2 syntax.clause form=fragment complement=$n1",spacy,judge
+pleese add a task box with rounded corners,"@c1 syntax.clause form=imperative discourse=""pleese"" verb=""add"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""task"" head=""box""
+@r1 syntax.relation marker=""with"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""rounded"" head=""corners""",spacy,judge
 I nede a task box with rounded corners before the talk,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""nede"" subject=$n1 complement=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""task"" head=""box""
-@r1 syntax.relation marker=""with"" from=$c1 to=$n3
+@r1 syntax.relation marker=""with"" from=$n2 to=$n3
 @n3 syntax.nominal dependent=""rounded"" head=""corners""
 @r2 syntax.relation marker=""before"" from=$c1 to=$n4
-@n4 syntax.nominal dependent=""the"" head=""talk""",spacy-direct+hmm-rules,agreement
+@n4 syntax.nominal dependent=""the"" head=""talk""",spacy,judge
 could you highlight the branch below Left in plum?,,,
 how do I colour a whole branch plum?,,,
 let's paint the subtree under Left plum,,,
 make the Alpha branch olive,,,
 please to colour the branch under Left plum,,,
-"make sure every node on the Left branch turns plum, children included",,,
+"make sure every node on the Left branch turns plum, children included","@c1 syntax.clause form=imperative verb=""make"" modifier=""sure""
+@n1 syntax.nominal dependent=""every"" head=""node""
+@r1 syntax.relation marker=""on"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""Left"" head=""branch""
+@c2 syntax.clause form=declarative verb=""turns"" subject=$n1 complement=$n3
+@n3 syntax.nominal head=""plum""
+@n4 syntax.nominal head=""children""
+@c3 syntax.clause form=nonfinite verb=""included"" subject=$n4
+@r2 syntax.relation from=$c1 to=$c2
+@r3 syntax.relation from=$c2 to=$c3",spacy,judge
 colour the branch under Alpha olive and leave the rest of the tree alone,,,
 would it be possible to put a plum tint on the Left branch?,"@c1 syntax.clause form=interrogative auxiliary=""would"" verb=""be"" modifier=""possible"" subject=$n1
 @n1 syntax.nominal head=""it""
 @r1 syntax.relation marker=""to"" from=$c1 to=$c2
 @c2 syntax.clause form=nonfinite verb=""put"" complement=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""plum"" head=""tint""
-@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c2 to=$n3
-@n3 syntax.nominal dependent=""the"" dependent=""Left"" head=""branch""",spacy-direct+hmm-rules,agreement
+@r2 syntax.relation marker=""on"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""Left"" head=""branch""",spacy,judge
 please highlight everything below Alpha in olive,"@c1 syntax.clause form=imperative discourse=""please"" verb=""highlight"" complement=$n1
 @n1 syntax.nominal head=""everything""
-@r1 syntax.relation marker=""below"" from=$c1 to=$n2
+@r1 syntax.relation marker=""below"" from=$n1 to=$n2
 @n2 syntax.nominal head=""Alpha""
-@r2 syntax.relation marker=""in"" from=$c1 to=$n3
-@n3 syntax.nominal head=""olive""",spacy-direct+hmm-rules,agreement
+@r2 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n3
+@n3 syntax.nominal head=""olive""",spacy,judge
 "just the Left branch, in plum","@c1 syntax.clause form=fragment modifier=""just"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""Left"" head=""branch""
 @r1 syntax.relation marker=""in"" from=$n1 to=$n2
 @n2 syntax.nominal head=""plum""",spacy+hmm-rules,agreement
-that branch olive,,,
+that branch olive,"@n1 syntax.nominal dependent=""that"" head=""branch""
+@c1 syntax.clause form=fragment modifier=""olive"" complement=$n1",spacy,judge
 colour the subtree plum,,,
 colour the branch under Alpha olive and give it a matching outline,,,
 "paint the whole Left branch plum, from the child down to the last leaf, without touching the other side",,,
-"the branch that starts at Alpha should be entirely olive, every box and every arrow below it included",,,
+"the branch that starts at Alpha should be entirely olive, every box and every arrow below it included","@n1 syntax.nominal dependent=""the"" head=""branch""
+@r1 syntax.relation marker=""that"" from=$n1 to=$c1
+@c1 syntax.clause form=declarative verb=""starts""
+@r2 syntax.relation marker=""at"" from=$c1 to=$n2
+@n2 syntax.nominal head=""Alpha""
+@c2 syntax.clause form=declarative auxiliary=""should"" verb=""be"" modifier=""entirely"" modifier=""olive"" subject=$n1
+@n3 syntax.nominal dependent=""every"" head=""box""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n3 conjunct=$n4
+@n4 syntax.nominal dependent=""every"" head=""arrow""
+@r3 syntax.relation marker=""below"" from=$n4 to=$n5
+@n5 syntax.nominal head=""it""
+@c3 syntax.clause form=nonfinite verb=""included"" subject=$k1
+@r4 syntax.relation from=$c2 to=$c3",spacy,judge
 "now the whole branch under it, in plum","@c1 syntax.clause form=fragment modifier=""now"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""whole"" head=""branch""
 @r1 syntax.relation marker=""under"" from=$n1 to=$n2
 @n2 syntax.nominal head=""it""
-@r2 syntax.relation marker=""in"" from=$c1 to=$n3
-@n3 syntax.nominal head=""plum""",hmm-rules,agreement
+@r2 syntax.relation marker=""in"" from=$n1 to=$n3
+@n3 syntax.nominal head=""plum""",spacy,judge
 this branch plum,,,
 mark Done with a double circle and add the entry arrow into Idle,,,
 could you give the last state a double circle and point an entry arrow at Wait?,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""give"" subject=$n1 complement=$n2 complement=$n3
@@ -86,19 +150,48 @@ could you give the last state a double circle and point an entry arrow at Wait?,
 @n4 syntax.nominal dependent=""an"" dependent=""entry"" head=""arrow""
 @r1 syntax.relation marker=""at"" from=$c2 to=$n5
 @n5 syntax.nominal head=""Wait""",spacy+spacy-direct+hmm-rules,agreement
-I need a double circle on Done and an entry arrow before Idle,,,
-let's mark the end with a double circle and start with an entry arrow,,,
+I need a double circle on Done and an entry arrow before Idle,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1 complement=$k1
+@n2 syntax.nominal dependent=""a"" dependent=""double"" head=""circle""
+@r1 syntax.relation marker=""on"" from=$n2 to=$n3
+@n3 syntax.nominal head=""Done""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n4
+@n4 syntax.nominal dependent=""an"" dependent=""entry"" head=""arrow""
+@r2 syntax.relation marker=""before"" from=$n4 to=$n5
+@n5 syntax.nominal head=""Idle""",spacy,judge
+let's mark the end with a double circle and start with an entry arrow,"@c1 syntax.clause form=imperative verb=""let"" complement=$n1
+@n1 syntax.nominal head=""'s""
+@c2 syntax.clause form=nonfinite verb=""mark"" complement=$n2
+@n2 syntax.nominal dependent=""the"" head=""end""
+@r1 syntax.relation marker=""with"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""a"" dependent=""double"" head=""circle""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c2 conjunct=$c3
+@c3 syntax.clause form=nonfinite verb=""start""
+@r2 syntax.relation marker=""with"" from=$c3 to=$n4
+@n4 syntax.nominal dependent=""an"" dependent=""entry"" head=""arrow""
+@r3 syntax.relation from=$c1 to=$k1",spacy,judge
 please to add a double circle to Stop and the entry arrow,,,
-what I want is a double circle for the final state and an entry arrow for the first,,,
+what I want is a double circle for the final state and an entry arrow for the first,"@n1 syntax.nominal head=""what""
+@n2 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""want"" subject=$n2 complement=$n1
+@c2 syntax.clause form=declarative verb=""is"" complement=$k1
+@n3 syntax.nominal dependent=""a"" dependent=""double"" head=""circle""
+@r1 syntax.relation marker=""for"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""the"" dependent=""final"" head=""state""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n3 conjunct=$n5
+@n5 syntax.nominal dependent=""an"" dependent=""entry"" head=""arrow""
+@r2 syntax.relation marker=""for"" from=$n5 to=$n6
+@n6 syntax.nominal dependent=""the"" head=""first""
+@r3 syntax.relation from=$c2 to=$c1",spacy,judge
 put a double circle on Done and draw the entry arrow into Idle,"@c1 syntax.clause form=imperative verb=""put"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""double"" head=""circle""
-@r1 syntax.relation marker=""on"" from=$c1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
 @n2 syntax.nominal head=""Done""
 @k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
 @c2 syntax.clause form=imperative verb=""draw"" complement=$n3
 @n3 syntax.nominal dependent=""the"" dependent=""entry"" head=""arrow""
-@r2 syntax.relation marker=""into"" from=$n3 to=$n4
-@n4 syntax.nominal head=""Idle""",spacy-direct+hmm-rules,agreement
+@r2 syntax.relation marker=""into"" from=$c2 to=$n4
+@n4 syntax.nominal head=""Idle""",spacy,judge
 just the double circle and the entry arrow,"@c1 syntax.clause form=fragment modifier=""just"" complement=$k1
 @n1 syntax.nominal dependent=""the"" dependent=""double"" head=""circle""
 @k1 syntax.coordination conjunction=""and"" conjunct=$n1 conjunct=$n2
@@ -107,7 +200,8 @@ double circle at the end,"@n1 syntax.nominal dependent=""double"" head=""circle"
 @r1 syntax.relation marker=""at"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""the"" head=""end""
 @c1 syntax.clause form=fragment complement=$n1",spacy+spacy-direct+hmm-rules,agreement
-the usual start and end markers,,,
+the usual start and end markers,"@n1 syntax.nominal dependent=""the"" dependent=""usual"" dependent=""start"" dependent=""and"" dependent=""end"" head=""markers""
+@c1 syntax.clause form=fragment complement=$n1",spacy,judge
 mark Done as final with a double circle and give Idle an incoming entry arrow,,,
 add a small entry arrow that points into Wait and close the diagram with a double circle around Stop,"@c1 syntax.clause form=imperative verb=""add"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""small"" dependent=""entry"" head=""arrow""
@@ -118,53 +212,103 @@ add a small entry arrow that points into Wait and close the diagram with a doubl
 @k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c3
 @c3 syntax.clause form=imperative verb=""close"" complement=$n3
 @n3 syntax.nominal dependent=""the"" head=""diagram""
-@r3 syntax.relation marker=""with"" from=$n3 to=$n4
+@r3 syntax.relation attachment=ambiguous marker=""with"" from=$c3 to=$n4
 @n4 syntax.nominal dependent=""a"" dependent=""double"" head=""circle""
-@r4 syntax.relation marker=""around"" from=$c3 to=$n5
-@n5 syntax.nominal head=""Stop""",hmm-rules,judge
-"the final state should be a double circle around Done, and the very first state needs the little entry arrow that comes from nowhere",,,
+@r4 syntax.relation marker=""around"" from=$n4 to=$n5
+@n5 syntax.nominal head=""Stop""",spacy,judge
+"the final state should be a double circle around Done, and the very first state needs the little entry arrow that comes from nowhere","@n1 syntax.nominal dependent=""the"" dependent=""final"" head=""state""
+@c1 syntax.clause form=declarative auxiliary=""should"" verb=""be"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""double"" head=""circle""
+@r1 syntax.relation marker=""around"" from=$n2 to=$n3
+@n3 syntax.nominal head=""Done""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@n4 syntax.nominal dependent=""the"" dependent=""very"" dependent=""first"" head=""state""
+@c2 syntax.clause form=declarative verb=""needs"" subject=$n4 complement=$n5
+@n5 syntax.nominal dependent=""the"" dependent=""little"" dependent=""entry"" head=""arrow""
+@r2 syntax.relation marker=""that"" from=$n5 to=$c3
+@c3 syntax.clause form=declarative verb=""comes""
+@r3 syntax.relation marker=""from"" from=$c3 to=$n6
+@n6 syntax.nominal head=""nowhere""",spacy,judge
 mark Stop with a duble circle and add the entry arrow,"@c1 syntax.clause form=imperative verb=""mark"" complement=$n1
 @n1 syntax.nominal head=""Stop""
-@r1 syntax.relation marker=""with"" from=$c1 to=$n2
+@r1 syntax.relation marker=""with"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""duble"" head=""circle""
 @k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
 @c2 syntax.clause form=imperative verb=""add"" complement=$n3
-@n3 syntax.nominal dependent=""the"" dependent=""entry"" head=""arrow""",hmm-rules,agreement
-add the entry arow into Idle and the double circle,,,
-now mark Stop final with a double circle and add the entry arrow,,,
-"double circle on Stop, entry arrow into Wait",,,
+@n3 syntax.nominal dependent=""the"" dependent=""entry"" head=""arrow""",spacy,judge
+add the entry arow into Idle and the double circle,"@c1 syntax.clause form=imperative verb=""add"" complement=$n1
+@n1 syntax.nominal dependent=""the"" dependent=""entry"" head=""arow""
+@r1 syntax.relation marker=""into"" from=$n1 to=$k1
+@n2 syntax.nominal head=""Idle""
+@k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""double"" head=""circle""",spacy,judge
+now mark Stop final with a double circle and add the entry arrow,"@c1 syntax.clause form=imperative discourse=""now"" verb=""mark"" modifier=""final"" complement=$n1
+@n1 syntax.nominal head=""Stop""
+@r1 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""double"" head=""circle""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""add"" complement=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""entry"" head=""arrow""",spacy,judge
+"double circle on Stop, entry arrow into Wait","@n1 syntax.nominal dependent=""double"" head=""circle""
+@r1 syntax.relation marker=""on"" from=$n1 to=$n2
+@n2 syntax.nominal head=""Stop""
+@n3 syntax.nominal dependent=""entry"" head=""arrow""
+@r2 syntax.relation marker=""into"" from=$n3 to=$n4
+@n4 syntax.nominal head=""Wait""
+@c1 syntax.clause form=fragment complement=$n1
+@r3 syntax.relation from=$n1 to=$n3",spacy,judge
 "turn each milestone into a circle on a stem, like a lollipop","@c1 syntax.clause form=imperative verb=""turn"" complement=$n1
 @n1 syntax.nominal dependent=""each"" head=""milestone""
 @r1 syntax.relation marker=""into"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""a"" head=""circle""
-@r2 syntax.relation marker=""on"" from=$n1 to=$n3
+@r2 syntax.relation marker=""on"" from=$n2 to=$n3
 @n3 syntax.nominal dependent=""a"" head=""stem""
-@r3 syntax.relation marker=""like"" from=$c1 to=$n4
-@n4 syntax.nominal dependent=""a"" head=""lollipop""",hmm-rules,agreement
+@r3 syntax.relation marker=""like"" from=$n2 to=$n4
+@n4 syntax.nominal dependent=""a"" head=""lollipop""",spacy,judge
 could you draw circles on stems for the timeline?,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""draw"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""circles""
 @r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
 @n3 syntax.nominal head=""stems""
-@r2 syntax.relation marker=""for"" from=$n3 to=$n4
-@n4 syntax.nominal dependent=""the"" head=""timeline""",spacy-direct+hmm-rules,agreement
+@r2 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""timeline""",spacy,judge
 I need a circle and a stem for every point,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""need"" subject=$n1 complement=$k1
 @n2 syntax.nominal dependent=""a"" head=""circle""
 @k1 syntax.coordination conjunction=""and"" conjunct=$n2 conjunct=$n3
 @n3 syntax.nominal dependent=""a"" head=""stem""
-@r1 syntax.relation marker=""for"" from=$n3 to=$n4
-@n4 syntax.nominal dependent=""every"" head=""point""",spacy-direct+hmm-rules,agreement
+@r1 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n4
+@n4 syntax.nominal dependent=""every"" head=""point""",spacy,judge
 how do I get the lollipop look with a circle on a stem?,,,
 circles on stems for all the dates,"@n1 syntax.nominal head=""circles""
 @r1 syntax.relation marker=""on"" from=$n1 to=$n2
 @n2 syntax.nominal head=""stems""
-@r2 syntax.relation marker=""for"" from=$n2 to=$n3
+@r2 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""all"" dependent=""the"" head=""dates""
-@c1 syntax.clause form=fragment complement=$n1",spacy-direct+hmm-rules,agreement
-let's put a circle on top of each stem,,,
-"circle on a stem, every point",,,
-please to draw a circle on a stem under each date,,,
+@c1 syntax.clause form=fragment complement=$n1",spacy,judge
+let's put a circle on top of each stem,"@c1 syntax.clause form=imperative verb=""let"" complement=$n1
+@n1 syntax.nominal head=""'s""
+@c2 syntax.clause form=nonfinite verb=""put"" complement=$n2
+@n2 syntax.nominal dependent=""a"" head=""circle""
+@r1 syntax.relation marker=""on"" from=$c2 to=$n3
+@n3 syntax.nominal head=""top""
+@r2 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""each"" head=""stem""
+@r3 syntax.relation from=$c1 to=$c2",spacy,judge
+"circle on a stem, every point","@n1 syntax.nominal head=""circle""
+@r1 syntax.relation marker=""on"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""a"" head=""stem""
+@n3 syntax.nominal dependent=""every"" head=""point""
+@c1 syntax.clause form=fragment complement=$n1
+@r2 syntax.relation from=$n1 to=$n3",spacy,judge
+please to draw a circle on a stem under each date,"@c1 syntax.clause form=fragment discourse=""please""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""draw"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""circle""
+@r2 syntax.relation marker=""on"" from=$c2 to=$n2
+@n2 syntax.nominal dependent=""a"" head=""stem""
+@r3 syntax.relation marker=""under"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""each"" head=""date""",spacy,judge
 "what I want is the lollipop style, one circle per stem","@n1 syntax.nominal head=""what""
 @n2 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""want"" subject=$n2 complement=$n1
@@ -174,58 +318,73 @@ please to draw a circle on a stem under each date,,,
 @r1 syntax.relation marker=""per"" from=$n4 to=$n5
 @n5 syntax.nominal head=""stem""
 @r2 syntax.relation from=$c2 to=$c1",rvss,judge
-make sure each circle sits exactly on its stem,,,
-would it be possible to use circles on stems instead of boxes?,,,
+make sure each circle sits exactly on its stem,"@c1 syntax.clause form=imperative verb=""make"" modifier=""sure""
+@n1 syntax.nominal dependent=""each"" head=""circle""
+@c2 syntax.clause form=declarative verb=""sits"" modifier=""exactly"" subject=$n1
+@r1 syntax.relation marker=""on"" from=$c2 to=$n2
+@n2 syntax.nominal dependent=""its"" head=""stem""
+@r2 syntax.relation from=$c1 to=$c2",spacy,judge
+would it be possible to use circles on stems instead of boxes?,"@c1 syntax.clause form=interrogative auxiliary=""would"" verb=""be"" modifier=""possible"" subject=$n1
+@n1 syntax.nominal head=""it""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""use"" complement=$n2
+@n2 syntax.nominal head=""circles""
+@r2 syntax.relation marker=""on"" from=$c2 to=$k1
+@n3 syntax.nominal head=""stems""
+@k1 syntax.coordination conjunction=""instead of"" conjunct=$n3 conjunct=$n4
+@n4 syntax.nominal head=""boxes""",spacy,judge
 please replace the boxes with a circle on a stem,"@c1 syntax.clause form=imperative discourse=""please"" verb=""replace"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""boxes""
-@r1 syntax.relation marker=""with"" from=$c1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""a"" head=""circle""
-@r2 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
-@n3 syntax.nominal dependent=""a"" head=""stem""",spacy-direct+hmm-rules,agreement
-"the usual timeline, circles",,,
+@r2 syntax.relation marker=""on"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""a"" head=""stem""",spacy,judge
+"the usual timeline, circles","@n1 syntax.nominal dependent=""the"" dependent=""usual"" head=""timeline""
+@n2 syntax.nominal head=""circles""
+@c1 syntax.clause form=fragment complement=$n1 complement=$n2",spacy,judge
 put a circle on each stem and keep all the stems the same height,"@c1 syntax.clause form=imperative verb=""put"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""circle""
-@r1 syntax.relation marker=""on"" from=$c1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""each"" head=""stem""
 @k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
 @c2 syntax.clause form=imperative verb=""keep"" complement=$n3 complement=$n4
 @n3 syntax.nominal dependent=""all"" dependent=""the"" head=""stems""
-@n4 syntax.nominal dependent=""the"" dependent=""same"" head=""height""",spacy-direct+hmm-rules,agreement
+@n4 syntax.nominal dependent=""the"" dependent=""same"" head=""height""",spacy,judge
 draw the timeline as lollipops: one circle for each date and a vertical stem from the circle down to the line,,,
 "every point on the timeline should be a small circle sitting on top of its own vertical stem, all stems the same length",,,
 draw circles on stem for the timeline,"@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
 @n1 syntax.nominal head=""circles""
-@r1 syntax.relation marker=""on"" from=$c1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
 @n2 syntax.nominal head=""stem""
-@r2 syntax.relation marker=""for"" from=$n2 to=$n3
-@n3 syntax.nominal dependent=""the"" head=""timeline""",spacy-direct+hmm-rules,agreement
+@r2 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""timeline""",spacy,judge
 now give each one a circle on a stem,"@c1 syntax.clause form=imperative modifier=""now"" verb=""give"" complement=$n1 complement=$n2
 @n1 syntax.nominal dependent=""each"" head=""one""
 @n2 syntax.nominal dependent=""a"" head=""circle""
-@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
-@n3 syntax.nominal dependent=""a"" head=""stem""",spacy-direct+hmm-rules,agreement
+@r1 syntax.relation marker=""on"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""a"" head=""stem""",spacy,judge
 circles on stems,"@n1 syntax.nominal head=""circles""
 @r1 syntax.relation marker=""on"" from=$n1 to=$n2
 @n2 syntax.nominal head=""stems""
 @c1 syntax.clause form=fragment complement=$n1",spacy+spacy-direct+hmm-rules,agreement
 put a pin on Approve and hang the label off it,"@c1 syntax.clause form=imperative verb=""put"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""pin""
-@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
+@r1 syntax.relation marker=""on"" from=$c1 to=$n2
 @n2 syntax.nominal head=""Approve""
 @k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
 @c2 syntax.clause form=imperative verb=""hang"" complement=$n3
 @n3 syntax.nominal dependent=""the"" head=""label""
 @r2 syntax.relation marker=""off"" from=$c2 to=$n4
-@n4 syntax.nominal head=""it""",spacy-direct+hmm-rules,agreement
+@n4 syntax.nominal head=""it""",spacy,judge
 put a coordinate cross at Approve,"@c1 syntax.clause form=imperative verb=""put"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""coordinate"" head=""cross""
-@r1 syntax.relation marker=""at"" from=$n1 to=$n2
-@n2 syntax.nominal head=""Approve""",spacy-direct+hmm-rules,agreement
+@r1 syntax.relation marker=""at"" from=$c1 to=$n2
+@n2 syntax.nominal head=""Approve""",spacy,judge
 could you draw a coordinate cross on the Home node?,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""draw"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""a"" dependent=""coordinate"" head=""cross""
-@r1 syntax.relation marker=""on"" from=$c1 to=$n3
-@n3 syntax.nominal dependent=""the"" dependent=""Home"" head=""node""",spacy-direct+hmm-rules,agreement
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""Home"" head=""node""",spacy,judge
 how do I add a coordinate cross to a node?,"@c1 syntax.clause form=interrogative modifier=""how"" auxiliary=""do"" verb=""add"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""I""
 @n2 syntax.nominal dependent=""a"" dependent=""coordinate"" head=""cross""
@@ -237,23 +396,35 @@ how do I add a coordinate cross to a node?,"@c1 syntax.clause form=interrogative
 @c1 syntax.clause form=fragment discourse=""please"" complement=$n1",spacy+spacy-direct+hmm-rules,agreement
 let's put a coordinate cross on Home,"@c1 syntax.clause form=imperative verb=""let"" complement=$n1
 @n1 syntax.nominal head=""'s""
-@c2 syntax.clause form=nonfinite verb=""put"" subject=$n1 complement=$n2
+@c2 syntax.clause form=nonfinite verb=""put"" complement=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""coordinate"" head=""cross""
 @r1 syntax.relation marker=""on"" from=$c2 to=$n3
 @n3 syntax.nominal head=""Home""
-@r2 syntax.relation from=$c1 to=$c2",hmm-rules,agreement
+@r2 syntax.relation from=$c1 to=$c2",spacy,judge
 "coordinate cross, Approve",,,
-please to place a coordinate cross at Home,,,
-make sure the coordinate cross sits at the centre of Home,,,
+please to place a coordinate cross at Home,"@c1 syntax.clause form=fragment discourse=""please""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""place"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""coordinate"" head=""cross""
+@r2 syntax.relation marker=""at"" from=$c2 to=$n2
+@n2 syntax.nominal head=""Home""",spacy,judge
+make sure the coordinate cross sits at the centre of Home,"@c1 syntax.clause form=imperative verb=""make"" modifier=""sure""
+@n1 syntax.nominal dependent=""the"" dependent=""coordinate"" head=""cross""
+@c2 syntax.clause form=declarative verb=""sits"" subject=$n1
+@r1 syntax.relation marker=""at"" from=$c2 to=$n2
+@n2 syntax.nominal dependent=""the"" head=""centre""
+@r2 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal head=""Home""
+@r3 syntax.relation from=$c1 to=$c2",spacy,judge
 put a coordinate cross at Approve and align its axes with the page,"@c1 syntax.clause form=imperative verb=""put"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""coordinate"" head=""cross""
-@r1 syntax.relation marker=""at"" from=$n1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""at"" from=$c1 to=$n2
 @n2 syntax.nominal head=""Approve""
 @k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
 @c2 syntax.clause form=imperative verb=""align"" complement=$n3
 @n3 syntax.nominal dependent=""its"" head=""axes""
 @r2 syntax.relation marker=""with"" from=$c2 to=$n4
-@n4 syntax.nominal dependent=""the"" head=""page""",spacy-direct+hmm-rules,agreement
+@n4 syntax.nominal dependent=""the"" head=""page""",spacy,judge
 would it be possible to mark Home with a coordinate cross?,"@c1 syntax.clause form=interrogative auxiliary=""would"" verb=""be"" modifier=""possible"" subject=$n1
 @n1 syntax.nominal head=""it""
 @r1 syntax.relation marker=""to"" from=$c1 to=$c2
@@ -273,27 +444,42 @@ the usual local frame,"@n1 syntax.nominal dependent=""the"" dependent=""usual"" 
 @c1 syntax.clause form=fragment complement=$n1",spacy+spacy-direct+hmm-rules,agreement
 draw a coordinate cross at Approve and label its two directions,"@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""coordinate"" head=""cross""
-@r1 syntax.relation marker=""at"" from=$n1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""at"" from=$c1 to=$n2
 @n2 syntax.nominal head=""Approve""
 @k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
 @c2 syntax.clause form=imperative verb=""label"" complement=$n3
-@n3 syntax.nominal dependent=""its"" dependent=""two"" head=""directions""",spacy-direct+hmm-rules,agreement
+@n3 syntax.nominal dependent=""its"" dependent=""two"" head=""directions""",spacy,judge
 the Home box should carry a small coordinate cross so the local directions are clear,"@n1 syntax.nominal dependent=""the"" dependent=""Home"" head=""box""
 @c1 syntax.clause form=declarative auxiliary=""should"" verb=""carry"" subject=$n1 complement=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""small"" dependent=""coordinate"" head=""cross""
 @r1 syntax.relation marker=""so"" from=$c1 to=$c2
 @n3 syntax.nominal dependent=""the"" dependent=""local"" head=""directions""
 @c2 syntax.clause form=declarative verb=""are"" modifier=""clear"" subject=$n3",spacy+spacy-direct+hmm-rules,agreement
-"I want a coordinate cross drawn at the centre of Approve, with the horizontal and vertical arms the same length",,,
+"I want a coordinate cross drawn at the centre of Approve, with the horizontal and vertical arms the same length","@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""want"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""coordinate"" head=""cross""
+@c2 syntax.clause form=nonfinite verb=""drawn""
+@r1 syntax.relation marker=""at"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""the"" head=""centre""
+@r2 syntax.relation marker=""of"" from=$n3 to=$n4
+@n4 syntax.nominal head=""Approve""
+@r3 syntax.relation marker=""with"" from=$c1 to=$c3
+@n5 syntax.nominal dependent=""the"" dependent=""horizontal"" dependent=""and"" dependent=""vertical"" head=""arms""
+@n6 syntax.nominal dependent=""the"" dependent=""same"" head=""length""
+@r4 syntax.relation from=$n2 to=$c2
+@c3 syntax.clause form=fragment complement=$n5 complement=$n6",spacy,judge
 put a coordiante cross at Home,"@c1 syntax.clause form=imperative verb=""put"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""coordiante"" head=""cross""
-@r1 syntax.relation attachment=ambiguous marker=""at"" from=$c1 to=$n2
-@n2 syntax.nominal head=""Home""",prolog+spacy+z3,judge
+@r1 syntax.relation marker=""at"" from=$c1 to=$n2
+@n2 syntax.nominal head=""Home""",rvss,judge
 draw a coordinate cros on the Approve node,"@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""coordinate"" head=""cros""
-@r1 syntax.relation marker=""on"" from=$n1 to=$n2
-@n2 syntax.nominal dependent=""the"" dependent=""Approve"" head=""node""",spacy-direct+hmm-rules,agreement
-now put a coordinate cross at Home,,,
+@r1 syntax.relation attachment=ambiguous marker=""on"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""the"" dependent=""Approve"" head=""node""",spacy,judge
+now put a coordinate cross at Home,"@c1 syntax.clause form=imperative discourse=""now"" verb=""put"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""coordinate"" head=""cross""
+@r1 syntax.relation marker=""at"" from=$c1 to=$n2
+@n2 syntax.nominal head=""Home""",spacy,judge
 "no, a cross at Approve, not at the origin","@c1 syntax.clause form=fragment discourse=""no"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""cross""
 @r1 syntax.relation marker=""at"" from=$n1 to=$n2
@@ -310,42 +496,59 @@ give Review a dashed outline,"@c1 syntax.clause form=imperative verb=""give"" co
 could you put a dashed outline around Check?,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""put"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""a"" dependent=""dashed"" head=""outline""
-@r1 syntax.relation marker=""around"" from=$n2 to=$n3
-@n3 syntax.nominal head=""Check""",spacy-direct+hmm-rules,agreement
+@r1 syntax.relation marker=""around"" from=$c1 to=$n3
+@n3 syntax.nominal head=""Check""",spacy,judge
 I need Review with a dashed outline,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""need"" subject=$n1 complement=$n2
 @n2 syntax.nominal head=""Review""
-@r1 syntax.relation marker=""with"" from=$c1 to=$n3
-@n3 syntax.nominal dependent=""a"" dependent=""dashed"" head=""outline""",spacy-direct+hmm-rules,agreement
+@r1 syntax.relation marker=""with"" from=$n2 to=$n3
+@n3 syntax.nominal dependent=""a"" dependent=""dashed"" head=""outline""",spacy,judge
 how do I add a dashed outline to a node?,"@c1 syntax.clause form=interrogative modifier=""how"" auxiliary=""do"" verb=""add"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""I""
 @n2 syntax.nominal dependent=""a"" dependent=""dashed"" head=""outline""
-@r1 syntax.relation marker=""to"" from=$n2 to=$n3
-@n3 syntax.nominal dependent=""a"" head=""node""",spacy-direct+hmm-rules,agreement
+@r1 syntax.relation marker=""to"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""a"" head=""node""",spacy,judge
 "dashed outline on Review, please","@n1 syntax.nominal dependent=""dashed"" head=""outline""
 @r1 syntax.relation marker=""on"" from=$n1 to=$n2
 @n2 syntax.nominal head=""Review""
 @c1 syntax.clause form=fragment discourse=""please"" complement=$n1",spacy+spacy-direct+hmm-rules,agreement
 let's switch Check to a dashed outline,"@c1 syntax.clause form=imperative verb=""let"" complement=$n1
 @n1 syntax.nominal head=""'s""
-@c2 syntax.clause form=nonfinite verb=""switch"" subject=$n1 complement=$n2
+@c2 syntax.clause form=nonfinite verb=""switch"" complement=$n2
 @n2 syntax.nominal head=""Check""
 @r1 syntax.relation marker=""to"" from=$c2 to=$n3
 @n3 syntax.nominal dependent=""a"" dependent=""dashed"" head=""outline""
-@r2 syntax.relation from=$c1 to=$c2",hmm-rules,agreement
-"dashed outline, Review",,,
-what I want is Review outlined with dashes,,,
+@r2 syntax.relation from=$c1 to=$c2",spacy,judge
+"dashed outline, Review","@n1 syntax.nominal dependent=""dashed"" head=""outline""
+@n2 syntax.nominal head=""Review""
+@c1 syntax.clause form=fragment complement=$n1 complement=$n2",spacy,judge
+what I want is Review outlined with dashes,"@n1 syntax.nominal head=""what""
+@n2 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""want"" subject=$n2 complement=$n1
+@c2 syntax.clause form=declarative verb=""is"" complement=$n3
+@n3 syntax.nominal head=""Review""
+@c3 syntax.clause form=nonfinite verb=""outlined""
+@r1 syntax.relation marker=""with"" from=$c3 to=$n4
+@n4 syntax.nominal head=""dashes""
+@r2 syntax.relation from=$c2 to=$c1
+@r3 syntax.relation from=$n3 to=$c3",spacy,judge
 put a dashed outline around Review and leave the fill as it is,"@c1 syntax.clause form=imperative verb=""put"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""dashed"" head=""outline""
-@r1 syntax.relation marker=""around"" from=$n1 to=$n2
+@r1 syntax.relation marker=""around"" from=$c1 to=$n2
 @n2 syntax.nominal head=""Review""
 @k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
 @c2 syntax.clause form=imperative verb=""leave"" complement=$n3
 @n3 syntax.nominal dependent=""the"" head=""fill""
 @r2 syntax.relation marker=""as"" from=$c2 to=$c3
 @n4 syntax.nominal head=""it""
-@c3 syntax.clause form=declarative verb=""is"" subject=$n4",spacy-direct+hmm-rules,agreement
-would it be possible to outline Check with dashes?,,,
+@c3 syntax.clause form=declarative verb=""is"" subject=$n4",spacy,judge
+would it be possible to outline Check with dashes?,"@c1 syntax.clause form=interrogative auxiliary=""would"" verb=""be"" modifier=""possible"" subject=$n1
+@n1 syntax.nominal head=""it""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""outline"" complement=$n2
+@n2 syntax.nominal head=""Check""
+@r2 syntax.relation attachment=ambiguous marker=""with"" from=$c2 to=$n3
+@n3 syntax.nominal head=""dashes""",spacy,judge
 please change Review's outline to dashed,"@c1 syntax.clause form=imperative discourse=""please"" verb=""change"" complement=$n2
 @n1 syntax.nominal head=""Review""
 @r1 syntax.relation marker=""'s"" from=$n2 to=$n1
@@ -358,7 +561,10 @@ just a dashed outline on Check,"@c1 syntax.clause form=fragment modifier=""just"
 @n2 syntax.nominal head=""Check""",spacy+hmm-rules,agreement
 dashed outline,"@n1 syntax.nominal dependent=""dashed"" head=""outline""
 @c1 syntax.clause form=fragment complement=$n1",spacy+spacy-direct+hmm-rules,agreement
-"the usual outline, dashed",,,
+"the usual outline, dashed","@n1 syntax.nominal dependent=""the"" dependent=""usual"" head=""outline""
+@c1 syntax.clause form=nonfinite verb=""dashed""
+@c2 syntax.clause form=fragment complement=$n1
+@r1 syntax.relation from=$n1 to=$c1",spacy,judge
 give Review a dashed outline and keep the other boxes solid,"@c1 syntax.clause form=imperative verb=""give"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""Review""
 @n2 syntax.nominal dependent=""a"" dependent=""dashed"" head=""outline""
