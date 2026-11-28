@@ -2,8 +2,17 @@ text,sop,source,accepted_by
 show me a surprise picture please,"@c1 syntax.clause form=imperative verb=""show"" discourse=""please"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""me""
 @n2 syntax.nominal dependent=""a"" dependent=""surprise"" head=""picture""",spacy-direct+hmm-rules,agreement
-"just draw me something, anything, thanks",,,
-"could you draw me something, anything now",,,
+"just draw me something, anything, thanks","@c1 syntax.clause form=imperative modifier=""just"" verb=""draw"" discourse=""thanks"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""me""
+@n2 syntax.nominal head=""something""
+@n3 syntax.nominal head=""anything""
+@r1 syntax.relation from=$n2 to=$n3",spacy,judge
+"could you draw me something, anything now","@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""draw"" modifier=""now"" subject=$n1 complement=$n2 complement=$n3
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""me""
+@n3 syntax.nominal head=""something""
+@n4 syntax.nominal head=""anything""
+@r1 syntax.relation from=$n3 to=$n4",spacy,judge
 "I want you to show me a surprise picture, thanks","@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""want"" subject=$n1
 @n2 syntax.nominal head=""you""
@@ -11,7 +20,15 @@ show me a surprise picture please,"@c1 syntax.clause form=imperative verb=""show
 @c2 syntax.clause form=nonfinite verb=""show"" discourse=""thanks"" subject=$n2 complement=$n3 complement=$n4
 @n3 syntax.nominal head=""me""
 @n4 syntax.nominal dependent=""a"" dependent=""surprise"" head=""picture""",spacy-direct+hmm-rules,agreement
-"I want you to draw whatever you want, thanks",,,
+"I want you to draw whatever you want, thanks","@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""want"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""draw"" discourse=""thanks"" subject=$n2
+@n3 syntax.nominal head=""whatever""
+@n4 syntax.nominal head=""you""
+@c3 syntax.clause form=declarative verb=""want"" subject=$n4 complement=$n3
+@r2 syntax.relation from=$c2 to=$c3",spacy,judge
 I want you to make me a random picture!,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""want"" subject=$n1
 @n2 syntax.nominal head=""you""
@@ -22,8 +39,18 @@ I want you to make me a random picture!,"@n1 syntax.nominal head=""I""
 "hey, draw something random this time","@c1 syntax.clause form=imperative discourse=""hey"" verb=""draw"" modifier=""random"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""something""
 @n2 syntax.nominal dependent=""this"" head=""time""",spacy-direct+hmm-rules,agreement
-"ok draw me something, anything please",,,
-"go on, draw anything you like, thanks",,,
+"ok draw me something, anything please","@c1 syntax.clause form=imperative discourse=""ok"" verb=""draw"" discourse=""please"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""me""
+@n2 syntax.nominal head=""something""
+@n3 syntax.nominal head=""anything""
+@r1 syntax.relation from=$n2 to=$n3",spacy,judge
+"go on, draw anything you like, thanks","@c1 syntax.clause form=imperative verb=""go"" modifier=""on""
+@c2 syntax.clause form=imperative verb=""draw"" discourse=""thanks"" complement=$n1
+@n1 syntax.nominal head=""anything""
+@n2 syntax.nominal head=""you""
+@c3 syntax.clause form=declarative verb=""like"" subject=$n2
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2
+@r1 syntax.relation from=$n1 to=$c3",spacy,judge
 I want you to surprise me now,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""want"" subject=$n1
 @n2 syntax.nominal head=""you""
@@ -39,8 +66,18 @@ now paint a random scene!,"@c1 syntax.clause form=imperative modifier=""now"" ve
 please show me a surprise picture!,"@c1 syntax.clause form=imperative discourse=""please"" verb=""show"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""me""
 @n2 syntax.nominal dependent=""a"" dependent=""surprise"" head=""picture""",spacy-direct+hmm-rules,agreement
-"could you draw me something, anything, thanks",,,
-ok draw anything you like this time,,,
+"could you draw me something, anything, thanks","@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""draw"" discourse=""thanks"" subject=$n1 complement=$n2 complement=$n3
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""me""
+@n3 syntax.nominal head=""something""
+@n4 syntax.nominal head=""anything""
+@r1 syntax.relation from=$n3 to=$n4",spacy,judge
+ok draw anything you like this time,"@c1 syntax.clause form=imperative discourse=""ok"" verb=""draw"" complement=$n1 complement=$n3
+@n1 syntax.nominal head=""anything""
+@n2 syntax.nominal head=""you""
+@c2 syntax.clause form=declarative verb=""like"" subject=$n2
+@n3 syntax.nominal dependent=""this"" head=""time""
+@r1 syntax.relation from=$n1 to=$c2",spacy,judge
 "hey, surprise me!","@c1 syntax.clause form=imperative discourse=""hey"" verb=""surprise"" complement=$n1
 @n1 syntax.nominal head=""me""",spacy-direct+hmm-rules,agreement
 please surprise me for me,"@c1 syntax.clause form=imperative discourse=""please"" verb=""surprise"" complement=$n1
@@ -51,8 +88,20 @@ please surprise me for me,"@c1 syntax.clause form=imperative discourse=""please"
 @c2 syntax.clause form=imperative verb=""surprise"" discourse=""thanks"" complement=$n1
 @n1 syntax.nominal head=""me""
 @k1 syntax.coordination conjunct=$c1 conjunct=$c2",spacy+hmm-rules,agreement
-"please draw me something, anything now",,,
-I want you to draw anything you like!,,,
+"please draw me something, anything now","@c1 syntax.clause form=imperative discourse=""please"" verb=""draw"" modifier=""now"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""me""
+@n2 syntax.nominal head=""something""
+@n3 syntax.nominal head=""anything""
+@r1 syntax.relation from=$n2 to=$n3",spacy,judge
+I want you to draw anything you like!,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""want"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""draw"" subject=$n2 complement=$n3
+@n3 syntax.nominal head=""anything""
+@n4 syntax.nominal head=""you""
+@c3 syntax.clause form=declarative verb=""like"" subject=$n4
+@r2 syntax.relation from=$n3 to=$c3",spacy,judge
 just make me a random picture now,"@c1 syntax.clause form=imperative modifier=""just"" verb=""make"" modifier=""now"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""me""
 @n2 syntax.nominal dependent=""a"" dependent=""random"" head=""picture""",spacy-direct+hmm-rules,agreement
@@ -60,13 +109,13 @@ just make me a random picture now,"@c1 syntax.clause form=imperative modifier=""
 @c2 syntax.clause form=imperative verb=""show"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""me""
 @n2 syntax.nominal dependent=""a"" dependent=""surprise"" head=""picture""
-@r1 syntax.relation marker=""for"" from=$c2 to=$n3
+@r1 syntax.relation marker=""for"" from=$n2 to=$n3
 @n3 syntax.nominal head=""me""
-@k1 syntax.coordination conjunct=$c1 conjunct=$c2",hmm-rules,agreement
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2",spacy,judge
 draw something random for me,"@c1 syntax.clause form=imperative verb=""draw"" modifier=""random"" complement=$n1
 @n1 syntax.nominal head=""something""
-@r1 syntax.relation marker=""for"" from=$c1 to=$n2
-@n2 syntax.nominal head=""me""",spacy-direct+hmm-rules,agreement
+@r1 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n2
+@n2 syntax.nominal head=""me""",spacy,judge
 "go on, draw something random","@c1 syntax.clause form=imperative verb=""go"" modifier=""on""
 @c2 syntax.clause form=imperative verb=""draw"" modifier=""random"" complement=$n1
 @n1 syntax.nominal head=""something""
@@ -75,7 +124,12 @@ could you make me a random picture,"@c1 syntax.clause form=interrogative auxilia
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""me""
 @n3 syntax.nominal dependent=""a"" dependent=""random"" head=""picture""",spacy-direct+hmm-rules,agreement
-just draw whatever you want this time,,,
+just draw whatever you want this time,"@c1 syntax.clause form=imperative modifier=""just"" verb=""draw""
+@n1 syntax.nominal head=""whatever""
+@n2 syntax.nominal head=""you""
+@c2 syntax.clause form=declarative verb=""want"" subject=$n2 complement=$n1 complement=$n3
+@n3 syntax.nominal dependent=""this"" head=""time""
+@r1 syntax.relation from=$c1 to=$c2",spacy,judge
 please draw something random this time,"@c1 syntax.clause form=imperative discourse=""please"" verb=""draw"" modifier=""random"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""something""
 @n2 syntax.nominal dependent=""this"" head=""time""",spacy-direct+hmm-rules,agreement
@@ -98,8 +152,8 @@ please paint a random scene,"@c1 syntax.clause form=imperative discourse=""pleas
 "hey, make me a random picture for me","@c1 syntax.clause form=imperative discourse=""hey"" verb=""make"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""me""
 @n2 syntax.nominal dependent=""a"" dependent=""random"" head=""picture""
-@r1 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n3
-@n3 syntax.nominal head=""me""",spacy-direct+hmm-rules,agreement
+@r1 syntax.relation marker=""for"" from=$n2 to=$n3
+@n3 syntax.nominal head=""me""",spacy,judge
 just paint a random scene for me,"@c1 syntax.clause form=imperative modifier=""just"" verb=""paint"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""random"" head=""scene""
 @r1 syntax.relation marker=""for"" from=$c1 to=$n2
@@ -110,7 +164,11 @@ I want you to paint a random scene!,"@n1 syntax.nominal head=""I""
 @r1 syntax.relation marker=""to"" from=$c1 to=$c2
 @c2 syntax.clause form=nonfinite verb=""paint"" subject=$n2 complement=$n3
 @n3 syntax.nominal dependent=""a"" dependent=""random"" head=""scene""",spacy-direct+hmm-rules,agreement
-just draw whatever you want,,,
+just draw whatever you want,"@c1 syntax.clause form=imperative modifier=""just"" verb=""draw""
+@n1 syntax.nominal head=""whatever""
+@n2 syntax.nominal head=""you""
+@c2 syntax.clause form=declarative verb=""want"" subject=$n2 complement=$n1
+@r1 syntax.relation from=$c1 to=$c2",spacy,judge
 surprise me now,"@c1 syntax.clause form=imperative verb=""surprise"" modifier=""now"" complement=$n1
 @n1 syntax.nominal head=""me""",spacy-direct+hmm-rules,agreement
 please make me a random picture,"@c1 syntax.clause form=imperative discourse=""please"" verb=""make"" complement=$n1 complement=$n2
@@ -125,7 +183,11 @@ I want you to surprise me please,"@n1 syntax.nominal head=""I""
 "please show me a surprise picture, thanks","@c1 syntax.clause form=imperative discourse=""please"" verb=""show"" discourse=""thanks"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""me""
 @n2 syntax.nominal dependent=""a"" dependent=""surprise"" head=""picture""",spacy-direct+hmm-rules,agreement
-draw whatever you want,,,
+draw whatever you want,"@c1 syntax.clause form=imperative verb=""draw""
+@n1 syntax.nominal head=""whatever""
+@n2 syntax.nominal head=""you""
+@c2 syntax.clause form=declarative verb=""want"" subject=$n2 complement=$n1
+@r1 syntax.relation from=$c1 to=$c2",spacy,judge
 draw something random,"@c1 syntax.clause form=imperative verb=""draw"" modifier=""random"" complement=$n1
 @n1 syntax.nominal head=""something""",spacy-direct+hmm-rules,agreement
 please surprise me now,"@c1 syntax.clause form=imperative discourse=""please"" verb=""surprise"" modifier=""now"" complement=$n1
@@ -133,7 +195,12 @@ please surprise me now,"@c1 syntax.clause form=imperative discourse=""please"" v
 please make me a random picture now,"@c1 syntax.clause form=imperative discourse=""please"" verb=""make"" modifier=""now"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""me""
 @n2 syntax.nominal dependent=""a"" dependent=""random"" head=""picture""",spacy-direct+hmm-rules,agreement
-could you draw anything you like please,,,
+could you draw anything you like please,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""draw"" discourse=""please"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""anything""
+@n3 syntax.nominal head=""you""
+@c2 syntax.clause form=declarative verb=""like"" subject=$n3
+@r1 syntax.relation from=$n2 to=$c2",spacy,judge
 ok show me a surprise picture please,"@c1 syntax.clause form=imperative discourse=""ok"" verb=""show"" discourse=""please"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""me""
 @n2 syntax.nominal dependent=""a"" dependent=""surprise"" head=""picture""",spacy-direct+hmm-rules,agreement
@@ -144,23 +211,61 @@ I want you to show me a surprise picture for me,"@n1 syntax.nominal head=""I""
 @c2 syntax.clause form=nonfinite verb=""show"" subject=$n2 complement=$n3 complement=$n4
 @n3 syntax.nominal head=""me""
 @n4 syntax.nominal dependent=""a"" dependent=""surprise"" head=""picture""
-@r2 syntax.relation marker=""for"" from=$c2 to=$n5
-@n5 syntax.nominal head=""me""",spacy-direct+hmm-rules,agreement
-draw whatever you want this time,,,
-please draw anything you like,,,
-"now draw me something, anything for me",,,
-"I want you to draw anything you like, thanks",,,
-"please draw me something, anything",,,
+@r2 syntax.relation marker=""for"" from=$n4 to=$n5
+@n5 syntax.nominal head=""me""",spacy,judge
+draw whatever you want this time,"@c1 syntax.clause form=imperative verb=""draw"" complement=$n3
+@n1 syntax.nominal head=""whatever""
+@n2 syntax.nominal head=""you""
+@c2 syntax.clause form=declarative verb=""want"" subject=$n2 complement=$n1
+@n3 syntax.nominal dependent=""this"" head=""time""
+@r1 syntax.relation from=$c1 to=$c2",spacy,judge
+please draw anything you like,"@c1 syntax.clause form=imperative discourse=""please"" verb=""draw"" complement=$n1
+@n1 syntax.nominal head=""anything""
+@n2 syntax.nominal head=""you""
+@c2 syntax.clause form=declarative verb=""like"" subject=$n2
+@r1 syntax.relation from=$n1 to=$c2",spacy,judge
+"now draw me something, anything for me","@c1 syntax.clause form=imperative modifier=""now"" verb=""draw"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""me""
+@n2 syntax.nominal head=""something""
+@n3 syntax.nominal head=""anything""
+@r1 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n4
+@n4 syntax.nominal head=""me""
+@r2 syntax.relation from=$n2 to=$n3",spacy,judge
+"I want you to draw anything you like, thanks","@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""want"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""draw"" discourse=""thanks"" subject=$n2 complement=$n3
+@n3 syntax.nominal head=""anything""
+@n4 syntax.nominal head=""you""
+@c3 syntax.clause form=declarative verb=""like"" subject=$n4
+@r2 syntax.relation from=$n3 to=$c3",spacy,judge
+"please draw me something, anything","@c1 syntax.clause form=imperative discourse=""please"" verb=""draw"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""me""
+@n2 syntax.nominal head=""something""
+@n3 syntax.nominal head=""anything""
+@r1 syntax.relation from=$n2 to=$n3",spacy,judge
 paint a random scene for me,"@c1 syntax.clause form=imperative verb=""paint"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""random"" head=""scene""
-@r1 syntax.relation marker=""for"" from=$c1 to=$n2
-@n2 syntax.nominal head=""me""",spacy-direct+hmm-rules,agreement
-could you draw whatever you want please,,,
+@r1 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n2
+@n2 syntax.nominal head=""me""",spacy,judge
+could you draw whatever you want please,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""draw"" discourse=""please"" subject=$n1
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""whatever""
+@n3 syntax.nominal head=""you""
+@c2 syntax.clause form=declarative verb=""want"" subject=$n3 complement=$n2
+@r1 syntax.relation from=$c1 to=$c2",spacy,judge
 can you make me a random picture now,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""make"" modifier=""now"" subject=$n1 complement=$n2 complement=$n3
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""me""
 @n3 syntax.nominal dependent=""a"" dependent=""random"" head=""picture""",spacy-direct+hmm-rules,agreement
-"hey, draw anything you like for me",,,
+"hey, draw anything you like for me","@c1 syntax.clause form=imperative discourse=""hey"" verb=""draw"" complement=$n1
+@n1 syntax.nominal head=""anything""
+@n2 syntax.nominal head=""you""
+@c2 syntax.clause form=declarative verb=""like"" subject=$n2
+@r1 syntax.relation marker=""for"" from=$c1 to=$n3
+@n3 syntax.nominal head=""me""
+@r2 syntax.relation from=$n1 to=$c2",spacy,judge
 just surprise me for me,"@c1 syntax.clause form=imperative modifier=""just"" verb=""surprise"" complement=$n1
 @n1 syntax.nominal head=""me""
 @r1 syntax.relation marker=""for"" from=$c1 to=$n2
@@ -171,12 +276,20 @@ can you show me a surprise picture!,"@c1 syntax.clause form=interrogative auxili
 @n3 syntax.nominal dependent=""a"" dependent=""surprise"" head=""picture""",spacy-direct+hmm-rules,agreement
 "hey, surprise me please","@c1 syntax.clause form=imperative discourse=""hey"" verb=""surprise"" discourse=""please"" complement=$n1
 @n1 syntax.nominal head=""me""",spacy-direct+hmm-rules,agreement
-"ok draw me something, anything this time",,,
+"ok draw me something, anything this time","@c1 syntax.clause form=imperative discourse=""ok"" verb=""draw"" complement=$n1 complement=$n2 complement=$n4
+@n1 syntax.nominal head=""me""
+@n2 syntax.nominal head=""something""
+@n3 syntax.nominal head=""anything""
+@n4 syntax.nominal dependent=""this"" head=""time""
+@r1 syntax.relation from=$n2 to=$n3",spacy,judge
 "hey, show me a surprise picture please","@c1 syntax.clause form=imperative discourse=""hey"" verb=""show"" discourse=""please"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""me""
 @n2 syntax.nominal dependent=""a"" dependent=""surprise"" head=""picture""",spacy-direct+hmm-rules,agreement
-now make me a random picture please,,,
-now make a random desert picture,,,
+now make me a random picture please,"@c1 syntax.clause form=imperative discourse=""now"" verb=""make"" discourse=""please"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""me""
+@n2 syntax.nominal dependent=""a"" dependent=""random"" head=""picture""",spacy,judge
+now make a random desert picture,"@c1 syntax.clause form=imperative discourse=""now"" verb=""make"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""random"" dependent=""desert"" head=""picture""",spacy,judge
 "could you surprise me with a garden scene, thanks","@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""surprise"" discourse=""thanks"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""me""
@@ -200,7 +313,8 @@ make a random desert picture this time,"@c1 syntax.clause form=imperative verb="
 @n2 syntax.nominal dependent=""this"" head=""time""",spacy-direct+hmm-rules,agreement
 now make a random beach picture!,"@c1 syntax.clause form=imperative modifier=""now"" verb=""make"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""random"" dependent=""beach"" head=""picture""",spacy-direct+hmm-rules,agreement
-"now make a random farm picture, thanks",,,
+"now make a random farm picture, thanks","@c1 syntax.clause form=imperative discourse=""now"" verb=""make"" discourse=""thanks"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""random"" dependent=""farm"" head=""picture""",spacy,judge
 "hey, surprise me with a winter scene please","@c1 syntax.clause form=imperative discourse=""hey"" verb=""surprise"" discourse=""please"" complement=$n1
 @n1 syntax.nominal head=""me""
 @r1 syntax.relation marker=""with"" from=$c1 to=$n2
@@ -243,18 +357,19 @@ I want you to surprise me with a space scene,"@n1 syntax.nominal head=""I""
 @n1 syntax.nominal head=""me""
 @r1 syntax.relation marker=""with"" from=$c2 to=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""garden"" head=""scene""
-@r2 syntax.relation marker=""for"" from=$c2 to=$n3
+@r2 syntax.relation marker=""for"" from=$n2 to=$n3
 @n3 syntax.nominal head=""me""
-@k1 syntax.coordination conjunct=$c1 conjunct=$c2",hmm-rules,agreement
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2",spacy,judge
 make a random forest picture,"@c1 syntax.clause form=imperative verb=""make"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""random"" dependent=""forest"" head=""picture""",spacy-direct+hmm-rules,agreement
-now make a random farm picture now,,,
+now make a random farm picture now,"@c1 syntax.clause form=imperative discourse=""now"" verb=""make"" modifier=""now"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""random"" dependent=""farm"" head=""picture""",spacy,judge
 just surprise me with a farm scene for me,"@c1 syntax.clause form=imperative modifier=""just"" verb=""surprise"" complement=$n1
 @n1 syntax.nominal head=""me""
 @r1 syntax.relation marker=""with"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""farm"" head=""scene""
-@r2 syntax.relation marker=""for"" from=$c1 to=$n3
-@n3 syntax.nominal head=""me""",spacy-direct+hmm-rules,agreement
+@r2 syntax.relation marker=""for"" from=$n2 to=$n3
+@n3 syntax.nominal head=""me""",spacy,judge
 just make a random forest picture please,"@c1 syntax.clause form=imperative modifier=""just"" verb=""make"" discourse=""please"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""random"" dependent=""forest"" head=""picture""",spacy-direct+hmm-rules,agreement
 ok make a random beach picture this time,"@c1 syntax.clause form=imperative discourse=""ok"" verb=""make"" complement=$n1 complement=$n2
@@ -265,8 +380,8 @@ could you surprise me with a winter scene for me,"@c1 syntax.clause form=interro
 @n2 syntax.nominal head=""me""
 @r1 syntax.relation marker=""with"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""a"" dependent=""winter"" head=""scene""
-@r2 syntax.relation marker=""for"" from=$c1 to=$n4
-@n4 syntax.nominal head=""me""",spacy-direct+hmm-rules,agreement
+@r2 syntax.relation marker=""for"" from=$n3 to=$n4
+@n4 syntax.nominal head=""me""",spacy,judge
 "go on, draw a random kitchen scene","@c1 syntax.clause form=imperative verb=""go"" modifier=""on""
 @c2 syntax.clause form=imperative verb=""draw"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""random"" dependent=""kitchen"" head=""scene""
@@ -296,9 +411,12 @@ ok surprise me with a park scene for me,"@c1 syntax.clause form=imperative disco
 @n1 syntax.nominal head=""me""
 @r1 syntax.relation marker=""with"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""park"" head=""scene""
-@r2 syntax.relation marker=""for"" from=$c1 to=$n3
-@n3 syntax.nominal head=""me""",spacy-direct+hmm-rules,agreement
-"go on, draw a random forest scene, thanks",,,
+@r2 syntax.relation marker=""for"" from=$n2 to=$n3
+@n3 syntax.nominal head=""me""",spacy,judge
+"go on, draw a random forest scene, thanks","@c1 syntax.clause form=imperative verb=""go"" modifier=""on""
+@c2 syntax.clause form=imperative verb=""draw"" discourse=""thanks"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""random"" dependent=""forest"" head=""scene""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2",hmm-rules,judge
 please surprise me with a winter scene,"@c1 syntax.clause form=imperative discourse=""please"" verb=""surprise"" complement=$n1
 @n1 syntax.nominal head=""me""
 @r1 syntax.relation marker=""with"" from=$c1 to=$n2
@@ -329,7 +447,10 @@ just surprise me with a winter scene this time,"@c1 syntax.clause form=imperativ
 @r1 syntax.relation marker=""with"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""winter"" head=""scene""
 @n3 syntax.nominal dependent=""this"" head=""time""",spacy-direct+hmm-rules,agreement
-"now surprise me with a space scene, thanks",,,
+"now surprise me with a space scene, thanks","@c1 syntax.clause form=imperative discourse=""now"" verb=""surprise"" discourse=""thanks"" complement=$n1
+@n1 syntax.nominal head=""me""
+@r1 syntax.relation marker=""with"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""space"" head=""scene""",spacy,judge
 could you surprise me with a forest scene,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""surprise"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""me""
@@ -350,8 +471,8 @@ just draw a random beach scene this time,"@c1 syntax.clause form=imperative modi
 @n1 syntax.nominal head=""me""
 @r1 syntax.relation marker=""with"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""space"" head=""scene""
-@r2 syntax.relation marker=""for"" from=$c1 to=$n3
-@n3 syntax.nominal head=""me""",spacy-direct+hmm-rules,agreement
+@r2 syntax.relation marker=""for"" from=$n2 to=$n3
+@n3 syntax.nominal head=""me""",spacy,judge
 "ok draw a random city scene, thanks","@c1 syntax.clause form=imperative discourse=""ok"" verb=""draw"" discourse=""thanks"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""random"" dependent=""city"" head=""scene""",spacy-direct+hmm-rules,agreement
 can you surprise me with a city scene!,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""surprise"" subject=$n1 complement=$n2
@@ -394,9 +515,10 @@ could you draw a random kitchen scene,"@c1 syntax.clause form=interrogative auxi
 @n2 syntax.nominal dependent=""a"" dependent=""random"" dependent=""kitchen"" head=""scene""",spacy-direct+hmm-rules,agreement
 please draw a random city scene for me,"@c1 syntax.clause form=imperative discourse=""please"" verb=""draw"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""random"" dependent=""city"" head=""scene""
-@r1 syntax.relation marker=""for"" from=$c1 to=$n2
-@n2 syntax.nominal head=""me""",spacy-direct+hmm-rules,agreement
-now make a random desert picture please,,,
+@r1 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n2
+@n2 syntax.nominal head=""me""",spacy,judge
+now make a random desert picture please,"@c1 syntax.clause form=imperative discourse=""now"" verb=""make"" discourse=""please"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""random"" dependent=""desert"" head=""picture""",spacy,judge
 could you draw a random space scene,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""draw"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""a"" dependent=""random"" dependent=""space"" head=""scene""",spacy-direct+hmm-rules,agreement
@@ -406,8 +528,8 @@ please make a random space picture,"@c1 syntax.clause form=imperative discourse=
 @n1 syntax.nominal head=""me""
 @r1 syntax.relation marker=""with"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""garden"" head=""scene""
-@r2 syntax.relation marker=""for"" from=$c1 to=$n3
-@n3 syntax.nominal head=""me""",spacy-direct+hmm-rules,agreement
+@r2 syntax.relation marker=""for"" from=$n2 to=$n3
+@n3 syntax.nominal head=""me""",spacy,judge
 I want you to draw a random night scene now,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""want"" subject=$n1
 @n2 syntax.nominal head=""you""
@@ -416,23 +538,23 @@ I want you to draw a random night scene now,"@n1 syntax.nominal head=""I""
 @n3 syntax.nominal dependent=""a"" dependent=""random"" dependent=""night"" head=""scene""",spacy-direct+hmm-rules,agreement
 just make a random desert picture for me,"@c1 syntax.clause form=imperative modifier=""just"" verb=""make"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""random"" dependent=""desert"" head=""picture""
-@r1 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n2
-@n2 syntax.nominal head=""me""",hmm-rules,judge
+@r1 syntax.relation marker=""for"" from=$c1 to=$n2
+@n2 syntax.nominal head=""me""",spacy,judge
 please draw a random picture with a horse in it this time,"@c1 syntax.clause form=imperative discourse=""please"" verb=""draw"" complement=$n1 complement=$n4
 @n1 syntax.nominal dependent=""a"" dependent=""random"" head=""picture""
-@r1 syntax.relation marker=""with"" from=$c1 to=$n2
+@r1 syntax.relation marker=""with"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""a"" head=""horse""
-@r2 syntax.relation marker=""in"" from=$c1 to=$n3
+@r2 syntax.relation marker=""in"" from=$n2 to=$n3
 @n3 syntax.nominal head=""it""
-@n4 syntax.nominal dependent=""this"" head=""time""",spacy-direct+hmm-rules,agreement
+@n4 syntax.nominal dependent=""this"" head=""time""",spacy,judge
 "go on, make up a scene with three sheep for me","@c1 syntax.clause form=imperative verb=""go"" modifier=""on""
 @c2 syntax.clause form=imperative verb=""make"" modifier=""up"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""scene""
 @r1 syntax.relation marker=""with"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""three"" head=""sheep""
-@r2 syntax.relation marker=""for"" from=$n2 to=$n3
+@r2 syntax.relation marker=""for"" from=$c2 to=$n3
 @n3 syntax.nominal head=""me""
-@k1 syntax.coordination conjunct=$c1 conjunct=$c2",hmm-rules,judge
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2",spacy,judge
 just surprise me with a scene that has three sheep!,"@c1 syntax.clause form=imperative modifier=""just"" verb=""surprise"" complement=$n1
 @n1 syntax.nominal head=""me""
 @r1 syntax.relation marker=""with"" from=$c1 to=$n2
@@ -440,20 +562,40 @@ just surprise me with a scene that has three sheep!,"@c1 syntax.clause form=impe
 @r2 syntax.relation marker=""that"" from=$n2 to=$c2
 @c2 syntax.clause form=declarative verb=""has"" complement=$n3
 @n3 syntax.nominal dependent=""three"" head=""sheep""",spacy+hmm-rules,agreement
-"now draw something random, but include a boat",,,
-now surprise me with a scene that has a horse now,,,
+"now draw something random, but include a boat","@c1 syntax.clause form=imperative discourse=""now"" verb=""draw"" modifier=""random"" complement=$n1
+@n1 syntax.nominal head=""something""
+@k1 syntax.coordination conjunction=""but"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""include"" complement=$n2
+@n2 syntax.nominal dependent=""a"" head=""boat""",spacy,judge
+now surprise me with a scene that has a horse now,"@c1 syntax.clause form=imperative discourse=""now"" verb=""surprise"" complement=$n1
+@n1 syntax.nominal head=""me""
+@r1 syntax.relation marker=""with"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""a"" head=""scene""
+@r2 syntax.relation marker=""that"" from=$n2 to=$c2
+@c2 syntax.clause form=declarative verb=""has"" modifier=""now"" complement=$n3
+@n3 syntax.nominal dependent=""a"" head=""horse""",spacy,judge
 "hey, a random scene with a balloon, thanks","@c1 syntax.clause form=fragment discourse=""hey"" discourse=""thanks"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""random"" head=""scene""
 @r1 syntax.relation marker=""with"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""a"" head=""balloon""",spacy-direct+hmm-rules,agreement
-"can you draw something random, but include two birds",,,
+"can you draw something random, but include two birds","@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""draw"" modifier=""random"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""something""
+@k1 syntax.coordination conjunction=""but"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""include"" complement=$n3
+@n3 syntax.nominal dependent=""two"" head=""birds""",hmm-rules,judge
 "hey, draw a random picture with three sheep in it please","@c1 syntax.clause form=imperative discourse=""hey"" verb=""draw"" discourse=""please"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""random"" head=""picture""
-@r1 syntax.relation marker=""with"" from=$c1 to=$n2
+@r1 syntax.relation marker=""with"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""three"" head=""sheep""
-@r2 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n3
-@n3 syntax.nominal head=""it""",spacy-direct+hmm-rules,agreement
-"can you draw something random, but include a cat now",,,
+@r2 syntax.relation marker=""in"" from=$n2 to=$n3
+@n3 syntax.nominal head=""it""",spacy,judge
+"can you draw something random, but include a cat now","@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""draw"" modifier=""random"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""something""
+@k1 syntax.coordination conjunction=""but"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""include"" modifier=""now"" complement=$n3
+@n3 syntax.nominal dependent=""a"" head=""cat""",hmm-rules,judge
 just make up a scene with a girl!,"@c1 syntax.clause form=imperative modifier=""just"" verb=""make"" modifier=""up"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""scene""
 @r1 syntax.relation marker=""with"" from=$n1 to=$n2
@@ -474,15 +616,20 @@ please make up a scene with a cat this time,"@c1 syntax.clause form=imperative d
 @n2 syntax.nominal dependent=""some"" head=""flowers""",spacy-direct+hmm-rules,agreement
 please draw a random picture with a balloon in it please,"@c1 syntax.clause form=imperative discourse=""please"" verb=""draw"" discourse=""please"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""random"" head=""picture""
-@r1 syntax.relation marker=""with"" from=$c1 to=$n2
+@r1 syntax.relation marker=""with"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""a"" head=""balloon""
-@r2 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n3
-@n3 syntax.nominal head=""it""",spacy-direct+hmm-rules,agreement
+@r2 syntax.relation marker=""in"" from=$n2 to=$n3
+@n3 syntax.nominal head=""it""",spacy,judge
 ok make up a scene with two birds please,"@c1 syntax.clause form=imperative discourse=""ok"" verb=""make"" modifier=""up"" discourse=""please"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""scene""
 @r1 syntax.relation marker=""with"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""two"" head=""birds""",spacy-direct+hmm-rules,agreement
-"go on, a random scene with a horse please",,,
+"go on, a random scene with a horse please","@c1 syntax.clause form=imperative verb=""go"" modifier=""on"" discourse=""please""
+@n1 syntax.nominal dependent=""a"" dependent=""random"" head=""scene""
+@r1 syntax.relation marker=""with"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""a"" head=""horse""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=fragment complement=$n1",spacy,judge
 "hey, surprise me with a scene that has a cat!","@c1 syntax.clause form=imperative discourse=""hey"" verb=""surprise"" complement=$n1
 @n1 syntax.nominal head=""me""
 @r1 syntax.relation marker=""with"" from=$c1 to=$n2
@@ -518,19 +665,19 @@ could you surprise me with a scene that has a red car!,"@c1 syntax.clause form=i
 @c3 syntax.clause form=imperative verb=""include"" discourse=""thanks"" complement=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""red"" head=""car""",spacy-direct+hmm-rules,agreement
 could you a random scene with three sheep this time,,,
-"surprise me with a scene that has three sheep, thanks","@c1 syntax.clause form=imperative verb=""surprise"" complement=$n1
+"surprise me with a scene that has three sheep, thanks","@c1 syntax.clause form=imperative verb=""surprise"" discourse=""thanks"" complement=$n1
 @n1 syntax.nominal head=""me""
 @r1 syntax.relation marker=""with"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""a"" head=""scene""
 @r2 syntax.relation marker=""that"" from=$n2 to=$c2
-@c2 syntax.clause form=declarative verb=""has"" discourse=""thanks"" complement=$n3
-@n3 syntax.nominal dependent=""three"" head=""sheep""",hmm-rules,agreement
+@c2 syntax.clause form=declarative verb=""has"" complement=$n3
+@n3 syntax.nominal dependent=""three"" head=""sheep""",spacy,judge
 please draw a random picture with a horse in it!,"@c1 syntax.clause form=imperative discourse=""please"" verb=""draw"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""random"" head=""picture""
-@r1 syntax.relation marker=""with"" from=$c1 to=$n2
+@r1 syntax.relation marker=""with"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""a"" head=""horse""
-@r2 syntax.relation marker=""in"" from=$c1 to=$n3
-@n3 syntax.nominal head=""it""",spacy-direct+hmm-rules,agreement
+@r2 syntax.relation marker=""in"" from=$n2 to=$n3
+@n3 syntax.nominal head=""it""",spacy,judge
 I want you to make up a scene with three sheep this time,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""want"" subject=$n1
 @n2 syntax.nominal head=""you""
@@ -542,10 +689,10 @@ I want you to make up a scene with three sheep this time,"@n1 syntax.nominal hea
 @n5 syntax.nominal dependent=""this"" head=""time""",spacy-direct+hmm-rules,agreement
 ok draw a random picture with a red car in it,"@c1 syntax.clause form=imperative discourse=""ok"" verb=""draw"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""random"" head=""picture""
-@r1 syntax.relation marker=""with"" from=$c1 to=$n2
+@r1 syntax.relation marker=""with"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""red"" head=""car""
-@r2 syntax.relation marker=""in"" from=$c1 to=$n3
-@n3 syntax.nominal head=""it""",spacy-direct+hmm-rules,agreement
+@r2 syntax.relation marker=""in"" from=$n2 to=$n3
+@n3 syntax.nominal head=""it""",spacy,judge
 just make up a scene with a castle!,"@c1 syntax.clause form=imperative modifier=""just"" verb=""make"" modifier=""up"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""scene""
 @r1 syntax.relation marker=""with"" from=$n1 to=$n2
@@ -554,8 +701,8 @@ ok a random scene with two birds for me,"@c1 syntax.clause form=fragment discour
 @n1 syntax.nominal dependent=""a"" dependent=""random"" head=""scene""
 @r1 syntax.relation marker=""with"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""two"" head=""birds""
-@r2 syntax.relation marker=""for"" from=$n2 to=$n3
-@n3 syntax.nominal head=""me""",spacy-direct+hmm-rules,agreement
+@r2 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n3
+@n3 syntax.nominal head=""me""",spacy,judge
 "hey, make up a scene with a balloon this time","@c1 syntax.clause form=imperative discourse=""hey"" verb=""make"" modifier=""up"" complement=$n1 complement=$n3
 @n1 syntax.nominal dependent=""a"" head=""scene""
 @r1 syntax.relation marker=""with"" from=$n1 to=$n2
@@ -564,10 +711,10 @@ ok a random scene with two birds for me,"@c1 syntax.clause form=fragment discour
 can you draw a random picture with a dog in it!,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""draw"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""a"" dependent=""random"" head=""picture""
-@r1 syntax.relation marker=""with"" from=$c1 to=$n3
+@r1 syntax.relation marker=""with"" from=$n2 to=$n3
 @n3 syntax.nominal dependent=""a"" head=""dog""
-@r2 syntax.relation marker=""in"" from=$c1 to=$n4
-@n4 syntax.nominal head=""it""",spacy-direct+hmm-rules,agreement
+@r2 syntax.relation marker=""in"" from=$n3 to=$n4
+@n4 syntax.nominal head=""it""",spacy,judge
 ok surprise me with a scene that has a red car,"@c1 syntax.clause form=imperative discourse=""ok"" verb=""surprise"" complement=$n1
 @n1 syntax.nominal head=""me""
 @r1 syntax.relation marker=""with"" from=$c1 to=$n2
@@ -575,23 +722,53 @@ ok surprise me with a scene that has a red car,"@c1 syntax.clause form=imperativ
 @r2 syntax.relation marker=""that"" from=$n2 to=$c2
 @c2 syntax.clause form=declarative verb=""has"" complement=$n3
 @n3 syntax.nominal dependent=""a"" dependent=""red"" head=""car""",spacy+hmm-rules,agreement
-can you a random scene with a castle please,,,
-now surprise me with a scene that has a boat this time,,,
-now draw a random picture with a tree in it for me,,,
+can you a random scene with a castle please,"@c1 syntax.clause form=interrogative verb=""can"" discourse=""please"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""a"" dependent=""random"" head=""scene""
+@r1 syntax.relation marker=""with"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""a"" head=""castle""",hmm-rules,judge
+now surprise me with a scene that has a boat this time,"@c1 syntax.clause form=imperative discourse=""now"" verb=""surprise"" complement=$n1
+@n1 syntax.nominal head=""me""
+@r1 syntax.relation marker=""with"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""a"" head=""scene""
+@r2 syntax.relation marker=""that"" from=$n2 to=$c2
+@c2 syntax.clause form=declarative verb=""has"" complement=$n3 complement=$n4
+@n3 syntax.nominal dependent=""a"" head=""boat""
+@n4 syntax.nominal dependent=""this"" head=""time""",spacy,judge
+now draw a random picture with a tree in it for me,"@c1 syntax.clause form=imperative discourse=""now"" verb=""draw"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""random"" head=""picture""
+@r1 syntax.relation marker=""with"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""a"" head=""tree""
+@r2 syntax.relation marker=""in"" from=$n2 to=$n3
+@n3 syntax.nominal head=""it""
+@r3 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n4
+@n4 syntax.nominal head=""me""",spacy,judge
 "go on, draw something random, but include a balloon!","@c1 syntax.clause form=imperative verb=""go"" modifier=""on""
 @c2 syntax.clause form=imperative verb=""draw"" modifier=""random"" complement=$n1
 @n1 syntax.nominal head=""something""
 @k1 syntax.coordination conjunction=""but"" conjunct=$c1 conjunct=$c2 conjunct=$c3
 @c3 syntax.clause form=imperative verb=""include"" complement=$n2
 @n2 syntax.nominal dependent=""a"" head=""balloon""",spacy-direct+hmm-rules,agreement
-now draw a random picture with three sheep in it for me,,,
+now draw a random picture with three sheep in it for me,"@c1 syntax.clause form=imperative discourse=""now"" verb=""draw"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""random"" head=""picture""
+@r1 syntax.relation marker=""with"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""three"" head=""sheep""
+@r2 syntax.relation marker=""in"" from=$n2 to=$n3
+@n3 syntax.nominal head=""it""
+@r3 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n4
+@n4 syntax.nominal head=""me""",spacy,judge
 "hey, make up a scene with a horse for me","@c1 syntax.clause form=imperative discourse=""hey"" verb=""make"" modifier=""up"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""scene""
 @r1 syntax.relation marker=""with"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""a"" head=""horse""
-@r2 syntax.relation marker=""for"" from=$n2 to=$n3
-@n3 syntax.nominal head=""me""",spacy-direct+hmm-rules,agreement
-"can you draw something random, but include a balloon now",,,
+@r2 syntax.relation marker=""for"" from=$c1 to=$n3
+@n3 syntax.nominal head=""me""",spacy,judge
+"can you draw something random, but include a balloon now","@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""draw"" modifier=""random"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""something""
+@k1 syntax.coordination conjunction=""but"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""include"" modifier=""now"" complement=$n3
+@n3 syntax.nominal dependent=""a"" head=""balloon""",hmm-rules,judge
 could you make up a scene with some flowers,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""make"" modifier=""up"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""a"" head=""scene""
@@ -602,7 +779,13 @@ could you make up a scene with some flowers,"@c1 syntax.clause form=interrogativ
 @k1 syntax.coordination conjunction=""but"" conjunct=$c1 conjunct=$c2
 @c2 syntax.clause form=imperative verb=""include"" discourse=""thanks"" complement=$n2
 @n2 syntax.nominal dependent=""some"" head=""flowers""",spacy-direct+hmm-rules,agreement
-can you a random scene with two birds for me,,,
+can you a random scene with two birds for me,"@c1 syntax.clause form=interrogative verb=""can"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""a"" dependent=""random"" head=""scene""
+@r1 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""two"" head=""birds""
+@r2 syntax.relation marker=""for"" from=$c1 to=$n4
+@n4 syntax.nominal head=""me""",hmm-rules,judge
 "go on, make up a scene with a cat!","@c1 syntax.clause form=imperative verb=""go"" modifier=""on""
 @c2 syntax.clause form=imperative verb=""make"" modifier=""up"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""scene""
@@ -611,10 +794,10 @@ can you a random scene with two birds for me,,,
 @k1 syntax.coordination conjunct=$c1 conjunct=$c2",spacy+hmm-rules,agreement
 draw a random picture with a castle in it,"@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""random"" head=""picture""
-@r1 syntax.relation marker=""with"" from=$c1 to=$n2
+@r1 syntax.relation marker=""with"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""a"" head=""castle""
-@r2 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n3
-@n3 syntax.nominal head=""it""",spacy-direct+hmm-rules,agreement
+@r2 syntax.relation marker=""in"" from=$n2 to=$n3
+@n3 syntax.nominal head=""it""",spacy,judge
 "please draw something random, but include a castle now","@c1 syntax.clause form=imperative discourse=""please"" verb=""draw"" modifier=""random"" complement=$n1
 @n1 syntax.nominal head=""something""
 @k1 syntax.coordination conjunction=""but"" conjunct=$c1 conjunct=$c2
@@ -623,38 +806,48 @@ draw a random picture with a castle in it,"@c1 syntax.clause form=imperative ver
 can you draw a random picture with a red car in it!,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""draw"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""a"" dependent=""random"" head=""picture""
-@r1 syntax.relation marker=""with"" from=$c1 to=$n3
+@r1 syntax.relation marker=""with"" from=$n2 to=$n3
 @n3 syntax.nominal dependent=""a"" dependent=""red"" head=""car""
-@r2 syntax.relation marker=""in"" from=$c1 to=$n4
-@n4 syntax.nominal head=""it""",spacy-direct+hmm-rules,agreement
-"now draw something random, but include a balloon this time",,,
+@r2 syntax.relation marker=""in"" from=$n3 to=$n4
+@n4 syntax.nominal head=""it""",spacy,judge
+"now draw something random, but include a balloon this time","@c1 syntax.clause form=imperative discourse=""now"" verb=""draw"" modifier=""random"" complement=$n1
+@n1 syntax.nominal head=""something""
+@k1 syntax.coordination conjunction=""but"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""include"" complement=$n2 complement=$n3
+@n2 syntax.nominal dependent=""a"" head=""balloon""
+@n3 syntax.nominal dependent=""this"" head=""time""",spacy,judge
 draw a random picture with a castle in it please,"@c1 syntax.clause form=imperative verb=""draw"" discourse=""please"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""random"" head=""picture""
-@r1 syntax.relation marker=""with"" from=$c1 to=$n2
+@r1 syntax.relation marker=""with"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""a"" head=""castle""
-@r2 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n3
-@n3 syntax.nominal head=""it""",spacy-direct+hmm-rules,agreement
+@r2 syntax.relation marker=""in"" from=$n2 to=$n3
+@n3 syntax.nominal head=""it""",spacy,judge
 "draw something random, but include a castle for me","@c1 syntax.clause form=imperative verb=""draw"" modifier=""random"" complement=$n1
 @n1 syntax.nominal head=""something""
 @k1 syntax.coordination conjunction=""but"" conjunct=$c1 conjunct=$c2
 @c2 syntax.clause form=imperative verb=""include"" complement=$n2
 @n2 syntax.nominal dependent=""a"" head=""castle""
-@r1 syntax.relation marker=""for"" from=$n2 to=$n3
-@n3 syntax.nominal head=""me""",spacy-direct+hmm-rules,agreement
+@r1 syntax.relation attachment=ambiguous marker=""for"" from=$c2 to=$n3
+@n3 syntax.nominal head=""me""",spacy,judge
 can you draw a random picture with three sheep in it!,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""draw"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""a"" dependent=""random"" head=""picture""
-@r1 syntax.relation marker=""with"" from=$c1 to=$n3
+@r1 syntax.relation marker=""with"" from=$n2 to=$n3
 @n3 syntax.nominal dependent=""three"" head=""sheep""
-@r2 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n4
-@n4 syntax.nominal head=""it""",spacy-direct+hmm-rules,agreement
-"could you draw something random, but include some flowers now",,,
-now make up a scene with a red car for me,"@c1 syntax.clause form=imperative modifier=""now"" verb=""make"" modifier=""up"" complement=$n1
+@r2 syntax.relation marker=""in"" from=$n3 to=$n4
+@n4 syntax.nominal head=""it""",spacy,judge
+"could you draw something random, but include some flowers now","@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""draw"" modifier=""random"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""something""
+@k1 syntax.coordination conjunction=""but"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""include"" modifier=""now"" complement=$n3
+@n3 syntax.nominal dependent=""some"" head=""flowers""",hmm-rules,judge
+now make up a scene with a red car for me,"@c1 syntax.clause form=imperative discourse=""now"" verb=""make"" modifier=""up"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""scene""
 @r1 syntax.relation marker=""with"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""red"" head=""car""
-@r2 syntax.relation marker=""for"" from=$n2 to=$n3
-@n3 syntax.nominal head=""me""",hmm-rules,judge
+@r2 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n3
+@n3 syntax.nominal head=""me""",spacy,judge
 "hey, surprise me with a scene that has a red car now","@c1 syntax.clause form=imperative discourse=""hey"" verb=""surprise"" complement=$n1
 @n1 syntax.nominal head=""me""
 @r1 syntax.relation marker=""with"" from=$c1 to=$n2
@@ -668,10 +861,10 @@ I want you to draw a random picture with some flowers in it please,"@n1 syntax.n
 @r1 syntax.relation marker=""to"" from=$c1 to=$c2
 @c2 syntax.clause form=nonfinite verb=""draw"" discourse=""please"" subject=$n2 complement=$n3
 @n3 syntax.nominal dependent=""a"" dependent=""random"" head=""picture""
-@r2 syntax.relation marker=""with"" from=$c2 to=$n4
+@r2 syntax.relation marker=""with"" from=$n3 to=$n4
 @n4 syntax.nominal dependent=""some"" head=""flowers""
-@r3 syntax.relation attachment=ambiguous marker=""in"" from=$c2 to=$n5
-@n5 syntax.nominal head=""it""",spacy-direct+hmm-rules,agreement
+@r3 syntax.relation marker=""in"" from=$n4 to=$n5
+@n5 syntax.nominal head=""it""",spacy,judge
 make up a scene with a cat!,"@c1 syntax.clause form=imperative verb=""make"" modifier=""up"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""scene""
 @r1 syntax.relation marker=""with"" from=$n1 to=$n2
@@ -684,10 +877,10 @@ make up a scene with a cat!,"@c1 syntax.clause form=imperative verb=""make"" mod
 can you draw a random picture with a red car in it please,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""draw"" discourse=""please"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""a"" dependent=""random"" head=""picture""
-@r1 syntax.relation marker=""with"" from=$c1 to=$n3
+@r1 syntax.relation marker=""with"" from=$n2 to=$n3
 @n3 syntax.nominal dependent=""a"" dependent=""red"" head=""car""
-@r2 syntax.relation marker=""in"" from=$c1 to=$n4
-@n4 syntax.nominal head=""it""",spacy-direct+hmm-rules,agreement
+@r2 syntax.relation marker=""in"" from=$n3 to=$n4
+@n4 syntax.nominal head=""it""",spacy,judge
 "ok draw something random, but include a tree this time","@c1 syntax.clause form=imperative discourse=""ok"" verb=""draw"" modifier=""random"" complement=$n1
 @n1 syntax.nominal head=""something""
 @k1 syntax.coordination conjunction=""but"" conjunct=$c1 conjunct=$c2
@@ -696,12 +889,12 @@ can you draw a random picture with a red car in it please,"@c1 syntax.clause for
 @n3 syntax.nominal dependent=""this"" head=""time""",spacy-direct+hmm-rules,agreement
 draw a random picture with a tree in it for me,"@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""random"" head=""picture""
-@r1 syntax.relation marker=""with"" from=$c1 to=$n2
+@r1 syntax.relation marker=""with"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""a"" head=""tree""
-@r2 syntax.relation marker=""in"" from=$c1 to=$n3
+@r2 syntax.relation marker=""in"" from=$n2 to=$n3
 @n3 syntax.nominal head=""it""
-@r3 syntax.relation marker=""for"" from=$c1 to=$n4
-@n4 syntax.nominal head=""me""",spacy-direct+hmm-rules,agreement
+@r3 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n4
+@n4 syntax.nominal head=""me""",spacy,judge
 surprise me with a scene that has a tree please,"@c1 syntax.clause form=imperative verb=""surprise"" complement=$n1
 @n1 syntax.nominal head=""me""
 @r1 syntax.relation marker=""with"" from=$c1 to=$n2
@@ -709,7 +902,14 @@ surprise me with a scene that has a tree please,"@c1 syntax.clause form=imperati
 @r2 syntax.relation marker=""that"" from=$n2 to=$c2
 @c2 syntax.clause form=declarative verb=""has"" discourse=""please"" complement=$n3
 @n3 syntax.nominal dependent=""a"" head=""tree""",distilbert+z3,judge
-"can you draw something random, but include a horse for me",,,
+"can you draw something random, but include a horse for me","@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""draw"" modifier=""random"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""something""
+@k1 syntax.coordination conjunction=""but"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""include"" complement=$n3
+@n3 syntax.nominal dependent=""a"" head=""horse""
+@r1 syntax.relation attachment=ambiguous marker=""for"" from=$c2 to=$n4
+@n4 syntax.nominal head=""me""",hmm-rules,judge
 "please draw something random, but include a cat now","@c1 syntax.clause form=imperative discourse=""please"" verb=""draw"" modifier=""random"" complement=$n1
 @n1 syntax.nominal head=""something""
 @k1 syntax.coordination conjunction=""but"" conjunct=$c1 conjunct=$c2
@@ -729,7 +929,10 @@ ok make up a scene with a girl,"@c1 syntax.clause form=imperative discourse=""ok
 @n1 syntax.nominal dependent=""a"" head=""scene""
 @r1 syntax.relation marker=""with"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""a"" head=""girl""",spacy-direct+hmm-rules,agreement
-now make up a scene with a horse,,,
+now make up a scene with a horse,"@c1 syntax.clause form=imperative discourse=""now"" verb=""make"" modifier=""up"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""scene""
+@r1 syntax.relation marker=""with"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""a"" head=""horse""",spacy,judge
 "ok a random scene with a dog, thanks","@c1 syntax.clause form=fragment discourse=""ok"" discourse=""thanks"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""random"" head=""scene""
 @r1 syntax.relation marker=""with"" from=$n1 to=$n2
@@ -740,7 +943,11 @@ now make up a scene with a horse,,,
 @c2 syntax.clause form=imperative verb=""include"" complement=$n2 complement=$n3
 @n2 syntax.nominal dependent=""a"" head=""boat""
 @n3 syntax.nominal dependent=""this"" head=""time""",spacy-direct+hmm-rules,agreement
-could you a random scene with some flowers,,,
+could you a random scene with some flowers,"@c1 syntax.clause form=interrogative verb=""could"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""a"" dependent=""random"" head=""scene""
+@r1 syntax.relation marker=""with"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""some"" head=""flowers""",hmm-rules,judge
 I want you to make up a scene with a castle,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""want"" subject=$n1
 @n2 syntax.nominal head=""you""
@@ -760,18 +967,23 @@ could you surprise me with a scene that has two birds now,"@c1 syntax.clause for
 can you draw a random picture with two birds in it this time,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""draw"" subject=$n1 complement=$n2 complement=$n5
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""a"" dependent=""random"" head=""picture""
-@r1 syntax.relation marker=""with"" from=$c1 to=$n3
+@r1 syntax.relation marker=""with"" from=$n2 to=$n3
 @n3 syntax.nominal dependent=""two"" head=""birds""
-@r2 syntax.relation marker=""in"" from=$c1 to=$n4
+@r2 syntax.relation marker=""in"" from=$n3 to=$n4
 @n4 syntax.nominal head=""it""
-@n5 syntax.nominal dependent=""this"" head=""time""",spacy-direct+hmm-rules,agreement
-"can you draw something random, but include some flowers, thanks",,,
+@n5 syntax.nominal dependent=""this"" head=""time""",spacy,judge
+"can you draw something random, but include some flowers, thanks","@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""draw"" modifier=""random"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""something""
+@k1 syntax.coordination conjunction=""but"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""include"" discourse=""thanks"" complement=$n3
+@n3 syntax.nominal dependent=""some"" head=""flowers""",hmm-rules,judge
 please draw a random picture with a red car in it!,"@c1 syntax.clause form=imperative discourse=""please"" verb=""draw"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""random"" head=""picture""
-@r1 syntax.relation marker=""with"" from=$c1 to=$n2
+@r1 syntax.relation marker=""with"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""red"" head=""car""
-@r2 syntax.relation marker=""in"" from=$c1 to=$n3
-@n3 syntax.nominal head=""it""",spacy-direct+hmm-rules,agreement
+@r2 syntax.relation marker=""in"" from=$n2 to=$n3
+@n3 syntax.nominal head=""it""",spacy,judge
 "go on, draw something random, but include a tree now","@c1 syntax.clause form=imperative verb=""go"" modifier=""on""
 @c2 syntax.clause form=imperative verb=""draw"" modifier=""random"" complement=$n1
 @n1 syntax.nominal head=""something""
@@ -789,25 +1001,63 @@ please draw a random picture with a red car in it!,"@c1 syntax.clause form=imper
 "go on, make up a scene with a horse, thanks","@c1 syntax.clause form=imperative verb=""go"" modifier=""on""
 @c2 syntax.clause form=imperative verb=""make"" modifier=""up"" discourse=""thanks"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""scene""
-@r1 syntax.relation marker=""with"" from=$n1 to=$n2
+@r1 syntax.relation attachment=ambiguous marker=""with"" from=$c2 to=$n2
 @n2 syntax.nominal dependent=""a"" head=""horse""
-@k1 syntax.coordination conjunct=$c1 conjunct=$c2",hmm-rules,agreement
-I want you to draw a picture of what we talked about now,,,
-ok draw something about what we discussed for me,,,
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2",spacy,judge
+I want you to draw a picture of what we talked about now,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""want"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""draw"" modifier=""now"" subject=$n2 complement=$n3
+@n3 syntax.nominal dependent=""a"" head=""picture""
+@r2 syntax.relation marker=""of"" from=$n3 to=$c3
+@n4 syntax.nominal head=""what""
+@n5 syntax.nominal head=""we""
+@c3 syntax.clause form=declarative verb=""talked"" subject=$n5
+@r3 syntax.relation marker=""about"" from=$c3 to=$n4",spacy,judge
+ok draw something about what we discussed for me,"@c1 syntax.clause form=imperative discourse=""ok"" verb=""draw"" complement=$n1
+@n1 syntax.nominal head=""something""
+@r1 syntax.relation marker=""about"" from=$n1 to=$c2
+@n2 syntax.nominal head=""what""
+@n3 syntax.nominal head=""we""
+@c2 syntax.clause form=declarative verb=""discussed"" subject=$n3 complement=$n2
+@r2 syntax.relation marker=""for"" from=$c1 to=$n4
+@n4 syntax.nominal head=""me""",spacy,judge
 "ok make a picture from our conversation, thanks","@c1 syntax.clause form=imperative discourse=""ok"" verb=""make"" discourse=""thanks"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""picture""
 @r1 syntax.relation attachment=ambiguous marker=""from"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""our"" head=""conversation""",spacy-direct+hmm-rules,agreement
-can you illustrate what I just told you now,,,
-"hey, make a picture from our conversation this time",,,
-"hey, make a picture from our conversation for me","@c1 syntax.clause form=imperative discourse=""hey"" verb=""make"" complement=$n1
+can you illustrate what I just told you now,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""illustrate"" modifier=""now"" subject=$n1
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""what""
+@n3 syntax.nominal head=""I""
+@c2 syntax.clause form=declarative modifier=""just"" verb=""told"" subject=$n3 complement=$n2 complement=$n4
+@n4 syntax.nominal head=""you""
+@r1 syntax.relation from=$c1 to=$c2",spacy,judge
+"hey, make a picture from our conversation this time","@c1 syntax.clause form=imperative discourse=""hey"" verb=""make"" complement=$n1 complement=$n3
 @n1 syntax.nominal dependent=""a"" head=""picture""
 @r1 syntax.relation attachment=ambiguous marker=""from"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""our"" head=""conversation""
-@r2 syntax.relation marker=""for"" from=$n2 to=$n3
-@n3 syntax.nominal head=""me""",hmm-rules,judge
-can you draw what I described now,,,
-could you draw something about what we discussed,,,
+@n3 syntax.nominal dependent=""this"" head=""time""",hmm-rules,judge
+"hey, make a picture from our conversation for me","@c1 syntax.clause form=imperative discourse=""hey"" verb=""make"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""picture""
+@r1 syntax.relation marker=""from"" from=$n1 to=$n2
+@n2 syntax.nominal dependent=""our"" head=""conversation""
+@r2 syntax.relation marker=""for"" from=$c1 to=$n3
+@n3 syntax.nominal head=""me""",spacy,judge
+can you draw what I described now,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""draw"" modifier=""now"" subject=$n1
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""what""
+@n3 syntax.nominal head=""I""
+@c2 syntax.clause form=declarative verb=""described"" subject=$n3 complement=$n2
+@r1 syntax.relation from=$c1 to=$c2",spacy,judge
+could you draw something about what we discussed,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""draw"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""something""
+@r1 syntax.relation marker=""about"" from=$n2 to=$c2
+@n3 syntax.nominal head=""what""
+@n4 syntax.nominal head=""we""
+@c2 syntax.clause form=declarative verb=""discussed"" subject=$n4 complement=$n3",spacy,judge
 can you draw what I described!,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""draw"" subject=$n1
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""what""
@@ -820,33 +1070,58 @@ can you draw what I described,"@c1 syntax.clause form=interrogative auxiliary=""
 @n3 syntax.nominal head=""I""
 @c2 syntax.clause form=declarative verb=""described"" subject=$n3 complement=$n2
 @r1 syntax.relation from=$c1 to=$c2",spacy+hmm-rules,agreement
-draw something about what we discussed,,,
-ok draw the scene I just described now,,,
-can you draw a picture of what we talked about,,,
+draw something about what we discussed,"@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
+@n1 syntax.nominal head=""something""
+@r1 syntax.relation marker=""about"" from=$n1 to=$c2
+@n2 syntax.nominal head=""what""
+@n3 syntax.nominal head=""we""
+@c2 syntax.clause form=declarative verb=""discussed"" subject=$n3 complement=$n2",spacy,judge
+ok draw the scene I just described now,"@c1 syntax.clause form=imperative discourse=""ok"" verb=""draw"" modifier=""now"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""scene""
+@n2 syntax.nominal head=""I""
+@c2 syntax.clause form=declarative modifier=""just"" verb=""described"" subject=$n2
+@r1 syntax.relation from=$n1 to=$c2",spacy,judge
+can you draw a picture of what we talked about,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""draw"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""a"" head=""picture""
+@r1 syntax.relation marker=""of"" from=$n2 to=$c2
+@n3 syntax.nominal head=""what""
+@n4 syntax.nominal head=""we""
+@c2 syntax.clause form=declarative verb=""talked"" subject=$n4
+@r2 syntax.relation marker=""about"" from=$c2 to=$n3",spacy,judge
 "I want you to illustrate what I just told you, thanks","@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""want"" subject=$n1
 @n2 syntax.nominal head=""you""
 @r1 syntax.relation marker=""to"" from=$c1 to=$c2
-@c2 syntax.clause form=nonfinite verb=""illustrate"" subject=$n2
+@c2 syntax.clause form=nonfinite verb=""illustrate"" discourse=""thanks"" subject=$n2
 @n3 syntax.nominal head=""what""
 @n4 syntax.nominal head=""I""
-@c3 syntax.clause form=declarative modifier=""just"" verb=""told"" discourse=""thanks"" subject=$n4 complement=$n3 complement=$n5
+@c3 syntax.clause form=declarative modifier=""just"" verb=""told"" subject=$n4 complement=$n3 complement=$n5
 @n5 syntax.nominal head=""you""
-@r2 syntax.relation from=$c2 to=$c3",hmm-rules,agreement
+@r2 syntax.relation from=$c2 to=$c3",spacy,judge
 please draw the scene I just described,"@c1 syntax.clause form=imperative discourse=""please"" verb=""draw"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""scene""
 @n2 syntax.nominal head=""I""
 @c2 syntax.clause form=declarative modifier=""just"" verb=""described"" subject=$n2
 @r1 syntax.relation from=$n1 to=$c2",spacy-direct+hmm-rules,agreement
-now draw the scene I just described,,,
+now draw the scene I just described,"@c1 syntax.clause form=imperative discourse=""now"" verb=""draw"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""scene""
+@n2 syntax.nominal head=""I""
+@c2 syntax.clause form=declarative modifier=""just"" verb=""described"" subject=$n2
+@r1 syntax.relation from=$n1 to=$c2",spacy,judge
 could you make a picture from our conversation for me,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""make"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""a"" head=""picture""
 @r1 syntax.relation attachment=ambiguous marker=""from"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""our"" head=""conversation""
-@r2 syntax.relation marker=""for"" from=$n3 to=$n4
-@n4 syntax.nominal head=""me""",spacy-direct+hmm-rules,agreement
-"now draw something about what we discussed, thanks",,,
+@r2 syntax.relation marker=""for"" from=$c1 to=$n4
+@n4 syntax.nominal head=""me""",spacy,judge
+"now draw something about what we discussed, thanks","@c1 syntax.clause form=imperative discourse=""now"" verb=""draw"" discourse=""thanks"" complement=$n1
+@n1 syntax.nominal head=""something""
+@r1 syntax.relation marker=""about"" from=$n1 to=$c2
+@n2 syntax.nominal head=""what""
+@n3 syntax.nominal head=""we""
+@c2 syntax.clause form=declarative verb=""discussed"" subject=$n3 complement=$n2",spacy,judge
 can you draw what I described for me,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""draw"" subject=$n1
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""what""
@@ -866,7 +1141,13 @@ can you make a picture from our conversation,"@c1 syntax.clause form=interrogati
 @n2 syntax.nominal dependent=""a"" head=""picture""
 @r1 syntax.relation attachment=ambiguous marker=""from"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""our"" head=""conversation""",spacy-direct+hmm-rules,agreement
-"now draw a picture of what we talked about, thanks",,,
+"now draw a picture of what we talked about, thanks","@c1 syntax.clause form=imperative discourse=""now"" verb=""draw"" discourse=""thanks"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""picture""
+@r1 syntax.relation marker=""of"" from=$n1 to=$c2
+@n2 syntax.nominal head=""what""
+@n3 syntax.nominal head=""we""
+@c2 syntax.clause form=declarative verb=""talked"" subject=$n3
+@r2 syntax.relation marker=""about"" from=$c2 to=$n2",spacy,judge
 now draw the scene I just described!,"@c1 syntax.clause form=imperative modifier=""now"" verb=""draw"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""scene""
 @n2 syntax.nominal head=""I""
@@ -875,19 +1156,36 @@ now draw the scene I just described!,"@c1 syntax.clause form=imperative modifier
 ok illustrate what I just told you,"@c1 syntax.clause form=imperative discourse=""ok"" verb=""illustrate""
 @n1 syntax.nominal head=""what""
 @n2 syntax.nominal head=""I""
-@c2 syntax.clause form=interrogative modifier=""just"" verb=""told"" subject=$n2 complement=$n1 complement=$n3
+@c2 syntax.clause form=declarative modifier=""just"" verb=""told"" subject=$n2 complement=$n1 complement=$n3
 @n3 syntax.nominal head=""you""
-@r1 syntax.relation from=$c1 to=$c2",spacy-direct+hmm-rules,agreement
+@r1 syntax.relation from=$c1 to=$c2",hmm-rules+spacy,judge
 please draw the scene I just described for me,"@c1 syntax.clause form=imperative discourse=""please"" verb=""draw"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""scene""
 @n2 syntax.nominal head=""I""
 @c2 syntax.clause form=declarative modifier=""just"" verb=""described"" subject=$n2
-@r1 syntax.relation marker=""for"" from=$c2 to=$n3
+@r1 syntax.relation marker=""for"" from=$c1 to=$n3
 @n3 syntax.nominal head=""me""
-@r2 syntax.relation from=$n1 to=$c2",spacy-direct+hmm-rules,agreement
-please draw something about what we discussed,,,
-could you draw a picture of what we talked about!,,,
-draw the scene I just described this time,,,
+@r2 syntax.relation from=$n1 to=$c2",spacy,judge
+please draw something about what we discussed,"@c1 syntax.clause form=imperative discourse=""please"" verb=""draw"" complement=$n1
+@n1 syntax.nominal head=""something""
+@r1 syntax.relation marker=""about"" from=$n1 to=$c2
+@n2 syntax.nominal head=""what""
+@n3 syntax.nominal head=""we""
+@c2 syntax.clause form=declarative verb=""discussed"" subject=$n3 complement=$n2",spacy,judge
+could you draw a picture of what we talked about!,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""draw"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""a"" head=""picture""
+@r1 syntax.relation marker=""of"" from=$n2 to=$c2
+@n3 syntax.nominal head=""what""
+@n4 syntax.nominal head=""we""
+@c2 syntax.clause form=declarative verb=""talked"" subject=$n4
+@r2 syntax.relation marker=""about"" from=$c2 to=$n3",spacy,judge
+draw the scene I just described this time,"@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""scene""
+@n2 syntax.nominal head=""I""
+@c2 syntax.clause form=declarative modifier=""just"" verb=""described"" subject=$n2 complement=$n3
+@n3 syntax.nominal dependent=""this"" head=""time""
+@r1 syntax.relation from=$c1 to=$c2",hmm-rules,judge
 please make a picture from our conversation please,"@c1 syntax.clause form=imperative discourse=""please"" verb=""make"" discourse=""please"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""picture""
 @r1 syntax.relation attachment=ambiguous marker=""from"" from=$c1 to=$n2
@@ -896,19 +1194,33 @@ can you illustrate what I just told you this time,"@c1 syntax.clause form=interr
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""what""
 @n3 syntax.nominal head=""I""
-@c2 syntax.clause form=interrogative modifier=""just"" verb=""told"" subject=$n3 complement=$n2 complement=$n4 complement=$n5
+@c2 syntax.clause form=declarative modifier=""just"" verb=""told"" subject=$n3 complement=$n2 complement=$n4 complement=$n5
 @n4 syntax.nominal head=""you""
 @n5 syntax.nominal dependent=""this"" head=""time""
-@r1 syntax.relation from=$c1 to=$c2",spacy-direct+hmm-rules,agreement
-just draw something about what we discussed!,,,
-now draw the scene I just described please,,,
-could you draw the scene I just described now,,,
-ok illustrate what I just told you please,"@c1 syntax.clause form=imperative discourse=""ok"" verb=""illustrate""
+@r1 syntax.relation from=$c1 to=$c2",hmm-rules+spacy,judge
+just draw something about what we discussed!,"@c1 syntax.clause form=imperative modifier=""just"" verb=""draw"" complement=$n1
+@n1 syntax.nominal head=""something""
+@r1 syntax.relation marker=""about"" from=$n1 to=$c2
+@n2 syntax.nominal head=""what""
+@n3 syntax.nominal head=""we""
+@c2 syntax.clause form=declarative verb=""discussed"" subject=$n3 complement=$n2",spacy,judge
+now draw the scene I just described please,"@c1 syntax.clause form=imperative discourse=""now"" verb=""draw"" discourse=""please"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""scene""
+@n2 syntax.nominal head=""I""
+@c2 syntax.clause form=declarative modifier=""just"" verb=""described"" subject=$n2
+@r1 syntax.relation from=$n1 to=$c2",spacy,judge
+could you draw the scene I just described now,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""draw"" modifier=""now"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""the"" head=""scene""
+@n3 syntax.nominal head=""I""
+@c2 syntax.clause form=declarative modifier=""just"" verb=""described"" subject=$n3
+@r1 syntax.relation from=$n2 to=$c2",spacy,judge
+ok illustrate what I just told you please,"@c1 syntax.clause form=imperative discourse=""ok"" verb=""illustrate"" discourse=""please""
 @n1 syntax.nominal head=""what""
 @n2 syntax.nominal head=""I""
-@c2 syntax.clause form=declarative modifier=""just"" verb=""told"" discourse=""please"" subject=$n2 complement=$n1 complement=$n3
+@c2 syntax.clause form=declarative modifier=""just"" verb=""told"" subject=$n2 complement=$n1 complement=$n3
 @n3 syntax.nominal head=""you""
-@r1 syntax.relation from=$c1 to=$c2",hmm-rules,agreement
+@r1 syntax.relation from=$c1 to=$c2",spacy,judge
 can you illustrate what I just told you for me,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""illustrate"" subject=$n1
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""what""
@@ -928,25 +1240,43 @@ could you make a picture from our conversation,"@c1 syntax.clause form=interroga
 @n2 syntax.nominal dependent=""a"" head=""picture""
 @r1 syntax.relation attachment=ambiguous marker=""from"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""our"" head=""conversation""",spacy-direct+hmm-rules,agreement
-I want you to make a picture from our conversation this time,,,
+I want you to make a picture from our conversation this time,"@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""want"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""make"" subject=$n2 complement=$n3 complement=$n5
+@n3 syntax.nominal dependent=""a"" head=""picture""
+@r2 syntax.relation attachment=ambiguous marker=""from"" from=$c2 to=$n4
+@n4 syntax.nominal dependent=""our"" head=""conversation""
+@n5 syntax.nominal dependent=""this"" head=""time""",hmm-rules,judge
 I want you to draw the scene I just described please,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""want"" subject=$n1
 @n2 syntax.nominal head=""you""
 @r1 syntax.relation marker=""to"" from=$c1 to=$c2
-@c2 syntax.clause form=nonfinite verb=""draw"" subject=$n2 complement=$n3
+@c2 syntax.clause form=nonfinite verb=""draw"" discourse=""please"" subject=$n2 complement=$n3
 @n3 syntax.nominal dependent=""the"" head=""scene""
 @n4 syntax.nominal head=""I""
-@c3 syntax.clause form=declarative modifier=""just"" verb=""described"" discourse=""please"" subject=$n4
-@r2 syntax.relation from=$n3 to=$c3",hmm-rules,agreement
-now illustrate what I just told you,,,
+@c3 syntax.clause form=declarative modifier=""just"" verb=""described"" subject=$n4
+@r2 syntax.relation from=$n3 to=$c3",spacy,judge
+now illustrate what I just told you,"@c1 syntax.clause form=imperative discourse=""now"" verb=""illustrate""
+@n1 syntax.nominal head=""what""
+@n2 syntax.nominal head=""I""
+@c2 syntax.clause form=declarative modifier=""just"" verb=""told"" subject=$n2 complement=$n1 complement=$n3
+@n3 syntax.nominal head=""you""
+@r1 syntax.relation from=$c1 to=$c2",spacy,judge
 could you illustrate what I just told you,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""illustrate"" subject=$n1
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""what""
 @n3 syntax.nominal head=""I""
-@c2 syntax.clause form=interrogative modifier=""just"" verb=""told"" subject=$n3 complement=$n2 complement=$n4
+@c2 syntax.clause form=declarative modifier=""just"" verb=""told"" subject=$n3 complement=$n2 complement=$n4
 @n4 syntax.nominal head=""you""
-@r1 syntax.relation from=$c1 to=$c2",spacy-direct+hmm-rules,agreement
-please draw something about what we discussed!,,,
+@r1 syntax.relation from=$c1 to=$c2",hmm-rules+spacy,judge
+please draw something about what we discussed!,"@c1 syntax.clause form=imperative discourse=""please"" verb=""draw"" complement=$n1
+@n1 syntax.nominal head=""something""
+@r1 syntax.relation marker=""about"" from=$n1 to=$c2
+@n2 syntax.nominal head=""what""
+@n3 syntax.nominal head=""we""
+@c2 syntax.clause form=declarative verb=""discussed"" subject=$n3 complement=$n2",spacy,judge
 I want you to make a picture from our conversation,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""want"" subject=$n1
 @n2 syntax.nominal head=""you""
@@ -959,10 +1289,15 @@ can you illustrate what I just told you,"@c1 syntax.clause form=interrogative au
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""what""
 @n3 syntax.nominal head=""I""
-@c2 syntax.clause form=interrogative modifier=""just"" verb=""told"" subject=$n3 complement=$n2 complement=$n4
+@c2 syntax.clause form=declarative modifier=""just"" verb=""told"" subject=$n3 complement=$n2 complement=$n4
 @n4 syntax.nominal head=""you""
-@r1 syntax.relation from=$c1 to=$c2",spacy-direct+hmm-rules,agreement
-ok illustrate what I just told you now,,,
+@r1 syntax.relation from=$c1 to=$c2",hmm-rules+spacy,judge
+ok illustrate what I just told you now,"@c1 syntax.clause form=imperative discourse=""ok"" verb=""illustrate"" modifier=""now""
+@n1 syntax.nominal head=""what""
+@n2 syntax.nominal head=""I""
+@c2 syntax.clause form=declarative modifier=""just"" verb=""told"" subject=$n2 complement=$n1 complement=$n3
+@n3 syntax.nominal head=""you""
+@r1 syntax.relation from=$c1 to=$c2",spacy,judge
 "go on, make a picture from our conversation","@c1 syntax.clause form=imperative verb=""go"" modifier=""on""
 @c2 syntax.clause form=imperative verb=""make"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""picture""
@@ -985,15 +1320,34 @@ can you draw what I described this time,"@c1 syntax.clause form=interrogative au
 @n2 syntax.nominal head=""I""
 @c2 syntax.clause form=declarative modifier=""just"" verb=""described"" subject=$n2
 @r1 syntax.relation from=$n1 to=$c2",spacy-direct+hmm-rules,agreement
-"I want you to draw a picture of what we talked about, thanks",,,
-draw a picture of what we talked about now,,,
+"I want you to draw a picture of what we talked about, thanks","@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""want"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""draw"" discourse=""thanks"" subject=$n2 complement=$n3
+@n3 syntax.nominal dependent=""a"" head=""picture""
+@r2 syntax.relation marker=""of"" from=$n3 to=$c3
+@n4 syntax.nominal head=""what""
+@n5 syntax.nominal head=""we""
+@c3 syntax.clause form=declarative verb=""talked"" subject=$n5
+@r3 syntax.relation marker=""about"" from=$c3 to=$n4",spacy,judge
+draw a picture of what we talked about now,"@c1 syntax.clause form=imperative verb=""draw"" modifier=""now"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""picture""
+@r1 syntax.relation marker=""of"" from=$n1 to=$c2
+@n2 syntax.nominal head=""what""
+@n3 syntax.nominal head=""we""
+@c2 syntax.clause form=declarative verb=""talked"" subject=$n3
+@r2 syntax.relation marker=""about"" from=$c2 to=$n2",spacy,judge
 "no, give me another one","@c1 syntax.clause form=imperative discourse=""no"" verb=""give"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""me""
 @n2 syntax.nominal dependent=""another"" head=""one""",spacy-direct+hmm-rules,agreement
 "ok, simpler","@c1 syntax.clause form=fragment discourse=""ok"" modifier=""simpler""",spacy-direct+hmm-rules,judge
 "ok, a simpler one","@c1 syntax.clause form=fragment discourse=""ok"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""simpler"" head=""one""",spacy-direct+hmm-rules,agreement
-"nice, another one like that",,,
+"nice, another one like that","@c1 syntax.clause form=fragment modifier=""nice"" complement=$n1
+@n1 syntax.nominal dependent=""another"" head=""one""
+@r1 syntax.relation marker=""like"" from=$n1 to=$n2
+@n2 syntax.nominal head=""that""",hmm-rules,judge
 "ok, make it busier!","@c1 syntax.clause form=imperative discourse=""ok"" verb=""make"" modifier=""busier"" complement=$n1
 @n1 syntax.nominal head=""it""",spacy-direct+hmm-rules,agreement
 "hmm, give me another one","@c1 syntax.clause form=imperative discourse=""hmm"" verb=""give"" complement=$n1 complement=$n2
@@ -1007,7 +1361,8 @@ draw a picture of what we talked about now,,,
 @n2 syntax.nominal dependent=""the"" dependent=""same"" head=""style""",spacy-direct+hmm-rules,agreement
 "no, make it busier!","@c1 syntax.clause form=imperative discourse=""no"" verb=""make"" modifier=""busier"" complement=$n1
 @n1 syntax.nominal head=""it""",spacy-direct+hmm-rules,agreement
-"nice, a busier one",,,
+"nice, a busier one","@c1 syntax.clause form=fragment modifier=""nice"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""busier"" head=""one""",hmm-rules,judge
 "no, give me another one please","@c1 syntax.clause form=imperative discourse=""no"" verb=""give"" discourse=""please"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""me""
 @n2 syntax.nominal dependent=""another"" head=""one""",spacy-direct+hmm-rules,agreement
@@ -1019,7 +1374,8 @@ draw a picture of what we talked about now,,,
 @n1 syntax.nominal dependent=""another"" head=""one""
 @r1 syntax.relation marker=""like"" from=$n1 to=$n2
 @n2 syntax.nominal head=""that""",spacy-direct+hmm-rules,agreement
-"no, more detail please",,,
+"no, more detail please","@c1 syntax.clause form=fragment discourse=""no"" discourse=""please"" complement=$n1
+@n1 syntax.nominal dependent=""more"" head=""detail""",spacy,judge
 "ok, try again with a new one please","@c1 syntax.clause form=imperative discourse=""ok"" verb=""try"" modifier=""again"" discourse=""please""
 @r1 syntax.relation marker=""with"" from=$c1 to=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""new"" head=""one""",spacy+hmm-rules,agreement
@@ -1028,9 +1384,14 @@ draw a picture of what we talked about now,,,
 another one please,"@n1 syntax.nominal dependent=""another"" head=""one""
 @c1 syntax.clause form=fragment discourse=""please"" complement=$n1",spacy-direct+hmm-rules,agreement
 "hmm, simpler!","@c1 syntax.clause form=fragment discourse=""hmm"" modifier=""simpler""",spacy-direct+hmm-rules,agreement
-"nice, another one like that please",,,
-"no, more detail",,,
-"hmm, more detail!",,,
+"nice, another one like that please","@c1 syntax.clause form=fragment modifier=""nice"" discourse=""please"" complement=$n1
+@n1 syntax.nominal dependent=""another"" head=""one""
+@r1 syntax.relation marker=""like"" from=$n1 to=$n2
+@n2 syntax.nominal head=""that""",hmm-rules,judge
+"no, more detail","@c1 syntax.clause form=fragment discourse=""no"" complement=$n1
+@n1 syntax.nominal dependent=""more"" head=""detail""",spacy,judge
+"hmm, more detail!","@c1 syntax.clause form=fragment discourse=""hmm"" complement=$n1
+@n1 syntax.nominal dependent=""more"" head=""detail""",spacy,judge
 "ok, a different one!","@c1 syntax.clause form=fragment discourse=""ok"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""different"" head=""one""",spacy-direct+hmm-rules,agreement
 "hmm, more like that!","@c1 syntax.clause form=fragment discourse=""hmm"" modifier=""more""
@@ -1076,7 +1437,8 @@ give me another one,"@c1 syntax.clause form=imperative verb=""give"" complement=
 "nice, give me another one!","@c1 syntax.clause form=imperative discourse=""nice"" verb=""give"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""me""
 @n2 syntax.nominal dependent=""another"" head=""one""",distilbert+hmm-rules,judge
-"nice, a different one!",,,
+"nice, a different one!","@c1 syntax.clause form=fragment modifier=""nice"" complement=$n1
+@n1 syntax.nominal dependent=""a"" dependent=""different"" head=""one""",hmm-rules,judge
 "hmm, do another","@c1 syntax.clause form=imperative discourse=""hmm"" verb=""do"" complement=$n1
 @n1 syntax.nominal head=""another""",spacy-direct+hmm-rules,agreement
 try again with a new one,"@c1 syntax.clause form=imperative verb=""try"" modifier=""again""
@@ -1085,11 +1447,22 @@ try again with a new one,"@c1 syntax.clause form=imperative verb=""try"" modifie
 "hmm, give me another one!","@c1 syntax.clause form=imperative discourse=""hmm"" verb=""give"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""me""
 @n2 syntax.nominal dependent=""another"" head=""one""",spacy-direct+hmm-rules,agreement
-could you draw anything you like!,,,
+could you draw anything you like!,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""draw"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""anything""
+@n3 syntax.nominal head=""you""
+@c2 syntax.clause form=declarative verb=""like"" subject=$n3
+@r1 syntax.relation from=$n2 to=$c2",spacy,judge
 ok make me a random picture!,"@c1 syntax.clause form=imperative discourse=""ok"" verb=""make"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""me""
 @n2 syntax.nominal dependent=""a"" dependent=""random"" head=""picture""",spacy-direct+hmm-rules,agreement
-just draw whatever you want for me,,,
+just draw whatever you want for me,"@c1 syntax.clause form=imperative modifier=""just"" verb=""draw""
+@n1 syntax.nominal head=""whatever""
+@n2 syntax.nominal head=""you""
+@c2 syntax.clause form=declarative verb=""want"" subject=$n2 complement=$n1
+@r1 syntax.relation marker=""for"" from=$c1 to=$n3
+@n3 syntax.nominal head=""me""
+@r2 syntax.relation from=$c1 to=$c2",spacy,judge
 "draw something random, but include a castle please","@c1 syntax.clause form=imperative verb=""draw"" modifier=""random"" complement=$n1
 @n1 syntax.nominal head=""something""
 @k1 syntax.coordination conjunction=""but"" conjunct=$c1 conjunct=$c2
@@ -1102,11 +1475,17 @@ ok surprise me with a scene that has three sheep!,"@c1 syntax.clause form=impera
 @r2 syntax.relation marker=""that"" from=$n2 to=$c2
 @c2 syntax.clause form=declarative verb=""has"" complement=$n3
 @n3 syntax.nominal dependent=""three"" head=""sheep""",spacy+hmm-rules,agreement
-now surprise me with a scene that has a cat now,,,
+now surprise me with a scene that has a cat now,"@c1 syntax.clause form=imperative discourse=""now"" verb=""surprise"" complement=$n1
+@n1 syntax.nominal head=""me""
+@r1 syntax.relation marker=""with"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""a"" head=""scene""
+@r2 syntax.relation marker=""that"" from=$n2 to=$c2
+@c2 syntax.clause form=declarative verb=""has"" modifier=""now"" complement=$n3
+@n3 syntax.nominal dependent=""a"" head=""cat""",spacy,judge
 please make up a scene with a balloon,"@c1 syntax.clause form=imperative discourse=""please"" verb=""make"" modifier=""up"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""scene""
-@r1 syntax.relation marker=""with"" from=$n1 to=$n2
-@n2 syntax.nominal dependent=""a"" head=""balloon""",spacy-direct+hmm-rules,agreement
+@r1 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""a"" head=""balloon""",spacy,judge
 "just a random scene with a red car, thanks","@c1 syntax.clause form=fragment modifier=""just"" discourse=""thanks"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""random"" head=""scene""
 @r1 syntax.relation marker=""with"" from=$n1 to=$n2
@@ -1119,18 +1498,20 @@ please surprise me with a scene that has a balloon this time,"@c1 syntax.clause 
 @c2 syntax.clause form=declarative verb=""has"" complement=$n3 complement=$n4
 @n3 syntax.nominal dependent=""a"" head=""balloon""
 @n4 syntax.nominal dependent=""this"" head=""time""",spacy+hmm-rules,agreement
-"hey, draw the scene I just described please","@c1 syntax.clause form=imperative discourse=""hey"" verb=""draw"" complement=$n1
+"hey, draw the scene I just described please","@c1 syntax.clause form=imperative discourse=""hey"" verb=""draw"" discourse=""please"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""scene""
 @n2 syntax.nominal head=""I""
-@c2 syntax.clause form=declarative modifier=""just"" verb=""described"" discourse=""please"" subject=$n2
-@r1 syntax.relation from=$n1 to=$c2",hmm-rules,agreement
-"can you draw what I described, thanks","@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""draw"" subject=$n1
+@c2 syntax.clause form=declarative modifier=""just"" verb=""described"" subject=$n2
+@r1 syntax.relation from=$n1 to=$c2",spacy,judge
+"can you draw what I described, thanks","@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""draw"" discourse=""thanks"" subject=$n1
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""what""
 @n3 syntax.nominal head=""I""
-@c2 syntax.clause form=declarative verb=""described"" discourse=""thanks"" subject=$n3 complement=$n2
-@r1 syntax.relation from=$c1 to=$c2",hmm-rules,agreement
-"nice, give me another one",,,
+@c2 syntax.clause form=declarative verb=""described"" subject=$n3 complement=$n2
+@r1 syntax.relation from=$c1 to=$c2",spacy,judge
+"nice, give me another one","@c1 syntax.clause form=imperative discourse=""nice"" verb=""give"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""me""
+@n2 syntax.nominal dependent=""another"" head=""one""",hmm-rules,judge
 "please draw something random, but include some flowers","@c1 syntax.clause form=imperative discourse=""please"" verb=""draw"" modifier=""random"" complement=$n1
 @n1 syntax.nominal head=""something""
 @k1 syntax.coordination conjunction=""but"" conjunct=$c1 conjunct=$c2
@@ -1151,39 +1532,45 @@ ok make a picture from our conversation for me,"@c1 syntax.clause form=imperativ
 @n1 syntax.nominal dependent=""a"" head=""picture""
 @r1 syntax.relation attachment=ambiguous marker=""from"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""our"" head=""conversation""
-@r2 syntax.relation marker=""for"" from=$n2 to=$n3
-@n3 syntax.nominal head=""me""",spacy-direct+hmm-rules,agreement
+@r2 syntax.relation marker=""for"" from=$c1 to=$n3
+@n3 syntax.nominal head=""me""",spacy,judge
 can you show me a surprise picture now,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""show"" modifier=""now"" subject=$n1 complement=$n2 complement=$n3
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""me""
 @n3 syntax.nominal dependent=""a"" dependent=""surprise"" head=""picture""",spacy-direct+hmm-rules,agreement
-"go on, draw something random please","@c1 syntax.clause form=imperative verb=""go"" modifier=""on""
-@c2 syntax.clause form=imperative verb=""draw"" modifier=""random"" discourse=""please"" complement=$n1
+"go on, draw something random please","@c1 syntax.clause form=imperative verb=""go"" modifier=""on"" discourse=""please""
+@c2 syntax.clause form=imperative verb=""draw"" modifier=""random"" complement=$n1
 @n1 syntax.nominal head=""something""
-@k1 syntax.coordination conjunct=$c1 conjunct=$c2",hmm-rules,agreement
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2",spacy,judge
 just show me a surprise picture for me,"@c1 syntax.clause form=imperative modifier=""just"" verb=""show"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""me""
 @n2 syntax.nominal dependent=""a"" dependent=""surprise"" head=""picture""
-@r1 syntax.relation marker=""for"" from=$c1 to=$n3
-@n3 syntax.nominal head=""me""",spacy-direct+hmm-rules,agreement
+@r1 syntax.relation marker=""for"" from=$n2 to=$n3
+@n3 syntax.nominal head=""me""",spacy,judge
 "hey, surprise me with a harbour scene now","@c1 syntax.clause form=imperative discourse=""hey"" verb=""surprise"" modifier=""now"" complement=$n1
 @n1 syntax.nominal head=""me""
 @r1 syntax.relation marker=""with"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""harbour"" head=""scene""",spacy-direct+hmm-rules,agreement
 "hey, draw a random picture with a cat in it this time","@c1 syntax.clause form=imperative discourse=""hey"" verb=""draw"" complement=$n1 complement=$n4
 @n1 syntax.nominal dependent=""a"" dependent=""random"" head=""picture""
-@r1 syntax.relation marker=""with"" from=$c1 to=$n2
+@r1 syntax.relation marker=""with"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""a"" head=""cat""
 @r2 syntax.relation marker=""in"" from=$n2 to=$n3
 @n3 syntax.nominal head=""it""
-@n4 syntax.nominal dependent=""this"" head=""time""",spacy-direct+hmm-rules,agreement
+@n4 syntax.nominal dependent=""this"" head=""time""",spacy,judge
 please a random scene with a tree for me,"@c1 syntax.clause form=fragment discourse=""please"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""random"" head=""scene""
 @r1 syntax.relation marker=""with"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""a"" head=""tree""
-@r2 syntax.relation marker=""for"" from=$n2 to=$n3
-@n3 syntax.nominal head=""me""",spacy-direct+hmm-rules,agreement
-now surprise me with a scene that has a tree please,,,
+@r2 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n3
+@n3 syntax.nominal head=""me""",spacy,judge
+now surprise me with a scene that has a tree please,"@c1 syntax.clause form=imperative discourse=""now"" verb=""surprise"" discourse=""please"" complement=$n1
+@n1 syntax.nominal head=""me""
+@r1 syntax.relation marker=""with"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""a"" head=""scene""
+@r2 syntax.relation marker=""that"" from=$n2 to=$c2
+@c2 syntax.clause form=declarative verb=""has"" complement=$n3
+@n3 syntax.nominal dependent=""a"" head=""tree""",spacy,judge
 I want you to surprise me with a scene that has a red car!,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""want"" subject=$n1
 @n2 syntax.nominal head=""you""
@@ -1198,54 +1585,108 @@ I want you to surprise me with a scene that has a red car!,"@n1 syntax.nominal h
 "hey, illustrate what I just told you","@c1 syntax.clause form=imperative discourse=""hey"" verb=""illustrate""
 @n1 syntax.nominal head=""what""
 @n2 syntax.nominal head=""I""
-@c2 syntax.clause form=interrogative modifier=""just"" verb=""told"" subject=$n2 complement=$n1 complement=$n3
+@c2 syntax.clause form=declarative modifier=""just"" verb=""told"" subject=$n2 complement=$n1 complement=$n3
 @n3 syntax.nominal head=""you""
-@r1 syntax.relation from=$c1 to=$c2",spacy-direct+hmm-rules,agreement
-please draw a picture of what we talked about!,,,
+@r1 syntax.relation from=$c1 to=$c2",hmm-rules+spacy,judge
+please draw a picture of what we talked about!,"@c1 syntax.clause form=imperative discourse=""please"" verb=""draw"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""picture""
+@r1 syntax.relation marker=""of"" from=$n1 to=$c2
+@n2 syntax.nominal head=""what""
+@n3 syntax.nominal head=""we""
+@c2 syntax.clause form=declarative verb=""talked"" subject=$n3
+@r2 syntax.relation marker=""about"" from=$c2 to=$n2",spacy,judge
 draw a random farm scene now,"@c1 syntax.clause form=imperative verb=""draw"" modifier=""now"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""random"" dependent=""farm"" head=""scene""",spacy-direct+hmm-rules,agreement
-ok draw a picture of what we talked about,,,
+ok draw a picture of what we talked about,"@c1 syntax.clause form=imperative discourse=""ok"" verb=""draw"" complement=$n1
+@n1 syntax.nominal dependent=""a"" head=""picture""
+@r1 syntax.relation marker=""of"" from=$n1 to=$c2
+@n2 syntax.nominal head=""what""
+@n3 syntax.nominal head=""we""
+@c2 syntax.clause form=declarative verb=""talked"" subject=$n3
+@r2 syntax.relation marker=""about"" from=$c2 to=$n2",spacy,judge
 "just draw a random night scene, thanks","@c1 syntax.clause form=imperative modifier=""just"" verb=""draw"" discourse=""thanks"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""random"" dependent=""night"" head=""scene""",spacy-direct+hmm-rules,agreement
-"draw me something, anything, thanks",,,
-please draw anything you like please,,,
+"draw me something, anything, thanks","@c1 syntax.clause form=imperative verb=""draw"" discourse=""thanks"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""me""
+@n2 syntax.nominal head=""something""
+@n3 syntax.nominal head=""anything""
+@r1 syntax.relation from=$n2 to=$n3",spacy,judge
+please draw anything you like please,"@c1 syntax.clause form=imperative discourse=""please"" verb=""draw"" discourse=""please"" complement=$n1
+@n1 syntax.nominal head=""anything""
+@n2 syntax.nominal head=""you""
+@c2 syntax.clause form=declarative verb=""like"" subject=$n2
+@r1 syntax.relation from=$n1 to=$c2",spacy,judge
 can you surprise me with a city scene please,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""surprise"" discourse=""please"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""me""
 @r1 syntax.relation marker=""with"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""a"" dependent=""city"" head=""scene""",spacy-direct+hmm-rules,agreement
-"please illustrate what I just told you, thanks","@c1 syntax.clause form=imperative discourse=""please"" verb=""illustrate""
+"please illustrate what I just told you, thanks","@c1 syntax.clause form=imperative discourse=""please"" verb=""illustrate"" discourse=""thanks""
 @n1 syntax.nominal head=""what""
 @n2 syntax.nominal head=""I""
-@c2 syntax.clause form=declarative modifier=""just"" verb=""told"" discourse=""thanks"" subject=$n2 complement=$n1 complement=$n3
+@c2 syntax.clause form=declarative modifier=""just"" verb=""told"" subject=$n2 complement=$n1 complement=$n3
 @n3 syntax.nominal head=""you""
-@r1 syntax.relation from=$c1 to=$c2",hmm-rules,agreement
-"hmm, more detail please",,,
-"go on, draw whatever you want for me",,,
-"hey, draw whatever you want!",,,
+@r1 syntax.relation from=$c1 to=$c2",spacy,judge
+"hmm, more detail please","@c1 syntax.clause form=fragment discourse=""hmm"" discourse=""please"" complement=$n1
+@n1 syntax.nominal dependent=""more"" head=""detail""",spacy,judge
+"go on, draw whatever you want for me","@c1 syntax.clause form=imperative verb=""go"" modifier=""on""
+@c2 syntax.clause form=imperative verb=""draw""
+@n1 syntax.nominal head=""whatever""
+@n2 syntax.nominal head=""you""
+@c3 syntax.clause form=declarative verb=""want"" subject=$n2 complement=$n1
+@r1 syntax.relation marker=""for"" from=$c3 to=$n3
+@n3 syntax.nominal head=""me""
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2
+@r2 syntax.relation from=$c2 to=$c3",spacy,judge
+"hey, draw whatever you want!","@c1 syntax.clause form=imperative discourse=""hey"" verb=""draw""
+@n1 syntax.nominal head=""whatever""
+@n2 syntax.nominal head=""you""
+@c2 syntax.clause form=declarative verb=""want"" subject=$n2 complement=$n1
+@r1 syntax.relation from=$c1 to=$c2",spacy,judge
 "hey, surprise me with a city scene for me","@c1 syntax.clause form=imperative discourse=""hey"" verb=""surprise"" complement=$n1
 @n1 syntax.nominal head=""me""
 @r1 syntax.relation marker=""with"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""city"" head=""scene""
-@r2 syntax.relation marker=""for"" from=$c1 to=$n3
-@n3 syntax.nominal head=""me""",spacy-direct+hmm-rules,agreement
-now surprise me with a farm scene for me,,,
-"I want you to draw something random, but include a girl for me",,,
+@r2 syntax.relation marker=""for"" from=$n2 to=$n3
+@n3 syntax.nominal head=""me""",spacy,judge
+now surprise me with a farm scene for me,"@c1 syntax.clause form=imperative discourse=""now"" verb=""surprise"" complement=$n1
+@n1 syntax.nominal head=""me""
+@r1 syntax.relation marker=""with"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""farm"" head=""scene""
+@r2 syntax.relation marker=""for"" from=$n2 to=$n3
+@n3 syntax.nominal head=""me""",spacy,judge
+"I want you to draw something random, but include a girl for me","@n1 syntax.nominal head=""I""
+@c1 syntax.clause form=declarative verb=""want"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""draw"" modifier=""random"" subject=$n2 complement=$n3
+@n3 syntax.nominal head=""something""
+@k1 syntax.coordination conjunction=""but"" conjunct=$c1 conjunct=$c3
+@c3 syntax.clause form=imperative verb=""include"" complement=$n4
+@n4 syntax.nominal dependent=""a"" head=""girl""
+@r2 syntax.relation marker=""for"" from=$c3 to=$n5
+@n5 syntax.nominal head=""me""",hmm-rules,judge
 please make a picture from our conversation for me,"@c1 syntax.clause form=imperative discourse=""please"" verb=""make"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""picture""
 @r1 syntax.relation attachment=ambiguous marker=""from"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""our"" head=""conversation""
-@r2 syntax.relation marker=""for"" from=$n2 to=$n3
-@n3 syntax.nominal head=""me""",spacy-direct+hmm-rules,agreement
-can you draw what I described please,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""draw"" subject=$n1
+@r2 syntax.relation marker=""for"" from=$c1 to=$n3
+@n3 syntax.nominal head=""me""",spacy,judge
+can you draw what I described please,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""draw"" discourse=""please"" subject=$n1
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal head=""what""
 @n3 syntax.nominal head=""I""
-@c2 syntax.clause form=declarative verb=""described"" discourse=""please"" subject=$n3 complement=$n2
-@r1 syntax.relation from=$c1 to=$c2",hmm-rules,agreement
-please illustrate what I just told you now,,,
+@c2 syntax.clause form=declarative verb=""described"" subject=$n3 complement=$n2
+@r1 syntax.relation from=$c1 to=$c2",spacy,judge
+please illustrate what I just told you now,"@c1 syntax.clause form=imperative discourse=""please"" verb=""illustrate"" modifier=""now""
+@n1 syntax.nominal head=""what""
+@n2 syntax.nominal head=""I""
+@c2 syntax.clause form=declarative modifier=""just"" verb=""told"" subject=$n2 complement=$n1 complement=$n3
+@n3 syntax.nominal head=""you""
+@r1 syntax.relation from=$c1 to=$c2",spacy,judge
 "no, simpler","@c1 syntax.clause form=fragment discourse=""no"" modifier=""simpler""",spacy-direct+hmm-rules,agreement
-"ok, more detail",,,
+"ok, more detail","@c1 syntax.clause form=fragment discourse=""ok"" complement=$n1
+@n1 syntax.nominal dependent=""more"" head=""detail""",spacy,judge
 "hmm, make it simpler","@c1 syntax.clause form=imperative discourse=""hmm"" verb=""make"" modifier=""simpler"" complement=$n1
 @n1 syntax.nominal head=""it""",spacy-direct+hmm-rules,agreement
 draw a random beach scene,"@c1 syntax.clause form=imperative verb=""draw"" complement=$n1
@@ -1253,34 +1694,50 @@ draw a random beach scene,"@c1 syntax.clause form=imperative verb=""draw"" compl
 could you draw a random picture with a tree in it,"@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""draw"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""a"" dependent=""random"" head=""picture""
-@r1 syntax.relation marker=""with"" from=$c1 to=$n3
+@r1 syntax.relation marker=""with"" from=$n2 to=$n3
 @n3 syntax.nominal dependent=""a"" head=""tree""
-@r2 syntax.relation marker=""in"" from=$c1 to=$n4
-@n4 syntax.nominal head=""it""",spacy-direct+hmm-rules,agreement
+@r2 syntax.relation marker=""in"" from=$n3 to=$n4
+@n4 syntax.nominal head=""it""",spacy,judge
 "go on, draw a random picture with a castle in it!","@c1 syntax.clause form=imperative verb=""go"" modifier=""on""
 @c2 syntax.clause form=imperative verb=""draw"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""random"" head=""picture""
-@r1 syntax.relation marker=""with"" from=$c2 to=$n2
+@r1 syntax.relation marker=""with"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""a"" head=""castle""
-@r2 syntax.relation attachment=ambiguous marker=""in"" from=$c2 to=$n3
+@r2 syntax.relation marker=""in"" from=$n2 to=$n3
 @n3 syntax.nominal head=""it""
-@k1 syntax.coordination conjunct=$c1 conjunct=$c2",hmm-rules,agreement
-can you draw the scene I just described this time,,,
-"now draw something random, but include some flowers this time",,,
+@k1 syntax.coordination conjunct=$c1 conjunct=$c2",spacy,judge
+can you draw the scene I just described this time,"@c1 syntax.clause form=interrogative auxiliary=""can"" verb=""draw"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal dependent=""the"" head=""scene""
+@n3 syntax.nominal head=""I""
+@c2 syntax.clause form=declarative modifier=""just"" verb=""described"" subject=$n3 complement=$n4
+@n4 syntax.nominal dependent=""this"" head=""time""
+@r1 syntax.relation from=$c1 to=$c2",hmm-rules,judge
+"now draw something random, but include some flowers this time","@c1 syntax.clause form=imperative discourse=""now"" verb=""draw"" modifier=""random"" complement=$n1
+@n1 syntax.nominal head=""something""
+@k1 syntax.coordination conjunction=""but"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=imperative verb=""include"" complement=$n2 complement=$n3
+@n2 syntax.nominal dependent=""some"" head=""flowers""
+@n3 syntax.nominal dependent=""this"" head=""time""",spacy,judge
 "draw something random, but include some flowers now","@c1 syntax.clause form=imperative verb=""draw"" modifier=""random"" complement=$n1
 @n1 syntax.nominal head=""something""
 @k1 syntax.coordination conjunction=""but"" conjunct=$c1 conjunct=$c2
 @c2 syntax.clause form=imperative verb=""include"" modifier=""now"" complement=$n2
 @n2 syntax.nominal dependent=""some"" head=""flowers""",spacy-direct+hmm-rules,agreement
-now surprise me with a forest scene for me,,,
+now surprise me with a forest scene for me,"@c1 syntax.clause form=imperative discourse=""now"" verb=""surprise"" complement=$n1
+@n1 syntax.nominal head=""me""
+@r1 syntax.relation marker=""with"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""forest"" head=""scene""
+@r2 syntax.relation marker=""for"" from=$n2 to=$n3
+@n3 syntax.nominal head=""me""",spacy,judge
 I want you to a random scene with some flowers this time,"@n1 syntax.nominal head=""I""
 @c1 syntax.clause form=declarative verb=""want"" subject=$n1 complement=$n2 complement=$n5
 @n2 syntax.nominal head=""you""
-@r1 syntax.relation marker=""to"" from=$c1 to=$n3
+@r1 syntax.relation marker=""to"" from=$n2 to=$n3
 @n3 syntax.nominal dependent=""a"" dependent=""random"" head=""scene""
-@r2 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$n4
+@r2 syntax.relation marker=""with"" from=$n3 to=$n4
 @n4 syntax.nominal dependent=""some"" head=""flowers""
-@n5 syntax.nominal dependent=""this"" head=""time""",spacy-direct+hmm-rules,agreement
+@n5 syntax.nominal dependent=""this"" head=""time""",spacy,judge
 "go on, make up a scene with a boat please","@c1 syntax.clause form=imperative verb=""go"" modifier=""on""
 @c2 syntax.clause form=imperative verb=""make"" modifier=""up"" discourse=""please"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""scene""
@@ -1293,9 +1750,15 @@ I want you to make up a scene with a balloon,"@n1 syntax.nominal head=""I""
 @r1 syntax.relation marker=""to"" from=$c1 to=$c2
 @c2 syntax.clause form=nonfinite verb=""make"" modifier=""up"" subject=$n2 complement=$n3
 @n3 syntax.nominal dependent=""a"" head=""scene""
-@r2 syntax.relation marker=""with"" from=$n3 to=$n4
-@n4 syntax.nominal dependent=""a"" head=""balloon""",spacy-direct+hmm-rules,agreement
-"could you draw me something, anything this time",,,
+@r2 syntax.relation attachment=ambiguous marker=""with"" from=$c2 to=$n4
+@n4 syntax.nominal dependent=""a"" head=""balloon""",spacy,judge
+"could you draw me something, anything this time","@c1 syntax.clause form=interrogative auxiliary=""could"" verb=""draw"" subject=$n1 complement=$n2 complement=$n3 complement=$n5
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""me""
+@n3 syntax.nominal head=""something""
+@n4 syntax.nominal head=""anything""
+@n5 syntax.nominal dependent=""this"" head=""time""
+@r1 syntax.relation from=$n3 to=$n4",spacy,judge
 "go on, draw the scene I just described","@c1 syntax.clause form=imperative verb=""go"" modifier=""on""
 @c2 syntax.clause form=imperative verb=""draw"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""scene""
