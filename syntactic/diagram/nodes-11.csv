@@ -44,8 +44,8 @@ delet Dashboard,"@n1 syntax.nominal dependent=""delet"" head=""Dashboard""
 @c1 syntax.clause form=fragment complement=$n1",neural-dependencies+neuro-prolog+neuro-selector+selector-distilbert+spacy-beam+spacy-direct,judge
 conect Login to End,"@c1 syntax.clause form=imperative verb=""conect"" complement=$n1
 @n1 syntax.nominal head=""Login""
-@r1 syntax.relation marker=""to"" from=$c1 to=$n2
-@n2 syntax.nominal head=""End""",distilbert+neuro-selector+selector-distilbert+hmm-rules,judge
+@r1 syntax.relation marker=""to"" from=$n1 to=$n2
+@n2 syntax.nominal head=""End""",spacy,judge
 mkae Login bleu,"@n1 syntax.nominal dependent=""mkae"" dependent=""Login"" head=""bleu""
 @c1 syntax.clause form=fragment complement=$n1",neural-dependencies+neuro-prolog+prolog+prolog-example-transfer+spacy-beam+spacy-direct,judge
 arange all the nodes in a colum,"@c1 syntax.clause form=imperative verb=""arange"" complement=$n1
@@ -129,8 +129,8 @@ give it a darker look,"@c1 syntax.clause form=imperative verb=""give"" complemen
 @k1 syntax.coordination conjunct=$c1 conjunct=$c2",neuro-selector+prolog+prolog-example-transfer+selector-distilbert+spacy-beam+spacy-direct,judge
 make e2 red,"@c1 syntax.clause form=imperative verb=""make"" modifier=""red"" complement=$n1
 @n1 syntax.nominal head=""e2""",distilbert+neural-dependencies+neuro-prolog+neuro-selector+prolog+prolog-example-transfer+selector-distilbert+spacy-beam+spacy-direct+hmm-rules,judge
-label line e3 yes,"@n1 syntax.nominal dependent=""label"" dependent=""line"" head=""e3""
-@c1 syntax.clause form=fragment discourse=""yes"" complement=$n1",neural-dependencies+neuro-selector+selector-distilbert+spacy-beam+spacy-direct,judge
+label line e3 yes,"@c1 syntax.clause form=imperative verb=""label"" discourse=""yes"" complement=$n1
+@n1 syntax.nominal dependent=""line"" head=""e3""",spacy,judge
 delete the circles,"@c1 syntax.clause form=imperative verb=""delete"" complement=$n1
 @n1 syntax.nominal dependent=""the"" head=""circles""",distilbert+neural-dependencies+neuro-prolog+neuro-selector+prolog+prolog-example-transfer+selector-distilbert+spacy-beam+spacy-direct+hmm-rules,judge
 make all elements bigger,"@c1 syntax.clause form=imperative verb=""make"" modifier=""bigger"" complement=$n1
@@ -150,8 +150,8 @@ delete the one I just added,"@c1 syntax.clause form=imperative verb=""delete"" c
 @r1 syntax.relation from=$n1 to=$c2",neural-dependencies+neuro-prolog+neuro-selector+prolog+prolog-example-transfer+selector-distilbert+spacy-beam+spacy-direct+hmm-rules,judge
 rename the first circle to Begin,"@c1 syntax.clause form=imperative verb=""rename"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""first"" head=""circle""
-@r1 syntax.relation marker=""to"" from=$n1 to=$c2
-@c2 syntax.clause form=nonfinite verb=""Begin""",neural-dependencies+neuro-prolog+neuro-selector+selector-distilbert+spacy-beam+spacy-direct,judge
+@r1 syntax.relation marker=""to"" from=$n1 to=$n2
+@n2 syntax.nominal head=""Begin""",spacy,judge
 group these two,"@c1 syntax.clause form=imperative verb=""group"" complement=$n1
 @n1 syntax.nominal dependent=""these"" head=""two""",distilbert+neural-dependencies+neuro-selector+prolog+prolog-example-transfer+selector-distilbert+spacy-beam+spacy-direct+hmm-rules,judge
 make them pink,"@c1 syntax.clause form=imperative verb=""make"" modifier=""pink"" complement=$n1
@@ -166,13 +166,14 @@ put it below Login,"@c1 syntax.clause form=imperative verb=""put"" complement=$n
 @n2 syntax.nominal head=""Login""",distilbert+neural-dependencies+neuro-prolog+neuro-selector+prolog+prolog-example-transfer+selector-distilbert+spacy-beam+spacy-direct+hmm-rules,judge
 add a circle called Retry and connect Valid? to it,"@c1 syntax.clause form=imperative verb=""add"" complement=$n1
 @n1 syntax.nominal dependent=""a"" head=""circle""
-@r1 syntax.relation marker=""called"" from=$n1 to=$n2
+@c2 syntax.clause form=nonfinite verb=""called"" complement=$n2
 @n2 syntax.nominal head=""Retry""
-@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
-@c2 syntax.clause form=imperative verb=""connect"" complement=$n3
+@k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c3
+@c3 syntax.clause form=imperative verb=""connect"" complement=$n3
 @n3 syntax.nominal head=""Valid""
-@r2 syntax.relation marker=""to"" from=$c2 to=$n4
-@n4 syntax.nominal head=""it""",distilbert,judge
+@r1 syntax.relation marker=""to"" from=$c3 to=$n4
+@n4 syntax.nominal head=""it""
+@r2 syntax.relation from=$n1 to=$c2",spacy,judge
 delete Dashboard and connect Valid? to End,"@c1 syntax.clause form=imperative verb=""delete"" complement=$n1
 @n1 syntax.nominal head=""Dashboard""
 @k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
@@ -273,10 +274,10 @@ make n3 orange,"@c1 syntax.clause form=imperative verb=""make"" modifier=""orang
 how many circles are there,"@n1 syntax.nominal dependent=""how"" dependent=""many"" head=""circles""
 @c1 syntax.clause form=interrogative verb=""are"" subject=$n2 complement=$n1
 @n2 syntax.nominal head=""there""",distilbert+neural-dependencies+neuro-prolog+neuro-selector+prolog+prolog-example-transfer+selector-distilbert+spacy-beam+spacy-direct,judge
-make n one read,"@c1 syntax.clause form=imperative verb=""make""
+make n one read,"@c1 syntax.clause form=imperative verb=""make"" complement=$n1
 @n1 syntax.nominal dependent=""n"" head=""one""
 @c2 syntax.clause form=nonfinite verb=""read"" subject=$n1
-@r1 syntax.relation from=$c1 to=$c2",neural-dependencies+neuro-prolog+neuro-selector+selector-distilbert+spacy-beam+spacy-direct,judge
+@r1 syntax.relation from=$c1 to=$c2",hmm-rules,judge
 remove the last one,"@c1 syntax.clause form=imperative verb=""remove"" complement=$n1
 @n1 syntax.nominal dependent=""the"" dependent=""last"" head=""one""",distilbert+neural-dependencies+neuro-prolog+neuro-selector+prolog+prolog-example-transfer+selector-distilbert+spacy-beam+spacy-direct+hmm-rules,judge
 delete node n5 and node n6,"@c1 syntax.clause form=imperative verb=""delete"" complement=$k1

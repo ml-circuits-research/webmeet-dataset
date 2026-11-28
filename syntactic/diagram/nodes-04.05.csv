@@ -1,14 +1,71 @@
 text,sop,source,accepted_by
-"how many swaps until the whole row is alphabetical, and how many turns until the row is in alphabetical order?",,,
-teel me how many turns until the whole row is alphabetical.,,,
-how many swaps until the order is completely reversed?,,,
-what number of moves until the order is completely reversed?,,,
-tell me how many turns until the order is completely reversed.,,,
-how many steps until the order is completely reversed?,,,
-"how many steps until the row reads backwards, and how many swaps until the order is completely reversed?",,,
-"what number of moves until the order is completely reversed, and what number of steps until the last box becomes first?",,,
+"how many swaps until the whole row is alphabetical, and how many turns until the row is in alphabetical order?","@n1 syntax.nominal dependent=""how"" dependent=""many"" head=""swaps""
+@r1 syntax.relation marker=""until"" from=$n1 to=$c1
+@n2 syntax.nominal dependent=""the"" dependent=""whole"" head=""row""
+@c1 syntax.clause form=declarative verb=""is"" modifier=""alphabetical"" subject=$n2
+@k1 syntax.coordination conjunction=""and"" conjunct=$n1 conjunct=$n3
+@n3 syntax.nominal dependent=""how"" dependent=""many"" head=""turns""
+@r2 syntax.relation marker=""until"" from=$n3 to=$c2
+@n4 syntax.nominal dependent=""the"" head=""row""
+@c2 syntax.clause form=declarative verb=""is"" subject=$n4
+@r3 syntax.relation marker=""in"" from=$c2 to=$n5
+@n5 syntax.nominal dependent=""alphabetical"" head=""order""
+@c3 syntax.clause form=fragment complement=$k1",spacy,judge
+teel me how many turns until the whole row is alphabetical.,"@c1 syntax.clause form=imperative verb=""teel"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""me""
+@n2 syntax.nominal dependent=""how"" dependent=""many"" head=""turns""
+@r1 syntax.relation marker=""until"" from=$c1 to=$c2
+@n3 syntax.nominal dependent=""the"" dependent=""whole"" head=""row""
+@c2 syntax.clause form=declarative verb=""is"" modifier=""alphabetical"" subject=$n3",spacy,judge
+how many swaps until the order is completely reversed?,"@n1 syntax.nominal dependent=""how"" dependent=""many"" head=""swaps""
+@r1 syntax.relation marker=""until"" from=$c2 to=$c1
+@n2 syntax.nominal dependent=""the"" head=""order""
+@c1 syntax.clause form=declarative auxiliary=""is"" modifier=""completely"" verb=""reversed"" subject=$n2
+@c2 syntax.clause form=fragment complement=$n1",spacy,judge
+what number of moves until the order is completely reversed?,"@n1 syntax.nominal dependent=""what"" head=""number""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal head=""moves""
+@r2 syntax.relation marker=""until"" from=$c2 to=$c1
+@n3 syntax.nominal dependent=""the"" head=""order""
+@c1 syntax.clause form=declarative auxiliary=""is"" modifier=""completely"" verb=""reversed"" subject=$n3
+@c2 syntax.clause form=fragment complement=$n1",spacy,judge
+tell me how many turns until the order is completely reversed.,"@c1 syntax.clause form=imperative verb=""tell"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""me""
+@n2 syntax.nominal dependent=""how"" dependent=""many"" head=""turns""
+@r1 syntax.relation marker=""until"" from=$c1 to=$c2
+@n3 syntax.nominal dependent=""the"" head=""order""
+@c2 syntax.clause form=declarative auxiliary=""is"" modifier=""completely"" verb=""reversed"" subject=$n3",spacy,judge
+how many steps until the order is completely reversed?,"@n1 syntax.nominal dependent=""how"" dependent=""many"" head=""steps""
+@r1 syntax.relation marker=""until"" from=$c2 to=$c1
+@n2 syntax.nominal dependent=""the"" head=""order""
+@c1 syntax.clause form=declarative auxiliary=""is"" modifier=""completely"" verb=""reversed"" subject=$n2
+@c2 syntax.clause form=fragment complement=$n1",spacy,judge
+"how many steps until the row reads backwards, and how many swaps until the order is completely reversed?","@n1 syntax.nominal dependent=""how"" dependent=""many"" head=""steps""
+@r1 syntax.relation marker=""until"" from=$n1 to=$c1
+@n2 syntax.nominal dependent=""the"" head=""row""
+@c1 syntax.clause form=declarative verb=""reads"" modifier=""backwards"" subject=$n2
+@k1 syntax.coordination conjunction=""and"" conjunct=$n1 conjunct=$n3
+@n3 syntax.nominal dependent=""how"" dependent=""many"" head=""swaps""
+@r2 syntax.relation marker=""until"" from=$n3 to=$c2
+@n4 syntax.nominal dependent=""the"" head=""order""
+@c2 syntax.clause form=declarative auxiliary=""is"" modifier=""completely"" verb=""reversed"" subject=$n4
+@c3 syntax.clause form=fragment complement=$k1",spacy,judge
+"what number of moves until the order is completely reversed, and what number of steps until the last box becomes first?","@n1 syntax.nominal dependent=""what"" head=""number""
+@r1 syntax.relation marker=""of"" from=$n1 to=$n2
+@n2 syntax.nominal head=""moves""
+@r2 syntax.relation marker=""until"" from=$n1 to=$c1
+@n3 syntax.nominal dependent=""the"" head=""order""
+@c1 syntax.clause form=declarative auxiliary=""is"" modifier=""completely"" verb=""reversed"" subject=$n3
+@k1 syntax.coordination conjunction=""and"" conjunct=$n1 conjunct=$n4
+@n4 syntax.nominal dependent=""what"" head=""number""
+@r3 syntax.relation marker=""of"" from=$n4 to=$n5
+@n5 syntax.nominal head=""steps""
+@r4 syntax.relation marker=""until"" from=$n4 to=$c2
+@n6 syntax.nominal dependent=""the"" dependent=""last"" head=""box""
+@c2 syntax.clause form=declarative verb=""becomes"" modifier=""first"" subject=$n6
+@c3 syntax.clause form=fragment complement=$k1",spacy,judge
 "how many swaps until the order is completely reversed, and say which boxes you compared, in what order, to reach that answer from the current row?",,,
-reversed yet?,,,
+reversed yet?,"@c1 syntax.clause form=interrogative verb=""reversed"" modifier=""yet""",hmm-rules,judge
 tell me what's the point of a venn diagram,"@c1 syntax.clause form=imperative verb=""tell"" complement=$n1
 @n1 syntax.nominal head=""me""
 @n2 syntax.nominal head=""what""
@@ -22,9 +79,16 @@ is an org chart the same thing as a hierarchy chart,"@c1 syntax.clause form=inte
 @n2 syntax.nominal dependent=""the"" dependent=""same"" head=""thing""
 @r1 syntax.relation marker=""as"" from=$n2 to=$n3
 @n3 syntax.nominal dependent=""a"" dependent=""hierarchy"" head=""chart""",spacy-direct+hmm-rules,agreement
-when do people actually use er diagrams,,,
+when do people actually use er diagrams,"@c1 syntax.clause form=interrogative modifier=""when"" auxiliary=""do"" modifier=""actually"" verb=""use"" discourse=""er"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""people""
+@n2 syntax.nominal head=""diagrams""",spacy,judge
 i'm wondering what is a gantt chart meant for,,,
-why would i draw a mind map instead of writing a list,,,
+why would i draw a mind map instead of writing a list,"@c1 syntax.clause form=interrogative modifier=""why"" auxiliary=""would"" verb=""draw"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""i""
+@n2 syntax.nominal dependent=""a"" dependent=""mind"" head=""map""
+@r1 syntax.relation marker=""instead of"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""writing"" complement=$n3
+@n3 syntax.nominal dependent=""a"" head=""list""",hmm-rules,judge
 what is the difference between an activity diagram and a sequence diagram,"@n1 syntax.nominal head=""what""
 @c1 syntax.clause form=interrogative verb=""is"" subject=$n2 complement=$n1
 @n2 syntax.nominal dependent=""the"" head=""difference""
@@ -35,12 +99,16 @@ what is the difference between an activity diagram and a sequence diagram,"@n1 s
 do i use a use case diagram for this kind of thing,"@c1 syntax.clause form=interrogative auxiliary=""do"" verb=""use"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""i""
 @n2 syntax.nominal dependent=""a"" dependent=""use"" dependent=""case"" head=""diagram""
-@r1 syntax.relation marker=""for"" from=$c1 to=$n3
+@r1 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n3
 @n3 syntax.nominal dependent=""this"" head=""kind""
 @r2 syntax.relation marker=""of"" from=$n3 to=$n4
-@n4 syntax.nominal head=""thing""",spacy-direct+hmm-rules,agreement
+@n4 syntax.nominal head=""thing""",spacy,judge
 quick question: what is a block diagram good for,,,
-what is a network diagram supposed to show,,,
+what is a network diagram supposed to show,"@n1 syntax.nominal head=""what""
+@c1 syntax.clause form=interrogative auxiliary=""is"" verb=""supposed"" subject=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""network"" head=""diagram""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""show"" complement=$n1",spacy,judge
 when is a timeline better than a flowchart,"@c1 syntax.clause form=interrogative modifier=""when"" verb=""is"" modifier=""better"" subject=$n1
 @n1 syntax.nominal dependent=""a"" head=""timeline""
 @r1 syntax.relation marker=""than"" from=$c1 to=$n2
@@ -51,12 +119,33 @@ is a pie chart a kind of diagram or is it something else,"@c1 syntax.clause form
 @r1 syntax.relation marker=""of"" from=$n2 to=$n3
 @n3 syntax.nominal head=""diagram""
 @k1 syntax.coordination conjunction=""or"" conjunct=$c1 conjunct=$c2
-@c2 syntax.clause form=interrogative verb=""is"" modifier=""else"" subject=$n4 complement=$n5
+@c2 syntax.clause form=interrogative verb=""is"" subject=$n4 complement=$n5
 @n4 syntax.nominal head=""it""
-@n5 syntax.nominal head=""something""",spacy-direct+hmm-rules,agreement
+@n5 syntax.nominal head=""something"" dependent=""else""",hmm-rules+spacy,judge
 quick question: what is a decision tree for,,,
-explain what a tree diagram is used for,,,
-"before i start drawing, can you tell me what a state diagram is actually for and when it beats a plain flowchart",,,
+explain what a tree diagram is used for,"@c1 syntax.clause form=imperative verb=""explain""
+@n1 syntax.nominal head=""what""
+@n2 syntax.nominal dependent=""a"" dependent=""tree"" head=""diagram""
+@c2 syntax.clause form=declarative auxiliary=""is"" verb=""used"" subject=$n2
+@r1 syntax.relation marker=""for"" from=$c2 to=$n1
+@r2 syntax.relation from=$c1 to=$c2",spacy,judge
+"before i start drawing, can you tell me what a state diagram is actually for and when it beats a plain flowchart","@r1 syntax.relation marker=""before"" from=$c3 to=$c1
+@n1 syntax.nominal head=""i""
+@c1 syntax.clause form=declarative verb=""start"" subject=$n1
+@c2 syntax.clause form=nonfinite verb=""drawing""
+@c3 syntax.clause form=interrogative auxiliary=""can"" verb=""tell"" subject=$n2 complement=$n3
+@n2 syntax.nominal head=""you""
+@n3 syntax.nominal head=""me""
+@n4 syntax.nominal head=""what""
+@n5 syntax.nominal dependent=""a"" dependent=""state"" head=""diagram""
+@c4 syntax.clause form=declarative verb=""is"" modifier=""actually"" subject=$n5
+@r2 syntax.relation marker=""for"" from=$c4 to=$n4
+@k1 syntax.coordination conjunction=""and"" conjunct=$c4 conjunct=$c5
+@c5 syntax.clause form=declarative modifier=""when"" verb=""beats"" subject=$n6 complement=$n7
+@n6 syntax.nominal head=""it""
+@n7 syntax.nominal dependent=""a"" dependent=""plain"" head=""flowchart""
+@r3 syntax.relation from=$c1 to=$c2
+@r4 syntax.relation from=$c3 to=$k1",spacy,judge
 what's the difference between a process diagram and a flowchart,"@n1 syntax.nominal head=""what""
 @c1 syntax.clause form=interrogative verb=""'s"" subject=$n2 complement=$n1
 @n2 syntax.nominal dependent=""the"" head=""difference""
@@ -64,8 +153,16 @@ what's the difference between a process diagram and a flowchart,"@n1 syntax.nomi
 @n3 syntax.nominal dependent=""a"" dependent=""process"" head=""diagram""
 @k1 syntax.coordination conjunction=""and"" conjunct=$n3 conjunct=$n4
 @n4 syntax.nominal dependent=""a"" head=""flowchart""",spacy-direct+hmm-rules,agreement
-what is a class diagram for in plain words,,,
-what is a sequense diagram for,,,
+what is a class diagram for in plain words,"@n1 syntax.nominal head=""what""
+@c1 syntax.clause form=interrogative verb=""is"" subject=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""class"" head=""diagram""
+@r1 syntax.relation marker=""for"" from=$c1 to=$n1
+@r2 syntax.relation attachment=ambiguous marker=""in"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""plain"" head=""words""",spacy,judge
+what is a sequense diagram for,"@n1 syntax.nominal head=""what""
+@c1 syntax.clause form=interrogative verb=""is"" subject=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""sequense"" head=""diagram""
+@r1 syntax.relation marker=""for"" from=$c1 to=$n1",spacy,judge
 and a gantt chart?,"@c1 syntax.clause form=fragment discourse=""and"" complement=$n1
 @n1 syntax.nominal dependent=""a"" dependent=""gantt"" head=""chart""",spacy-direct+hmm-rules,agreement
 "i need to know what is a sequence diagram for, and when should i pick it over a flowchart",,,
@@ -95,38 +192,89 @@ can you explain how to draw a sequence diagram,"@c1 syntax.clause form=interroga
 @r1 syntax.relation marker=""to"" from=$c1 to=$c2
 @c2 syntax.clause form=nonfinite verb=""draw"" complement=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""sequence"" head=""diagram""",spacy+hmm-rules,agreement
-i'm wondering what's the correct way to put a use case diagram together,,,
+i'm wondering what's the correct way to put a use case diagram together,"@n1 syntax.nominal head=""i""
+@c1 syntax.clause form=declarative auxiliary=""'m"" verb=""wondering"" subject=$n1
+@n2 syntax.nominal head=""what""
+@c2 syntax.clause form=declarative verb=""'s"" subject=$n2 complement=$n3
+@n3 syntax.nominal dependent=""the"" dependent=""correct"" head=""way""
+@r1 syntax.relation marker=""to"" from=$n3 to=$c3
+@c3 syntax.clause form=nonfinite verb=""put"" modifier=""together"" complement=$n4
+@n4 syntax.nominal dependent=""a"" dependent=""use"" dependent=""case"" head=""diagram""
+@r2 syntax.relation from=$c1 to=$c2",spacy,judge
 how do you draw a decision tree for this,"@c1 syntax.clause form=interrogative modifier=""how"" auxiliary=""do"" verb=""draw"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""you""
 @n2 syntax.nominal dependent=""a"" dependent=""decision"" head=""tree""
-@r1 syntax.relation marker=""for"" from=$c1 to=$n3
-@n3 syntax.nominal head=""this""",spacy-direct+hmm-rules,agreement
+@r1 syntax.relation attachment=ambiguous marker=""for"" from=$c1 to=$n3
+@n3 syntax.nominal head=""this""",spacy,judge
 show me how to draw an org chart,"@c1 syntax.clause form=imperative verb=""show"" modifier=""how"" complement=$n1
 @n1 syntax.nominal head=""me""
 @r1 syntax.relation marker=""to"" from=$c1 to=$c2
 @c2 syntax.clause form=nonfinite verb=""draw"" complement=$n2
 @n2 syntax.nominal dependent=""an"" dependent=""org"" head=""chart""",spacy+hmm-rules,agreement
-"how do i draw a network diagram that doesn't turn into spaghetti, because the last one i tried had lines crossing everywhere and nobody could follow it",,,
+"how do i draw a network diagram that doesn't turn into spaghetti, because the last one i tried had lines crossing everywhere and nobody could follow it","@c1 syntax.clause form=interrogative modifier=""how"" auxiliary=""do"" verb=""draw"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""i""
+@n2 syntax.nominal dependent=""a"" dependent=""network"" head=""diagram""
+@r1 syntax.relation marker=""that"" from=$n2 to=$c2
+@c2 syntax.clause form=declarative auxiliary=""does"" negation=""n't"" verb=""turn""
+@r2 syntax.relation marker=""into"" from=$c2 to=$n3
+@n3 syntax.nominal head=""spaghetti""
+@r3 syntax.relation marker=""because"" from=$c1 to=$k1
+@n4 syntax.nominal dependent=""the"" dependent=""last"" head=""one""
+@n5 syntax.nominal head=""i""
+@c3 syntax.clause form=declarative verb=""tried"" subject=$n5
+@c4 syntax.clause form=declarative verb=""had"" subject=$n4
+@n6 syntax.nominal head=""lines""
+@c5 syntax.clause form=nonfinite verb=""crossing"" modifier=""everywhere"" subject=$n6
+@k1 syntax.coordination conjunction=""and"" conjunct=$c4 conjunct=$c6
+@n7 syntax.nominal head=""nobody""
+@c6 syntax.clause form=declarative auxiliary=""could"" verb=""follow"" subject=$n7 complement=$n8
+@n8 syntax.nominal head=""it""
+@r4 syntax.relation from=$n4 to=$c3
+@r5 syntax.relation from=$c4 to=$c5",spacy,judge
 quick question: what's the method for drawing a sankey diagram,,,
 how would i draw a swimlane diagram with two teams,"@c1 syntax.clause form=interrogative modifier=""how"" auxiliary=""would"" verb=""draw"" subject=$n1 complement=$n2
 @n1 syntax.nominal head=""i""
 @n2 syntax.nominal dependent=""a"" dependent=""swimlane"" head=""diagram""
-@r1 syntax.relation marker=""with"" from=$n2 to=$n3
-@n3 syntax.nominal dependent=""two"" head=""teams""",spacy-direct+hmm-rules,agreement
+@r1 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""two"" head=""teams""",spacy,judge
 what's the trick to drawing a class diagram,"@n1 syntax.nominal head=""what""
 @c1 syntax.clause form=interrogative verb=""'s"" subject=$n2 complement=$n1
 @n2 syntax.nominal dependent=""the"" head=""trick""
 @r1 syntax.relation marker=""to"" from=$n2 to=$c2
 @c2 syntax.clause form=nonfinite verb=""drawing"" complement=$n3
 @n3 syntax.nominal dependent=""a"" dependent=""class"" head=""diagram""",spacy-direct+hmm-rules,agreement
-"how do i draw a block diagram from a parts list, using only the parts names and leaving out the wiring detail for now",,,
-quick question: how do i draw an activity diagram with a decision,,,
+"how do i draw a block diagram from a parts list, using only the parts names and leaving out the wiring detail for now","@c1 syntax.clause form=interrogative modifier=""how"" auxiliary=""do"" verb=""draw"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""i""
+@n2 syntax.nominal dependent=""a"" dependent=""block"" head=""diagram""
+@r1 syntax.relation marker=""from"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""a"" dependent=""parts"" head=""list""
+@c2 syntax.clause form=nonfinite verb=""using"" complement=$n4
+@n4 syntax.nominal dependent=""only"" dependent=""the"" dependent=""parts"" head=""names""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c2 conjunct=$c3
+@c3 syntax.clause form=nonfinite verb=""leaving"" modifier=""out"" complement=$n5
+@n5 syntax.nominal dependent=""the"" dependent=""wiring"" head=""detail""
+@r2 syntax.relation marker=""for"" from=$c3 to=$n6
+@n6 syntax.nominal head=""now""
+@r3 syntax.relation from=$c1 to=$k1",spacy,judge
+quick question: how do i draw an activity diagram with a decision,"@n1 syntax.nominal dependent=""quick"" head=""question""
+@c1 syntax.clause form=interrogative modifier=""how"" auxiliary=""do"" verb=""draw"" subject=$n2 complement=$n3
+@n2 syntax.nominal head=""i""
+@n3 syntax.nominal dependent=""an"" dependent=""activity"" head=""diagram""
+@r1 syntax.relation attachment=ambiguous marker=""with"" from=$c1 to=$n4
+@n4 syntax.nominal dependent=""a"" head=""decision""
+@c2 syntax.clause form=fragment complement=$n1
+@k1 syntax.coordination conjunct=$c2 conjunct=$c1",spacy,judge
 where do i even start when drawing a venn diagram,"@c1 syntax.clause form=interrogative modifier=""where"" auxiliary=""do"" modifier=""even"" verb=""start"" subject=$n1
 @n1 syntax.nominal head=""i""
 @r1 syntax.relation marker=""when"" from=$c1 to=$c2
 @c2 syntax.clause form=nonfinite verb=""drawing"" complement=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""venn"" head=""diagram""",spacy-direct+hmm-rules,agreement
-how do people draw a timeline that stays readable,,,
+how do people draw a timeline that stays readable,"@c1 syntax.clause form=interrogative modifier=""how"" auxiliary=""do"" verb=""draw"" subject=$n1 complement=$n2
+@n1 syntax.nominal head=""people""
+@n2 syntax.nominal dependent=""a"" head=""timeline""
+@r1 syntax.relation marker=""that"" from=$n2 to=$c2
+@c2 syntax.clause form=declarative verb=""stays"" complement=$n3
+@n3 syntax.nominal head=""readable""",hmm-rules,judge
 tell me how do i draw a flowchrt for a refund,"@c1 syntax.clause form=imperative verb=""tell"" complement=$n1
 @n1 syntax.nominal head=""me""
 @c2 syntax.clause form=interrogative modifier=""how"" auxiliary=""do"" verb=""draw"" subject=$n2 complement=$n3
@@ -139,26 +287,67 @@ how do i draw a sequense diagram,"@c1 syntax.clause form=interrogative modifier=
 @n1 syntax.nominal head=""i""
 @n2 syntax.nominal dependent=""a"" dependent=""sequense"" head=""diagram""",spacy-direct+hmm-rules,agreement
 "i need to know how do i draw a flowchart, and how is that different from drawing a state diagram",,,
-"teach me to draw an er diagram, then explain when the relationships go on the lines",,,
+"teach me to draw an er diagram, then explain when the relationships go on the lines","@c1 syntax.clause form=imperative verb=""teach""
+@n1 syntax.nominal head=""me""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""draw"" subject=$n1 complement=$n2
+@n2 syntax.nominal dependent=""an"" dependent=""er"" head=""diagram""
+@k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c3
+@c3 syntax.clause form=imperative verb=""explain""
+@r2 syntax.relation marker=""when"" from=$c3 to=$c4
+@n3 syntax.nominal dependent=""the"" head=""relationships""
+@c4 syntax.clause form=declarative verb=""go"" subject=$n3
+@r3 syntax.relation marker=""on"" from=$c4 to=$n4
+@n4 syntax.nominal dependent=""the"" head=""lines""",hmm-rules,judge
 give me the steps to draw a flowchart for a refund,"@c1 syntax.clause form=imperative verb=""give"" complement=$n1 complement=$n2
 @n1 syntax.nominal head=""me""
 @n2 syntax.nominal dependent=""the"" head=""steps""
 @r1 syntax.relation marker=""to"" from=$n2 to=$c2
 @c2 syntax.clause form=nonfinite verb=""draw"" complement=$n3
 @n3 syntax.nominal dependent=""a"" head=""flowchart""
-@r2 syntax.relation marker=""for"" from=$n3 to=$n4
-@n4 syntax.nominal dependent=""a"" head=""refund""",spacy-direct+hmm-rules,agreement
+@r2 syntax.relation attachment=ambiguous marker=""for"" from=$c2 to=$n4
+@n4 syntax.nominal dependent=""a"" head=""refund""",spacy,judge
 walk me through drawing an er diagram one step at a time,,,
-list the steps for drawing a sequence diagram when you get a chance,,,
-what order do i do things in to draw a mind map,,,
-take me through a gantt chart step by step,,,
+list the steps for drawing a sequence diagram when you get a chance,"@c1 syntax.clause form=imperative verb=""list"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""steps""
+@r1 syntax.relation marker=""for"" from=$n1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""drawing"" complement=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""sequence"" head=""diagram""
+@r2 syntax.relation marker=""when"" from=$c2 to=$c3
+@n3 syntax.nominal head=""you""
+@c3 syntax.clause form=declarative verb=""get"" subject=$n3 complement=$n4
+@n4 syntax.nominal dependent=""a"" head=""chance""",spacy,judge
+what order do i do things in to draw a mind map,"@n1 syntax.nominal dependent=""what"" head=""order""
+@c1 syntax.clause form=interrogative auxiliary=""do"" verb=""do"" subject=$n2 complement=$n3
+@n2 syntax.nominal head=""i""
+@n3 syntax.nominal head=""things""
+@r1 syntax.relation marker=""in"" from=$c1 to=$n1
+@r2 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""draw"" complement=$n4
+@n4 syntax.nominal dependent=""a"" dependent=""mind"" head=""map""",spacy,judge
+take me through a gantt chart step by step,"@c1 syntax.clause form=imperative verb=""take"" complement=$n1 complement=$n3
+@n1 syntax.nominal head=""me""
+@r1 syntax.relation marker=""through"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""gantt"" head=""chart""
+@n3 syntax.nominal head=""step""
+@r2 syntax.relation marker=""by"" from=$n3 to=$n4
+@n4 syntax.nominal head=""step""",spacy,judge
 what are the steps to put a use case diagram together,"@n1 syntax.nominal head=""what""
 @c1 syntax.clause form=interrogative verb=""are"" subject=$n2 complement=$n1
 @n2 syntax.nominal dependent=""the"" head=""steps""
 @r1 syntax.relation marker=""to"" from=$n2 to=$c2
 @c2 syntax.clause form=nonfinite verb=""put"" modifier=""together"" complement=$n3
 @n3 syntax.nominal dependent=""a"" dependent=""use"" dependent=""case"" head=""diagram""",spacy-direct+hmm-rules,agreement
-i'm wondering can you give me a numbered list for drawing a state machine,,,
+i'm wondering can you give me a numbered list for drawing a state machine,"@n1 syntax.nominal head=""i""
+@c1 syntax.clause form=declarative auxiliary=""'m"" verb=""wondering"" subject=$n1
+@c2 syntax.clause form=interrogative auxiliary=""can"" verb=""give"" subject=$n2 complement=$n3 complement=$n4
+@n2 syntax.nominal head=""you""
+@n3 syntax.nominal head=""me""
+@n4 syntax.nominal dependent=""a"" dependent=""numbered"" head=""list""
+@r1 syntax.relation marker=""for"" from=$n4 to=$c3
+@c3 syntax.clause form=nonfinite verb=""drawing"" complement=$n5
+@n5 syntax.nominal dependent=""a"" dependent=""state"" head=""machine""
+@r2 syntax.relation from=$c1 to=$c2",spacy,judge
 start with the boxes and tell me the rest of the steps for a block diagram,"@c1 syntax.clause form=imperative verb=""start""
 @r1 syntax.relation marker=""with"" from=$c1 to=$n1
 @n1 syntax.nominal dependent=""the"" head=""boxes""
@@ -175,13 +364,77 @@ start with the boxes and tell me the rest of the steps for a block diagram,"@c1 
 @r1 syntax.relation marker=""when"" from=$c1 to=$c2
 @c2 syntax.clause form=nonfinite verb=""drawing"" complement=$n2
 @n2 syntax.nominal dependent=""an"" dependent=""org"" head=""chart""",spacy+hmm-rules,agreement
-"i need you to give me a short tutorial for drawing a network diagram, starting from a blank page and ending with the labels in place",,,
-walk me through it as if i've never drawn a class diagram,,,
-list the moves for drawing a gantt chart from a task list,,,
-"what's the sequence for drawing a venn diagram, especially where the overlap gets labelled and where the shared items are counted",,,
-"teach me the steps for a swimlane diagram, one at a time",,,
-give me the recipe for drawing a flow diagram,,,
-"how do i go from a blank page to a finished timeline, step by step",,,
+"i need you to give me a short tutorial for drawing a network diagram, starting from a blank page and ending with the labels in place","@n1 syntax.nominal head=""i""
+@c1 syntax.clause form=declarative verb=""need"" subject=$n1
+@n2 syntax.nominal head=""you""
+@r1 syntax.relation marker=""to"" from=$c1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""give"" subject=$n2 complement=$n3 complement=$n4
+@n3 syntax.nominal head=""me""
+@n4 syntax.nominal dependent=""a"" dependent=""short"" head=""tutorial""
+@r2 syntax.relation marker=""for"" from=$n4 to=$c3
+@c3 syntax.clause form=nonfinite verb=""drawing"" complement=$n5
+@n5 syntax.nominal dependent=""a"" dependent=""network"" head=""diagram""
+@c4 syntax.clause form=nonfinite verb=""starting""
+@r3 syntax.relation marker=""from"" from=$c4 to=$n6
+@n6 syntax.nominal dependent=""a"" dependent=""blank"" head=""page""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c4 conjunct=$c5
+@c5 syntax.clause form=nonfinite verb=""ending""
+@r4 syntax.relation marker=""with"" from=$c5 to=$n7
+@n7 syntax.nominal dependent=""the"" head=""labels""
+@r5 syntax.relation marker=""in"" from=$n7 to=$n8
+@n8 syntax.nominal head=""place""
+@r6 syntax.relation from=$c3 to=$k1",spacy,judge
+walk me through it as if i've never drawn a class diagram,"@c1 syntax.clause form=imperative verb=""walk"" complement=$n1
+@n1 syntax.nominal head=""me""
+@r1 syntax.relation marker=""through"" from=$c1 to=$n2
+@n2 syntax.nominal head=""it""
+@r2 syntax.relation marker=""as if"" from=$c1 to=$c2
+@n3 syntax.nominal head=""i""
+@c2 syntax.clause form=declarative auxiliary=""'ve"" negation=""never"" verb=""drawn"" subject=$n3 complement=$n4
+@n4 syntax.nominal dependent=""a"" dependent=""class"" head=""diagram""",spacy,judge
+list the moves for drawing a gantt chart from a task list,"@c1 syntax.clause form=imperative verb=""list"" complement=$n1
+@n1 syntax.nominal dependent=""the"" head=""moves""
+@r1 syntax.relation marker=""for"" from=$n1 to=$c2
+@c2 syntax.clause form=nonfinite verb=""drawing"" complement=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""gantt"" head=""chart""
+@r2 syntax.relation marker=""from"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""a"" dependent=""task"" head=""list""",spacy,judge
+"what's the sequence for drawing a venn diagram, especially where the overlap gets labelled and where the shared items are counted","@n1 syntax.nominal head=""what""
+@c1 syntax.clause form=interrogative verb=""'s"" subject=$n2 complement=$n1
+@n2 syntax.nominal dependent=""the"" head=""sequence""
+@r1 syntax.relation marker=""for"" from=$n2 to=$c2
+@c2 syntax.clause form=nonfinite verb=""drawing"" complement=$n3
+@n3 syntax.nominal dependent=""a"" dependent=""venn"" head=""diagram""
+@c3 syntax.clause form=declarative modifier=""especially"" modifier=""where"" auxiliary=""gets"" verb=""labelled"" subject=$n4
+@n4 syntax.nominal dependent=""the"" head=""overlap""
+@k1 syntax.coordination conjunction=""and"" conjunct=$c3 conjunct=$c4
+@c4 syntax.clause form=declarative modifier=""where"" auxiliary=""are"" verb=""counted"" subject=$n5
+@n5 syntax.nominal dependent=""the"" dependent=""shared"" head=""items""
+@r2 syntax.relation from=$c1 to=$k1",spacy,judge
+"teach me the steps for a swimlane diagram, one at a time","@c1 syntax.clause form=imperative verb=""teach"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""me""
+@n2 syntax.nominal dependent=""the"" head=""steps""
+@r1 syntax.relation marker=""for"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""a"" dependent=""swimlane"" head=""diagram""
+@n4 syntax.nominal head=""one""
+@r2 syntax.relation attachment=ambiguous marker=""at"" from=$c1 to=$n5
+@n5 syntax.nominal dependent=""a"" head=""time""
+@r3 syntax.relation from=$c1 to=$n4",hmm-rules,judge
+give me the recipe for drawing a flow diagram,"@c1 syntax.clause form=imperative verb=""give"" complement=$n1 complement=$n2
+@n1 syntax.nominal head=""me""
+@n2 syntax.nominal dependent=""the"" head=""recipe""
+@r1 syntax.relation marker=""for"" from=$n2 to=$c2
+@c2 syntax.clause form=nonfinite verb=""drawing"" complement=$n3
+@n3 syntax.nominal dependent=""a"" dependent=""flow"" head=""diagram""",spacy,judge
+"how do i go from a blank page to a finished timeline, step by step","@c1 syntax.clause form=interrogative modifier=""how"" auxiliary=""do"" verb=""go"" subject=$n1 complement=$n4
+@n1 syntax.nominal head=""i""
+@r1 syntax.relation marker=""from"" from=$c1 to=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""blank"" head=""page""
+@r2 syntax.relation marker=""to"" from=$c1 to=$n3
+@n3 syntax.nominal dependent=""a"" dependent=""finished"" head=""timeline""
+@n4 syntax.nominal head=""step""
+@r3 syntax.relation marker=""by"" from=$n4 to=$n5
+@n5 syntax.nominal head=""step""",spacy,judge
 "i need to draw an activity diagram from scratch for a class tomorrow, so give me the steps in the order you'd actually do them",,,
 go ahead and give me the steps to draw a flowchrt,"@c1 syntax.clause form=imperative verb=""go"" modifier=""ahead""
 @k1 syntax.coordination conjunction=""and"" conjunct=$c1 conjunct=$c2
@@ -196,24 +449,89 @@ and the steps for a gantt chart,"@c1 syntax.clause form=fragment discourse=""and
 @n1 syntax.nominal dependent=""the"" head=""steps""
 @r1 syntax.relation marker=""for"" from=$n1 to=$n2
 @n2 syntax.nominal dependent=""a"" dependent=""gantt"" head=""chart""",spacy-direct+hmm-rules,agreement
-"would you give me the steps for a flowchart, then the steps for a state machine",,,
+"would you give me the steps for a flowchart, then the steps for a state machine","@c1 syntax.clause form=interrogative auxiliary=""would"" verb=""give"" subject=$n1 complement=$n2 complement=$n3
+@n1 syntax.nominal head=""you""
+@n2 syntax.nominal head=""me""
+@n3 syntax.nominal dependent=""the"" head=""steps""
+@r1 syntax.relation marker=""for"" from=$n3 to=$n4
+@n4 syntax.nominal dependent=""a"" head=""flowchart""
+@k1 syntax.coordination conjunction=""then"" conjunct=$c1 conjunct=$c2
+@n5 syntax.nominal dependent=""the"" head=""steps""
+@r2 syntax.relation marker=""for"" from=$n5 to=$n6
+@n6 syntax.nominal dependent=""a"" dependent=""state"" head=""machine""
+@c2 syntax.clause form=fragment complement=$n5 ellipsis=$c1",spacy,judge
 walk me through drawing an er diagram and then tell me how to check it,,,
-how does our customer onboarding run? put it in a diagram,,,
-"i can't tell if this is a chart or a diagram, make it a diagram either way.",,,
-how many turns until the whole row is alphabetical?,,,
+how does our customer onboarding run? put it in a diagram,"@c1 syntax.clause form=interrogative modifier=""how"" auxiliary=""does"" verb=""run"" subject=$n1
+@n1 syntax.nominal dependent=""our"" dependent=""customer"" head=""onboarding""
+@c2 syntax.clause form=imperative verb=""put"" complement=$n2
+@n2 syntax.nominal head=""it""
+@r1 syntax.relation marker=""in"" from=$c2 to=$n3
+@n3 syntax.nominal dependent=""a"" head=""diagram""",spacy,judge
+"i can't tell if this is a chart or a diagram, make it a diagram either way.","@n1 syntax.nominal head=""i""
+@c1 syntax.clause form=declarative auxiliary=""ca"" negation=""n't"" verb=""tell"" subject=$n1
+@r1 syntax.relation marker=""if"" from=$c1 to=$c2
+@n2 syntax.nominal head=""this""
+@c2 syntax.clause form=declarative verb=""is"" subject=$n2 complement=$k1
+@n3 syntax.nominal dependent=""a"" head=""chart""
+@k1 syntax.coordination conjunction=""or"" conjunct=$n3 conjunct=$n4
+@n4 syntax.nominal dependent=""a"" head=""diagram""
+@c3 syntax.clause form=imperative verb=""make"" complement=$n5 complement=$n6 complement=$n7
+@n5 syntax.nominal head=""it""
+@n6 syntax.nominal dependent=""a"" head=""diagram""
+@n7 syntax.nominal dependent=""either"" head=""way""
+@k2 syntax.coordination conjunct=$c1 conjunct=$c3",spacy,judge
+how many turns until the whole row is alphabetical?,"@n1 syntax.nominal dependent=""how"" dependent=""many"" head=""turns""
+@r1 syntax.relation marker=""until"" from=$c2 to=$c1
+@n2 syntax.nominal dependent=""the"" dependent=""whole"" head=""row""
+@c1 syntax.clause form=declarative verb=""is"" modifier=""alphabetical"" subject=$n2
+@c2 syntax.clause form=fragment complement=$n1",spacy,judge
 tell me why would anyone draw a swimlane diagram,"@c1 syntax.clause form=imperative verb=""tell"" complement=$n1
 @n1 syntax.nominal head=""me""
 @c2 syntax.clause form=interrogative modifier=""why"" auxiliary=""would"" verb=""draw"" subject=$n2 complement=$n3
 @n2 syntax.nominal head=""anyone""
 @n3 syntax.nominal dependent=""a"" dependent=""swimlane"" head=""diagram""
 @r1 syntax.relation from=$c1 to=$c2",spacy-direct+hmm-rules,agreement
-how do i get started drawing a gantt chart,,,
-"i have never drawn one of these before, so how do i draw a proper sequence diagram without making a mess of the lifelines",,,
+how do i get started drawing a gantt chart,"@c1 syntax.clause form=interrogative modifier=""how"" auxiliary=""do"" auxiliary=""get"" verb=""started"" subject=$n1
+@n1 syntax.nominal head=""i""
+@c2 syntax.clause form=nonfinite verb=""drawing"" complement=$n2
+@n2 syntax.nominal dependent=""a"" dependent=""gantt"" head=""chart""
+@r1 syntax.relation from=$c1 to=$c2",spacy,judge
+"i have never drawn one of these before, so how do i draw a proper sequence diagram without making a mess of the lifelines","@n1 syntax.nominal head=""i""
+@c1 syntax.clause form=declarative auxiliary=""have"" negation=""never"" verb=""drawn"" modifier=""before"" subject=$n1 complement=$n2
+@n2 syntax.nominal head=""one""
+@r1 syntax.relation marker=""of"" from=$n2 to=$n3
+@n3 syntax.nominal head=""these""
+@k1 syntax.coordination conjunction=""so"" conjunct=$c1 conjunct=$c2
+@c2 syntax.clause form=interrogative modifier=""how"" auxiliary=""do"" verb=""draw"" subject=$n4 complement=$n5
+@n4 syntax.nominal head=""i""
+@n5 syntax.nominal dependent=""a"" dependent=""proper"" dependent=""sequence"" head=""diagram""
+@r2 syntax.relation marker=""without"" from=$c2 to=$c3
+@c3 syntax.clause form=nonfinite verb=""making"" complement=$n6
+@n6 syntax.nominal dependent=""a"" head=""mess""
+@r3 syntax.relation attachment=ambiguous marker=""of"" from=$c3 to=$n7
+@n7 syntax.nominal dependent=""the"" head=""lifelines""",spacy,judge
 why does the diagram stop at the checkout part?,"@c1 syntax.clause form=interrogative modifier=""why"" auxiliary=""does"" verb=""stop"" subject=$n1
 @n1 syntax.nominal dependent=""the"" head=""diagram""
 @r1 syntax.relation marker=""at"" from=$c1 to=$n2
 @n2 syntax.nominal dependent=""the"" dependent=""checkout"" head=""part""",spacy-direct+hmm-rules,agreement
 "how many turns until the row is in alphabetical order, and explain in detail how you worked that out from the exact arrangement you can see in the row right now?",,,
-when would i use a state machine instead of a flowchart,,,
-what does a sankey diagram show that a flowchart does not,,,
-"explain what a venn diagram shows, and also what an org chart shows",,,
+when would i use a state machine instead of a flowchart,"@c1 syntax.clause form=interrogative modifier=""when"" auxiliary=""would"" verb=""use"" subject=$n1 complement=$k1
+@n1 syntax.nominal head=""i""
+@n2 syntax.nominal dependent=""a"" dependent=""state"" head=""machine""
+@k1 syntax.coordination conjunction=""instead of"" conjunct=$n2 conjunct=$n3
+@n3 syntax.nominal dependent=""a"" head=""flowchart""",spacy,judge
+what does a sankey diagram show that a flowchart does not,"@n1 syntax.nominal head=""what""
+@c1 syntax.clause form=interrogative auxiliary=""does"" verb=""show"" subject=$n2 complement=$n1
+@n2 syntax.nominal dependent=""a"" dependent=""sankey"" head=""diagram""
+@r1 syntax.relation marker=""that"" from=$c1 to=$c2
+@n3 syntax.nominal dependent=""a"" head=""flowchart""
+@c2 syntax.clause form=declarative verb=""does"" negation=""not"" subject=$n3",spacy,judge
+"explain what a venn diagram shows, and also what an org chart shows","@c1 syntax.clause form=imperative verb=""explain""
+@n1 syntax.nominal head=""what""
+@n2 syntax.nominal dependent=""a"" dependent=""venn"" head=""diagram""
+@c2 syntax.clause form=declarative verb=""shows"" subject=$n2 complement=$n1
+@k1 syntax.coordination conjunction=""and"" conjunct=$c2 conjunct=$c3
+@c3 syntax.clause form=declarative modifier=""also"" verb=""shows"" subject=$n4 complement=$n3
+@n3 syntax.nominal head=""what""
+@n4 syntax.nominal dependent=""an"" dependent=""org"" head=""chart""
+@r1 syntax.relation from=$c1 to=$k1",spacy,judge
